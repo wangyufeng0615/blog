@@ -3,8 +3,8 @@ import React from 'react';
 export function Sidebar() {
   const projects = [
     {
-      name: '随机街景',
-      desc: '随机街景 + AI 解读，我和好朋友玩的很开心',
+      name: '和AI一起探索地球',
+      desc: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
       url: 'https://earth.wangyufeng.org'
     },
     {
