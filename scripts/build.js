@@ -53,12 +53,18 @@ function readPosts() {
     // 将相对图片路径 images/xxx 转换为 /posts/slug/images/xxx
     htmlContent = htmlContent.replace(/src="images\//g, `src="/posts/${dir}/images/`);
 
+    // 提取文章摘要（前100字）
+    const plainText = mdContent.replace(/[#*`\[\]()!]/g, '').replace(/\n/g, ' ').trim();
+    const description = plainText.slice(0, 120) + (plainText.length > 120 ? '...' : '');
+
     posts.push({
       slug: dir,
       title: data.title || '无标题',
       date: formatDate(data.date),
       rawDate: data.date,
+      isoDate: data.date ? new Date(data.date).toISOString() : '',
       content: htmlContent,
+      description,
       dir,
     });
   }
@@ -116,7 +122,24 @@ const css = ${JSON.stringify(css)};
 
 // 生成首页
 const homeContent = renderToString(React.createElement(HomePage, { posts }));
-const homeHtml = htmlTemplate({ title: '王雨峰的博客', content: homeContent, css });
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: '王雨峰的博客',
+  url: 'https://wangyufeng.org',
+  author: {
+    '@type': 'Person',
+    name: '王雨峰',
+    url: 'https://wangyufeng.org'
+  }
+};
+const homeHtml = htmlTemplate({
+  title: '王雨峰的博客',
+  content: homeContent,
+  css,
+  url: '/',
+  jsonLd: homeJsonLd
+});
 console.log('HOME:' + JSON.stringify(homeHtml));
 
 // 生成文章页
@@ -128,10 +151,34 @@ for (const post of posts) {
       content: post.content,
     })
   );
+  const postJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    datePublished: post.isoDate,
+    author: {
+      '@type': 'Person',
+      name: '王雨峰',
+      url: 'https://wangyufeng.org'
+    },
+    publisher: {
+      '@type': 'Person',
+      name: '王雨峰'
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://wangyufeng.org/posts/' + post.slug + '.html'
+    }
+  };
   const postHtml = htmlTemplate({
     title: post.title + ' - 王雨峰的博客',
     content: postContent,
     css,
+    description: post.description,
+    url: '/posts/' + post.slug + '.html',
+    date: post.isoDate,
+    isArticle: true,
+    jsonLd: postJsonLd
   });
   console.log('POST:' + post.slug + ':' + JSON.stringify(postHtml));
 }
@@ -199,6 +246,49 @@ function copyPublicFiles() {
   }
 }
 
+// 生成 sitemap.xml
+function generateSitemap(posts) {
+  const siteUrl = 'https://wangyufeng.org';
+  const today = new Date().toISOString().split('T')[0];
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${siteUrl}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+`;
+
+  for (const post of posts) {
+    const lastmod = post.date || today;
+    xml += `  <url>
+    <loc>${siteUrl}/posts/${post.slug}.html</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+`;
+  }
+
+  xml += `</urlset>`;
+
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), xml);
+  console.log('✓ sitemap.xml');
+}
+
+// 生成 robots.txt
+function generateRobots() {
+  const content = `User-agent: *
+Allow: /
+
+Sitemap: https://wangyufeng.org/sitemap.xml
+`;
+  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), content);
+  console.log('✓ robots.txt');
+}
+
 // 主函数
 async function build() {
   console.log('\n🔨 Building blog...\n');
@@ -212,6 +302,8 @@ async function build() {
   await buildPages(posts, css);
   copyImages(posts);
   copyPublicFiles();
+  generateSitemap(posts);
+  generateRobots();
   cleanup();
 
   console.log('\n✅ Build complete! Output: dist/\n');
