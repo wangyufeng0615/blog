@@ -48,12 +48,17 @@ function readPosts() {
 
     if (data.draft) continue;
 
+    // 渲染 markdown 并修复图片路径
+    let htmlContent = md.render(mdContent);
+    // 将相对图片路径 images/xxx 转换为 /posts/slug/images/xxx
+    htmlContent = htmlContent.replace(/src="images\//g, `src="/posts/${dir}/images/`);
+
     posts.push({
       slug: dir,
       title: data.title || '无标题',
       date: formatDate(data.date),
       rawDate: data.date,
-      content: md.render(mdContent),
+      content: htmlContent,
       dir,
     });
   }
