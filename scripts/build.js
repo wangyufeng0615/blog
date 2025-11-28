@@ -111,7 +111,7 @@ const css = ${JSON.stringify(css)};
 
 // 生成首页
 const homeContent = renderToString(React.createElement(HomePage, { posts }));
-const homeHtml = htmlTemplate({ title: '青山的博客', content: homeContent, css });
+const homeHtml = htmlTemplate({ title: '王雨峰的博客', content: homeContent, css });
 console.log('HOME:' + JSON.stringify(homeHtml));
 
 // 生成文章页
@@ -124,7 +124,7 @@ for (const post of posts) {
     })
   );
   const postHtml = htmlTemplate({
-    title: post.title + ' - 青山的博客',
+    title: post.title + ' - 王雨峰的博客',
     content: postContent,
     css,
   });
