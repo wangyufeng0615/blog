@@ -6,9 +6,6 @@ export function Layout({ children }) {
       <main className="main">
         {children}
       </main>
-      <footer className="footer">
-        <p>© 2024 青山</p>
-      </footer>
     </div>
   );
 }
