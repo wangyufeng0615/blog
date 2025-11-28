@@ -17,8 +17,8 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-profile">
-        <img src="/avatar.jpg" alt="青山" className="avatar-photo" />
-        <h1 className="name">青山</h1>
+        <img src="/avatar.jpg" alt="王雨峰" className="avatar-photo" />
+        <h1 className="name">王雨峰</h1>
         <p className="bio">编程和写作都是我的兴趣，也许是机缘巧合，我选择了前者作为我的大学专业和工作方向。</p>
         <div className="links">
           <a href="https://github.com/wangyufeng0615" target="_blank" rel="noopener noreferrer">GitHub</a>
