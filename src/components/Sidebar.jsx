@@ -12,6 +12,16 @@ export function Sidebar() {
       desc: '计算你需要多少钱才能提前退休',
       url: 'https://retirement.wangyufeng.org'
     },
+    {
+      name: 'aitop',
+      desc: 'Claude Code 多进程监控终端（虽然能用，但效果不太好）',
+      url: 'https://github.com/wangyufeng0615/aitop'
+    },
+    {
+      name: 'LOF基金溢价计算器',
+      desc: 'LOF基金溢价计算器（自用）',
+      url: 'https://github.com/wangyufeng0615/lof-premium-calculator'
+    },
   ];
 
   return (
