@@ -322,30 +322,53 @@
                 }
 
                 // ===== 树顶星星 =====
-                const starParticles = Math.floor(this.count * 0.015);
-                const starY = CONFIG.treeHeight + CONFIG.trunkHeight + 0.2;
+                const starParticles = Math.floor(this.count * 0.018);
+                const starY = CONFIG.treeHeight + CONFIG.trunkHeight + 0.3;
+                const outerR = 0.45;  // 外半径（五角尖端）
+                const innerR = 0.18;  // 内半径（凹陷处）
+                const points = 5;     // 五角星
 
                 for (let i = 0; i < starParticles && idx < this.count; i++) {
-                    // 五角星分布
                     const t = i / starParticles;
-                    const points = 5;
-                    const angleStep = (Math.PI * 2) / points;
-                    const baseAngle = t * Math.PI * 2 * 3; // 多圈
 
-                    const pointIndex = Math.floor((baseAngle % (Math.PI * 2)) / angleStep);
-                    const inPoint = (baseAngle % angleStep) / angleStep;
+                    // 计算五角星上的角度
+                    const angle = t * Math.PI * 2;
 
-                    // 星星形状
-                    const outerR = 0.35;
-                    const innerR = 0.14;
-                    const starR = inPoint < 0.5
-                        ? outerR - (outerR - innerR) * (inPoint * 2)
-                        : innerR + (outerR - innerR) * ((inPoint - 0.5) * 2);
+                    // 五角星形状：在10个顶点间交替（5个外角 + 5个内角）
+                    const segmentAngle = Math.PI / points; // 36度
+                    const angleInSegment = angle % (segmentAngle * 2);
 
-                    const finalR = starR * (0.7 + Math.random() * 0.5);
-                    const x = Math.cos(baseAngle) * finalR;
-                    const z = Math.sin(baseAngle) * finalR;
-                    const y = starY + (Math.random() - 0.5) * 0.15;
+                    // 计算当前角度对应的半径
+                    let radius;
+                    if (angleInSegment < segmentAngle) {
+                        // 从外角到内角
+                        radius = outerR - (outerR - innerR) * (angleInSegment / segmentAngle);
+                    } else {
+                        // 从内角到外角
+                        radius = innerR + (outerR - innerR) * ((angleInSegment - segmentAngle) / segmentAngle);
+                    }
+
+                    // 在边缘和内部都放置粒子
+                    const rand = Math.random();
+                    let finalR, yOffset;
+                    if (rand < 0.5) {
+                        // 50% 在五角星边缘，形成清晰轮廓
+                        finalR = radius * (0.95 + Math.random() * 0.1);
+                        yOffset = (Math.random() - 0.5) * 0.08;
+                    } else if (rand < 0.8) {
+                        // 30% 填充内部
+                        finalR = radius * Math.random() * 0.9;
+                        yOffset = (Math.random() - 0.5) * 0.1;
+                    } else {
+                        // 20% 在五角尖端加强发光
+                        const tipAngle = Math.floor(angle / (segmentAngle * 2)) * (segmentAngle * 2);
+                        finalR = outerR * (0.85 + Math.random() * 0.2);
+                        yOffset = (Math.random() - 0.5) * 0.05;
+                    }
+
+                    const x = Math.cos(angle) * finalR;
+                    const z = Math.sin(angle) * finalR;
+                    const y = starY + yOffset;
 
                     const i3 = idx * 3;
                     this.positions[i3] = x;
@@ -355,12 +378,12 @@
                     this.originalPositions[i3 + 1] = y;
                     this.originalPositions[i3 + 2] = z;
 
-                    // 金色
+                    // 金色 - 更亮的颜色
                     this.colors[i3] = 1.0;
-                    this.colors[i3 + 1] = 0.85;
-                    this.colors[i3 + 2] = 0.1;
+                    this.colors[i3 + 1] = 0.9;
+                    this.colors[i3 + 2] = 0.2;
 
-                    this.baseSizes[idx] = 0.12 + Math.random() * 0.08;
+                    this.baseSizes[idx] = 0.1 + Math.random() * 0.1;
                     this.sizes[idx] = this.baseSizes[idx];
                     this.phases[idx] = Math.random() * Math.PI * 2;
                     this.isOrnament[idx] = 1;
