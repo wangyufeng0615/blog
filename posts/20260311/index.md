@@ -1,5 +1,5 @@
 ---
-title: "折腾openclaw的记录以及对未来的预测"
+title: "3月openclaw随想"
 date: 2026-03-11T00:00:00+08:00
 draft: false
 ---
