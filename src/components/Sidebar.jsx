@@ -13,6 +13,11 @@ export function Sidebar() {
       url: 'https://retirement.wangyufeng.org'
     },
     {
+      name: 'aimeter',
+      desc: 'macOS 菜单栏应用，实时追踪 Claude Code 和 Codex CLI 的用量和额度',
+      url: 'https://github.com/wangyufeng0615/aimeter'
+    },
+    {
       name: 'aitop',
       desc: 'Claude Code 多进程监控终端（虽然能用，但效果不太好）',
       url: 'https://github.com/wangyufeng0615/aitop'
