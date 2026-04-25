@@ -1,0 +1,6 @@
+{
+  "title": "研究报告：后训练时代的存储增量——从 DeepSeek V4 论文出发",
+  "date": "2026-04-25T00:00:00+08:00",
+  "description": "通过解读 DeepSeek V4 论文并横向对比 GPT-5.5、Claude Opus 4.7 的训练栈线索，量化分析当前 AI 训练范式转变对 HBM/DRAM/NAND 三层存储需求的结构性影响，并给出可跟踪的先行指标。",
+  "draft": false
+}

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研究报告：后训练时代的存储增量——从 DeepSeek V4 论文出发</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #faf9f7;
+  --bg-card: #ffffff;
+  --bg-soft: #f3f1ec;
+  --text: #2f2f2f;
+  --text-soft: #484848;
+  --text-mute: #6a6a6a;
+  --accent: #5c7a6f;
+  --accent-dark: #3d5a4f;
+  --accent-soft: #d5e0db;
+  --warn: #a86545;
+  --gold: #b08f4f;
+  --rust: #8c4f3a;
+  --border: #e8e4dc;
+  --rule: #d8d2c4;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+
+.layout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 56px) clamp(20px, 5vw, 40px) 60px;
+}
+
+/* Header */
+header.article-head {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 22px;
+  margin-bottom: 28px;
+}
+h1.title {
+  font-size: clamp(23px, 4.2vw, 32px);
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  color: #1f1f1f;
+}
+.subtitle {
+  font-size: 15px;
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.meta { font-size: 13px; color: var(--text-mute); }
+
+/* Sections */
+section { margin-bottom: 36px; }
+h2 {
+  font-size: clamp(17px, 2.6vw, 20px);
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+p { margin-bottom: 10px; }
+strong { color: #1f1f1f; font-weight: 600; }
+em { font-style: normal; background: linear-gradient(transparent 60%, var(--accent-soft) 60%); padding: 0 2px; }
+
+/* TL;DR 框（仅开头用） */
+.tldr {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 14px 0 18px;
+  border-radius: 4px;
+}
+.tldr-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.tldr p { margin: 0; line-height: 1.7; color: var(--text); }
+
+/* Lead - 每节开头核心论点（无 label） */
+.lead {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 500;
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 11px 16px;
+  margin: 12px 0 18px;
+  border-radius: 0 3px 3px 0;
+  line-height: 1.7;
+}
+.lead strong { color: var(--accent-dark); font-weight: 600; }
+.lead em { background: linear-gradient(transparent 60%, var(--accent-soft) 60%); }
+
+/* Key list */
+.key-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+.key-list li {
+  position: relative;
+  padding: 4px 0 4px 22px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+.key-list li::before {
+  content: "›";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 16px;
+}
+.key-list li strong { color: var(--text); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  background: var(--bg-card);
+  min-width: 480px;
+  color: var(--text-soft);
+}
+th, td {
+  padding: 9px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+th {
+  background: var(--bg-soft);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 12.5px;
+}
+tr:last-child td { border-bottom: none; }
+td.strong { color: var(--text); font-weight: 600; }
+td.num { font-variant-numeric: tabular-nums; }
+
+/* Charts */
+.chart {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px clamp(14px, 2.5vw, 22px);
+  margin: 18px 0;
+}
+.chart-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.chart-sub {
+  font-size: 12px;
+  color: var(--text-mute);
+  margin-bottom: 14px;
+}
+.chart-foot {
+  font-size: 12px;
+  color: var(--text-mute);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  line-height: 1.55;
+}
+.svg-wrap { width: 100%; overflow-x: auto; }
+.svg-wrap svg { width: 100%; height: auto; display: block; min-width: 480px; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--text-soft);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-mark { width: 20px; height: 3px; border-radius: 1px; flex-shrink: 0; }
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  position: relative;
+}
+.card-num {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-soft);
+  line-height: 1;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 6px;
+  padding-right: 28px;
+}
+.card-desc {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+/* Timeline */
+.timeline { position: relative; padding: 4px 0 4px 18px; margin: 12px 0; }
+.timeline::before {
+  content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--rule);
+}
+.tl-item { position: relative; padding-bottom: 12px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: ""; position: absolute; left: -18px; top: 5px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+}
+.tl-item.now::before { background: var(--accent); }
+.tl-date { font-size: 12px; color: var(--accent-dark); font-weight: 600; margin-bottom: 1px; }
+.tl-content { font-size: 13.5px; color: var(--text-soft); line-height: 1.6; }
+
+/* Indicators */
+.ind-list { display: grid; gap: 6px; margin: 10px 0; }
+.ind {
+  display: grid;
+  grid-template-columns: 22px 130px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.ind.med { border-left-color: var(--gold); }
+.ind.low { border-left-color: var(--text-mute); }
+.ind-num { font-size: 13px; font-weight: 700; color: var(--accent); }
+.ind.med .ind-num { color: var(--gold); }
+.ind.low .ind-num { color: var(--text-mute); }
+.ind-name { font-weight: 600; color: var(--text); }
+.ind-desc { color: var(--text-soft); font-size: 13px; }
+
+@media (max-width: 540px) {
+  .ind { grid-template-columns: 22px 1fr; }
+  .ind-name { grid-column: 2; }
+  .ind-desc { grid-column: 2; margin-top: 2px; }
+}
+
+/* Reflection - 一行紧凑 */
+.reflect-list { display: grid; gap: 8px; margin: 10px 0; }
+.reflect {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.reflect-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--warn);
+  letter-spacing: 0.04em;
+  margin-right: 8px;
+}
+.reflect-name { font-weight: 600; color: var(--text); }
+.reflect-body { color: var(--text-soft); margin-top: 3px; }
+
+/* Group titles in 跟踪指标 */
+.group-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.group-title.high { color: var(--accent); }
+.group-title.med { color: var(--gold); }
+.group-title.low { color: var(--text-mute); }
+
+/* Sources */
+.sources {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  color: var(--text-soft);
+}
+.sources h3 { font-size: 12.5px; margin-bottom: 8px; color: var(--text); }
+.sources ul { padding-left: 16px; margin: 0; }
+.sources li { margin-bottom: 3px; line-height: 1.5; }
+.sources a { color: var(--accent); word-break: break-all; }
+
+.disclaimer {
+  margin-top: 24px;
+  padding: 12px 16px;
+  background: var(--bg-soft);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-mute);
+  line-height: 1.6;
+}
+
+@media (max-width: 540px) {
+  body { font-size: 14.5px; }
+  .card-num { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<header class="article-head">
+  <h1 class="title">后训练时代的存储增量</h1>
+  <div class="subtitle">从 DeepSeek V4 论文出发，量化分析当前大模型训练范式转变对三层存储介质的结构性影响</div>
+  <div class="meta">2026-04-25</div>
+</header>
+
+<!-- TL;DR -->
+<section>
+  <div class="tldr">
+    <div class="tldr-label">研究核心结论</div>
+    <p>DeepSeek V4 论文首次完整公开一种新的训练范式（专家训练 + 在线策略蒸馏 + 沙盒环境），其工程实现里隐藏着<strong>三类全新的固态硬盘工作负载</strong>。同样的范式在 OpenAI、Anthropic、Google 的硬件路线上独立验证。<em>当前卖方分析师对训练侧的固态硬盘净增量定价不足，对应的盈利修正空间还在右尾。</em></p>
+  </div>
+</section>
+
+<!-- 1 -->
+<section>
+  <h2>一 · 三类被忽略的训练侧工作负载</h2>
+
+  <p class="lead">V4 论文的工程章节里隐藏着三类全新的固态硬盘工作负载。当前卖方分析师的需求模型几乎不反映这部分。</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-title">逐字日志</div>
+      <div class="card-desc">强化学习推演时模型每生成一个词就立即写盘。<strong>极频繁、小块写入</strong>，对位高耐久度企业级固态硬盘。</div>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-title">多专家权重换班</div>
+      <div class="card-desc">十几个万亿级专家轮流上岗，权重在中央存储与显卡间反复搬运。<strong>高带宽顺序读</strong>，单次训练涉及十几太字节流量。</div>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-title">智能代理沙盒</div>
+      <div class="card-desc">单集群 10 万隔离虚拟电脑跑工具调用、写文件。<strong>分布式文件系统 + 商品级大容量闪存</strong>。</div>
+    </div>
+  </div>
+
+  <ul class="key-list">
+    <li><strong>单实验室年增量</strong>：10-30 PB</li>
+    <li><strong>全行业前沿团队合计</strong>：150-450 PB / 年</li>
+    <li><strong>加上闭源前沿（约 5-10 倍训练规模）</strong>：800 PB - 2 EB / 年</li>
+  </ul>
+</section>
+
+<!-- 2 -->
+<section>
+  <h2>二 · 这不是 DeepSeek 一家的现象</h2>
+
+  <p class="lead">同样的范式在三家闭源前沿实验室独立验证。三巨头联合反对所谓"对抗性蒸馏"这件事本身证明，多专家蒸馏已是当前最有效的训练范式之一。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width: 22%;">实验室</th><th>独立证据</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="strong">DeepSeek V4</td>
+          <td>论文完整公开三类工作负载的工程实现</td>
+        </tr>
+        <tr>
+          <td class="strong">OpenAI 5.5</td>
+          <td>命令行工具 Codex 更新日志直接出现"推演记录已包含工具、代码模式、会话、多代理关系"以及"远程沙盒配置要求"</td>
+        </tr>
+        <tr>
+          <td class="strong">Anthropic 4.7</td>
+          <td>Opus 4.5 系统说明书提到"多代理配置一致优于单代理基线"；Mythos 系统说明书显示 Firefox 漏洞利用率从 15% 跃升到 84%——只能来自大规模沙盒环境的强化学习训练</td>
+        </tr>
+        <tr>
+          <td class="strong">Google 3.1</td>
+          <td>TPU 8t 官方介绍直接写"快速处理连续强化学习试验"；TPU 8i 三倍片上静态内存为快速注意力缓存更新设计</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <h2>三 · 训练计算量级</h2>
+
+  <p class="lead">开源前沿落后闭源前沿一个数量级，但<strong>训练侧固态硬盘增量随训练量线性放大</strong>——单次闭源旗舰训练对应的存储增量可能是 V4 的 10 倍。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>模型</th><th>等价 GB200 卡时</th><th>10 万卡上耗时</th><th>训练侧存储净增量</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="strong">V4-Flash</td><td class="num">130 万</td><td class="num">~0.7 天</td><td class="num">~5 PB</td></tr>
+        <tr><td class="strong">V4-Pro</td><td class="num">450 万</td><td class="num">~2 天</td><td class="num">~20 PB</td></tr>
+        <tr><td class="strong">GPT-5.5</td><td class="num">5,000 万</td><td class="num">~21 天</td><td class="num">~200 PB</td></tr>
+        <tr><td class="strong">Opus 4.7（估）</td><td class="num">5,000 万 - 1 亿</td><td class="num">~21-42 天</td><td class="num">~200-400 PB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size: 12.5px; color: var(--text-mute); margin-top: 8px;">折算锚点：V3 实测 278.8 万 H800 卡时；H800 → GB200 速度比 3 倍；GPT-5.5 由 Stargate 公开的"10 万张混合显卡训练 19 天"反推；Opus 4.7 不披露任何数据，按硬件投入与能力跃升估算。</p>
+</section>
+
+<!-- 4 -->
+<section>
+  <h2>四 · 三方需求曲线分歧</h2>
+
+  <p class="lead">本研究修正后的全球闪存累积需求，<strong>2030 年比卖方共识高约 50%、比早期框架高约 30%</strong>。差距来自三个不同节奏的驱动力——推理、训练、持续学习。</p>
+
+  <div class="chart">
+    <div class="chart-title">图 1 · 全球闪存累积需求三方预期</div>
+    <div class="chart-sub">2025 年实际值设为 100 · 数值为同口径下的累积出货指数</div>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#e8e4dc" stroke-width="1">
+          <line x1="60" y1="40" x2="560" y2="40"/>
+          <line x1="60" y1="85" x2="560" y2="85"/>
+          <line x1="60" y1="130" x2="560" y2="130"/>
+          <line x1="60" y1="175" x2="560" y2="175"/>
+          <line x1="60" y1="220" x2="560" y2="220"/>
+        </g>
+        <line x1="60" y1="40" x2="60" y2="220" stroke="#888"/>
+        <line x1="60" y1="220" x2="560" y2="220" stroke="#888"/>
+        <g font-size="11" fill="#6a6a6a" text-anchor="end">
+          <text x="54" y="44">300</text>
+          <text x="54" y="89">250</text>
+          <text x="54" y="134">200</text>
+          <text x="54" y="179">150</text>
+          <text x="54" y="224">100</text>
+        </g>
+        <g font-size="11" fill="#6a6a6a" text-anchor="middle">
+          <text x="60" y="245">2025</text>
+          <text x="160" y="245">2026</text>
+          <text x="260" y="245">2027</text>
+          <text x="360" y="245">2028</text>
+          <text x="460" y="245">2029</text>
+          <text x="560" y="245">2030</text>
+        </g>
+
+        <polygon points="60,220 160,200 260,171 360,137 460,92 560,40 560,220" fill="#5c7a6f" fill-opacity="0.08"/>
+
+        <polyline points="60,220 160,200 260,180 360,162 460,144 560,128" fill="none" stroke="#a8a39a" stroke-width="2" stroke-dasharray="6,3"/>
+        <g fill="#a8a39a">
+          <circle cx="60" cy="220" r="3"/><circle cx="160" cy="200" r="3"/>
+          <circle cx="260" cy="180" r="3"/><circle cx="360" cy="162" r="3"/>
+          <circle cx="460" cy="144" r="3"/><circle cx="560" cy="128" r="3"/>
+        </g>
+
+        <polyline points="60,220 160,200 260,176 360,151 460,127 560,100" fill="none" stroke="#88a89a" stroke-width="2"/>
+        <g fill="#88a89a">
+          <circle cx="60" cy="220" r="3"/><circle cx="160" cy="200" r="3"/>
+          <circle cx="260" cy="176" r="3"/><circle cx="360" cy="151" r="3"/>
+          <circle cx="460" cy="127" r="3"/><circle cx="560" cy="100" r="3"/>
+        </g>
+
+        <polyline points="60,220 160,200 260,171 360,137 460,92 560,40" fill="none" stroke="#5c7a6f" stroke-width="2.8"/>
+        <g fill="#5c7a6f">
+          <circle cx="60" cy="220" r="3.5"/><circle cx="160" cy="200" r="3.5"/>
+          <circle cx="260" cy="171" r="3.5"/><circle cx="360" cy="137" r="3.5"/>
+          <circle cx="460" cy="92" r="3.5"/><circle cx="560" cy="40" r="3.5"/>
+        </g>
+
+        <!-- 终点数字标签：放在曲线右侧空白区 -->
+        <g font-size="12" font-weight="600">
+          <text x="566" y="44" fill="#3d5a4f">300</text>
+          <text x="566" y="104" fill="#5a7c70">233</text>
+          <text x="566" y="132" fill="#6a6a6a">202</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-mark" style="background: #5c7a6f;"></span><span>本次研究：含训练侧 + 持续学习</span></div>
+      <div class="legend-item"><span class="legend-mark" style="background: #88a89a;"></span><span>早期框架：仅推理侧</span></div>
+      <div class="legend-item"><span class="legend-mark" style="background: #a8a39a;"></span><span>卖方共识：以推理服务器为主</span></div>
+    </div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-title">图 2 · 固态硬盘年新增需求按来源分解</div>
+    <div class="chart-sub">单位：EB / 年 · 三条独立折线 · 仅含人工智能相关增量</div>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#e8e4dc" stroke-width="1">
+          <line x1="60" y1="30" x2="560" y2="30"/>
+          <line x1="60" y1="78" x2="560" y2="78"/>
+          <line x1="60" y1="126" x2="560" y2="126"/>
+          <line x1="60" y1="174" x2="560" y2="174"/>
+          <line x1="60" y1="222" x2="560" y2="222"/>
+        </g>
+        <line x1="60" y1="30" x2="60" y2="222" stroke="#888"/>
+        <line x1="60" y1="222" x2="560" y2="222" stroke="#888"/>
+        <g font-size="11" fill="#6a6a6a" text-anchor="end">
+          <text x="54" y="34">40</text>
+          <text x="54" y="82">30</text>
+          <text x="54" y="130">20</text>
+          <text x="54" y="178">10</text>
+          <text x="54" y="226">0</text>
+        </g>
+        <g font-size="11" fill="#6a6a6a" text-anchor="middle">
+          <text x="60" y="245">2025</text>
+          <text x="160" y="245">2026</text>
+          <text x="260" y="245">2027</text>
+          <text x="360" y="245">2028</text>
+          <text x="460" y="245">2029</text>
+          <text x="560" y="245">2030</text>
+        </g>
+
+        <!-- 推理 8/12/17/22/28/35  y = 222 - v*4.8 -->
+        <polyline points="60,184 160,164 260,140 360,116 460,88 560,54" fill="none" stroke="#5c7a6f" stroke-width="2.5"/>
+        <g fill="#5c7a6f">
+          <circle cx="60" cy="184" r="3"/><circle cx="160" cy="164" r="3"/>
+          <circle cx="260" cy="140" r="3"/><circle cx="360" cy="116" r="3"/>
+          <circle cx="460" cy="88" r="3"/><circle cx="560" cy="54" r="3"/>
+        </g>
+
+        <!-- 训练 1/3/5/8/12/16 -->
+        <polyline points="60,217 160,208 260,198 360,184 460,164 560,145" fill="none" stroke="#b08f4f" stroke-width="2.5"/>
+        <g fill="#b08f4f">
+          <circle cx="60" cy="217" r="3"/><circle cx="160" cy="208" r="3"/>
+          <circle cx="260" cy="198" r="3"/><circle cx="360" cy="184" r="3"/>
+          <circle cx="460" cy="164" r="3"/><circle cx="560" cy="145" r="3"/>
+        </g>
+
+        <!-- 持续学习 0/0/0.5/3/8/18 -->
+        <polyline points="60,222 160,222 260,220 360,208 460,184 560,135" fill="none" stroke="#8c4f3a" stroke-width="2.5"/>
+        <g fill="#8c4f3a">
+          <circle cx="60" cy="222" r="3"/><circle cx="160" cy="222" r="3"/>
+          <circle cx="260" cy="220" r="3"/><circle cx="360" cy="208" r="3"/>
+          <circle cx="460" cy="184" r="3"/><circle cx="560" cy="135" r="3"/>
+        </g>
+
+        <!-- 终点数字标签：用引线错开避免重叠 -->
+        <!-- 推理终点 (560, 54) -->
+        <text x="566" y="58" font-size="12" font-weight="600" fill="#3d5a4f">35</text>
+
+        <!-- 持续学习终点 (560, 135)，标签往上移到 (566, 124) -->
+        <line x1="562" y1="135" x2="566" y2="125" stroke="#8c4f3a" stroke-width="1"/>
+        <text x="568" y="128" font-size="12" font-weight="600" fill="#8c4f3a">18</text>
+
+        <!-- 训练终点 (560, 145)，标签往下移到 (566, 162) -->
+        <line x1="562" y1="145" x2="566" y2="158" stroke="#b08f4f" stroke-width="1"/>
+        <text x="568" y="162" font-size="12" font-weight="600" fill="#b08f4f">16</text>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-mark" style="background: #5c7a6f;"></span><span>推理侧</span></div>
+      <div class="legend-item"><span class="legend-mark" style="background: #b08f4f;"></span><span>训练侧</span></div>
+      <div class="legend-item"><span class="legend-mark" style="background: #8c4f3a;"></span><span>持续学习</span></div>
+    </div>
+    <div class="chart-foot">三个驱动力的接力顺序：推理（已起步）→ 训练（V4 揭示）→ 持续学习（2028 起飞）。</div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <h2>五 · 持续学习——下一波浪潮</h2>
+
+  <p class="lead">2028 年起，部分训练负载从集中训练集群下沉到推理节点。每个节点的系统内存翻倍、固态硬盘容量翻一个数量级。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">2024-2025 · 探索期</div>
+      <div class="tl-content">Google Titans / MIRAS 提出测试时记忆机制；Anthropic 在 Opus 4.x 系统说明书里有上下文学习的实验性扩展。</div>
+    </div>
+    <div class="tl-item now">
+      <div class="tl-date">2026 当前 · 基础设施铺垫</div>
+      <div class="tl-content">DeepSeek V4 论文把在线学习写入未来方向；Google TPU 8i 三倍片上静态内存；Anthropic Mythos 系统说明书显示模型在 29% 对话中识别"在被测试"。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2027 · 试点</div>
+      <div class="tl-content">少量推理节点开始部署在线学习；测试时记忆进入消费级产品。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2028-2030 · 普及</div>
+      <div class="tl-content">推理节点配置变化：高带宽内存不变（核心权重）+ 系统内存翻倍（长期记忆 + 优化器状态）+ 固态硬盘翻 16 倍（经验回放）。先行指标：英伟达 BlueField-5/6 板载固态硬盘是否从 512GB 翻到 2TB+。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <h2>六 · 三种存储介质谁更利好</h2>
+
+  <p class="lead">短期价格弹性看供给紧张度（高带宽内存 > 系统内存 > 闪存），<strong>长期收益空间看未被定价的需求向量数量（闪存 > 系统内存 > 高带宽内存）</strong>。这两个维度方向相反。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>介质</th><th>需求增量来源</th><th>主要风险</th><th style="width: 18%;">综合定位</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="strong">高带宽内存</td>
+          <td>模型参数继续增长、训练规模、长上下文</td>
+          <td>V4 把单词元注意力缓存压缩 90% 是反向力量；低功耗内存替代部分场景</td>
+          <td>受益最确定<br>已充分定价</td>
+        </tr>
+        <tr>
+          <td class="strong">系统内存</td>
+          <td>主存切换到低功耗内存、内存池标准化、长期记忆模块</td>
+          <td>2028 年新产能集中释放</td>
+          <td>受益较强<br>部分定价</td>
+        </tr>
+        <tr>
+          <td class="strong">闪存</td>
+          <td>注意力缓存持久化、训练侧三类工作负载、经验回放</td>
+          <td>供给弹性最强是双刃剑、2027 下半年扩产释放压力</td>
+          <td>受益最强<br><em>定价最不充分</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <h2>七 · 跟踪指标</h2>
+
+  <p class="lead">判断兑现的先行指标按观察频率分三档。第一档（每月）变化最敏感，是核心信号源。</p>
+
+  <div class="group-title high">每月观察</div>
+  <div class="ind-list">
+    <div class="ind"><div class="ind-num">A</div><div class="ind-name">卖方共识盈利预期</div><div class="ind-desc">闪存龙头下一财年每股盈利往 120-150 美元走表明激进情景兑现。</div></div>
+    <div class="ind"><div class="ind-num">B</div><div class="ind-name">现货价 vs 合约价</div><div class="ind-desc">现货高于合约是异常信号，差距持续扩大表明上行加速；收敛或反转则是顶部信号。</div></div>
+    <div class="ind"><div class="ind-num">C</div><div class="ind-name">三大厂商资本开支</div><div class="ind-desc">三星 / 海力士 / 美光任一家上调 30%+ 意味着 2027 下半年供过于求风险升高。</div></div>
+    <div class="ind"><div class="ind-num">D</div><div class="ind-name">超大云厂商资本开支</div><div class="ind-desc">Meta、微软、谷歌、亚马逊季报。增长节奏变化是最敏感指标。</div></div>
+  </div>
+
+  <div class="group-title med">每季度观察</div>
+  <div class="ind-list">
+    <div class="ind med"><div class="ind-num">E</div><div class="ind-name">硬件路线落地</div><div class="ind-desc">英伟达 BlueField-5/6 板载固态硬盘容量、TPU 9 系列、高带宽闪存商业化时间表。</div></div>
+    <div class="ind med"><div class="ind-num">F</div><div class="ind-name">其他实验室训练栈</div><div class="ind-desc">Llama 5、Qwen 4、Mistral、Gemini 4 是否采用多专家蒸馏或沙盒训练。</div></div>
+    <div class="ind med"><div class="ind-num">G</div><div class="ind-name">算法压缩进度</div><div class="ind-desc">下一代模型注意力缓存压缩比，每代砍 50%+ 则侵蚀高带宽内存增长曲线。</div></div>
+  </div>
+
+  <div class="group-title low">每半年观察</div>
+  <div class="ind-list">
+    <div class="ind low"><div class="ind-num">H</div><div class="ind-name">持续学习落地</div><div class="ind-desc">Titans / MIRAS 后续工作；是否有公开模型部署测试时记忆。</div></div>
+    <div class="ind low"><div class="ind-num">I</div><div class="ind-name">政策风险</div><div class="ind-desc">美国对中国人工智能芯片管制、监管法规对需求曲线的影响。</div></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section>
+  <h2>八 · 方法论沉淀</h2>
+
+  <p class="lead">本研究过程中暴露出的五个分析偏差，作为后续工作的校准点。</p>
+
+  <div class="reflect-list">
+    <div class="reflect">
+      <span class="reflect-tag">偏差 01</span><span class="reflect-name">把"已经涨了多少"当成判断的反向证据</span>
+      <div class="reflect-body">某存储龙头年初涨 132% 后反射性看空，但两周内继续涨 40%。<strong>判断验证度（结构性需求）和估值合理性（市盈率）必须分开看。</strong></div>
+    </div>
+    <div class="reflect">
+      <span class="reflect-tag">偏差 02</span><span class="reflect-name">把训练资本开支当成黑盒</span>
+      <div class="reflect-body">之前固态硬盘增量主要从推理侧看，遗漏了训练侧。<strong>必须拆到逐字日志、训练快照、镜像、日志这些基础单元层级。</strong></div>
+    </div>
+    <div class="reflect">
+      <span class="reflect-tag">偏差 03</span><span class="reflect-name">高估存储软件公司的市场份额</span>
+      <div class="reflect-body">3FS 开源 + 超大规模云厂商自研倾向，软件层市场比预期小。<strong>底层闪存厂商和中间层软件公司是两个独立市场。</strong></div>
+    </div>
+    <div class="reflect">
+      <span class="reflect-tag">偏差 04</span><span class="reflect-name">用旧范式基准推新范式量级</span>
+      <div class="reflect-body">用 V3 时代"后训练 5000 卡时"作基准，但 V4 后训练量级与预训练相当。<strong>遇到范式转变时，过去的基准必须主动作废。</strong></div>
+    </div>
+    <div class="reflect">
+      <span class="reflect-tag">偏差 05</span><span class="reflect-name">低估硬件路线落地速度</span>
+      <div class="reflect-body">认为持续学习还在纯理论期，但 TPU 8 系列和 BlueField-4 已在硬件层面铺路。<strong>硬件路线是判断落地最强的先行指标。</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section>
+  <h2>九 · 结语</h2>
+
+  <div class="tldr">
+    <p>DeepSeek V4 不是能力突破——它落后 GPT-5.5 与 Opus 4.7 大约 3-6 个月——而是<strong>第一份完整公开"后训练新范式"工程实现</strong>的开源论文。它揭示的三类训练侧固态硬盘工作负载几乎不在卖方分析师的需求模型里；同样的范式在 OpenAI、Anthropic、Google 的硬件路线上独立验证。这部分增量被市场充分定价需要 6-12 个月，是<em>错位定价的窗口</em>。</p>
+  </div>
+</section>
+
+<!-- Sources -->
+<div class="sources">
+  <h3>主要引用</h3>
+  <ul>
+    <li>DeepSeek-AI · DeepSeek-V4 论文 · <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf" target="_blank">huggingface.co</a></li>
+    <li>DeepSeek-AI · 3FS 分布式文件系统 · <a href="https://github.com/deepseek-ai/3FS" target="_blank">github.com/deepseek-ai/3FS</a></li>
+    <li>Epoch AI · GPT-5 训练算力估算 · <a href="https://epochai.substack.com/p/notes-on-gpt-5-training-compute" target="_blank">epochai.substack.com</a></li>
+    <li>Anthropic · Claude Opus 4.5 系统说明书 · <a href="https://www.anthropic.com/claude-opus-4-5-system-card" target="_blank">anthropic.com</a></li>
+    <li>Google Cloud · 第八代 TPU 为智能代理时代设计 · <a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era/" target="_blank">blog.google</a></li>
+    <li>SemiAnalysis · H100 与 GB200 NVL72 训练基准 · <a href="https://newsletter.semianalysis.com/p/h100-vs-gb200-nvl72-training-benchmarks" target="_blank">newsletter.semianalysis.com</a></li>
+    <li>集邦咨询 · 2026 年第二季度内存合约价展望 · <a href="https://www.trendforce.com/presscenter/news/20260331-12995.html" target="_blank">trendforce.com</a></li>
+    <li>Google Research · Titans / MIRAS 长期记忆架构 · <a href="https://research.google/blog/titans-miras-helping-ai-have-long-term-memory/" target="_blank">research.google</a></li>
+  </ul>
+</div>
+
+<div class="disclaimer">
+  本文为研究笔记，所有判断为个人分析，不构成投资建议。文中提及的具体公司、模型、技术细节均基于公开资料，可能随时间过期。
+</div>
+
+</div>
+
+</body>
+</html>
