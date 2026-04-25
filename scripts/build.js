@@ -41,35 +41,67 @@ function readPosts() {
 
   for (const dir of dirs) {
     const mdFile = path.join(POSTS_DIR, dir, 'index.md');
-    if (!fs.existsSync(mdFile)) continue;
+    const htmlFile = path.join(POSTS_DIR, dir, 'index.html');
+    const hasMd = fs.existsSync(mdFile);
+    const hasHtml = fs.existsSync(htmlFile);
 
-    const content = fs.readFileSync(mdFile, 'utf-8');
-    const { data, content: mdContent } = matter(content);
+    if (hasMd && hasHtml) {
+      console.warn(`⚠ ${dir} 同时存在 index.md 和 index.html，使用 index.md`);
+    }
 
-    if (data.draft) continue;
+    if (hasMd) {
+      const content = fs.readFileSync(mdFile, 'utf-8');
+      const { data, content: mdContent } = matter(content);
+      if (data.draft) continue;
 
-    // 渲染 markdown 并修复图片路径
-    let htmlContent = md.render(mdContent);
-    // 将相对图片路径 images/xxx 转换为 /posts/slug/images/xxx
-    htmlContent = htmlContent.replace(/src="images\//g, `src="/posts/${dir}/images/`);
+      let htmlContent = md.render(mdContent);
+      htmlContent = htmlContent.replace(/src="images\//g, `src="/posts/${dir}/images/`);
 
-    // 提取文章摘要（前100字）
-    const plainText = mdContent.replace(/[#*`\[\]()!]/g, '').replace(/\n/g, ' ').trim();
-    const description = plainText.slice(0, 120) + (plainText.length > 120 ? '...' : '');
+      const plainText = mdContent.replace(/[#*`\[\]()!]/g, '').replace(/\n/g, ' ').trim();
+      const description = plainText.slice(0, 120) + (plainText.length > 120 ? '...' : '');
 
-    posts.push({
-      slug: dir,
-      title: data.title || '无标题',
-      date: formatDate(data.date),
-      rawDate: data.date,
-      isoDate: data.date ? new Date(data.date).toISOString() : '',
-      content: htmlContent,
-      description,
-      dir,
-    });
+      posts.push({
+        slug: dir,
+        title: data.title || '无标题',
+        date: formatDate(data.date),
+        rawDate: data.date,
+        isoDate: data.date ? new Date(data.date).toISOString() : '',
+        content: htmlContent,
+        description,
+        dir,
+        type: 'markdown',
+        url: `/posts/${dir}.html`,
+      });
+    } else if (hasHtml) {
+      const metaFile = path.join(POSTS_DIR, dir, 'meta.json');
+      if (!fs.existsSync(metaFile)) {
+        console.warn(`⚠ ${dir}/index.html 缺少 meta.json，跳过`);
+        continue;
+      }
+      let meta;
+      try {
+        meta = JSON.parse(fs.readFileSync(metaFile, 'utf-8'));
+      } catch (e) {
+        console.warn(`⚠ ${dir}/meta.json 解析失败：${e.message}，跳过`);
+        continue;
+      }
+      if (meta.draft) continue;
+
+      posts.push({
+        slug: dir,
+        title: meta.title || '无标题',
+        date: formatDate(meta.date),
+        rawDate: meta.date,
+        isoDate: meta.date ? new Date(meta.date).toISOString() : '',
+        description: meta.description || '',
+        dir,
+        type: 'custom',
+        url: `/posts/${dir}/`,
+        noHeader: !!meta.noHeader,
+      });
+    }
   }
 
-  // 按日期降序排序
   posts.sort((a, b) => {
     const dateA = a.rawDate ? new Date(a.rawDate) : new Date(0);
     const dateB = b.rawDate ? new Date(b.rawDate) : new Date(0);
@@ -91,9 +123,10 @@ function readCSS() {
   return fs.readFileSync(STYLES_FILE, 'utf-8');
 }
 
-// 复制图片资源
+// 复制图片资源（仅 markdown 文章）
 function copyImages(posts) {
   for (const post of posts) {
+    if (post.type !== 'markdown') continue;
     const imagesDir = path.join(POSTS_DIR, post.dir, 'images');
     if (fs.existsSync(imagesDir)) {
       const destDir = path.join(DIST_DIR, 'posts', post.slug, 'images');
@@ -104,6 +137,98 @@ function copyImages(posts) {
       }
       console.log(`✓ posts/${post.slug}/images/`);
     }
+  }
+}
+
+function copyDirRecursive(src, dest, exclude = []) {
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  for (const entry of entries) {
+    if (exclude.includes(entry.name)) continue;
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath, exclude);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
+// 浮动返回按钮：右下角胶囊，毛玻璃质感，自动适配深色背景
+const FLOATING_BACK_HTML = `
+<style>
+  #blog-back-fab {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2147483647;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px 8px 12px;
+    font: 500 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #2b2b2b;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    text-decoration: none;
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+  #blog-back-fab:hover {
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 10px 28px rgba(0, 0, 0, 0.12);
+    text-decoration: none;
+    color: #2b2b2b;
+  }
+  #blog-back-fab svg { display: block; opacity: .72; }
+  @media (prefers-color-scheme: dark) {
+    #blog-back-fab {
+      color: #f2f2f2;
+      background: rgba(28, 28, 30, 0.55);
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+    #blog-back-fab:hover {
+      background: rgba(28, 28, 30, 0.85);
+      color: #f2f2f2;
+    }
+  }
+  @media (max-width: 480px) {
+    #blog-back-fab { right: 12px; bottom: 12px; padding: 7px 12px 7px 10px; font-size: 12px; }
+  }
+</style>
+<a id="blog-back-fab" href="/" aria-label="返回博客首页">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  <span>王雨峰的博客</span>
+</a>
+`;
+
+function injectFloatingBack(html) {
+  if (html.includes('</body>')) {
+    return html.replace('</body>', `${FLOATING_BACK_HTML}\n</body>`);
+  }
+  return html + FLOATING_BACK_HTML;
+}
+
+// 自定义 HTML 文章：整目录拷贝到 dist/posts/<slug>/，按需注入返回按钮
+function buildCustomPosts(posts) {
+  for (const post of posts) {
+    if (post.type !== 'custom') continue;
+    const srcDir = path.join(POSTS_DIR, post.dir);
+    const destDir = path.join(DIST_DIR, 'posts', post.slug);
+    copyDirRecursive(srcDir, destDir, ['meta.json']);
+
+    const indexFile = path.join(destDir, 'index.html');
+    let html = fs.readFileSync(indexFile, 'utf-8');
+    if (!post.noHeader) {
+      html = injectFloatingBack(html);
+    }
+    fs.writeFileSync(indexFile, html);
+    console.log(`✓ posts/${post.slug}/`);
   }
 }
 
@@ -142,8 +267,9 @@ const homeHtml = htmlTemplate({
 });
 console.log('HOME:' + JSON.stringify(homeHtml));
 
-// 生成文章页
+// 生成文章页（仅 markdown 类型，自定义 HTML 由 buildCustomPosts 处理）
 for (const post of posts) {
+  if (post.type !== 'markdown') continue;
   const postContent = renderToString(
     React.createElement(PostPage, {
       title: post.title,
@@ -167,7 +293,7 @@ for (const post of posts) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': 'https://wangyufeng.org/posts/' + post.slug + '.html'
+      '@id': 'https://wangyufeng.org' + post.url
     }
   };
   const postHtml = htmlTemplate({
@@ -175,7 +301,7 @@ for (const post of posts) {
     content: postContent,
     css,
     description: post.description,
-    url: '/posts/' + post.slug + '.html',
+    url: post.url,
     date: post.isoDate,
     isArticle: true,
     jsonLd: postJsonLd
@@ -264,7 +390,7 @@ function generateSitemap(posts) {
   for (const post of posts) {
     const lastmod = post.date || today;
     xml += `  <url>
-    <loc>${siteUrl}/posts/${post.slug}.html</loc>
+    <loc>${siteUrl}${post.url}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -301,6 +427,7 @@ async function build() {
 
   await buildPages(posts, css);
   copyImages(posts);
+  buildCustomPosts(posts);
   copyPublicFiles();
   generateSitemap(posts);
   generateRobots();

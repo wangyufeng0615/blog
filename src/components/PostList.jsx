@@ -7,7 +7,7 @@ export function PostList({ posts }) {
       <ul className="posts">
         {posts.map((post) => (
           <li key={post.slug} className="post-item">
-            <a href={`/posts/${post.slug}.html`} className="post-link">
+            <a href={post.url} className="post-link">
               <span className="post-date">{post.date}</span>
               <span className="post-title">{post.title}</span>
             </a>
