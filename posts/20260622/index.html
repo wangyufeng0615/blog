@@ -1,0 +1,1878 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>四篇 AI 论文与存储需求学习手册</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23151f27'/%3E%3Cpath d='M7 9h18M7 16h18M7 23h12' stroke='%23f8fafb' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #eef2f5;
+      --paper: #ffffff;
+      --ink: #17212a;
+      --muted: #637482;
+      --line: #d7e0e6;
+      --line-dark: #aebdc7;
+      --hbm: #d98a1b;
+      --dram: #276db6;
+      --nand: #177c5a;
+      --risk: #b4463e;
+      --soft-hbm: #fff2dc;
+      --soft-dram: #e9f2fc;
+      --soft-nand: #e6f5ee;
+      --soft-risk: #f9e8e6;
+      --soft: #f8fafb;
+      --mono: "SFMono-Regular", "Roboto Mono", "Cascadia Code", Consolas, monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.43;
+      letter-spacing: 0;
+    }
+
+    a { color: #125f8b; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .deck-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 9px 28px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line-dark);
+      background: #f8fafb;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #243845;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 5px 8px;
+      color: #344956;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .nav-meta {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .deck {
+      counter-reset: slide;
+      padding: 18px 22px 42px;
+    }
+
+    .slide {
+      position: relative;
+      counter-increment: slide;
+      width: min(1180px, calc(100vw - 64px));
+      min-height: unset;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto 22px;
+      padding: clamp(20px, 2.2vw, 30px);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 12px 34px rgba(23, 33, 42, 0.06);
+      scroll-margin-top: 70px;
+    }
+
+    .slide.compact { min-height: unset; }
+
+    .slide[data-takeaway] {
+      padding-bottom: 106px;
+    }
+
+    .slide[data-takeaway]::before {
+      content: attr(data-takeaway);
+      position: absolute;
+      left: clamp(20px, 2.2vw, 30px);
+      right: 76px;
+      bottom: 42px;
+      min-height: 34px;
+      padding: 9px 12px;
+      border-top: 1px solid var(--line);
+      border-left: 4px solid #17212a;
+      background: #f8fafb;
+      color: #263945;
+      font-size: 12.8px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .slide::after {
+      content: counter(slide, decimal-leading-zero) " / 30";
+      position: absolute;
+      right: 28px;
+      bottom: 22px;
+      color: #8796a0;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .slide-title {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 14px;
+      padding-bottom: 9px;
+      border-bottom: 2px solid #17212a;
+    }
+
+    .slide-title h1,
+    .slide-title h2 {
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .slide-title h1 {
+      max-width: 1000px;
+      font-size: clamp(28px, 3.2vw, 42px);
+    }
+
+    .slide-title h2 {
+      font-size: clamp(22px, 2.4vw, 33px);
+    }
+
+    .kicker {
+      margin: 0 0 5px;
+      color: #4a5b66;
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .date-box {
+      min-width: 210px;
+      border-left: 3px solid #17212a;
+      padding-left: 12px;
+      color: #425461;
+      font-size: 12px;
+    }
+
+    .date-box b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 15px;
+    }
+
+    .lead {
+      max-width: 1080px;
+      margin: 0;
+      color: #344955;
+      font-size: clamp(17px, 1.45vw, 21px);
+      line-height: 1.34;
+      font-weight: 560;
+    }
+
+    .fine {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .grid-5 {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+    .block {
+      border-top: 3px solid var(--line-dark);
+      padding: 11px 0 0;
+    }
+
+    .block.hbm { border-color: var(--hbm); }
+    .block.dram { border-color: var(--dram); }
+    .block.nand { border-color: var(--nand); }
+    .block.risk { border-color: var(--risk); }
+
+    .block h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .block p,
+    .block li {
+      color: #435663;
+      font-size: 13.5px;
+    }
+
+    .block p { margin: 0; }
+    .block ul { margin: 7px 0 0; padding-left: 18px; }
+
+    .mini {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      padding: 11px 12px;
+    }
+
+    .mini b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    .mini p {
+      margin: 0;
+      color: #465965;
+      font-size: 12.5px;
+    }
+
+    .paper-meta {
+      display: grid;
+      grid-template-columns: 136px minmax(0, 1fr);
+      gap: 6px 14px;
+      margin: 8px 0 0;
+      padding: 8px 0 0;
+      border-top: 1px solid var(--line);
+      color: #41525d;
+      font-size: 12.5px;
+    }
+
+    .paper-meta b { color: var(--ink); }
+
+    .quote {
+      margin: 11px 0;
+      padding: 11px 14px;
+      border-left: 4px solid #17212a;
+      background: #f8fafb;
+      color: #243642;
+      font-size: 14px;
+      line-height: 1.42;
+      font-weight: 560;
+    }
+
+    .diagram {
+      border: 1px solid var(--line);
+      background: #fbfcfd;
+      padding: 12px;
+    }
+
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0;
+      margin: 10px 0 13px;
+      border: 1px solid var(--line);
+    }
+
+    .chain-step {
+      min-height: 70px;
+      padding: 8px 10px;
+      border-right: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+
+    .chain-step:last-child { border-right: 0; }
+
+    .chain-step b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12.5px;
+    }
+
+    .chain-step span {
+      color: #526572;
+      font-size: 11.5px;
+    }
+
+    .deep-read {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .deep-read h3,
+    .diagram h3,
+    .chart-title {
+      margin: 0 0 7px;
+      font-size: 16.5px;
+      line-height: 1.2;
+    }
+
+    .deep-read p {
+      margin: 0 0 7px;
+      color: #334855;
+      font-size: 13.3px;
+      line-height: 1.45;
+    }
+
+    .bars {
+      display: grid;
+      gap: 8px;
+      margin-top: 7px;
+    }
+
+    .bar {
+      display: grid;
+      grid-template-columns: 76px 1fr 38px;
+      gap: 10px;
+      align-items: center;
+      color: #344955;
+      font-family: var(--mono);
+      font-size: 11.5px;
+    }
+
+    .bar-line {
+      height: 11px;
+      background: #e8eef2;
+    }
+
+    .bar-line span {
+      display: block;
+      height: 100%;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 8px 7px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .matrix th {
+      border-top: 2px solid #17212a;
+      background: #f8fafb;
+      color: #334752;
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+    }
+
+    .matrix td { color: #374b58; }
+    .matrix b { color: var(--ink); }
+
+    .tag {
+      display: inline-block;
+      min-width: 38px;
+      padding: 2px 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 760;
+      text-align: center;
+    }
+
+    .tag.high { background: var(--soft-nand); color: var(--nand); }
+    .tag.mid { background: var(--soft-hbm); color: #9a5c00; }
+    .tag.low { background: #edf2f5; color: #536773; }
+    .tag.risk { background: var(--soft-risk); color: var(--risk); }
+    .tag.blue { background: var(--soft-dram); color: var(--dram); }
+
+    .tier {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr) 150px;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tier:last-child { border-bottom: 0; }
+
+    .tier-name {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 760;
+    }
+
+    .tier p {
+      margin: 0;
+      color: #3b4f5c;
+      font-size: 13px;
+    }
+
+    .scenario-chart {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .scenario-row {
+      display: grid;
+      grid-template-columns: 136px 1fr 76px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .scenario-label {
+      font-weight: 760;
+      color: #273a45;
+      font-size: 13px;
+    }
+
+    .stack {
+      display: flex;
+      height: 20px;
+      background: #edf2f5;
+      border: 1px solid var(--line);
+    }
+
+    .stack span { display: block; height: 100%; }
+
+    .formula {
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: #fbfcfd;
+      font-family: var(--mono);
+      color: #283944;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .source-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: #3b4f5b;
+      font-size: 13px;
+    }
+
+    .source-list li:last-child { border-bottom: 0; }
+
+    .print-note {
+      margin: 16px auto 0;
+      width: min(1180px, calc(100vw - 64px));
+      color: #6a7a85;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    @media (max-width: 980px) {
+      .deck-nav {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .nav-links { justify-content: flex-start; }
+      .deck { padding: 14px 10px 36px; }
+
+      .slide {
+        display: flex;
+        flex-direction: column;
+        width: calc(100vw - 20px);
+        min-height: auto;
+        aspect-ratio: auto;
+        padding: 24px 18px 54px;
+        scroll-margin-top: 126px;
+      }
+
+      .slide[data-takeaway] {
+        padding-bottom: 54px;
+      }
+
+      .slide[data-takeaway]::before {
+        position: static;
+        display: block;
+        order: 99;
+        margin-top: 18px;
+      }
+
+      .slide-title,
+      .deep-read,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .grid-5 {
+        grid-template-columns: 1fr;
+      }
+
+      .date-box { min-width: 0; }
+      .paper-meta { grid-template-columns: 1fr; }
+      .chain { grid-template-columns: 1fr; }
+      .chain-step { border-right: 0; border-bottom: 1px solid var(--line); }
+      .chain-step:last-child { border-bottom: 0; }
+      .tier { grid-template-columns: 1fr; }
+      .scenario-row { grid-template-columns: 1fr; gap: 6px; }
+      .matrix { font-size: 12px; }
+      .matrix th, .matrix td { padding: 7px 5px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .deck-nav { display: none; }
+      .deck { padding: 0; }
+      .slide {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        page-break-after: always;
+        border: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="deck-nav" aria-label="页面导航">
+    <div class="brand"><span class="brand-mark">IR</span><span>AI 论文与存储需求学习手册</span></div>
+    <div class="nav-links">
+      <a href="#cover">总览</a>
+      <a href="#method">阅读法</a>
+      <a href="#framework">框架</a>
+      <a href="#audit">审稿</a>
+      <a href="#oel-1">论文 1</a>
+      <a href="#fst-1">论文 2</a>
+      <a href="#survey-1">论文 3</a>
+      <a href="#mem-1">论文 4</a>
+      <a href="#impact">统一结论</a>
+      <a href="#mechanism-matrix">矩阵</a>
+      <a href="#purity">纯度</a>
+      <a href="#questions">练习</a>
+      <a href="#sources">来源</a>
+    </div>
+    <div class="nav-meta">学习手册版 · 2026-06-22</div>
+  </nav>
+
+  <div class="deck">
+    <section class="slide" id="cover" data-takeaway="读法提示：这不是一组单纯利好 NAND 的论文，而是一组关于持续智能体如何管理状态、经验和上下文的论文。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">从论文到存储需求</p>
+          <h1>智能体正在把“经验”变成新的记忆基础设施</h1>
+        </div>
+        <div class="date-box">
+          <b>2026</b>
+          四篇论文<br />HBM / DRAM / NAND 分层研读
+        </div>
+      </div>
+
+      <p class="lead">
+        这份手册的核心判断：存储叙事不应再被简化为“数据更多，所以 NAND 更多”。四篇论文共同指向的是一个新系统问题：智能体如何把交互轨迹、反馈、上下文和记忆组织成可复用的经验资产。
+      </p>
+
+      <div class="grid-4" style="margin-top: 28px">
+        <div class="block nand">
+          <h3>轨迹成为原材料</h3>
+          <p>真实任务、工具调用、错误、环境反馈和用户意图，开始从日志变成学习材料。</p>
+        </div>
+        <div class="block dram">
+          <h3>记忆成为调度问题</h3>
+          <p>长期记忆不是放进去就有用，关键是检索、压缩、重排、淘汰和上下文预算。</p>
+        </div>
+        <div class="block hbm">
+          <h3>上下文成为热权重</h3>
+          <p>优化后的提示词、任务上下文和键值缓存，会进入最热推理路径。</p>
+        </div>
+        <div class="block risk">
+          <h3>容量不是唯一瓶颈</h3>
+          <p>好的经验系统会抽象、遗忘和压缩；粗糙容量推演会高估长期原始数据保留。</p>
+        </div>
+      </div>
+
+      <div class="diagram" style="margin-top: 24px">
+        <div class="tier">
+          <div class="tier-name" style="color: var(--hbm)">HBM</div>
+          <p><strong>最热状态。</strong>正在解码的上下文、活跃键值缓存、训练和蒸馏工作集。</p>
+          <div class="fine">带宽优先 · 容量最贵</div>
+        </div>
+        <div class="tier">
+          <div class="tier-name" style="color: var(--dram)">DRAM</div>
+          <p><strong>工作记忆。</strong>热索引、候选记忆池、重排、上下文预取和任务状态。</p>
+          <div class="fine">延迟优先 · 调度核心</div>
+        </div>
+        <div class="tier">
+          <div class="tier-name" style="color: var(--nand)">NAND</div>
+          <p><strong>温层经验库。</strong>轨迹、摘要、失败样本、向量库、回放数据和版本化评测。</p>
+          <div class="fine">容量优先 · 可复用资产</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="method" data-takeaway="本页 takeaway：先判断对象是热状态、工作记忆还是温层资产，再谈 HBM、DRAM、NAND。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">怎么读这组论文</p>
+          <h2>不是找一句口号，而是找需求传导链</h2>
+        </div>
+        <div class="date-box">
+          <b>Method</b>
+          论文 → 系统 → 采购压力
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="mini">
+          <b>第一层：论文到底让什么对象变重要？</b>
+          <p>轨迹、上下文、记忆、反馈、经验摘要、回放缓冲，分别对应不同介质。</p>
+        </div>
+        <div class="mini">
+          <b>第二层：对象在系统里是热的还是冷的？</b>
+          <p>正在推理的是 HBM/DRAM 问题；长期可复用和回放才是 NAND 问题。</p>
+        </div>
+        <div class="mini">
+          <b>第三层：对象是否会被压缩、抽象、遗忘？</b>
+          <p>论文越强调经验抽象，越不能用“全量永久保存”做简单推算。</p>
+        </div>
+      </div>
+
+      <div class="chain" style="margin-top: 22px">
+        <div class="chain-step"><b>论文机制</b><span>学习从哪里来，反馈如何被利用。</span></div>
+        <div class="chain-step"><b>数据形态</b><span>原始轨迹、摘要、上下文、权重、索引。</span></div>
+        <div class="chain-step"><b>生命周期</b><span>临时、热缓存、温层复用、长期归档。</span></div>
+        <div class="chain-step"><b>瓶颈位置</b><span>带宽、延迟、容量、检索质量、网络。</span></div>
+        <div class="chain-step"><b>产业映射</b><span>HBM、DRAM、SSD/NAND、控制器、系统软件。</span></div>
+      </div>
+
+      <div class="quote">
+        使用这份手册时，重点不要问“哪篇最利好 NAND”，而要问“这篇论文会让哪类状态被保存、被检索、被重放、被蒸馏，以及保存多久”。
+      </div>
+    </section>
+
+    <section class="slide compact" id="framework" data-takeaway="本页 takeaway：同一个“记忆”词，在不同生命周期里会映射到完全不同的介质和供应链位置。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">三层存储框架</p>
+          <h2>把“经验”拆成热状态、工作记忆和温层资产</h2>
+        </div>
+        <div class="date-box">
+          <b>Frame</b>
+          之后所有论文都按这个框架读
+        </div>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>层级</th>
+            <th>典型对象</th>
+            <th>主要瓶颈</th>
+            <th>来自论文的触发条件</th>
+            <th>最容易误读的地方</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b style="color:var(--hbm)">HBM</b></td>
+            <td>活跃上下文、键值缓存、训练小批次、蒸馏时教师/学生分布</td>
+            <td>带宽、吞吐、推理尾延迟</td>
+            <td>快权重进入推理路径；长上下文和在线蒸馏放量</td>
+            <td>长期经验不会全量常驻 HBM</td>
+          </tr>
+          <tr>
+            <td><b style="color:var(--dram)">DRAM</b></td>
+            <td>热索引、候选记忆池、向量检索、重排、任务状态、上下文预取</td>
+            <td>低延迟检索、并发调度、内存池化</td>
+            <td>外部记忆变复杂；上下文预算变稀缺</td>
+            <td>DRAM 不是中性缓存，而是记忆质量的组织层</td>
+          </tr>
+          <tr>
+            <td><b style="color:var(--nand)">NAND</b></td>
+            <td>轨迹、失败样本、经验摘要、回放缓冲、评测版本、向量库</td>
+            <td>容量、吞吐、成本、耐久、数据管理</td>
+            <td>真实部署轨迹被保留；私有评测和回放成为标准流程</td>
+            <td>成熟系统会抽象和淘汰，不能假设全部永久保留</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-3" style="margin-top: 22px">
+        <div class="block hbm"><h3>热状态问题</h3><p>“此刻要进模型”的状态。影响 HBM，也影响高端推理集群。</p></div>
+        <div class="block dram"><h3>组织问题</h3><p>“该取哪段记忆”的问题。影响 DRAM、CXL、向量索引、重排服务。</p></div>
+        <div class="block nand"><h3>资产问题</h3><p>“哪些经验值得留下”的问题。影响 SSD/NAND、对象存储和数据治理。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="audit" data-takeaway="本页 takeaway：第二轮审稿后的核心修正是反过度外推：先识别状态层级，再谈需求弹性。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">第二轮审稿基线</p>
+          <h2>最容易犯的错：把“经验”直接等同于“容量”</h2>
+        </div>
+        <div class="date-box"><b>Audit</b>先防误读，再做推演</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="block risk">
+          <h3>需要降权的说法</h3>
+          <ul>
+            <li>“智能体越多，NAND 就线性暴涨。”忽略保留周期、去重、压缩和抽象。</li>
+            <li>“外部记忆解决持续学习。”论文 4 反而说明瓶颈会迁移到检索和组织。</li>
+            <li>“长上下文全是 HBM 需求。”热键值缓存和温层上下文不是同一层。</li>
+            <li>“四篇论文都指向同一个标的。”控制器、容量、接口和系统软件的变现层不同。</li>
+          </ul>
+        </div>
+        <div class="block nand">
+          <h3>应该保留的强结论</h3>
+          <ul>
+            <li>部署轨迹、失败样本、评测版本和回放缓冲正在从副产品变成训练资产。</li>
+            <li>DRAM 的角色被低估：它是候选记忆、索引、重排和上下文预算的组织层。</li>
+            <li>HBM 受益于长上下文、在线蒸馏和高并发热状态，但不承载长期经验库。</li>
+            <li>NAND 的弹性来自保留周期、回放倍数、多模态轨迹和私有评测频率。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        读法修正：每看到“memory / experience / trajectory”，先问它是热状态、工作记忆、温层资产还是冷归档；再问它会被原样保存、抽象保存还是被丢弃。
+      </div>
+
+      <div class="grid-3" style="margin-top: 18px">
+        <div class="mini"><b>热路径审稿</b><p>是否真的进入推理、训练或蒸馏工作集？如果没有，不应直接映射到 HBM。</p></div>
+        <div class="mini"><b>组织层审稿</b><p>是否需要在线检索、候选池、重排和上下文预取？这才是 DRAM/CXL 的核心问题。</p></div>
+        <div class="mini"><b>容量层审稿</b><p>是否长期保留原始轨迹、失败样本和评测版本？这决定 NAND 弹性。</p></div>
+      </div>
+    </section>
+
+    <section class="slide" id="oel-1" data-takeaway="本页 takeaway：OEL 把部署后的真实交互从日志变成训练燃料，这是它影响存储叙事的根。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 1 · 问题意识</p>
+          <h2>Online Experiential Learning for Language Models</h2>
+        </div>
+        <div class="date-box">
+          <b>发布时间：2026-03-17</b>
+          原始链接<br />
+          <a href="https://arxiv.org/abs/2603.16856" target="_blank" rel="noreferrer">arXiv:2603.16856</a>
+        </div>
+      </div>
+
+      <div class="paper-meta">
+        <b>作者</b><span>Tianzhu Ye, Li Dong, Qingxiu Dong, Xun Wu, Shaohan Huang, Furu Wei</span>
+        <b>一句话</b><span>真实部署中的用户交互轨迹不再只是日志，而是被抽取成可迁移经验，再蒸馏回模型。</span>
+      </div>
+
+      <div class="grid-2" style="margin-top: 16px">
+        <div>
+          <h3 class="chart-title">它解决的不是“更多训练数据”</h3>
+          <p class="lead" style="font-size:17px">它解决的是：模型上线之后每天产生大量真实交互，但传统训练范式没有把这些交互变成持续学习燃料。</p>
+          <div class="quote">
+            关键变化：部署经验从“事后日志”升级为“可抽取、可积累、可蒸馏、可迭代”的学习对象。
+          </div>
+        </div>
+        <div class="diagram">
+          <h3>论文给出的两阶段闭环</h3>
+          <div class="chain" style="grid-template-columns: repeat(3, minmax(0,1fr)); margin: 0">
+            <div class="chain-step"><b>用户侧</b><span>模型与真实环境互动，收集多轮轨迹。</span></div>
+            <div class="chain-step"><b>服务端</b><span>从轨迹中抽取可迁移经验，不需要访问用户环境。</span></div>
+            <div class="chain-step"><b>再部署</b><span>经验通过同策略上下文蒸馏内化进模型，再产生更好轨迹。</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-4" style="margin-top: 18px">
+        <div class="mini"><b>用户侧轨迹</b><p>观测、动作、文本反馈、失败路径和成功路径。</p></div>
+        <div class="mini"><b>经验抽取</b><p>把噪声轨迹提炼成规则、策略和可复用提示。</p></div>
+        <div class="mini"><b>同策略蒸馏</b><p>学生从自己的分布采样，再匹配带经验教师。</p></div>
+        <div class="mini"><b>闭环迭代</b><p>更强模型产生更高质量轨迹，经验质量继续上升。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="oel-2" data-takeaway="本页 takeaway：OEL 的新增需求来自整条加工链，而不是单个数据湖。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 1 · 方法机制</p>
+          <h2>OEL 把轨迹拆成三类可保存对象</h2>
+        </div>
+        <div class="date-box"><b>OEL</b>轨迹 → 经验 → 蒸馏样本</div>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>对象</th>
+            <th>论文中的角色</th>
+            <th>为什么重要</th>
+            <th>存储含义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>原始轨迹 T</b></td>
+            <td>模型动作与环境反馈交替出现的多轮历史</td>
+            <td>提供失败样本、策略探索路径和环境反应</td>
+            <td>NAND/对象存储底座；审计和回放需求强</td>
+          </tr>
+          <tr>
+            <td><b>经验知识 C</b></td>
+            <td>从轨迹中抽取的可迁移规则和策略</td>
+            <td>论文发现抽取经验比直接用原始轨迹更有效</td>
+            <td>温层知识库和版本库；体积小但访问频繁</td>
+          </tr>
+          <tr>
+            <td><b>前缀样本 D</b></td>
+            <td>从轨迹切出的部分历史，用于单步响应蒸馏</td>
+            <td>让服务端不访问真实环境也能训练</td>
+            <td>训练数据管道；短期高吞吐，依赖 SSD 和 DRAM</td>
+          </tr>
+          <tr>
+            <td><b>教师分布</b></td>
+            <td>带经验上下文的冻结教师，为学生提供细粒度信号</td>
+            <td>把外部经验压进参数或上下文行为</td>
+            <td>HBM/DRAM 压力来自训练和蒸馏热路径</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote">
+        这篇论文的存储启发不是“保存聊天记录”，而是“保存能被再加工的学习链条”：原始轨迹、抽取经验、训练前缀、蒸馏版本都需要治理。
+      </div>
+    </section>
+
+    <section class="slide compact" id="oel-3" data-takeaway="本页 takeaway：原始轨迹要保存，但真正的资产是能提升模型行为的经验抽取结果。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 1 · 实验与学习要点</p>
+          <h2>抽取出的经验，比原始轨迹更像资产</h2>
+        </div>
+        <div class="date-box"><b>OEL</b>实验读法</div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="chart-title">实验告诉我们的三件事</h3>
+          <table class="matrix">
+            <thead>
+              <tr><th>发现</th><th>含义</th><th>对存储的暗示</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>多轮迭代提高通过率</b></td>
+                <td>经验抽取和蒸馏能形成正循环</td>
+                <td>数据不是一次性训练集，而是持续流</td>
+              </tr>
+              <tr>
+                <td><b>响应长度下降到约 70%</b></td>
+                <td>经验被内化后推理更省 token</td>
+                <td>热层压力可能被经验压缩部分抵消</td>
+              </tr>
+              <tr>
+                <td><b>经验知识优于原始轨迹</b></td>
+                <td>未经处理的轨迹有噪声</td>
+                <td>价值在抽取管道，不只在原始容量</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram">
+          <h3>论文表 1 的直观读法</h3>
+          <div class="bars">
+            <div class="bar"><span>无经验</span><div class="bar-line"><span style="width:35%;background:#90a4b3"></span></div><b>7.5</b></div>
+            <div class="bar"><span>原轨迹</span><div class="bar-line"><span style="width:51%;background:var(--dram)"></span></div><b>10.9</b></div>
+            <div class="bar"><span>经验上下文</span><div class="bar-line"><span style="width:85%;background:var(--nand)"></span></div><b>18.2</b></div>
+            <div class="bar"><span>经验蒸馏</span><div class="bar-line"><span style="width:100%;background:var(--hbm)"></span></div><b>21.4</b></div>
+          </div>
+          <div class="quote">
+            原始轨迹不是终点。真正值得投资的，是从轨迹到经验、从经验到模型行为的加工链。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="oel-4" data-takeaway="本页 takeaway：OEL 最强化 NAND，但同时要求我们跟踪抽取效率和原始轨迹保留比例。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 1 · 存储映射</p>
+          <h2>OEL 最强化 NAND，但不是无脑容量叙事</h2>
+        </div>
+        <div class="date-box"><b>OEL</b>需求传导</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="diagram">
+          <h3>对三层需求的方向</h3>
+          <div class="bars">
+            <div class="bar"><span>HBM</span><div class="bar-line"><span style="width:72%;background:var(--hbm)"></span></div><b>强</b></div>
+            <div class="bar"><span>DRAM</span><div class="bar-line"><span style="width:78%;background:var(--dram)"></span></div><b>强</b></div>
+            <div class="bar"><span>NAND</span><div class="bar-line"><span style="width:95%;background:var(--nand)"></span></div><b>最强</b></div>
+          </div>
+        </div>
+        <div>
+          <div class="block nand">
+            <h3>NAND 为什么最强</h3>
+            <ul>
+              <li>真实轨迹、失败样本、环境反馈需要低成本持久化。</li>
+              <li>经验摘要和训练前缀会形成版本化数据集。</li>
+              <li>企业要做审计和回放时，原始轨迹保留周期会拉长。</li>
+            </ul>
+          </div>
+          <div class="block risk" style="margin-top: 14px">
+            <h3>但它也给出反证</h3>
+            <p>论文明确显示经验抽取比原始轨迹更有效。抽取越强、压缩越好，长期原始轨迹保留比例越低，NAND 增量就越温和。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 18px">
+        <div class="mini"><b>热路径</b><p>蒸馏训练时进入 HBM，推理时只用被选中的经验。</p></div>
+        <div class="mini"><b>工作集</b><p>经验检索、候选样本、训练前缀缓存进入 DRAM。</p></div>
+        <div class="mini"><b>温层资产</b><p>轨迹、摘要、失败案例、评测集进入 NAND。</p></div>
+      </div>
+    </section>
+
+    <section class="slide" id="fst-1" data-takeaway="本页 takeaway：FST 的关键变化是把上下文从提示词提升为可学习的快权重。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 2 · 问题意识</p>
+          <h2>Learning, Fast and Slow: Towards LLMs That Adapt Continually</h2>
+        </div>
+        <div class="date-box">
+          <b>发布时间：2026-05-12</b>
+          v2：2026-05-14<br />
+          <a href="https://arxiv.org/abs/2605.12484" target="_blank" rel="noreferrer">arXiv:2605.12484</a>
+        </div>
+      </div>
+
+      <div class="paper-meta">
+        <b>作者</b><span>Rishabh Tiwari, Kusha Sareen, Lakshya A. Agrawal, Joseph E. Gonzalez, Matei Zaharia, Kurt Keutzer, Inderjit S. Dhillon, Rishabh Agarwal, Devvrit Khatri</span>
+        <b>一句话</b><span>模型参数是慢权重，优化后的上下文是快权重；两者共同学习，减少遗忘并提高持续适应能力。</span>
+      </div>
+
+      <div class="grid-2" style="margin-top: 16px">
+        <div>
+          <h3 class="chart-title">它挑战的是“学习只能改参数”</h3>
+          <p class="lead" style="font-size:17px">参数更新能提高任务表现，但也会让模型漂离基座，带来灾难性遗忘和可塑性下降。FST 的思路是让一部分任务适配留在文本上下文里。</p>
+          <div class="quote">
+            对存储最重要的句子：上下文不再是一次性提示词，而是可优化、可保留、可组合、可迁移的快权重。
+          </div>
+        </div>
+        <div class="diagram">
+          <h3>快慢权重分工</h3>
+          <table class="matrix">
+            <tbody>
+              <tr><td><b>慢权重</b></td><td>模型参数，更新昂贵，负责长期能力和通用推理。</td></tr>
+              <tr><td><b>快权重</b></td><td>提示、指令、任务上下文，可频繁更新，负责快速任务适配。</td></tr>
+              <tr><td><b>共同训练</b></td><td>上下文和参数一起演化，避免所有任务信息都挤进参数。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-4" style="margin-top: 16px">
+        <div class="mini"><b>读法 1</b><p>把上下文看作会变化的状态，不要只看参数。</p></div>
+        <div class="mini"><b>读法 2</b><p>关注上下文池、候选提示和反馈文本的存储形态。</p></div>
+        <div class="mini"><b>读法 3</b><p>热层压力来自快权重进入推理和训练路径。</p></div>
+        <div class="mini"><b>读法 4</b><p>长期资产来自上下文版本和失败反馈。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="fst-2" data-takeaway="本页 takeaway：快权重需要上下文池、候选选择和版本管理，DRAM 组织层因此变重要。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 2 · 方法机制</p>
+          <h2>FST 的系统形态是“上下文池 + 参数训练”</h2>
+        </div>
+        <div class="date-box"><b>FST</b>上下文快权重</div>
+      </div>
+
+      <div class="chain">
+        <div class="chain-step"><b>任务反馈</b><span>推理、工具调用、错误、文本反馈。</span></div>
+        <div class="chain-step"><b>快上下文更新</b><span>反思式优化器更新提示和任务上下文。</span></div>
+        <div class="chain-step"><b>上下文池</b><span>保留多个候选快权重，而不是只留一个最佳提示。</span></div>
+        <div class="chain-step"><b>慢参数更新</b><span>在不同上下文条件下进行强化学习或微调。</span></div>
+        <div class="chain-step"><b>持续适应</b><span>任务变化时先动上下文，再逐渐影响参数。</span></div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 18px">
+        <div class="block hbm">
+          <h3>为什么会推高 HBM</h3>
+          <p>快权重最终进入推理上下文，也会增加训练和蒸馏时的活跃上下文长度。</p>
+        </div>
+        <div class="block dram">
+          <h3>为什么会推高 DRAM</h3>
+          <p>上下文池、候选提示、任务反馈和重排逻辑会形成主机侧热工作集。</p>
+        </div>
+        <div class="block nand">
+          <h3>NAND 的角色</h3>
+          <p>上下文版本库、失败反馈、候选提示和训练轨迹需要持久化，但不是每次都在热路径。</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        FST 把“上下文工程”从手工调提示升级为训练系统组件。它的存储含义更偏热层和组织层，而不是单纯容量层。
+      </div>
+    </section>
+
+    <section class="slide compact" id="fst-3" data-takeaway="本页 takeaway：少漂移和更可塑意味着一部分学习压力被转移到外部上下文层。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 2 · 实验与学习要点</p>
+          <h2>快权重让模型少漂移，也更能继续学</h2>
+        </div>
+        <div class="date-box"><b>FST</b>实验读法</div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <table class="matrix">
+            <thead>
+              <tr><th>结果</th><th>论文含义</th><th>存储含义</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>最多 3 倍更省样本</b></td>
+                <td>快上下文能迅速吸收任务反馈</td>
+                <td>反馈文本和上下文版本变成训练资产</td>
+              </tr>
+              <tr>
+                <td><b>最高约 70% 更低 KL 漂移</b></td>
+                <td>慢权重不必承载全部任务信息</td>
+                <td>外部上下文层替代部分参数记忆</td>
+              </tr>
+              <tr>
+                <td><b>持续任务切换更稳</b></td>
+                <td>参数不被单一任务锁死</td>
+                <td>上下文池需要可检索、可淘汰、可复用</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram">
+          <h3>概念图：任务信息分流</h3>
+          <div class="scenario-chart">
+            <div class="scenario-row">
+              <div class="scenario-label">参数-only</div>
+              <div class="stack"><span style="width:82%;background:var(--hbm)"></span><span style="width:18%;background:var(--dram)"></span></div>
+              <div class="fine">易漂移</div>
+            </div>
+            <div class="scenario-row">
+              <div class="scenario-label">快慢协同</div>
+              <div class="stack"><span style="width:46%;background:var(--hbm)"></span><span style="width:34%;background:var(--dram)"></span><span style="width:20%;background:var(--nand)"></span></div>
+              <div class="fine">更可塑</div>
+            </div>
+          </div>
+          <div class="quote">
+            对投资叙事的意义：有些“学习”不会先变成参数更新，而会先变成上下文和记忆层的负载。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="fst-4" data-takeaway="本页 takeaway：FST 更像 HBM/DRAM thesis，NAND 是上下文版本和反馈资产的持久层。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 2 · 存储映射</p>
+          <h2>FST 最强化 HBM 与 DRAM，NAND 是版本化底座</h2>
+        </div>
+        <div class="date-box"><b>FST</b>需求传导</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="diagram">
+          <h3>对三层需求的方向</h3>
+          <div class="bars">
+            <div class="bar"><span>HBM</span><div class="bar-line"><span style="width:88%;background:var(--hbm)"></span></div><b>最强</b></div>
+            <div class="bar"><span>DRAM</span><div class="bar-line"><span style="width:84%;background:var(--dram)"></span></div><b>很强</b></div>
+            <div class="bar"><span>NAND</span><div class="bar-line"><span style="width:68%;background:var(--nand)"></span></div><b>中强</b></div>
+          </div>
+        </div>
+        <div>
+          <div class="block hbm">
+            <h3>热层压力</h3>
+            <ul>
+              <li>快权重进入上下文，增加上下文长度和键值缓存。</li>
+              <li>训练时快慢权重协同，推高 GPU 活跃工作集。</li>
+              <li>多候选上下文会放大评测和采样成本。</li>
+            </ul>
+          </div>
+          <div class="block dram" style="margin-top: 14px">
+            <h3>组织层压力</h3>
+            <p>上下文池不是静态文件夹，而是要按任务、反馈、表现、时效性和多样性进行检索和调度。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="survey-1" data-takeaway="本页 takeaway：这篇综述是分类器，用来判断一个记忆系统处在保存、反思还是经验抽象阶段。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 3 · 问题意识</p>
+          <h2>From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms</h2>
+        </div>
+        <div class="date-box">
+          <b>发布时间：2026-05-07</b>
+          原始链接<br />
+          <a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">arXiv:2605.06716</a>
+        </div>
+      </div>
+
+      <div class="paper-meta">
+        <b>作者</b><span>Jinghao Luo, Yuchen Tian, Chuxue Cao, Ziyang Luo, Hongzhan Lin, Kaixin Li, Chuyi Kong, Ruichao Yang, Jing Ma</span>
+        <b>一句话</b><span>智能体记忆从保存轨迹，演化到反思修正，再演化到跨轨迹抽象的经验。</span>
+      </div>
+
+      <div class="grid-2" style="margin-top: 16px">
+        <div>
+          <p class="lead" style="font-size:17px">这篇是路线图型论文，不是单一系统论文。它最适合用来建立研究框架：同样叫“记忆”，处在不同阶段时，对存储介质的需求完全不同。</p>
+          <div class="quote">
+            论文的三阶段：Storage 是轨迹保存，Reflection 是轨迹提炼，Experience 是跨轨迹抽象。
+          </div>
+        </div>
+        <div class="diagram">
+          <h3>三阶段路线</h3>
+          <div class="scenario-chart">
+            <div class="scenario-row"><div class="scenario-label">Storage</div><div class="stack"><span style="width:82%;background:var(--nand)"></span></div><div class="fine">保存</div></div>
+            <div class="scenario-row"><div class="scenario-label">Reflection</div><div class="stack"><span style="width:48%;background:var(--nand)"></span><span style="width:34%;background:var(--dram)"></span></div><div class="fine">提炼</div></div>
+            <div class="scenario-row"><div class="scenario-label">Experience</div><div class="stack"><span style="width:28%;background:var(--nand)"></span><span style="width:42%;background:var(--dram)"></span><span style="width:18%;background:var(--hbm)"></span></div><div class="fine">抽象</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 16px">
+        <div class="mini"><b>如果产品只保存轨迹</b><p>先看 NAND、对象存储、日志治理和留存周期。</p></div>
+        <div class="mini"><b>如果产品能反思纠错</b><p>再看 DRAM、索引、重排和记忆生命周期。</p></div>
+        <div class="mini"><b>如果产品能抽象经验</b><p>最后看评测、回放、技能库和周期训练。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="survey-2" data-takeaway="本页 takeaway：Storage 更像容量问题，Reflection 更像组织问题，Experience 更像抽象和评测问题。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 3 · 三阶段详解</p>
+          <h2>同样是“记忆”，不同阶段的数据结构不同</h2>
+        </div>
+        <div class="date-box"><b>Survey</b>Storage / Reflection / Experience</div>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>阶段</th>
+            <th>论文定义</th>
+            <th>典型数据</th>
+            <th>系统瓶颈</th>
+            <th>存储映射</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Storage</b></td>
+            <td>保留轨迹，尽量保持一对一对应</td>
+            <td>对话、工具调用、环境状态、原始日志</td>
+            <td>容量、成本、生命周期管理</td>
+            <td>NAND 最直接；冷归档也重要</td>
+          </tr>
+          <tr>
+            <td><b>Reflection</b></td>
+            <td>从轨迹中生成批评、修正、偏好和经验片段</td>
+            <td>反思文本、错误总结、偏好、纠错路径</td>
+            <td>去噪、索引、相似检索、版本管理</td>
+            <td>DRAM 组织层上升，NAND 仍是底座</td>
+          </tr>
+          <tr>
+            <td><b>Experience</b></td>
+            <td>跨轨迹抽象出规则、技能、策略或隐式能力</td>
+            <td>规则集、技能库、程序、潜变量、微调权重</td>
+            <td>抽象质量、可迁移性、评测和回放</td>
+            <td>容量压力下降，热检索和训练压力上升</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote">
+        这篇论文给存储研究最大的帮助，是避免把“智能体记忆”当成一个统一需求。早期是容量问题，中期是组织问题，后期是抽象和评测问题。
+      </div>
+    </section>
+
+    <section class="slide compact" id="survey-3" data-takeaway="本页 takeaway：经验不是更长的日志，而是更短、更可迁移、更可评测的策略或技能。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 3 · Experience 阶段</p>
+          <h2>经验不是更长的日志，而是跨轨迹抽象</h2>
+        </div>
+        <div class="date-box"><b>Survey</b>抽象与探索</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="block dram">
+          <h3>主动探索</h3>
+          <p>记忆不只是记录过去，还会指导下一步探索。系统会用已有经验决定去哪里试错、哪些状态值得采样、哪些失败值得回放。</p>
+          <ul>
+            <li>探索广度：补齐陌生环境。</li>
+            <li>探索深度：挖掘高阶技能。</li>
+            <li>探索策略：优化长期决策路径。</li>
+          </ul>
+        </div>
+        <div class="block nand">
+          <h3>跨轨迹抽象</h3>
+          <p>把多个相似轨迹压缩成规则、程序、技能或模型内能力。论文强调从单条轨迹修正，转向跨轨迹归纳。</p>
+          <ul>
+            <li>浅层：自然语言规则。</li>
+            <li>中层：模块化技能或代码。</li>
+            <li>深层：压进参数或潜变量。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="diagram" style="margin-top: 18px">
+        <h3>对存储叙事的修正</h3>
+        <div class="chain" style="margin:0">
+          <div class="chain-step"><b>原始轨迹多</b><span>NAND 容量增长。</span></div>
+          <div class="chain-step"><b>反思去噪</b><span>DRAM 检索和重排重要。</span></div>
+          <div class="chain-step"><b>经验抽象</b><span>单位价值上升，单位体积下降。</span></div>
+          <div class="chain-step"><b>回放评测</b><span>仍需要保留代表性样本。</span></div>
+          <div class="chain-step"><b>周期更新</b><span>热训练路径仍推高 HBM。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="survey-4" data-takeaway="本页 takeaway：越走向 Experience，越不能用原始容量线性外推，但越需要记忆组织和评测基础设施。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 3 · 存储映射</p>
+          <h2>它同时强化 NAND 长期叙事，也反对粗糙容量外推</h2>
+        </div>
+        <div class="date-box"><b>Survey</b>需求传导</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="diagram">
+          <h3>对三层需求的方向</h3>
+          <div class="bars">
+            <div class="bar"><span>HBM</span><div class="bar-line"><span style="width:58%;background:var(--hbm)"></span></div><b>中</b></div>
+            <div class="bar"><span>DRAM</span><div class="bar-line"><span style="width:88%;background:var(--dram)"></span></div><b>很强</b></div>
+            <div class="bar"><span>NAND</span><div class="bar-line"><span style="width:90%;background:var(--nand)"></span></div><b>很强</b></div>
+          </div>
+        </div>
+        <div class="block risk">
+          <h3>如何避免误读</h3>
+          <ul>
+            <li>Storage 阶段更像容量故事，但 Experience 阶段会压缩原始轨迹。</li>
+            <li>越成熟的系统越需要代表性样本，而不是保留所有细节。</li>
+            <li>检索、抽象、评测和版本管理会把需求从纯 NAND 推向 DRAM 和系统软件。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        对投资研究来说，这篇论文是“分类器”：它帮助判断一个产品、论文或云厂架构，处在记忆演化的哪个阶段。
+      </div>
+    </section>
+
+    <section class="slide" id="mem-1" data-takeaway="本页 takeaway：外部记忆不会自动解决持续学习，它只是把问题从参数空间搬到检索空间。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 4 · 问题意识</p>
+          <h2>When Continual Learning Moves to Memory</h2>
+        </div>
+        <div class="date-box">
+          <b>发布时间：2026-04-29</b>
+          原始链接<br />
+          <a href="https://arxiv.org/abs/2604.27003" target="_blank" rel="noreferrer">arXiv:2604.27003</a>
+        </div>
+      </div>
+
+      <div class="paper-meta">
+        <b>作者</b><span>Qisheng Hu, Quanyu Long, Wenya Wang</span>
+        <b>一句话</b><span>外部记忆没有消灭持续学习难题，只是把瓶颈从参数更新转移到记忆检索。</span>
+      </div>
+
+      <div class="grid-2" style="margin-top: 16px">
+        <div>
+          <p class="lead" style="font-size:17px">这篇是这组论文里最重要的“反炒作”材料。它提醒我们：长期记忆不是无限追加就能持续学习，因为模型每次只拥有有限上下文窗口。</p>
+          <div class="quote">
+            参数持续学习的干扰叫权重覆盖；记忆持续学习的干扰叫检索污染、上下文竞争和记忆稀释。
+          </div>
+        </div>
+        <div class="diagram">
+          <h3>瓶颈转移</h3>
+          <table class="matrix">
+            <tbody>
+              <tr><td><b>参数学习</b></td><td>新任务更新权重，可能覆盖旧知识。</td></tr>
+              <tr><td><b>记忆学习</b></td><td>旧经验还在，但未必能被正确取出。</td></tr>
+              <tr><td><b>真正瓶颈</b></td><td>有限上下文里，旧经验和新经验竞争入口。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-4" style="margin-top: 16px">
+        <div class="mini"><b>原始轨迹</b><p>容易携带任务特定动作脚本，跨任务可能误导。</p></div>
+        <div class="mini"><b>抽象洞察</b><p>更像可迁移原则，负迁移风险更低。</p></div>
+        <div class="mini"><b>检索预算</b><p>上下文有限，取错比存少更致命。</p></div>
+        <div class="mini"><b>组织策略</b><p>聚合、去重和多样性控制决定记忆质量。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="mem-2" data-takeaway="本页 takeaway：原始轨迹跨任务可能有害，抽象记忆才更适合长期复用。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 4 · 实验与学习要点</p>
+          <h2>抽象记忆比原始轨迹更安全</h2>
+        </div>
+        <div class="date-box"><b>Memory CL</b>结果读法</div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <table class="matrix">
+            <thead>
+              <tr><th>实验发现</th><th>解释</th><th>存储含义</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>原始轨迹跨任务可能负迁移</b></td>
+                <td>细节看似相关，但会误导新任务</td>
+                <td>不是越细越好；需要抽象和过滤</td>
+              </tr>
+              <tr>
+                <td><b>困难样本更容易被误导</b></td>
+                <td>越需要帮助的样本，越依赖检索质量</td>
+                <td>检索错误的代价集中在高价值场景</td>
+              </tr>
+              <tr>
+                <td><b>细粒度组织不总是更好</b></td>
+                <td>同质记忆会造成检索多样性坍塌</td>
+                <td>DRAM 索引和组织策略很关键</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram">
+          <h3>论文 A→B 方向的直观对比</h3>
+          <div class="bars">
+            <div class="bar"><span>ALF 原轨迹</span><div class="bar-line"><span style="width:30%;background:var(--risk)"></span></div><b>-9.5</b></div>
+            <div class="bar"><span>ALF 抽象</span><div class="bar-line"><span style="width:70%;background:var(--nand)"></span></div><b>+6.5</b></div>
+            <div class="bar"><span>Baby 原轨迹</span><div class="bar-line"><span style="width:36%;background:var(--risk)"></span></div><b>-7.5</b></div>
+            <div class="bar"><span>Baby 抽象</span><div class="bar-line"><span style="width:78%;background:var(--nand)"></span></div><b>+9.0</b></div>
+          </div>
+          <div class="fine">数值来自论文中前向迁移实验，单位为百分点。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="mem-3" data-takeaway="本页 takeaway：长期记忆越多，越需要去重、聚合、重排和检索多样性控制。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 4 · 组织问题</p>
+          <h2>记忆系统的敌人不是遗忘，而是取错</h2>
+        </div>
+        <div class="date-box"><b>Memory CL</b>检索与稀释</div>
+      </div>
+
+      <div class="grid-3">
+        <div class="block risk">
+          <h3>检索污染</h3>
+          <p>取到了看起来相似、实际会误导的经验。原始轨迹越细，越容易携带任务特定动作脚本。</p>
+        </div>
+        <div class="block dram">
+          <h3>上下文竞争</h3>
+          <p>有限上下文里，旧经验、新经验、任务输入和工具状态争夺同一个入口。</p>
+        </div>
+        <div class="block nand">
+          <h3>记忆稀释</h3>
+          <p>经验越积越多，旧经验没有被删除，却越来越难在正确时刻被取到。</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        这篇论文最值得放进投资框架：长期存储越大，越需要更好的索引、聚合、去重、评测和淘汰机制。否则容量本身会变成噪声源。
+      </div>
+
+      <div class="grid-2" style="margin-top: 18px">
+        <div class="mini"><b>对 DRAM 的强化</b><p>候选记忆池、向量索引、重排和上下文构建成为热工作集。</p></div>
+        <div class="mini"><b>对 NAND 的修正</b><p>NAND 仍重要，但更像被治理的经验资产库，而不是无限追加日志库。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="mem-4" data-takeaway="本页 takeaway：这篇论文最直接强化 DRAM、检索系统和控制器，而不是简单 NAND 容量。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">论文 4 · 存储映射</p>
+          <h2>它最强化 DRAM 和检索系统，而不是单纯容量</h2>
+        </div>
+        <div class="date-box"><b>Memory CL</b>需求传导</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="diagram">
+          <h3>对三层需求的方向</h3>
+          <div class="bars">
+            <div class="bar"><span>HBM</span><div class="bar-line"><span style="width:52%;background:var(--hbm)"></span></div><b>中</b></div>
+            <div class="bar"><span>DRAM</span><div class="bar-line"><span style="width:92%;background:var(--dram)"></span></div><b>最强</b></div>
+            <div class="bar"><span>NAND</span><div class="bar-line"><span style="width:64%;background:var(--nand)"></span></div><b>中强</b></div>
+          </div>
+        </div>
+        <div class="block risk">
+          <h3>它削弱哪种叙事</h3>
+          <ul>
+            <li>削弱“记得越多越好”。</li>
+            <li>削弱“原始轨迹越细越好”。</li>
+            <li>削弱“外部记忆自动解决持续学习”。</li>
+            <li>强化“存储必须和检索质量、抽象质量一起看”。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 16px">
+        <div class="mini"><b>最强变量</b><p>候选记忆池和重排质量，而不是原始容量。</p></div>
+        <div class="mini"><b>验证指标</b><p>检索命中率、上下文污染率、跨任务迁移效果。</p></div>
+        <div class="mini"><b>产业落点</b><p>内存、控制器、向量检索和记忆中间件。</p></div>
+      </div>
+    </section>
+
+    <section class="slide" id="impact" data-takeaway="本页 takeaway：四篇论文共同支持分层存储 thesis，但每篇强化的介质和变量不同。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">统一结论</p>
+          <h2>四篇论文如何改变 HBM / DRAM / NAND 需求判断</h2>
+        </div>
+        <div class="date-box"><b>Impact</b>从机制到采购压力</div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="chart-title">论文对三层介质的相对影响</h3>
+          <table class="matrix">
+            <thead>
+              <tr><th>论文</th><th>HBM</th><th>DRAM</th><th>NAND</th><th>主导变量</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><b>Online Experiential Learning</b></td><td><span class="tag mid">72</span></td><td><span class="tag mid">78</span></td><td><span class="tag high">95</span></td><td>真实部署轨迹和经验库</td></tr>
+              <tr><td><b>Learning, Fast and Slow</b></td><td><span class="tag high">88</span></td><td><span class="tag high">84</span></td><td><span class="tag mid">68</span></td><td>上下文快权重</td></tr>
+              <tr><td><b>From Storage to Experience</b></td><td><span class="tag low">58</span></td><td><span class="tag high">88</span></td><td><span class="tag high">90</span></td><td>记忆演化和经验抽象</td></tr>
+              <tr><td><b>When Continual Learning Moves to Memory</b></td><td><span class="tag low">52</span></td><td><span class="tag high">92</span></td><td><span class="tag mid">64</span></td><td>记忆表示和检索组织</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 class="chart-title">三个典型负载的容量画像</h3>
+          <div class="scenario-chart">
+            <div class="scenario-row"><div class="scenario-label">文本评测型</div><div class="stack"><span style="width:20%;background:var(--hbm)"></span><span style="width:30%;background:var(--dram)"></span><span style="width:50%;background:var(--nand)"></span></div><div class="fine">TB 级</div></div>
+            <div class="scenario-row"><div class="scenario-label">企业富工作流</div><div class="stack"><span style="width:14%;background:var(--hbm)"></span><span style="width:20%;background:var(--dram)"></span><span style="width:66%;background:var(--nand)"></span></div><div class="fine">百 TB 到 PB</div></div>
+            <div class="scenario-row"><div class="scenario-label">多模态强化学习</div><div class="stack"><span style="width:10%;background:var(--hbm)"></span><span style="width:15%;background:var(--dram)"></span><span style="width:75%;background:var(--nand)"></span></div><div class="fine">PB 到十 PB</div></div>
+          </div>
+          <div class="quote">
+            关键不是“所有智能体都吃同样存储”，而是任务是否产生可回放轨迹、是否保留失败样本、是否运行私有评测和强化学习环境。
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 16px">
+        <div class="mini"><b>HBM 判断</b><p>看上下文是否进入推理热路径，训练蒸馏是否放量。</p></div>
+        <div class="mini"><b>DRAM 判断</b><p>看记忆检索、候选池、预取和重排是否成为在线服务。</p></div>
+        <div class="mini"><b>NAND 判断</b><p>看轨迹、失败样本、回放和评测版本是否长期保留。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="mechanism-matrix" data-takeaway="本页 takeaway：四篇论文不是同一种利好；它们分别强化经验生产、快权重、记忆演化和检索组织。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">统一结论 · 学习矩阵</p>
+          <h2>每篇论文都要落到五个问题上</h2>
+        </div>
+        <div class="date-box"><b>Matrix</b>机制 → 需求 → 反证</div>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>论文</th>
+            <th>机制抓手</th>
+            <th>新增存储对象</th>
+            <th>最敏感需求变量</th>
+            <th>投资含义</th>
+            <th>反证条件</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>OEL</b></td>
+            <td>真实部署轨迹抽取经验，再同策略蒸馏</td>
+            <td>轨迹、经验摘要、回放样本、版本化评测</td>
+            <td>轨迹保留周期、失败样本比例、蒸馏频率</td>
+            <td>NAND 弹性最强，DRAM/HBM 随训练回放放大</td>
+            <td>只保留摘要、原始轨迹短删、回放低频</td>
+          </tr>
+          <tr>
+            <td><b>FST</b></td>
+            <td>把优化后的上下文作为快权重</td>
+            <td>上下文池、反馈文本、候选提示、快权重版本</td>
+            <td>上下文长度、在线选择频率、训练/推理共用度</td>
+            <td>HBM/DRAM 更强，NAND 是版本底座</td>
+            <td>快权重很快蒸馏回参数，运行期上下文变短</td>
+          </tr>
+          <tr>
+            <td><b>Survey</b></td>
+            <td>Storage → Reflection → Experience 三阶段</td>
+            <td>轨迹、反思记录、跨轨迹抽象、主动探索日志</td>
+            <td>抽象效率、记忆生命周期、探索成本</td>
+            <td>强化分层架构，不支持粗糙线性容量外推</td>
+            <td>经验抽象极高效，原始轨迹留存需求下降</td>
+          </tr>
+          <tr>
+            <td><b>Memory CL</b></td>
+            <td>持续学习瓶颈从参数迁移到检索访问</td>
+            <td>抽象程序记忆、检索索引、任务组织结构</td>
+            <td>候选池大小、重排质量、上下文污染率</td>
+            <td>DRAM、控制器和记忆中间件优先于单纯容量</td>
+            <td>外部记忆在真实任务中收益有限或污染严重</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote">
+        审稿后最该强调的一点：每篇论文都要读出“变量”，而不是读出“方向”。变量决定采购弹性，方向只决定叙事温度。
+      </div>
+    </section>
+
+    <section class="slide compact" id="demand-chain" data-takeaway="本页 takeaway：采购压力来自任务复杂化后的连锁反应，不是论文标题里的某个关键词。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">统一结论</p>
+          <h2>需求不是一跳传导，而是五个环节逐级放大</h2>
+        </div>
+        <div class="date-box"><b>Chain</b>从任务到存储</div>
+      </div>
+
+      <div class="chain">
+        <div class="chain-step"><b>任务复杂化</b><span>工具、网页、代码、企业文档、多模态环境。</span></div>
+        <div class="chain-step"><b>轨迹产生</b><span>输入、动作、错误、反馈、环境状态。</span></div>
+        <div class="chain-step"><b>经验加工</b><span>抽取、反思、压缩、聚合、版本化。</span></div>
+        <div class="chain-step"><b>记忆调用</b><span>检索、重排、预取、上下文构建。</span></div>
+        <div class="chain-step"><b>训练回放</b><span>评测、强化学习、蒸馏、持续更新。</span></div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 22px">
+        <div class="block hbm"><h3>HBM 放大器</h3><p>长上下文、并发解码、在线蒸馏、训练回放进入最热路径。</p></div>
+        <div class="block dram"><h3>DRAM 放大器</h3><p>候选记忆池、索引、重排、任务状态和上下文预取成为常驻工作集。</p></div>
+        <div class="block nand"><h3>NAND 放大器</h3><p>轨迹保留周期、失败样本比例、私有评测频次和回放倍数决定容量。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="quantity" data-takeaway="本页 takeaway：决定 NAND 数量级的是保留周期和回放放大倍数，而不是并发智能体数量本身。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">量化推演</p>
+          <h2>真正拉开需求差距的，是轨迹体积、保留周期和回放放大</h2>
+        </div>
+        <div class="date-box"><b>Model</b>数量级估算，不是论文原始数据</div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <table class="matrix">
+            <thead>
+              <tr><th>场景</th><th>热 HBM</th><th>热 DRAM</th><th>热 NAND</th><th>冷归档</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><b>文本私有评测</b><br /><span class="fine">短文本、低保留、低回放</span></td><td>0.2-0.6 TB</td><td>0.1-0.4 TB</td><td>0.8-5 TB</td><td>10-30 TB/年</td></tr>
+              <tr><td><b>企业富工作流</b><br /><span class="fine">文档、工具、代码、网页状态</span></td><td>1-4 TB</td><td>0.5-2 TB</td><td>100-400 TB</td><td>1-2 PB/年</td></tr>
+              <tr><td><b>多模态强化学习</b><br /><span class="fine">截图、视频、沙箱、反复回放</span></td><td>4-16 TB</td><td>2-8 TB</td><td>5-20 PB</td><td>50-100 PB/年</td></tr>
+            </tbody>
+          </table>
+          <p class="fine">口径：每 1000 个并发任务或等效活跃任务池。这里只看方向和数量级。</p>
+        </div>
+        <div class="formula">
+          <b>NAND 热池</b><br />
+          ≈（原始轨迹 + 经验摘要 + 回放缓冲）× 热保留天数 × 副本数<br /><br />
+          <b>DRAM 热层</b><br />
+          ≈ 并发任务状态 + 热索引 + 候选记忆池 + 重排缓存<br /><br />
+          <b>HBM 热层</b><br />
+          ≈ 当前上下文 + 活跃键值缓存 + 训练/蒸馏小批次工作集<br /><br />
+          <span class="fine">如果经验抽取强、保留周期短、回放低频，NAND 增量会显著下调；如果多模态轨迹和私有评测放量，NAND 增量会快速上移。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="playbook" data-takeaway="本页 takeaway：跟踪投资标的时，先问它变现的是热路径、组织层、容量层还是系统软件层。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">投资与产业跟踪</p>
+          <h2>跟踪三层介质，要问不同的问题</h2>
+        </div>
+        <div class="date-box"><b>Playbook</b>不要混成一个指标</div>
+      </div>
+
+      <div class="grid-3">
+        <div class="block hbm">
+          <h3>看 HBM</h3>
+          <ul>
+            <li>长上下文服务是否成为主流。</li>
+            <li>快权重和在线蒸馏是否进入生产训练。</li>
+            <li>多智能体并发是否推高活跃键值缓存。</li>
+          </ul>
+        </div>
+        <div class="block dram">
+          <h3>看 DRAM</h3>
+          <ul>
+            <li>记忆检索是否成为云厂标准服务。</li>
+            <li>向量索引、重排、上下文预取是否常驻内存。</li>
+            <li>CXL 或内存池化是否用于上下文和记忆层。</li>
+          </ul>
+        </div>
+        <div class="block nand">
+          <h3>看 NAND</h3>
+          <ul>
+            <li>是否保留真实执行轨迹和失败样本。</li>
+            <li>是否建立私有评测、回放和强化学习数据湖。</li>
+            <li>是否把 SSD 作为温层上下文或键值缓存层。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        公开公司映射应按“变现层”而不是按故事归类：容量层、控制器层、内存接口层、系统软件层、云服务层的纯度不同。
+      </div>
+    </section>
+
+    <section class="slide compact" id="purity" data-takeaway="本页 takeaway：同样叫 AI 存储，变现层不同，纯度也不同；不要把主题相关当成收入弹性。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">投资与过往讨论回扣</p>
+          <h2>标的映射要看变现层，不看故事相似度</h2>
+        </div>
+        <div class="date-box"><b>Purity</b>容量、控制器、接口、池化</div>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>变现层</th>
+            <th>代表方向</th>
+            <th>和四篇论文的连接</th>
+            <th>受益纯度</th>
+            <th>主要风险</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>容量层</b></td>
+            <td>SNDK / Kioxia、企业级 SSD、NAND 供给</td>
+            <td>轨迹、失败样本、回放缓冲和私有评测长期留存</td>
+            <td><span class="tag high">高</span></td>
+            <td>经验抽象、去重和短留存会压低容量弹性</td>
+          </tr>
+          <tr>
+            <td><b>控制器层</b></td>
+            <td>SIMO、企业 SSD 控制器、数据管理固件</td>
+            <td>温层经验库需要吞吐、耐久、QoS 和检索友好数据路径</td>
+            <td><span class="tag high">很高</span></td>
+            <td>云厂自研或客户集中会压缩议价</td>
+          </tr>
+          <tr>
+            <td><b>广义内存层</b></td>
+            <td>MU、HBM、DRAM、NAND 组合暴露</td>
+            <td>热状态、工作记忆和温层资产都会被拉动</td>
+            <td><span class="tag mid">中高</span></td>
+            <td>不是纯 NAND 表达，周期和产品结构会稀释 thesis</td>
+          </tr>
+          <tr>
+            <td><b>接口 / 池化层</b></td>
+            <td>RMBS、ALAB、CXL、内存扩展和池化</td>
+            <td>候选记忆池、重排、上下文预取让 DRAM 组织层变关键</td>
+            <td><span class="tag mid">中高</span></td>
+            <td>标准演进慢，云厂采用节奏不确定</td>
+          </tr>
+          <tr>
+            <td><b>数据移动混合层</b></td>
+            <td>MRVL、网络、DPU、连接和加速路径</td>
+            <td>跨层状态搬运、分解式推理和存储近端处理</td>
+            <td><span class="tag low">中</span></td>
+            <td>主题相关但不够纯，收入弹性可能被其他业务稀释</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote">
+        组合读法：容量弹性看 SNDK/Kioxia，控制器杠杆看 SIMO，广义存储周期看 MU，内存组织和池化看 RMBS/ALAB，混合数据移动看 MRVL。
+      </div>
+    </section>
+
+    <section class="slide compact" id="falsify" data-takeaway="本页 takeaway：可证伪版本更强，因为它告诉我们哪些产业信号会让 thesis 下修。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">反证框架</p>
+          <h2>哪些信号会削弱这条存储 thesis？</h2>
+        </div>
+        <div class="date-box"><b>Risk</b>不要只找支持证据</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="block risk">
+          <h3>削弱 NAND 的信号</h3>
+          <ul>
+            <li>企业只保留经验摘要，原始轨迹短期删除。</li>
+            <li>抽象和去重效率极高，回放样本需求下降。</li>
+            <li>监管或隐私限制让用户侧轨迹不能集中保存。</li>
+            <li>多模态智能体没有进入规模化生产。</li>
+          </ul>
+        </div>
+        <div class="block risk">
+          <h3>削弱 DRAM/HBM 的信号</h3>
+          <ul>
+            <li>快权重被迅速蒸馏回小模型，热上下文变短。</li>
+            <li>检索质量靠离线批处理解决，而不是在线热索引。</li>
+            <li>长上下文推理成本下降太快，降低分层缓存必要性。</li>
+            <li>外部记忆被证明在真实任务中收益有限。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        这套 thesis 最强的版本不是“所有存储都会涨”，而是“持续智能体会创造一套状态管理基础设施，热、温、冷状态分层受益”。
+      </div>
+    </section>
+
+    <section class="slide compact" id="questions" data-takeaway="本页 takeaway：这些问题可以直接作为团队学习后的讨论提纲，检查是否真的理解了论文到需求的传导。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">学习问题</p>
+          <h2>读完后应该能回答的 12 个问题</h2>
+        </div>
+        <div class="date-box"><b>Workshop</b>适合小组讨论</div>
+      </div>
+
+      <div class="grid-3">
+        <div class="block nand">
+          <h3>论文理解</h3>
+          <ul>
+            <li>OEL 为什么说经验知识优于原始轨迹？</li>
+            <li>FST 为什么把上下文叫快权重？</li>
+            <li>Storage、Reflection、Experience 的边界在哪里？</li>
+            <li>外部记忆为什么仍会产生持续学习瓶颈？</li>
+          </ul>
+        </div>
+        <div class="block dram">
+          <h3>系统映射</h3>
+          <ul>
+            <li>哪些数据必须进入 HBM？哪些不该进入？</li>
+            <li>DRAM 里的候选记忆池应该如何定义？</li>
+            <li>NAND 里最有价值的是原始轨迹还是经验摘要？</li>
+            <li>SSD-backed KV cache 和智能体记忆是什么关系？</li>
+          </ul>
+        </div>
+        <div class="block risk">
+          <h3>投资判断</h3>
+          <ul>
+            <li>哪些云厂行为能验证这条 thesis？</li>
+            <li>哪些公开公司只是叙事相关，变现层并不纯？</li>
+            <li>什么情况下 NAND 增量会被高估？</li>
+            <li>如何区分容量需求和检索质量需求？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 16px">
+        <div class="mini"><b>课堂用法</b><p>每人先选 2 个问题独立回答，再交叉质询。</p></div>
+        <div class="mini"><b>投研用法</b><p>把每个问题转成一个可跟踪产业信号。</p></div>
+        <div class="mini"><b>复盘用法</b><p>如果答不清，就回到对应论文页重读机制。</p></div>
+      </div>
+    </section>
+
+    <section class="slide compact" id="takeaway" data-takeaway="本页 takeaway：真正的结论不是存储更多，而是 AI 基础设施正在出现一层可管理、可回放、可评测的状态资产。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">最后一页</p>
+          <h2>一句话总结：存储正在从“保存数据”变成“管理状态”</h2>
+        </div>
+        <div class="date-box"><b>Takeaway</b>手册结论</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="block nand">
+          <h3>被加强的叙事</h3>
+          <ul>
+            <li>智能体会产生可回放、可评测、可蒸馏的经验数据。</li>
+            <li>企业级 SSD/NAND 是经验资产库的自然底座。</li>
+            <li>DRAM 是记忆质量的组织层，不只是中间缓存。</li>
+            <li>HBM 继续承接长上下文和训练蒸馏热路径。</li>
+          </ul>
+        </div>
+        <div class="block risk">
+          <h3>被削弱的粗糙叙事</h3>
+          <ul>
+            <li>所有原始轨迹都会永久保存。</li>
+            <li>只要容量更大，智能体能力就更强。</li>
+            <li>NAND 可以直接替代 HBM/DRAM 的热键值缓存。</li>
+            <li>所有“AI 存储”标的都同样纯。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        最好的研究口径：把每个新论文、新产品、新云厂架构，都映射到热状态、工作记忆、温层经验库和冷归档四个位置。
+      </div>
+    </section>
+
+    <section class="slide compact" id="sources" data-takeaway="本页 takeaway：页面中的数量级是研究推演；原始论文提供机制证据，产业链接提供系统方向证据。">
+      <div class="slide-title">
+        <div>
+          <p class="kicker">来源账本</p>
+          <h2>原始论文与系统证据</h2>
+        </div>
+        <div class="date-box"><b>Links</b>可继续阅读</div>
+      </div>
+
+      <ul class="source-list">
+        <li><b>Online Experiential Learning for Language Models</b> · Submitted on 17 Mar 2026 · <a href="https://arxiv.org/abs/2603.16856" target="_blank" rel="noreferrer">https://arxiv.org/abs/2603.16856</a></li>
+        <li><b>Learning, Fast and Slow: Towards LLMs That Adapt Continually</b> · Submitted on 12 May 2026, revised 14 May 2026 · <a href="https://arxiv.org/abs/2605.12484" target="_blank" rel="noreferrer">https://arxiv.org/abs/2605.12484</a></li>
+        <li><b>From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms</b> · Submitted on 7 May 2026 · <a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">https://arxiv.org/abs/2605.06716</a></li>
+        <li><b>When Continual Learning Moves to Memory: A Study of Experience Reuse in LLM Agents</b> · Submitted on 29 Apr 2026 · <a href="https://arxiv.org/abs/2604.27003" target="_blank" rel="noreferrer">https://arxiv.org/abs/2604.27003</a></li>
+        <li><b>Tutti: Making SSD-Backed KV Cache Practical for Long-Context LLM Serving</b> · Submitted on 5 May 2026 · <a href="https://arxiv.org/abs/2605.03375" target="_blank" rel="noreferrer">https://arxiv.org/abs/2605.03375</a></li>
+        <li><b>KVServe: Service-Aware KV Cache Compression for Communication-Efficient Disaggregated LLM Serving</b> · Submitted on 13 May 2026 · <a href="https://arxiv.org/abs/2605.13734" target="_blank" rel="noreferrer">https://arxiv.org/abs/2605.13734</a></li>
+        <li><b>NVIDIA CMX</b> · 产业证据：上下文记忆存储平台 · <a href="https://www.nvidia.com/en-us/data-center/ai-storage/cmx/" target="_blank" rel="noreferrer">https://www.nvidia.com/en-us/data-center/ai-storage/cmx/</a></li>
+        <li><b>NVIDIA BlueField-4 Powered Inference Context Memory Storage Platform</b> · 技术博客 · <a href="https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/" target="_blank" rel="noreferrer">developer.nvidia.com</a></li>
+      </ul>
+
+      <div class="quote">
+        使用提醒：本页面里的 HBM / DRAM / NAND 数量级估算是研究推演，不是论文原始数据，也不是投资建议。真正要跟踪的是云厂是否把轨迹、记忆、评测和回放变成标准基础设施。
+      </div>
+    </section>
+
+    <div class="print-note">提示：浏览器打印时可选择横向，即可作为宽屏讲义导出。</div>
+  </div>
+</body>
+</html>

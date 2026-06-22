@@ -1,0 +1,6 @@
+{
+  "title": "四篇 AI 论文与存储需求：从经验学习到 HBM、DRAM、NAND 分层推演",
+  "date": "2026-06-22T00:00:00+08:00",
+  "description": "以 Online Experiential Learning、Learning Fast and Slow、From Storage to Experience、When Continual Learning Moves to Memory 四篇论文为核心，分析持续智能体如何把轨迹、上下文、记忆和经验变成新的状态管理基础设施，并映射到 HBM、DRAM、NAND 的需求弹性。",
+  "draft": false
+}
