@@ -206,6 +206,98 @@
       font-weight: 560;
     }
 
+    .cover-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .cover-thesis {
+      display: grid;
+      gap: 14px;
+      padding-top: 2px;
+    }
+
+    .paper-lineup {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 2px solid #17212a;
+    }
+
+    .paper-lineup li {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) 92px;
+      gap: 10px 14px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .paper-index {
+      font-family: var(--mono);
+      color: #8a5b19;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .paper-title {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.24;
+    }
+
+    .paper-title a { color: inherit; }
+
+    .paper-date {
+      color: #536675;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.35;
+      text-align: right;
+    }
+
+    .paper-role {
+      grid-column: 2 / -1;
+      color: #526572;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .cover-tier-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 2px solid #17212a;
+    }
+
+    .cover-tier {
+      padding-top: 8px;
+      border-top: 3px solid var(--line-dark);
+    }
+
+    .cover-tier.hbm { border-color: var(--hbm); }
+    .cover-tier.dram { border-color: var(--dram); }
+    .cover-tier.nand { border-color: var(--nand); }
+
+    .cover-tier b {
+      display: block;
+      margin-bottom: 5px;
+      font-family: var(--mono);
+      font-size: 15px;
+    }
+
+    .cover-tier p {
+      margin: 0;
+      color: #3b4f5c;
+      font-size: 12.5px;
+      line-height: 1.38;
+    }
+
     .fine {
       color: var(--muted);
       font-size: 12px;
@@ -250,9 +342,9 @@
     .block ul { margin: 7px 0 0; padding-left: 18px; }
 
     .mini {
-      border: 1px solid var(--line);
-      background: var(--soft);
-      padding: 11px 12px;
+      border-top: 2px solid var(--line-dark);
+      background: transparent;
+      padding: 9px 0 0;
     }
 
     .mini b {
@@ -282,9 +374,9 @@
 
     .quote {
       margin: 11px 0;
-      padding: 11px 14px;
+      padding: 6px 0 6px 13px;
       border-left: 4px solid #17212a;
-      background: #f8fafb;
+      background: transparent;
       color: #243642;
       font-size: 14px;
       line-height: 1.42;
@@ -292,9 +384,10 @@
     }
 
     .diagram {
-      border: 1px solid var(--line);
-      background: #fbfcfd;
-      padding: 12px;
+      border-top: 2px solid var(--line-dark);
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      padding: 12px 0;
     }
 
     .chain {
@@ -302,14 +395,15 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0;
       margin: 10px 0 13px;
-      border: 1px solid var(--line);
+      border-top: 2px solid var(--line-dark);
+      border-bottom: 1px solid var(--line);
     }
 
     .chain-step {
       min-height: 70px;
       padding: 8px 10px;
       border-right: 1px solid var(--line);
-      background: #fbfcfd;
+      background: transparent;
     }
 
     .chain-step:last-child { border-right: 0; }
@@ -467,8 +561,9 @@
 
     .formula {
       padding: 12px;
-      border: 1px solid var(--line);
-      background: #fbfcfd;
+      border-top: 2px solid var(--line-dark);
+      border-bottom: 1px solid var(--line);
+      background: transparent;
       font-family: var(--mono);
       color: #283944;
       font-size: 12.5px;
@@ -532,6 +627,8 @@
 
       .slide-title,
       .deep-read,
+      .cover-grid,
+      .cover-tier-strip,
       .grid-2,
       .grid-3,
       .grid-4,
@@ -540,6 +637,9 @@
       }
 
       .date-box { min-width: 0; }
+      .paper-lineup li { grid-template-columns: 34px minmax(0, 1fr); }
+      .paper-date { text-align: left; }
+      .paper-role { grid-column: 2 / -1; }
       .paper-meta { grid-template-columns: 1fr; }
       .chain { grid-template-columns: 1fr; }
       .chain-step { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -599,44 +699,60 @@
         </div>
       </div>
 
-      <p class="lead">
-        这份手册的核心判断：存储叙事不应再被简化为“数据更多，所以 NAND 更多”。四篇论文共同指向的是一个新系统问题：智能体如何把交互轨迹、反馈、上下文和记忆组织成可复用的经验资产。
-      </p>
+      <div class="cover-grid">
+        <div class="cover-thesis">
+          <p class="lead">
+            这份手册的核心判断：存储叙事不应再被简化为“数据更多，所以 NAND 更多”。四篇论文共同指向的是一个新系统问题：智能体如何把交互轨迹、反馈、上下文和记忆组织成可复用的经验资产。
+          </p>
+          <div class="quote">
+            读法提示：先识别状态生命周期，再谈介质。热状态对应 HBM，在线组织对应 DRAM，长期经验资产才对应 NAND。
+          </div>
+          <div class="block risk">
+            <h3>第一张先给结论</h3>
+            <p>这组论文不是同一个方向的四次重复，而是四个互补切面：经验生产、快权重、记忆演化、检索组织。它们共同支持分层存储 thesis，但每篇强化的介质不同。</p>
+          </div>
+        </div>
 
-      <div class="grid-4" style="margin-top: 28px">
-        <div class="block nand">
-          <h3>轨迹成为原材料</h3>
-          <p>真实任务、工具调用、错误、环境反馈和用户意图，开始从日志变成学习材料。</p>
-        </div>
-        <div class="block dram">
-          <h3>记忆成为调度问题</h3>
-          <p>长期记忆不是放进去就有用，关键是检索、压缩、重排、淘汰和上下文预算。</p>
-        </div>
-        <div class="block hbm">
-          <h3>上下文成为热权重</h3>
-          <p>优化后的提示词、任务上下文和键值缓存，会进入最热推理路径。</p>
-        </div>
-        <div class="block risk">
-          <h3>容量不是唯一瓶颈</h3>
-          <p>好的经验系统会抽象、遗忘和压缩；粗糙容量推演会高估长期原始数据保留。</p>
-        </div>
+        <ol class="paper-lineup" aria-label="四篇核心论文">
+          <li>
+            <span class="paper-index">01</span>
+            <span class="paper-title"><a href="https://arxiv.org/abs/2603.16856" target="_blank" rel="noreferrer">Online Experiential Learning for Language Models</a></span>
+            <span class="paper-date">2026-03-17</span>
+            <span class="paper-role">部署轨迹从日志变成训练燃料，最直接强化轨迹保留、回放和经验库。</span>
+          </li>
+          <li>
+            <span class="paper-index">02</span>
+            <span class="paper-title"><a href="https://arxiv.org/abs/2605.12484" target="_blank" rel="noreferrer">Learning, Fast and Slow: Towards LLMs That Adapt Continually</a></span>
+            <span class="paper-date">2026-05-12<br />v2 05-14</span>
+            <span class="paper-role">把上下文升级为可学习的快权重，强化 HBM 热路径和 DRAM 上下文池。</span>
+          </li>
+          <li>
+            <span class="paper-index">03</span>
+            <span class="paper-title"><a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms</a></span>
+            <span class="paper-date">2026-05-07</span>
+            <span class="paper-role">把智能体记忆分成保存、反思、经验三阶段，是判断 NAND/DRAM 权重的分类器。</span>
+          </li>
+          <li>
+            <span class="paper-index">04</span>
+            <span class="paper-title"><a href="https://arxiv.org/abs/2604.27003" target="_blank" rel="noreferrer">When Continual Learning Moves to Memory</a></span>
+            <span class="paper-date">2026-04-29</span>
+            <span class="paper-role">提醒外部记忆不会自动解决持续学习，瓶颈会迁移到检索、重排和上下文竞争。</span>
+          </li>
+        </ol>
       </div>
 
-      <div class="diagram" style="margin-top: 24px">
-        <div class="tier">
-          <div class="tier-name" style="color: var(--hbm)">HBM</div>
-          <p><strong>最热状态。</strong>正在解码的上下文、活跃键值缓存、训练和蒸馏工作集。</p>
-          <div class="fine">带宽优先 · 容量最贵</div>
+      <div class="cover-tier-strip">
+        <div class="cover-tier hbm">
+          <b style="color: var(--hbm)">HBM</b>
+          <p>正在解码的上下文、键值缓存、训练和蒸馏工作集。看长上下文、快权重和在线回放。</p>
         </div>
-        <div class="tier">
-          <div class="tier-name" style="color: var(--dram)">DRAM</div>
-          <p><strong>工作记忆。</strong>热索引、候选记忆池、重排、上下文预取和任务状态。</p>
-          <div class="fine">延迟优先 · 调度核心</div>
+        <div class="cover-tier dram">
+          <b style="color: var(--dram)">DRAM</b>
+          <p>热索引、候选记忆池、重排、上下文预取和任务状态。看检索质量和在线组织层。</p>
         </div>
-        <div class="tier">
-          <div class="tier-name" style="color: var(--nand)">NAND</div>
-          <p><strong>温层经验库。</strong>轨迹、摘要、失败样本、向量库、回放数据和版本化评测。</p>
-          <div class="fine">容量优先 · 可复用资产</div>
+        <div class="cover-tier nand">
+          <b style="color: var(--nand)">NAND</b>
+          <p>轨迹、摘要、失败样本、向量库、回放数据和版本化评测。看留存周期和回放倍数。</p>
         </div>
       </div>
     </section>
