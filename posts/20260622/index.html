@@ -128,10 +128,9 @@
       right: 76px;
       bottom: 42px;
       min-height: 34px;
-      padding: 9px 12px;
-      border-top: 1px solid var(--line);
-      border-left: 4px solid #17212a;
-      background: #f8fafb;
+      padding: 5px 0 5px 12px;
+      border-left: 2px solid #17212a;
+      background: transparent;
       color: #263945;
       font-size: 12.8px;
       line-height: 1.35;
@@ -155,7 +154,7 @@
       align-items: start;
       margin-bottom: 14px;
       padding-bottom: 9px;
-      border-bottom: 2px solid #17212a;
+      border-bottom: 1px solid var(--line-dark);
     }
 
     .slide-title h1,
@@ -183,7 +182,8 @@
 
     .date-box {
       min-width: 210px;
-      border-left: 3px solid #17212a;
+      max-width: 260px;
+      border-left: 2px solid var(--line-dark);
       padding-left: 12px;
       color: #425461;
       font-size: 12px;
@@ -194,7 +194,8 @@
       margin-bottom: 3px;
       color: var(--ink);
       font-family: var(--mono);
-      font-size: 15px;
+      font-size: 13px;
+      line-height: 1.22;
     }
 
     .lead {
@@ -317,7 +318,7 @@
     .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
     .block {
-      border-top: 3px solid var(--line-dark);
+      border-top: 2px solid var(--line-dark);
       padding: 11px 0 0;
     }
 
@@ -342,9 +343,9 @@
     .block ul { margin: 7px 0 0; padding-left: 18px; }
 
     .mini {
-      border-top: 2px solid var(--line-dark);
+      border-top: 0;
       background: transparent;
-      padding: 9px 0 0;
+      padding: 0;
     }
 
     .mini b {
@@ -374,8 +375,8 @@
 
     .quote {
       margin: 11px 0;
-      padding: 6px 0 6px 13px;
-      border-left: 4px solid #17212a;
+      padding: 4px 0 4px 12px;
+      border-left: 2px solid #17212a;
       background: transparent;
       color: #243642;
       font-size: 14px;
@@ -384,8 +385,8 @@
     }
 
     .diagram {
-      border-top: 2px solid var(--line-dark);
-      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      border-bottom: 0;
       background: transparent;
       padding: 12px 0;
     }
@@ -393,16 +394,16 @@
     .chain {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 0;
+      gap: 8px;
       margin: 10px 0 13px;
-      border-top: 2px solid var(--line-dark);
-      border-bottom: 1px solid var(--line);
+      border: 0;
     }
 
     .chain-step {
       min-height: 70px;
-      padding: 8px 10px;
-      border-right: 1px solid var(--line);
+      padding: 4px 0 4px 9px;
+      border-right: 0;
+      border-left: 2px solid var(--line);
       background: transparent;
     }
 
@@ -476,13 +477,13 @@
     .matrix th,
     .matrix td {
       padding: 8px 7px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid #e5edf2;
       text-align: left;
       vertical-align: top;
     }
 
     .matrix th {
-      border-top: 2px solid #17212a;
+      border-top: 1px solid var(--line-dark);
       background: #f8fafb;
       color: #334752;
       font-size: 11.5px;
@@ -560,9 +561,8 @@
     .stack span { display: block; height: 100%; }
 
     .formula {
-      padding: 12px;
-      border-top: 2px solid var(--line-dark);
-      border-bottom: 1px solid var(--line);
+      padding: 4px 0 4px 12px;
+      border-left: 2px solid var(--line-dark);
       background: transparent;
       font-family: var(--mono);
       color: #283944;
@@ -642,7 +642,7 @@
       .paper-role { grid-column: 2 / -1; }
       .paper-meta { grid-template-columns: 1fr; }
       .chain { grid-template-columns: 1fr; }
-      .chain-step { border-right: 0; border-bottom: 1px solid var(--line); }
+      .chain-step { border-right: 0; border-bottom: 0; }
       .chain-step:last-child { border-bottom: 0; }
       .tier { grid-template-columns: 1fr; }
       .scenario-row { grid-template-columns: 1fr; gap: 6px; }
@@ -942,7 +942,7 @@
           <p class="kicker">论文 1 · 方法机制</p>
           <h2>OEL 把轨迹拆成三类可保存对象</h2>
         </div>
-        <div class="date-box"><b>OEL</b>轨迹 → 经验 → 蒸馏样本</div>
+        <div class="date-box"><b>Online Experiential Learning</b>轨迹 → 经验 → 蒸馏样本</div>
       </div>
 
       <table class="matrix">
@@ -993,7 +993,7 @@
           <p class="kicker">论文 1 · 实验与学习要点</p>
           <h2>抽取出的经验，比原始轨迹更像资产</h2>
         </div>
-        <div class="date-box"><b>OEL</b>实验读法</div>
+        <div class="date-box"><b>Online Experiential Learning</b>实验读法</div>
       </div>
 
       <div class="grid-2">
@@ -1043,7 +1043,7 @@
           <p class="kicker">论文 1 · 存储映射</p>
           <h2>OEL 最强化 NAND，但不是无脑容量叙事</h2>
         </div>
-        <div class="date-box"><b>OEL</b>需求传导</div>
+        <div class="date-box"><b>Online Experiential Learning</b>需求传导</div>
       </div>
 
       <div class="grid-2">
@@ -1130,7 +1130,7 @@
           <p class="kicker">论文 2 · 方法机制</p>
           <h2>FST 的系统形态是“上下文池 + 参数训练”</h2>
         </div>
-        <div class="date-box"><b>FST</b>上下文快权重</div>
+        <div class="date-box"><b>Learning, Fast and Slow</b>上下文快权重</div>
       </div>
 
       <div class="chain">
@@ -1167,7 +1167,7 @@
           <p class="kicker">论文 2 · 实验与学习要点</p>
           <h2>快权重让模型少漂移，也更能继续学</h2>
         </div>
-        <div class="date-box"><b>FST</b>实验读法</div>
+        <div class="date-box"><b>Learning, Fast and Slow</b>实验读法</div>
       </div>
 
       <div class="grid-2">
@@ -1222,7 +1222,7 @@
           <p class="kicker">论文 2 · 存储映射</p>
           <h2>FST 最强化 HBM 与 DRAM，NAND 是版本化底座</h2>
         </div>
-        <div class="date-box"><b>FST</b>需求传导</div>
+        <div class="date-box"><b>Learning, Fast and Slow</b>需求传导</div>
       </div>
 
       <div class="grid-2">
@@ -1299,7 +1299,7 @@
           <p class="kicker">论文 3 · 三阶段详解</p>
           <h2>同样是“记忆”，不同阶段的数据结构不同</h2>
         </div>
-        <div class="date-box"><b>Survey</b>Storage / Reflection / Experience</div>
+        <div class="date-box"><b>From Storage to Experience</b>Storage / Reflection / Experience</div>
       </div>
 
       <table class="matrix">
@@ -1348,7 +1348,7 @@
           <p class="kicker">论文 3 · Experience 阶段</p>
           <h2>经验不是更长的日志，而是跨轨迹抽象</h2>
         </div>
-        <div class="date-box"><b>Survey</b>抽象与探索</div>
+        <div class="date-box"><b>From Storage to Experience</b>抽象与探索</div>
       </div>
 
       <div class="grid-2">
@@ -1390,7 +1390,7 @@
           <p class="kicker">论文 3 · 存储映射</p>
           <h2>它同时强化 NAND 长期叙事，也反对粗糙容量外推</h2>
         </div>
-        <div class="date-box"><b>Survey</b>需求传导</div>
+        <div class="date-box"><b>From Storage to Experience</b>需求传导</div>
       </div>
 
       <div class="grid-2">
@@ -1468,7 +1468,7 @@
           <p class="kicker">论文 4 · 实验与学习要点</p>
           <h2>抽象记忆比原始轨迹更安全</h2>
         </div>
-        <div class="date-box"><b>Memory CL</b>结果读法</div>
+        <div class="date-box"><b>When Continual Learning Moves to Memory</b>结果读法</div>
       </div>
 
       <div class="grid-2">
@@ -1515,7 +1515,7 @@
           <p class="kicker">论文 4 · 组织问题</p>
           <h2>记忆系统的敌人不是遗忘，而是取错</h2>
         </div>
-        <div class="date-box"><b>Memory CL</b>检索与稀释</div>
+        <div class="date-box"><b>When Continual Learning Moves to Memory</b>检索与稀释</div>
       </div>
 
       <div class="grid-3">
@@ -1549,7 +1549,7 @@
           <p class="kicker">论文 4 · 存储映射</p>
           <h2>它最强化 DRAM 和检索系统，而不是单纯容量</h2>
         </div>
-        <div class="date-box"><b>Memory CL</b>需求传导</div>
+        <div class="date-box"><b>When Continual Learning Moves to Memory</b>需求传导</div>
       </div>
 
       <div class="grid-2">
