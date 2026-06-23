@@ -1,0 +1,48 @@
+// 页面只展示 name/description，其余字段供 projects.json 和 JSON-LD 使用
+export const allProjects = [
+  {
+    name: '和AI一起探索地球',
+    description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
+    url: 'https://earth.wangyufeng.org',
+    type: 'Map game',
+    year: '2026',
+    tags: ['AI', 'Street View', 'Game'],
+    status: 'Live',
+  },
+  {
+    name: '提前退休计算器',
+    description: '计算你需要多少钱才能提前退休',
+    url: 'https://retirement.wangyufeng.org',
+    type: 'Calculator',
+    year: '2026',
+    tags: ['Finance', 'Planning'],
+    status: 'Live',
+  },
+  {
+    name: 'aimeter',
+    description: 'macOS 菜单栏应用，实时追踪 Claude Code 和 Codex CLI 的用量和额度',
+    url: 'https://github.com/wangyufeng0615/aimeter',
+    type: 'macOS app',
+    year: '2026',
+    tags: ['macOS', 'AI tools'],
+    status: 'GitHub',
+  },
+  {
+    name: 'aitop',
+    description: 'Claude Code 多进程监控终端（虽然能用，但效果不太好）',
+    url: 'https://github.com/wangyufeng0615/aitop',
+    type: 'Terminal tool',
+    year: '2026',
+    tags: ['CLI', 'Monitoring'],
+    status: 'GitHub',
+  },
+  {
+    name: 'LOF基金溢价计算器',
+    description: 'LOF基金溢价计算器（自用）',
+    url: 'https://github.com/wangyufeng0615/lof-premium-calculator',
+    type: 'Investing tool',
+    year: '2026',
+    tags: ['Finance', 'Utility'],
+    status: 'GitHub',
+  },
+];

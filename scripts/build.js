@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { build as esbuild } from 'esbuild';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
+import { allProjects } from '../src/data/projects.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -17,6 +18,8 @@ const md = new MarkdownIt({
   linkify: true,
   typographer: true,
 });
+
+const SITE_URL = 'https://wangyufeng.org';
 
 // 清理并创建输出目录
 function setupDirs() {
@@ -243,25 +246,55 @@ import { PostPage } from '../src/components/PostPage.jsx';
 import { htmlTemplate } from '../src/templates/html.js';
 
 const posts = ${JSON.stringify(posts)};
+const projects = ${JSON.stringify(allProjects)};
 const css = ${JSON.stringify(css)};
 
 // 生成首页
 const homeContent = renderToString(React.createElement(HomePage, { posts }));
 const homeJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: '王雨峰的博客',
-  url: 'https://wangyufeng.org',
-  author: {
-    '@type': 'Person',
-    name: '王雨峰',
-    url: 'https://wangyufeng.org'
-  }
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://wangyufeng.org/#website',
+      name: '王雨峰的博客',
+      url: 'https://wangyufeng.org',
+      author: { '@id': 'https://wangyufeng.org/#person' },
+      inLanguage: ['zh-CN', 'en']
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://wangyufeng.org/#person',
+      name: '王雨峰',
+      url: 'https://wangyufeng.org',
+      email: 'mailto:alanwang424@gmail.com',
+      sameAs: ['https://github.com/wangyufeng0615'],
+      knowsAbout: ['AI tools', 'map games', 'software engineering', 'personal software']
+    },
+    {
+      '@type': 'ItemList',
+      '@id': 'https://wangyufeng.org/#projects',
+      name: 'Projects by 王雨峰',
+      itemListElement: projects.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'SoftwareApplication',
+          name: project.name,
+          description: project.description,
+          url: project.url,
+          applicationCategory: project.type,
+          author: { '@id': 'https://wangyufeng.org/#person' }
+        }
+      }))
+    }
+  ]
 };
 const homeHtml = htmlTemplate({
   title: '王雨峰的博客',
   content: homeContent,
   css,
+  description: '王雨峰的工程师主页，收集 AI 工具、地图游戏、个人软件和文章。',
   url: '/',
   jsonLd: homeJsonLd
 });
@@ -327,7 +360,10 @@ for (const post of posts) {
 
   // 执行渲染脚本
   const { execSync } = await import('child_process');
-  const output = execSync(`node ${outfile}`, { encoding: 'utf-8' });
+  const output = execSync(`node ${outfile}`, {
+    encoding: 'utf-8',
+    maxBuffer: 50 * 1024 * 1024,
+  });
 
   // 解析输出并写入文件
   const lines = output.trim().split('\n');
@@ -374,13 +410,12 @@ function copyPublicFiles() {
 
 // 生成 sitemap.xml
 function generateSitemap(posts) {
-  const siteUrl = 'https://wangyufeng.org';
   const today = new Date().toISOString().split('T')[0];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>${siteUrl}/</loc>
+    <loc>${SITE_URL}/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -390,7 +425,7 @@ function generateSitemap(posts) {
   for (const post of posts) {
     const lastmod = post.date || today;
     xml += `  <url>
-    <loc>${siteUrl}${post.url}</loc>
+    <loc>${SITE_URL}${post.url}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -402,6 +437,64 @@ function generateSitemap(posts) {
 
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), xml);
   console.log('✓ sitemap.xml');
+}
+
+function generateAiReadableFiles(posts) {
+  const projectIndex = allProjects.map((project) => ({
+    name: project.name,
+    description: project.description,
+    url: project.url,
+    type: project.type,
+    year: project.year,
+    tags: project.tags,
+    status: project.status,
+  }));
+
+  const postIndex = posts.map((post) => ({
+    title: post.title,
+    date: post.date,
+    url: `${SITE_URL}${post.url}`,
+    description: post.description,
+    type: post.type,
+    slug: post.slug,
+  }));
+
+  const llms = `# 王雨峰的博客
+
+> 王雨峰的个人网站，收集 AI 工具、地图游戏、个人软件、投资/技术/生活文章。站点是静态 HTML，适合人类阅读，也提供机器可读索引供 AI agents 使用。
+
+The homepage is the best human-readable overview. For automated reading, prefer the JSON indexes below and use article URLs as canonical sources.
+
+## Site
+
+- [Homepage](${SITE_URL}/): Engineer homepage, featured work, tools, writing archive, and AI-readable entry points.
+- [Sitemap](${SITE_URL}/sitemap.xml): Canonical URLs for crawl discovery.
+- [Robots](${SITE_URL}/robots.txt): Crawler policy.
+
+## Machine-readable indexes
+
+- [Projects JSON](${SITE_URL}/projects.json): Structured project list with names, descriptions, URLs, types, tags, years, and status.
+- [Posts JSON](${SITE_URL}/posts.json): Structured post list with titles, dates, URLs, descriptions, types, and slugs.
+
+## Featured work
+
+${projectIndex.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}
+
+## Writing
+
+${postIndex.slice(0, 20).map((post) => `- [${post.title}](${post.url}): ${post.date}`).join('\n')}
+
+## Optional
+
+- [All posts JSON](${SITE_URL}/posts.json): Use this when a complete article index is needed.
+`;
+
+  fs.writeFileSync(path.join(DIST_DIR, 'projects.json'), JSON.stringify(projectIndex, null, 2));
+  fs.writeFileSync(path.join(DIST_DIR, 'posts.json'), JSON.stringify(postIndex, null, 2));
+  fs.writeFileSync(path.join(DIST_DIR, 'llms.txt'), llms);
+  console.log('✓ projects.json');
+  console.log('✓ posts.json');
+  console.log('✓ llms.txt');
 }
 
 // 生成 robots.txt
@@ -429,6 +522,7 @@ async function build() {
   copyImages(posts);
   buildCustomPosts(posts);
   copyPublicFiles();
+  generateAiReadableFiles(posts);
   generateSitemap(posts);
   generateRobots();
   cleanup();
