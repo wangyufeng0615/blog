@@ -100,11 +100,10 @@ body:has(.layout-home) a:hover { color: var(--sp-fire); text-decoration: none; }
   align-items: start;
 }
 
-/* 两侧栏随滚动停留，中列文章滚动 */
+/* 首页三栏跟随整页一起滚动 */
 .home-side,
 .home-notes-col {
-  position: sticky;
-  top: 36px;
+  position: static;
 }
 
 /* ---- 头部：篝火 + 身份 ---- */
