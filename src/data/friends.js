@@ -20,7 +20,7 @@ export const friendLinks = [
     url: 'https://rushftk.github.io/',
   },
   {
-    name: 'sxnian.com',
+    name: '石先念',
     url: 'https://sxnian.com/',
   },
 ];
