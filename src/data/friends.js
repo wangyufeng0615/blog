@@ -19,4 +19,8 @@ export const friendLinks = [
     name: "Rush_FTK's blog",
     url: 'https://rushftk.github.io/',
   },
+  {
+    name: 'sxnian.com',
+    url: 'https://sxnian.com/',
+  },
 ];
