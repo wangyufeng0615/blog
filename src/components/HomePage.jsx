@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from './Layout.jsx';
 import { allProjects } from '../data/projects.js';
+import { friendLinks } from '../data/friends.js';
 
 export function HomePage({ posts }) {
   // 学习笔记 = 自定义 HTML 研报；文章 = markdown
@@ -42,6 +43,20 @@ export function HomePage({ posts }) {
                     <a className="work-name" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
                     <span className="work-desc">{p.description}</span>
                   </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="home-friends">
+            <h2 className="home-h2">友链</h2>
+            <ul className="friends-list">
+              {friendLinks.map((friend) => (
+                <li key={friend.url} className="friend-item">
+                  <a className="friend-link" href={friend.url} target="_blank" rel="noopener noreferrer">
+                    <span className="friend-mark" aria-hidden="true"></span>
+                    <span className="friend-name">{friend.name}</span>
+                  </a>
                 </li>
               ))}
             </ul>

@@ -282,6 +282,58 @@ body:has(.layout-home) a:hover { color: var(--sp-fire); text-decoration: none; }
   margin-top: 3px;
 }
 
+/* ---- 友链：旧博客的小伙伴们 ---- */
+.home-friends {
+  margin-top: 36px;
+}
+.friends-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.friend-item {
+  min-width: 0;
+}
+.friend-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 30px;
+  padding: 4px 0;
+  color: var(--sp-ink2);
+}
+.friend-link:hover {
+  color: var(--sp-fire);
+  text-decoration: none;
+}
+.friend-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--sp-card);
+  border: 2px solid var(--sp-ink);
+  box-shadow: 2px 2px 0 var(--sp-line2);
+}
+.friend-mark::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 6px;
+  height: 6px;
+  background: var(--sp-teal);
+  border: 2px solid var(--sp-bg);
+}
+.friend-name {
+  min-width: 0;
+  font-family: var(--sp-cn);
+  font-size: 13.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
 /* ---- 中列文章：横排单列 ---- */
 .entry-list { list-style: none; }
 
