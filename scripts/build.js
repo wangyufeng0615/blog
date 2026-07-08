@@ -395,16 +395,22 @@ function copyPublicFiles() {
   const publicDir = path.join(ROOT, 'public');
   if (!fs.existsSync(publicDir)) return;
 
-  const files = fs.readdirSync(publicDir);
-  for (const file of files) {
-    const src = path.join(publicDir, file);
-    const dest = path.join(DIST_DIR, file);
+  function copyRecursive(src, dest) {
     const stat = fs.statSync(src);
-
-    if (stat.isFile()) {
+    if (stat.isDirectory()) {
+      if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
+      for (const file of fs.readdirSync(src)) {
+        copyRecursive(path.join(src, file), path.join(dest, file));
+      }
+    } else {
       fs.copyFileSync(src, dest);
-      console.log(`✓ ${file}`);
+      const rel = path.relative(DIST_DIR, dest);
+      if (rel) console.log(`✓ ${rel}`);
     }
+  }
+
+  for (const file of fs.readdirSync(publicDir)) {
+    copyRecursive(path.join(publicDir, file), path.join(DIST_DIR, file));
   }
 }
 
