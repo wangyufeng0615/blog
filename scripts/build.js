@@ -439,6 +439,17 @@ function generateSitemap(posts) {
 `;
   }
 
+  for (const project of allProjects) {
+    if (!project.url.startsWith(`${SITE_URL}/`)) continue;
+    xml += `  <url>
+    <loc>${project.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+`;
+  }
+
   xml += `</urlset>`;
 
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), xml);
