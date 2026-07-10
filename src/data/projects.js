@@ -1,6 +1,15 @@
 // 页面只展示 name/description，其余字段供 projects.json 和 JSON-LD 使用
 export const allProjects = [
   {
+    name: '盘感挑战',
+    description: '看一段真实历史 K 线，和 AI 交易员一起猜下一段走势',
+    url: 'https://wangyufeng.org/trade/',
+    type: 'Market game',
+    year: '2026',
+    tags: ['Game', 'Market', 'AI'],
+    status: 'Live',
+  },
+  {
     name: '和AI一起探索地球',
     description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
     url: 'https://earth.wangyufeng.org',
