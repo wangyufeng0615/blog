@@ -38,7 +38,7 @@ export function HomePage({ posts }) {
             <ul className="works-list">
               {allProjects.map((p) => (
                 <li key={p.name} className="work">
-                  <span className="work-sticker" aria-hidden="true"></span>
+                  <span className={`work-sticker work-sticker-${p.sticker}`} aria-hidden="true"></span>
                   <span className="work-text">
                     <a className="work-name" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
                     <span className="work-desc">{p.description}</span>
