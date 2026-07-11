@@ -1,6 +1,16 @@
 // 页面展示 name/description/sticker，其余字段供 projects.json 和 JSON-LD 使用
 export const allProjects = [
   {
+    name: 'Rapier Galton Lab',
+    description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
+    sticker: 'galton',
+    url: 'https://wangyufeng.org/galton/',
+    type: 'Physics simulation',
+    year: '2026',
+    tags: ['Physics', 'Simulation', 'WebGL'],
+    status: 'Live',
+  },
+  {
     name: '盘感挑战',
     description: '看一段真实历史 K 线，和 AI 交易员一起猜下一段走势',
     sticker: 'market',
