@@ -18,20 +18,63 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout blog
         uses: actions/checkout@v7.0.0
+
+      - name: Read trade game revision
+        id: trade-game-revision
+        run: |
+          revision="$(tr -d '\n' < .deploy/trade-game-revision)"
+          if [[ ! "$revision" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid trade game revision: expected a full Git commit SHA." >&2
+            exit 1
+          fi
+          echo "sha=$revision" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout trade game
+        uses: actions/checkout@v7.0.0
+        with:
+          repository: wangyufeng0615/trade-game
+          ref: ${{ steps.trade-game-revision.outputs.sha }}
+          ssh-key: ${{ secrets.TRADE_GAME_DEPLOY_KEY }}
+          path: .trade-game
 
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
           node-version: '24'
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            .trade-game/package-lock.json
 
-      - name: Install dependencies
+      - name: Install blog dependencies
         run: npm ci
 
-      - name: Build
+      - name: Install trade game dependencies
+        working-directory: .trade-game
+        run: npm ci
+
+      - name: Validate trade game
+        working-directory: .trade-game
+        run: |
+          npm run lint
+          npm test
+
+      - name: Build blog
         run: npm run build
+
+      - name: Build trade game
+        working-directory: .trade-game
+        env:
+          VITE_API_URL: https://trade-api.wangyufeng.org
+          VITE_BASE_PATH: /trade/
+        run: npm run build
+
+      - name: Add trade game to Pages artifact
+        run: |
+          mkdir -p dist/trade
+          cp -R .trade-game/dist/. dist/trade/
 
       - name: Setup Pages
         uses: actions/configure-pages@v6.0.0
