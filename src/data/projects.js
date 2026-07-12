@@ -1,6 +1,16 @@
 // 页面展示 name/description/sticker，其余字段供 projects.json 和 JSON-LD 使用
 export const allProjects = [
   {
+    name: '和AI一起探索地球',
+    description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
+    sticker: 'earth',
+    url: 'https://earth.wangyufeng.org',
+    type: 'Map game',
+    year: '2026',
+    tags: ['AI', 'Street View', 'Game'],
+    status: 'Live',
+  },
+  {
     name: 'Rapier Galton Lab',
     description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
     sticker: 'galton',
@@ -18,16 +28,6 @@ export const allProjects = [
     type: 'Market game',
     year: '2026',
     tags: ['Game', 'Market', 'AI'],
-    status: 'Live',
-  },
-  {
-    name: '和AI一起探索地球',
-    description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
-    sticker: 'earth',
-    url: 'https://earth.wangyufeng.org',
-    type: 'Map game',
-    year: '2026',
-    tags: ['AI', 'Street View', 'Game'],
     status: 'Live',
   },
   {
