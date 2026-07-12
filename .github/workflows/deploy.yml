@@ -46,6 +46,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: |
             package-lock.json
+            apps/ball-moving/package-lock.json
             .trade-game/package-lock.json
 
       - name: Install blog dependencies
@@ -55,13 +56,17 @@ jobs:
         working-directory: .trade-game
         run: npm ci
 
+      - name: Install ball moving dependencies
+        working-directory: apps/ball-moving
+        run: npm ci
+
       - name: Validate trade game
         working-directory: .trade-game
         run: |
           npm run lint
           npm test
 
-      - name: Build blog
+      - name: Build blog and bundled apps
         run: npm run build
 
       - name: Build trade game
