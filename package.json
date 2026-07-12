@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && npm --prefix apps/ball-moving run build && node scripts/copy-apps.js",
     "preview": "npx serve dist"
   },
   "dependencies": {

@@ -70,4 +70,14 @@ export const allProjects = [
     tags: ['Finance', 'Utility'],
     status: 'GitHub',
   },
+  {
+    name: '小球移动重置版',
+    description: '用 Three.js 与 Rapier 3D 重现小球移动、点选计分和精确胜利规则',
+    sticker: 'ball',
+    url: 'https://wangyufeng.org/ball-moving/',
+    type: '3D browser game',
+    year: '2026',
+    tags: ['Game', 'Three.js', 'Rapier', 'WebGL'],
+    status: 'Live',
+  },
 ];
