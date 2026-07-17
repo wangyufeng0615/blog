@@ -11,6 +11,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '王工存储指数',
+    description: '追踪 DRAM、NAND、SSD、HBM 与 B站情绪的存储产业指标面板',
+    sticker: 'market',
+    url: 'https://wangyufeng.org/storage-trend/',
+    type: 'Industry dashboard',
+    year: '2026',
+    tags: ['Storage', 'Data', 'Sentiment'],
+    status: 'Live',
+  },
+  {
     name: 'Rapier Galton Lab',
     description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
     sticker: 'galton',
