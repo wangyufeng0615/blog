@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js && npm --prefix apps/ball-moving run build && node scripts/copy-apps.js",
-    "preview": "npx serve dist"
+    "preview": "npx serve dist",
+    "deploy:storage-trend": "npx wrangler deploy --config wrangler.storage-trend.jsonc"
   },
   "dependencies": {
     "react": "^18.2.0",

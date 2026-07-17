@@ -1,0 +1,15 @@
+{
+  "name": "wanggong-storage-index",
+  "compatibility_date": "2026-07-17",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public/storage-trend",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [
+    {
+      "pattern": "cun.wangyufeng.org",
+      "custom_domain": true
+    }
+  ]
+}
