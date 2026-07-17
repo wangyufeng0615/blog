@@ -34,7 +34,12 @@ function setupDirs() {
   fs.mkdirSync(TEMP_DIR);
 }
 
-// 读取所有文章
+/**
+ * Discover publishable Markdown and custom-HTML posts.
+ *
+ * Markdown wins when both entry formats exist. Custom HTML is listed only when
+ * meta.json parses successfully; draft entries never reach indexes or output.
+ */
 function readPosts() {
   const posts = [];
   const dirs = fs.readdirSync(POSTS_DIR).filter(dir => {
@@ -217,7 +222,10 @@ function injectFloatingBack(html) {
   return html + FLOATING_BACK_HTML;
 }
 
-// 自定义 HTML 文章：整目录拷贝到 dist/posts/<slug>/，按需注入返回按钮
+/**
+ * Copy custom HTML posts and inject the shared return control unless noHeader
+ * explicitly opts out. meta.json is build metadata and is never published.
+ */
 function buildCustomPosts(posts) {
   for (const post of posts) {
     if (post.type !== 'custom') continue;
@@ -390,7 +398,8 @@ function cleanup() {
   }
 }
 
-// 复制 public 目录下的文件到 dist
+// public/ is copied late and can overwrite an earlier generated path. Keep it
+// for intentional static artifacts, not duplicate sources of generated pages.
 function copyPublicFiles() {
   const publicDir = path.join(ROOT, 'public');
   if (!fs.existsSync(publicDir)) return;
