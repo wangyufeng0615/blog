@@ -660,6 +660,7 @@
     .logic-grid {
       display: grid;
       grid-template-columns: 72px minmax(0, 1fr);
+      min-width: 0;
       gap: 0;
       margin: 8px 0 0;
       border: 1px solid var(--line);
@@ -680,11 +681,13 @@
     }
     .logic-row dd {
       margin: 0;
+      min-width: 0;
       color: var(--ink-2);
       font-size: 13px;
       line-height: 1.5;
       padding: 6px 10px;
       border-bottom: 1px solid var(--line-soft);
+      overflow-wrap: anywhere;
     }
     .logic-row:last-child dt,
     .logic-row:last-child dd { border-bottom: 0; }
@@ -816,7 +819,7 @@
       .topbar { align-items: flex-start; }
     }
   </style>
-  <script src="demo/vendor/echarts-6.1.0.min.js"></script>
+  <script src="vendor/echarts-6.1.0.min.js"></script>
 </head>
 <body>
   <main>
@@ -2962,7 +2965,7 @@
 
     <div class="footer-info">
       <div>共 23 个产业指标 · 17 个产业趋势窗口 · 1 个 ETF 市场参考</div>
-      <div>生成时间：2026-07-18T06:17:41Z</div>
+      <div>生成时间：2026-07-18T06:20:34Z</div>
       <div>数据仅供产业研究，不构成投资建议</div>
     </div>
   </main>
