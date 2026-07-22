@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-22T22:00:00+08:00",
+  "generatedAt": "2026-07-22T23:40:00+08:00",
   "scope": "Tracker.gg public Competitive match cards",
   "players": [
     {
@@ -23,6 +23,21 @@
         "activeDays": 383,
         "dateMin": "2023-03-04",
         "dateMax": "2026-07-19"
+      },
+      "recent20": {
+        "matches": 20,
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "winRate": 0.6,
+        "kd": 1.2996389891696751,
+        "kills": 360,
+        "deaths": 277,
+        "assists": 62,
+        "acs": 249.85,
+        "hs": 0.242,
+        "dd": 26.25,
+        "trs": 656.7
       },
       "july": {
         "matches": 4,
@@ -79,10 +94,25 @@
         "acs": 255.2681,
         "hs": 0.1752,
         "dd": 23.4187,
-        "trs": 628.0948,
+        "trs": 618.6355,
         "activeDays": 242,
         "dateMin": "2023-03-05",
         "dateMax": "2026-07-19"
+      },
+      "recent20": {
+        "matches": 20,
+        "wins": 12,
+        "losses": 5,
+        "draws": 3,
+        "winRate": 0.6,
+        "kd": 1.1373801916932906,
+        "kills": 356,
+        "deaths": 313,
+        "assists": 103,
+        "acs": 238.2,
+        "hs": 0.19899999999999998,
+        "dd": 21.7,
+        "trs": 636.3
       },
       "july": {
         "matches": 3,
@@ -139,10 +169,25 @@
         "acs": 186.8889,
         "hs": 0.149,
         "dd": -15.1185,
-        "trs": 470.5568,
+        "trs": 465.3284,
         "activeDays": 449,
         "dateMin": "2023-03-04",
         "dateMax": "2026-07-19"
+      },
+      "recent20": {
+        "matches": 20,
+        "wins": 9,
+        "losses": 10,
+        "draws": 1,
+        "winRate": 0.45,
+        "kd": 0.7728813559322034,
+        "kills": 228,
+        "deaths": 295,
+        "assists": 94,
+        "acs": 165.3,
+        "hs": 0.134,
+        "dd": -31.35,
+        "trs": 391.55
       },
       "july": {
         "matches": 3,
@@ -206,19 +251,19 @@
       3
     ],
     [
+      "mcnuggget",
+      "ccisme",
+      2
+    ],
+    [
+      "mcnuggget",
+      "cheche",
+      2
+    ],
+    [
       "ccisme",
       "cheche",
       3
-    ],
-    [
-      "mcnuggget",
-      "ccisme",
-      2
-    ],
-    [
-      "mcnuggget",
-      "cheche",
-      2
     ]
   ]
 }
