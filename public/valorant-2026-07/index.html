@@ -4,370 +4,271 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Tonyspack 的 Valorant 月报与 558 场公开竞技历史数据分析。">
-  <title>Tonyspack Valorant 数据中心</title>
+  <meta name="description" content="Tonyspack 与常玩队友的 Valorant 月报、公开竞技历史与共同游戏分析。">
+  <title>Valorant 阵容台</title>
   <style>
     :root {
       color-scheme: light;
       --canvas: #faf9f7;
-      --surface: #ffffff;
-      --surface-soft: #f1f4f1;
-      --ink: #303734;
-      --muted: #6d7470;
-      --border: #dfe3df;
+      --paper: #ffffff;
+      --ink: #3d3d3d;
+      --muted: #747a76;
+      --line: #e1e4e1;
       --accent: #5c7a6f;
-      --accent-dark: #3f5e53;
-      --accent-open: #e7eeea;
-      --gold: #b88942;
-      --shadow: 0 18px 45px rgba(54, 65, 60, .08);
+      --accent-soft: #e8efeb;
+      --shadow: 0 22px 60px rgba(54, 65, 60, .09);
     }
 
     * { box-sizing: border-box; }
-
     html { background: var(--canvas); scroll-behavior: smooth; }
-
     body {
       margin: 0;
       min-width: 320px;
       background:
-        radial-gradient(circle at 92% 0%, rgba(92, 122, 111, .12), transparent 28rem),
+        radial-gradient(circle at 93% 0, color-mix(in srgb, var(--accent) 13%, transparent), transparent 28rem),
         var(--canvas);
       color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .shell { width: min(1480px, 100%); margin: auto; padding: 20px clamp(14px, 3vw, 42px) 36px; }
+    .topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+    .home { display: inline-flex; min-height: 44px; align-items: center; gap: 10px; color: var(--ink); font-size: 13px; font-weight: 800; text-decoration: none; }
+    .home-mark { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.78); color: var(--accent); box-shadow: 0 8px 24px rgba(54,65,60,.07); }
+    .snapshot { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 
-    .shell {
-      width: min(1480px, 100%);
-      margin: 0 auto;
-      padding: 24px clamp(16px, 3vw, 44px) 40px;
-    }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-bottom: 25px; }
+    .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 900px; font-size: clamp(34px, 5.5vw, 68px); line-height: .99; letter-spacing: -.055em; }
+    .dek { max-width: 850px; margin: 14px 0 0; color: var(--muted); font-size: clamp(14px, 1.3vw, 17px); line-height: 1.7; }
+    .hero-facts { display: grid; grid-template-columns: repeat(3, auto); gap: 8px; }
+    .fact { min-width: 92px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,255,255,.75); }
+    .fact strong { display: block; font-size: 20px; letter-spacing: -.03em; }
+    .fact span { color: var(--muted); font-size: 11px; }
 
-    .masthead {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 20px;
-      align-items: end;
-      margin-bottom: 22px;
-    }
-
-    .brand-row {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 13px;
-    }
-
-    .home-mark {
+    .roster-wrap { position: sticky; top: 0; z-index: 30; margin: 0 0 12px; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: rgba(250,249,247,.92); box-shadow: 0 10px 30px rgba(54,65,60,.06); backdrop-filter: blur(18px); }
+    .roster { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; }
+    .roster::-webkit-scrollbar, .view-tabs::-webkit-scrollbar { display: none; }
+    .player {
+      --player: #5c7a6f;
+      position: relative;
       display: inline-grid;
-      width: 42px;
-      height: 42px;
-      place-items: center;
-      border: 1px solid rgba(92, 122, 111, .35);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, .75);
-      color: var(--accent-dark);
-      font-size: 14px;
-      font-weight: 750;
-      letter-spacing: .05em;
-      text-decoration: none;
-      box-shadow: 0 7px 22px rgba(63, 94, 83, .09);
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--accent-dark);
-      font-size: 12px;
-      font-weight: 720;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 900px;
-      font-size: clamp(30px, 5vw, 58px);
-      font-weight: 680;
-      line-height: 1.03;
-      letter-spacing: -.045em;
-    }
-
-    .dek {
-      max-width: 840px;
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: clamp(14px, 1.4vw, 17px);
-      line-height: 1.7;
-    }
-
-    .snapshot {
-      display: grid;
-      justify-items: end;
-      gap: 8px;
-      padding-bottom: 3px;
-      color: var(--muted);
-      font-size: 12px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .snapshot strong {
-      color: var(--ink);
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    .source-link {
-      display: inline-flex;
-      min-height: 44px;
+      flex: 1 0 150px;
+      min-height: 56px;
+      grid-template-columns: 12px 1fr;
+      gap: 10px;
       align-items: center;
       padding: 8px 13px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .72);
-      color: var(--accent-dark);
-      font-weight: 620;
-      text-decoration: none;
-    }
-
-    .source-link:hover,
-    .source-link:focus-visible { border-color: var(--accent); outline: none; }
-
-    .workspace {
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .tabs-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      padding: 10px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, .93);
-      backdrop-filter: blur(16px);
-    }
-
-    .tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 0;
-      scrollbar-width: none;
-    }
-
-    .tabs::-webkit-scrollbar { display: none; }
-
-    .tab {
-      position: relative;
-      display: inline-flex;
-      flex: 0 0 auto;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      padding: 9px 15px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 13px;
       background: transparent;
       color: var(--muted);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 620;
-      text-decoration: none;
+      text-align: left;
       cursor: pointer;
-      transition: background-color .18s ease, color .18s ease, transform .18s ease;
+      font: inherit;
     }
+    .player:hover { background: #f0f2ef; color: var(--ink); }
+    .player:focus-visible, .view-tab:focus-visible, .source:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .player[aria-selected="true"] { background: color-mix(in srgb, var(--player) 13%, #fff); color: var(--ink); }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--player); box-shadow: 0 0 0 4px color-mix(in srgb, var(--player) 13%, transparent); }
+    .player strong { display: block; overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+    .player small { color: var(--muted); font-size: 10px; }
+    .player.squad { grid-template-columns: 26px 1fr; }
+    .squad-icon { display: grid; width: 24px; height: 24px; grid-template-columns: repeat(2, 8px); gap: 3px; align-content: center; justify-content: center; }
+    .squad-icon i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 
-    .tab:hover { background: var(--surface-soft); color: var(--ink); }
-    .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .tab[aria-selected="true"] { background: var(--accent-open); color: var(--accent-dark); }
-
-    .tab[data-new="true"]::after {
-      content: "NEW";
-      margin-left: 7px;
-      color: var(--gold);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: .08em;
-    }
-
-    .panel {
-      position: relative;
-      display: none;
-      min-height: 760px;
-      background: var(--surface);
-    }
-
-    .panel.active { display: block; }
-
-    .loading {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .loading::before {
-      content: "";
-      width: 26px;
-      height: 26px;
-      margin-right: 10px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .75s linear infinite;
-    }
-
-    .panel.ready .loading { display: none; }
-
-    iframe {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: 100%;
-      height: min(80vh, 1080px);
-      min-height: 760px;
-      border: 0;
-      background: var(--surface);
-    }
-
-    .footnote {
-      margin: 14px 4px 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
+    .workspace { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); box-shadow: var(--shadow); }
+    .viewbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.95); }
+    .view-tabs { display: flex; min-width: 0; gap: 5px; overflow-x: auto; scrollbar-width: none; }
+    .view-tab { display: inline-flex; flex: 0 0 auto; min-height: 44px; align-items: center; padding: 8px 14px; border: 0; border-radius: 11px; background: transparent; color: var(--muted); font: inherit; font-size: 13px; font-weight: 720; cursor: pointer; }
+    .view-tab:hover { background: #f2f3f1; color: var(--ink); }
+    .view-tab[aria-selected="true"] { background: var(--accent-soft); color: color-mix(in srgb, var(--accent) 80%, #20342c); }
+    .source { display: inline-flex; flex: 0 0 auto; min-height: 44px; align-items: center; padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--accent); font-size: 12px; font-weight: 760; text-decoration: none; }
+    .source:hover { border-color: var(--accent); }
+    .frame-wrap { position: relative; min-height: 720px; }
+    .loading { position: absolute; inset: 0; z-index: 0; display: grid; place-items: center; color: var(--muted); font-size: 13px; }
+    .loading::before { content: ""; width: 24px; height: 24px; margin-right: 9px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .75s linear infinite; }
+    .frame-wrap.ready .loading { display: none; }
+    iframe { position: relative; z-index: 1; display: block; width: 100%; height: 900px; min-height: 720px; border: 0; background: var(--canvas); }
+    .footnote { margin: 14px 3px 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    @media (max-width: 760px) {
-      .shell { padding: 18px 12px 28px; }
-      .masthead { grid-template-columns: 1fr; align-items: start; margin-bottom: 18px; }
-      .brand-row { margin-bottom: 10px; }
-      h1 { font-size: clamp(31px, 11vw, 44px); }
-      .dek { margin-top: 11px; line-height: 1.62; }
-      .snapshot { justify-items: start; }
+    @media (max-width: 820px) {
+      .shell { padding: 14px 10px 28px; }
+      .topline { margin-bottom: 20px; }
+      .hero { grid-template-columns: 1fr; align-items: start; margin-bottom: 20px; }
+      h1 { font-size: clamp(38px, 12vw, 54px); }
+      .hero-facts { width: 100%; grid-template-columns: repeat(3, 1fr); }
+      .fact { min-width: 0; }
+      .roster-wrap { margin-inline: -2px; border-radius: 15px; }
+      .player { flex-basis: 138px; }
       .workspace { border-radius: 18px; }
-      .tabs-wrap { padding: 8px; }
-      .tab { padding-inline: 13px; }
-      .panel, iframe { min-height: 680px; }
-      iframe { height: calc(100vh - 220px); }
+      .viewbar { position: static; align-items: flex-start; }
+      .source { padding-inline: 11px; }
+      .frame-wrap, iframe { min-height: 680px; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .tab { transition: none; }
-      .loading::before { animation: none; border-top-color: var(--border); }
+    @media (max-width: 460px) {
+      .snapshot { display: none; }
+      .hero-facts { gap: 6px; }
+      .fact { padding: 10px; }
+      .fact strong { font-size: 18px; }
+      .viewbar { display: grid; grid-template-columns: minmax(0,1fr) auto; padding: 8px; }
+      .view-tab { padding-inline: 12px; }
+      iframe { height: 1000px; }
     }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .loading::before { animation: none; } }
   </style>
 </head>
 <body>
   <main class="shell">
-    <header class="masthead">
+    <div class="topline">
+      <a class="home" href="/" aria-label="返回博客首页"><span class="home-mark">WYF</span><span>wangyufeng.org</span></a>
+      <span class="snapshot">PUBLIC SNAPSHOT · 2026-07-22</span>
+    </div>
+
+    <header class="hero">
       <div>
-        <div class="brand-row">
-          <a class="home-mark" href="/" aria-label="返回博客首页">YF</a>
-          <p class="eyebrow">Valorant · Career Archive</p>
-        </div>
-        <h1>Tonyspack 数据中心</h1>
-        <p class="dek">从 7 月月报到完整竞技生涯：把 558 场公开对局拆成投入周期、滚动表现、英雄地图适配和可逐场检索的历史档案。</p>
+        <p class="eyebrow" id="eyebrow">SQUAD BENCH · 阵容台</p>
+        <h1 id="title">4 个人，一张协作画像</h1>
+        <p class="dek" id="dek">把月报、生涯与共同游戏关系放进同一套阅读路径；所有比较都保留样本量与公开覆盖边界。</p>
       </div>
-      <div class="snapshot">
-        <strong>2023.03.04 — 2026.07.19</strong>
-        <span>558 场 · 383 个活跃日 · 14 个英雄 · 12 张地图</span>
-        <a class="source-link" href="https://tracker.gg/valorant/profile/riot/tonyspack%238756/matches?platform=pc&amp;playlist=competitive" target="_blank" rel="noreferrer">查看 Tracker 数据源 ↗</a>
+      <div class="hero-facts" aria-label="数据概览">
+        <div class="fact"><strong>4</strong><span>玩家</span></div>
+        <div class="fact"><strong>1,700</strong><span>公开对局</span></div>
+        <div class="fact"><strong>2023.03</strong><span>最早记录</span></div>
       </div>
     </header>
 
-    <section class="workspace" aria-label="Tonyspack Valorant 数据分析">
-      <div class="tabs-wrap">
-        <nav class="tabs" role="tablist" aria-label="报告章节">
-          <a class="tab" id="tab-monthly" role="tab" href="#monthly" aria-controls="panel-monthly" aria-selected="true">7 月月报</a>
-          <a class="tab" id="tab-overview" role="tab" href="#overview" aria-controls="panel-overview" aria-selected="false" data-new="true">历史总览</a>
-          <a class="tab" id="tab-trends" role="tab" href="#trends" aria-controls="panel-trends" aria-selected="false">长期趋势</a>
-          <a class="tab" id="tab-profile" role="tab" href="#profile" aria-controls="panel-profile" aria-selected="false">英雄与地图</a>
-          <a class="tab" id="tab-matches" role="tab" href="#matches" aria-controls="panel-matches" aria-selected="false">全部对局</a>
-        </nav>
+    <nav class="roster-wrap" aria-label="选择玩家">
+      <div class="roster" role="tablist">
+        <button class="player squad" style="--player:#5c7a6f" data-player="squad" role="tab" aria-selected="true">
+          <span class="squad-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>阵容对比</strong><small>4 人协作画像</small></span>
+        </button>
+        <button class="player" style="--player:#5c7a6f" data-player="tonyspack" role="tab" aria-selected="false"><span class="dot"></span><span><strong>Tonyspack</strong><small>#8756 · 558 场</small></span></button>
+        <button class="player" style="--player:#b8745a" data-player="mcnuggget" role="tab" aria-selected="false"><span class="dot"></span><span><strong>McNuggget</strong><small>#McNug · 332 场</small></span></button>
+        <button class="player" style="--player:#6b7a8f" data-player="ccisme" role="tab" aria-selected="false"><span class="dot"></span><span><strong>CCisMe</strong><small>#0918 · 810 场</small></span></button>
+        <button class="player" style="--player:#8a6f8a" data-player="cheche" role="tab" aria-selected="false"><span class="dot"></span><span><strong>澈澈QwQ</strong><small>#JP1 · 私密</small></span></button>
       </div>
+    </nav>
 
-      <section class="panel active" id="panel-monthly" role="tabpanel" aria-labelledby="tab-monthly">
-        <div class="loading">正在载入 7 月月报</div>
-        <iframe title="Tonyspack 2026 年 7 月 Valorant 工作月报" data-src="./monthly.html"></iframe>
-      </section>
-      <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" hidden>
-        <div class="loading">正在载入历史总览</div>
-        <iframe title="Tonyspack Valorant 历史总览" data-src="./history-overview.html"></iframe>
-      </section>
-      <section class="panel" id="panel-trends" role="tabpanel" aria-labelledby="tab-trends" hidden>
-        <div class="loading">正在载入长期趋势</div>
-        <iframe title="Tonyspack Valorant 长期趋势" data-src="./history-trends.html"></iframe>
-      </section>
-      <section class="panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
-        <div class="loading">正在载入英雄与地图分析</div>
-        <iframe title="Tonyspack Valorant 英雄与地图分析" data-src="./history-profile.html"></iframe>
-      </section>
-      <section class="panel" id="panel-matches" role="tabpanel" aria-labelledby="tab-matches" hidden>
-        <div class="loading">正在载入全部对局</div>
-        <iframe title="Tonyspack Valorant 全部历史对局" data-src="./history-matches.html"></iframe>
-      </section>
+    <section class="workspace" aria-label="Valorant 数据内容">
+      <div class="viewbar">
+        <div class="view-tabs" id="viewTabs" role="tablist" aria-label="选择分析范围"></div>
+        <a class="source" id="sourceLink" href="https://tracker.gg/valorant/profile/riot/tonyspack%238756/overview" target="_blank" rel="noreferrer">Tracker 来源 ↗</a>
+      </div>
+      <div class="frame-wrap" id="frameWrap">
+        <span class="loading" role="status" aria-live="polite">正在载入视图</span>
+        <iframe id="contentFrame" title="Valorant 阵容分析" loading="eager"></iframe>
+      </div>
     </section>
 
-    <p class="footnote">公开数据快照更新于 2026-07-22。只统计 PC Competitive；原始页面 1 场未显示英雄、6 场未显示当时段位。页面不修改博客首页，也不会自动抓取新的比赛。</p>
+    <p class="footnote">仅使用 Tracker.gg 公开可见的 Competitive 对局卡片。共同场次为最近 60 天队友卡片口径；澈澈QwQ 的 Profile 当前为私密状态。本站为静态快照，不修改博客首页，也不会自动更新。</p>
   </main>
 
   <script>
-    (() => {
-      const validTabs = new Set(["monthly", "overview", "trends", "profile", "matches"]);
-      const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    const players = {
+      squad: { name: "阵容对比", color: "#5c7a6f", title: "4 个人，一张协作画像", eyebrow: "SQUAD BENCH · 阵容台", dek: "把月报、生涯与共同游戏关系放进同一套阅读路径；所有比较都保留样本量与公开覆盖边界。", source: "https://tracker.gg/valorant/profile/riot/tonyspack%238756/matches?platform=pc&playlist=competitive" },
+      tonyspack: { name: "Tonyspack", color: "#5c7a6f", title: "Tonyspack 的竞技档案", eyebrow: "PLAYER FILE · #8756", dek: "558 场公开竞技记录，从 2023-03-04 延伸到 2026-07-19。", source: "https://tracker.gg/valorant/profile/riot/tonyspack%238756/matches?platform=pc&playlist=competitive" },
+      mcnuggget: { name: "McNuggget", color: "#b8745a", title: "McNuggget 的竞技档案", eyebrow: "PLAYER FILE · #McNug", dek: "332 场公开竞技记录，从 2023-03-05 延伸到 2026-07-19。", source: "https://tracker.gg/valorant/profile/riot/McNuggget%23McNug/matches?platform=pc&playlist=competitive" },
+      ccisme: { name: "CCisMe", color: "#6b7a8f", title: "CCisMe 的竞技档案", eyebrow: "PLAYER FILE · #0918", dek: "810 场公开竞技记录，从 2023-03-04 延伸到 2026-07-19。", source: "https://tracker.gg/valorant/profile/riot/CCisMe%230918/matches?platform=pc&playlist=competitive" },
+      cheche: { name: "澈澈QwQ", color: "#8a6f8a", title: "澈澈QwQ 的可见画像", eyebrow: "PLAYER FILE · #JP1", dek: "公开 Profile 当前为私密状态；仅呈现其他公开玩家页面可验证的共同游戏关系。", source: "https://tracker.gg/valorant/profile/riot/%E6%BE%88%E6%BE%88QwQ%23JP1/matches?platform=pc&playlist=competitive" }
+    };
+    const careerViews = [
+      ["overview", "总览"], ["trends", "趋势"], ["profile", "英雄地图"], ["matches", "全部对局"]
+    ];
+    const frame = document.querySelector("#contentFrame");
+    const frameWrap = document.querySelector("#frameWrap");
+    const tabs = document.querySelector("#viewTabs");
+    let resizeObserver;
 
-      function loadPanel(panel) {
-        const frame = panel.querySelector("iframe");
-        if (!frame || frame.src) return;
-        frame.addEventListener("load", () => panel.classList.add("ready"), { once: true });
-        frame.src = frame.dataset.src;
+    function parseHash() {
+      const raw = location.hash.replace(/^#/, "");
+      if (!raw || raw === "squad") return { player: "squad", scope: "squad", view: "squad" };
+      const [player, scope = "monthly", view = "overview"] = raw.split("/");
+      if (!players[player] || player === "squad") return { player: "squad", scope: "squad", view: "squad" };
+      if (scope === "monthly") return { player, scope, view: "monthly" };
+      return { player, scope: "career", view: careerViews.some(([id]) => id === view) ? view : "overview" };
+    }
+
+    function hashFor(state) {
+      if (state.player === "squad") return "#squad";
+      if (state.scope === "monthly") return `#${state.player}/monthly`;
+      return `#${state.player}/career/${state.view}`;
+    }
+
+    function srcFor(state) {
+      if (state.player === "squad") return "squad.html";
+      return `players/${state.player}/${state.scope === "monthly" ? "monthly" : state.view}.html`;
+    }
+
+    function tabButton(id, label, selected, action) {
+      const button = document.createElement("button");
+      button.className = "view-tab";
+      button.type = "button";
+      button.role = "tab";
+      button.textContent = label;
+      button.ariaSelected = String(selected);
+      button.addEventListener("click", action);
+      return button;
+    }
+
+    function render() {
+      const state = parseHash(), player = players[state.player];
+      document.documentElement.style.setProperty("--accent", player.color);
+      document.documentElement.style.setProperty("--accent-soft", `color-mix(in srgb, ${player.color} 14%, #fff)`);
+      document.querySelector("#title").textContent = player.title;
+      document.querySelector("#eyebrow").textContent = player.eyebrow;
+      document.querySelector("#dek").textContent = player.dek;
+      document.querySelector("#sourceLink").href = player.source;
+      document.querySelectorAll(".player").forEach((button) => button.ariaSelected = String(button.dataset.player === state.player));
+      tabs.replaceChildren();
+
+      if (state.player === "squad") {
+        tabs.append(tabButton("squad", "阵容总览", true, () => {}));
+      } else {
+        tabs.append(tabButton("monthly", "7月月报", state.scope === "monthly", () => { location.hash = `#${state.player}/monthly`; }));
+        tabs.append(tabButton("career", "生涯", state.scope === "career" && state.view === "overview", () => { location.hash = `#${state.player}/career/overview`; }));
+        if (state.scope === "career") {
+          careerViews.slice(1).forEach(([id, label]) => tabs.append(tabButton(id, label, state.view === id, () => { location.hash = `#${state.player}/career/${id}`; })));
+        }
       }
 
-      function activate(name, updateHistory = false) {
-        const resolved = validTabs.has(name) ? name : "monthly";
-        tabs.forEach((tab) => {
-          const selected = tab.getAttribute("href") === `#${resolved}`;
-          tab.setAttribute("aria-selected", String(selected));
-          tab.tabIndex = selected ? 0 : -1;
-          if (selected) tab.scrollIntoView({ block: "nearest", inline: "nearest" });
-        });
-        panels.forEach((panel) => {
-          const selected = panel.id === `panel-${resolved}`;
-          panel.hidden = !selected;
-          panel.classList.toggle("active", selected);
-          if (selected) loadPanel(panel);
-        });
-        if (updateHistory && location.hash !== `#${resolved}`) history.pushState(null, "", `#${resolved}`);
+      const nextSrc = srcFor(state);
+      if (frame.getAttribute("src") !== nextSrc) {
+        frameWrap.classList.remove("ready");
+        frame.src = nextSrc;
+        frame.title = state.player === "squad" ? "Valorant 阵容对比" : `${player.name} ${state.scope === "monthly" ? "7月月报" : state.view}`;
       }
+      document.title = `${player.name} · Valorant 阵容台`;
+    }
 
-      tabs.forEach((tab, index) => {
-        tab.addEventListener("click", (event) => {
-          event.preventDefault();
-          activate(tab.hash.slice(1), true);
+    function fitFrame() {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        const height = Math.max(720, doc.documentElement.scrollHeight, doc.body?.scrollHeight || 0);
+        frame.style.height = `${height}px`;
+        resizeObserver?.disconnect();
+        resizeObserver = new ResizeObserver(() => {
+          const next = Math.max(720, doc.documentElement.scrollHeight, doc.body?.scrollHeight || 0);
+          frame.style.height = `${next}px`;
         });
-        tab.addEventListener("keydown", (event) => {
-          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-          event.preventDefault();
-          const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
-          tabs[nextIndex].focus();
-          activate(tabs[nextIndex].hash.slice(1), true);
-        });
-      });
+        resizeObserver.observe(doc.documentElement);
+      } catch (_) {}
+    }
 
-      window.addEventListener("hashchange", () => activate(location.hash.slice(1)));
-      activate(location.hash.slice(1));
-    })();
+    document.querySelectorAll(".player").forEach((button) => button.addEventListener("click", () => {
+      const id = button.dataset.player;
+      location.hash = id === "squad" ? "#squad" : `#${id}/monthly`;
+    }));
+    frame.addEventListener("load", () => { frameWrap.classList.add("ready"); fitFrame(); });
+    addEventListener("hashchange", render);
+    if (!location.hash) history.replaceState(null, "", "#squad");
+    render();
   </script>
 </body>
 </html>
