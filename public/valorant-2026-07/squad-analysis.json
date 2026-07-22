@@ -1,0 +1,224 @@
+{
+  "generatedAt": "2026-07-22T22:00:00+08:00",
+  "scope": "Tracker.gg public Competitive match cards",
+  "players": [
+    {
+      "slug": "tonyspack",
+      "name": "Tonyspack",
+      "tag": "#8756",
+      "summary": {
+        "matches": 558,
+        "wins": 294,
+        "losses": 253,
+        "draws": 11,
+        "winRate": 0.5269,
+        "kd": 1.3704,
+        "kills": 10451,
+        "deaths": 7626,
+        "assists": 2625,
+        "acs": 257.6452,
+        "hs": 0.2249,
+        "dd": 35.0269,
+        "trs": 663.4659,
+        "activeDays": 383,
+        "dateMin": "2023-03-04",
+        "dateMax": "2026-07-19"
+      },
+      "july": {
+        "matches": 4,
+        "wins": 2,
+        "losses": 2,
+        "draws": 0,
+        "winRate": 0.5,
+        "kd": 1.0634920634920635,
+        "kills": 67,
+        "deaths": 63,
+        "assists": 10,
+        "acs": 215.5,
+        "hs": 0.2925,
+        "dd": -8.25,
+        "trs": 587.75
+      },
+      "quality": {
+        "rows": 558,
+        "uniqueIds": 558,
+        "min": "2023-03-04",
+        "max": "2026-07-19",
+        "groupCountMismatches": [],
+        "groupResultMismatches": [],
+        "missing": {
+          "agent": 1,
+          "map": 0,
+          "kills": 0,
+          "deaths": 0,
+          "assists": 0,
+          "acs": 0,
+          "trs": 0,
+          "rank": 6
+        },
+        "scoreOrientationConflicts": [
+          "2024-01-21-02",
+          "2024-09-26-01"
+        ]
+      }
+    },
+    {
+      "slug": "mcnuggget",
+      "name": "McNuggget",
+      "tag": "#McNug",
+      "summary": {
+        "matches": 332,
+        "wins": 175,
+        "losses": 150,
+        "draws": 7,
+        "winRate": 0.5271,
+        "kd": 1.1625,
+        "kills": 5888,
+        "deaths": 5065,
+        "assists": 1867,
+        "acs": 255.2681,
+        "hs": 0.1752,
+        "dd": 23.4187,
+        "trs": 628.0948,
+        "activeDays": 242,
+        "dateMin": "2023-03-05",
+        "dateMax": "2026-07-19"
+      },
+      "july": {
+        "matches": 3,
+        "wins": 2,
+        "losses": 1,
+        "draws": 0,
+        "winRate": 0.6666666666666666,
+        "kd": 0.9761904761904762,
+        "kills": 41,
+        "deaths": 42,
+        "assists": 14,
+        "acs": 174.33333333333334,
+        "hs": 0.2633333333333333,
+        "dd": -8.333333333333334,
+        "trs": 508.6666666666667
+      },
+      "quality": {
+        "rows": 332,
+        "uniqueIds": 332,
+        "min": "2023-03-05",
+        "max": "2026-07-19",
+        "groupCountMismatches": [],
+        "groupResultMismatches": [],
+        "missing": {
+          "agent": 0,
+          "map": 0,
+          "kills": 0,
+          "deaths": 0,
+          "assists": 0,
+          "acs": 0,
+          "trs": 5,
+          "rank": 0
+        },
+        "scoreOrientationConflicts": [
+          "2024-01-21-02",
+          "2024-09-26-01"
+        ]
+      }
+    },
+    {
+      "slug": "ccisme",
+      "name": "CCisMe",
+      "tag": "#0918",
+      "summary": {
+        "matches": 810,
+        "wins": 414,
+        "losses": 381,
+        "draws": 15,
+        "winRate": 0.5111,
+        "kd": 0.8852,
+        "kills": 10584,
+        "deaths": 11957,
+        "assists": 4961,
+        "acs": 186.8889,
+        "hs": 0.149,
+        "dd": -15.1185,
+        "trs": 470.5568,
+        "activeDays": 449,
+        "dateMin": "2023-03-04",
+        "dateMax": "2026-07-19"
+      },
+      "july": {
+        "matches": 3,
+        "wins": 2,
+        "losses": 1,
+        "draws": 0,
+        "winRate": 0.6666666666666666,
+        "kd": 0.95,
+        "kills": 38,
+        "deaths": 40,
+        "assists": 24,
+        "acs": 182,
+        "hs": 0.10333333333333333,
+        "dd": 2.3333333333333335,
+        "trs": 533.6666666666666
+      },
+      "quality": {
+        "rows": 810,
+        "uniqueIds": 810,
+        "min": "2023-03-04",
+        "max": "2026-07-19",
+        "groupCountMismatches": [],
+        "groupResultMismatches": [],
+        "missing": {
+          "agent": 0,
+          "map": 0,
+          "kills": 0,
+          "deaths": 0,
+          "assists": 0,
+          "acs": 0,
+          "trs": 9,
+          "rank": 0
+        },
+        "scoreOrientationConflicts": [
+          "2024-01-21-02",
+          "2024-09-26-01"
+        ]
+      }
+    },
+    {
+      "slug": "cheche",
+      "name": "澈澈QwQ",
+      "tag": "#JP1",
+      "private": true
+    }
+  ],
+  "recentPairEdges": [
+    [
+      "tonyspack",
+      "mcnuggget",
+      4
+    ],
+    [
+      "tonyspack",
+      "ccisme",
+      4
+    ],
+    [
+      "tonyspack",
+      "cheche",
+      3
+    ],
+    [
+      "ccisme",
+      "cheche",
+      3
+    ],
+    [
+      "mcnuggget",
+      "ccisme",
+      2
+    ],
+    [
+      "mcnuggget",
+      "cheche",
+      2
+    ]
+  ]
+}
