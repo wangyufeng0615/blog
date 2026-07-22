@@ -228,6 +228,78 @@
       }
     },
     {
+      "slug": "imisswonder",
+      "name": "iMissWonder",
+      "tag": "#Siuuu",
+      "summary": {
+        "matches": 820,
+        "wins": 418,
+        "losses": 391,
+        "draws": 11,
+        "winRate": 0.5098,
+        "kd": 1.0247,
+        "kills": 12830,
+        "deaths": 12521,
+        "assists": 3578,
+        "acs": 215.5073,
+        "hs": 0.2329,
+        "dd": -1.739,
+        "trs": 519.6646,
+        "activeDays": 277,
+        "dateMin": "2021-06-17",
+        "dateMax": "2025-12-14"
+      },
+      "recent20": {
+        "matches": 20,
+        "wins": 6,
+        "losses": 13,
+        "draws": 1,
+        "winRate": 0.3,
+        "kd": 0.7724358974358975,
+        "kills": 241,
+        "deaths": 312,
+        "assists": 70,
+        "acs": 183.7,
+        "hs": 0.19,
+        "dd": -28.35,
+        "trs": 375.3
+      },
+      "july": {
+        "matches": 0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "winRate": 0,
+        "kd": 0,
+        "kills": 0,
+        "deaths": 0,
+        "assists": 0,
+        "acs": 0,
+        "hs": 0,
+        "dd": 0,
+        "trs": 0
+      },
+      "quality": {
+        "rows": 820,
+        "uniqueIds": 820,
+        "min": "2021-06-17",
+        "max": "2025-12-14",
+        "groupCountMismatches": [],
+        "groupResultMismatches": [],
+        "missing": {
+          "agent": 0,
+          "map": 0,
+          "kills": 0,
+          "deaths": 0,
+          "assists": 0,
+          "acs": 0,
+          "trs": 11,
+          "rank": 0
+        },
+        "scoreOrientationConflicts": []
+      }
+    },
+    {
       "slug": "cheche",
       "name": "澈澈QwQ",
       "tag": "#JP1",
