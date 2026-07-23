@@ -21,6 +21,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: 'X 存储情绪雷达',
+    description: '追踪中英文存储博主公开观点，用 LLM 标注情绪、交易节点与样本覆盖边界',
+    sticker: 'market',
+    url: 'https://wangyufeng.org/storage-radar/',
+    type: 'Industry dashboard',
+    year: '2026',
+    tags: ['Storage', 'X', 'LLM', 'Sentiment'],
+    status: 'Live',
+  },
+  {
     name: 'Rapier Galton Lab',
     description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
     sticker: 'galton',

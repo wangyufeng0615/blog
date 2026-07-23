@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/build.js && npm --prefix apps/ball-moving run build && node scripts/copy-apps.js",
     "preview": "npx serve dist",
-    "deploy:storage-trend": "npx wrangler deploy --config wrangler.storage-trend.jsonc",
+    "check:storage-trend": "python3 ../storage-trend/scripts/public_page_readiness.py --snapshot ../storage-trend/data/processed/demo_snapshot.json --html public/storage-trend/index.html",
+    "deploy:storage-trend": "npm run check:storage-trend && npx wrangler deploy --config wrangler.storage-trend.jsonc",
     "test:land-below-wind-edge": "node --test cloudflare/land-below-wind-router.test.js",
     "deploy:land-below-wind-edge": "npx wrangler deploy --config wrangler.land-below-wind.jsonc"
   },
