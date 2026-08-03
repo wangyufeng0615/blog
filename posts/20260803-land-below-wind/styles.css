@@ -18,6 +18,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--ink); }
+html.story-snapping { scroll-snap-type: y mandatory; }
 body { margin: 0; overflow-x: hidden; background: var(--ink); color: var(--fog); font-family: var(--sans); }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
@@ -85,7 +86,10 @@ body:has(#blog-back-fab) .map-legend { bottom: 78px; }
 .journey-progress span { display: block; width: 100%; height: 100%; background: var(--map-route); transform: scaleX(1); transform-origin: left; will-change: transform; }
 
 .chapters { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
-.chapter { min-height: 100svh; display: flex; align-items: center; justify-content: flex-start; padding: 98px 6.5vw 54px 8vw; }
+.chapter {
+  min-height: 100svh; display: flex; align-items: center; justify-content: flex-start;
+  padding: 98px 6.5vw 54px 8vw; scroll-snap-align: start; scroll-snap-stop: always;
+}
 .chapter-card,
 .hero-copy { pointer-events: none; }
 .chapter-card {
@@ -95,6 +99,13 @@ body:has(#blog-back-fab) .map-legend { bottom: 78px; }
   opacity: .36; transform: translateY(22px); transition: opacity .38s ease, transform .38s ease;
 }
 .chapter.is-active .chapter-card { opacity: 1; transform: translateY(0); }
+body.story-stepped .chapter-card,
+body.story-stepped .hero-copy { visibility: hidden; opacity: 0; transform: none; transition: opacity .16s ease; }
+body.story-stepped.story-in-view .chapter.is-active .chapter-card,
+body.story-stepped.story-in-view .chapter.is-active .hero-copy {
+  position: fixed; z-index: 12; top: 50%; left: 8vw;
+  visibility: visible; opacity: 1; transform: translateY(-50%);
+}
 .chapter-heading { display: flex; gap: 15px; align-items: baseline; color: var(--paper-deep); }
 .chapter-heading > span { flex: 0 0 auto; color: var(--route); font: 30px var(--serif); }
 .chapter-heading p { margin: 0; font-size: 12px; line-height: 1.45; letter-spacing: .09em; }
@@ -189,7 +200,7 @@ html[lang="en"] .quote-translation { display: none; }
 .journey-notes {
   position: relative; z-index: 20; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 72px 28px; padding: clamp(84px, 9vw, 150px) 8vw 68px;
-  background: var(--paper); color: #171b16;
+  background: var(--paper); color: #171b16; scroll-snap-align: start; scroll-snap-stop: always;
 }
 .journey-notes::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .34;
@@ -322,6 +333,12 @@ html[lang="en"] .quote-translation { display: none; }
   .map-vignette--left { width: 100%; background: linear-gradient(180deg, rgba(7,17,13,.26) 0%, rgba(7,17,13,.18) 32%, rgba(7,17,13,.86) 74%, rgba(7,17,13,.98) 100%); }
   .chapter { align-items: flex-end; padding: 78px 14px 35px; }
   .chapter--hero { align-items: center; }
+  body.story-stepped.story-in-view .chapter.is-active .chapter-card {
+    top: auto; right: 14px; bottom: 35px; left: 14px; width: auto; transform: none;
+  }
+  body.story-stepped.story-in-view .chapter.is-active .hero-copy {
+    top: 50%; right: 22px; left: 22px; width: auto; transform: translateY(-50%);
+  }
   .hero-copy { width: 100%; padding: 0 8px; }
   .hero-copy h1 { font-size: clamp(62px, 21vw, 100px); }
   html[lang="en"] .hero-copy h1 { font-size: clamp(56px, 17vw, 74px); line-height: .94; letter-spacing: -.015em; }
@@ -397,6 +414,7 @@ html[lang="en"] .quote-translation { display: none; }
 
 @media (max-width: 420px) and (max-height: 760px) {
   .chapter { padding-bottom: 22px; }
+  body.story-stepped.story-in-view .chapter.is-active .chapter-card { bottom: 22px; }
   .chapter-card,
   html[lang="en"] .chapter-card { padding: 14px 16px 13px; }
   .chapter-card h2,
