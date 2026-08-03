@@ -95,6 +95,8 @@ function readPosts() {
       }
       if (meta.draft) continue;
 
+      const permalink = normalizeCustomPermalink(meta.permalink, dir);
+
       posts.push({
         slug: dir,
         title: meta.title || '无标题',
@@ -104,7 +106,7 @@ function readPosts() {
         description: meta.description || '',
         dir,
         type: 'custom',
-        url: `/posts/${dir}/`,
+        url: permalink,
         noHeader: !!meta.noHeader,
       });
     }
@@ -117,6 +119,20 @@ function readPosts() {
   });
 
   return posts;
+}
+
+function normalizeCustomPermalink(value, dir) {
+  const fallback = `/posts/${dir}/`;
+  if (value == null || value === '') return fallback;
+  if (
+    typeof value !== 'string' ||
+    !/^\/[a-z0-9][a-z0-9/_-]*\/$/.test(value) ||
+    value.includes('//') ||
+    value.includes('..')
+  ) {
+    throw new Error(`Invalid permalink for ${dir}: expected an absolute lowercase path ending in /`);
+  }
+  return value;
 }
 
 // 格式化日期
@@ -230,7 +246,11 @@ function buildCustomPosts(posts) {
   for (const post of posts) {
     if (post.type !== 'custom') continue;
     const srcDir = path.join(POSTS_DIR, post.dir);
-    const destDir = path.join(DIST_DIR, 'posts', post.slug);
+    const outputPath = post.url.replace(/^\/+|\/+$/g, '');
+    const destDir = path.join(DIST_DIR, outputPath);
+    if (!destDir.startsWith(`${DIST_DIR}${path.sep}`)) {
+      throw new Error(`Custom page output escaped dist: ${post.url}`);
+    }
     copyDirRecursive(srcDir, destDir, ['meta.json']);
 
     const indexFile = path.join(destDir, 'index.html');
@@ -239,7 +259,7 @@ function buildCustomPosts(posts) {
       html = injectFloatingBack(html);
     }
     fs.writeFileSync(indexFile, html);
-    console.log(`✓ posts/${post.slug}/`);
+    console.log(`✓ ${outputPath}/`);
   }
 }
 
