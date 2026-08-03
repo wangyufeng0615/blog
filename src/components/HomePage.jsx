@@ -4,8 +4,8 @@ import { allProjects } from '../data/projects.js';
 import { friendLinks } from '../data/friends.js';
 
 export function HomePage({ posts }) {
-  // 学习笔记 = 自定义 HTML 研报；文章 = markdown
-  const notes = posts.filter((p) => p.type === 'custom');
+  // 页面 = 自定义 HTML 页面；文章 = markdown
+  const pages = posts.filter((p) => p.type === 'custom');
   const articles = posts.filter((p) => p.type !== 'custom');
 
   const entry = (post) => (
@@ -73,12 +73,12 @@ export function HomePage({ posts }) {
           </section>
         </main>
 
-        {/* 第三列：学习笔记 */}
+        {/* 第三列：页面 */}
         <aside className="home-notes-col">
           <section className="home-notes">
-            <h2 className="home-h2">学习笔记</h2>
+            <h2 className="home-h2">页面<span className="home-count">{pages.length}</span></h2>
             <ul className="entry-list note-list">
-              {notes.map(entry)}
+              {pages.map(entry)}
             </ul>
           </section>
         </aside>
