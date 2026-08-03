@@ -8,7 +8,7 @@ const COPY = {
     legendRoute: "凯斯夫妇的主路线", legendRelated: "书中相关地点", legendHistory: "转述的历史事件", legendApprox: "虚线与菱形为复原",
     prologue: "序章", epilogue: "尾声", heroAltTitle: "Land Below the Wind", heroTitle: "风下之乡",
     heroDeck: "1938 年，作家阿格尼丝·凯斯随从事林务工作的丈夫哈里·凯斯，进入英属北婆罗洲东南部的河流与雨林。",
-    heroNote: "他们从山打根（Sandakan）沿海岸南下至斗湖（Tawau），在卡拉巴坎（Kalabakan）换乘独木舟，逆流翻越分水岭，最后顺夸穆特河（Kuamut）与京那巴当岸河（Kinabatangan River）回到海上。", startRoute: "沿路线出发",
+    heroNote: "他们从山打根（Sandakan）沿海岸南下至斗湖（Tawau），在卡拉巴坎（Kalabakan）换乘独木舟，逆流翻越分水岭，最后顺夸穆特河（Kuamut）与京那巴当岸河（Kinabatangan River）回到海上。", scrollCue: "向下滚动，每个章节会完整吸附到位。", startRoute: "沿路线出发",
     homeLabel: "山打根", homeTitle: "从 Newlands 离开", homeDate: "1938 年 6 月初",
     homeBody1: "山打根山坡上的 Newlands 是凯斯夫妇生活、写作和林务工作的基地。远征计划曾三次搁置，其中两次是暴雨令河道无法通航；真正出发时，Agnes 仍在发烧，却知道这次再回到花园小径时，身体与记忆都将不同。",
     homeBody2: "今天的 Agnes Keith House 是 1946—47 年战后重建的房屋。它提供可靠的空间锚点，却不应被误读为 1938 年原屋完整保存至今。",
@@ -95,7 +95,7 @@ const COPY = {
     prologue: "Prologue", epilogue: "Epilogue", heroAltTitle: "风下之乡", heroTitle: "Land Below the Wind",
     heroDeck: "In 1938, writer Agnes Newton Keith joined her husband Harry, who worked in forestry, on a journey into the rivers and rainforest of southeastern British North Borneo.",
     heroNote: "From Sandakan they sailed south to Tawau, changed to dugout canoes at Kalabakan and travelled upstream. After crossing the watershed, they descended the Kuamut and Kinabatangan to the sea.",
-    scrollCue: "Scroll down. The route will advance with each chapter.",
+    scrollCue: "Scroll down. Each chapter will snap fully into place.",
     homeLabel: "Sandakan", homeTitle: "Leaving Newlands", homeDate: "Early June 1938",
     homeBody1: "Newlands, on the hill above Sandakan, was the Keiths’ base for domestic life, writing and forestry work. The expedition had already been postponed three times—twice because rain made the rivers impassable. When Agnes finally left, she was still feverish and knew that both body and memory would be altered before she walked up the garden path again.",
     homeBody2: "Today’s Agnes Keith House was rebuilt in 1946–47 after the war. It is a dependable geographical anchor, but should not be read as the intact house of 1938.",
@@ -596,7 +596,7 @@ function animateRouteProgress(target, immediate = false) {
     return;
   }
   const started = performance.now();
-  const duration = Math.min(3000, 1200 + Math.abs(destination - origin) * 420);
+  const duration = Math.min(850, 520 + Math.abs(destination - origin) * 70);
   const animate = (timestamp) => {
     const linear = Math.min(1, (timestamp - started) / duration);
     const eased = linear < 0.5
@@ -640,7 +640,7 @@ function flyToChapter(chapter, duration = 1500) {
     });
     return;
   }
-  map.flyTo({
+  map.easeTo({
     ...view,
     padding: desktopPadding,
     retainPadding: false,
@@ -890,26 +890,42 @@ function activateChapter(chapter) {
   updateMarkerLabels();
   const rewindFromOverview = previousChapter === "overview" && chapter === "home";
   animateRouteProgress(routeProgressByChapter[chapter] ?? currentRouteProgress, rewindFromOverview);
-  flyToChapter(chapter, 1550);
+  flyToChapter(chapter, 720);
 }
 
-const chapterObserver = new IntersectionObserver((entries) => {
-  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (visible) activateChapter(visible.target.dataset.chapter);
-}, { rootMargin: "-31% 0px -45% 0px", threshold: [0, 0.2, 0.55] });
-document.querySelectorAll(".chapter").forEach((chapter) => chapterObserver.observe(chapter));
+const chapterElements = [...document.querySelectorAll(".chapter")];
+document.body.classList.add("story-stepped");
 
-function syncStoryVisibility() {
+function syncStoryState() {
   const rect = document.querySelector("#route-story").getBoundingClientRect();
-  document.body.classList.toggle("story-in-view", rect.bottom > 120 && rect.top < window.innerHeight - 120);
+  const storyInView = rect.bottom > 120 && rect.top < window.innerHeight - 120;
+  document.body.classList.toggle("story-in-view", storyInView);
+  document.documentElement.classList.toggle("story-snapping", storyInView);
+  if (!storyInView) return;
+
+  const triggerY = window.innerHeight * 0.5;
+  const visibleChapter = chapterElements.find((chapter) => {
+    const chapterRect = chapter.getBoundingClientRect();
+    return chapterRect.top <= triggerY && chapterRect.bottom > triggerY;
+  });
+  if (visibleChapter) activateChapter(visibleChapter.dataset.chapter);
 }
-window.addEventListener("scroll", syncStoryVisibility, { passive: true });
-syncStoryVisibility();
+
+let storySyncFrame;
+function requestStorySync() {
+  cancelAnimationFrame(storySyncFrame);
+  storySyncFrame = requestAnimationFrame(syncStoryState);
+}
+window.addEventListener("scroll", requestStorySync, { passive: true });
+syncStoryState();
 
 let resizeCameraFrame;
 window.addEventListener("resize", () => {
   cancelAnimationFrame(resizeCameraFrame);
-  resizeCameraFrame = requestAnimationFrame(() => flyToChapter(activeChapter, 0));
+  resizeCameraFrame = requestAnimationFrame(() => {
+    syncStoryState();
+    flyToChapter(activeChapter, 0);
+  });
 }, { passive: true });
 
 document.querySelectorAll("[data-lang]").forEach((button) => button.addEventListener("click", () => {
