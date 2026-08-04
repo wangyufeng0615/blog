@@ -156,8 +156,6 @@ const COPY = {
     relatedLinidisTitle: "Linidis", relatedLinidisBody: "The 1890 Walter Flint episode retold in the book: an echo from the past.",
     relatedEvidence: "Yellow dots mark other places in the book; green dots mark historical events. Neither counts toward the 1938 main route.", fieldNotes: "Field notes · 1938",
     notesLabel: "Map notes", notesTitle: "The route and places at a glance",
-    notesIntro: "The line expresses the journey’s currently supported sequence; it is not a GPS track. This index keeps only what a reader needs to follow the route, while dashed lines and diamonds retain the parts still awaiting calibration.",
-    notesKeyTitle: "How to read the map", notesKeyLocated: "Sea-glass green solid line | located main route", notesKeyApprox: "Sea-glass green dashed line and diamonds | reconstructed route or place", notesKeyRelated: "Yellow dot | another place in the book", notesKeyHistory: "Green dot | a historical event retold in the book",
     notesRouteTitle: "The 1938 main route", notesRelatedTitle: "Beyond the route", notesSourcesTitle: "Sources", notesRightsTitle: "Quotation and illustration rights",
     notesRightsBody: "Eight brief translated excerpts and five author-drawn illustrations come from the 2016 SDX Joint Publishing Chinese edition. English excerpt text on this page is newly rendered from that edition. They are presented for non-commercial literary and historical research; copyright remains with the relevant authors, translators and publishers.",
     readingLead: "Close reading · 1939 edition", readingTitle: "Beyond the map, how the body remembers the journey",
