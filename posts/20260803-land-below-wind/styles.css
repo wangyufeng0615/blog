@@ -113,11 +113,6 @@ body.story-stepped.story-in-view .chapter.is-active .hero-copy {
 .chapter-card > p { margin: 0; color: #d2d5ce; font-size: 14.5px; line-height: 1.7; }
 .chapter-card > p + p { margin-top: 12px; }
 .chapter-card .chapter-date { margin: 0 0 18px; color: #d29a78; font: 13px var(--serif); letter-spacing: .05em; }
-.chapter-card .scene-source { margin: 15px 0 0; color: rgba(232,224,208,.62); font-size: 9.5px; line-height: 1.5; letter-spacing: .035em; }
-.chapter-card .chapter-evidence {
-  margin-top: 13px; padding-top: 11px; border-top: 1px solid rgba(241,238,230,.2);
-  color: #e1d5c2; font-size: 10.5px; line-height: 1.58; letter-spacing: .02em;
-}
 html[lang="en"] .chapter-card { width: min(700px, 54vw); }
 
 .chapter-card--context {
@@ -145,7 +140,6 @@ html[lang="en"] .chapter-card { width: min(700px, 54vw); }
 .hero-copy h1 { margin: 0; font: 400 clamp(72px, 9vw, 146px)/.94 var(--serif); letter-spacing: .04em; }
 .hero-deck { margin: 28px 0 0; max-width: 20em; font: 400 clamp(20px, 2.1vw, 32px)/1.45 var(--serif); }
 .hero-note { width: min(640px, 94%); color: #c5c8c0; line-height: 1.8; }
-.scroll-cue { display: flex; gap: 28px; width: max-content; margin-top: 34px; padding-bottom: 8px; border-bottom: 1px solid rgba(241,238,230,.5); font-size: 14px; }
 
 .book-fragment {
   margin: 14px 0 0; padding: 10px 0 10px 16px; border-left: 2px solid rgba(147,216,200,.72);
@@ -275,16 +269,16 @@ html[lang="en"] .quote-translation { display: none; }
   .map-marker.is-chapter-focus .map-marker-label { font-size: 15px; }
 }
 .route-journey-head {
-  position: relative; width: 12px; height: 12px; border: 2px solid var(--map-route-shadow); border-radius: 50%;
-  background: var(--map-route-bright); box-shadow: 0 0 0 2px var(--map-route), 0 2px 12px rgba(6,20,15,.72);
+  position: relative; width: 11px; height: 11px; border: 2px solid rgba(4,18,14,.92); border-radius: 50%;
+  background: #f4fffb; box-shadow: 0 0 0 3px rgba(142,213,197,.76), 0 0 20px rgba(191,255,233,.66), 0 3px 12px rgba(4,18,14,.82);
 }
 .route-journey-head::after {
-  content: ""; position: absolute; inset: -7px; border: 1px solid rgba(147,216,200,.8); border-radius: inherit;
-  animation: route-head-pulse 1.85s cubic-bezier(.2,.72,.28,1) infinite; will-change: transform, opacity;
+  content: ""; position: absolute; inset: -9px; border: 1px solid rgba(172,239,223,.82); border-radius: inherit;
+  animation: route-head-pulse 2.15s cubic-bezier(.2,.72,.28,1) infinite; will-change: transform, opacity;
 }
 @keyframes route-head-pulse {
-  0% { opacity: .72; transform: scale(.45); }
-  72%, 100% { opacity: 0; transform: scale(1.32); }
+  0% { opacity: .76; transform: scale(.38); }
+  74%, 100% { opacity: 0; transform: scale(1.44); }
 }
 .maplibregl-ctrl-attrib { background: rgba(7,17,13,.72) !important; color: #c2c5be; font-size: 9px !important; }
 .maplibregl-ctrl-attrib a { color: #e0e1dc !important; }
@@ -307,8 +301,6 @@ html[lang="en"] .quote-translation { display: none; }
   html[lang="en"] .book-fragment p { font-size: 11.5px; line-height: 1.4; }
   .book-fragment cite { margin-top: 4px; font-size: 7.5px; }
   .inline-quote { margin-top: 10px; padding-top: 9px; font-size: 15px; }
-  .chapter-card .scene-source { margin-top: 9px; }
-  .chapter-card .chapter-evidence { margin-top: 8px; padding-top: 7px; }
   .chapter-card--context { padding-block: 20px; }
   .chapter-card--context h2 { font-size: 31px; }
   .context-place-grid { margin-top: 12px; }
@@ -336,7 +328,6 @@ html[lang="en"] .quote-translation { display: none; }
   html[lang="en"] .hero-copy h1 { font-size: clamp(56px, 17vw, 74px); line-height: .94; letter-spacing: -.015em; }
   .hero-deck { max-width: 16em; margin-top: 20px; font-size: 20px; }
   .hero-note { font-size: 13px; line-height: 1.62; }
-  .scroll-cue { margin-top: 22px; font-size: 12px; }
   .chapter-card,
   html[lang="en"] .chapter-card,
   .chapter-card--archive,
@@ -349,8 +340,6 @@ html[lang="en"] .quote-translation { display: none; }
   .chapter-card > p { font-size: 11.5px; line-height: 1.55; }
   .chapter-card > p + p { margin-top: 7px; }
   .chapter-card .chapter-date { margin-bottom: 9px; font-size: 10px; }
-  .chapter-card .scene-source { margin-top: 8px; font-size: 8px; }
-  .chapter-card .chapter-evidence { margin-top: 7px; padding-top: 6px; font-size: 8.5px; line-height: 1.4; }
   .slide-illustration { margin-top: 9px; }
   .slide-illustration img { height: min(15svh, 122px); }
   .slide-illustration--return img { height: min(10svh, 82px); }
