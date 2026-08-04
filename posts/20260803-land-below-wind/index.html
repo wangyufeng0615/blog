@@ -71,9 +71,9 @@
     <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://server.arcgisonline.com" />
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" />
-    <link rel="stylesheet" href="./styles.css?v=20260804-publish-v15" />
+    <link rel="stylesheet" href="./styles.css?v=20260804-publish-v18" />
     <script defer src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js"></script>
-    <script defer src="./app.js?v=20260804-publish-v15"></script>
+    <script defer src="./app.js?v=20260804-publish-v18"></script>
   </head>
   <body>
     <a class="skip-link" href="#route-story" data-i18n="skip">跳到路线正文</a>
@@ -101,12 +101,6 @@
           <div class="map-error" id="map-error" hidden>
             <strong data-i18n="mapErrorTitle">卫星图暂时无法加载</strong>
             <span data-i18n="mapErrorBody">路线和文字仍可阅读；联网后刷新即可恢复底图。</span>
-          </div>
-          <div class="map-legend" aria-label="地图图例">
-            <span><i class="legend-line legend-line--route"></i><b data-i18n="legendRoute">凯斯夫妇的主路线</b></span>
-            <span><i class="legend-dot legend-dot--related"></i><b data-i18n="legendRelated">书中相关地点</b></span>
-            <span><i class="legend-dot legend-dot--history"></i><b data-i18n="legendHistory">转述的历史事件</b></span>
-            <span><i class="legend-line legend-line--approx"></i><b data-i18n="legendApprox">虚线与菱形为复原</b></span>
           </div>
           <div class="journey-progress" aria-hidden="true"><span id="journey-progress-fill"></span></div>
         </div>
