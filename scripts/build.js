@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import vm from 'vm';
 import { fileURLToPath } from 'url';
 import { build as esbuild } from 'esbuild';
 import matter from 'gray-matter';
@@ -96,6 +97,7 @@ function readPosts() {
       if (meta.draft) continue;
 
       const permalink = normalizeCustomPermalink(meta.permalink, dir);
+      const locales = normalizeCustomLocales(meta.locales, permalink, dir);
 
       posts.push({
         slug: dir,
@@ -103,11 +105,13 @@ function readPosts() {
         date: formatDate(meta.date),
         rawDate: meta.date,
         isoDate: meta.date ? new Date(meta.date).toISOString() : '',
+        modifiedDate: formatDate(meta.modified || meta.date),
         description: meta.description || '',
         dir,
         type: 'custom',
         url: permalink,
         noHeader: !!meta.noHeader,
+        locales,
       });
     }
   }
@@ -119,6 +123,39 @@ function readPosts() {
   });
 
   return posts;
+}
+
+function normalizeCustomLocales(locales, permalink, dir) {
+  if (locales == null) return null;
+  if (typeof locales !== 'object' || Array.isArray(locales)) {
+    throw new Error(`Invalid locales for ${dir}: expected an object`);
+  }
+
+  const required = ['zh-CN', 'en'];
+  const normalized = {};
+  for (const language of required) {
+    const locale = locales[language];
+    if (!locale || typeof locale !== 'object' || Array.isArray(locale)) {
+      throw new Error(`Invalid locales for ${dir}: missing ${language}`);
+    }
+    for (const field of ['url', 'title', 'description', 'socialTitle', 'socialDescription', 'ogLocale', 'imageAlt']) {
+      if (typeof locale[field] !== 'string' || !locale[field].trim()) {
+        throw new Error(`Invalid locales for ${dir}: ${language}.${field} is required`);
+      }
+    }
+    normalized[language] = {
+      ...locale,
+      url: normalizeCustomPermalink(locale.url, dir),
+    };
+  }
+
+  if (normalized['zh-CN'].url !== permalink) {
+    throw new Error(`Invalid locales for ${dir}: zh-CN.url must match permalink`);
+  }
+  if (!normalized.en.url.startsWith(permalink)) {
+    throw new Error(`Invalid locales for ${dir}: en.url must be nested below permalink`);
+  }
+  return normalized;
 }
 
 function normalizeCustomPermalink(value, dir) {
@@ -180,7 +217,11 @@ function copyDirRecursive(src, dest, exclude = []) {
 }
 
 // 浮动返回按钮：右下角胶囊，毛玻璃质感，自动适配深色背景
-const FLOATING_BACK_HTML = `
+function floatingBackHtml(language = 'zh-CN') {
+  const english = language === 'en';
+  const label = english ? 'Back to Wang Yufeng’s blog' : '返回王雨峰的博客首页';
+  const text = english ? 'Wang Yufeng’s Blog' : '王雨峰的博客';
+  return `
 <style>
   #blog-back-fab {
     position: fixed;
@@ -225,17 +266,207 @@ const FLOATING_BACK_HTML = `
     #blog-back-fab { right: 12px; bottom: 12px; padding: 7px 12px 7px 10px; font-size: 12px; }
   }
 </style>
-<a id="blog-back-fab" href="/" aria-label="返回博客首页">
+<a id="blog-back-fab" href="/" aria-label="${label}">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  <span>王雨峰的博客</span>
+  <span>${text}</span>
 </a>
 `;
+}
 
-function injectFloatingBack(html) {
+function injectFloatingBack(html, language) {
+  const control = floatingBackHtml(language);
   if (html.includes('</body>')) {
-    return html.replace('</body>', `${FLOATING_BACK_HTML}\n</body>`);
+    return html.replace('</body>', `${control}\n</body>`);
   }
-  return html + FLOATING_BACK_HTML;
+  return html + control;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function extractEnglishCopy(appFile) {
+  const source = fs.readFileSync(appFile, 'utf-8');
+  const startMarker = 'const COPY = ';
+  const endMarker = '// The Chinese copy is authored directly in the HTML';
+  const start = source.indexOf(startMarker);
+  const end = source.indexOf(endMarker, start);
+  if (start === -1 || end === -1) {
+    throw new Error(`Unable to extract COPY from ${appFile}`);
+  }
+
+  const expression = source.slice(start + startMarker.length, end).trim().replace(/;$/, '');
+  const sandbox = Object.create(null);
+  vm.runInNewContext(`copy = (${expression})`, sandbox, { timeout: 1000 });
+  if (!sandbox.copy?.en || typeof sandbox.copy.en !== 'object') {
+    throw new Error(`COPY.en is missing from ${appFile}`);
+  }
+  return sandbox.copy.en;
+}
+
+function translateStaticCopy(html, copy, sourceName) {
+  const expectedKeys = [...html.matchAll(/\bdata-i18n="([^"]+)"/g)].map((match) => match[1]);
+  let translated = 0;
+  html = html.replace(
+    /(<([a-z][\w:-]*)\b[^>]*\bdata-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>)/gi,
+    (match, open, tag, key, body, close) => {
+      if (/<[a-z][^>]*>/i.test(body)) {
+        throw new Error(`Nested markup is not supported for data-i18n="${key}" in ${sourceName}`);
+      }
+      if (!(key in copy)) {
+        throw new Error(`Missing English copy for data-i18n="${key}" in ${sourceName}`);
+      }
+      translated += 1;
+      return `${open}${escapeHtml(copy[key])}${close}`;
+    }
+  );
+  if (translated !== expectedKeys.length) {
+    throw new Error(`Translated ${translated}/${expectedKeys.length} data-i18n nodes in ${sourceName}`);
+  }
+
+  const altKeys = [...html.matchAll(/\bdata-i18n-alt="([^"]+)"/g)].map((match) => match[1]);
+  let translatedAlts = 0;
+  html = html.replace(/<[^>]*\bdata-i18n-alt="([^"]+)"[^>]*>/gi, (element, key) => {
+    if (!(key in copy)) {
+      throw new Error(`Missing English copy for data-i18n-alt="${key}" in ${sourceName}`);
+    }
+    if (!/\balt="[^"]*"/i.test(element)) {
+      throw new Error(`Missing alt attribute for data-i18n-alt="${key}" in ${sourceName}`);
+    }
+    translatedAlts += 1;
+    return element.replace(/\balt="[^"]*"/i, `alt="${escapeHtml(copy[key])}"`);
+  });
+  if (translatedAlts !== altKeys.length) {
+    throw new Error(`Translated ${translatedAlts}/${altKeys.length} alt attributes in ${sourceName}`);
+  }
+  return html;
+}
+
+function replaceMetaContent(html, selector, value, content) {
+  const tagPattern = new RegExp(`<meta\\s+[^>]*${escapeRegExp(selector)}="${escapeRegExp(value)}"[^>]*>`, 'i');
+  if (!tagPattern.test(html)) {
+    throw new Error(`Missing meta[${selector}="${value}"]`);
+  }
+  return html.replace(tagPattern, (tag) => {
+    if (!/\bcontent="[^"]*"/i.test(tag)) {
+      throw new Error(`Missing content on meta[${selector}="${value}"]`);
+    }
+    return tag.replace(/\bcontent="[^"]*"/i, `content="${escapeHtml(content)}"`);
+  });
+}
+
+function buildStructuredData(post, language, locale) {
+  const url = `${SITE_URL}${locale.url}`;
+  const image = `${SITE_URL}${post.url}assets/og-land-below-wind.png`;
+  const published = formatDate(post.rawDate);
+  const websiteName = language === 'en' ? 'Wang Yufeng’s Blog' : '王雨峰的博客';
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: locale.title,
+        description: locale.description,
+        inLanguage: language,
+        datePublished: published,
+        dateModified: post.modifiedDate,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: websiteName,
+          url: `${SITE_URL}/`,
+        },
+        primaryImageOfPage: { '@id': `${url}#primaryimage` },
+      },
+      {
+        '@type': 'Article',
+        '@id': `${url}#article`,
+        mainEntityOfPage: { '@id': `${url}#webpage` },
+        headline: locale.socialTitle,
+        description: locale.description,
+        inLanguage: language,
+        datePublished: published,
+        dateModified: post.modifiedDate,
+        author: {
+          '@type': 'Person',
+          name: '王雨峰',
+          url: `${SITE_URL}/`,
+        },
+        image: { '@id': `${url}#primaryimage` },
+        about: [
+          {
+            '@type': 'Book',
+            name: 'Land Below the Wind',
+            alternateName: '风下之乡',
+            author: { '@type': 'Person', name: 'Agnes Newton Keith' },
+          },
+          { '@type': 'Place', name: 'Sabah, Malaysia' },
+          { '@type': 'Thing', name: 'British North Borneo history' },
+        ],
+      },
+      {
+        '@type': 'ImageObject',
+        '@id': `${url}#primaryimage`,
+        url: image,
+        contentUrl: image,
+        width: 1200,
+        height: 630,
+        caption: locale.imageAlt,
+      },
+    ],
+  };
+}
+
+function localizeCustomHtml(sourceHtml, post, language, locale, englishCopy) {
+  const isEnglish = language === 'en';
+  let html = sourceHtml;
+  if (isEnglish) {
+    html = translateStaticCopy(html, englishCopy, `${post.dir}/index.html`);
+    html = html.replace(/\b(href|src)="\.\//g, '$1="../');
+  }
+
+  html = html.replace(/<html\s+lang="[^"]+">/i, `<html lang="${language}">`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(locale.title)}</title>`);
+  html = replaceMetaContent(html, 'name', 'description', locale.description);
+  html = replaceMetaContent(html, 'name', 'keywords', locale.keywords || 'Land Below the Wind, Agnes Newton Keith, Sabah, North Borneo, literary map');
+  html = replaceMetaContent(html, 'property', 'og:title', locale.socialTitle);
+  html = replaceMetaContent(html, 'property', 'og:description', locale.socialDescription);
+  html = replaceMetaContent(html, 'property', 'og:site_name', isEnglish ? 'Wang Yufeng’s Blog' : '王雨峰的博客');
+  html = replaceMetaContent(html, 'property', 'og:url', `${SITE_URL}${locale.url}`);
+  html = replaceMetaContent(html, 'property', 'og:image:alt', locale.imageAlt);
+  html = replaceMetaContent(html, 'property', 'og:locale', locale.ogLocale);
+  html = replaceMetaContent(html, 'property', 'og:locale:alternate', isEnglish ? 'zh_CN' : 'en_US');
+  html = replaceMetaContent(html, 'name', 'twitter:title', locale.socialTitle);
+  html = replaceMetaContent(html, 'name', 'twitter:description', locale.socialDescription);
+  html = replaceMetaContent(html, 'name', 'twitter:image:alt', locale.imageAlt);
+
+  html = html.replace(/\s*<link\s+rel="alternate"\s+hreflang="[^"]+"\s+href="[^"]+"\s*\/>/gi, '');
+  const canonical = `<link rel="canonical" href="${SITE_URL}${locale.url}" />`;
+  const alternates = Object.entries(post.locales)
+    .map(([code, item]) => `    <link rel="alternate" hreflang="${code}" href="${SITE_URL}${item.url}" />`)
+    .concat(`    <link rel="alternate" hreflang="x-default" href="${SITE_URL}${post.locales['zh-CN'].url}" />`)
+    .join('\n');
+  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]+"\s*\/>/i, `${canonical}\n${alternates}`);
+
+  const jsonLd = JSON.stringify(buildStructuredData(post, language, locale), null, 2);
+  html = html.replace(
+    /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/i,
+    `<script type="application/ld+json">\n${jsonLd}\n    </script>`
+  );
+  html = html.replace(/\bdata-lang="zh"\s+aria-current="[^"]+"/g, `data-lang="zh" aria-current="${isEnglish ? 'false' : 'page'}"`);
+  html = html.replace(/\bdata-lang="en"\s+aria-current="[^"]+"/g, `data-lang="en" aria-current="${isEnglish ? 'page' : 'false'}"`);
+
+  if (!post.noHeader) html = injectFloatingBack(html, language);
+  return html;
 }
 
 /**
@@ -253,13 +484,24 @@ function buildCustomPosts(posts) {
     }
     copyDirRecursive(srcDir, destDir, ['meta.json']);
 
-    const indexFile = path.join(destDir, 'index.html');
-    let html = fs.readFileSync(indexFile, 'utf-8');
-    if (!post.noHeader) {
-      html = injectFloatingBack(html);
+    const sourceHtml = fs.readFileSync(path.join(srcDir, 'index.html'), 'utf-8');
+    if (!post.locales) {
+      const indexFile = path.join(destDir, 'index.html');
+      const html = post.noHeader ? sourceHtml : injectFloatingBack(sourceHtml, 'zh-CN');
+      fs.writeFileSync(indexFile, html);
+      console.log(`✓ ${outputPath}/`);
+      continue;
     }
-    fs.writeFileSync(indexFile, html);
-    console.log(`✓ ${outputPath}/`);
+
+    const englishCopy = extractEnglishCopy(path.join(srcDir, 'app.js'));
+    for (const [language, locale] of Object.entries(post.locales)) {
+      const relativeLocalePath = locale.url.slice(post.url.length).replace(/^\/+|\/+$/g, '');
+      const localeDest = relativeLocalePath ? path.join(destDir, relativeLocalePath) : destDir;
+      fs.mkdirSync(localeDest, { recursive: true });
+      const html = localizeCustomHtml(sourceHtml, post, language, locale, englishCopy);
+      fs.writeFileSync(path.join(localeDest, 'index.html'), html);
+      console.log(`✓ ${locale.url.replace(/^\/+/, '')}`);
+    }
   }
 }
 
@@ -448,7 +690,7 @@ function generateSitemap(posts) {
   const today = new Date().toISOString().split('T')[0];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>${SITE_URL}/</loc>
     <lastmod>${today}</lastmod>
@@ -458,14 +700,23 @@ function generateSitemap(posts) {
 `;
 
   for (const post of posts) {
-    const lastmod = post.date || today;
-    xml += `  <url>
-    <loc>${SITE_URL}${post.url}</loc>
-    <lastmod>${lastmod}</lastmod>
+    const lastmod = post.modifiedDate || post.date || today;
+    const variants = post.locales ? Object.values(post.locales) : [{ url: post.url }];
+    for (const variant of variants) {
+      const alternates = post.locales
+        ? Object.entries(post.locales)
+            .map(([language, locale]) => `    <xhtml:link rel="alternate" hreflang="${language}" href="${SITE_URL}${locale.url}" />`)
+            .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${post.locales['zh-CN'].url}" />`)
+            .join('\n') + '\n'
+        : '';
+      xml += `  <url>
+    <loc>${SITE_URL}${variant.url}</loc>
+${alternates}    <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 `;
+    }
   }
 
   for (const project of allProjects) {
@@ -496,14 +747,37 @@ function generateAiReadableFiles(posts) {
     status: project.status,
   }));
 
-  const postIndex = posts.map((post) => ({
-    title: post.title,
-    date: post.date,
-    url: `${SITE_URL}${post.url}`,
-    description: post.description,
-    type: post.type,
-    slug: post.slug,
-  }));
+  const postIndex = posts.map((post) => {
+    const entry = {
+      title: post.title,
+      date: post.date,
+      modified: post.modifiedDate || post.date,
+      url: `${SITE_URL}${post.url}`,
+      description: post.description,
+      type: post.type,
+      slug: post.slug,
+    };
+    if (post.locales) {
+      entry.languages = Object.entries(post.locales).map(([language, locale]) => ({
+        language,
+        title: locale.title,
+        url: `${SITE_URL}${locale.url}`,
+        description: locale.description,
+      }));
+    }
+    return entry;
+  });
+
+  const writingEntries = posts.flatMap((post) => {
+    if (!post.locales) {
+      return [{ title: post.title, url: `${SITE_URL}${post.url}`, description: post.description }];
+    }
+    return Object.entries(post.locales).map(([language, locale]) => ({
+      title: `${locale.title} [${language}]`,
+      url: `${SITE_URL}${locale.url}`,
+      description: locale.description,
+    }));
+  });
 
   const llms = `# 王雨峰的博客
 
@@ -526,9 +800,9 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 
 ${projectIndex.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}
 
-## Writing
+## Writing and pages
 
-${postIndex.slice(0, 20).map((post) => `- [${post.title}](${post.url}): ${post.date}`).join('\n')}
+${writingEntries.slice(0, 30).map((post) => `- [${post.title}](${post.url}): ${post.description}`).join('\n')}
 
 ## Optional
 

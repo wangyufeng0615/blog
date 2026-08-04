@@ -40,9 +40,9 @@ button { font: inherit; }
 .brand small { color: var(--muted); font-size: 12px; letter-spacing: .03em; }
 .header-actions { justify-self: end; }
 .language-switch { display: flex; align-items: center; gap: 6px; color: rgba(241,238,230,.52); font-size: 11px; letter-spacing: .06em; }
-.language-switch button { padding: 6px 2px; border: 0; background: transparent; color: inherit; cursor: pointer; }
-.language-switch button[aria-pressed="true"] { color: var(--fog); border-bottom: 1px solid var(--route); }
-.language-switch button:focus-visible { outline: 1px solid var(--fog); outline-offset: 3px; }
+.language-switch a { padding: 6px 2px; border: 0; background: transparent; color: inherit; cursor: pointer; text-decoration: none; }
+.language-switch a[aria-current="page"] { color: var(--fog); border-bottom: 1px solid var(--route); }
+.language-switch a:focus-visible { outline: 1px solid var(--fog); outline-offset: 3px; }
 
 .map-story { position: relative; min-height: calc(var(--chapter-count, 18) * 100svh); }
 .map-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }

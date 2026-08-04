@@ -1,7 +1,30 @@
 {
   "title": "《风下之乡》1938 北婆罗洲旅程地图",
   "date": "2026-08-03T21:30:00+08:00",
+  "modified": "2026-08-04T12:00:46+08:00",
   "description": "沿阿格尼丝·凯斯 1938 年穿越英属北婆罗洲的旅程，以双语卫星地图重建《风下之乡》的河流、雨林、地点与历史路线。",
   "permalink": "/land-below-the-wind/",
+  "locales": {
+    "zh-CN": {
+      "url": "/land-below-the-wind/",
+      "title": "风下之乡路线地图｜阿格尼丝·凯斯 1938 北婆罗洲旅程",
+      "description": "沿阿格尼丝·凯斯 1938 年穿越英属北婆罗洲的旅程，以卫星地图重建《风下之乡》的河流、雨林、地点与历史路线。",
+      "socialTitle": "风下之乡路线地图｜Land Below the Wind",
+      "socialDescription": "沿阿格尼丝·凯斯 1938 年穿越北婆罗洲的旅程，在卫星地图上重建《风下之乡》的路线与地点。",
+      "ogLocale": "zh_CN",
+      "imageAlt": "《风下之乡》1938 年北婆罗洲旅程地图",
+      "keywords": "风下之乡, 阿格尼丝·凯斯, 北婆罗洲, 沙巴, 文学地图, 1938 旅行路线, Land Below the Wind, Agnes Newton Keith"
+    },
+    "en": {
+      "url": "/land-below-the-wind/en/",
+      "title": "Land Below the Wind Journey Map | Agnes Keith in North Borneo, 1938",
+      "description": "A satellite-map reconstruction of Agnes Newton Keith’s 1938 journey through the rivers and rainforests of British North Borneo in Land Below the Wind.",
+      "socialTitle": "Land Below the Wind | A 1938 North Borneo Journey Map",
+      "socialDescription": "Follow Agnes Newton Keith’s 1938 journey through British North Borneo on a richly annotated satellite map.",
+      "ogLocale": "en_US",
+      "imageAlt": "Map of Agnes Newton Keith’s 1938 journey through North Borneo",
+      "keywords": "Land Below the Wind, Agnes Newton Keith, North Borneo, Sabah, literary map, 1938 journey, historical travel map"
+    }
+  },
   "draft": false
 }
