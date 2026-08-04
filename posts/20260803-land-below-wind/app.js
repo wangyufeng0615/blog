@@ -5,7 +5,6 @@ const COPY = {
   zh: {
     skip: "跳到路线正文", navRoute: "路线", navQuote: "原书", navMethod: "考据",
     mapLoading: "正在加载卫星影像…", mapErrorTitle: "卫星图暂时无法加载", mapErrorBody: "路线和文字仍可阅读；联网后刷新即可恢复底图。",
-    legendRoute: "凯斯夫妇的主路线", legendRelated: "书中相关地点", legendHistory: "转述的历史事件", legendApprox: "虚线与菱形为复原",
     prologue: "序章", epilogue: "尾声", heroAltTitle: "Land Below the Wind", heroTitle: "风下之乡",
     heroDeck: "1938 年，作家阿格尼丝·凯斯随从事林务工作的丈夫哈里·凯斯，进入英属北婆罗洲东南部的河流与雨林。",
     heroNote: "他们从山打根（Sandakan）沿海岸南下至斗湖（Tawau），在卡拉巴坎（Kalabakan）换乘独木舟，逆流翻越分水岭，最后顺夸穆特河（Kuamut）与京那巴当岸河（Kinabatangan River）回到海上。", startRoute: "沿路线出发",
@@ -82,7 +81,6 @@ const COPY = {
   en: {
     skip: "Skip to the route", navRoute: "Route", navQuote: "Book", navMethod: "Research",
     mapLoading: "Loading satellite imagery…", mapErrorTitle: "Satellite imagery is temporarily unavailable", mapErrorBody: "The route and story remain readable. Reconnect and refresh to restore the basemap.",
-    legendRoute: "The Keiths’ main route", legendRelated: "Other places in the book", legendHistory: "Retold historical events", legendApprox: "Dashed lines and diamonds are reconstructed",
     prologue: "Prologue", epilogue: "Epilogue", heroAltTitle: "风下之乡", heroTitle: "Land Below the Wind",
     heroDeck: "In 1938, writer Agnes Newton Keith joined her husband Harry, who worked in forestry, on a journey into the rivers and rainforest of southeastern British North Borneo.",
     heroNote: "From Sandakan they sailed south to Tawau, changed to dugout canoes at Kalabakan and travelled upstream. After crossing the watershed, they descended the Kuamut and Kinabatangan to the sea.",
@@ -245,7 +243,6 @@ function localizedPoint(point) {
 function updateMapAccessibility() {
   const mapElement = document.querySelector("#map");
   mapElement?.setAttribute("aria-label", currentLang === "zh" ? "沙巴卫星地图，显示《风下之乡》相关路线" : "Satellite map of Sabah showing routes and places from Land Below the Wind");
-  document.querySelector(".map-legend")?.setAttribute("aria-label", currentLang === "zh" ? "地图图例" : "Map legend");
   document.querySelector(".chapter-progress")?.setAttribute("aria-label", currentLang === "zh" ? "章节进度" : "Chapter progress");
   document.querySelector("#route-story")?.setAttribute("aria-label", currentLang === "zh" ? "路线地图与章节" : "Route map and chapters");
 }
@@ -645,6 +642,8 @@ function animateRouteProgress(target, immediate = false) {
 function flyToChapter(chapter, duration = 1500) {
   const view = chapterViews[chapter];
   if (!map || !view) return;
+  const cameraEasing = (time) => time * time * (3 - 2 * time);
+  const zeroPadding = { top: 0, right: 0, bottom: 0, left: 0 };
   const narrative = document.querySelector(`.chapter[data-chapter="${chapter}"] .chapter-card, .chapter[data-chapter="${chapter}"] .hero-copy`);
   const narrativeRect = narrative?.getBoundingClientRect();
   const desktopPadding = window.innerWidth > 820 && narrativeRect
@@ -654,9 +653,14 @@ function flyToChapter(chapter, duration = 1500) {
         bottom: 42,
         left: Math.min(Math.round(narrativeRect.right + 44), window.innerWidth - 320)
       }
-    : { top: 0, right: 0, bottom: 0, left: 0 };
+    : zeroPadding;
+  const desktopOffset = window.innerWidth > 820
+    ? [
+        Math.round((desktopPadding.left - desktopPadding.right) / 2),
+        Math.round((desktopPadding.top - desktopPadding.bottom) / 2)
+      ]
+    : [0, 0];
   map.stop();
-  map.setPadding({ top: 0, right: 0, bottom: 0, left: 0 });
   if (chapter === "overview") {
     if (window.innerWidth <= 820) {
       map.easeTo({
@@ -664,9 +668,10 @@ function flyToChapter(chapter, duration = 1500) {
         center: [117.35, 5.65],
         zoom: 5.75,
         offset: [0, -110],
-        padding: { top: 0, right: 0, bottom: 0, left: 0 },
+        padding: zeroPadding,
         retainPadding: false,
         duration: reduceMotion.matches ? 0 : duration,
+        easing: cameraEasing,
         essential: false
       });
       return;
@@ -677,22 +682,32 @@ function flyToChapter(chapter, duration = 1500) {
       bottom: Math.round(window.innerHeight * 0.075),
       left: Math.round(window.innerWidth * 0.055)
     };
-    map.fitBounds(sabahOverviewBounds, {
+    const overviewCamera = map.cameraForBounds(sabahOverviewBounds, {
       padding: overviewPadding,
       bearing: view.bearing,
       pitch: view.pitch,
-      maxZoom: view.zoom,
+      maxZoom: view.zoom
+    });
+    if (!overviewCamera) return;
+    map.easeTo({
+      ...overviewCamera,
+      bearing: view.bearing,
+      pitch: view.pitch,
+      padding: zeroPadding,
       retainPadding: false,
       duration: reduceMotion.matches ? 0 : duration,
+      easing: cameraEasing,
       essential: false
     });
     return;
   }
   map.easeTo({
     ...view,
-    padding: desktopPadding,
+    offset: desktopOffset,
+    padding: zeroPadding,
     retainPadding: false,
     duration: reduceMotion.matches ? 0 : duration,
+    easing: cameraEasing,
     essential: false
   });
 }
@@ -729,6 +744,9 @@ function initializeMap() {
   });
   map.addControl(new maplibregl.ScaleControl({ maxWidth: 100, unit: "metric" }), "bottom-left");
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+  const mapSticky = document.querySelector(".map-sticky");
+  map.on("movestart", () => mapSticky?.classList.add("is-camera-moving"));
+  map.on("moveend", () => mapSticky?.classList.remove("is-camera-moving"));
   map.on("load", () => {
     mapReady = true;
     mapStatus.classList.add("is-hidden");
@@ -1005,7 +1023,7 @@ function activateChapter(chapter) {
   const rewindFromOverview = previousChapter === "overview" && chapter === "home";
   animateRouteProgress(routeProgressByChapter[chapter] ?? currentRouteProgress, rewindFromOverview);
   restartRouteFlow();
-  flyToChapter(chapter, 720);
+  flyToChapter(chapter, 860);
 }
 
 const chapterElements = [...document.querySelectorAll(".chapter")];

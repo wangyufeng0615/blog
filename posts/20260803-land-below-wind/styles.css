@@ -64,24 +64,6 @@ button { font: inherit; }
 .map-error[hidden] { display: none; }
 .map-error span { color: var(--muted); font-size: 12px; line-height: 1.5; }
 
-.map-legend {
-  position: absolute; z-index: 5; right: 26px; bottom: 28px; display: grid; gap: 9px;
-  padding: 14px 16px; border: 1px solid rgba(241,238,230,.22); background: rgba(7,17,13,.82);
-  backdrop-filter: blur(12px); color: #dadbd5; font-size: 11px;
-}
-body:has(#blog-back-fab) .map-legend { bottom: 78px; }
-.map-legend span { display: flex; align-items: center; gap: 9px; }
-.map-legend b { font-weight: 400; }
-.legend-line { width: 25px; height: 0; border-top: 2px solid; }
-.legend-line--route { border-color: var(--map-route); }
-.legend-line--approx { border-top: 2px dashed var(--map-route); }
-.legend-dot,
-.legend-diamond { width: 9px; height: 9px; display: inline-block; border: 1.5px solid; }
-.legend-dot { border-radius: 50%; }
-.legend-dot--related { border-color: var(--related); }
-.legend-dot--history { border-color: var(--history); }
-.legend-diamond { border-color: var(--fog); transform: rotate(45deg); }
-
 .journey-progress { position: absolute; z-index: 8; inset: auto 0 0; height: 2px; overflow: hidden; background: rgba(232,224,208,.12); }
 .journey-progress span { display: block; width: 100%; height: 100%; background: var(--map-route); transform: scaleX(1); transform-origin: left; will-change: transform; }
 
@@ -247,6 +229,7 @@ html[lang="en"] .quote-translation { display: none; }
 .map-marker::before {
   content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--paper);
   background: var(--marker-accent); box-shadow: 0 0 0 2px rgba(7,17,13,.78), 0 2px 8px rgba(0,0,0,.48);
+  transition: width .18s ease, height .18s ease, border-radius .18s ease, box-shadow .18s ease;
 }
 .map-marker.is-approx::before { width: 7px; height: 7px; border-radius: 1px; transform: rotate(45deg); }
 .map-marker[data-category="related"] { --marker-accent: var(--related); }
@@ -258,6 +241,7 @@ html[lang="en"] .quote-translation { display: none; }
   transform: translateX(-3px); transition: opacity .18s ease, transform .18s ease;
 }
 .map-marker-label.is-visible { visibility: visible; opacity: 1; transform: translateX(0); }
+.map-sticky.is-camera-moving .map-marker-label { opacity: 0; }
 .map-marker.is-label-left .map-marker-label { right: 19px; left: auto; text-align: right; transform: translateX(3px); }
 .map-marker.is-label-left .map-marker-label.is-visible { transform: translateX(0); }
 .map-marker.is-chapter-focus::before { width: 11px; height: 11px; box-shadow: 0 0 0 3px rgba(7,17,13,.84), 0 2px 11px rgba(0,0,0,.62); }
@@ -325,6 +309,7 @@ html[lang="en"] .quote-translation { display: none; }
   }
   .hero-copy { width: 100%; padding: 0 8px; }
   .hero-copy h1 { font-size: clamp(62px, 21vw, 100px); }
+  html[lang^="zh"] .hero-copy h1 { font-size: clamp(62px, 19vw, 92px); white-space: nowrap; }
   html[lang="en"] .hero-copy h1 { font-size: clamp(56px, 17vw, 74px); line-height: .94; letter-spacing: -.015em; }
   .hero-deck { max-width: 16em; margin-top: 20px; font-size: 20px; }
   .hero-note { font-size: 13px; line-height: 1.62; }
@@ -372,9 +357,6 @@ html[lang="en"] .quote-translation { display: none; }
   .context-place-grid p { margin-top: 3px; font-size: 8px; line-height: 1.3; }
   .context-place-dot { width: 6px; height: 6px; margin-top: 4px; }
   .chapter-progress { display: none; }
-  .map-legend { right: 10px; top: 74px; bottom: auto; padding: 8px 9px; gap: 6px; font-size: 8px; }
-  body:has(#blog-back-fab) .map-legend { bottom: auto; }
-  .map-legend span:nth-child(n+3) { display: none; }
   .maplibregl-ctrl-scale { display: none; }
   .map-marker-label { display: none !important; }
   .route-journey-head { width: 10px; height: 10px; }
