@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "land-below-wind-language-router",
+  "main": "./cloudflare/land-below-wind-router.js",
+  "compatibility_date": "2026-08-04",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "wangyufeng.org/land-below-the-wind/*",
+      "zone_name": "wangyufeng.org"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
