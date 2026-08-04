@@ -8,62 +8,53 @@ const COPY = {
     legendRoute: "凯斯夫妇的主路线", legendRelated: "书中相关地点", legendHistory: "转述的历史事件", legendApprox: "虚线与菱形为复原",
     prologue: "序章", epilogue: "尾声", heroAltTitle: "Land Below the Wind", heroTitle: "风下之乡",
     heroDeck: "1938 年，作家阿格尼丝·凯斯随从事林务工作的丈夫哈里·凯斯，进入英属北婆罗洲东南部的河流与雨林。",
-    heroNote: "他们从山打根（Sandakan）沿海岸南下至斗湖（Tawau），在卡拉巴坎（Kalabakan）换乘独木舟，逆流翻越分水岭，最后顺夸穆特河（Kuamut）与京那巴当岸河（Kinabatangan River）回到海上。", scrollCue: "向下滚动，每个章节会完整吸附到位。", startRoute: "沿路线出发",
+    heroNote: "他们从山打根（Sandakan）沿海岸南下至斗湖（Tawau），在卡拉巴坎（Kalabakan）换乘独木舟，逆流翻越分水岭，最后顺夸穆特河（Kuamut）与京那巴当岸河（Kinabatangan River）回到海上。", startRoute: "沿路线出发",
     homeLabel: "山打根", homeTitle: "从 Newlands 离开", homeDate: "1938 年 6 月初",
     homeBody1: "山打根山坡上的 Newlands 是凯斯夫妇生活、写作和林务工作的基地。远征计划曾三次搁置，其中两次是暴雨令河道无法通航；真正出发时，Agnes 仍在发烧，却知道这次再回到花园小径时，身体与记忆都将不同。",
-    homeBody2: "今天的 Agnes Keith House 是 1946—47 年战后重建的房屋。它提供可靠的空间锚点，却不应被误读为 1938 年原屋完整保存至今。",
+    homeBody2: "今天的 Agnes Keith House 建于 1946—47 年。它在战后的原址上延续了 Newlands 的生活记忆，却不是 1938 年那座房子的原样留存。",
     homeQuote: "“下一次再走上这条花园小径时……心里装满了我想要回味留恋的各种记忆。”",
     homeQuoteSource: "2016 中译本 · 短引",
-    homeSource: "来源：Sabah Museum · 1939 初版背景", homeEvidence: "地点锚点｜Newlands 现址可确认；今天的建筑是战后重建。",
     coastLabel: "海岸南下", coastTitle: "Tawau 会合，驶向 Sebatik", coastDate: "远征第一程",
     coastBody1: "他们在 Tawau 与石油公司地质学家 Winki 会合，随后乘一艘挂着黑黄船帆的 bagong 驶往 Sebatik。城里穿的鞋袜被塞进船底，赤脚反倒更适合这段水路。",
     coastBody2: "Winki 要继续钻探试油孔，Harry 则收集树木标本。营地里，他们用立体镜看航拍照片：原本像鱼子酱和小虫的纹理忽然变成树冠、深林与河道。借来的轻帐篷和第一杯浓咖啡，也把日常生活推向了野外。",
     coastQuote: "“我们把鞋袜脱掉，摊在船板上，舒服地光着脚。”",
     coastQuoteSource: "2016 中译本 · 短引",
-    coastSource: "原书剧情线索", coastEvidence: "空间精度｜Sebatik 营地的精确位置未找到，暂以 Wallace Bay 作为范围锚点。",
     kalabakanLabel: "进入河网", kalabakanTitle: "从海船换进 perahu",
     kalabakanBody1: "到了 Kalabakang，旅行工具彻底改变：队伍改乘当地制造的 perahu。船身约二十英尺长、底部浑圆，只容一人纵向坐下；行李必须精确码放以维持平衡，人的舒适从一开始就不在考虑范围内。",
     kalabakanBody2: "标本标签把 6 月 3 日钉在这里。旧拼法 Kalabakang 与现代 Kalabakan 指向同一河口，也标志着海岸航行转入内陆河网。",
     kalabakanQuote: "“大多数时候，我们蹲在船舱底部，蜷缩在行李中间……屁股一直泡在永远湿漉漉的船舱里。”",
     kalabakanQuoteSource: "2016 中译本 · 短引",
-    kalabakanSource: "原书剧情线索 · 标本日期链",
     tiagauLabel: "逆流而上", tiagauTitle: "雨、急流与湿透的帐篷",
     tiagauBody1: "雨几乎每天午后准时到来，帐篷还没从前一夜干透，下一场雨已经开始。Agnes 把等待搭营的自己比成一尊被小心搬进搬出的瓷观音；真正能让身体重新运转的，只是干衣服、热咖啡和一双干袜子。",
     tiagauBody2: "急流处，船夫有时从岸边拖船，乘客则爬过湿滑岩石；Unggib 甚至叼着点燃的烟斗游在船旁。到 Ulu Tiagau，水路逐渐让位给徒步。",
     tiagauQuote: "“三点扎营，从中午开始瓢泼大雨。太累了，不写了。”",
     tiagauQuoteSource: "2016 中译本 · 短引",
-    tiagauSource: "原书剧情线索", tiagauEvidence: "地名对应｜Tiaggau 即 Tiagau；河口可定位，Pengkalan 沿河段为复原。",
     floodLabel: "洪水来临", floodTitle: "河流决定能否继续", floodDate: "Tiagau 上游",
     floodBody1: "Puasa 反复警告洪水风险。船队一面前行，一面把对洪水的担忧唱进节奏里；这不是背景气候，而是随时可能改变路线和时间的力量。",
     floodBody2: "水真正涨起来时，人们把帐篷、帐杆和那把醒目的蓝伞托在水面上。重新上路后，他们又接连闯过六道长急流；船夫在旋涡里推、拉、游、撑，每过一道，队伍都要靠岸把进水的船清空。",
     floodQuote: "“船一直在进水，每过一次急流，我们都得把它推到岸边去清空一次。”",
     floodQuoteSource: "2016 中译本 · 短引",
-    floodSource: "原书剧情线索",
     biyudunLabel: "越过分水岭", biyudunTitle: "Biyudun：水蛭与丛林泥",
     biyudunBody1: "在 Biyudun 河谷，水蛭并不遵守“只到膝盖以下”的经验规则。不断检查皮肤、处理伤口和保持衣物，成了与找路同样实际的工作。",
     biyudunBody2: "他们有时让行李走水路，自己穿过丛林。Agnes 越来越疲惫，跌进泥里时甚至感到生理性的厌恶；夜里听雨，她又从 Harry 的强壮与自己的柔弱中重新理解了这段共同承担的旅程。",
     biyudunQuote: "“不过无论如何，我走过来了……这些，兴许比橡胶束身衣要珍贵呢……”",
     biyudunQuoteSource: "2016 中译本 · 短引",
-    biyudunSource: "原书剧情线索 · 标本日期链", biyudunEvidence: "空间精度｜标本地名与日期可以核对，现代河道和具体坐标仍属复原。",
     napagunLabel: "最不确定的一段", napagunTitle: "从 Middle Napagun 到河口",
     napagunBody1: "水蛭伤口持续流血，衣服又无法在雨里晾干。Agnes 把旅程写成意志与身体之间的拉扯：精神仍想前进，身体却一次次滑倒在湿岩和泥地里。",
-    napagunBody2: "标本标签给出 Middle Napagun 与 Kuala Napagun 的日期，却没有留下足以精确落点的现代坐标。因此这里让路线继续前进，同时保留虚线和菱形的疑问。",
-    napagunSource: "原书剧情线索 · 标本日期链", napagunEvidence: "证据边界｜Middle / Kuala Napagun 的日期可核对，坐标按河网关系复原。",
+    napagunBody2: "离开 Middle Napagun 后，熟悉的地名渐渐从现代地图上消失。队伍仍沿河谷向 Kuala Napagun 推进；今天只能顺着水系和日期，勾勒出这段穿越的大致方向。",
     kuamutLabel: "进入大河", kuamutTitle: "激流之后，Kuala Kuamut", kuamutDate: "1938 年 6 月 18 日以后",
     kuamutBody1: "急流把细长的 perahu 埋进白沫里，船不再只是交通工具，而像在水里挣扎的东西。到 Kuala Kuamut，治安官用仪式迎接他们，并把平日断案的公署让作住处；这里终于再次像一个码头和村落。",
-    kuamutBody2: "离开时，Agnes 刚换上最后一套干净衣服，便从松动的独木板上掉进齐膝的泥里。这个狼狈的瞬间之后，复原路线却重新获得明确汇流点：他们将进入更宽阔的 Kinabatangan。",
+    kuamutBody2: "离开时，Agnes 刚换上最后一套干净衣服，便从松动的独木板上掉进齐膝的泥里。带着这份狼狈继续顺流而下，狭窄的 Kuamut 很快汇入更宽阔的 Kinabatangan。",
     kuamutQuote: "“经历了夸马特河的壮美，京那巴当岸河的下游便显得闷热、缓慢而泥泞。”",
     kuamutQuoteSource: "2016 中译本 · 短引",
-    kuamutSource: "原书剧情线索",
     returnLabel: "顺流回海", returnTitle: "错过接驳船，再见到海", returnDate: "1938 年 6 月下旬",
     returnBody1: "洪水扰乱了接驳：宾达山（Bintasan）的预定汽船三天前已经来过，又因无法确定等待多久而离开。雨夜里，他们只得向当地人借宿；第二天在拉马（Lamag）一带，泥岸上的鳄鱼又把注意力拉回眼前的河流。",
     returnBody2: "他们终于见到小文的摩托艇，后面一字拖着九只 perahu，像水牛尾巴。船夫们高举船桨欢呼，水从衣服和笑脸上流下；再顺 Kinabatangan 驶入 Sulu Sea，海才真正把他们送回 Sandakan。",
-    returnSource: "原书剧情线索",
     relatedLabel: "路线之外的书中世界", relatedTitle: "四个地方，不在 1938 年路线上，却属于《风下之乡》",
     relatedBody: "凯斯夫妇的横穿只是这片土地上众多故事中的一条线。阿拜连接 1935 年的电影探险，仙本那与拿笃连接东岸人物和航路；利尼迪斯则把 1938 年旅程拉回 1890 年一场被殖民报复放大的惨剧。",
     relatedQuote: "“这故事太可怕了。”我说。哈里答：“可正是因为这样的故事，你和我今天才敢在河上旅行。”",
     relatedQuoteSource: "2016 中译本 · 短引",
-    relatedEvidence: "图层说明｜相关地点与历史地点始终可见，但不计入 1938 年主路线。", fieldNotes: "田野记录 · 1938",
+    fieldNotes: "田野记录 · 1938",
     readingLead: "原书细读 · 1939 年版", readingTitle: "地图之外，旅程如何被身体记住",
     readingIntro: "以下内容按情节顺序细致转述，正文不复制长段原文。",
     illustrationRights: "引文与插画取自 2016 年生活·读书·新知三联书店中文版，用于非商业文学与历史研究；相关著作权归原作者、译者及出版方等权利人所有。",
@@ -95,57 +86,47 @@ const COPY = {
     prologue: "Prologue", epilogue: "Epilogue", heroAltTitle: "风下之乡", heroTitle: "Land Below the Wind",
     heroDeck: "In 1938, writer Agnes Newton Keith joined her husband Harry, who worked in forestry, on a journey into the rivers and rainforest of southeastern British North Borneo.",
     heroNote: "From Sandakan they sailed south to Tawau, changed to dugout canoes at Kalabakan and travelled upstream. After crossing the watershed, they descended the Kuamut and Kinabatangan to the sea.",
-    scrollCue: "Scroll down. Each chapter will snap fully into place.",
     homeLabel: "Sandakan", homeTitle: "Leaving Newlands", homeDate: "Early June 1938",
     homeBody1: "Newlands, on the hill above Sandakan, was the Keiths’ base for domestic life, writing and forestry work. The expedition had already been postponed three times—twice because rain made the rivers impassable. When Agnes finally left, she was still feverish and knew that both body and memory would be altered before she walked up the garden path again.",
-    homeBody2: "Today’s Agnes Keith House was rebuilt in 1946–47 after the war. It is a dependable geographical anchor, but should not be read as the intact house of 1938.",
+    homeBody2: "Today’s Agnes Keith House was built in 1946–47. Rising on the same site after the war, it carries Newlands’ domestic memory forward without pretending to be the house of 1938 preserved intact.",
     homeQuote: "“When I next walked up this garden path … my mind would hold all the memories I wanted to linger over.”",
     homeQuoteSource: "New rendering from the 2016 Chinese edition",
-    homeSource: "Sources: Sabah Museum · context from the 1939 edition", homeEvidence: "Place anchor | Newlands can be located; the present house is a post-war reconstruction.",
     coastLabel: "Tawau — Sebatik Island", coastTitle: "Meeting at Tawau, sailing to Sebatik", coastDate: "The expedition’s first stage",
     coastBody1: "At Tawau they met Winki, a geologist for the oil company, then sailed for Sebatik in a bagong carrying a black-and-yellow sail. City shoes and socks went into the bottom of the boat; bare feet suited the water better.",
     coastBody2: "Winki planned more oil-test holes while Harry collected tree specimens. Through a stereoscope, aerial photographs that first resembled caviar and insects suddenly became treetops, deep forest and river channels. A light tent borrowed from the Medical Department—and the first strong camp coffee—completed the shift from domestic routine to field life.",
     coastQuote: "“We took off our shoes and socks, spread them on the deck, and settled comfortably into bare feet.”",
     coastQuoteSource: "New rendering from the 2016 Chinese edition",
-    coastSource: "Narrative evidence from the book", coastEvidence: "Spatial precision | The Sebatik camp has not been precisely located; Wallace Bay is used as an area anchor.",
     kalabakanLabel: "Kalabakan", kalabakanTitle: "Trading the sea boat for a perahu",
     kalabakanBody1: "At Kalabakang the means of travel changed completely. The party transferred to locally made perahus: roughly twenty feet long, round-bottomed and only one person wide. Baskets had to be placed precisely to preserve balance; human comfort was never part of the calculation.",
     kalabakanBody2: "A specimen label fixes 3 June to this place. The older Kalabakang and modern Kalabakan identify the same river mouth, where coastal travel gave way to an inland river network.",
     kalabakanQuote: "“Most of the time we crouched in the bottom, folded among the luggage … sitting in the water that forever wetted the boat.”",
     kalabakanQuoteSource: "New rendering from the 2016 Chinese edition",
-    kalabakanSource: "Narrative evidence from the book · specimen-date sequence",
     tiagauLabel: "Tiagau River", tiagauTitle: "Rain, rapids and a soaking tent",
     tiagauBody1: "Rain arrived almost every afternoon. Agnes compared herself, waiting to be lifted from the perahu into camp, to a porcelain goddess being unpacked and set upon a stand. Dry clothes, hot coffee and dry socks could be enough to make the body function again.",
     tiagauBody2: "At the rapids the men sometimes hauled the boat from shore while passengers climbed over wet rocks; Unggib even swam beside the perahu with his pipe still alight. Near Ulu Tiagau, water travel began to yield to walking.",
     tiagauQuote: "“Camped at three. Torrential rain since noon. Too tired to write.”",
     tiagauQuoteSource: "New rendering from the 2016 Chinese edition",
-    tiagauSource: "Narrative evidence from the book", tiagauEvidence: "Place-name match | Tiaggau is Tiagau; the mouth is located, while Pengkalan is reconstructed along the river reach.",
     floodLabel: "Upper Tiagau", floodTitle: "The river decides whether travel continues", floodDate: "Upper Tiagau",
     floodBody1: "Puasa repeatedly warned of floodwater. The boat party travelled while turning that anxiety into rhythm and song: weather was not scenery here, but a force able to rewrite both route and schedule.",
     floodBody2: "When the water rose, the men carried the tent, poles and a conspicuous blue umbrella above the surface. Once moving again, they met six long rapids in succession. The boatmen swam, shoved, hauled and poled through the eddies; after every rapid the party had to beach a perahu and empty it.",
     floodQuote: "“The boat kept filling; after every rapid we had to push it ashore and empty it.”",
     floodQuoteSource: "New rendering from the 2016 Chinese edition",
-    floodSource: "Narrative evidence from the book",
     biyudunLabel: "Hulu Biyudun River", biyudunTitle: "Biyudun: leeches and jungle mud",
     biyudunBody1: "In the Biyudun valley the leeches ignored the comforting rule that they stayed below the knee. Checking skin, tending bites and managing clothing became work as practical as finding the route.",
     biyudunBody2: "Sometimes the luggage went by boat while the travellers crossed the jungle. Agnes grew steadily more exhausted; falling into the mud produced something close to physical nausea. Listening to the rain at night, she understood Harry’s strength and her own vulnerability as burdens the marriage carried together.",
     biyudunQuote: "“But however badly, I had come through … perhaps what I gained was more precious than a rubber girdle.”",
     biyudunQuoteSource: "New rendering from the 2016 Chinese edition",
-    biyudunSource: "Narrative evidence from the book · specimen-date sequence", biyudunEvidence: "Spatial precision | The specimen name and dates are verifiable; the modern channel and exact coordinates remain reconstructed.",
     napagunLabel: "Middle Napagun — Kuala Napagun", napagunTitle: "From Middle Napagun to its mouth",
     napagunBody1: "Leech bites kept bleeding, while clothes could not be dried in the rain. Agnes framed the journey as a struggle between intention and the body: the will continued, while feet slipped again and again on wet rock and mud.",
-    napagunBody2: "Specimen labels provide dates for Middle Napagun and Kuala Napagun, but not enough evidence for precise modern coordinates. The route therefore advances while its dashed line and diamond markers keep the uncertainty visible.",
-    napagunSource: "Narrative evidence from the book · specimen-date sequence", napagunEvidence: "Evidence boundary | Dates for Middle and Kuala Napagun can be checked; their coordinates follow a river-network reconstruction.",
+    napagunBody2: "After Middle Napagun, familiar names fade from modern maps. The party still followed the valleys towards Kuala Napagun; today the rivers and dated stops can recover only the broad direction of this crossing.",
     kuamutLabel: "Kuamut River", kuamutTitle: "After the rapids, Kuala Kuamut", kuamutDate: "After 18 June 1938",
     kuamutBody1: "White water buried the narrow perahus in foam until the boats seemed to struggle in the river. At Kuala Kuamut the native chief greeted them ceremonially and offered the government office—normally a place for hearing disputes—as lodging. A recognisable jetty and settlement had finally returned.",
-    kuamutBody2: "On departure Agnes put on her last clean clothes, then stepped onto a loose plank and fell knee-deep into mud. Beyond that comic humiliation, the reconstructed route regained a firm confluence: the narrow Kuamut would give way to the broader Kinabatangan.",
+    kuamutBody2: "On departure Agnes put on her last clean clothes, then stepped onto a loose plank and fell knee-deep into mud. Carrying that comic humiliation downstream, the narrow Kuamut soon opened into the broader Kinabatangan.",
     kuamutQuote: "“After the majesty of the Kuamut, the lower Kinabatangan seemed hot, slow and muddy.”",
     kuamutQuoteSource: "New rendering from the 2016 Chinese edition",
-    kuamutSource: "Narrative evidence from the book",
     returnLabel: "Kinabatangan River — Sulu Sea", returnTitle: "Missing the launch, finding the sea", returnDate: "Late June 1938",
     returnBody1: "Floodwater disrupted the rendezvous: the launch expected at Bintasan had arrived three days earlier and left because no one knew how long it would have to wait. After borrowing shelter for the rainy night, they encountered a crocodile on a mudbank near Lamag, and the immediate river displaced thoughts of home once again.",
     returnBody2: "At last Winki’s motor launch appeared, towing nine perahus in a line like a water buffalo’s tail. The boatmen raised their paddles and shouted as water ran down their clothes and laughing faces. Only when the Kinabatangan opened into the Sulu Sea did the sea truly carry them back to Sandakan.",
-    returnSource: "Narrative evidence from the book",
     relatedLabel: "The book’s world beyond the route", relatedTitle: "Four places outside the 1938 route, yet part of Land Below the Wind",
     relatedBody: "The Keiths’ crossing was only one thread in a landscape full of stories. Abai connects to the Johnsons’ 1935 film expedition; Semporna and Lahad Datu hold the east coast’s people and sea routes. Linidis pulls the 1938 journey back toward an 1890 killing magnified by colonial retaliation.",
     relatedQuote: "“It is a terrible story,” I said. Harry answered, “Yet it is because of stories like this that you and I can travel safely on the river today.”",
@@ -154,7 +135,7 @@ const COPY = {
     relatedSempornaTitle: "Semporna", relatedSempornaBody: "An east-coast town where people and coastal stories in the book converge.",
     relatedLahadTitle: "Lahad Datu", relatedLahadBody: "An east-coast reference point in the book’s map and coastal narrative.",
     relatedLinidisTitle: "Linidis", relatedLinidisBody: "The 1890 Walter Flint episode retold in the book: an echo from the past.",
-    relatedEvidence: "Yellow dots mark other places in the book; green dots mark historical events. Neither counts toward the 1938 main route.", fieldNotes: "Field notes · 1938",
+    fieldNotes: "Field notes · 1938",
     notesLabel: "Map notes", notesTitle: "The route and places at a glance",
     notesRouteTitle: "The 1938 main route", notesRelatedTitle: "Beyond the route", notesSourcesTitle: "Sources", notesRightsTitle: "Quotation and illustration rights",
     notesRightsBody: "Eight brief translated excerpts and five author-drawn illustrations come from the 2016 SDX Joint Publishing Chinese edition. English excerpt text on this page is newly rendered from that edition. They are presented for non-commercial literary and historical research; copyright remains with the relevant authors, translators and publishers.",
@@ -323,7 +304,7 @@ function applyLanguage(language) {
 const routeOrder = ["newlands", "tawau", "sebatik", "kalabakan", "tiagau", "pengkalan", "ulu-tiagau", "biyudun", "napagun-mid", "napagun-mouth", "kasuyun", "kuala-kuamut", "kina-mouth", "newlands"];
 const chapterOrder = ["home", "coast", "kalabakan", "tiagau", "flood", "biyudun", "napagun", "kuamut", "return", "related"];
 const chapterViews = {
-  overview: { center: [117.83, 5.06], zoom: 6.25, bearing: -8, pitch: 22 },
+  overview: { center: [117.38, 5.65], zoom: 7.1, bearing: 0, pitch: 0 },
   home: { center: [118.1155, 5.8431], zoom: 10.7, bearing: -18, pitch: 42 },
   coast: { center: [117.95, 4.86], zoom: 6.55, bearing: -7, pitch: 30 },
   kalabakan: { center: [117.49, 4.4], zoom: 9.35, bearing: -12, pitch: 42 },
@@ -365,18 +346,38 @@ const routeGeometry = {
   12: (from, to) => cubicSeaArc(from, [118.64, 5.72], [118.4, 5.94], to, 20)
 };
 
+function softenRiverLine(coordinates, passes = 2) {
+  let softened = coordinates.map((coordinate) => [...coordinate]);
+  for (let pass = 0; pass < passes; pass += 1) {
+    const next = [softened[0]];
+    for (let index = 0; index < softened.length - 1; index += 1) {
+      const start = softened[index];
+      const end = softened[index + 1];
+      next.push(
+        [start[0] * 0.75 + end[0] * 0.25, start[1] * 0.75 + end[1] * 0.25],
+        [start[0] * 0.25 + end[0] * 0.75, start[1] * 0.25 + end[1] * 0.75]
+      );
+    }
+    next.push(softened.at(-1));
+    softened = next;
+  }
+  return softened;
+}
+
 const routeSegments = routeOrder.slice(0, -1).map((fromId, index) => {
   const toId = routeOrder[index + 1];
   const from = pointById.get(fromId);
   const to = pointById.get(toId);
-  const coordinates = routeGeometry[index]?.(from.coord, to.coord) || [from.coord, to.coord];
+  const mode = [0, 1, 12].includes(index) ? "sea" : "river";
+  const rawCoordinates = routeGeometry[index]?.(from.coord, to.coord) || [from.coord, to.coord];
+  const coordinates = mode === "river" ? softenRiverLine(rawCoordinates) : rawCoordinates;
   return {
     type: "Feature",
     properties: {
       from: fromId,
       to: toId,
       certainty: [0, 1, 2, 6, 7, 8, 9, 12].includes(index) ? "approx" : "located",
-      mode: [0, 1, 12].includes(index) ? "sea" : "river",
+      mode,
       index,
       active: true
     },
@@ -384,14 +385,9 @@ const routeSegments = routeOrder.slice(0, -1).map((fromId, index) => {
   };
 });
 
-// The overview must fit the route geometry itself, not only its named stops.
-// In particular, the two long sea arcs extend well beyond their port markers.
-const routeOverviewBounds = routeSegments
-  .flatMap((feature) => feature.geometry.coordinates)
-  .reduce((bounds, coordinate) => [
-    [Math.min(bounds[0][0], coordinate[0]), Math.min(bounds[0][1], coordinate[1])],
-    [Math.max(bounds[1][0], coordinate[0]), Math.max(bounds[1][1], coordinate[1])]
-  ], [[Infinity, Infinity], [-Infinity, -Infinity]]);
+// The prologue is a geographical overview: always restore the whole of Sabah,
+// including the west coast, Kudat peninsula and the southeastern frontier.
+const sabahOverviewBounds = [[115.25, 3.95], [119.45, 7.38]];
 
 document.querySelector("#progress-list").innerHTML = chapterOrder
   .map((chapter, index) => `<li aria-label="${String(index + 1).padStart(2, "0")}" data-progress-chapter="${chapter}"></li>`)
@@ -404,8 +400,8 @@ const markerElements = new Map();
 const journeyProgressFill = document.querySelector("#journey-progress-fill");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const routeProgressByChapter = {
-  overview: 13, home: 0, coast: 2, kalabakan: 3, tiagau: 6,
-  flood: 7, biyudun: 8, napagun: 10, kuamut: 11, return: 13, related: 13
+  overview: routeSegments.length, home: 0, coast: 2, kalabakan: 3, tiagau: 6,
+  flood: 7, biyudun: 8, napagun: 10, kuamut: 11, return: routeSegments.length, related: routeSegments.length
 };
 const routeRangeByChapter = {
   overview: [0, 12], home: [0, 0], coast: [0, 1], kalabakan: [2, 2],
@@ -417,6 +413,8 @@ let activeChapter = "overview";
 let mapReady = false;
 let currentRouteProgress = routeSegments.length;
 let routeAnimationFrame = null;
+let routeFlowFrame = null;
+let routeFlowStarted = 0;
 let journeyHeadMarker = null;
 
 function renderPlaceLedger() {
@@ -449,7 +447,7 @@ function renderPlaceLedger() {
 
       const evidence = document.createElement("p");
       evidence.className = "ledger-evidence";
-      evidence.textContent = `${localized.date} · ${localized.meta}`;
+      evidence.textContent = compact ? localized.date : `${localized.date} · ${localized.meta}`;
       if (compact) {
         item.classList.add("ledger-entry--compact");
         item.append(heading, evidence);
@@ -566,6 +564,44 @@ function progressTrailFeatureCollection(progress, span = 0.58) {
   return { type: "FeatureCollection", features };
 }
 
+function routeFlowRange(chapter) {
+  if (chapter === "overview") return [0, routeSegments.length];
+  const [minimum, maximum] = routeRangeByChapter[chapter] || [-1, -1];
+  return minimum < 0 ? null : [minimum, Math.min(routeSegments.length, maximum + 1)];
+}
+
+function clearRouteFlow() {
+  if (routeFlowFrame) cancelAnimationFrame(routeFlowFrame);
+  routeFlowFrame = null;
+  map?.getSource("route-flow")?.setData({ type: "FeatureCollection", features: [] });
+}
+
+function animateRouteFlow(timestamp) {
+  const range = routeFlowRange(activeChapter);
+  const storyInView = document.body.classList.contains("story-in-view");
+  if (!mapReady || !range || !storyInView || reduceMotion.matches) {
+    clearRouteFlow();
+    return;
+  }
+  const [start, end] = range;
+  const length = end - start;
+  const span = Math.min(activeChapter === "overview" ? 0.9 : 0.56, Math.max(0.18, length * 0.42));
+  const travel = Math.max(0.001, length - span);
+  const cycle = activeChapter === "overview" ? 8200 : 3200;
+  const phase = ((timestamp - routeFlowStarted) % cycle) / cycle;
+  const head = start + span + phase * travel;
+  map.getSource("route-flow")?.setData(progressTrailFeatureCollection(head, span));
+  routeFlowFrame = requestAnimationFrame(animateRouteFlow);
+}
+
+function restartRouteFlow() {
+  clearRouteFlow();
+  routeFlowStarted = performance.now();
+  if (!reduceMotion.matches && document.body.classList.contains("story-in-view")) {
+    routeFlowFrame = requestAnimationFrame(animateRouteFlow);
+  }
+}
+
 function progressHead(progress) {
   if (progress >= routeSegments.length) return routeSegments.at(-1).geometry.coordinates.at(-1);
   const index = Math.floor(progress);
@@ -589,6 +625,7 @@ function animateRouteProgress(target, immediate = false) {
   const origin = currentRouteProgress;
   if (immediate || reduceMotion.matches || Math.abs(destination - origin) < 0.01) {
     setRouteProgress(destination);
+    routeAnimationFrame = null;
     return;
   }
   const started = performance.now();
@@ -600,6 +637,7 @@ function animateRouteProgress(target, immediate = false) {
       : 1 - Math.pow(-2 * linear + 2, 3) / 2;
     setRouteProgress(origin + (destination - origin) * eased);
     if (linear < 1) routeAnimationFrame = requestAnimationFrame(animate);
+    else routeAnimationFrame = null;
   };
   routeAnimationFrame = requestAnimationFrame(animate);
 }
@@ -617,20 +655,34 @@ function flyToChapter(chapter, duration = 1500) {
         left: Math.min(Math.round(narrativeRect.right + 44), window.innerWidth - 320)
       }
     : { top: 0, right: 0, bottom: 0, left: 0 };
+  map.stop();
+  map.setPadding({ top: 0, right: 0, bottom: 0, left: 0 });
   if (chapter === "overview") {
-    const overviewPadding = window.innerWidth > 820
-      ? {
-          top: Math.max(desktopPadding.top, Math.round(window.innerHeight * 0.08)),
-          right: Math.max(desktopPadding.right, Math.round(window.innerWidth * 0.11)),
-          bottom: Math.max(desktopPadding.bottom, Math.round(window.innerHeight * 0.11)),
-          left: desktopPadding.left
-        }
-      : { top: 78, right: 24, bottom: 36, left: 24 };
-    map.fitBounds(routeOverviewBounds, {
+    if (window.innerWidth <= 820) {
+      map.easeTo({
+        ...view,
+        center: [117.35, 5.65],
+        zoom: 5.75,
+        offset: [0, -110],
+        padding: { top: 0, right: 0, bottom: 0, left: 0 },
+        retainPadding: false,
+        duration: reduceMotion.matches ? 0 : duration,
+        essential: false
+      });
+      return;
+    }
+    const overviewPadding = {
+      top: Math.round(window.innerHeight * 0.09),
+      right: Math.round(window.innerWidth * 0.055),
+      bottom: Math.round(window.innerHeight * 0.075),
+      left: Math.round(window.innerWidth * 0.055)
+    };
+    map.fitBounds(sabahOverviewBounds, {
       padding: overviewPadding,
       bearing: view.bearing,
       pitch: view.pitch,
       maxZoom: view.zoom,
+      retainPadding: false,
       duration: reduceMotion.matches ? 0 : duration,
       essential: false
     });
@@ -670,9 +722,8 @@ function initializeMap() {
     container: "map",
     style: mapStyle(),
     ...chapterViews.overview,
-    minZoom: 5.3,
+    minZoom: 4.1,
     maxZoom: 15,
-    maxBounds: [[114.6, 3.1], [120.2, 7.7]],
     attributionControl: false,
     interactive: false
   });
@@ -688,6 +739,7 @@ function initializeMap() {
     updateRouteHighlight(activeChapter);
     setRouteProgress(routeProgressByChapter[activeChapter] ?? routeSegments.length);
     flyToChapter(activeChapter, 0);
+    restartRouteFlow();
     updateMapAccessibility();
   });
   map.on("error", (event) => {
@@ -708,13 +760,14 @@ function addRouteLayers() {
   map.addSource("route", { type: "geojson", data: { type: "FeatureCollection", features: routeSegments } });
   map.addSource("route-progress", { type: "geojson", data: progressFeatureCollection(currentRouteProgress) });
   map.addSource("route-trail", { type: "geojson", data: progressTrailFeatureCollection(currentRouteProgress) });
+  map.addSource("route-flow", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
   map.addLayer({
     id: "route-casing", type: "line", source: "route",
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#06140f",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 4.6, 11, 6.8],
-      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.62, 0.28]
+      "line-color": "#04120e",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 4.2, 11, 6.5],
+      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.68, 0.24]
     }
   });
   map.addLayer({
@@ -722,29 +775,40 @@ function addRouteLayers() {
     filter: ["==", ["get", "certainty"], "located"],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#81948d",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.55, 11, 2.7],
-      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.72, 0.28]
+      "line-color": "#7aa79b",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.45, 11, 2.6],
+      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.78, 0.24]
     }
   });
   map.addLayer({
-    id: "route-line-approx", type: "line", source: "route",
-    filter: ["==", ["get", "certainty"], "approx"],
+    id: "route-line-approx-river", type: "line", source: "route",
+    filter: ["all", ["==", ["get", "certainty"], "approx"], ["!=", ["get", "mode"], "sea"]],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#81948d",
+      "line-color": "#7aa79b",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.45, 11, 2.6],
+      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.74, 0.22],
+      "line-dasharray": [1.7, 1.55]
+    }
+  });
+  map.addLayer({
+    id: "route-line-sea", type: "line", source: "route",
+    filter: ["==", ["get", "mode"], "sea"],
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-color": "#8bcabc",
       "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.55, 11, 2.7],
-      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.72, 0.28],
-      "line-dasharray": [3.2, 2.4]
+      "line-opacity": ["case", ["boolean", ["get", "active"], false], 0.82, 0.24],
+      "line-dasharray": [5.2, 3.1]
     }
   });
   map.addLayer({
     id: "route-progress-casing", type: "line", source: "route-progress",
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#06140f",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 5.1, 11, 7.2],
-      "line-opacity": 0.76
+      "line-color": "#03130e",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 4.9, 11, 7],
+      "line-opacity": 0.8
     }
   });
   map.addLayer({
@@ -752,30 +816,41 @@ function addRouteLayers() {
     filter: ["==", ["get", "certainty"], "located"],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#93d8c8",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.15, 11, 3.6],
-      "line-opacity": 0.98
+      "line-color": "#8ed5c5",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.05, 11, 3.5],
+      "line-opacity": 0.96
     }
   });
   map.addLayer({
-    id: "route-progress-approx", type: "line", source: "route-progress",
-    filter: ["==", ["get", "certainty"], "approx"],
+    id: "route-progress-approx-river", type: "line", source: "route-progress",
+    filter: ["all", ["==", ["get", "certainty"], "approx"], ["!=", ["get", "mode"], "sea"]],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#93d8c8",
+      "line-color": "#8ed5c5",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.05, 11, 3.5],
+      "line-opacity": 0.96,
+      "line-dasharray": [1.8, 1.5]
+    }
+  });
+  map.addLayer({
+    id: "route-progress-sea", type: "line", source: "route-progress",
+    filter: ["==", ["get", "mode"], "sea"],
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-color": "#9ce5d3",
       "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.15, 11, 3.6],
       "line-opacity": 0.98,
-      "line-dasharray": [3.2, 2.4]
+      "line-dasharray": [5.2, 2.8]
     }
   });
   map.addLayer({
     id: "route-trail-glow", type: "line", source: "route-trail",
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#c8fff1",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 7, 11, 12],
-      "line-opacity": 0.19,
-      "line-blur": 3.2
+      "line-color": "#bfffe9",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 7.5, 11, 12.5],
+      "line-opacity": 0.18,
+      "line-blur": 3.6
     }
   });
   map.addLayer({
@@ -783,20 +858,51 @@ function addRouteLayers() {
     filter: ["==", ["get", "certainty"], "located"],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#e4fff8",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.8, 11, 4.2],
-      "line-opacity": 0.96
+      "line-color": "#e8fff8",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.55, 11, 4],
+      "line-opacity": 0.94
     }
   });
   map.addLayer({
-    id: "route-trail-approx", type: "line", source: "route-trail",
-    filter: ["==", ["get", "certainty"], "approx"],
+    id: "route-trail-approx-river", type: "line", source: "route-trail",
+    filter: ["all", ["==", ["get", "certainty"], "approx"], ["!=", ["get", "mode"], "sea"]],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: {
-      "line-color": "#e4fff8",
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.8, 11, 4.2],
+      "line-color": "#e8fff8",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.55, 11, 4],
+      "line-opacity": 0.94,
+      "line-dasharray": [1.4, 1.5]
+    }
+  });
+  map.addLayer({
+    id: "route-trail-sea", type: "line", source: "route-trail",
+    filter: ["==", ["get", "mode"], "sea"],
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-color": "#f1fffb",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.7, 11, 4.1],
       "line-opacity": 0.96,
-      "line-dasharray": [1.5, 1.65]
+      "line-dasharray": [5.1, 2.5]
+    }
+  });
+  map.addLayer({
+    id: "route-flow-glow", type: "line", source: "route-flow",
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-color": "#d8fff4",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 9, 11, 15],
+      "line-opacity": 0.2,
+      "line-blur": 4.5
+    }
+  });
+  map.addLayer({
+    id: "route-flow-core", type: "line", source: "route-flow",
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-color": "#f4fffb",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.55, 11, 2.4],
+      "line-opacity": 0.92,
+      "line-blur": 0.15
     }
   });
 }
@@ -850,17 +956,29 @@ function updateMarkerLabels() {
   if (!map) return;
   const zoom = map.getZoom();
   const focusLabels = chapterFocusLabels[activeChapter] || new Set();
+  const narrative = document.querySelector(`.chapter[data-chapter="${activeChapter}"] .chapter-card, .chapter[data-chapter="${activeChapter}"] .hero-copy`);
+  const narrativeRect = narrative?.getBoundingClientRect();
   markerElements.forEach((element, id) => {
     const point = pointById.get(id);
     const label = element.querySelector(".map-marker-label");
     const isFocused = focusLabels.has(id);
-    const visible = isFocused
-      || persistentLabels.has(id)
-      || (activeChapter === "related" && contextLabels.has(id))
-      || (point.category === "route" ? zoom >= 8.5 : zoom >= 9.5);
     const projected = map.project(point.coord);
     const labelWidth = Math.max(label?.scrollWidth || 0, label?.getBoundingClientRect().width || 0);
-    element.classList.toggle("is-label-left", projected.x + 19 + labelWidth > window.innerWidth - 18);
+    const labelOnLeft = projected.x + 19 + labelWidth > window.innerWidth - 18;
+    const labelLeft = labelOnLeft ? projected.x - 19 - labelWidth : projected.x + 19;
+    const labelRight = labelOnLeft ? projected.x - 19 : projected.x + 19 + labelWidth;
+    const overlapsNarrative = window.innerWidth > 820 && narrativeRect
+      && labelRight > narrativeRect.left
+      && labelLeft < narrativeRect.right
+      && projected.y + 12 > narrativeRect.top
+      && projected.y - 12 < narrativeRect.bottom;
+    const visible = !overlapsNarrative && (
+      isFocused
+      || persistentLabels.has(id)
+      || (activeChapter === "related" && contextLabels.has(id))
+      || (point.category === "route" ? zoom >= 8.5 : zoom >= 9.5)
+    );
+    element.classList.toggle("is-label-left", labelOnLeft);
     element.classList.toggle("is-chapter-focus", isFocused);
     label?.classList.toggle("is-visible", visible);
   });
@@ -886,17 +1004,24 @@ function activateChapter(chapter) {
   updateMarkerLabels();
   const rewindFromOverview = previousChapter === "overview" && chapter === "home";
   animateRouteProgress(routeProgressByChapter[chapter] ?? currentRouteProgress, rewindFromOverview);
+  restartRouteFlow();
   flyToChapter(chapter, 720);
 }
 
 const chapterElements = [...document.querySelectorAll(".chapter")];
 document.body.classList.add("story-stepped");
+let storyWasInView = false;
 
 function syncStoryState() {
   const rect = document.querySelector("#route-story").getBoundingClientRect();
   const storyInView = rect.bottom > 120 && rect.top < window.innerHeight - 120;
   document.body.classList.toggle("story-in-view", storyInView);
   document.documentElement.classList.toggle("story-snapping", storyInView);
+  if (storyInView !== storyWasInView) {
+    storyWasInView = storyInView;
+    if (storyInView) restartRouteFlow();
+    else clearRouteFlow();
+  }
   if (!storyInView) return;
 
   const triggerY = window.innerHeight * 0.5;
@@ -914,6 +1039,11 @@ function requestStorySync() {
 }
 window.addEventListener("scroll", requestStorySync, { passive: true });
 syncStoryState();
+
+reduceMotion.addEventListener?.("change", () => {
+  if (reduceMotion.matches) clearRouteFlow();
+  else restartRouteFlow();
+});
 
 let resizeCameraFrame;
 window.addEventListener("resize", () => {
