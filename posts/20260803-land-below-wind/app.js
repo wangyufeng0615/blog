@@ -226,10 +226,10 @@ const PLACE_EN = {
 };
 
 function preferredLanguage() {
+  if (window.location.pathname.replace(/\/+$/, "").endsWith("/en")) return "en";
   const requested = new URLSearchParams(window.location.search).get("lang");
   if (requested === "en" || requested === "zh") return requested;
-  const browserLanguage = (navigator.languages?.[0] || navigator.language || "zh").toLowerCase();
-  return browserLanguage.startsWith("zh") ? "zh" : "en";
+  return "zh";
 }
 
 let currentLang = preferredLanguage();
@@ -269,7 +269,7 @@ function updateMapAccessibility() {
   document.querySelector("#route-story")?.setAttribute("aria-label", currentLang === "zh" ? "路线地图与章节" : "Route map and chapters");
 }
 
-function applyLanguage(language, updateUrl = false) {
+function applyLanguage(language) {
   currentLang = language === "en" ? "en" : "zh";
   const copy = currentLang === "zh" ? DOM_ZH_COPY : COPY.en;
   const metadata = currentLang === "zh"
@@ -283,9 +283,9 @@ function applyLanguage(language, updateUrl = false) {
       }
     : {
         title: "Land Below the Wind Journey Map | Agnes Keith in North Borneo, 1938",
-        description: "A bilingual satellite-map reconstruction of Agnes Newton Keith’s 1938 journey through the rivers and rainforests of British North Borneo in Land Below the Wind.",
+        description: "A satellite-map reconstruction of Agnes Newton Keith’s 1938 journey through the rivers and rainforests of British North Borneo in Land Below the Wind.",
         socialTitle: "Land Below the Wind | A 1938 North Borneo Journey Map",
-        socialDescription: "Follow Agnes Newton Keith’s 1938 journey through British North Borneo on a bilingual satellite map.",
+        socialDescription: "Follow Agnes Newton Keith’s 1938 journey through British North Borneo on a richly annotated satellite map.",
         locale: "en_US",
         imageAlt: "Map of Agnes Newton Keith’s 1938 journey through North Borneo"
       };
@@ -306,7 +306,10 @@ function applyLanguage(language, updateUrl = false) {
     const value = copy[element.dataset.i18nAlt];
     if (value) element.setAttribute("alt", value);
   });
-  document.querySelectorAll("[data-lang]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lang === currentLang)));
+  document.querySelectorAll("[data-lang]").forEach((link) => {
+    if (link.dataset.lang === currentLang) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
   markerElements.forEach((element, id) => {
     const point = localizedPoint(pointById.get(id));
     element.setAttribute("aria-label", `${point.name}, ${point.date}`);
@@ -315,11 +318,6 @@ function applyLanguage(language, updateUrl = false) {
   });
   renderPlaceLedger();
   updateMapAccessibility();
-  if (updateUrl) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("lang", currentLang);
-    history.replaceState(null, "", url);
-  }
 }
 
 const routeOrder = ["newlands", "tawau", "sebatik", "kalabakan", "tiagau", "pengkalan", "ulu-tiagau", "biyudun", "napagun-mid", "napagun-mouth", "kasuyun", "kuala-kuamut", "kina-mouth", "newlands"];
@@ -925,10 +923,6 @@ window.addEventListener("resize", () => {
     flyToChapter(activeChapter, 0);
   });
 }, { passive: true });
-
-document.querySelectorAll("[data-lang]").forEach((button) => button.addEventListener("click", () => {
-  applyLanguage(button.dataset.lang, true);
-}));
 
 applyLanguage(currentLang);
 window.addEventListener("load", initializeMap);
