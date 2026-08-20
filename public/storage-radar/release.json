@@ -1,10 +1,10 @@
 {
-  "release_id": "20260820",
-  "prepared_at": "2026-08-20T08:44:39.939083+00:00",
+  "release_id": "20260820b",
+  "prepared_at": "2026-08-20T12:05:24.247793+00:00",
   "canonical_url": "https://wangyufeng.org/storage-radar/",
-  "archived_posts": 8428,
-  "analyzed_posts": 1628,
-  "analysis_rate": 0.193166,
-  "html_sha256": "57594b6cc825cd9d994d65a0fae789eef01bc47d0ce082d58473c2379bc6025b",
+  "archived_posts": 8445,
+  "analyzed_posts": 2091,
+  "analysis_rate": 0.247602,
+  "html_sha256": "5b6756675be4da67d1f450e73a612b1a11d7e681db55e7c6b76d2ab8f9b0bbc3",
   "og_image_sha256": "d6f8ff50cc9efc4c0b00f79a2867f2ebcbac681f0283563af2d2e982c7e29c9f"
 }
