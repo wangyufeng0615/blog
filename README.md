@@ -49,9 +49,9 @@ draft: false
   公共资源。
 - `apps/ball-moving/` 是独立 Vite 应用；根目录 `npm run build` 会先构建它，
   再复制到 `dist/ball-moving/`。
-- `trade_game` 保存在独立私有仓库。Pages CI 根据
-  `.deploy/trade-game-revision` 拉取并验证精确 commit，然后把构建产物加入
-  `dist/trade/`。本地博客 build 不生成 `/trade/`。
+- `trade_game`（盘感挑战）原先由 Pages CI 拉取私有仓库构建到 `/trade/`。
+  2026-10-08 因后端下线撤下，CI 不再构建；最后发布的游戏 commit 为
+  `c2b334ad3296bd277100edc6092d3de3e0e07a62`。
 
 不要在 `public/` 手工复制仍有独立源码仓库的应用，除非它明确是受控的发布
 快照；源码、发布 artifact 和 commit marker 应保持可区分。
@@ -90,11 +90,9 @@ npm run preview
 
 `.github/workflows/deploy.yml` 在 `main` push 或手动触发时：
 
-1. 校验 `.deploy/trade-game-revision` 是完整 40 位 commit。
-2. 用仓库 Secret 中的只读 Deploy Key 拉取该版本 `trade_game`。
-3. 安装博客、`ball-moving` 和 `trade_game` 依赖。
-4. 验证 `trade_game`，构建博客与两个应用。
-5. 上传单一 GitHub Pages artifact 并部署。
+1. 安装博客和 `ball-moving` 依赖。
+2. 构建博客与内置应用。
+3. 上传单一 GitHub Pages artifact 并部署。
 
 工作流会产生外部发布；本地构建成功不等于 Pages 已更新。Deploy Key、API
 Token、证书、私钥、环境文件和服务端配置不得进入文章、日志样例或 Git。
@@ -112,7 +110,6 @@ blog/
 ├── src/templates/html.js        # HTML shell、SEO 与 JSON-LD
 ├── scripts/build.js             # 文章发现、SSR、复制、索引与 sitemap
 ├── scripts/copy-apps.js         # 内置应用产物复制
-├── .deploy/trade-game-revision  # Pages 使用的已验证游戏 commit
 └── dist/                        # 生成输出，不是编辑源
 ```
 
