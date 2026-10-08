@@ -12,7 +12,7 @@ export const allProjects = [
   },
   {
     name: '王工存储指数',
-    description: '追踪 DRAM、NAND、SSD、HBM 与 B站情绪的存储产业指标面板',
+    description: '追踪 DRAM、NAND、SSD、HBM 与 X 存储博主情绪的存储产业指标面板',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-trend/',
     type: 'Industry dashboard',
