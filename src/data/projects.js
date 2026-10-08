@@ -41,16 +41,6 @@ export const allProjects = [
     status: 'Live',
   },
   {
-    name: '盘感挑战',
-    description: '看一段真实历史 K 线，和 AI 交易员一起猜下一段走势',
-    sticker: 'market',
-    url: 'https://wangyufeng.org/trade/',
-    type: 'Market game',
-    year: '2026',
-    tags: ['Game', 'Market', 'AI'],
-    status: 'Live',
-  },
-  {
     name: '提前退休计算器',
     description: '计算你需要多少钱才能提前退休',
     sticker: 'retirement',
