@@ -7,8 +7,30 @@
     <meta name="description" content="小球移动重置版——by GPT-5.6 Sol" />
     <meta name="author" content="GPT-5.6 Sol" />
     <title>小球移动重置版 · by GPT-5.6 Sol</title>
+    <link rel="canonical" href="https://wangyufeng.org/ball-moving/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="小球移动重置版" />
+    <meta property="og:description" content="经典小游戏「小球移动」的网页复刻：添加、点选、删除物体计分，用 Three.js 与 Rapier 3D 重建画面和物理。" />
+    <meta property="og:url" content="https://wangyufeng.org/ball-moving/" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"小球移动重置版","url":"https://wangyufeng.org/ball-moving/","description":"经典小游戏「小球移动」的网页复刻，保留添加、点选、删除、计分、暂停、速度调节与两种精确胜利条件，用 Three.js 与 Rapier 3D 重建视觉与物理。","inLanguage":"zh-CN","genre":"Puzzle","gamePlatform":"Web browser","applicationCategory":"Game","operatingSystem":"Any","isAccessibleForFree":true,"publisher":{"@type":"Person","name":"王雨峰","url":"https://wangyufeng.org/"}}</script>
+    <script>document.documentElement.classList.add("js")</script>
+    <style>.seo-fallback{max-width:720px;margin:0 auto;padding:24px 16px;font:16px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#d8dee9}.js .seo-fallback{display:none}</style>
   </head>
   <body>
+    <main class="seo-fallback">
+      <h1>小球移动重置版</h1>
+      <p>经典小游戏「小球移动」的网页复刻，由 GPT-5.6 Sol 编写，发布在王雨峰的博客。保留原版的添加、点选、删除、计分、暂停和速度调节，用 Three.js 与 Rapier 3D 重建画面和物理碰撞。需要浏览器开启 JavaScript 和 WebGL。</p>
+      <h2>规则</h2>
+      <ul>
+        <li>添加物体后开始计时；分值、尺寸、形状和速度随机。</li>
+        <li>点中目标后再删除，目标分值累加到总分。</li>
+        <li>没有选中时，删除最早生成的物体且不计分。</li>
+        <li>点击空白区域随机扣 1–3 分，分数不会低于 0。</li>
+        <li>分数正好达到 50，或等于剩余物体数量的 20 倍时获胜。</li>
+      </ul>
+      <p><a href="https://wangyufeng.org/">返回王雨峰的博客</a></p>
+    </main>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

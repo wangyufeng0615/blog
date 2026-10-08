@@ -1,0 +1,26 @@
+# 王工存储指数
+
+> 王雨峰维护的存储产业指标面板，追踪 DRAM、HBM、NAND、SSD、硬盘与云存储的价格和经营数据，用来判断存储周期处在升温、分化还是降温阶段。数据为手工不定期刷新，仅供产业研究，不构成投资建议。
+
+页面地址：https://wangyufeng.org/storage-trend/ （短域名 https://cun.wangyufeng.org/ 内容相同）。页面 HTML 内含一段文字版摘要，列出每项指标的当前值、来源日期、来源和近期变化；图表需要浏览器执行 JavaScript。
+
+## 数据
+
+- [JSON 快照](https://storage-trend-api.wangyufeng.workers.dev/api/snapshot): 最新一次刷新的完整数据，含周期状态（overview）、核心指标（core_indicators）、来源与新鲜度（sources）、质量报告。字段 generated_at 是生成时间。
+- [公开历史](https://storage-trend-api.wangyufeng.workers.dev/api/public-history): 各指标的滚动历史序列，含来源名称与链接。
+- [健康状态](https://storage-trend-api.wangyufeng.workers.dev/api/health): 当前数据生成时间与来源数量。
+
+## 指标分组
+
+- 王工自研情绪：B站与 X 公开讨论的样本打分（0–100），只描述已分析的公开样本，不是市场价格。
+- 热层：DRAM 与 HBM，离算力最近、价格最先动。
+- 温层：NAND 与 SSD，容量存储，跟随但节奏不同。
+- 冷层：硬盘出货、云存储牌价与美国存储设备出厂价格指数，变化最慢。
+- 供给与经营验证：韩国存储出口、台湾存储厂月营收、Micron 库存天数，用来确认价格是否传导到真实经营。
+- 市场价格参考：DRAM ETF 价格，与产业指标分开阅读，不参与周期判断。
+
+## 引用注意
+
+- 引用数值时请同时给出该指标的来源日期，各指标更新频率不同，部分来源可能偏旧；偏旧指标不参与顶部周期判断。
+- HBM 没有公开现货市场，相关数值是公开估算或证据打分，不是成交价。
+- 作者：王雨峰，博客 https://wangyufeng.org/ ，全站索引 https://wangyufeng.org/llms.txt

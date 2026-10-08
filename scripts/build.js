@@ -795,6 +795,9 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 
 - [Projects JSON](${SITE_URL}/projects.json): Structured project list with names, descriptions, URLs, types, tags, years, and status.
 - [Posts JSON](${SITE_URL}/posts.json): Structured post list with titles, dates, URLs, descriptions, types, and slugs.
+- [王工存储指数 llms.txt](${SITE_URL}/storage-trend/llms.txt): 存储指数的指标分组、数据接口与引用注意事项。
+- [王工存储指数 JSON 快照](https://storage-trend-api.wangyufeng.workers.dev/api/snapshot): DRAM、HBM、NAND、SSD 等存储指标的最新完整数据。
+- [和AI一起探索地球 llms.txt](https://earth.wangyufeng.org/llms.txt): 街景探索游戏的玩法与入口说明。
 
 ## Featured work
 

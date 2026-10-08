@@ -21,8 +21,22 @@
     <link rel="modulepreload" crossorigin href="./assets/rapier-BxxXC43-.js">
     <link rel="modulepreload" crossorigin href="./assets/icons-BRmu3L4e.js">
     <link rel="stylesheet" crossorigin href="./assets/index-C10Is4CU.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rapier Galton Lab","url":"https://wangyufeng.org/galton/","description":"运行在浏览器中的 3D 高尔顿板：用 Rapier 刚体物理与 Three.js WebGL 渲染，小球穿过钉板落入十三个槽位，实时统计分布并与理想二项分布对比。","inLanguage":"zh-CN","applicationCategory":"EducationalApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"王雨峰","url":"https://wangyufeng.org/"}}</script>
+    <script>document.documentElement.classList.add("js")</script>
+    <style>.seo-fallback{max-width:720px;margin:0 auto;padding:24px 16px;font:16px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#dbe4ee}.js .seo-fallback{display:none}</style>
   </head>
   <body>
+    <main class="seo-fallback">
+      <h1>Rapier Galton Lab：3D 高尔顿板</h1>
+      <p>一座运行在浏览器中的高尔顿板。小球从顶部释放，与钉板上的圆柱发生真实的刚体碰撞，最后落入十三个槽位。页面实时画出每个槽位的球数直方图，并叠加理想二项分布曲线，用来观察概率分布如何从一次次碰撞中涌现。</p>
+      <ul>
+        <li>物理：Rapier 3D 刚体引擎；渲染：Three.js WebGL。</li>
+        <li>可调参数：小球数量、释放速度、重力、弹性、物理子步，可开关碰撞高亮。</li>
+        <li>实时统计：已释放、已落槽、平均槽位、标准差、连续同向率等。</li>
+        <li>操作：拖拽旋转视角、滚轮缩放，可暂停、重置和全屏。</li>
+      </ul>
+      <p>需要浏览器开启 JavaScript 和 WebGL。作者：<a href="https://wangyufeng.org/">王雨峰</a>。</p>
+    </main>
     <div id="root"></div>
   </body>
 </html>
