@@ -32,7 +32,7 @@ export const allProjects = [
   },
   {
     name: '得到老师预测回测',
-    description: '卓克、万维钢、香帅课程里的一千九百多条预测，逐条对照今天的现实',
+    description: '卓克、万维钢、香帅、吴军课程里的两千多条预测，逐条对照今天的现实',
     sticker: 'forecast',
     url: 'https://wangyufeng.org/forecast-review/',
     type: 'Data story',
