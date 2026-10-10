@@ -102,7 +102,7 @@
       const xs = d.filter((x) => x.tier === t); if (xs.length < 5) return '';
       const c = count(xs);
       return `<div class="lab">${TIER_NAME[t]}<small>${t} · ${xs.length} 条</small></div><div class="stack">${stackRow(c, DUE, xs.length, TIER_NAME[t])}</div><div class="val">${pct(c.ok, xs.length)}%</div>`;
-    }).join('')}</div>${legend(DUE)}<p class="cap" style="margin:10px 0 0">右侧数字为说对的比例。</p>`;
+    }).join('')}</div>${legend(DUE)}`;
     bindStack(el);
   }
 
@@ -114,7 +114,7 @@
     const rows = Object.entries(by).filter(([, xs]) => xs.length >= min)
       .map(([t, xs]) => ({ t, xs, c: count(xs) }))
       .sort((a, b) => b.c.ok / b.xs.length - a.c.ok / a.xs.length);
-    el.innerHTML = `<div class="srows">${rows.map((r) => `<div class="lab">${esc(r.t)}<small>${r.xs.length} 条</small></div><div class="stack">${stackRow(r.c, DUE, r.xs.length, r.t)}</div><div class="val">${pct(r.c.ok, r.xs.length)}%</div>`).join('')}</div>${legend(DUE)}<p class="cap" style="margin:10px 0 0">只列 ${min} 条以上的领域，按说对比例排序。</p>`;
+    el.innerHTML = `<div class="srows">${rows.map((r) => `<div class="lab">${esc(r.t)}<small>${r.xs.length} 条</small></div><div class="stack">${stackRow(r.c, DUE, r.xs.length, r.t)}</div><div class="val">${pct(r.c.ok, r.xs.length)}%</div>`).join('')}</div>${legend(DUE)}<p class="cap" style="margin:10px 0 0">仅列 ${min} 条以上的领域</p>`;
     bindStack(el);
   }
 

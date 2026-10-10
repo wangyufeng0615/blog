@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>卓克的预测回测｜得到老师预测回测</title>
-<meta name="description" content="卓克在得到 13 门课里留下近 700 条对科技未来的判断，逐条对照 2026 年 10 月的现实：供需拐点和产品节点判断准，“永远不可能”式的否定常被推翻。">
+<meta name="description" content="卓克在得到 13 门课里的近 700 条科技预测，逐条对照 2026 年 10 月的现实：供需拐点和产品节点判断准，“永远不可能”式的否定常被推翻。">
 <link rel="stylesheet" href="../assets/forecast.css">
 </head>
 <body>
@@ -17,187 +17,165 @@
 
 <header class="hero"><div class="wrap">
   <p class="eyebrow">得到老师预测回测 · 卓克</p>
-  <h1>卓克：能算出来的判断很准，<br>"永远不可能"常被推翻</h1>
-  <p class="lede">卓克在《科技参考》里几乎每周都给出对芯片、电池、航天、AI 的具体判断，说法常带型号、年份和数字，所以特别好检验。结果是：<span class="hl">判断供需拐点和产品节点很准；把当时的工程限制说成"不可能"、以及 2024—2026 年对 AI 的悲观判断，错得集中</span>。</p>
-  <p class="meta-line">范围：卓克 13 门课、2142 篇（2016—2026） · 现实情况截至 2026-10-08</p>
+  <h1>卓克：能算出来的很准，"永远不可能"常被推翻</h1>
+  <p class="lede">《科技参考》几乎每周都给出带型号、年份、数字的判断。<span class="hl">供需拐点和产品节点很准；技术否定和 2024—2025 年的 AI 悲观判断错得集中。</span></p>
+  <p class="meta-line">13 门课 · 2142 篇 · 2016—2026 · 现实截至 2026-10-08</p>
 </div></header>
 
 <main>
-<section class="block"><div class="wrap">
-  <div class="tiles" id="tiles"></div>
-</div></section>
+<section class="block"><div class="wrap"><div class="tiles" id="tiles"></div></div></section>
 
 <section class="block"><div class="wrap">
-  <h2>说错的比说对的多，但错得有规律</h2>
-  <p class="sub">已能判定的本人判断里，说对的约四成。高风险判断（当时有风险、说得具体、分量重）里，<b>说错的比说对的多</b>。错的不是随机分布，集中在几类话题上。</p>
+  <h2>错的比对的多，但错得有规律</h2>
+  <p class="sub">常识类几乎全对；高风险判断约三分之一对。</p>
   <div class="two-col">
-    <div class="chart-card"><h3>全部本人判断的结果</h3><p class="cap">含未到期和无法验证的，未到期占比很高</p><div class="chart" id="outcome"></div></div>
-    <div class="chart-card"><h3>按含金量分档的说对比例</h3><p class="cap">常识类几乎都对，高风险判断约三分之一对</p><div class="chart" id="tiers"></div></div>
+    <div class="chart-card"><h3>全部本人判断</h3><div class="chart" id="outcome"></div></div>
+    <div class="chart-card"><h3>按含金量分档的说对比例</h3><div class="chart" id="tiers"></div></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap grid2">
+  <div>
+    <h2>航天和电动车垫底</h2>
+    <p class="sub">"星链不行""超充不可能""钠电池上不了车"都在这两类。</p>
+    <div class="chart-card"><h3>各领域说对比例</h3><div class="chart" id="domains"></div></div>
+  </div>
+  <div>
+    <h2>2024—2025 年一串 AI 红点</h2>
+    <p class="sub">见顶、衰退、停止预训练，2026 年他本人已改口。</p>
+    <div class="chart-card"><h3>高风险判断时间线</h3><p class="cap">悬停查看内容</p><div class="chart" id="timeline"></div></div>
   </div>
 </div></section>
 
 <section class="block"><div class="wrap">
   <h2>一句话画像</h2>
-  <p class="sub">他判断"多久、多少、几时拐弯"很准，判断"能不能、会不会"常出错。</p>
   <div class="portrait">
     <div class="pcard good"><h3>擅长</h3><ul>
-      <li><b>供需拐点。</b>2021 年抢芯片最凶时，判断缺货 2022 年中后缓解、两年后多数芯片供过于求，拐点和反转都对。</li>
-      <li><b>具体节点。</b>AlphaFold 几年后拿诺贝尔奖、王虹获 2026 年菲尔兹奖、OpenAI 2024 年估值一两千亿美元、特斯拉 4680 电池延期。</li>
-      <li><b>AI 落地的路径。</b>AI 先在编程和驾驶这类数据产得快的领域爆发；2025 年会冒出一批配合推理的小模型。</li>
+      <li><b>供需拐点：</b>芯片缺货何时缓解、何时过剩</li>
+      <li><b>具体节点：</b>诺奖、菲尔兹奖、OpenAI 估值、4680 延期</li>
+      <li><b>AI 落地路径：</b>先编程和驾驶，推理小模型崛起</li>
     </ul></div>
     <div class="pcard weak"><h3>盲区</h3><ul>
-      <li><b>"永远不可能"式的技术否定。</b>乘用车 1000kW 充电、超级快充、钠电池上车、锂电回收、固态电池，都被推翻。</li>
-      <li><b>2024—2026 年对 AI 的系统性悲观。</b>谷歌衰落、OpenAI 半死不活、参数规模见顶、2026 年停止预训练、训练卡需求衰退。</li>
-      <li><b>星链和星舰。</b>星链三次被低估；星舰的时间表一再过于乐观。</li>
+      <li><b>"永远不可能"：</b>兆瓦快充、钠电池、锂电回收、固态电池</li>
+      <li><b>AI 悲观：</b>谷歌衰落、OpenAI 半死不活、参数见顶</li>
+      <li><b>星链与星舰：</b>星链三次低估，星舰时间表过于乐观</li>
     </ul></div>
   </div>
 </div></section>
 
 <section class="block"><div class="wrap">
-  <h2>分领域看，航天和电动车垫底</h2>
-  <p class="sub">生物医药、社会政策、自动驾驶类判断说对的比例最高；航天和电动车最低，正是"星链不行""超充不可能""钠电池上不了车"所在的领域。</p>
-  <div class="chart-card"><h3>各领域本人判断的说对比例</h3><p class="cap">悬停查看条数</p><div class="chart" id="domains"></div></div>
-</div></section>
-
-<section class="block"><div class="wrap">
-  <h2>高风险判断的时间线</h2>
-  <p class="sub">2021 年以前的红点多是电池和充电技术的否定；<span class="hl">2024—2025 年那一串红点几乎全是 AI 悲观判断</span>。2026 年他本人已经改口。</p>
-  <div class="chart-card"><h3>高风险判断（T1），按结果分三条泳道</h3><p class="cap">悬停或用 Tab 键聚焦查看内容</p><div class="chart" id="timeline"></div></div>
-</div></section>
-
-<section class="block"><div class="wrap">
   <h2>最值钱的判断</h2>
-  <p class="sub">挑选标准：当时有风险，话题分量重，结果今天清楚。</p>
 
   <div class="picks-head"><span class="badge b-ok">说对</span><h3>能算出来的，他算得准</h3></div>
   <div class="picks">
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2021-07</span><span>科技参考</span></div>
-      <p class="said">芯片缺货最早 2022 年 6 月后缓解；两年后除高端外，多数芯片供过于求，价格跌到疫情前以下。</p>
-      <p class="real">消费类芯片 2022 年下半年转为过剩，2023 年存储芯片价格跌到历史低位；高端 AI GPU 仍然紧缺。</p>
-      <p class="why">在全球抢芯片最凶的时候，同时判对了拐点和反转。</p></article>
+      <p class="said">芯片缺货 2022 年中后缓解，两年后多数芯片供过于求。</p>
+      <p class="real">2022 年下半年转过剩，2023 年存储价格跌到历史低位。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2021-08</span><span>科技参考</span></div>
-      <p class="said">AlphaFold 的工作几年后会拿诺贝尔奖。</p>
-      <p class="real">2024 年哈萨比斯、江珀因 AlphaFold 获诺贝尔化学奖。</p>
-      <p class="why">提前三年，点名到具体成果。</p></article>
+      <p class="said">AlphaFold 几年后会拿诺贝尔奖。</p>
+      <p class="real">2024 年获诺贝尔化学奖。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2020-12</span><span>科技参考</span></div>
-      <p class="said">几年内车用激光雷达价格降到当时的 1/10 到 1/20。</p>
-      <p class="real">2025 年国产车规激光雷达已到约 200 美元一颗，降幅超过预期。</p>
-      <p class="why">当时一颗动辄上万美元。</p></article>
+      <p class="said">车用激光雷达几年内降到 1/10—1/20。</p>
+      <p class="real">2025 年约 200 美元一颗。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2021-02</span><span>科技参考</span></div>
-      <p class="said">特斯拉 4680 电池要一两年后（2022—2023）才能量产。</p>
-      <p class="real">2022 年初才开始交付，产能爬坡缓慢，2023 年用到 Cybertruck 上。</p>
-      <p class="why">和特斯拉"明年就换用"的官方说法唱反调。</p></article>
+      <p class="said">特斯拉 4680 要到 2022—2023 年才能量产。</p>
+      <p class="real">2022 年初才交付，爬坡缓慢。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2023-11</span><span>科技参考3</span></div>
-      <p class="said">2024 年开发者大会时，OpenAI 估值会到一两千亿美元。</p>
-      <p class="real">2024 年 10 月完成融资，估值 1570 亿美元。</p>
-      <p class="why">当时估值约 860 亿，数字和时间都对。</p></article>
+      <p class="said">2024 年秋 OpenAI 估值到一两千亿美元。</p>
+      <p class="real">2024 年 10 月估值 1570 亿美元。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2024-09</span><span>科技参考3</span></div>
-      <p class="said">今后 AI 爆发大概率先出现在编程和驾驶这类任务窄、数据产得快的领域。</p>
-      <p class="real">AI 编程智能体成为增长最快的 AI 应用；Waymo 等无人出租车持续扩张。</p>
-      <p class="why">方向判断准，分量重。</p></article>
+      <p class="said">AI 爆发先出现在编程和驾驶。</p>
+      <p class="real">编程智能体增长最快，无人出租车持续扩张。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">命中</span><span class="date">2024-10</span><span>科技参考4</span></div>
-      <p class="said">2025 年会冒出一批配合推理链、千亿参数以下的小模型，AI 公司转向低成本产品化。</p>
-      <p class="real">DeepSeek-R1 蒸馏版、Qwen3 小尺寸推理模型、gpt-oss 等在 2025 年集中发布。</p>
-      <p class="why">早于 DeepSeek-R1 三个月。</p></article>
+      <p class="said">2025 年千亿参数以下的推理小模型崛起。</p>
+      <p class="real">R1 蒸馏版、Qwen3 小模型、gpt-oss 集中发布。</p></article>
     <article class="pick ok"><div class="top"><span class="badge b-ok">基本命中</span><span class="date">2025-06</span><span>科技参考4</span></div>
-      <p class="said">王虹会获得 2026 年菲尔兹奖。</p>
-      <p class="real">王虹获奖；只是他说的"7 月最后一个周末"，实际宣布是 7 月 23 日周四。</p>
-      <p class="why">提前一年点名具体获奖人。</p></article>
+      <p class="said">王虹获 2026 年菲尔兹奖。</p>
+      <p class="real">获奖，只是宣布日期说错了。</p></article>
   </div>
 
   <div class="picks-head"><span class="badge b-bad">说错</span><h3>"不可能"和"见顶"</h3></div>
   <div class="picks">
     <article class="pick bad"><div class="top"><span class="badge b-bad">被反证</span><span class="date">2020-11</span><span>科技参考</span></div>
-      <p class="said">乘用车充电"永远"不可能达到 1000kW。</p>
-      <p class="real">比亚迪 2025 年推出兆瓦闪充平台并大规模建站。</p>
-      <p class="why">把当时的工程限制当成了物理极限，同类错误后来又出现了好几次。</p></article>
+      <p class="said">乘用车充电"永远"达不到 1000kW。</p>
+      <p class="real">比亚迪 2025 年推出兆瓦闪充。</p></article>
     <article class="pick bad"><div class="top"><span class="badge b-bad">被反证</span><span class="date">2021-05</span><span>科技参考</span></div>
-      <p class="said">钠电池不太可能用在电动汽车上。</p>
-      <p class="real">2023 年已有钠电车交付，2026 年长安与宁德时代发布钠电量产乘用车。</p>
-      <p class="why">技术路线上的强否定。</p></article>
+      <p class="said">钠电池不太可能用在电动车上。</p>
+      <p class="real">2023 年已有钠电车交付。</p></article>
     <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2020-10 · 2024-03</span><span>科技参考</span></div>
-      <p class="said">卫星寿命和发射成本两三年内难改善，可持续性是星链最大威胁；星链全部潜在客户很难超过一千万。</p>
-      <p class="real">星链 2023 年起盈利，2026 年 8 月用户超过 1300 万。</p>
-      <p class="why">同一个对象三次低估。</p></article>
+      <p class="said">星链难以持续；用户很难超过一千万。</p>
+      <p class="real">2023 年起盈利，2026 年用户超 1300 万。</p></article>
     <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2024-03</span><span>科技参考3</span></div>
-      <p class="said">2024 年星舰至少飞 6 次，并进化出全部可回收的完全体。</p>
-      <p class="real">2024 年只飞了 4 次，上面级没有回收。</p>
-      <p class="why">马斯克系时间表被系统性高估的代表。</p></article>
-    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2024-01 · 2024-08</span><span>科技参考3</span></div>
-      <p class="said">谷歌在 AI 时代开始衰落；OpenAI 无法自我造血，会长期半死不活。</p>
-      <p class="real">Gemini 进入第一梯队，Alphabet 市值 2025 年 12 月超过微软；OpenAI 估值到 5000 亿美元。</p>
-      <p class="why">对行业格局的方向性误判。</p></article>
-    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2025-04 至 2025-12</span><span>科技参考4</span></div>
-      <p class="said">大模型参数规模已经到顶；o4 是强化学习最后一次大幅提升；2026 年大模型性能见顶、训练卡需求大幅衰退、各家停止全新预训练。</p>
-      <p class="real">GPT-5.5 是全新预训练；Kimi K3 达 2.8 万亿参数；四大云厂商 2026 年资本开支约 6500—7250 亿美元。</p>
-      <p class="why">一整组 AI 悲观判断，最容易误导投资决策。</p></article>
-    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2024-04 · 2025-03</span><span>科技参考3、4</span></div>
-      <p class="said">2026 年 AI 占全球用电 10%—15%，数据中心用电 2000—4000 太瓦时。</p>
-      <p class="real">数据中心 2026 年用电约 500—600 太瓦时。</p>
-      <p class="why">数量级高估了 4 倍以上。</p></article>
+      <p class="said">2024 年星舰至少飞 6 次并实现全部可回收。</p>
+      <p class="real">只飞 4 次，上面级未回收。</p></article>
+    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2024</span><span>科技参考3</span></div>
+      <p class="said">谷歌开始衰落；OpenAI 会长期半死不活。</p>
+      <p class="real">Alphabet 市值超过微软；OpenAI 估值 5000 亿美元。</p></article>
+    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2025</span><span>科技参考4</span></div>
+      <p class="said">参数规模到顶；2026 年停止预训练、训练卡需求衰退。</p>
+      <p class="real">GPT-5.5 全新预训练；云厂商资本开支继续猛增。</p></article>
+    <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2024 · 2025</span><span>科技参考3、4</span></div>
+      <p class="said">2026 年数据中心用电 2000—4000 太瓦时。</p>
+      <p class="real">实际约 500—600 太瓦时，高估 4 倍以上。</p></article>
     <article class="pick bad"><div class="top"><span class="badge b-bad">落空</span><span class="date">2023-11 · 2024-03</span><span>科技参考3</span></div>
-      <p class="said">GPT-5 一发布就是通用人工智能，可能在 2025 年；GPT-5 四个月内发布。</p>
-      <p class="real">GPT-5 2025 年 8 月才发布，也没有达到他定义的通用人工智能。</p>
-      <p class="why">他对 AI 先过度乐观，后来又过度悲观。</p></article>
+      <p class="said">GPT-5 就是通用人工智能，四个月内发布。</p>
+      <p class="real">2025 年 8 月才发布，也不是通用人工智能。</p></article>
   </div>
 </div></section>
 
 <section class="block"><div class="wrap">
   <h2>三条规律</h2>
   <div class="callouts">
-    <div class="callout"><h3>"多久、多少"可信，"能不能"要打折</h3><p>供需拐点、价格降幅、产能节点这类能用数据推的判断，他命中率高；"永远不可能""不太可能上车"这类技术否定，几年后常被工程进步推翻。</p></div>
-    <div class="callout"><h3>对 AI 的判断摆幅很大</h3><p>2023 年说 GPT-5 就是通用人工智能，2024—2025 年转向"见顶、衰退、停止预训练"，2026 年又改口说当前这一代模型就够做到顶尖科学家水平。单看某一年的观点容易被带偏。</p></div>
-    <div class="callout"><h3>转述的企业路线图更不靠谱</h3><p>他转述他人或企业计划的判断已到期 86 条，说错 37 条。特斯拉 4680、Optimus 量产、国产 EUV、Neuralink 这类路线图普遍延期。</p></div>
+    <div class="callout"><h3>"多久、多少"可信，"能不能"打折</h3><p>数据推算的判断准；技术否定常被工程进步推翻。</p></div>
+    <div class="callout"><h3>对 AI 摆幅很大</h3><p>2023 年过度乐观，2024—2025 年过度悲观，2026 年又改口。</p></div>
+    <div class="callout"><h3>转述的路线图更不靠谱</h3><p>转述已到期 86 条，说错 37 条，企业时间表普遍延期。</p></div>
   </div>
 </div></section>
 
-<section class="block"><div class="wrap prose">
-  <h2>他自己改过口的地方</h2>
-  <p class="sub">两个版本都计入了统计。</p>
-  <div class="flips">
-    <div class="flip"><span class="k">通用人工智能</span><span>2025 年 10 月说 1000 天内（到 2028 年 7 月）不会有 → 2026 年 5 月改成一年内出现 → 2026 年 8 月又改回"严格定义下 2028 年底前很可能没有"，同时说宽松定义下现在已经算是。</span></div>
-    <div class="flip"><span class="k">星链</span><span>2020 年说星链无法自我造血 → 2024 年明确撤回，把理由放在星舰降低发射成本上。</span></div>
-    <div class="flip"><span class="k">超级快充</span><span>2023 年底说只能展示、不能实用，只有换电能普及 → 2025 年 3 月比亚迪发布兆瓦闪充后转为看好。</span></div>
-    <div class="flip"><span class="k">AI 能力上限</span><span>2025 年底说自注意力大模型能力已到顶 → 2026 年 6 月说当前这一代模型就够做到顶尖科学家水平。</span></div>
+<section class="block"><div class="wrap grid2">
+  <div>
+    <h2>他改过口的地方</h2>
+    <div class="flips">
+      <div class="flip"><span class="k">通用人工智能</span><span>1000 天内没有 → 一年内会有 → 严格定义下 2028 年底前仍没有</span></div>
+      <div class="flip"><span class="k">星链</span><span>无法自我造血（2020）→ 撤回（2024）</span></div>
+      <div class="flip"><span class="k">超级快充</span><span>只能展示（2023）→ 转为看好（2025）</span></div>
+      <div class="flip"><span class="k">AI 上限</span><span>能力到顶（2025 年底）→ 当前一代就够（2026）</span></div>
+    </div>
   </div>
-</div></section>
-
-<section class="block"><div class="wrap prose">
-  <h2>还没到期，值得盯的</h2>
-  <p class="sub">下面这些属于他擅长的一类：按产能、质量、物理约束算出来的判断。</p>
-  <div class="flips">
-    <div class="flip"><span class="k">存储涨价周期</span><span>2026 年判断存储价格最早 2028 年才停止上涨，新厂大多 2028 年集中量产。目前<span class="ok-t">趋势向好</span>；他自己点出的风险是 2028 年集中供给碰上 AI 需求放缓。</span></div>
-    <div class="flip"><span class="k">HBM</span><span>2026 年 7 月判断 HBM 几年后成为内存的绝对主力，依据是其占内存销售额从 2023 年的 8% 升到 41%。</span></div>
-    <div class="flip"><span class="k">太空算力</span><span>2026 年判断马斯克的 500GW 太空算力"绝对不可能"，需要至少 6200 万吨送入轨道。按入轨质量算的物理论证很硬。</span></div>
-    <div class="flip"><span class="k">全固态电池</span><span>2026 年 5 月按产能推算：2027 年装车最多占新能源车的 1/230，2028 年约 1/100。</span></div>
-    <div class="flip"><span class="k">燃油车禁售</span><span>2025 年 5 月判断欧美 2035 年都不会停售燃油车，至少推后 5—10 年。欧盟 2025 年 12 月已提议放宽 2035 年的减排要求，<span class="ok-t">趋势向好</span>。</span></div>
-    <div class="flip"><span class="k">AI 与数学</span><span>2026 年 8 月说黎曼猜想很可能一年内由 AI 证明。这是他目前最激进的 AI 判断，2027 年 8 月就能检验。</span></div>
+  <div>
+    <h2>还没到期，值得盯</h2>
+    <div class="flips">
+      <div class="flip"><span class="k">存储涨价</span><span>最早 2028 年才停涨（2026）<span class="ok-t"> 趋势向好</span></span></div>
+      <div class="flip"><span class="k">HBM</span><span>几年后成为内存绝对主力（2026）</span></div>
+      <div class="flip"><span class="k">太空算力</span><span>500GW"绝对不可能"（2026）</span></div>
+      <div class="flip"><span class="k">全固态电池</span><span>2027 年装车最多占 1/230（2026）</span></div>
+      <div class="flip"><span class="k">燃油车禁售</span><span>欧美 2035 年停不了（2025）<span class="ok-t"> 趋势向好</span></span></div>
+      <div class="flip"><span class="k">AI 与数学</span><span>黎曼猜想一年内由 AI 证明（2026-08）</span></div>
+    </div>
   </div>
 </div></section>
 
 <section class="block"><div class="wrap">
   <h2>全部预测</h2>
-  <p class="sub">默认只显示高风险判断。预测内容是对原话的复述，现实依据和来源由联网核实。</p>
   <div id="list"><p class="noscript">需要开启 JavaScript 才能显示明细。</p></div>
 </div></section>
 
-<section class="block"><div class="wrap prose method">
-  <h2>方法与局限</h2>
+<section class="block"><div class="wrap method">
+  <h2>方法</h2>
   <ul>
-    <li>范围：卓克 13 门课、2142 篇正文。先用规则扫描带时间锚点和强断言的段落，再逐条筛读、联网核实，共整理出 689 条判断。规则扫描以外、藏在图片或没有明显时间词的预测可能漏检。</li>
-    <li>判定口径与香帅、万维钢页面一致：命中、基本命中算说对；部分命中单列；落空、被反证算说错。"作者已修正"计入无法验证。</li>
-    <li>含金量分档按同一标准补标：高风险判断要同时满足本人判断、说法具体、当时有风险、话题分量重、结果已明朗。分档有主观成分。</li>
-    <li>判定由 AI 子任务完成，抽查过 2026 年的关键事实，但没有逐条人工复核。实现情况截至 2026-10-08。</li>
+    <li>2142 篇规则扫描后逐条筛读，整理出 689 条；隐含预测可能漏检。</li>
+    <li>高风险判断：本人说的、具体、当时有风险、分量重、已有结果。</li>
+    <li>转述他人和企业计划不计入他本人的命中率。</li>
+    <li>AI 辅助判定，抽查关键事实，未逐条人工复核。</li>
   </ul>
 </div></section>
 </main>
 
 <footer class="end"><div class="wrap">
-  <p>继续看另外两位：</p>
   <div class="next">
-    <a href="../wanweigang/">万维钢<span>具体预测少，宏观判断多数应验</span></a>
-    <a href="../xiangshuai/">香帅<span>风险提示很准，买入建议要打折</span></a>
-    <a href="../">专题首页<span>三位老师放在一起看</span></a>
+    <a href="../wanweigang/">万维钢<span>逆着恐慌的判断多数对</span></a>
+    <a href="../xiangshuai/">香帅<span>风险提示准，买入建议打折</span></a>
+    <a href="../">专题首页<span>三位老师对比</span></a>
   </div>
 </div></footer>
 <script src="../assets/charts.js"></script>
