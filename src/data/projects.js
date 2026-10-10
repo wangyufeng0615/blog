@@ -31,6 +31,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '得到老师预测回测',
+    description: '卓克、万维钢、香帅课程里的一千九百多条预测，逐条对照今天的现实',
+    sticker: 'forecast',
+    url: 'https://wangyufeng.org/forecast-review/',
+    type: 'Data story',
+    year: '2026',
+    tags: ['Forecast', 'Data', 'LLM'],
+    status: 'Live',
+  },
+  {
     name: 'Rapier Galton Lab',
     description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
     sticker: 'galton',
