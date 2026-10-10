@@ -273,6 +273,18 @@ function floatingBackHtml(language = 'zh-CN') {
 `;
 }
 
+// 多页专题的子目录页面（如 /forecast-review/zhuoke/）同样需要返回博客的按钮
+function injectNestedFloatingBack(dir, rootDir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      injectNestedFloatingBack(full, rootDir);
+    } else if (entry.name === 'index.html' && dir !== rootDir) {
+      fs.writeFileSync(full, injectFloatingBack(fs.readFileSync(full, 'utf-8'), 'zh-CN'));
+    }
+  }
+}
+
 function injectFloatingBack(html, language) {
   const control = floatingBackHtml(language);
   if (html.includes('</body>')) {
@@ -489,6 +501,7 @@ function buildCustomPosts(posts) {
       const indexFile = path.join(destDir, 'index.html');
       const html = post.noHeader ? sourceHtml : injectFloatingBack(sourceHtml, 'zh-CN');
       fs.writeFileSync(indexFile, html);
+      if (!post.noHeader) injectNestedFloatingBack(destDir, destDir);
       console.log(`✓ ${outputPath}/`);
       continue;
     }

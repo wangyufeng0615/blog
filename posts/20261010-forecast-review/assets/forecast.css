@@ -40,8 +40,10 @@ a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid co
 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 b, strong { color: var(--ink-strong); font-weight: 600; }
 
-.wrap { width: min(1120px, 100%); margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
-.prose > * { max-width: 760px; }
+.wrap { width: min(1560px, 100%); margin: 0 auto; padding: 0 clamp(16px, 4vw, 64px); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); align-items: start; }
+.grid2 > div > h2 { margin-bottom: 6px; }
+@media (max-width: 1080px) { .grid2 { grid-template-columns: 1fr; } }
 
 /* 顶部导航：面包屑 + 三位老师切换 */
 .topnav { border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 20; }
@@ -52,16 +54,16 @@ b, strong { color: var(--ink-strong); font-weight: 600; }
 .topnav a[aria-current="page"] { color: var(--accent-ink); box-shadow: inset 0 -2px 0 var(--accent); }
 
 /* 页首 */
-.hero { padding: clamp(40px, 8vw, 88px) 0 clamp(28px, 5vw, 48px); }
+.hero { padding: clamp(36px, 6vw, 72px) 0 clamp(24px, 4vw, 40px); }
 .eyebrow { font-size: 14px; color: var(--accent-ink); font-weight: 600; letter-spacing: .02em; margin-bottom: 14px; }
 h1 { font-size: clamp(30px, 5.4vw, 52px); line-height: 1.18; color: var(--ink-strong); font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
-.lede { margin-top: 18px; font-size: clamp(17px, 2.1vw, 20px); line-height: 1.7; color: var(--ink); max-width: 760px; text-wrap: pretty; }
+.lede { margin-top: 18px; font-size: clamp(17px, 2.1vw, 21px); line-height: 1.7; color: var(--ink); max-width: 1000px; text-wrap: pretty; }
 .meta-line { margin-top: 16px; font-size: 14px; color: var(--muted); }
 
-section.block { padding: clamp(28px, 5vw, 56px) 0; border-top: 1px solid var(--line); }
+section.block { padding: clamp(24px, 4vw, 48px) 0; border-top: 1px solid var(--line); }
 h2 { font-size: clamp(22px, 3vw, 30px); line-height: 1.3; color: var(--ink-strong); font-weight: 700; margin-bottom: 10px; text-wrap: balance; }
 h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 600; }
-.sub { color: var(--muted); font-size: 15px; margin-bottom: 24px; max-width: 760px; }
+.sub { color: var(--muted); font-size: 15px; margin-bottom: 18px; max-width: 1000px; }
 .prose p + p, .prose p + ul, .prose ul + p { margin-top: 14px; }
 .prose ul { padding-left: 1.2em; display: grid; gap: 8px; }
 
@@ -82,6 +84,7 @@ h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 
 /* 图表容器 */
 .chart-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(16px, 2.6vw, 24px); }
 .chart-card + .chart-card { margin-top: 16px; }
+.two-col > .chart-card + .chart-card { margin-top: 0; }
 .chart-card h3 { margin-bottom: 4px; }
 .chart-card .cap { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .chart { width: 100%; position: relative; }
@@ -123,7 +126,7 @@ h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 
 .pcard ul { padding-left: 1.1em; display: grid; gap: 8px; font-size: 15px; }
 
 /* 精选判断卡片 */
-.picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; }
+.picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 14px; }
 .pick { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
 .pick .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 .pick .top .date { font-variant-numeric: tabular-nums; }
@@ -137,14 +140,14 @@ h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 
 .picks-head:first-of-type { margin-top: 6px; }
 
 /* 规律 / 提示块 */
-.callouts { display: grid; gap: 14px; }
+.callouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 14px; }
 .callout { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; }
 .callout h3 { font-size: 17px; margin-bottom: 6px; }
 .callout p { font-size: 15px; }
 
 /* 时间线式列表（改口、待观察） */
-.flips { display: grid; gap: 10px; }
-.flip { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.flips { display: grid; }
+.flip { display: grid; grid-template-columns: 104px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
 .flip .k { font-weight: 600; color: var(--ink-strong); }
 @media (max-width: 560px) { .flip { grid-template-columns: 1fr; gap: 4px; } }
 
@@ -204,7 +207,7 @@ h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 
 .lesson p { font-size: 15px; }
 
 .method { font-size: 14.5px; color: var(--ink); }
-.method ul { padding-left: 1.2em; display: grid; gap: 8px; }
+.method ul { padding-left: 1.2em; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 8px 40px; }
 footer.end { padding: 36px 0 90px; color: var(--muted); font-size: 13.5px; border-top: 1px solid var(--line); }
 .next { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 8px; }
 .next a { display: block; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 14px 16px; color: var(--ink-strong); font-weight: 600; }
