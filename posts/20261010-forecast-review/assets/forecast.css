@@ -180,8 +180,9 @@ h3 { font-size: 18px; line-height: 1.45; color: var(--ink-strong); font-weight: 
 .more:hover { border-color: var(--accent); }
 
 /* 专题首页：三位老师卡片 */
-.teachers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-@media (max-width: 960px) { .teachers { grid-template-columns: 1fr; } }
+.teachers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1280px) { .teachers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px) { .teachers { grid-template-columns: 1fr; } }
 .tcard { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 14px; color: inherit; border-bottom: 1px solid var(--line); transition: border-color .15s, transform .15s, box-shadow .15s; }
 .tcard:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(40, 40, 30, .07); color: inherit; }
 .tcard .name { font-size: 24px; font-weight: 700; color: var(--ink-strong); line-height: 1.2; }
