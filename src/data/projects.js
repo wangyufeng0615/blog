@@ -41,6 +41,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '星际拓荒通关线索图',
+    description: '《星际拓荒》打出结局要先知道哪些事、每件在哪学到、哪些能绕过去，一张可缩放的依赖图',
+    sticker: 'outerwilds',
+    url: 'https://wangyufeng.org/outer-wilds-clues/',
+    type: 'Game guide',
+    year: '2026',
+    tags: ['Outer Wilds', 'Game', 'Graph'],
+    status: 'Live',
+  },
+  {
     name: 'Rapier Galton Lab',
     description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
     sticker: 'galton',

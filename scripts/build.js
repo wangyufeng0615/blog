@@ -811,6 +811,7 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 - [王工存储指数 llms.txt](${SITE_URL}/storage-trend/llms.txt): 存储指数的指标分组、数据接口与引用注意事项。
 - [王工存储指数 JSON 快照](https://storage-trend-api.wangyufeng.workers.dev/api/snapshot): DRAM、HBM、NAND、SSD 等存储指标的最新完整数据。
 - [和AI一起探索地球 llms.txt](https://earth.wangyufeng.org/llms.txt): 街景探索游戏的玩法与入口说明。
+- [星际拓荒通关线索图 llms.txt](${SITE_URL}/outer-wilds-clues/llms.txt): 《星际拓荒》本体线索依赖的完整文字版与常见问题。
 
 ## Featured work
 
