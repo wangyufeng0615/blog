@@ -1,0 +1,4136 @@
+{
+ "name": "Outer Wilds clue dependency map",
+ "name_zh": "星际拓荒通关线索图",
+ "description": "Prerequisite graph of the Outer Wilds base game (no DLC): what you must learn or reach before each step, where each clue is, alternative ways through, and how to get to key locations. Contains full spoilers.",
+ "url": "https://wangyufeng.org/outer-wilds-clues/en/",
+ "url_zh": "https://wangyufeng.org/outer-wilds-clues/",
+ "author": {
+  "name": "王雨峰 (Wang Yufeng)",
+  "url": "https://wangyufeng.org/"
+ },
+ "datePublished": "2026-10-14",
+ "dateModified": "2026-10-14",
+ "game": {
+  "name": "Outer Wilds",
+  "name_zh": "星际拓荒",
+  "developer": "Mobius Digital",
+  "publisher": "Annapurna Interactive",
+  "year": 2019
+ },
+ "sources": "Quotes: official English and Simplified Chinese game text (Steam build, October 2026). Alternatives: Outer Wilds Wiki and community guides, cited per node.",
+ "how_to_read": "Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.",
+ "bands": [
+  {
+   "key": "main",
+   "title": {
+    "zh": "通关主线",
+    "en": "Main path"
+   },
+   "summary": {
+    "zh": "坐标、飞船、高级跃迁核心三样凑齐，才能跃迁到宇宙之眼",
+    "en": "Get all three — the coordinates, the Vessel and the advanced warp core — to warp to the Eye of the Universe"
+   },
+   "roots": [
+    "goal"
+   ]
+  },
+  {
+   "key": "reach",
+   "title": {
+    "zh": "怎么到那儿",
+    "en": "Getting there"
+   },
+   "summary": {
+    "zh": "关键地点的入口、发现方式和时机。上面卡片里的地点，点开详情能跳到这里",
+    "en": "Entrances, how you find them, and when to go. Places on the cards above link here"
+   },
+   "roots": [
+    "r-hel",
+    "r-fossil",
+    "r-lakebed",
+    "r-sunstation",
+    "r-forge",
+    "r-observatory",
+    "r-qtower",
+    "r-tqt",
+    "r-workshop",
+    "r-mine"
+   ]
+  },
+  {
+   "key": "qm",
+   "title": {
+    "zh": "量子卫星支线",
+    "en": "Quantum Moon"
+   },
+   "summary": {
+    "zh": "可选。走完后，结局营火边会多出所莱内姆",
+    "en": "Optional. Finish it and Solanum joins the campfire at the end"
+   },
+   "roots": [
+    "q-goal"
+   ]
+  },
+  {
+   "key": "comet",
+   "title": {
+    "zh": "闯入者支线",
+    "en": "The Interloper"
+   },
+   "summary": {
+    "zh": "可选。只解释挪麦人为什么灭绝，不影响通关",
+    "en": "Optional. Explains what wiped out the Nomai; not needed to finish"
+   },
+   "roots": [
+    "i-goal"
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "c-dmg",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "损伤报告：跟踪模块遗失",
+    "en": "Damage report: tracking module missing"
+   },
+   "place": {
+    "zh": "轨道探测炮 · 控制模块",
+    "en": "Orbital Probe Cannon · Control Module"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-sunk"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Probe Tracking Module: MISSING.",
+     "zh": "探测器跟踪模块：遗失。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-cassava",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "有部件沉到了水流下面",
+    "en": "A part sank below the current"
+   },
+   "place": {
+    "zh": "碎空星南部天文台 / 建造厂",
+    "en": "Southern Observatory / Construction Yard"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-observatory",
+   "prerequisites": [],
+   "unlocks": [
+    "g-sunk"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai on the Construction Yard saw something sink beneath the underwater current, which they'd previously thought was impossible.",
+     "zh": "建造厂的挪麦人看见有东西沉到了水流的下面。在此之前，他们觉得这种事情是不可能的。",
+     "source": "Ship log · Ocean Depths"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-feld-core",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "费尔德斯巴到过核心",
+    "en": "Feldspar reached the core"
+   },
+   "place": {
+    "zh": "黑棘星 · 费尔德斯巴",
+    "en": "Dark Bramble · Feldspar"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-sunk"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Feldspar found a way to reach the core of Giant’s Deep.",
+     "zh": "费尔德斯巴找到了抵达深巨星核心的方法。",
+     "source": "Ship log · Ocean Depths"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-sunk",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "知道模块沉在海底",
+    "en": "Learn the module sank"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-dmg",
+    "c-cassava",
+    "c-feld-core"
+   ],
+   "unlocks": [
+    "coords"
+   ],
+   "notes": [
+    {
+     "zh": "先得知道坐标在海底，才会去想办法下潜。",
+     "en": "You have to know the coordinates are underwater before you look for a way down."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-tornado",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "逆时针气旋会往下压",
+    "en": "Counterclockwise cyclones push down"
+   },
+   "place": {
+    "zh": "碎空星 · 南部天文台的气旋模型",
+    "en": "Brittle Hollow · cyclone model in the Southern Observatory"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-observatory",
+   "prerequisites": [],
+   "unlocks": [
+    "g-current"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "There also exists a rarer type of cyclone that spins the opposite direction and pushes objects beneath the waters and below the current.",
+     "zh": "还有一种较为罕见的气旋，会反方向旋转，把对象往水面和水流下方推。",
+     "source": "Ship log · Tornado Simulation"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-cur-accident",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "碰巧被逆时针气旋卷下去",
+    "en": "Get swept down by luck"
+   },
+   "place": {
+    "zh": "深巨星海面",
+    "en": "Giant’s Deep"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-current"
+   ],
+   "notes": [
+    {
+     "zh": "费尔德斯巴自己就是这么发现的。",
+     "en": "That is how Feldspar found it."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "I found that bit out by accident, but let’s keep that between you and me, hey? Hornfels would have my very handsome head if they knew I’d been riding the cyclones again.",
+     "zh": "我是无意间才发现的，不过这事咱们就别告诉其他人了，行吗？要是让霍恩费斯知道我又搭气旋的便车，他非把我的皮给扒了不可。",
+     "source": "Dialogue and signs"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-cur-dive",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "高速直冲核心",
+    "en": "Dive in at very high speed"
+   },
+   "place": {
+    "zh": "深巨星",
+    "en": "Giant’s Deep"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-current"
+   ],
+   "notes": [
+    {
+     "zh": "速度够快（每秒约一万米）可以直接冲破水流，撞上岛就会死。有对应的成就。",
+     "en": "Fast enough (around 10 km/s) and you punch straight through; hit an island and you die. There is an achievement for it."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Giant%27s_Deep"
+   ]
+  },
+  {
+   "id": "a-cur-island",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "停在被抛起的岛下面",
+    "en": "Wait under a thrown island"
+   },
+   "place": {
+    "zh": "深巨星",
+    "en": "Giant’s Deep"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-current"
+   ],
+   "notes": [
+    {
+     "zh": "岛被气旋抛上天再砸回海面时，有时会把下面的飞船压到水流以下。",
+     "en": "When a cyclone throws an island and it crashes back down, it can push a ship underneath below the current."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Giant%27s_Deep"
+   ]
+  },
+  {
+   "id": "a-cur-shuttle",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "用重力炮把航天飞机打过去",
+    "en": "Fire the Nomai shuttle at it"
+   },
+   "place": {
+    "zh": "碎空星重力炮 → 深巨星",
+    "en": "Brittle Hollow gravity cannon → Giant’s Deep"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-current"
+   ],
+   "notes": [
+    {
+     "zh": "两颗星靠近时，用碎空星重力炮发射所莱内姆的航天飞机，能穿过水流，但穿不过核心外的电场。前提是已经把它从量子卫星召回来。",
+     "en": "Launch Solanum’s shuttle from the Brittle Hollow gravity cannon when the planets are close. It gets below the current but not through the electric field. You need to have recalled it from the Quantum Moon first."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Giant%27s_Deep"
+   ]
+  },
+  {
+   "id": "g-current",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "潜到水流下面",
+    "en": "Get below the current"
+   },
+   "place": {
+    "zh": "深巨星海面下的强水流",
+    "en": "The strong current under the ocean"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-tornado",
+    "a-cur-accident",
+    "a-cur-dive",
+    "a-cur-island",
+    "a-cur-shuttle"
+   ],
+   "unlocks": [
+    "coords"
+   ],
+   "notes": [
+    {
+     "zh": "深巨星海面下有一层强水流，正常情况下任何东西都沉不下去。",
+     "en": "A strong current under the surface of Giant’s Deep keeps everything from sinking."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it.",
+     "zh": "加布罗说水面下有一股很强劲的水流，使得水里的东西无法沉下去。",
+     "source": "Ship log · Ocean Depths"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-harmonica",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "口琴信号",
+    "en": "Harmonica signal"
+   },
+   "place": {
+    "zh": "信号镜 · 旅行者频道",
+    "en": "Signalscope · Travelers frequency"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-findfeld"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Esker's signalscope log reports harmonica music coming from somewhere on Timber Hearth. They claim it sounds just like Feldspar's harmonica, but Feldspar disappeared in space ages ago.",
+     "zh": "埃斯科的信号镜日志报告说，木炉星的某处传来了口琴声。他说那声音听起来和费尔德斯巴的口琴一模一样。可是费尔德斯巴早就消失在太空里了。",
+     "source": "Ship log · Dark Bramble Seed"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-thseed",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "侦察兵射进木炉星的种子",
+    "en": "Scout into Timber Hearth’s seed"
+   },
+   "place": {
+    "zh": "木炉星 · 撞击坑",
+    "en": "Timber Hearth · impact crater"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-findfeld"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "When I launch my scout into the seed that crashed on Timber Hearth, it ends up in a much bigger space filled with fog and thorny vines.",
+     "zh": "当我把侦查兵发射到坠落在木炉星的种子里面去的时候，它最后却出现在了一个充满雾气和尖刺藤蔓的更大的空间。",
+     "source": "Ship log · Feldspar’s Camp"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-bramisland",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "荆棘岛上的旧营地",
+    "en": "Old camp on Bramble Island"
+   },
+   "place": {
+    "zh": "深巨星 · 荆棘岛",
+    "en": "Giant’s Deep · Bramble Island"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-findfeld"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "An island of thorny vines and what appears to be a frozen jellyfish. It looks like Feldspar camped here before heading off to Dark Bramble.",
+     "zh": "一座长满了有刺藤蔓的岛屿，样子像是一只冻住的水母。看起来费尔德斯巴在前往黑棘星之前曾经在这里扎营。",
+     "source": "Ship log · Bramble Island"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-feld-wander",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "在黑棘星里乱逛撞见",
+    "en": "Stumble on him in Dark Bramble"
+   },
+   "place": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-findfeld"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "g-findfeld",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "找到费尔德斯巴",
+    "en": "Find Feldspar"
+   },
+   "place": {
+    "zh": "黑棘星某颗种子里",
+    "en": "Inside one of Dark Bramble’s seeds"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-harmonica",
+    "c-thseed",
+    "c-bramisland",
+    "a-feld-wander"
+   ],
+   "unlocks": [
+    "c-jelly"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-fossil",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "安康鱼是瞎的，靠听声",
+    "en": "Anglerfish are blind and hunt by sound"
+   },
+   "place": {
+    "zh": "余烬双星 · 安康鱼化石",
+    "en": "Ember Twin · anglerfish fossil"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-fossil",
+   "prerequisites": [],
+   "unlocks": [
+    "g-angler"
+   ],
+   "notes": [
+    {
+     "zh": "关掉引擎靠惯性滑过去，安康鱼就发现不了你。",
+     "en": "Cut the engines and drift; they won’t notice you."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The blindfold rule was added because real anglerfish are blind.",
+     "zh": "之所以加入眼罩这个规则，是因为真正的安康鱼就是看不见的。",
+     "source": "Ship log · Anglerfish Fossil"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-ang-drift",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "出种子后什么都不按",
+    "en": "Do nothing after entering a seed"
+   },
+   "place": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-angler"
+   ],
+   "notes": [
+    {
+     "zh": "从种子出来时速度和方向是固定的，什么都不按就能稳定漂过去；转动机身不会惊动它们。",
+     "en": "You always come out of a seed at a fixed speed and heading, so doing nothing drifts you past reliably. Rotating the ship doesn’t alert them."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Anglerfish"
+   ]
+  },
+  {
+   "id": "a-ang-dodge",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "全速甩开，或让它卡在藤蔓间",
+    "en": "Outrun them or snag them on vines"
+   },
+   "place": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-angler"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Anglerfish"
+   ]
+  },
+  {
+   "id": "g-angler",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "活着躲过安康鱼",
+    "en": "Get past the anglerfish"
+   },
+   "place": {
+    "zh": "黑棘星内部",
+    "en": "Inside Dark Bramble"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-fossil",
+    "a-ang-drift",
+    "a-ang-dodge"
+   ],
+   "unlocks": [
+    "c-jelly",
+    "vessel"
+   ],
+   "notes": [
+    {
+     "zh": "飞船线和水母线都要穿过黑棘星，所以这是整张图里两条线共用的门槛。",
+     "en": "Both the Vessel line and the jellyfish line run through Dark Bramble, so this gate is shared."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-jelly",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "水母内部是绝缘的",
+    "en": "Jellyfish insides are insulated"
+   },
+   "place": {
+    "zh": "黑棘星 · 费尔德斯巴营地的冻水母",
+    "en": "Dark Bramble · the frozen jellyfish at Feldspar’s camp"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "g-findfeld",
+    "g-angler"
+   ],
+   "unlocks": [
+    "g-field"
+   ],
+   "notes": [
+    {
+     "zh": "钻进深巨星的水母体内，就能随它穿过电场。",
+     "en": "Get inside a Giant’s Deep jellyfish and ride it through the field."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "Feldspar documented their attempts to eat this enormous jellyfish frozen in the ice. The outside was all rubbery and tough, possibly because it insulates the jellyfish’s insides from getting zapped by electricity.",
+     "zh": "费尔德斯巴曾经多次尝试吃掉这条冰封起来的巨大水母，并把这些内容记录了下来。外皮就像橡胶，根本咬不动。可能是为了起到绝缘的作用，保护水母内部，以免触电。",
+     "source": "Ship log · Frozen Jellyfish"
+    },
+    {
+     "en": "After tasting the inside of the jellyfish, Feldspar concluded that these jellyfish are only useful for insulation from electricity.",
+     "zh": "品尝过水母的内部之后，费尔德斯巴得出了结论，这些水母只有在隔绝电流时才有用。",
+     "source": "Ship log · Frozen Jellyfish"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-field",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "穿过核心外的电场",
+    "en": "Get through the electric field"
+   },
+   "place": {
+    "zh": "深巨星核心外围",
+    "en": "Around Giant’s Deep’s core"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-jelly"
+   ],
+   "unlocks": [
+    "coords"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The ocean is surprisingly calm beneath the current. Some sort of electrical field surrounds the planet's core.",
+     "zh": "水流下面的海洋出奇地宁静。某种电场环绕着行星的核心。",
+     "source": "Ship log · Ocean Depths"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "coords",
+   "type": "required_item",
+   "band": "main",
+   "label": {
+    "zh": "宇宙之眼坐标",
+    "en": "The Eye’s coordinates"
+   },
+   "place": {
+    "zh": "深巨星核心 · 探测器跟踪模块",
+    "en": "Giant’s Deep core · Probe Tracking Module"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "g-sunk",
+    "g-current",
+    "g-field"
+   ],
+   "unlocks": [
+    "goal"
+   ],
+   "notes": [
+    {
+     "zh": "跟踪模块从轨道探测炮上脱落，沉进了深巨星核心。它的投影池里存着第 9,318,054 号探测器找到的宇宙之眼坐标。",
+     "en": "The tracking module broke off the Orbital Probe Cannon and sank to the core of Giant’s Deep. Its projection pool holds the coordinates found by probe 9,318,054."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The 9,318,054th probe located a deep space anomaly matching all known criteria for the Eye of the universe.",
+     "zh": "探测器9,318,054发现了与宇宙之眼所有已知指标相符的深空异常现象。",
+     "source": "Ship log · Probe Tracking Module"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-murals",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "三块壁画",
+    "en": "The three murals"
+   },
+   "place": {
+    "zh": "碎空星 · 旧定居点",
+    "en": "Brittle Hollow · Old Settlement"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-oldsettle",
+   "prerequisites": [],
+   "unlocks": [
+    "g-knowvessel"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "A mural of Dark Bramble ensnaring the Nomai vessel.",
+     "zh": "一幅黑棘星缠住挪麦飞船的壁画。",
+     "source": "Ship log · Mural (Panel 2)"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-podlogs",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "逃生舱飞行日志",
+    "en": "Escape pod flight logs"
+   },
+   "place": {
+    "zh": "碎空星 / 余烬双星的逃生舱",
+    "en": "Escape pods on Brittle Hollow / Ember Twin"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-knowvessel"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "All three escape pods were launched from something called the Vessel, which was badly damaged.",
+     "zh": "所有三个逃生舱都是从某个损坏严重、名叫飞船的东西发射出来的。",
+     "source": "Ship log · Escape Pod 1"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-knowvessel",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "知道有一艘飞船",
+    "en": "Learn there is a Vessel"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-murals",
+    "c-podlogs"
+   ],
+   "unlocks": [
+    "vessel"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-pod3",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "3号逃生舱：两个信标",
+    "en": "Escape Pod 3: two beacons"
+   },
+   "place": {
+    "zh": "黑棘星 · 3号逃生舱",
+    "en": "Dark Bramble · Escape Pod 3"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "c-grave"
+   ],
+   "notes": [
+    {
+     "zh": "3号逃生舱的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。",
+     "en": "The Escape Pod 3 survivors heard two identical Vessel beacons, followed the nearer one leaving a trail of lights, and died at a small seed. Follow the lights to the grave."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The survivors from Escape Pod 3 detected two distinct beacons from the Vessel, as if it was in two locations at once.",
+     "zh": "3号逃生舱的幸存者检测到了从飞船发出的两个不同信标，好像飞船同时出现在了两个地方一样。",
+     "source": "Ship log · Escape Pod 3"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-grave",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "侦察兵射进小种子，拍到飞船",
+    "en": "Scout into the small seed and photograph it"
+   },
+   "place": {
+    "zh": "黑棘星 · 挪麦坟墓",
+    "en": "Dark Bramble · Nomai Grave"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-pod3"
+   ],
+   "unlocks": [
+    "g-whichseed"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "If I launch my scout into the seed, I can take photos of an enormous derelict Nomai ship.",
+     "zh": "如果我把侦查兵发射到种子里面去，我就可以拍下那艘被挪麦人废弃的巨大飞船的照片。",
+     "source": "Ship log · Nomai Grave"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-seed-explore",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "在黑棘星里一颗颗试",
+    "en": "Search the seeds one by one"
+   },
+   "place": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-whichseed"
+   ],
+   "notes": [
+    {
+     "zh": "飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗。",
+     "en": "The Vessel’s seed is in the anglerfish nest — the only one that doesn’t glow."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Dark_Bramble"
+   ]
+  },
+  {
+   "id": "g-whichseed",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "知道飞船在哪颗种子里",
+    "en": "Find which seed hides it"
+   },
+   "place": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-grave",
+    "a-seed-explore"
+   ],
+   "unlocks": [
+    "vessel"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "vessel",
+   "type": "required_item",
+   "band": "main",
+   "label": {
+    "zh": "进入挪麦飞船",
+    "en": "Reach the Nomai Vessel"
+   },
+   "place": {
+    "zh": "黑棘星深处",
+    "en": "Deep in Dark Bramble"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "g-knowvessel",
+    "g-whichseed",
+    "g-angler"
+   ],
+   "unlocks": [
+    "goal"
+   ],
+   "notes": [
+    {
+     "zh": "飞船当年被黑棘星缠住，跃迁核心摔坏了，但还能接收消息，也存着宇宙之眼的原始信号。",
+     "en": "Dark Bramble caught the Vessel and broke its warp core, but it can still receive messages and holds the Eye’s original signal."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Vessel's warp core broke when the ship crashed in Dark Bramble.",
+     "zh": "飞船坠毁在黑棘星上时，它的跃迁核心摔坏了。",
+     "source": "Ship log · The Vessel"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-atp4",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "四处原文都指向它",
+    "en": "Four places point to it"
+   },
+   "place": {
+    "zh": "高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉",
+    "en": "High Energy Lab / mines / Statue Workshop / Black Hole Forge"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-whereatp"
+   ],
+   "notes": [
+    {
+     "zh": "高能实验室提议选址灰烬双星；木炉星矿井在造它的保护壳；雕塑车间的面具装在里面；黑洞熔炉为它铸核心。",
+     "en": "The High Energy Lab proposed Ash Twin; Timber Hearth’s mines supplied its shell; the Statue Workshop’s masks are inside; the Black Hole Forge cast its core."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Nomai wanted to know if a 22-minute negative time interval was possible. They concluded it would require new technology to produce the necessary energy as well as an advanced warp core to handle those energies. Ash Twin was proposed as a location for the project.",
+     "zh": "挪麦人想知道，他们是否能够制造出一个22分钟的时间倒流间隔。他们得出结论，实现这一目标需要一种能够产生必要能量的新技术，还需要一颗能够处理这些能量的高级跃迁核心。他们提议将灰烬双星作为该计划的选址。",
+     "source": "Ship log · High Energy Lab"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-whereatp",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "知道计划在灰烬双星中心",
+    "en": "Learn the project is inside Ash Twin"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-atp4"
+   ],
+   "unlocks": [
+    "core"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-mine",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "保护壳没有任何入口",
+    "en": "The shell has no physical entrance"
+   },
+   "place": {
+    "zh": "木炉星 · 挪麦矿井",
+    "en": "Timber Hearth · Nomai Mines"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-mine",
+   "prerequisites": [],
+   "unlocks": [
+    "g-sealed"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Once the shell was finished, the Nomai checked to ensure there were no longer any physical entrances or cracks.",
+     "zh": "保护外壳一经完成，挪麦人便对其进行检查，确认其上没有裂缝，也没有任何与内部物理接触的方式。",
+     "source": "Ship log · Nomai Mines"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-sealed-try",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "飞过去发现进不去",
+    "en": "Fly there and find no way in"
+   },
+   "place": {
+    "zh": "灰烬双星",
+    "en": "Ash Twin"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-sealed"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "g-sealed",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "知道只能跃迁进去",
+    "en": "Learn you can only warp in"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-mine",
+    "a-sealed-try"
+   ],
+   "unlocks": [
+    "core"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-bhfall",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "掉进碎空星的黑洞",
+    "en": "Fall into Brittle Hollow’s black hole"
+   },
+   "place": {
+    "zh": "碎空星中心",
+    "en": "Brittle Hollow’s core"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "c-whs"
+   ],
+   "notes": [
+    {
+     "zh": "碎空星的地壳一直在碎，掉进中心黑洞的东西会从白洞出来，白洞站就在旁边。",
+     "en": "Brittle Hollow’s crust keeps breaking up; whatever falls into the central black hole comes out of the white hole, next to the station."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "There is a White Hole Station on the other side of Brittle Hollow's black hole.",
+     "zh": "碎空星黑洞的另一边有一个白洞站。",
+     "source": "Ship log · WHS_R1"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-whs",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "站上平台，等目标过头顶",
+    "en": "Stand on the pad until the target is overhead"
+   },
+   "place": {
+    "zh": "白洞站",
+    "en": "White Hole Station"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-bhfall"
+   ],
+   "unlocks": [
+    "g-warp"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "To use a tower, you must be standing on the warp platform during the tower's alignment with its corresponding astral body (the alignment happens when the astral body is directly overhead).",
+     "zh": "要使用跃迁塔，你必须站在跃迁平台上，等待跃迁塔与其对应的天体匹配（对应天体经过头顶正上方时，匹配就会完成）。",
+     "source": "Ship log · WHS_X1"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-window",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "对齐有约五度的窗口",
+    "en": "Alignment has a ~5° window"
+   },
+   "place": {
+    "zh": "碎空星 · 黑洞熔炉",
+    "en": "Brittle Hollow · Black Hole Forge"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-forge",
+   "prerequisites": [],
+   "unlocks": [
+    "g-warp"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Anyone stepping onto the warp platform during the active window will be immediately warped.",
+     "zh": "在有效时间内踏上跃迁平台的任何人都会立即跃迁。",
+     "source": "Ship log · Alignment Angle Diagram"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "a-warp-accident",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "碰巧站上平台被传走",
+    "en": "Get warped by accident"
+   },
+   "place": {
+    "zh": "任意跃迁平台",
+    "en": "Any warp pad"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-warp"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "g-warp",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "会用跃迁平台",
+    "en": "Know how warp pads work"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-whs",
+    "c-window",
+    "a-warp-accident"
+   ],
+   "unlocks": [
+    "core"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-towermap",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "高塔设计图",
+    "en": "The tower designs"
+   },
+   "place": {
+    "zh": "余烬双星 · 高能实验室",
+    "en": "Ember Twin · High Energy Lab"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-hel",
+   "prerequisites": [],
+   "unlocks": [
+    "c-deduce"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Each tower was designed to visually reflect its warp destination.",
+     "zh": "每座高塔的外观都设计成了对应跃迁目的地的风格。",
+     "source": "Ship log · Ash Twin Tower Designs"
+    },
+    {
+     "en": "POKE: The tower designs in the High Energy Lab on Ember Twin reveal each receiver's location. Ask Yarrow; he is familiar with them.",
+     "zh": "珀克：余烬双星上的高能实验室中的高塔设计图可以显示每个接收点的位置。去问亚罗吧，他对这些很熟悉。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-forge",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "双星共用一个对准点",
+    "en": "The twins share an alignment point"
+   },
+   "place": {
+    "zh": "碎空星 · 黑洞熔炉",
+    "en": "Brittle Hollow · Black Hole Forge"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-forge",
+   "prerequisites": [],
+   "unlocks": [
+    "c-deduce"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Hourglass Twins are so close together they function as a single astral body, with a shared alignment point in between them.",
+     "zh": "沙漏双星离得特别近，就像一个天体一样，它们共用的对准点就在双星之间。",
+     "source": "Ship log · Black Hole Forge"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-deduce",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "推理：接收点就在灰烬双星上",
+    "en": "Deduce: the receiver is on Ash Twin"
+   },
+   "place": null,
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-towermap",
+    "c-forge"
+   ],
+   "unlocks": [
+    "g-receiver"
+   ],
+   "notes": [
+    {
+     "zh": "赤道那圈高塔各通一处，只有计划塔看不出通向哪里。按黑洞熔炉的规则，沙漏双星共用两星之间的对准点，所以它的接收点就在灰烬双星自己身上。",
+     "en": "Each tower on the equator leads somewhere, except the project tower. By the Forge’s rule the Hourglass Twins share an alignment point between them, so its receiver must be on Ash Twin itself."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "a-recv-body",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "正确的塔外有挪麦遗体",
+    "en": "A Nomai body lies outside the right tower"
+   },
+   "place": {
+    "zh": "灰烬双星 · 计划塔",
+    "en": "Ash Twin · project tower"
+   },
+   "requires": null,
+   "alternative_kind": "official",
+   "unverified": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-receiver"
+   ],
+   "notes": [
+    {
+     "zh": "Wiki 说计划塔外躺着一具挪麦遗体，可以当作提示。我没有在游戏原文里核到这一点。",
+     "en": "The wiki says a Nomai body lies outside the project tower. I could not confirm it in the game text."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Ash_Twin_Project"
+   ]
+  },
+  {
+   "id": "a-recv-try",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "把每座塔的平台挨个试",
+    "en": "Try every tower’s pad"
+   },
+   "place": {
+    "zh": "灰烬双星赤道",
+    "en": "Ash Twin’s equator"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-receiver"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "g-receiver",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "找到计划塔的接收点",
+    "en": "Find the project tower’s receiver"
+   },
+   "place": {
+    "zh": "灰烬双星表面",
+    "en": "Ash Twin’s surface"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-deduce",
+    "a-recv-body",
+    "a-recv-try"
+   ],
+   "unlocks": [
+    "core"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "c-hourglass",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "沙子从灰烬流向余烬",
+    "en": "Sand flows from Ash Twin to Ember Twin"
+   },
+   "place": {
+    "zh": "沙漏双星",
+    "en": "Hourglass Twins"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-sand"
+   ],
+   "notes": [
+    {
+     "zh": "循环开始时接收点埋在沙下，大约第 7 分 50 秒才露出来能用。",
+     "en": "The receiver starts buried; it becomes usable about 7:50 into the loop."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Ash_Twin_Project"
+   ]
+  },
+  {
+   "id": "a-sand-sleep",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "在营火边打盹快进",
+    "en": "Doze at a campfire to skip ahead"
+   },
+   "place": {
+    "zh": "任意营火",
+    "en": "Any campfire"
+   },
+   "requires": null,
+   "alternative_kind": "official",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-sand"
+   ],
+   "notes": [
+    {
+     "zh": "拿到发射密码后，就可以在营火边打盹跳过一段时间。",
+     "en": "Once you have the launch codes you can doze at a campfire to skip time."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "g-sand",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "等沙子露出接收点",
+    "en": "Wait for the sand to uncover it"
+   },
+   "place": {
+    "zh": "灰烬双星表面",
+    "en": "Ash Twin’s surface"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [
+    "c-hourglass",
+    "a-sand-sleep"
+   ],
+   "unlocks": [
+    "core"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "core",
+   "type": "required_item",
+   "band": "main",
+   "label": {
+    "zh": "取得高级跃迁核心",
+    "en": "Take the advanced warp core"
+   },
+   "place": {
+    "zh": "灰烬双星 · 中央舱室",
+    "en": "Ash Twin · central chamber"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "g-whereatp",
+    "g-sealed",
+    "g-warp",
+    "g-receiver",
+    "g-sand"
+   ],
+   "unlocks": [
+    "goal"
+   ],
+   "notes": [
+    {
+     "zh": "灰烬双星计划的核心。飞船原来的核心坏了，只有这一颗能带它跃迁。",
+     "en": "The core that powers the Ash Twin Project. The Vessel’s own core is broken; this is the only one that can make it warp."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "There is an advanced warp core inside the protective casing at the center of the planet. Removing the core will disable the Ash Twin Project.",
+     "zh": "行星中央的保护外壳内部有一颗高级跃迁核心。移除核心将会关闭灰烬双星计划。",
+     "source": "Ship log · Ash Twin Project"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "goal",
+   "type": "goal",
+   "band": "main",
+   "label": {
+    "zh": "跃迁到宇宙之眼",
+    "en": "Warp to the Eye of the Universe"
+   },
+   "place": {
+    "zh": "黑棘星深处 · 挪麦飞船舰桥",
+    "en": "Deep in Dark Bramble · the Vessel’s bridge"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "coords",
+    "vessel",
+    "core"
+   ],
+   "unlocks": [],
+   "notes": [
+    {
+     "zh": "把高级跃迁核心装进飞船，在舰桥的三面柱上输入坐标，飞船就会跃迁到宇宙之眼。",
+     "en": "Install the advanced warp core in the Vessel, enter the coordinates on the three-sided pillar on the bridge, and the Vessel warps to the Eye."
+    },
+    {
+     "zh": "取出核心的同时时间循环就停了，所以这一步只能放在最后一轮。",
+     "en": "Taking the core out stops the time loop, so this has to be your last loop."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Vessel's warp core is long dead.",
+     "zh": "飞船的跃迁核心早已失灵。",
+     "source": "Ship log · The Vessel"
+    },
+    {
+     "en": "I activated a three-sided pillar on the Vessel's bridge that appears to be some sort of input device.",
+     "zh": "我启动了飞船舰桥上的一根三面柱。它看上去像是某种输入装置。",
+     "source": "Ship log · The Vessel"
+    },
+    {
+     "en": "WARNING: Removing the core will disable the Ash Twin Project.",
+     "zh": "警告：移除核心将会关闭灰烬双星计划。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-hel-door",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "正门从里面锁着",
+    "en": "The front door is locked from inside"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-hel"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The High Energy Lab can only be accessed by a path from the Sunless City.",
+     "zh": "只能从背阴城的一条道路才能抵达高能实验室。",
+     "source": "Ship log · High Energy Lab"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-sun-chert",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "切特：地表几乎没有废墟",
+    "en": "Chert: hardly any ruins on the surface"
+   },
+   "place": {
+    "zh": "余烬双星 · 切特的营地",
+    "en": "Ember Twin · Chert’s camp"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sun-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Chert thinks the lack of surface ruins means the Nomai must have lived somewhere underground.",
+     "zh": "切特觉得地表很少有废墟这个事实，说明挪麦人一定住在地下的什么地方。",
+     "source": "Ship log · The Sunless City"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-sun-shelter",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "幸存者躲进了逃生舱下的洞",
+    "en": "Survivors sheltered beneath their pod"
+   },
+   "place": {
+    "zh": "余烬双星 · 2号逃生舱",
+    "en": "Ember Twin · Escape Pod 2"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sun-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai survivors who crashed on Ember Twin decided to seek shelter in the caves beneath their crashed escape pod.",
+     "zh": "在余烬双星上失事的挪麦幸存者们决定在坠毁逃生舱下面的洞窟里需求庇护所。",
+     "source": "Ship log · The Sunless City"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-sun-know",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "知道城在地下",
+    "en": "Learn it is underground"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-sun-chert",
+    "r-sun-shelter"
+   ],
+   "unlocks": [
+    "r-sunless"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-pod2",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "找到2号逃生舱",
+    "en": "Find Escape Pod 2"
+   },
+   "place": {
+    "zh": "余烬双星南半球",
+    "en": "Ember Twin’s southern hemisphere"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sun-pod"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Chert saw a Nomai shipwreck shooting a beam of light into the sky somewhere on Ember Twin's southern hemisphere.",
+     "zh": "切特看见一艘挪麦宇宙飞船残骸向余烬双星南半球的某个地方发射了一道光束。",
+     "source": "Ship log · Escape Pod 2"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-sun-pod",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从2号逃生舱下的洞穴跟着路标走",
+    "en": "Follow the markers from under Escape Pod 2"
+   },
+   "place": {
+    "zh": "余烬双星南半球",
+    "en": "Ember Twin’s southern hemisphere"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-pod2"
+   ],
+   "unlocks": [
+    "r-sun-way"
+   ],
+   "notes": [
+    {
+     "zh": "洞里漆黑，像迷宫，挪麦人在墙上留了路标。",
+     "en": "The caves are dark and maze-like; the Nomai marked the walls."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "ANNONA: Even with this danger, they are still our best chance for survival. We’ll form teams and descend into the caves to look for a shelter site. We can mark our findings on the walls to avoid becoming irreversibly lost.",
+     "zh": "安诺纳：虽然有这种危险存在，但假如我们想要活下去，这是最好的办法。我们会组织队伍，向下深入洞窟，去寻找建立庇护所的位置。我们可以把发现的内容刻在墙上，以免彻底迷路。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-sun-hole",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "重力炮上方的隐藏洞口",
+    "en": "A hidden hole above the gravity cannon"
+   },
+   "place": {
+    "zh": "余烬双星赤道 · 重力炮",
+    "en": "Ember Twin’s equator · gravity cannon"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sun-way"
+   ],
+   "notes": [
+    {
+     "zh": "通到城顶的宇宙之眼祭坛区，沿途有幽灵物质和仙人掌。重力炮旁边那扇城门被仙人掌堵着。",
+     "en": "Leads to the Eye Shrine District at the top of the city, past ghost matter and cacti. The door next to the cannon is blocked by cacti."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "I found a trailmarker for the the Sunless City, but the path is blocked.",
+     "zh": "我找到了背阴城的路标，但是路被堵死了。",
+     "source": "Ship log · The Sunless City"
+    }
+   ],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Hourglass_Twins"
+   ]
+  },
+  {
+   "id": "r-sun-way",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "找到进城的路",
+    "en": "Find a way in"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-sun-pod",
+    "r-sun-hole"
+   ],
+   "unlocks": [
+    "r-sunless"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-sun-time",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "越早去越好",
+    "en": "Go early"
+   },
+   "place": {
+    "zh": "沙子从下往上灌满城市",
+    "en": "Sand fills the city from the bottom up"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sunless"
+   ],
+   "notes": [
+    {
+     "zh": "沙子会从下往上灌满整座城，晚了下层就进不去，回头路也常被沙瀑截断。",
+     "en": "Sand floods the city from the bottom up; later in the loop the lower districts close off and sandfalls cut off the way back."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Hourglass_Twins"
+   ]
+  },
+  {
+   "id": "r-sunless",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "背阴城",
+    "en": "The Sunless City"
+   },
+   "place": {
+    "zh": "余烬双星地下",
+    "en": "Beneath Ember Twin"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-sun-know",
+    "r-sun-way",
+    "r-sun-time"
+   ],
+   "unlocks": [
+    "r-hel",
+    "r-fossil"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-hel-trail",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "沿能量电缆走城底的小路",
+    "en": "Follow the power cable from the bottom of the city"
+   },
+   "place": {
+    "zh": "背阴城最底层",
+    "en": "The Sunless City’s lowest district"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-hel"
+   ],
+   "notes": [
+    {
+     "zh": "小路从背阴城最底层出发，沿一路延伸的能量电缆走，最后坐重力升降机、穿过峡谷桥内部进入实验室。",
+     "en": "The trail starts in the lowest district and follows the long power cable to a gravity lift, then through the inside of the canyon bridge into the lab."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Hourglass_Twins"
+   ]
+  },
+  {
+   "id": "r-hel-time",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "时机要卡在中间",
+    "en": "Time it for the middle of the loop"
+   },
+   "place": {
+    "zh": "前段被淹，后段要等沙",
+    "en": "Early half floods; later half needs sand"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-hel"
+   ],
+   "notes": [
+    {
+     "zh": "小路前半段很快会被沙子淹没；后半段一开始有沙瀑把人冲进仙人掌丛，喷气背包过不去，要等沙子把仙人掌盖住才能走。",
+     "en": "The first half floods early. The second half starts with a sandfall pushing you into cacti — the jetpack won’t get you past — so wait for the sand to bury the cacti."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Hourglass_Twins"
+   ]
+  },
+  {
+   "id": "r-hel",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "高能实验室",
+    "en": "The High Energy Lab"
+   },
+   "place": {
+    "zh": "余烬双星赤道峡谷",
+    "en": "Ember Twin’s equatorial canyon"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-hel-door",
+    "r-sunless",
+    "r-hel-trail",
+    "r-hel-time"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-fos-light",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "先给化石嘴里打个光",
+    "en": "Light up the fossil’s mouth first"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-fos-crack"
+   ],
+   "notes": [
+    {
+     "zh": "往化石嘴里射侦察兵当灯，入口就显出来了。",
+     "en": "Shoot your scout into the fossil’s mouth as a lamp and the entrance shows."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The entrance from Stepping Stone Cave is hard to see unless the anglerfish is fed a light first.",
+     "zh": "垫脚石洞的入口很难发现，除非先把一道光喂给安康鱼吃。",
+     "source": "Ship log · Anglerfish Fossil"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-fos-search",
+   "type": "alternative",
+   "band": "reach",
+   "label": {
+    "zh": "沿着天花板仔细找",
+    "en": "Search the ceiling carefully"
+   },
+   "place": {
+    "zh": "垫脚石洞",
+    "en": "Stepping Stone Cave"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-fos-crack"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-fos-crack",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "找到垫脚石洞顶的裂缝",
+    "en": "Find the crack in Stepping Stone Cave’s ceiling"
+   },
+   "place": {
+    "zh": "背阴城 · 垫脚石洞",
+    "en": "Sunless City · Stepping Stone Cave"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-fos-light",
+    "r-fos-search"
+   ],
+   "unlocks": [
+    "r-fossil"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Nomai children used to play a game in Fossil Fish Cave. There is a way to enter Fossil Fish Cave from Stepping Stone Cave.",
+     "zh": "挪麦人的孩子们以前在化石鱼洞里面玩游戏。有条路可以从垫脚石洞进入化石鱼洞。",
+     "source": "Ship log · Anglerfish Fossil"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-fossil",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "安康鱼化石洞",
+    "en": "Fossil Fish Cave"
+   },
+   "place": {
+    "zh": "余烬双星地下",
+    "en": "Beneath Ember Twin"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-sunless",
+    "r-fos-crack"
+   ],
+   "unlocks": [],
+   "notes": [
+    {
+     "zh": "从别的开口只能看到化石，进不去。",
+     "en": "Other openings only let you look in."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "I found a cave with an anglerfish fossil inside, but the opening is only big enough for my scout.",
+     "zh": "我找到了一座山洞，里面有一副安康鱼的化石。但是开口太小，只有我的侦查兵才能进去。",
+     "source": "Ship log · Anglerfish Fossil"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-lake-time",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "循环开头几分钟内去",
+    "en": "Go in the first few minutes"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-lakebed"
+   ],
+   "notes": [
+    {
+     "zh": "洞穴在循环开始后几分钟内就会被沙子填满，要第一时间赶过去。",
+     "en": "The cave fills with sand within the first few minutes, so go there first."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Hourglass_Twins"
+   ]
+  },
+  {
+   "id": "r-lakebed",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "湖床洞穴",
+    "en": "Lakebed Cave"
+   },
+   "place": {
+    "zh": "余烬双星北极的干湖底",
+    "en": "Dry lakebed at Ember Twin’s north pole"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-lake-time"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The wandering rock was first spotted in a cave at the bottom of the dry lakebed at Ember Twin’s north pole.",
+     "zh": "有人第一次目击流浪岩石，是在余烬双星北极干涸湖床底部的一个洞穴里。",
+     "source": "Ship log · Lakebed Cave"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-ss-hint",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "有一条更安全的路",
+    "en": "There is a safer way"
+   },
+   "place": {
+    "zh": "余烬双星 · 背阴城",
+    "en": "Ember Twin · the Sunless City"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-ss-tower"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Who’s been computing shuttle trajectories to the Sun Station? Don’t worry; the station is in such a low stellar orbit, we’ve constructed a different, safer way to travel there from Ash Twin.",
+     "zh": "是谁在一直计算航天飞机飞往太阳站的轨道？别担心；太阳站所处的恒星轨道非常低。我们已经实现了另一种更加安全的方法，可以从灰烬双星前往那里。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-ss-time",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "约第 5 分钟塔门露出",
+    "en": "The tower door clears around minute 5"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-ss-tower"
+   ],
+   "notes": [
+    {
+     "zh": "沙子大约第 5 分钟流过太阳站塔，带阳台那一侧的门露出来，窗口很短。进去后站在平台上，等太阳到头顶。",
+     "en": "Around minute 5 the sand passes the Sun Station tower and the balcony-side door opens up, briefly. Stand on the pad inside and wait for the Sun to be overhead."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Sun_Station"
+   ]
+  },
+  {
+   "id": "r-ss-tower",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "走灰烬双星上的太阳站塔",
+    "en": "Use the Sun Station tower on Ash Twin"
+   },
+   "place": null,
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-ss-hint",
+    "r-ss-time"
+   ],
+   "unlocks": [
+    "r-sunstation"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-ss-land",
+   "type": "alternative",
+   "band": "reach",
+   "label": {
+    "zh": "直接开飞船降落",
+    "en": "Land the ship on it"
+   },
+   "place": {
+    "zh": "太阳站",
+    "en": "Sun Station"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-sunstation"
+   ],
+   "notes": [
+    {
+     "zh": "太阳引力极强、太阳站又绕得飞快，非常难，成功了有成就。",
+     "en": "Brutal with the Sun’s gravity and the station’s fast orbit. There is an achievement for it."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Sun_Station"
+   ]
+  },
+  {
+   "id": "r-sunstation",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "太阳站",
+    "en": "The Sun Station"
+   },
+   "place": {
+    "zh": "贴着太阳的低轨道",
+    "en": "Low orbit around the Sun"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-ss-tower",
+    "r-ss-land"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-bh-north",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "瑞拜克营地北边有座大城",
+    "en": "A huge city north of Riebeck’s camp"
+   },
+   "place": {
+    "zh": "碎空星赤道 · 瑞拜克",
+    "en": "Brittle Hollow’s equator · Riebeck"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-bh-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "There's a huge Nomai city just to the north of Riebeck's campsite.",
+     "zh": "瑞拜克营地的北方坐落着一座巨大的挪麦城市。",
+     "source": "Ship log · The Hanging City"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-bh-migrate",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "旧定居点的人搬去了冰川",
+    "en": "The settlers moved to the glacier"
+   },
+   "place": {
+    "zh": "碎空星 · 旧定居点",
+    "en": "Brittle Hollow · Old Settlement"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-bh-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai decided to migrate from the Old Settlement to the northern glacier. They used gravity crystals to craft a stable path beneath the surface.",
+     "zh": "挪麦人决定从旧定居点向北部冰川迁移。他们使用重力水晶在地下制造出了一条稳定的道路。",
+     "source": "Ship log · The Hanging City"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-bh-know",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "知道它在哪",
+    "en": "Learn where it is"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-bh-north",
+    "r-bh-migrate"
+   ],
+   "unlocks": [
+    "r-bhcity"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-bh-river",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "冰川河流尽头的隐藏洞",
+    "en": "A hidden hole where the glacier river ends"
+   },
+   "place": {
+    "zh": "碎空星北极",
+    "en": "Brittle Hollow’s north pole"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-bh-way"
+   ],
+   "notes": [
+    {
+     "zh": "河水灌进洞口成了瀑布，顺着下去就是融水区。北极那座大建筑里的升降梯是坏的。",
+     "en": "The river pours into it as a waterfall down to the Meltwater District. The lift in the big building up there is broken."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-crossroads",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "十字路口",
+    "en": "The Crossroads"
+   },
+   "place": {
+    "zh": "入口在赤道上长树的废墟里",
+    "en": "Entrance: the ruin with trees on the equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-bh-bridge",
+    "r-cannon"
+   ],
+   "notes": [
+    {
+     "zh": "赤道上瑞拜克营地对面有座长满树的废墟，里面的挪麦小路一直通到地壳下的十字路口。",
+     "en": "Across from Riebeck’s camp on the equator, a Nomai path inside a tree-grown ruin leads down to the Crossroads."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "Riebeck discovered an old Nomai path near their campsite on the equator. The path starts inside the ruined building with trees growing out of it.",
+     "zh": "瑞拜克在赤道营地附近发现了一条古老的挪麦道路。道路从树木丛生的废墟建筑里延伸了出去。",
+     "source": "Ship log · Riebeck’s Camp"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-bh-bridge",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从十字路口过桥",
+    "en": "Cross the bridges from the Crossroads"
+   },
+   "place": {
+    "zh": "碎空星地壳下",
+    "en": "Under Brittle Hollow’s crust"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [
+    "r-crossroads"
+   ],
+   "unlocks": [
+    "r-bh-way"
+   ],
+   "notes": [
+    {
+     "zh": "两座桥会被空心灯的火山弹陆续砸断，越晚越难走。",
+     "en": "Hollow’s Lantern’s volcanic bombs knock sections out over the loop."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-pod1",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "打开1号逃生舱舱门，沿栈桥下去",
+    "en": "Open Escape Pod 1’s hatch and climb down"
+   },
+   "place": {
+    "zh": "碎空星赤道",
+    "en": "Brittle Hollow’s equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-oldsettle"
+   ],
+   "notes": [
+    {
+     "zh": "木栈桥和台阶很脆，一踩就塌，掉下去就进黑洞。",
+     "en": "The wooden bridges and stairs are fragile; fall and you are in the black hole."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Nomai survivors who crashed on Brittle Hollow climbed down the cliff to a shelter site below the surface.",
+     "zh": "坠毁在碎空星的挪麦幸存者们爬下悬崖，来到了地表下的一处庇护所。",
+     "source": "Ship log · Old Settlement"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-oldsettle",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "旧定居点",
+    "en": "The Old Settlement"
+   },
+   "place": {
+    "zh": "碎空星赤道的地壳下",
+    "en": "Under the crust at Brittle Hollow’s equator"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-pod1"
+   ],
+   "unlocks": [
+    "r-bh-way"
+   ],
+   "notes": [
+    {
+     "zh": "从旧定居点有一条重力水晶小路沿地壳背面通到悬空城最底层的学校区。",
+     "en": "A gravity crystal path runs along the underside of the crust from here to the Hanging City’s School District."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-bh-way",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "进城的路",
+    "en": "A way in"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-bh-river",
+    "r-bh-bridge",
+    "r-oldsettle"
+   ],
+   "unlocks": [
+    "r-bhcity"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-bhcity",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "悬空城",
+    "en": "The Hanging City"
+   },
+   "place": {
+    "zh": "碎空星北部冰川下",
+    "en": "Under Brittle Hollow’s northern glacier"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-bh-know",
+    "r-bh-way"
+   ],
+   "unlocks": [
+    "r-forge-raise"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-forge-raise",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "在融水区把熔炉升上来",
+    "en": "Raise the forge from the Meltwater District"
+   },
+   "place": null,
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-bhcity"
+   ],
+   "unlocks": [
+    "r-forge"
+   ],
+   "notes": [
+    {
+     "zh": "熔炉平时降在星球中心的黑洞旁边，只有升到悬空城最上层才进得去。",
+     "en": "The forge normally hangs down by the black hole; you can only enter it once it is raised to the top of the city."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Black Hole Forge is suspended below the Hanging City. I found a switch in the Meltwater District that raises and lowers the forge.",
+     "zh": "黑洞熔炉悬挂在悬空城的下方。我在融水区找到了一个可以升降熔炉的开关。",
+     "source": "Ship log · Black Hole Forge"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-forge-warp",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从灰烬双星的碎空星塔跃迁过来",
+    "en": "Warp in from the Brittle Hollow tower on Ash Twin"
+   },
+   "place": {
+    "zh": "灰烬双星赤道",
+    "en": "Ash Twin’s equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-forge-district"
+   ],
+   "notes": [
+    {
+     "zh": "熔炉区里就有这座塔对应的接收点。",
+     "en": "That tower’s receiver is in the Forge District."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-forge-district",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "到达熔炉区",
+    "en": "Reach the Forge District"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-forge-warp"
+   ],
+   "unlocks": [
+    "r-forge"
+   ],
+   "notes": [
+    {
+     "zh": "通往最上层的竖井断了，正常走不上去。",
+     "en": "The shaft up to the top district is broken."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-forge",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "黑洞熔炉",
+    "en": "The Black Hole Forge"
+   },
+   "place": {
+    "zh": "悬空城最上层",
+    "en": "Top of the Hanging City"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-forge-raise",
+    "r-forge-district"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-obs-door",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "地面上的大门坏了",
+    "en": "The surface door is broken"
+   },
+   "place": {
+    "zh": "碎空星南极 · 瑞拜克的飞船",
+    "en": "South pole · Riebeck’s ship"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-observatory"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Riebeck says you can't get into the observatory from the surface (they tried), but there's probably a path to it beneath the crust somewhere.",
+     "zh": "根据瑞拜克的说法，从地面进入天文台是不可能的（他试过了），不过地壳下某个地方可能有条通路。",
+     "source": "Ship log · Southern Observatory"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-cannon",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "到达重力炮",
+    "en": "Reach the gravity cannon"
+   },
+   "place": {
+    "zh": "碎空星赤道",
+    "en": "Brittle Hollow’s equator"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-crossroads"
+   ],
+   "unlocks": [
+    "r-obs-cannon"
+   ],
+   "notes": [
+    {
+     "zh": "从地面能直接走到，也可以从十字路口往东跳过一串地壳碎块。",
+     "en": "You can walk there on the surface, or head east from the Crossroads across floating crust."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-cannon-time",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "趁重力炮还没掉进黑洞",
+    "en": "Before the cannon falls in"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-obs-cannon"
+   ],
+   "notes": [
+    {
+     "zh": "重力炮在循环后期很可能随地壳掉进黑洞。",
+     "en": "Late in the loop the cannon is likely to fall into the black hole."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-obs-cannon",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从重力炮出发",
+    "en": "Start at the gravity cannon"
+   },
+   "place": null,
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-cannon",
+    "r-cannon-time"
+   ],
+   "unlocks": [
+    "r-obs-under"
+   ],
+   "notes": [
+    {
+     "zh": "一串错位的重力电梯和碎地壳，要用喷气背包在电梯之间跳。",
+     "en": "A run of misaligned gravity lifts and broken crust; jetpack between the lifts."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-obs-tower",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从量子知识之塔底层出发",
+    "en": "Start at the base of the Tower of Quantum Knowledge"
+   },
+   "place": {
+    "zh": "碎空星赤道",
+    "en": "Brittle Hollow’s equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-obs-under"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-obs-under",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "走地壳下的路",
+    "en": "Take a path under the crust"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-obs-cannon",
+    "r-obs-tower"
+   ],
+   "unlocks": [
+    "r-observatory"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "There are two paths beneath Brittle Hollow's surface that lead to the observatory. One starts at the gravity cannon, and the other starts at the Tower of Quantum Knowledge.",
+     "zh": "碎空星地下有两条通往天文台的路。一条起始于重力炮，另一条起始于量子知识之塔。",
+     "source": "Ship log · Southern Observatory"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-observatory",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "南部天文台",
+    "en": "The Southern Observatory"
+   },
+   "place": {
+    "zh": "碎空星南极",
+    "en": "Brittle Hollow’s south pole"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-obs-door",
+    "r-obs-under"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-qt-find",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "航天飞机旁的记录指路",
+    "en": "Directions near the recalled shuttle"
+   },
+   "place": {
+    "zh": "碎空星 · 重力炮",
+    "en": "Brittle Hollow · gravity cannon"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-qtower"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "BELLS: The tower is on the opposite side of Brittle Hollow. If you follow the path west to the Crossroads, you can reach the tower from there.",
+     "zh": "贝尔斯：量子知识之塔在碎空星的另一头。如果你沿着西边的路走到十字路口，就能从那儿前往量子知识之塔。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-qt-fall",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "等塔掉进黑洞，在白洞那边进",
+    "en": "Let it fall through, enter at the white hole"
+   },
+   "place": {
+    "zh": "白洞站附近",
+    "en": "Near the White Hole Station"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-qtower"
+   ],
+   "notes": [
+    {
+     "zh": "塔的上层入口断了。地壳崩塌时整座塔会掉进黑洞，从白洞出来后在零重力里就能进去。",
+     "en": "The way up is broken. When the crust collapses the whole tower falls into the black hole; once it comes out of the white hole you can float in."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Brittle_Hollow"
+   ]
+  },
+  {
+   "id": "r-qtower",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "量子知识之塔上层",
+    "en": "Top of the Tower of Quantum Knowledge"
+   },
+   "place": {
+    "zh": "碎空星赤道",
+    "en": "Brittle Hollow’s equator"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-qt-find",
+    "r-qt-fall"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-tqt-signal",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "深巨星有量子信号",
+    "en": "A quantum signal on Giant’s Deep"
+   },
+   "place": {
+    "zh": "信号镜 · 量子频道",
+    "en": "Signalscope · Quantum Fluctuations"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-tqt"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai detected a Quantum signal coming from somewhere on Giant’s Deep.",
+     "zh": "挪麦人检测到从深巨星的某处传来了一个量子信号。",
+     "source": "Ship log · Tower of Quantum Trials"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-tqt-above",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从云层上方降进去",
+    "en": "Drop in from above the clouds"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-tqt-way"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Tower_of_Quantum_Trials"
+   ]
+  },
+  {
+   "id": "r-tqt-below",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从水流下面浮上去",
+    "en": "Come up from below the current"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-tqt-way"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Tower_of_Quantum_Trials"
+   ]
+  },
+  {
+   "id": "r-tqt-way",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "绕过北极的巨型气旋",
+    "en": "Get past the giant polar cyclone"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-tqt-above",
+    "r-tqt-below"
+   ],
+   "unlocks": [
+    "r-tqt"
+   ],
+   "notes": [
+    {
+     "zh": "北极有一个不会移动的巨型气旋，风墙过不去。",
+     "en": "A permanent cyclone sits on the north pole and its wall can’t be flown through."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-tqt",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "量子试验之塔",
+    "en": "Tower of Quantum Trials"
+   },
+   "place": {
+    "zh": "深巨星北极",
+    "en": "Giant’s Deep’s north pole"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-tqt-signal",
+    "r-tqt-way"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-ws-kids",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "挪麦孩子说的危险小路",
+    "en": "The risky route the Nomai children mentioned"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-ws-under"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Some Nomai children debated bypassing the Statue Workshop's door and sneaking inside via an alternate (more dangerous) route.",
+     "zh": "一些挪麦孩子曾经考虑过要不要绕过雕塑车间的大门，通过另一条路（更加危险）偷偷溜进去。",
+     "source": "Ship log · Statue Workshop"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-ws-under",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从岛底下的开口游进去",
+    "en": "Swim in from under the island"
+   },
+   "place": null,
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-ws-kids"
+   ],
+   "unlocks": [
+    "r-ws-way"
+   ],
+   "notes": [
+    {
+     "zh": "雕像岛是个圆顶，车间绕着内侧一圈，正中间通着大海。",
+     "en": "The island is a dome; the workshop rings its inside, open to the sea in the middle."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "I can see into a large cave from one of the ruins on top of the island. The bottom of the cave is filled with water.",
+     "zh": "从岛屿顶端的其中一个废墟上，我可以看到一个巨大的山洞内部。山洞的底部全是水。",
+     "source": "Ship log · Statue Workshop"
+    }
+   ],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Statue_Island"
+   ]
+  },
+  {
+   "id": "r-ws-way",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "绕过坏掉的大门",
+    "en": "Get around the broken door"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-ws-under"
+   ],
+   "unlocks": [
+    "r-workshop"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "I found a sign for a \"Statue Workshop\" next to a broken door that used to lead inside the island.",
+     "zh": "我在一扇破损的大门旁发现了一块牌子，上面写着“雕塑车间”。这扇门一度可以通往岛屿的内部。",
+     "source": "Ship log · Statue Workshop"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "r-ws-high",
+   "type": "gate",
+   "band": "reach",
+   "label": {
+    "zh": "高处平台要等岛被抛起",
+    "en": "The high ledge needs the island in the air"
+   },
+   "place": null,
+   "requires": null,
+   "alternative_kind": null,
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-workshop"
+   ],
+   "notes": [
+    {
+     "zh": "深巨星重力大，喷气背包够不着；气旋把岛抛上天时才上得去。",
+     "en": "Giant’s Deep’s gravity is too strong to jetpack up; you can reach it while a cyclone has the island in the air."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Statue_Island"
+   ]
+  },
+  {
+   "id": "r-workshop",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "雕塑车间",
+    "en": "The Statue Workshop"
+   },
+   "place": {
+    "zh": "深巨星 · 雕像岛",
+    "en": "Giant’s Deep · Statue Island"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-ws-way",
+    "r-ws-high"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "r-mine-geyser",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "最大的间歇泉山里有入口",
+    "en": "An entrance inside the biggest geyser mountain"
+   },
+   "place": {
+    "zh": "木炉星 · 挪麦遗迹",
+    "en": "Timber Hearth · Nomai ruins"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-mine"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Timber_Hearth"
+   ]
+  },
+  {
+   "id": "r-mine-warp",
+   "type": "clue",
+   "band": "reach",
+   "label": {
+    "zh": "从灰烬双星的木炉星塔跃迁过来",
+    "en": "Warp in from the Timber Hearth tower on Ash Twin"
+   },
+   "place": {
+    "zh": "灰烬双星赤道",
+    "en": "Ash Twin’s equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "r-mine"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Timber_Hearth"
+   ]
+  },
+  {
+   "id": "r-mine",
+   "type": "location",
+   "band": "reach",
+   "label": {
+    "zh": "挪麦矿井",
+    "en": "The Nomai Mines"
+   },
+   "place": {
+    "zh": "木炉星",
+    "en": "Timber Hearth"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "r-mine-geyser",
+    "r-mine-warp"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai were mining ore somewhere on Timber Hearth.",
+     "zh": "挪麦人在木炉星的某处开采矿石。",
+     "source": "Ship log · Nomai Mines"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "q-locator",
+   "type": "clue",
+   "band": "qm",
+   "label": {
+    "zh": "它会在五个位置之间跳",
+    "en": "It jumps between five locations"
+   },
+   "place": {
+    "zh": "余烬双星 · 量子卫星定位器",
+    "en": "Ember Twin · Quantum Moon locator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "q-land"
+   ],
+   "notes": [
+    {
+     "zh": "知道它会在几颗行星之间跳，就能守着某处等它，飞近时一直盯着它。",
+     "en": "Knowing it hops between planets, you can wait for it somewhere and keep watching it as you approach."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Quantum Moon travels to a total of five locations.",
+     "zh": "量子卫星一共会出现在五个位置。",
+     "source": "Ship log · Quantum Moon Locator"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "aq-photo",
+   "type": "alternative",
+   "band": "qm",
+   "label": {
+    "zh": "拍张照，再盯着它降落",
+    "en": "Photograph it, then watch it as you land"
+   },
+   "place": {
+    "zh": "量子卫星",
+    "en": "Quantum Moon"
+   },
+   "requires": null,
+   "alternative_kind": "official",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "q-land"
+   ],
+   "notes": [
+    {
+     "zh": "先给量子卫星拍张照，降落途中一直看着它，它就不会跳走。这本身就是成像法则的用法。",
+     "en": "Take a photo of the moon and keep looking at it as you descend so it can’t jump away — the rule of imaging at work."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Quantum_Moon"
+   ]
+  },
+  {
+   "id": "q-land",
+   "type": "gate",
+   "band": "qm",
+   "label": {
+    "zh": "登上量子卫星",
+    "en": "Land on the Quantum Moon"
+   },
+   "place": {
+    "zh": "总是在南极着陆",
+    "en": "You always land at the south pole"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "q-locator",
+    "aq-photo"
+   ],
+   "unlocks": [
+    "q-goal"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Visitors to the Quantum Moon always arrive at the south pole (for reasons unknown to the Nomai).",
+     "zh": "前往量子卫星的人总是会来到南极（挪麦人也不知道这是为什么）。",
+     "source": "Ship log · Solanum's Shuttle"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "q-trials",
+   "type": "clue",
+   "band": "qm",
+   "label": {
+    "zh": "量子试验之塔",
+    "en": "Tower of Quantum Trials"
+   },
+   "place": {
+    "zh": "深巨星北极",
+    "en": "Giant’s Deep’s north pole"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-tqt",
+   "prerequisites": [],
+   "unlocks": [
+    "q-imaging"
+   ],
+   "notes": [
+    {
+     "zh": "塔里的谜题本身就要用拍照来\"定住\"量子物体，过了关就学会了。",
+     "en": "The tower’s puzzles make you pin quantum objects with photos; finishing them teaches the rule."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "\"Observing a quantum object; observing an image of a quantum object. These are the same.\"",
+     "zh": "“观察一个量子对象；观察一个量子对象的图形。它们是一样的事情。”",
+     "source": "Ship log · Tower of Quantum Trials"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "aq-img-try",
+   "type": "alternative",
+   "band": "qm",
+   "label": {
+    "zh": "自己试出拍照能定住它",
+    "en": "Work it out by experimenting"
+   },
+   "place": {
+    "zh": "任意量子物体",
+    "en": "Any quantum object"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "unverified": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "q-imaging"
+   ],
+   "notes": [
+    {
+     "zh": "社区里有玩家完全靠试错摸出这条规则，属于个人说法。",
+     "en": "Some players say they worked it out by trial and error alone."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://steamcommunity.com/app/753640/discussions/0/2568690592367993639"
+   ]
+  },
+  {
+   "id": "q-imaging",
+   "type": "gate",
+   "band": "qm",
+   "label": {
+    "zh": "成像法则",
+    "en": "Rule of quantum imaging"
+   },
+   "place": {
+    "zh": "观察图像 = 观察本体",
+    "en": "Observing an image = observing the object"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "q-trials",
+    "aq-img-try"
+   ],
+   "unlocks": [
+    "q-goal"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "q-lakebed",
+   "type": "clue",
+   "band": "qm",
+   "label": {
+    "zh": "科利耶斯消失之谜",
+    "en": "How Coleus vanished"
+   },
+   "place": {
+    "zh": "余烬双星 · 湖床洞穴",
+    "en": "Ember Twin · Lakebed Cave"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-lakebed",
+   "prerequisites": [],
+   "unlocks": [
+    "q-entangle"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "To travel with a quantum object, I must stand on the object and cease to observe my surroundings (meaning I must be in complete darkness). Coleus used this quantum rule to escape the cave he was trapped in.",
+     "zh": "我必须站在量子对象上，停止观察我的周围（也就是说我必须完全处于黑暗之中），才能和该对象一起移动。科利耶斯利用这条量子法则从被困的洞穴里逃了出来。",
+     "source": "Ship log · Lakebed Cave"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "aq-shard",
+   "type": "alternative",
+   "band": "qm",
+   "label": {
+    "zh": "碎空星高塔碎片旁的文字",
+    "en": "Text by Brittle Hollow’s tower shard"
+   },
+   "place": {
+    "zh": "碎空星",
+    "en": "Brittle Hollow"
+   },
+   "requires": null,
+   "alternative_kind": "official",
+   "unverified": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "q-entangle"
+   ],
+   "notes": [
+    {
+     "zh": "Wiki 说碎空星\"高塔碎片\"旁的挪麦文字也暗示了黑暗规则，我没逐条核对原文。",
+     "en": "The wiki says Nomai text by Brittle Hollow’s tower shard also hints at the darkness rule; I did not check it line by line."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Quantum_Moon"
+   ]
+  },
+  {
+   "id": "aq-ent-try",
+   "type": "alternative",
+   "band": "qm",
+   "label": {
+    "zh": "站在量子碎片上关灯试试",
+    "en": "Turn your light off on a shard"
+   },
+   "place": {
+    "zh": "任意量子碎片",
+    "en": "Any quantum shard"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "q-entangle"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "q-entangle",
+   "type": "gate",
+   "band": "qm",
+   "label": {
+    "zh": "纠缠法则",
+    "en": "Rule of quantum entanglement"
+   },
+   "place": {
+    "zh": "站在量子物体上，完全黑暗",
+    "en": "Stand on it in complete darkness"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "q-lakebed",
+    "aq-shard",
+    "aq-ent-try"
+   ],
+   "unlocks": [
+    "q-goal"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "q-knowledge",
+   "type": "clue",
+   "band": "qm",
+   "label": {
+    "zh": "量子知识之塔",
+    "en": "Tower of Quantum Knowledge"
+   },
+   "place": {
+    "zh": "碎空星赤道",
+    "en": "Brittle Hollow’s equator"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-qtower",
+   "prerequisites": [],
+   "unlocks": [
+    "q-sixth"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "BELLS: You’ll be aided in your pilgrimage by the shrine our clan built on the Quantum Moon. But remember this final rule: To explore the sixth location, the shrine must be on the moon’s north pole.",
+     "zh": "贝尔斯：我们家族建立在量子卫星上的祭坛将会协助你完成朝圣。但是，一定要记好这条最终的守则：要想探索第六个位置，祭坛必须位于卫星的北极。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "q-sixth",
+   "type": "gate",
+   "band": "qm",
+   "label": {
+    "zh": "第六位置法则",
+    "en": "Rule of the sixth location"
+   },
+   "place": {
+    "zh": "祭坛必须在卫星北极",
+    "en": "The shrine must be at the north pole"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "q-knowledge"
+   ],
+   "unlocks": [
+    "q-goal"
+   ],
+   "notes": [
+    {
+     "zh": "实际操作要把三条法则合起来用：祭坛本身也是量子物体，没人看着时会换位置。在祭坛里关门关灯，就会随它移动，卫星跳到别的行星。有些行星版本的地形挡住了北极，要先换到能走到北极的版本，站在北极背对着等祭坛出现，再进祭坛关灯一次，就到第六个位置。",
+     "en": "In practice you combine all three rules. The shrine is quantum too and moves when unobserved. Close the door and turn off the light inside and you travel with it as the moon jumps planets. Some versions block the north pole, so switch to one where you can walk there, stand at the pole facing away until the shrine appears, then use it once more."
+    },
+    {
+     "zh": "祭坛不在北极时，它的门会被碎石挡住。（步骤整理自 Wiki 和社区讨论）",
+     "en": "Anywhere but the pole, rock blocks the shrine’s door. (Steps from the wiki and community.)"
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "q-goal",
+   "type": "goal",
+   "band": "qm",
+   "label": {
+    "zh": "在第六个位置见到所莱内姆",
+    "en": "Meet Solanum at the sixth location"
+   },
+   "place": {
+    "zh": "量子卫星 · 宇宙之眼的轨道",
+    "en": "Quantum Moon · orbiting the Eye"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "q-land",
+    "q-imaging",
+    "q-entangle",
+    "q-sixth"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Quantum Moon is the Eye of the universe's moon.",
+     "zh": "量子卫星是宇宙之眼的卫星。",
+     "source": "Ship log · Sixth Location"
+    },
+    {
+     "en": "Solanum wonders what would happen if a conscious observer were to enter the Eye.",
+     "zh": "所莱内姆想知道，如果一个有意识的观察者进入宇宙之眼，那又会发生什么事情。",
+     "source": "Ship log · Sixth Location"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "i-shuttle",
+   "type": "clue",
+   "band": "comet",
+   "label": {
+    "zh": "召回冻住的航天飞机",
+    "en": "Recall the frozen shuttle"
+   },
+   "place": {
+    "zh": "余烬双星 · 重力炮",
+    "en": "Ember Twin · gravity cannon"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Nomai shuttle that's frozen on the Interloper can be called home to the gravity cannon on Ember Twin.",
+     "zh": "冻结在闯入者上的挪麦航天飞机可以被召回到余烬双星的重力炮那里去。",
+     "source": "Ship log · Gravity Cannon"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "i-sunstation",
+   "type": "clue",
+   "band": "comet",
+   "label": {
+    "zh": "太阳站失败后去看彗星",
+    "en": "After the Sun Station failed"
+   },
+   "place": {
+    "zh": "太阳站",
+    "en": "Sun Station"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": "r-sunstation",
+   "prerequisites": [],
+   "unlocks": [
+    "i-know"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "After the failure of the Sun Station, the Nomai took a break to investigate the newly arrived comet.",
+     "zh": "太阳站失败后，挪麦人稍事休息，对刚抵达的彗星展开了调查。",
+     "source": "Ship log · Sun Station"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "i-know",
+   "type": "gate",
+   "band": "comet",
+   "label": {
+    "zh": "知道挪麦人去过彗星",
+    "en": "Learn the Nomai went to the comet"
+   },
+   "place": null,
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "i-shuttle",
+    "i-sunstation"
+   ],
+   "unlocks": [
+    "i-goal"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "i-frozen",
+   "type": "clue",
+   "band": "comet",
+   "label": {
+    "zh": "冰封航天飞机的记录",
+    "en": "The frozen shuttle’s log"
+   },
+   "place": {
+    "zh": "闯入者表面",
+    "en": "The Interloper’s surface"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-enter"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "There were three Nomai aboard the shuttle. One of them stayed behind to keep the shuttle warm while the other two explored the Interloper.",
+     "zh": "航天飞机上载着三个挪麦人。其中一个留了下来，保障航天飞机的温度。其他两个人则去探索闯入者。",
+     "source": "Ship log · Frozen Nomai Shuttle"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "ai-melt",
+   "type": "alternative",
+   "band": "comet",
+   "label": {
+    "zh": "等彗星靠近太阳、冰面融开",
+    "en": "Wait for the ice to melt near the Sun"
+   },
+   "place": {
+    "zh": "闯入者向阳面",
+    "en": "Sunward side"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "timing_sensitive": true,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-enter"
+   ],
+   "notes": [
+    {
+     "zh": "向阳面的冰会随着接近太阳融开，自己观察也能找到入口。",
+     "en": "The sunward ice melts open as the comet nears the Sun; you can spot the entrance yourself."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Interloper"
+   ]
+  },
+  {
+   "id": "i-enter",
+   "type": "gate",
+   "band": "comet",
+   "label": {
+    "zh": "进到彗星冰层下面",
+    "en": "Get under the comet’s ice"
+   },
+   "place": {
+    "zh": "闯入者向阳面的冰缝",
+    "en": "A fissure on the sunward side"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "i-frozen",
+    "ai-melt"
+   ],
+   "unlocks": [
+    "i-goal"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Two of the Nomai located a fissure in the ice on the Interloper’s sunward side. They descended inside to investigate.",
+     "zh": "两个挪麦人在闯入者向阳面的冰块里发现了一道沟壑。他们爬了进去，想要进行调查。",
+     "source": "Ship log · Ruptured Core"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "i-photo",
+   "type": "clue",
+   "band": "comet",
+   "label": {
+    "zh": "照片里能看见幽灵物质",
+    "en": "Cameras can see ghost matter"
+   },
+   "place": {
+    "zh": "木炉星 · 村子",
+    "en": "Timber Hearth · village"
+   },
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-ghost"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "DANGER! Inside this fence is a pocket of ghost matter - a strange and dangerous substance that’s invisible to the naked eyes. The good news is that you can detect ghost matter with a camera.",
+     "zh": "危险！这道栅栏后面有一团幽灵物质。它拥有奇怪的特性，并且冰冷异常，无法被肉眼观察到。好消息是，你可以通过摄像机来侦测到幽灵物质。",
+     "source": "Dialogue and signs"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "ai-scout",
+   "type": "alternative",
+   "band": "comet",
+   "label": {
+    "zh": "发射侦察兵也能看到",
+    "en": "Your scout shows it too"
+   },
+   "place": {
+    "zh": "任意幽灵物质",
+    "en": "Any ghost matter"
+   },
+   "requires": null,
+   "alternative_kind": "official",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-ghost"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Ghost_Matter"
+   ]
+  },
+  {
+   "id": "ai-try",
+   "type": "alternative",
+   "band": "comet",
+   "label": {
+    "zh": "死过几次就知道了",
+    "en": "Learn it by dying"
+   },
+   "place": {
+    "zh": "闯入者",
+    "en": "The Interloper"
+   },
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "i-ghost"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "i-ghost",
+   "type": "gate",
+   "band": "comet",
+   "label": {
+    "zh": "避开幽灵物质",
+    "en": "Avoid the ghost matter"
+   },
+   "place": {
+    "zh": "肉眼看不见的致命物质",
+    "en": "Lethal and invisible to the eye"
+   },
+   "requires": "any",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "i-photo",
+    "ai-scout",
+    "ai-try"
+   ],
+   "unlocks": [
+    "i-goal"
+   ],
+   "notes": [],
+   "quotes": [],
+   "references": []
+  },
+  {
+   "id": "i-goal",
+   "type": "goal",
+   "band": "comet",
+   "label": {
+    "zh": "挪麦人灭绝的真相",
+    "en": "What killed the Nomai"
+   },
+   "place": {
+    "zh": "闯入者 · 破裂的核心",
+    "en": "The Interloper · ruptured core"
+   },
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "i-know",
+    "i-enter",
+    "i-ghost"
+   ],
+   "unlocks": [],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "They determined the exotic matter was both lethal and under extreme pressure. If the stone were to rupture, the exotic matter within would rapidly expand, completely blanketing the solar system almost instantaneously.",
+     "zh": "他们推断这种异常的物质不但致命，而且目前正处在极度高压之下。如果岩石裂开来，那么里面的异常物质便会迅速扩散，几乎一眨眼就可以覆盖这个太阳系。",
+     "source": "Ship log · Ruptured Core"
+    }
+   ],
+   "references": []
+  }
+ ],
+ "faq": [
+  {
+   "question": {
+    "zh": "《星际拓荒》要打出结局，需要凑齐哪几样东西？",
+    "en": "What do you need to reach the ending of Outer Wilds?"
+   },
+   "answer": {
+    "zh": "三样：宇宙之眼的坐标（在深巨星核心的探测器跟踪模块里）、挪麦人的飞船（困在黑棘星深处）、高级跃迁核心（在灰烬双星计划的中央舱室里）。把核心装进飞船，在舰桥输入坐标，就能跃迁到宇宙之眼。取出核心会让时间循环停止，所以这一步要放在最后。",
+    "en": "Three things: the Eye of the Universe’s coordinates (in the Probe Tracking Module at the core of Giant’s Deep), the Nomai Vessel (stuck deep in Dark Bramble), and the advanced warp core (in the central chamber of the Ash Twin Project). Put the core in the Vessel, enter the coordinates on the bridge, and warp to the Eye. Taking the core stops the time loop, so do it last."
+   }
+  },
+  {
+   "question": {
+    "zh": "黑棘星的安康鱼怎么躲？",
+    "en": "How do you get past the anglerfish in Dark Bramble?"
+   },
+   "answer": {
+    "zh": "安康鱼是瞎的，靠声音找猎物，关掉引擎靠惯性滑过去就不会被发现。线索在余烬双星的安康鱼化石：挪麦小孩玩\"安康鱼和小鱼\"时，扮安康鱼的要戴眼罩。从种子出来时速度方向固定，什么都不按直接漂也很稳。",
+    "en": "Anglerfish are blind and hunt by sound, so cut your engines and drift. The clue is the anglerfish fossil on Ember Twin, where Nomai children played a game in which the “anglerfish” wore a blindfold. You leave each seed at a fixed speed and heading, so simply drifting works well."
+   }
+  },
+  {
+   "question": {
+    "zh": "怎么潜到深巨星的水流下面、穿过核心外的电场？",
+    "en": "How do you get below Giant’s Deep’s current and through the electric field?"
+   },
+   "answer": {
+    "zh": "设计好的办法是坐逆时针旋转的气旋下去，线索在碎空星南部天文台的气旋模型。也能高速直冲，或停在被抛起的岛下面等它砸下来。核心外的电场只能钻进水母穿过，线索是黑棘星里费尔德斯巴吃水母的笔记：外皮像橡胶，能绝缘。",
+    "en": "The intended way is to ride a counterclockwise cyclone down; the clue is the cyclone model in Brittle Hollow’s Southern Observatory. A very fast dive or a falling island also works. The electric field around the core can only be crossed inside a jellyfish; Feldspar’s notes in Dark Bramble say their rubbery skin insulates them."
+   }
+  },
+  {
+   "question": {
+    "zh": "灰烬双星计划怎么进去？",
+    "en": "How do you get into the Ash Twin Project?"
+   },
+   "answer": {
+    "zh": "保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；黑洞熔炉说明沙漏双星共用两星之间的对准点，高能实验室的高塔设计图对应每座塔的去向，合起来能推出计划塔的接收点就在灰烬双星表面。接收点一开始埋在沙下，大约第 7 分 50 秒露出来。",
+    "en": "Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the Black Hole Forge says the Hourglass Twins share one alignment point between them; the tower designs in the High Energy Lab show where each tower goes. Together they tell you the project tower’s receiver is on Ash Twin’s surface. It is buried by sand until about 7:50 into the loop."
+   }
+  },
+  {
+   "question": {
+    "zh": "背阴城和高能实验室怎么进？",
+    "en": "How do you get into the Sunless City and the High Energy Lab?"
+   },
+   "answer": {
+    "zh": "背阴城在余烬双星地下：从2号逃生舱下的洞穴跟着墙上的路标走，或从重力炮上方的隐藏洞口下去，要趁沙子还没灌满。高能实验室正门从里面锁着，只能从背阴城最底层沿能量电缆的小路过去，前半段怕沙子淹，后半段要等沙子盖住仙人掌。",
+    "en": "The Sunless City is beneath Ember Twin: follow the wall markers from the caves under Escape Pod 2, or drop through a hidden hole above the gravity cannon, before the sand fills it. The High Energy Lab’s front door is locked from inside; take the trail along the power cable from the city’s lowest district, early enough that the first half isn’t flooded and late enough that sand has buried the cacti on the second half."
+   }
+  },
+  {
+   "question": {
+    "zh": "黑洞熔炉和南部天文台怎么去？",
+    "en": "How do you reach the Black Hole Forge and the Southern Observatory?"
+   },
+   "answer": {
+    "zh": "黑洞熔炉挂在悬空城下面，先在融水区的控制室把它升到最上层，再从灰烬双星上的碎空星塔跃迁到熔炉区（竖井断了）。南部天文台的地面大门是坏的，要从地壳下走：从重力炮出发跳一串重力电梯，或从量子知识之塔底层出发。",
+    "en": "The Forge hangs below the Hanging City: raise it from the control room in the Meltwater District, then warp to the Forge District from the Brittle Hollow tower on Ash Twin (the shaft is broken). The Southern Observatory’s surface door is broken; go under the crust, either from the gravity cannon across a chain of gravity lifts or from the base of the Tower of Quantum Knowledge."
+   }
+  },
+  {
+   "question": {
+    "zh": "量子卫星的第六个位置怎么去？",
+    "en": "How do you reach the Quantum Moon’s sixth location?"
+   },
+   "answer": {
+    "zh": "要用齐三条量子法则：成像法则（深巨星量子试验之塔）、纠缠法则（余烬双星湖床洞穴）、第六位置法则（碎空星量子知识之塔：祭坛必须在卫星北极）。在祭坛里关门关灯就会随它移动，让祭坛出现在北极后再用一次，就能见到所莱内姆。",
+    "en": "You need all three quantum rules: imaging (Tower of Quantum Trials on Giant’s Deep), entanglement (Lakebed Cave on Ember Twin), and the sixth location (Tower of Quantum Knowledge on Brittle Hollow: the shrine must be at the moon’s north pole). Shut yourself in the shrine in the dark to travel with it; get it to the north pole and use it once more to meet Solanum."
+   }
+  },
+  {
+   "question": {
+    "zh": "挪麦人是怎么灭绝的？",
+    "en": "What happened to the Nomai?"
+   },
+   "answer": {
+    "zh": "太阳站没能引爆太阳后，挪麦人去调查刚到的彗星\"闯入者\"。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。幽灵物质肉眼看不见，用相机能看到。",
+    "en": "After the Sun Station failed, the Nomai went to study a newly arrived comet, the Interloper. Its core held ghost matter under extreme pressure; when it ruptured, the ghost matter covered the solar system almost instantly. It is invisible to the eye but shows up on camera."
+   }
+  }
+ ]
+}

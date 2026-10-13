@@ -1,95 +1,258 @@
-// Regenerates posts/20261014-outer-wilds-clues/index.html and llms.txt from assets/graph-data.js:
-// FAQ (HTML + FAQPage JSON-LD), Article JSON-LD; llms.txt carries the full clue list. Edit the data or the template, then run
+// Builds /outer-wilds-clues/ (zh) and /outer-wilds-clues/en/ from data.src.mjs:
+//   assets/graph-data.js  canvas data (quotes resolved to official English + Simplified Chinese game text)
+//   graph.json            machine-readable graph for agents
+//   llms.txt              bilingual plain-text version
+//   index.html, en/index.html  pages with static FAQ, <noscript> clue list, JSON-LD, hreflang
+// Quotes are looked up in the extracted game text in the Obsidian vault (GAME_TEXT_DIR); rerun after editing data:
 //   node scripts/outer-wilds-clues/gen.mjs
-// og.html is the source of assets/og-outer-wilds-clues.png (Chrome headless screenshot at 1200x630).
+// og.html is the source of assets/og-outer-wilds-clues*.png (Chrome headless screenshot, 1200x630).
 import fs from 'fs';
-import vm from 'vm';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { BANDS, FAQ } from './data.src.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const tpl = path.join(here, 'index.template.html');
-const postDir = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
-const ctx = {};
-vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(path.join(postDir, 'assets/graph-data.js'), 'utf8') + '\nthis.TREES = TREES;', ctx);
-const TREES = ctx.TREES;
-const URL = 'https://wangyufeng.org/outer-wilds-clues/';
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const strip = s => String(s).replace(/<[^>]+>/g, '');
+const POST = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
+const GAME_TEXT_DIR = process.env.OW_TEXT_DIR || path.join(process.env.HOME, 'Documents/Obsidian Vault/生活/游戏/Outer Wilds');
+const SITE = 'https://wangyufeng.org';
+const URLS = { zh: '/outer-wilds-clues/', en: '/outer-wilds-clues/en/' };
+const PUBLISHED = '2026-10-14T21:00:00+08:00';
+const MODIFIED = '2026-10-14T23:30:00+08:00';
 
-const FAQ = [
-  ['《星际拓荒》要打出结局，需要凑齐哪几样东西？',
-   '三样：宇宙之眼的坐标（在深巨星核心的探测器跟踪模块里）、挪麦人的飞船（困在黑棘星深处）、高级跃迁核心（在灰烬双星计划的中央舱室里）。把核心装进飞船，在舰桥输入坐标，就能跃迁到宇宙之眼。取出核心会让时间循环停止，所以这一步要放在最后一轮。'],
-  ['宇宙之眼的坐标每个玩家都一样吗？',
-   '一样。坐标对所有玩家、所有存档固定不变，飞船也不检查你这一局有没有亲眼看过跟踪模块。记住坐标的二周目玩家可以完全不去深巨星。'],
-  ['能在一个循环里通关吗？',
-   '能，对应成就"新手的运气"。知道全部答案时，必做的只剩：拿发射密码，触发天文台雕像（跳过它沙子不会落、太阳也不会爆），跃迁进灰烬双星计划取核心，穿过安康鱼巢到飞船，装核心、输坐标。'],
-  ['黑棘星的安康鱼怎么躲？',
-   '安康鱼是瞎的，靠声音找猎物，关掉引擎靠惯性滑过去就不会被发现。线索在余烬双星背阴城附近的安康鱼化石：挪麦小孩玩"安康鱼和小鱼"时扮安康鱼的要戴眼罩。另外，从种子出来时速度方向固定，什么都不按直接漂也很稳；转动机身不会惊动它们。'],
-  ['怎么潜到深巨星的水流下面、穿过核心外的电场？',
-   '设计好的办法是坐逆时针旋转的气旋下去，线索在碎空星南部天文台的龙卷风模型。也可以高速直冲、停在被抛起的岛下面等它砸下来，或者碰巧被卷下去（费尔德斯巴就是无意中发现的）。核心外的电场只能钻进水母穿过，线索是黑棘星里费尔德斯巴吃水母的笔记：外皮像橡胶，能绝缘。'],
-  ['灰烬双星计划怎么进去？',
-   '保护外壳没有任何物理入口，只能跃迁进去。白洞站教你跃迁平台的用法（站上去，等对应天体经过头顶）；黑洞熔炉说明沙漏双星共用两星之间的对准点，高能实验室的高塔设计图对应每座塔的去向，合起来能推出计划塔的接收点就在灰烬双星表面。接收点一开始埋在沙下，大约第 7 分 50 秒露出来就能用，营火边打盹可以快进。'],
-  ['量子卫星的第六个位置怎么去？',
-   '要用齐三条量子法则：成像法则（深巨星量子试验之塔），纠缠法则（余烬双星湖床洞穴），第六位置法则（碎空星量子知识之塔：祭坛必须在卫星北极）。在祭坛里关门关灯就会随它移动，让祭坛出现在北极后再用一次，就能见到所莱内姆。这条线不影响通关，但结局营火边会多一个人。'],
-  ['挪麦人是怎么灭绝的？',
-   '太阳站没能引爆太阳之后，挪麦人去调查刚到的彗星"闯入者"。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。线索是余烬双星重力炮召回的冰封航天飞机，以及闯入者核心旁的记录；幽灵物质肉眼看不见，用相机能看到。']
-];
+/* ---------- game text lookup ---------- */
+function pairs(file) {
+  const t = fs.readFileSync(path.join(GAME_TEXT_DIR, file), 'utf8');
+  const out = [];
+  const re = /(?:### (\S+) · (shiplog_text|shiplog_name)\n\n)?\*\*EN\*\*\n\n([\s\S]*?)\n\n\*\*中文\*\*\n\n([\s\S]*?)(?=\n\n(?:\*\*|#|位置与字体信息|选项条件|```)|\n*$)/g;
+  let m;
+  while ((m = re.exec(t))) {
+    const en = m[3].split(/\n\n/).join(' ').replace(/\s+/g, ' ').trim();
+    const zh = m[4].split(/\n\n/).join('').replace(/\n/g, '').trim();
+    out.push({ id: m[1], kind: m[2], en, zh });
+  }
+  return out;
+}
+const LOG = pairs('飞船日志中英对照.md');
+const NOMAI = pairs('挪麦文字中英对照.md');
+const DLG = pairs('对话与说明牌中英对照.md');
+const logText = Object.fromEntries(LOG.filter(p => p.kind === 'shiplog_text').map(p => [p.id, p]));
+const logName = Object.fromEntries(LOG.filter(p => p.kind === 'shiplog_name').map(p => [p.id, p]));
 
-const ALT_TAG = { official: '官方另一解', luck: '运气 / 硬闯', skip: '二周目直接跳', glitch: '速通 bug' };
+function resolveQuote(key) {
+  const [src, ...rest] = key.split(':');
+  const arg = rest.join(':');
+  if (src === 'LOG') {
+    const p = logText[arg];
+    if (!p) throw new Error(`Ship log entry not found: ${arg}`);
+    const name = logName[arg.replace(/_(X|R)\d+$/, '')];
+    return { zh: p.zh, en: p.en, cite: { zh: `飞船日志 · ${name ? name.zh : arg}`, en: `Ship log · ${name ? name.en : arg}` } };
+  }
+  const pool = src === 'NOMAI' ? NOMAI : DLG;
+  const hits = pool.filter(p => p.en.includes(arg));
+  if (!hits.length) throw new Error(`Text not found (${src}): ${arg}`);
+  const p = hits[0];
+  return src === 'NOMAI'
+    ? { zh: p.zh, en: p.en, cite: { zh: '挪麦文字', en: 'Nomai text' } }
+    : { zh: p.zh, en: p.en, cite: { zh: '对话与说明牌', en: 'Dialogue and signs' } };
+}
+
+/* ---------- resolve data ---------- */
 const nodes = {};
-for (const k in TREES) (function reg(n) { if (n.ref) return; nodes[n.id] = n; (n.kids || []).forEach(reg); })(TREES[k].root);
+function resolve(n) {
+  if (n.ref) return { ref: n.ref };
+  const out = { ...n };
+  if (n.quote) out.quote = n.quote.map(x => resolveQuote(x.$q));
+  if (n.kids) out.kids = n.kids.map(resolve);
+  nodes[n.id] = out;
+  return out;
+}
+const bands = BANDS.map(b => ({ ...b, roots: b.roots.map(resolve) }));
+const edges = [];
+(function link() {
+  const walk = n => { if (n.ref) return; (n.kids || []).forEach(k => { edges.push({ from: k.ref || k.id, to: n.id }); walk(k); }); };
+  bands.forEach(b => b.roots.forEach(walk));
+})();
+const bandOf = {};
+bands.forEach(b => { const walk = n => { if (n.ref) return; bandOf[n.id] = b.key; (n.kids || []).forEach(walk); }; b.roots.forEach(walk); });
 
-const faqHtml = FAQ.map(([q, a]) => `    <dt>${esc(q)}</dt>\n    <dd>${esc(a)}</dd>`).join('\n');
-const jsonld = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    { '@type': 'WebPage', '@id': URL + '#webpage', url: URL, name: '星际拓荒通关线索图', inLanguage: 'zh-CN',
-      isPartOf: { '@type': 'WebSite', name: '王雨峰的博客', url: 'https://wangyufeng.org/' },
-      primaryImageOfPage: { '@type': 'ImageObject', url: URL + 'assets/og-outer-wilds-clues.png', width: 1200, height: 630 } },
-    { '@type': 'Article', '@id': URL + '#article', mainEntityOfPage: { '@id': URL + '#webpage' },
-      headline: '星际拓荒通关线索图：Outer Wilds 线索依赖与跳关路线全图',
-      description: '《星际拓荒》本体的线索依赖图：结局需要的三样东西、每一步的前置线索与所在星球，以及可以靠运气、二周目或 bug 绕过的步骤。',
-      inLanguage: 'zh-CN', datePublished: '2026-10-14T21:00:00+08:00', dateModified: '2026-10-14T21:00:00+08:00',
-      author: { '@type': 'Person', name: '王雨峰', url: 'https://wangyufeng.org/' },
-      image: URL + 'assets/og-outer-wilds-clues.png',
-      about: { '@type': 'VideoGame', name: 'Outer Wilds', alternateName: '星际拓荒', datePublished: '2019',
-        author: { '@type': 'Organization', name: 'Mobius Digital' }, publisher: { '@type': 'Organization', name: 'Annapurna Interactive' } },
-      keywords: '星际拓荒, Outer Wilds, 宇宙之眼, 挪麦人, 灰烬双星计划, 量子卫星, 线索依赖图' },
-    { '@type': 'FAQPage', '@id': URL + '#faq', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }
-  ]
+fs.writeFileSync(path.join(POST, 'assets/graph-data.js'),
+  `// Generated by scripts/outer-wilds-clues/gen.mjs — edit data.src.mjs instead.\nwindow.OWC = ${JSON.stringify({ bands })};\n`);
+
+/* ---------- graph.json for agents ---------- */
+const TYPE_EN = { goal: 'goal', target: 'required_item', gate: 'gate', clue: 'clue', alt: 'alternative', loc: 'location' };
+const graph = {
+  name: 'Outer Wilds clue dependency map',
+  name_zh: '星际拓荒通关线索图',
+  description: 'Prerequisite graph of the Outer Wilds base game (no DLC): what you must learn or reach before each step, where each clue is, alternative ways through, and how to get to key locations. Contains full spoilers.',
+  url: SITE + URLS.en,
+  url_zh: SITE + URLS.zh,
+  author: { name: '王雨峰 (Wang Yufeng)', url: SITE + '/' },
+  datePublished: PUBLISHED.slice(0, 10),
+  dateModified: MODIFIED.slice(0, 10),
+  game: { name: 'Outer Wilds', name_zh: '星际拓荒', developer: 'Mobius Digital', publisher: 'Annapurna Interactive', year: 2019 },
+  sources: 'Quotes: official English and Simplified Chinese game text (Steam build, October 2026). Alternatives: Outer Wilds Wiki and community guides, cited per node.',
+  how_to_read: 'Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.',
+  bands: bands.map(b => ({ key: b.key, title: b.title, summary: b.band, roots: b.roots.map(r => r.id) })),
+  nodes: Object.values(nodes).map(n => ({
+    id: n.id, type: TYPE_EN[n.t], band: bandOf[n.id], label: n.label, place: n.place || null,
+    requires: n.req || null, alternative_kind: n.alt || null, timing_sensitive: n.tag === 'timing' || undefined,
+    unverified: n.verify || undefined, location_ref: n.at || null,
+    prerequisites: edges.filter(e => e.to === n.id).map(e => e.from),
+    unlocks: edges.filter(e => e.from === n.id).map(e => e.to),
+    notes: n.info || [], quotes: (n.quote || []).map(q => ({ en: q.en, zh: q.zh, source: q.cite.en })),
+    references: (n.src || []).map(s => s.url)
+  })),
+  faq: FAQ.map(([qq, a]) => ({ question: qq, answer: a }))
+};
+fs.writeFileSync(path.join(POST, 'graph.json'), JSON.stringify(graph, null, 1));
+
+/* ---------- text outline (noscript + llms.txt) ---------- */
+const ALT = { official: { zh: '官方另一解', en: 'other in-game clue' }, luck: { zh: '运气 / 试错 / 硬闯', en: 'luck / trial / brute force' } };
+const REQ = { all: { zh: '以下全部需要', en: 'needs all of' }, any: { zh: '以下任选一', en: 'any one of' } };
+const TIMING_TXT = { zh: '时间窗口', en: 'timing' };
+function line(n, lang) {
+  if (n.ref) return { text: `${lang === 'zh' ? '（同上：' : '(see above: '}${nodes[n.ref].label[lang]}${lang === 'zh' ? '）' : ')'}`, kids: [] };
+  const kids = n.kids || [];
+  let text = n.t === 'alt' ? `[${ALT[n.alt][lang]}] ${n.label[lang]}` : n.label[lang];
+  if (n.tag === 'timing') text += ` [${TIMING_TXT[lang]}]`;
+  if (n.place) text += ` — ${n.place[lang]}`;
+  if (n.req && kids.length > 1) text += ` (${REQ[n.req][lang]})`;
+  return { text, kids };
+}
+function mdTree(n, lang, depth) {
+  const l = line(n, lang);
+  return [`${'  '.repeat(depth)}- ${l.text}`].concat(l.kids.map(k => mdTree(k, lang, depth + 1))).join('\n');
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function htmlTree(n, lang) {
+  const l = line(n, lang);
+  return `<li>${esc(l.text)}${l.kids.length ? `<ul>${l.kids.map(k => htmlTree(k, lang)).join('')}</ul>` : ''}</li>`;
+}
+
+const llms = `# Outer Wilds clue dependency map / 星际拓荒通关线索图
+
+> A prerequisite graph for the Outer Wilds base game (Mobius Digital, 2019; no Echoes of the Eye DLC). To reach the ending you need three things: the Eye of the Universe's coordinates, the Nomai Vessel, and the advanced warp core. Each node lists what you must learn or reach first, where the clue is, other ways through, and how to get to key locations. Full spoilers.
+> 《星际拓荒》本体线索依赖图：结局需要的三样东西、每一步的前置线索与地点、其他走法，以及关键地点怎么去。全剧透。
+
+- English page: ${SITE}${URLS.en}
+- 中文页面：${SITE}${URLS.zh}
+- Machine-readable graph (nodes, prerequisites, quotes in English and Chinese): ${SITE}${URLS.zh}graph.json
+- Author: 王雨峰 (Wang Yufeng), ${SITE}/ · Published ${PUBLISHED.slice(0, 10)}
+- Sources: official game text (English + Simplified Chinese, Steam build Oct 2026); alternatives from the Outer Wilds Wiki and community guides. Please link the page when citing.
+
+## FAQ (English)
+
+${FAQ.map(([qq, a]) => `### ${qq.en}\n\n${a.en}`).join('\n\n')}
+
+## Full map (English)
+
+Indented items are prerequisites of the item above them.
+
+${bands.map(b => `### ${b.title.en}: ${b.band.en}\n\n${b.roots.map(r => mdTree(r, 'en', 0)).join('\n')}`).join('\n\n')}
+
+## 常见问题（中文）
+
+${FAQ.map(([qq, a]) => `### ${qq.zh}\n\n${a.zh}`).join('\n\n')}
+
+## 完整依赖（中文）
+
+缩进项是上一项的前置。
+
+${bands.map(b => `### ${b.title.zh}：${b.band.zh}\n\n${b.roots.map(r => mdTree(r, 'zh', 0)).join('\n')}`).join('\n\n')}
+`;
+fs.writeFileSync(path.join(POST, 'llms.txt'), llms);
+
+/* ---------- pages ---------- */
+const COPY = {
+  zh: {
+    htmlLang: 'zh-CN', ogLocale: 'zh_CN', ogAlt: 'en_US',
+    title: '星际拓荒通关线索图｜Outer Wilds 线索依赖、地点入口与通关路线',
+    description: '《星际拓荒》（Outer Wilds）本体的线索依赖图：打出结局要凑齐宇宙之眼坐标、挪麦飞船、高级跃迁核心三样东西；每一步要先知道什么、在哪颗星球学到、关键地点怎么进、什么时候去，以及能靠运气或另一条线索绕过去的步骤。',
+    keywords: '星际拓荒, Outer Wilds, 星际拓荒攻略, 星际拓荒线索, 星际拓荒结局, 宇宙之眼坐标, 挪麦人, 灰烬双星计划, 背阴城怎么进, 高能实验室, 黑洞熔炉, 南部天文台, 量子卫星第六个位置, 黑棘星安康鱼, 深巨星核心',
+    socialTitle: '星际拓荒通关线索图｜Outer Wilds',
+    socialDesc: '打出《星际拓荒》结局要凑齐哪三样东西、每样要先知道什么、关键地点怎么进，一张图看全。',
+    imageAlt: '星际拓荒通关线索依赖图', og: 'og-outer-wilds-clues.png',
+    h1: '星际拓荒通关线索图',
+    what: '《星际拓荒》（Outer Wilds）要打出结局，得先弄清一连串事情。这张图把它们串起来：每件事要先知道什么、在哪颗星球学到、关键地点怎么进、什么时候去，以及哪些步骤可以绕过去。越往右越接近结局。',
+    lg: ['绿框：结局和三样必需品', '实线：游戏设计好的路线', '虚线：其他走法（运气、试错、硬闯或另一条线索）', '点任意卡片看游戏原文'],
+    spoiler: '全是剧透，没通关慎看',
+    switchLabel: 'English', switchHref: 'en/', switchLang: 'en', switchHreflang: 'en',
+    zoomOut: '缩小', zoomIn: '放大', fit: '铺满宽度', hint: '拖动平移 · Ctrl/⌘ + 滚轮或双指缩放',
+    aria: '星际拓荒线索依赖图：通关主线、地点入口、量子卫星支线、闯入者支线。文字版见本页 llms.txt。',
+    noscript: '画布需要 JavaScript。下面是同一张图的文字版：缩进项是上一项的前置。',
+    faqTitle: '常见问题', srcTitle: '资料来源',
+    src: '实线和引文来自游戏原文：2026 年 10 月 Steam 版本的飞船日志、挪麦文字和对话，用官方简体中文译文，以及日志里自带的"这条传闻从哪里听来"的数据。其他走法和地点入口的细节来自 <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds 官方 Wiki</a> 和玩家社区，每张卡片的详情里写了出处；标着"未在原文核实"的几条我没在游戏原文里找到依据。不含 DLC《回声之眼》。',
+    agents: '给 AI 和程序读的版本：<a href="llms.txt">llms.txt</a>（全文）、<a href="graph.json">graph.json</a>（节点、前置关系和中英原文）。',
+    byline: '王雨峰 · 2026 年 10 月 14 日', assets: 'assets/', root: './',
+    breadcrumbHome: '王雨峰的博客'
+  },
+  en: {
+    htmlLang: 'en', ogLocale: 'en_US', ogAlt: 'zh_CN',
+    title: 'Outer Wilds Clue Map: Every Clue, Location and Route to the Ending',
+    description: 'A dependency map of the Outer Wilds base game. To reach the ending you need the Eye of the Universe’s coordinates, the Nomai Vessel and the advanced warp core; see what you must learn first, where each clue is, how to get into key locations and when, and which steps you can get past another way.',
+    keywords: 'Outer Wilds, Outer Wilds guide, Outer Wilds clues, Outer Wilds ending, Eye of the Universe coordinates, Nomai, Ash Twin Project, Sunless City, High Energy Lab, Black Hole Forge, Southern Observatory, Quantum Moon sixth location, Dark Bramble anglerfish, Giant’s Deep core',
+    socialTitle: 'Outer Wilds Clue Map',
+    socialDesc: 'What you need for the Outer Wilds ending, what to learn first, and how to get into every key location — on one zoomable map.',
+    imageAlt: 'Outer Wilds clue dependency map', og: 'og-outer-wilds-clues-en.png',
+    h1: 'Outer Wilds Clue Map',
+    what: 'Reaching the ending of Outer Wilds means figuring out a chain of things. This map connects them: what you need to know first, which planet teaches it, how to get into key places and when, and which steps you can get past another way. The closer to the right, the closer to the ending.',
+    lg: ['Green: the ending and its three must-haves', 'Solid line: the intended route', 'Dashed line: another way (luck, trial and error, brute force, or a different clue)', 'Click any card for the game text'],
+    spoiler: 'Full spoilers — finish the game first',
+    switchLabel: '中文', switchHref: '../', switchLang: 'zh', switchHreflang: 'zh-CN',
+    zoomOut: 'Zoom out', zoomIn: 'Zoom in', fit: 'Fit width', hint: 'Drag to pan · Ctrl/⌘ + scroll or pinch to zoom',
+    aria: 'Outer Wilds clue dependency map: main path, getting there, Quantum Moon, the Interloper. A text version is in llms.txt.',
+    noscript: 'The map needs JavaScript. Here is the same map as text; indented items are prerequisites of the item above.',
+    faqTitle: 'FAQ', srcTitle: 'Sources',
+    src: 'Solid lines and quotes come from the game itself: ship log, Nomai text and dialogue from the October 2026 Steam build, in the official English text, plus the ship log’s own “where did you hear this” data. Alternatives and location details come from the <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds Wiki</a> and the player community, cited on each card; a few marked “not confirmed in the game text” are community claims. Base game only, no Echoes of the Eye.',
+    agents: 'For AI and programs: <a href="../llms.txt">llms.txt</a> (full text) and <a href="../graph.json">graph.json</a> (nodes, prerequisites, English and Chinese game text).',
+    byline: 'Wang Yufeng · October 14, 2026', assets: '../assets/', root: '../',
+    breadcrumbHome: 'Wang Yufeng’s blog'
+  }
 };
 
-let html = fs.readFileSync(tpl, 'utf8');
-html = html.replace('/*JSONLD*/', JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'));
-html = html.replace('/*FAQ*/', faqHtml);
-fs.writeFileSync(path.join(postDir, 'index.html'), html);
-function md(n, depth) {
-  if (n.ref) return `${'  '.repeat(depth)}- （同上：${nodes[n.ref].label}）`;
-  const kids = n.kids || [];
-  const req = n.req && kids.length > 1 ? (n.req === 'all' ? '（以下全部需要）' : '（以下任选一）') : '';
-  const head = n.t === 'alt' ? `其他走法·${ALT_TAG[n.alt]}：${n.label}` : `${n.label}${req}`;
-  return [`${'  '.repeat(depth)}- ${head}${n.place ? ` — ${n.place}` : ''}`].concat(kids.map(k => md(k, depth + 1))).join('\n');
+const tpl = fs.readFileSync(path.join(here, 'index.template.html'), 'utf8');
+for (const lang of ['zh', 'en']) {
+  const c = COPY[lang];
+  const url = SITE + URLS[lang];
+  const image = `${SITE}${URLS.zh}assets/${c.og}`;
+  const jsonld = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebPage', '@id': url + '#webpage', url, name: c.h1, description: c.description, inLanguage: c.htmlLang,
+        isPartOf: { '@type': 'WebSite', name: lang === 'zh' ? '王雨峰的博客' : 'Wang Yufeng’s blog', url: SITE + '/' },
+        breadcrumb: { '@id': url + '#breadcrumb' }, primaryImageOfPage: { '@id': url + '#image' } },
+      { '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: SITE + '/' },
+        { '@type': 'ListItem', position: 2, name: c.h1, item: url } ] },
+      { '@type': 'Article', '@id': url + '#article', mainEntityOfPage: { '@id': url + '#webpage' }, headline: c.title, description: c.description,
+        inLanguage: c.htmlLang, datePublished: PUBLISHED, dateModified: MODIFIED, image: { '@id': url + '#image' },
+        author: { '@type': 'Person', name: '王雨峰', alternateName: 'Wang Yufeng', url: SITE + '/' },
+        about: { '@type': 'VideoGame', name: 'Outer Wilds', alternateName: '星际拓荒', datePublished: '2019', genre: 'Adventure',
+          author: { '@type': 'Organization', name: 'Mobius Digital' }, publisher: { '@type': 'Organization', name: 'Annapurna Interactive' } },
+        keywords: c.keywords,
+        workTranslation: lang === 'zh' ? { '@id': SITE + URLS.en + '#article' } : undefined,
+        translationOfWork: lang === 'en' ? { '@id': SITE + URLS.zh + '#article' } : undefined,
+        hasPart: { '@type': 'Dataset', name: 'Outer Wilds clue dependency graph', description: graph.description, url: SITE + URLS.zh + 'graph.json', encodingFormat: 'application/json', inLanguage: ['en', 'zh-CN'] } },
+      { '@type': 'ImageObject', '@id': url + '#image', url: image, contentUrl: image, width: 1200, height: 630, caption: c.imageAlt },
+      { '@type': 'FAQPage', '@id': url + '#faq', inLanguage: c.htmlLang,
+        mainEntity: FAQ.map(([qq, a]) => ({ '@type': 'Question', name: qq[lang], acceptedAnswer: { '@type': 'Answer', text: a[lang] } })) }
+    ]
+  };
+  const faqHtml = FAQ.map(([qq, a]) => `    <dt>${esc(qq[lang])}</dt>\n    <dd>${esc(a[lang])}</dd>`).join('\n');
+  const noscript = bands.map(b => `<h3>${esc(b.title[lang])}</h3><p>${esc(b.band[lang])}</p><ul>${b.roots.map(r => htmlTree(r, lang)).join('')}</ul>`).join('\n');
+  const vars = {
+    ...c, url, image, urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
+    otherPath: lang === 'zh' ? URLS.en : URLS.zh,
+    jsonld: JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'),
+    faq: faqHtml, noscriptList: noscript,
+    legend: c.lg.map((t, i) => `<span>${['<i class="lg-goal"></i>', '<i class="lg-main"></i>', '<i class="lg-alt"></i>', ''][i]}${esc(t)}</span>`).join('\n    ')
+  };
+  const html = tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => {
+    if (!(k in vars)) throw new Error(`Template var missing: ${k}`);
+    return ['jsonld', 'faq', 'noscriptList', 'legend', 'src', 'agents'].includes(k) ? vars[k] : esc(vars[k]);
+  });
+  const out = lang === 'zh' ? path.join(POST, 'index.html') : path.join(POST, 'en/index.html');
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, html);
 }
-const llms = `# 星际拓荒通关线索图（Outer Wilds clue dependency map）
-
-> 《星际拓荒》（Outer Wilds，Mobius Digital，2019）本体的线索依赖图。结局需要凑齐三样东西：宇宙之眼坐标、挪麦飞船、高级跃迁核心。图中每个节点列出它的前置知识、所在星球，以及可以靠运气、硬闯、二周目或速通 bug 绕过的其他走法。不含 DLC《回声之眼》。全文含剧透。
-
-- 页面：${URL}
-- 作者：王雨峰（https://wangyufeng.org/）
-- 发布：2026-10-14
-- 依据：游戏原文（2026 年 10 月 Steam 版，官方简体中文译文的飞船日志、挪麦文字、对话）+ 官方 Wiki、speedrun.com 指南、速通社区 bug 清单。引用时请链接页面。
-
-## 常见问题
-
-${FAQ.map(([q, a]) => `### ${q}\n\n${a}`).join('\n\n')}
-
-## 完整依赖清单
-
-缩进项是上一项的前置。"以下任选一"表示满足其中一条即可，"以下全部需要"表示都要满足。
-
-${['main', 'qm', 'comet'].map(k => `### ${TREES[k].title}：${TREES[k].band}\n\n${md(TREES[k].root, 0)}`).join('\n\n')}
-`;
-fs.writeFileSync(path.join(postDir, 'llms.txt'), llms);
-console.log('ok', html.length);
+console.log('ok', Object.keys(nodes).length, 'nodes', edges.length, 'edges');

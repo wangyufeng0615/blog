@@ -19,6 +19,9 @@ body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--fo
 a { color: var(--accent); }
 
 .top { padding: clamp(14px, 2.4vw, 22px) clamp(16px, 2.4vw, 28px) 10px; display: grid; gap: 6px; }
+.title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.lang { flex-shrink: 0; font-size: 14px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; background: var(--surface); }
+.lang:hover { border-color: var(--accent); }
 .top h1 { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; font-weight: 700; letter-spacing: .01em; text-wrap: balance; }
 .top .what { margin: 0; max-width: 72ch; color: var(--fg); }
 .top .spoiler { color: var(--muted); font-size: 13px; margin: 0; }
@@ -45,6 +48,9 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .detail .tags { margin: 10px 0; display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { font-size: 12px; line-height: 1; padding: 4px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); background: var(--bg); }
 .tag.alt { color: var(--alt); border-color: var(--alt); }
+.tag.timing { color: var(--fg); border-color: var(--fg); }
+.detail .go-here { font-weight: 600; }
+.detail a { color: var(--accent); }
 .detail p { margin: 8px 0; }
 .detail blockquote { margin: 10px 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--soft); border-radius: 0 6px 6px 0; font-size: 13px; }
 .detail blockquote cite { display: block; color: var(--muted); font-style: normal; font-size: 12px; margin-top: 4px; }
@@ -58,6 +64,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .node.gate rect.box { fill: var(--soft); }
 .node.goal rect.box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.2; }
 .node.target rect.box { fill: var(--surface); stroke: var(--accent); stroke-width: 1.8; }
+.node.loc rect.box { fill: var(--surface); stroke: var(--fg); stroke-width: 1.6; }
+.node.loc text.lbl { font-size: 14px; font-weight: 700; }
 .node.branch rect.box { fill: var(--soft); stroke: var(--fg); stroke-width: 1.4; }
 .node.alt rect.box { fill: var(--surface); stroke: var(--alt); stroke-dasharray: 5 4; stroke-width: 1.3; }
 .node text { fill: var(--fg); font-family: var(--font); }
@@ -68,6 +76,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .node text.sub { font-size: 11px; fill: var(--muted); }
 .node text.meta { font-size: 11px; fill: var(--muted); }
 .node text.meta.alt { fill: var(--alt); }
+.node text.meta.timing { fill: var(--fg); font-weight: 600; }
 .node:hover rect.box, .node.sel rect.box { stroke: var(--fg); stroke-width: 2; }
 .node:focus { outline: none; }
 .node:focus-visible rect.box { stroke: var(--accent); stroke-width: 3; }
@@ -89,6 +98,9 @@ svg.focus .edge.hl { stroke-width: 2.4; }
 .faq dt { font-weight: 600; margin-top: 16px; }
 .faq dd { margin: 4px 0 0; color: var(--fg); }
 .article .src { color: var(--muted); font-size: 14px; }
+
+.noscript { max-width: 860px; margin: 16px auto; padding: 0 20px; }
+.noscript ul { padding-left: 1.3em; }
 
 @media (max-width: 760px) {
   .stage { height: 72vh; height: 72dvh; min-height: 420px; }
