@@ -1,5 +1,5 @@
 // Regenerates posts/20261014-outer-wilds-clues/index.html and llms.txt from assets/graph-data.js:
-// FAQ (HTML + FAQPage JSON-LD), plain-text clue list, Article JSON-LD. Edit the data or the template, then run
+// FAQ (HTML + FAQPage JSON-LD), Article JSON-LD; llms.txt carries the full clue list. Edit the data or the template, then run
 //   node scripts/outer-wilds-clues/gen.mjs
 // og.html is the source of assets/og-outer-wilds-clues.png (Chrome headless screenshot at 1200x630).
 import fs from 'fs';
@@ -38,20 +38,8 @@ const FAQ = [
 ];
 
 const ALT_TAG = { official: '官方另一解', luck: '运气 / 硬闯', skip: '二周目直接跳', glitch: '速通 bug' };
-function li(n, nodes) {
-  if (n.ref) return `<li><span class="k">（同上：${esc(nodes[n.ref].label)}）</span></li>`;
-  const kids = n.kids || [];
-  const req = n.req && kids.length > 1 ? `<span class="k">（${n.req === 'all' ? '以下全部需要' : '以下任选一'}）</span>` : '';
-  const place = n.place ? `<span class="k"> · ${esc(n.place)}</span>` : '';
-  const head = n.t === 'alt'
-    ? `<span class="alt-item">其他走法·${ALT_TAG[n.alt]}：${esc(n.label)}</span>${place}`
-    : `<strong>${esc(n.label)}</strong>${place}${req}`;
-  const info = n.info ? `<br><span class="k">${[].concat(n.info).map(strip).map(esc).join(' ')}</span>` : '';
-  return `<li>${head}${info}${kids.length ? `<ul>${kids.map(k => li(k, nodes)).join('')}</ul>` : ''}</li>`;
-}
 const nodes = {};
 for (const k in TREES) (function reg(n) { if (n.ref) return; nodes[n.id] = n; (n.kids || []).forEach(reg); })(TREES[k].root);
-const list = ['main', 'qm', 'comet'].map(k => `<h3>${esc(TREES[k].title)}：${esc(TREES[k].band)}</h3>\n<ul>${li(TREES[k].root, nodes)}</ul>`).join('\n');
 
 const faqHtml = FAQ.map(([q, a]) => `    <dt>${esc(q)}</dt>\n    <dd>${esc(a)}</dd>`).join('\n');
 const jsonld = {
@@ -76,7 +64,6 @@ const jsonld = {
 let html = fs.readFileSync(tpl, 'utf8');
 html = html.replace('/*JSONLD*/', JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'));
 html = html.replace('/*FAQ*/', faqHtml);
-html = html.replace('<!--STATIC-LIST-->', list);
 fs.writeFileSync(path.join(postDir, 'index.html'), html);
 function md(n, depth) {
   if (n.ref) return `${'  '.repeat(depth)}- （同上：${nodes[n.ref].label}）`;
