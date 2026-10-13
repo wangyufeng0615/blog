@@ -81,17 +81,13 @@ svg.focus .edge:not(.hl) { opacity: .08; }
 svg.focus .edge.hl { stroke-width: 2.4; }
 @media (prefers-reduced-motion: no-preference) { .node, .edge { transition: opacity .15s; } }
 
-/* Text below the canvas: FAQ and the plain-text clue list (readable without JS). */
+/* Text below the canvas: FAQ (readable without JS). */
 .article { max-width: 860px; margin: 0 auto; padding: 36px 20px 80px; }
 .article h2 { font-size: 21px; margin: 34px 0 10px; }
 .article h3 { font-size: 16px; margin: 22px 0 6px; }
 .article p { margin: 8px 0; }
 .faq dt { font-weight: 600; margin-top: 16px; }
 .faq dd { margin: 4px 0 0; color: var(--fg); }
-.clue-list ul { margin: 4px 0; padding-left: 1.3em; }
-.clue-list li { margin: 3px 0; }
-.clue-list .k { color: var(--muted); font-size: 13px; }
-.clue-list .alt-item { color: var(--alt); }
 .article .src { color: var(--muted); font-size: 14px; }
 
 @media (max-width: 760px) {
