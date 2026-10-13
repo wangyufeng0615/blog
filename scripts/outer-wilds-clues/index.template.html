@@ -53,7 +53,7 @@
 <script type="application/ld+json">
 {{jsonld}}
 </script>
-<link rel="stylesheet" href="{{assets}}graph.css">
+<link rel="stylesheet" href="{{assets}}graph.css?v={{vCss}}">
 </head>
 <body>
 <header class="top">
@@ -103,7 +103,7 @@ document.querySelector('.lang').addEventListener('click', function () {
   try { localStorage.setItem('owc-lang', this.dataset.lang); } catch (e) {}
 });
 </script>
-<script src="{{assets}}graph-data.js"></script>
-<script src="{{assets}}graph.js"></script>
+<script src="{{assets}}graph-data.js?v={{vData}}"></script>
+<script src="{{assets}}graph.js?v={{vJs}}"></script>
 </body>
 </html>

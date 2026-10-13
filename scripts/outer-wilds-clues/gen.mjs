@@ -6,6 +6,7 @@
 // Quotes are looked up in the extracted game text in the Obsidian vault (GAME_TEXT_DIR); rerun after editing data:
 //   node scripts/outer-wilds-clues/gen.mjs
 // og.html is the source of assets/og-outer-wilds-clues*.png (Chrome headless screenshot, 1200x630).
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -210,6 +211,9 @@ const COPY = {
   }
 };
 
+// Content hashes as ?v= so a deploy never pairs new HTML with cached old assets.
+const ver = f => crypto.createHash('sha1').update(fs.readFileSync(path.join(POST, 'assets', f))).digest('hex').slice(0, 10);
+const VER = { css: ver('graph.css'), data: ver('graph-data.js'), js: ver('graph.js') };
 const tpl = fs.readFileSync(path.join(here, 'index.template.html'), 'utf8');
 for (const lang of ['zh', 'en']) {
   const c = COPY[lang];
@@ -241,7 +245,7 @@ for (const lang of ['zh', 'en']) {
   const faqHtml = FAQ.map(([qq, a]) => `    <dt>${esc(qq[lang])}</dt>\n    <dd>${esc(a[lang])}</dd>`).join('\n');
   const noscript = bands.map(b => `<h3>${esc(b.title[lang])}</h3><p>${esc(b.band[lang])}</p><ul>${b.roots.map(r => htmlTree(r, lang)).join('')}</ul>`).join('\n');
   const vars = {
-    ...c, url, image, urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
+    ...c, url, image, vCss: VER.css, vData: VER.data, vJs: VER.js, urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
     otherPath: lang === 'zh' ? URLS.en : URLS.zh,
     jsonld: JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'),
     faq: faqHtml, noscriptList: noscript,
