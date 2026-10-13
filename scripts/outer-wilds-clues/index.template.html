@@ -1,76 +1,109 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="{{htmlLang}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>星际拓荒通关线索图｜Outer Wilds 线索依赖与跳关路线全图</title>
-<meta name="description" content="《星际拓荒》（Outer Wilds）本体的线索依赖图：打出结局要凑齐宇宙之眼坐标、挪麦飞船、高级跃迁核心三样东西，每一步需要先知道什么、在哪颗星球学到、哪些步骤可以靠运气、二周目或 bug 绕过去，都画在一张图上。">
-<meta name="keywords" content="星际拓荒, Outer Wilds, 星际拓荒攻略, 星际拓荒线索, 星际拓荒结局, 宇宙之眼坐标, 挪麦人, 灰烬双星计划, 量子卫星第六个位置, 黑棘星安康鱼, 深巨星核心, 一个循环通关, 新手的运气">
-<meta name="author" content="王雨峰">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="keywords" content="{{keywords}}">
+<meta name="author" content="王雨峰 (Wang Yufeng)">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#faf9f7">
-<link rel="canonical" href="https://wangyufeng.org/outer-wilds-clues/">
+<link rel="canonical" href="{{url}}">
+<link rel="alternate" hreflang="zh-CN" href="{{urlZh}}">
+<link rel="alternate" hreflang="en" href="{{urlEn}}">
+<link rel="alternate" hreflang="x-default" href="{{urlZh}}">
+<link rel="alternate" type="text/plain" title="llms.txt" href="{{urlZh}}llms.txt">
+<link rel="alternate" type="application/json" title="Clue graph (JSON)" href="{{urlZh}}graph.json">
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
-<link rel="alternate" type="text/plain" title="llms.txt" href="https://wangyufeng.org/outer-wilds-clues/llms.txt">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="王雨峰的博客">
-<meta property="og:title" content="星际拓荒通关线索图｜Outer Wilds">
-<meta property="og:description" content="打出《星际拓荒》结局要凑齐哪三样东西、每样要先知道什么、哪些步骤能绕过去，一张图看全。">
-<meta property="og:url" content="https://wangyufeng.org/outer-wilds-clues/">
-<meta property="og:image" content="https://wangyufeng.org/outer-wilds-clues/assets/og-outer-wilds-clues.png">
+<meta property="og:site_name" content="王雨峰的博客 · Wang Yufeng">
+<meta property="og:title" content="{{socialTitle}}">
+<meta property="og:description" content="{{socialDesc}}">
+<meta property="og:url" content="{{url}}">
+<meta property="og:image" content="{{image}}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="星际拓荒通关线索依赖图">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image:alt" content="{{imageAlt}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:locale:alternate" content="{{ogAlt}}">
 <meta property="article:published_time" content="2026-10-14T21:00:00+08:00">
-<meta property="article:author" content="王雨峰">
+<meta property="article:modified_time" content="2026-10-14T23:30:00+08:00">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="星际拓荒通关线索图｜Outer Wilds">
-<meta name="twitter:description" content="打出《星际拓荒》结局要凑齐哪三样东西、每样要先知道什么、哪些步骤能绕过去，一张图看全。">
-<meta name="twitter:image" content="https://wangyufeng.org/outer-wilds-clues/assets/og-outer-wilds-clues.png">
-<meta name="twitter:image:alt" content="星际拓荒通关线索依赖图">
-<script type="application/ld+json">
-/*JSONLD*/
+<meta name="twitter:title" content="{{socialTitle}}">
+<meta name="twitter:description" content="{{socialDesc}}">
+<meta name="twitter:image" content="{{image}}">
+<meta name="twitter:image:alt" content="{{imageAlt}}">
+<script>
+/* Follow the reader's language on first visit; an explicit switch is remembered. Crawlers stay on the URL they asked for. */
+(function () {
+  var page = '{{pageLang}}', other = '{{otherPath}}';
+  try {
+    var saved = localStorage.getItem('owc-lang');
+    var want = saved;
+    if (!want) {
+      if (/bot|crawl|spider|slurp|preview|headless|lighthouse|google|bing|baidu|yandex|duckduck|bytespider|gpt|claude|anthropic|perplexity|facebookexternalhit|embedly/i.test(navigator.userAgent)) return;
+      var first = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      want = /^zh/i.test(first) ? 'zh' : 'en';
+    }
+    if (want !== page) location.replace(other + location.hash);
+  } catch (e) {}
+})();
 </script>
-<link rel="stylesheet" href="assets/graph.css">
+<script type="application/ld+json">
+{{jsonld}}
+</script>
+<link rel="stylesheet" href="{{assets}}graph.css">
 </head>
 <body>
 <header class="top">
-  <h1>星际拓荒通关线索图</h1>
-  <p class="what">《星际拓荒》（Outer Wilds）要打出结局，得先弄清一连串事情。这张图把它们串起来：每件事要先知道什么、在哪颗星球学到，以及哪些步骤可以绕过去。越往右越接近结局。</p>
+  <div class="title-row">
+    <h1>{{h1}}</h1>
+    <a class="lang" href="{{switchHref}}" hreflang="{{switchHreflang}}" lang="{{switchHreflang}}" data-lang="{{switchLang}}">{{switchLabel}}</a>
+  </div>
+  <p class="what">{{what}}</p>
   <div class="legend">
-    <span><i class="lg-goal"></i>绿框：结局和三样必需品</span>
-    <span><i class="lg-main"></i>实线：游戏设计好的路线</span>
-    <span><i class="lg-alt"></i>虚线：其他走法（运气、硬闯、二周目、bug）</span>
-    <span>点任意卡片看游戏原文</span>
-    <span class="spoiler">全是剧透，没通关慎看</span>
+    {{legend}}
+    <span class="spoiler">{{spoiler}}</span>
   </div>
 </header>
 
 <div class="stage" id="stage">
-  <svg id="graph" role="img" aria-label="星际拓荒线索依赖图：通关主线、量子卫星支线、闯入者支线。完整文字版见本页 llms.txt。"></svg>
-  <div class="zoom" role="group" aria-label="缩放">
-    <button type="button" id="z-out" aria-label="缩小">−</button>
+  <svg id="graph" role="img" aria-label="{{aria}}"></svg>
+  <div class="zoom" role="group">
+    <button type="button" id="z-out" aria-label="{{zoomOut}}">−</button>
     <output id="z-val">100%</output>
-    <button type="button" id="z-in" aria-label="放大">+</button>
-    <button type="button" id="z-fit">铺满宽度</button>
-    <span class="hint">拖动平移 · Ctrl/⌘ + 滚轮或双指缩放</span>
+    <button type="button" id="z-in" aria-label="{{zoomIn}}">+</button>
+    <button type="button" id="z-fit">{{fit}}</button>
+    <span class="hint">{{hint}}</span>
   </div>
   <aside class="detail" id="detail" aria-live="polite" hidden></aside>
 </div>
+<noscript>
+  <div class="noscript">
+    <p>{{noscript}}</p>
+    {{noscriptList}}
+  </div>
+</noscript>
 
 <main class="article">
-  <h2>常见问题</h2>
+  <h2>{{faqTitle}}</h2>
   <dl class="faq">
-/*FAQ*/
+{{faq}}
   </dl>
 
-  <h2>资料来源</h2>
-  <p class="src">实线和引文来自游戏原文：2026 年 10 月的 Steam 版本的飞船日志、挪麦文字和对话，用的是官方简体中文译文，以及日志里自带的"这条传闻从哪里听来"的数据。其他走法来自 <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds 官方 Wiki</a>、<a href="https://www.speedrun.com/outer_wilds/guides/6oj7z" rel="noopener">speedrun.com 速通指南</a> 和速通社区整理的 bug 清单，每张卡片的详情里写了具体出处。标着"社区说法"的三条我没在游戏原文里找到依据。不含 DLC《回声之眼》。</p>
-  <p class="src">王雨峰 · 2026 年 10 月 14 日</p>
+  <h2>{{srcTitle}}</h2>
+  <p class="src">{{src}}</p>
+  <p class="src">{{agents}}</p>
+  <p class="src">{{byline}}</p>
 </main>
 
-<script src="assets/graph-data.js"></script>
-<script src="assets/graph.js"></script>
+<script>
+document.querySelector('.lang').addEventListener('click', function () {
+  try { localStorage.setItem('owc-lang', this.dataset.lang); } catch (e) {}
+});
+</script>
+<script src="{{assets}}graph-data.js"></script>
+<script src="{{assets}}graph.js"></script>
 </body>
 </html>

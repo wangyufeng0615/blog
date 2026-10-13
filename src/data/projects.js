@@ -42,7 +42,7 @@ export const allProjects = [
   },
   {
     name: '星际拓荒通关线索图',
-    description: '《星际拓荒》打出结局要先知道哪些事、每件在哪学到、哪些能绕过去，一张可缩放的依赖图',
+    description: '《星际拓荒》打出结局要先知道哪些事、在哪学到、关键地点怎么进，一张可缩放的中英双语依赖图',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/outer-wilds-clues/',
     type: 'Game guide',

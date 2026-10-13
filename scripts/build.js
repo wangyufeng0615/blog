@@ -112,6 +112,7 @@ function readPosts() {
         url: permalink,
         noHeader: !!meta.noHeader,
         locales,
+        alternates: normalizeAlternates(meta.alternates, permalink, dir),
       });
     }
   }
@@ -156,6 +157,19 @@ function normalizeCustomLocales(locales, permalink, dir) {
     throw new Error(`Invalid locales for ${dir}: en.url must be nested below permalink`);
   }
   return normalized;
+}
+
+// Language variants that ship as separate static pages inside the post folder (no build-time localization).
+// Only used for sitemap hreflang; the pages carry their own canonical/hreflang tags.
+function normalizeAlternates(alternates, permalink, dir) {
+  if (!alternates) return null;
+  for (const url of Object.values(alternates)) {
+    if (typeof url !== 'string' || !url.startsWith(permalink) || !url.endsWith('/')) {
+      throw new Error(`Invalid alternates for ${dir}: urls must be nested below ${permalink} and end with /`);
+    }
+  }
+  if (alternates['zh-CN'] !== permalink) throw new Error(`Invalid alternates for ${dir}: zh-CN must equal permalink`);
+  return alternates;
 }
 
 function normalizeCustomPermalink(value, dir) {
@@ -280,7 +294,9 @@ function injectNestedFloatingBack(dir, rootDir) {
     if (entry.isDirectory()) {
       injectNestedFloatingBack(full, rootDir);
     } else if (entry.name === 'index.html' && dir !== rootDir) {
-      fs.writeFileSync(full, injectFloatingBack(fs.readFileSync(full, 'utf-8'), 'zh-CN'));
+      const html = fs.readFileSync(full, 'utf-8');
+      const language = /<html\b[^>]*\blang="en/i.test(html) ? 'en' : 'zh-CN';
+      fs.writeFileSync(full, injectFloatingBack(html, language));
     }
   }
 }
@@ -714,12 +730,15 @@ function generateSitemap(posts) {
 
   for (const post of posts) {
     const lastmod = post.modifiedDate || post.date || today;
-    const variants = post.locales ? Object.values(post.locales) : [{ url: post.url }];
+    const langMap = post.locales
+      ? Object.fromEntries(Object.entries(post.locales).map(([language, locale]) => [language, locale.url]))
+      : post.alternates;
+    const variants = langMap ? Object.values(langMap).map((url) => ({ url })) : [{ url: post.url }];
     for (const variant of variants) {
-      const alternates = post.locales
-        ? Object.entries(post.locales)
-            .map(([language, locale]) => `    <xhtml:link rel="alternate" hreflang="${language}" href="${SITE_URL}${locale.url}" />`)
-            .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${post.locales['zh-CN'].url}" />`)
+      const alternates = langMap
+        ? Object.entries(langMap)
+            .map(([language, url]) => `    <xhtml:link rel="alternate" hreflang="${language}" href="${SITE_URL}${url}" />`)
+            .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${langMap['zh-CN']}" />`)
             .join('\n') + '\n'
         : '';
       xml += `  <url>
@@ -811,7 +830,8 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 - [王工存储指数 llms.txt](${SITE_URL}/storage-trend/llms.txt): 存储指数的指标分组、数据接口与引用注意事项。
 - [王工存储指数 JSON 快照](https://storage-trend-api.wangyufeng.workers.dev/api/snapshot): DRAM、HBM、NAND、SSD 等存储指标的最新完整数据。
 - [和AI一起探索地球 llms.txt](https://earth.wangyufeng.org/llms.txt): 街景探索游戏的玩法与入口说明。
-- [星际拓荒通关线索图 llms.txt](${SITE_URL}/outer-wilds-clues/llms.txt): 《星际拓荒》本体线索依赖的完整文字版与常见问题。
+- [Outer Wilds clue map llms.txt / 星际拓荒通关线索图](${SITE_URL}/outer-wilds-clues/llms.txt): Bilingual text version of the Outer Wilds clue dependency map (English page: ${SITE_URL}/outer-wilds-clues/en/).
+- [Outer Wilds clue graph JSON](${SITE_URL}/outer-wilds-clues/graph.json): Nodes, prerequisites and official English/Chinese game text for the Outer Wilds clue map.
 
 ## Featured work
 
