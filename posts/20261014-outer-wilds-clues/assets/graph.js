@@ -3,21 +3,14 @@
   const LANG = /^en/i.test(document.documentElement.lang) ? 'en' : 'zh';
   const T = v => (v && typeof v === 'object' && !Array.isArray(v) ? v[LANG] : v);
   const FONT = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif';
-  const NODE_W = 200, INNER_W = NODE_W - 24, COL_GAP = 58, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
+  const NODE_W = 200, INNER_W = NODE_W - 24, COL_GAP = 72, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
   const UI = {
-    zh: { realize: '意识到', explore: '探索到', realizeLong: '意识到：要想明白的一件事', exploreLong: '探索到：要去到的地方或要做到的事', official: '官方另一解', luck: '运气 / 试错 / 硬闯', shared: '两条线共用', all: '需全部', any: '任选一', timing: '时间窗口', risk: '小心坠落',
-      kinds: { goal: '终点', branchGoal: '支线终点', target: '必需品', gate: '要过的关', clue: '线索', alt: '其他走法', loc: '地点' },
-      allLong: '左边的前置需全部满足', anyLong: '左边的前置满足一条即可', verify: '社区说法，未在游戏原文核实', src: '出处', pre: '前置', next: '通往',
-      goHere: '怎么到这里', foundHere: '这里能找到', sep: '、', close: '关闭' },
-    en: { realize: 'Realize', explore: 'Explore', realizeLong: 'Realize: something to figure out', exploreLong: 'Explore: somewhere to get to or something to get through', official: 'other in-game clue', luck: 'luck / trial / brute force', shared: 'shared by two lines', all: 'needs all', any: 'any one', timing: 'timing', risk: 'mind the drop',
-      kinds: { goal: 'Ending', branchGoal: 'Side goal', target: 'Must-have', gate: 'Gate', clue: 'Clue', alt: 'Another way', loc: 'Location' },
-      allLong: 'needs every prerequisite on its left', anyLong: 'any one prerequisite on its left is enough', verify: 'community claim, not confirmed in the game text', src: 'Source', pre: 'Needs', next: 'Leads to',
-      goHere: 'How to get here', foundHere: 'Clues found here', sep: ', ', close: 'Close' }
+    zh: { realize: '意识到', explore: '探索到', official: '官方另一解', luck: '运气 / 试错 / 硬闯', timing: '时间窗口', risk: '小心坠落', verify: '社区说法', or: '或', go: '怎么去' },
+    en: { realize: 'Realize', explore: 'Explore', official: 'other in-game clue', luck: 'luck / trial / brute force', timing: 'timing', risk: 'mind the drop', verify: 'community claim', or: 'or', go: 'how to get there' }
   }[LANG];
 
   const svg = document.getElementById('graph');
   const stage = document.getElementById('stage');
-  const detail = document.getElementById('detail');
   const vp = el('g', {}, svg);
   const state = { sel: null, view: { k: 1, tx: 0, ty: 0 }, moved: false, gw: 1000, gh: 1000, pos: {}, size: {} };
   const BANDS = window.OWC.bands;
@@ -29,7 +22,6 @@
     if (parent) parent.appendChild(e);
     return e;
   }
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // Wrap by measured width: words for English, characters for Chinese. Nothing runs past the card edge.
   const ctx = document.createElement('canvas').getContext('2d');
@@ -60,9 +52,6 @@
     const link = n => { if (n.ref) return; (n.kids || []).forEach(k => { G.edges.push({ from: k.ref || k.id, to: n.id }); link(k); }); };
     b.roots.forEach(link);
   });
-  const parentCount = {}, backlinks = {};
-  G.edges.forEach(e => { parentCount[e.from] = (parentCount[e.from] || 0) + 1; });
-  for (const id in G.nodes) { const at = G.nodes[id].at; if (at) (backlinks[at] = backlinks[at] || []).push(id); }
 
   const isBig = n => n.t === 'goal' || n.t === 'target' || n.t === 'loc';
   function nodeClass(n) {
@@ -74,19 +63,20 @@
     if (n.act) m.push(UI[n.act]);
     if (n.t === 'alt') m.push(UI[n.alt]);
     if (n.tag) m.push(UI[n.tag]);
-    if (parentCount[n.id] > 1) m.push(UI.shared);
-    if (n.req && (n.kids || []).length > 1) m.push(UI[n.req]);
+    if (n.verify) m.push(UI.verify);
     return m.join(' · ');
   }
   function measure(n) {
     const big = isBig(n);
     const lblFont = `${big ? 700 : n.t === 'gate' ? 600 : 400} ${big ? 14 : 13}px ${FONT}`;
     const label = wrap(T(n.label), lblFont, INNER_W);
-    const place = n.place ? wrap(T(n.place), `400 11px ${FONT}`, INNER_W).slice(0, 2) : [];
+    const placeText = n.place ? T(n.place) + (n.at ? (LANG === 'en' ? ' · ' : ' · ') + UI.go + ' ›' : '') : (n.at ? UI.go + ' ›' : '');
+    const place = placeText ? wrap(placeText, `400 11px ${FONT}`, INNER_W).slice(0, 3) : [];
+    const note = n.note ? wrap(T(n.note), `400 12px ${FONT}`, INNER_W).slice(0, 3) : [];
     const meta = metaText(n);
     const metaLines = meta ? wrap(meta, `700 11.5px ${FONT}`, INNER_W) : [];
-    const h = 10 + metaLines.length * 15 + (metaLines.length ? 2 : 0) + label.length * 18 + place.length * 15 + 9;
-    return { label, place, metaLines, h };
+    const h = 10 + metaLines.length * 15 + (metaLines.length ? 2 : 0) + label.length * 18 + note.length * 16 + (note.length ? 2 : 0) + place.length * 15 + 9;
+    return { label, note, place, metaLines, h };
   }
 
   // Tidy tree, right-to-left: leaves stack top-down, a parent sits at the middle of its children,
@@ -159,16 +149,35 @@
     });
     state.gw = width; state.gh = top - BAND_GAP + PAD; state.pos = pos;
 
+    // Where any one prerequisite is enough, the arrows merge into an "or" dot before the card;
+    // arrows that reach the card directly are all required.
+    const incoming = {};
+    G.edges.forEach(e => { if (pos[e.from] && pos[e.to]) incoming[e.to] = (incoming[e.to] || 0) + 1; });
+    const isOr = id => G.nodes[id].req === 'any' && incoming[id] > 1;
+    const R = 9;
     G.edges.forEach(e => {
       const a = G.nodes[e.from], b = G.nodes[e.to];
       if (!pos[a.id] || !pos[b.id]) return;
       const pa = pos[a.id], pb = pos[b.id];
-      const x1 = pa.x + NODE_W, y1 = pa.y + state.size[a.id].h / 2, x2 = pb.x - 2, y2 = pb.y + state.size[b.id].h / 2;
-      const dx = Math.max(28, (x2 - x1) / 2);
+      const x1 = pa.x + NODE_W, y1 = pa.y + state.size[a.id].h / 2, y2 = pb.y + state.size[b.id].h / 2;
+      const or = isOr(b.id);
+      const x2 = or ? pb.x - 26 - R : pb.x - 2;
+      const dx = Math.max(18, (x2 - x1) / 2);
       const alt = a.t === 'alt';
-      const p = el('path', { d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`, class: 'edge' + (alt ? ' alt' : ''), 'marker-end': `url(#${alt ? 'ah-alt' : 'ah'})` }, gE);
+      const attrs = { d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`, class: 'edge' + (alt ? ' alt' : '') };
+      if (!or) attrs['marker-end'] = `url(#${alt ? 'ah-alt' : 'ah'})`;
+      const p = el('path', attrs, gE);
       p.dataset.from = a.id; p.dataset.to = b.id;
     });
+    for (const id in pos) {
+      if (!isOr(id)) continue;
+      const pb = pos[id], y = pb.y + state.size[id].h / 2, cx = pb.x - 26;
+      const c = el('path', { d: `M${cx + R},${y} L${pb.x - 2},${y}`, class: 'edge join', 'marker-end': 'url(#ah)' }, gE);
+      c.dataset.join = id;
+      const g = el('g', { class: 'or' }, gE); g.dataset.join = id;
+      el('circle', { cx, cy: y, r: R }, g);
+      const t = el('text', { x: cx, y: y + 4, 'text-anchor': 'middle' }, g); t.textContent = UI.or;
+    }
 
     for (const id in pos) {
       const n = G.nodes[id], p = pos[id], s = state.size[id];
@@ -190,7 +199,13 @@
       });
       if (s.metaLines.length) y += 2;
       s.label.forEach(line => { const t = el('text', { class: 'lbl', x: 12, y: y + 14 }, gr); t.textContent = line; y += 18; });
-      s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + 11 }, gr); t.textContent = line; y += 15; });
+      if (s.note.length) y += 2;
+      s.note.forEach(line => { const t = el('text', { class: 'note', x: 12, y: y + 12 }, gr); t.textContent = line; y += 16; });
+      s.place.forEach(line => {
+        const t = el('text', { class: n.at ? 'sub go' : 'sub', x: 12, y: y + 11 }, gr); t.textContent = line;
+        if (n.at) t.dataset.go = n.at;
+        y += 15;
+      });
       gr.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(id); } });
     }
     applyView();
@@ -238,7 +253,7 @@
   svg.addEventListener('pointerdown', ev => {
     if (ev.pointerType === 'mouse' && ev.button !== 0) return;
     ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
-    if (ptrs.size === 1) drag = { x: ev.clientX, y: ev.clientY, moved: false, node: ev.target.closest('.node') };
+    if (ptrs.size === 1) drag = { x: ev.clientX, y: ev.clientY, moved: false, node: ev.target.closest('.node'), go: ev.target.closest('[data-go]') };
     else if (drag) drag.moved = true;
   });
   window.addEventListener('pointermove', ev => {
@@ -263,7 +278,7 @@
     if (!ptrs.has(ev.pointerId)) return;
     ptrs.delete(ev.pointerId);
     if (ptrs.size === 0 && drag) {
-      if (!drag.moved) { if (drag.node) select(drag.node.dataset.id); else clear(); }
+      if (!drag.moved) { if (drag.go) { select(drag.go.dataset.go, true); focusNode(drag.go.dataset.go); } else if (drag.node) select(drag.node.dataset.id); else clear(); }
       drag = null; svg.classList.remove('dragging');
     }
   }
@@ -274,8 +289,7 @@
   function focusNode(id) {
     const p = state.pos[id]; if (!p) return;
     const v = state.view, h = state.size[id].h;
-    const panelW = window.innerWidth > 760 ? detail.offsetWidth + 24 : 0;
-    const target = { tx: (stage.clientWidth - panelW) / 2 - (p.x + NODE_W / 2) * v.k, ty: stage.clientHeight / 2 - (p.y + h / 2) * v.k };
+    const target = { tx: stage.clientWidth / 2 - (p.x + NODE_W / 2) * v.k, ty: stage.clientHeight / 2 - (p.y + h / 2) * v.k };
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.tx = target.tx; v.ty = target.ty; applyView(); return; }
     const s = { tx: v.tx, ty: v.ty }, t0 = performance.now();
     (function step(t) {
@@ -298,7 +312,7 @@
   function applyHighlight() {
     svg.classList.toggle('focus', !!state.sel);
     svg.querySelectorAll('.node').forEach(n => n.classList.remove('hl', 'sel'));
-    svg.querySelectorAll('.edge').forEach(e => e.classList.remove('hl'));
+    svg.querySelectorAll('.edge, .or').forEach(e => e.classList.remove('hl'));
     if (!state.sel) return;
     const { up, down } = related(state.sel);
     svg.querySelectorAll('.node').forEach(n => {
@@ -308,44 +322,18 @@
     });
     svg.querySelectorAll('.edge').forEach(e => {
       const f = e.dataset.from, t = e.dataset.to;
-      if ((down.has(f) && down.has(t)) || (up.has(f) && up.has(t))) e.classList.add('hl');
+      if (f && ((down.has(f) && down.has(t)) || (up.has(f) && up.has(t)))) e.classList.add('hl');
     });
-  }
-  const goLink = id => `<a href="#" data-go="${id}">${esc(T(G.nodes[id].label))}</a>`;
-  function renderDetail() {
-    const n = state.sel && G.nodes[state.sel];
-    if (!n) { detail.hidden = true; return; }
-    detail.hidden = false;
-    const parents = G.edges.filter(e => e.from === n.id).map(e => e.to);
-    const kids = G.edges.filter(e => e.to === n.id).map(e => e.from);
-    const kind = n.t === 'goal' && G.band[n.id] !== 'main' ? UI.kinds.branchGoal : UI.kinds[n.t];
-    let h = `<button class="close" type="button" aria-label="${UI.close}">×</button><h2>${esc(T(n.label))}</h2>`;
-    if (n.place) h += `<div class="place">${esc(T(n.place))}</div>`;
-    h += `<div class="tags"><span class="tag">${kind}</span>`;
-    if (n.act) h += `<span class="tag kw-${n.act}">${UI[n.act + 'Long']}</span>`;
-    if (n.t === 'alt') h += `<span class="tag alt">${UI[n.alt]}</span>`;
-    if (n.tag) h += `<span class="tag ${n.tag}">${UI[n.tag]}</span>`;
-    if (n.req && kids.length > 1) h += `<span class="tag">${n.req === 'all' ? UI.allLong : UI.anyLong}</span>`;
-    if (parentCount[n.id] > 1) h += `<span class="tag">${UI.shared}</span>`;
-    if (n.verify) h += `<span class="tag">${UI.verify}</span>`;
-    h += `</div>`;
-    if (n.at) h += `<p class="go-here">${UI.goHere}${LANG === 'en' ? ': ' : '：'}${goLink(n.at)} →</p>`;
-    (n.info || []).forEach(t => { h += `<p>${esc(T(t))}</p>`; });
-    (n.quote || []).forEach(q => { h += `<blockquote>${esc(q[LANG])}<cite>${esc(q.cite[LANG])}</cite></blockquote>`; });
-    if (backlinks[n.id]) h += `<p class="meta">${UI.foundHere}${LANG === 'en' ? ': ' : '：'}${backlinks[n.id].map(goLink).join(UI.sep)}</p>`;
-    if (n.src) h += `<p class="meta">${UI.src}${LANG === 'en' ? ': ' : '：'}${n.src.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${esc(T(s.label))}</a>`).join(UI.sep)}</p>`;
-    if (kids.length) h += `<p class="meta">${UI.pre}${LANG === 'en' ? ': ' : '：'}${kids.map(goLink).join(UI.sep)}</p>`;
-    if (parents.length) h += `<p class="meta">${UI.next}${LANG === 'en' ? ': ' : '：'}${parents.map(goLink).join(UI.sep)}</p>`;
-    detail.innerHTML = h;
-    detail.scrollTop = 0;
-    detail.querySelector('.close').onclick = clear;
-    detail.querySelectorAll('a[data-go]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); select(a.dataset.go, true); focusNode(a.dataset.go); }));
+    svg.querySelectorAll('[data-join]').forEach(j => {
+      const id = j.dataset.join;
+      j.classList.toggle('hl', !!svg.querySelector(`.edge.hl[data-to="${CSS.escape(id)}"]`));
+    });
   }
   function select(id, force) {
     state.sel = (!force && state.sel === id) ? null : id;
-    applyHighlight(); renderDetail();
+    applyHighlight();
   }
-  function clear() { state.sel = null; applyHighlight(); renderDetail(); }
+  function clear() { state.sel = null; applyHighlight(); }
   document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && state.sel) clear(); });
 
   // Timeline events and traveler leads below the canvas jump to their card on the map.
