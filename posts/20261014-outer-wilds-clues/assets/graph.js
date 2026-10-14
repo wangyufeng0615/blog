@@ -11,7 +11,8 @@
 
   const svg = document.getElementById('graph');
   const vp = el('g', {}, svg);
-  const state = { gw: 1000, gh: 1000, pos: {}, size: {} };
+  const state = { view: { k: 1, tx: 0, ty: 0 }, moved: false, gw: 1000, gh: 1000, pos: {}, size: {} };
+  const stage = document.getElementById('stage');
   const BANDS = window.OWC.bands;
   const G = { nodes: {}, edges: [], band: {} };
 
@@ -204,11 +205,81 @@
       s.note.forEach(line => { const t = el('text', { class: 'note', x: 12, y: y + 12 }, gr); t.textContent = line; y += 16; });
       s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + 11 }, gr); t.textContent = line; y += 15; });
     }
-    // Read-only map at its natural size: the page scrolls it, the frame scrolls sideways if it is wider than the screen.
-    svg.setAttribute('viewBox', `0 0 ${width} ${state.gh}`);
-    svg.setAttribute('width', width);
-    svg.setAttribute('height', state.gh);
   }
+
+  /* ---------- view: opens on the whole map; zoom in to read ---------- */
+  const tip = document.getElementById('zoom-tip');
+  const clampK = k => Math.min(2.5, Math.max(0.05, k));
+  function applyView() {
+    const v = state.view;
+    vp.setAttribute('transform', `translate(${v.tx},${v.ty}) scale(${v.k})`);
+    document.getElementById('z-val').textContent = Math.round(v.k * 100) + '%';
+  }
+  function fitAll() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    const k = clampK(Math.min((w - 24) / state.gw, (h - 24) / state.gh));
+    state.view = { k, tx: (w - state.gw * k) / 2, ty: (h - state.gh * k) / 2 };
+    applyView();
+  }
+  function zoomAt(f, cx, cy) {
+    const v = state.view, k = clampK(v.k * f);
+    v.tx = cx - (cx - v.tx) * (k / v.k); v.ty = cy - (cy - v.ty) * (k / v.k); v.k = k;
+    state.moved = true; applyView();
+    if (tip) tip.hidden = true;
+  }
+  const center = () => [stage.clientWidth / 2, stage.clientHeight / 2];
+  document.getElementById('z-in').onclick = () => zoomAt(1.6, ...center());
+  document.getElementById('z-out').onclick = () => zoomAt(1 / 1.6, ...center());
+  document.getElementById('z-fit').onclick = () => { state.moved = false; fitAll(); };
+
+  // Ctrl/⌘ + wheel or a trackpad pinch zooms. A plain wheel moves a zoomed-in map and hands the scroll
+  // back to the page at its top or bottom edge (or right away when the whole map already fits).
+  svg.addEventListener('wheel', ev => {
+    const r = svg.getBoundingClientRect();
+    const unit = ev.deltaMode === 1 ? 16 : ev.deltaMode === 2 ? r.height : 1;
+    if (ev.ctrlKey || ev.metaKey) { ev.preventDefault(); zoomAt(Math.exp(-ev.deltaY * unit * 0.0025), ev.clientX - r.left, ev.clientY - r.top); return; }
+    const v = state.view;
+    const minTy = Math.min(12, r.height - state.gh * v.k - 12), maxTy = Math.max(12, r.height - state.gh * v.k - 12);
+    const dy = ev.deltaY * unit, dx = ev.deltaX * unit;
+    const atEdge = (dy > 0 && v.ty <= minTy + 0.5) || (dy < 0 && v.ty >= maxTy - 0.5);
+    if (atEdge && Math.abs(dy) >= Math.abs(dx)) return;
+    ev.preventDefault();
+    v.ty = Math.min(maxTy, Math.max(minTy, v.ty - dy));
+    v.tx -= dx; state.moved = true; applyView();
+  }, { passive: false });
+
+  const ptrs = new Map(); let drag = null;
+  svg.addEventListener('pointerdown', ev => {
+    if (ev.pointerType === 'mouse' && ev.button !== 0) return;
+    ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    if (ptrs.size === 1) drag = { x: ev.clientX, y: ev.clientY, moved: false };
+  });
+  window.addEventListener('pointermove', ev => {
+    if (!ptrs.has(ev.pointerId)) return;
+    const prev = ptrs.get(ev.pointerId);
+    if (ptrs.size === 2) {
+      const [a, b] = [...ptrs.values()];
+      const d0 = Math.hypot(a.x - b.x, a.y - b.y);
+      ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+      const [c, d] = [...ptrs.values()];
+      const r = svg.getBoundingClientRect();
+      if (d0 > 0) zoomAt(Math.hypot(c.x - d.x, c.y - d.y) / d0, (c.x + d.x) / 2 - r.left, (c.y + d.y) / 2 - r.top);
+      return;
+    }
+    ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    if (!drag) return;
+    if (!drag.moved && Math.hypot(ev.clientX - drag.x, ev.clientY - drag.y) < 4) return;
+    drag.moved = true; svg.classList.add('dragging');
+    state.view.tx += ev.clientX - prev.x; state.view.ty += ev.clientY - prev.y; state.moved = true; applyView();
+  });
+  function endPtr(ev) {
+    if (!ptrs.has(ev.pointerId)) return;
+    ptrs.delete(ev.pointerId);
+    if (ptrs.size === 0) { drag = null; svg.classList.remove('dragging'); }
+  }
+  window.addEventListener('pointerup', endPtr);
+  window.addEventListener('pointercancel', endPtr);
+  window.addEventListener('resize', () => { if (!state.moved) fitAll(); });
 
   // A quiet starfield behind everything, drawn once per resize from a fixed seed.
   const sky = document.getElementById('sky');
@@ -231,7 +302,5 @@
   window.addEventListener('resize', drawSky);
 
   render();
-  // Open at the right edge: the ending and its must-haves first, prerequisites further left.
-  const frame = document.getElementById('stage');
-  frame.scrollLeft = frame.scrollWidth;
+  fitAll();
 })();

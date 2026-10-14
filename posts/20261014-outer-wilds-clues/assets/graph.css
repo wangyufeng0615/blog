@@ -43,8 +43,14 @@ a { color: var(--accent); }
 .kw-mark-realize { fill: rgba(198, 180, 255, .2); }
 .kw-mark-explore { fill: rgba(255, 211, 110, .2); }
 
-.stage { position: relative; flex: none; background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; overflow-y: hidden; }
-.stage svg { display: block; max-width: none; }
+.stage { position: relative; flex: none; height: max(360px, calc(100vh - 140px)); height: max(360px, calc(100dvh - 140px)); background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; touch-action: none; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; user-select: none; -webkit-user-select: none; }
+.stage svg.dragging { cursor: grabbing; }
+.zoom-tip { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); margin: 0; padding: 6px 14px; border-radius: 8px; background: rgba(21, 30, 59, .92); border: 1px solid var(--line); color: var(--fg); font-size: 13px; white-space: nowrap; pointer-events: none; }
+.zoom { position: absolute; left: 12px; bottom: 12px; display: flex; align-items: center; gap: 2px; background: rgba(21, 30, 59, .92); border: 1px solid var(--line); border-radius: 8px; padding: 3px; }
+.zoom button { font: inherit; font-size: 15px; color: var(--fg); background: transparent; border: 0; border-radius: 6px; min-width: 40px; height: 36px; padding: 0 10px; cursor: pointer; }
+.zoom button:hover { background: var(--gate); }
+.zoom output { min-width: 50px; text-align: center; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
 
 
 button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -121,4 +127,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .noscript ul { padding-left: 1.3em; }
 
 @media (max-width: 760px) {
+  .stage { height: 72vh; height: 72dvh; min-height: 420px; }
+  .zoom-tip { white-space: normal; width: calc(100% - 24px); text-align: center; }
         }

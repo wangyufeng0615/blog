@@ -72,6 +72,13 @@
 
   <div class="stage" id="stage">
     <svg id="graph" role="img" aria-label="{{aria}}"></svg>
+    <p class="zoom-tip" id="zoom-tip">{{tip}}</p>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="{{zoomOut}}">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="{{zoomIn}}">+</button>
+      <button type="button" id="z-fit">{{fit}}</button>
+    </div>
   </div>
 </div>
 <noscript>

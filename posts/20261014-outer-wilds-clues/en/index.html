@@ -233,7 +233,7 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="../assets/graph.css?v=1db078fba9">
+<link rel="stylesheet" href="../assets/graph.css?v=97e23c9039">
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -252,6 +252,13 @@
 
   <div class="stage" id="stage">
     <svg id="graph" role="img" aria-label="Outer Wilds clue dependency map: main path, getting there, Quantum Moon, the Interloper. A text version is in llms.txt."></svg>
+    <p class="zoom-tip" id="zoom-tip">Pinch or Ctrl/⌘ + scroll to zoom in, drag to look around</p>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="Zoom out">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="Zoom in">+</button>
+      <button type="button" id="z-fit">Whole map</button>
+    </div>
   </div>
 </div>
 <noscript>
@@ -358,6 +365,6 @@ document.querySelector('.lang').addEventListener('click', function () {
 });
 </script>
 <script src="../assets/graph-data.js?v=a7fc08bd76"></script>
-<script src="../assets/graph.js?v=cd81e19a79"></script>
+<script src="../assets/graph.js?v=9dd2e4d643"></script>
 </body>
 </html>
