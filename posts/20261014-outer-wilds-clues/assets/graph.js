@@ -3,7 +3,7 @@
   const LANG = /^en/i.test(document.documentElement.lang) ? 'en' : 'zh';
   const T = v => (v && typeof v === 'object' && !Array.isArray(v) ? v[LANG] : v);
   const FONT = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif';
-  const NODE_W = 214, INNER_W = NODE_W - 24, COL_GAP = 52, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 48, BAND_HEAD = 56, BAND_GAP = 60;
+  const NODE_W = 214, TX = 15, INNER_W = NODE_W - TX * 2, COL_GAP = 52, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 48, BAND_HEAD = 56, BAND_GAP = 60;
   const UI = {
     zh: { realize: '意识到', explore: '探索到', official: '官方另一解', luck: '运气 / 试错 / 硬闯', timing: '时间窗口', risk: '小心坠落', verify: '社区说法', or: '或', go: '怎么去' },
     en: { realize: 'Realize', explore: 'Explore', official: 'other in-game clue', luck: 'luck / trial / brute force', timing: 'timing', risk: 'mind the drop', verify: 'community claim', or: 'or', go: 'how to get there' }
@@ -75,8 +75,8 @@
     const place = n.place ? wrap(T(n.place), `400 ${F.sub[0]}px ${FONT}`, INNER_W).slice(0, 3) : [];
     const note = n.note ? wrap(T(n.note), `400 ${F.note[0]}px ${FONT}`, INNER_W).slice(0, 3) : [];
     const meta = metaText(n);
-    const metaLines = meta ? wrap(meta, `700 ${F.meta[0]}px ${FONT}`, INNER_W) : [];
-    const h = 10 + metaLines.length * F.meta[1] + (metaLines.length ? 2 : 0) + label.length * lbl[1] + note.length * F.note[1] + (note.length ? 2 : 0) + place.length * F.sub[1] + 9;
+    const metaLines = meta ? wrap(meta, `700 ${F.meta[0]}px ${FONT}`, INNER_W - 14) : [];
+    const h = 14 + metaLines.length * F.meta[1] + (metaLines.length ? 2 : 0) + label.length * lbl[1] + note.length * F.note[1] + (note.length ? 2 : 0) + place.length * F.sub[1] + 12;
     return { label, note, place, metaLines, h };
   }
 
@@ -126,18 +126,39 @@
     const warp = Array.from({ length: n }, () => rnd() - 0.5), weft = Array.from({ length: n }, () => (rnd() - 0.5) * (rnd() < 0.05 ? 1.6 : 1));
     const c = document.createElement('canvas'); c.width = c.height = S;
     const g = c.getContext('2d'), img = g.createImageData(S, S), d = img.data;
-    const base = [60, 43, 32];
+    const base = [226, 214, 192];
     for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
       const i = Math.floor(x / TW), j = Math.floor(y / TW), warpUp = (i + j) % 2 === 0;
       const across = warpUp ? (x % TW) / (TW - 1) : (y % TW) / (TW - 1); // 0..1 across the thread on top
       const round = 1 - Math.pow(across * 2 - 1, 2); // thread centre catches the light
-      let l = 0.84 + 0.2 * round + 0.09 * (warpUp ? warp[i] : weft[j]) + (rnd() - 0.5) * 0.1;
-      if (!warpUp) l *= 0.96;
+      let l = 0.96 + 0.045 * round + 0.025 * (warpUp ? warp[i] : weft[j]) + (rnd() - 0.5) * 0.03;
+      if (!warpUp) l *= 0.985;
       const k = (y * S + x) * 4;
-      d[k] = base[0] * l; d[k + 1] = base[1] * l; d[k + 2] = base[2] * l; d[k + 3] = 255;
+      d[k] = Math.min(255, base[0] * l); d[k + 1] = Math.min(255, base[1] * l); d[k + 2] = Math.min(255, base[2] * l); d[k + 3] = 255;
     }
     g.putImageData(img, 0, 0);
     return { url: c.toDataURL('image/png'), size: S };
+  }
+
+  // Fine cotton for the cards, drawn at twice the map's resolution so it stays crisp when zoomed in.
+  // It is only light and shade (transparent elsewhere), laid over each card's own colour.
+  function cottonTile() {
+    const S = 192, TW = 4, n = S / TW;
+    let seed = 11;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    const warp = Array.from({ length: n }, () => rnd() - 0.5), weft = Array.from({ length: n }, () => rnd() - 0.5);
+    const c = document.createElement('canvas'); c.width = c.height = S;
+    const g = c.getContext('2d'), img = g.createImageData(S, S), d = img.data;
+    for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+      const i = Math.floor(x / TW), j = Math.floor(y / TW), warpUp = (i + j) % 2 === 0;
+      const across = warpUp ? (x % TW) / (TW - 1) : (y % TW) / (TW - 1);
+      const v = (0.5 - Math.pow(across * 2 - 1, 2)) * 0.6 + 0.35 * (warpUp ? warp[i] : weft[j]) + (rnd() - 0.5) * 0.25;
+      const k = (y * S + x) * 4;
+      if (v > 0) { d[k] = d[k + 1] = 255; d[k + 2] = 250; d[k + 3] = Math.min(70, v * 120); }
+      else { d[k] = 95; d[k + 1] = 65; d[k + 2] = 35; d[k + 3] = Math.min(34, -v * 60); }
+    }
+    g.putImageData(img, 0, 0);
+    return c.toDataURL('image/png');
   }
 
   // Nomai-style curl next to each band title.
@@ -154,7 +175,12 @@
     const tile = clothTile();
     const pat = el('pattern', { id: 'cloth', patternUnits: 'userSpaceOnUse', width: tile.size, height: tile.size }, defs);
     el('image', { href: tile.url, width: tile.size, height: tile.size }, pat);
-    [['ah', '#e6d3b3'], ['ah-alt', '#f0a35a']].forEach(([id, col]) => {
+    const cotton = el('pattern', { id: 'cotton', patternUnits: 'userSpaceOnUse', width: 96, height: 96 }, defs);
+    el('image', { href: cottonTile(), width: 96, height: 96 }, cotton);
+    const ging = el('pattern', { id: 'gingham', patternUnits: 'userSpaceOnUse', width: 14, height: 14 }, defs);
+    el('rect', { width: 14, height: 7, fill: 'rgba(214,112,46,.085)' }, ging);
+    el('rect', { width: 7, height: 14, fill: 'rgba(214,112,46,.085)' }, ging);
+    [['ah', '#7d6550'], ['ah-alt', '#c4581a']].forEach(([id, col]) => {
       const m = el('marker', { id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, defs);
       el('path', { d: 'M0,0 L10,5 L0,10 z', style: `fill:${col}` }, m);
     });
@@ -215,6 +241,7 @@
       c.dataset.join = id;
       const g = el('g', { class: 'or' }, gE); g.dataset.join = id;
       el('circle', { cx, cy: y, r: R }, g);
+      el('circle', { class: 'rim', cx, cy: y, r: R - 2.4 }, g);
       const t = el('text', { x: cx, y: y + 4, 'text-anchor': 'middle' }, g); t.textContent = UI.or;
     }
 
@@ -222,31 +249,33 @@
       const n = G.nodes[id], p = pos[id], s = state.size[id];
       const gr = el('g', { class: 'node ' + nodeClass(n), transform: `translate(${p.x},${p.y})` }, gN);
       gr.dataset.id = id;
-      // a cotton patch sewn onto the cloth: two shadows, the patch, then a hem line or, for
-      // other ways through, a running stitch in orange thread
-      el('rect', { class: 'shade', x: -1, y: 4, width: NODE_W + 2, height: s.h + 3, rx: 8 }, gr);
-      el('rect', { class: 'shade', x: 0, y: 1.5, width: NODE_W, height: s.h, rx: 6 }, gr);
-      el('rect', { class: 'box', width: NODE_W, height: s.h, rx: 6 }, gr);
-      el('rect', { class: n.t === 'alt' ? 'stitch' : 'hem', x: 4, y: 4, width: NODE_W - 8, height: s.h - 8, rx: 3.5 }, gr);
-      let y = 10;
+      // A fabric swatch: soft shadow, the cloth, its weave (gingham for other ways through),
+      // then a hand-sewn running stitch whose thread colour carries the meaning.
+      el('rect', { class: 'shade', x: 0.5, y: 3, width: NODE_W - 1, height: s.h, rx: 5 }, gr);
+      el('rect', { class: 'box', width: NODE_W, height: s.h, rx: 4 }, gr);
+      if (n.t === 'alt') el('rect', { class: 'fabric', width: NODE_W, height: s.h, rx: 4, fill: 'url(#gingham)' }, gr);
+      el('rect', { class: 'fabric', width: NODE_W, height: s.h, rx: 4, fill: 'url(#cotton)' }, gr);
+      el('rect', { class: 'stitch-shadow', x: 5.5, y: 6, width: NODE_W - 11, height: s.h - 11, rx: 2.5 }, gr);
+      el('rect', { class: 'stitch', x: 5.5, y: 5.5, width: NODE_W - 11, height: s.h - 11, rx: 2.5 }, gr);
+      let y = 14;
       s.metaLines.forEach((line, i) => {
-        const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 12 }, gr);
         const kw = n.act && i === 0 ? UI[n.act] : '';
-        if (kw && line.startsWith(kw)) { // highlight the realize / explore keyword like a marker pen
+        const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: kw ? TX + 5 : TX, y: y + 12 }, gr);
+        if (kw && line.startsWith(kw)) { // realize / explore sit on a small woven label
           ctx.font = `700 ${F.meta[0]}px ${FONT}`;
-          const w = ctx.measureText(kw).width;
-          gr.insertBefore(el('rect', { class: 'kw-mark-' + n.act, x: 9, y: y - 1, width: w + 7, height: F.meta[1], rx: 3 }), t);
+          const w = ctx.measureText(kw).width, lx = TX - 1, lw = w + 12;
+          gr.insertBefore(el('rect', { class: 'kw-mark-' + n.act, x: lx, y: y - 1, width: lw, height: F.meta[1] + 1, rx: 1.5 }), t);
           const a = el('tspan', { class: 'kw-' + n.act }, t); a.textContent = kw;
-          const b = el('tspan', {}, t); b.textContent = line.slice(kw.length);
+          const b = el('tspan', { dx: 9 }, t); b.textContent = line.slice(kw.length).replace(/^ · /, '· ');
         } else t.textContent = line;
         y += F.meta[1];
       });
       if (s.metaLines.length) y += 2;
       const lbl = isBig(n) ? F.big : F.lbl;
-      s.label.forEach(line => { const t = el('text', { class: 'lbl', x: 12, y: y + lbl[0] + 1 }, gr); t.textContent = line; y += lbl[1]; });
+      s.label.forEach(line => { const t = el('text', { class: 'lbl', x: TX, y: y + lbl[0] + 1 }, gr); t.textContent = line; y += lbl[1]; });
       if (s.note.length) y += 2;
-      s.note.forEach(line => { const t = el('text', { class: 'note', x: 12, y: y + F.note[0] }, gr); t.textContent = line; y += F.note[1]; });
-      s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + F.sub[0] }, gr); t.textContent = line; y += F.sub[1]; });
+      s.note.forEach(line => { const t = el('text', { class: 'note', x: TX, y: y + F.note[0] }, gr); t.textContent = line; y += F.note[1]; });
+      s.place.forEach(line => { const t = el('text', { class: 'sub', x: TX, y: y + F.sub[0] }, gr); t.textContent = line; y += F.sub[1]; });
     }
   }
 
@@ -323,26 +352,6 @@
   window.addEventListener('pointerup', endPtr);
   window.addEventListener('pointercancel', endPtr);
   window.addEventListener('resize', () => { if (!state.moved) fitAll(); });
-
-  // A quiet starfield behind everything, drawn once per resize from a fixed seed.
-  const sky = document.getElementById('sky');
-  function drawSky() {
-    if (!sky) return;
-    const dpr = Math.min(2, window.devicePixelRatio || 1), w = innerWidth, h = innerHeight;
-    sky.width = w * dpr; sky.height = h * dpr;
-    const c = sky.getContext('2d'); c.scale(dpr, dpr);
-    let seed = 22;
-    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const n = Math.round(w * h / 2600);
-    for (let i = 0; i < n; i++) {
-      const x = rnd() * w, y = rnd() * h, r = rnd() < 0.92 ? rnd() * 0.9 + 0.2 : rnd() * 1.3 + 0.9, a = rnd() * 0.6 + 0.2;
-      const tint = rnd();
-      c.fillStyle = tint < 0.12 ? `rgba(255,200,150,${a})` : tint < 0.24 ? `rgba(160,220,255,${a})` : `rgba(235,240,255,${a})`;
-      c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();
-    }
-  }
-  drawSky();
-  window.addEventListener('resize', drawSky);
 
   render();
   fitAll();
