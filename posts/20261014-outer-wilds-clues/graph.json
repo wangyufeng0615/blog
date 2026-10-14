@@ -27,8 +27,8 @@
     "en": "Main path"
    },
    "summary": {
-    "zh": "坐标、飞船、高级跃迁核心三样凑齐，才能跃迁到宇宙之眼",
-    "en": "Get all three — the coordinates, the Vessel and the advanced warp core — to warp to the Eye of the Universe"
+    "zh": "",
+    "en": ""
    },
    "roots": [
     "goal"
@@ -41,8 +41,8 @@
     "en": "Getting there"
    },
    "summary": {
-    "zh": "关键地点的入口、发现方式和时机。上面卡片里的地点，点开详情能跳到这里",
-    "en": "Entrances, how you find them, and when to go. Places on the cards above link here"
+    "zh": "",
+    "en": ""
    },
    "roots": [
     "r-hel",
@@ -64,8 +64,8 @@
     "en": "Quantum Moon"
    },
    "summary": {
-    "zh": "可选。走完后，结局营火边会多出所莱内姆",
-    "en": "Optional. Finish it and Solanum joins the campfire at the end"
+    "zh": "可选",
+    "en": "Optional"
    },
    "roots": [
     "q-goal"
@@ -78,8 +78,8 @@
     "en": "The Interloper"
    },
    "summary": {
-    "zh": "可选。只解释挪麦人为什么灭绝，不影响通关",
-    "en": "Optional. Explains what wiped out the Nomai; not needed to finish"
+    "zh": "可选",
+    "en": "Optional"
    },
    "roots": [
     "i-goal"
