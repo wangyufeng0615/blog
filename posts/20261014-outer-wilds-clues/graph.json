@@ -35,29 +35,6 @@
    ]
   },
   {
-   "key": "reach",
-   "title": {
-    "zh": "怎么到那儿",
-    "en": "Getting there"
-   },
-   "summary": {
-    "zh": "",
-    "en": ""
-   },
-   "roots": [
-    "r-hel",
-    "r-fossil",
-    "r-lakebed",
-    "r-sunstation",
-    "r-forge",
-    "r-observatory",
-    "r-qtower",
-    "r-tqt",
-    "r-workshop",
-    "r-mine"
-   ]
-  },
-  {
    "key": "qm",
    "title": {
     "zh": "量子卫星支线",
@@ -211,7 +188,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-observatory",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-observatory"
+   ],
    "unlocks": [
     "g-sunk"
    ],
@@ -304,7 +283,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-observatory",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-observatory"
+   ],
    "unlocks": [
     "g-current"
    ],
@@ -678,7 +659,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-fossil",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-fossil"
+   ],
    "unlocks": [
     "g-angler"
    ],
@@ -981,7 +964,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-oldsettle",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-oldsettle"
+   ],
    "unlocks": [
     "g-knowvessel"
    ],
@@ -1328,8 +1313,10 @@
    "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
-   "location_ref": null,
-   "prerequisites": [],
+   "location_ref": "r-workshop",
+   "prerequisites": [
+    "r-workshop"
+   ],
    "unlocks": [
     "g-whereatp"
    ],
@@ -1392,7 +1379,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-mine",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-mine"
+   ],
    "unlocks": [
     "g-sealed"
    ],
@@ -1548,7 +1537,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-forge",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-forge"
+   ],
    "unlocks": [
     "g-warp"
    ],
@@ -1633,7 +1624,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-hel",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-hel"
+   ],
    "unlocks": [
     "c-deduce"
    ],
@@ -1672,7 +1665,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-forge",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-forge"
+   ],
    "unlocks": [
     "c-deduce"
    ],
@@ -2139,7 +2134,7 @@
   {
    "id": "r-hel-door",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "正门从里面锁着",
     "en": "The front door is locked from inside"
@@ -2167,7 +2162,7 @@
   {
    "id": "r-sun-chert",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "切特：地表几乎没有废墟",
     "en": "Chert: hardly any ruins on the surface"
@@ -2198,7 +2193,7 @@
   {
    "id": "r-sun-shelter",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "幸存者躲进了逃生舱下的洞",
     "en": "Survivors sheltered beneath their pod"
@@ -2229,7 +2224,7 @@
   {
    "id": "r-sun-know",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "城在地下",
     "en": "It is underground"
@@ -2254,7 +2249,7 @@
   {
    "id": "r-pod2",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "2号逃生舱",
     "en": "Escape Pod 2"
@@ -2288,7 +2283,7 @@
   {
    "id": "r-sun-pod",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从2号逃生舱下的洞穴跟着路标走",
     "en": "Follow the markers from under Escape Pod 2"
@@ -2329,7 +2324,7 @@
   {
    "id": "r-sun-hole",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "重力炮上方的隐藏洞口",
     "en": "A hidden hole above the gravity cannon"
@@ -2370,7 +2365,7 @@
   {
    "id": "r-sun-way",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "进城的路",
     "en": "A way into the city"
@@ -2395,7 +2390,7 @@
   {
    "id": "r-sun-time",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "越早去越好",
     "en": "Go early"
@@ -2428,7 +2423,7 @@
   {
    "id": "r-sunless",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "背阴城",
     "en": "The Sunless City"
@@ -2447,8 +2442,8 @@
     "r-sun-time"
    ],
    "unlocks": [
-    "r-hel",
-    "r-fossil"
+    "r-fossil",
+    "r-hel"
    ],
    "summary": null,
    "notes": [],
@@ -2458,7 +2453,7 @@
   {
    "id": "r-hel-trail",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "沿能量电缆走城底的小路",
     "en": "Follow the power cable from the bottom of the city"
@@ -2493,7 +2488,7 @@
   {
    "id": "r-hel-time",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "时机要卡在中间",
     "en": "Time it for the middle of the loop"
@@ -2526,7 +2521,7 @@
   {
    "id": "r-hel",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "高能实验室",
     "en": "The High Energy Lab"
@@ -2545,7 +2540,9 @@
     "r-hel-trail",
     "r-hel-time"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-towermap"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -2554,7 +2551,7 @@
   {
    "id": "r-fos-light",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "先给化石嘴里打个光",
     "en": "Light up the fossil’s mouth first"
@@ -2590,7 +2587,7 @@
   {
    "id": "r-fos-search",
    "type": "alternative",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "沿着天花板仔细找",
     "en": "Search the ceiling carefully"
@@ -2615,7 +2612,7 @@
   {
    "id": "r-fos-crack",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "垫脚石洞顶的裂缝",
     "en": "The crack in Stepping Stone Cave’s ceiling"
@@ -2649,7 +2646,7 @@
   {
    "id": "r-fossil",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "安康鱼化石洞",
     "en": "Fossil Fish Cave"
@@ -2666,7 +2663,9 @@
     "r-sunless",
     "r-fos-crack"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-fossil"
+   ],
    "summary": {
     "zh": "别的开口只能看，进不去",
     "en": "Other openings only let you look"
@@ -2689,7 +2688,7 @@
   {
    "id": "r-lake-time",
    "type": "gate",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "循环开头几分钟内去",
     "en": "Go in the first few minutes"
@@ -2722,7 +2721,7 @@
   {
    "id": "r-lakebed",
    "type": "location",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "湖床洞穴",
     "en": "Lakebed Cave"
@@ -2738,7 +2737,9 @@
    "prerequisites": [
     "r-lake-time"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "q-lakebed"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [
@@ -2753,7 +2754,7 @@
   {
    "id": "r-ss-hint",
    "type": "clue",
-   "band": "reach",
+   "band": "comet",
    "label": {
     "zh": "有一条更安全的路",
     "en": "There is a safer way"
@@ -2787,7 +2788,7 @@
   {
    "id": "r-ss-time",
    "type": "gate",
-   "band": "reach",
+   "band": "comet",
    "label": {
     "zh": "约第 5 分钟塔门露出",
     "en": "The tower door clears around minute 5"
@@ -2820,7 +2821,7 @@
   {
    "id": "r-ss-tower",
    "type": "gate",
-   "band": "reach",
+   "band": "comet",
    "label": {
     "zh": "走灰烬双星上的太阳站塔",
     "en": "Use the Sun Station tower on Ash Twin"
@@ -2845,7 +2846,7 @@
   {
    "id": "r-ss-land",
    "type": "alternative",
-   "band": "reach",
+   "band": "comet",
    "label": {
     "zh": "直接开飞船降落",
     "en": "Land the ship on it"
@@ -2880,7 +2881,7 @@
   {
    "id": "r-sunstation",
    "type": "location",
-   "band": "reach",
+   "band": "comet",
    "label": {
     "zh": "太阳站",
     "en": "The Sun Station"
@@ -2897,7 +2898,9 @@
     "r-ss-tower",
     "r-ss-land"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "i-sunstation"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -2906,7 +2909,7 @@
   {
    "id": "r-bh-north",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "瑞拜克营地北边有座大城",
     "en": "A huge city north of Riebeck’s camp"
@@ -2937,7 +2940,7 @@
   {
    "id": "r-bh-migrate",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "旧定居点的人搬去了冰川",
     "en": "The settlers moved to the glacier"
@@ -2968,7 +2971,7 @@
   {
    "id": "r-bh-know",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "城的位置",
     "en": "Where the city is"
@@ -2993,7 +2996,7 @@
   {
    "id": "r-bh-river",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "冰川河流尽头的隐藏洞",
     "en": "A hidden hole where the glacier river ends"
@@ -3028,7 +3031,7 @@
   {
    "id": "r-crossroads",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "十字路口",
     "en": "The Crossroads"
@@ -3043,8 +3046,8 @@
    "location_ref": null,
    "prerequisites": [],
    "unlocks": [
-    "r-bh-bridge",
-    "r-cannon"
+    "r-cannon",
+    "r-bh-bridge"
    ],
    "summary": null,
    "notes": [
@@ -3065,7 +3068,7 @@
   {
    "id": "r-bh-bridge",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从十字路口过桥",
     "en": "Cross the bridges from the Crossroads"
@@ -3103,7 +3106,7 @@
   {
    "id": "r-pod1",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "打开1号逃生舱舱门，沿栈桥下去",
     "en": "Open Escape Pod 1’s hatch and climb down"
@@ -3142,7 +3145,7 @@
   {
    "id": "r-oldsettle",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "旧定居点",
     "en": "The Old Settlement"
@@ -3159,6 +3162,7 @@
     "r-pod1"
    ],
    "unlocks": [
+    "c-murals",
     "r-bh-way"
    ],
    "summary": {
@@ -3177,7 +3181,7 @@
   {
    "id": "r-bh-way",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "进城的路",
     "en": "A way in"
@@ -3203,7 +3207,7 @@
   {
    "id": "r-bhcity",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "悬空城",
     "en": "The Hanging City"
@@ -3231,7 +3235,7 @@
   {
    "id": "r-forge-raise",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "在融水区把熔炉升上来",
     "en": "Raise the forge from the Meltwater District"
@@ -3269,7 +3273,7 @@
   {
    "id": "r-forge-warp",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从灰烬双星的碎空星塔跃迁过来",
     "en": "Warp in from the Brittle Hollow tower on Ash Twin"
@@ -3304,7 +3308,7 @@
   {
    "id": "r-forge-district",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "熔炉区",
     "en": "The Forge District"
@@ -3336,7 +3340,7 @@
   {
    "id": "r-forge",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "黑洞熔炉",
     "en": "The Black Hole Forge"
@@ -3353,7 +3357,10 @@
     "r-forge-raise",
     "r-forge-district"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-window",
+    "c-forge"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -3362,7 +3369,7 @@
   {
    "id": "r-obs-door",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "地面上的大门坏了",
     "en": "The surface door is broken"
@@ -3393,7 +3400,7 @@
   {
    "id": "r-cannon",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "重力炮",
     "en": "The gravity cannon"
@@ -3428,7 +3435,7 @@
   {
    "id": "r-cannon-time",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "趁重力炮还没掉进黑洞",
     "en": "Before the cannon falls in"
@@ -3458,7 +3465,7 @@
   {
    "id": "r-obs-cannon",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从重力炮出发",
     "en": "Start at the gravity cannon"
@@ -3493,7 +3500,7 @@
   {
    "id": "r-obs-tower",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从量子知识之塔底层出发",
     "en": "Start at the base of the Tower of Quantum Knowledge"
@@ -3518,7 +3525,7 @@
   {
    "id": "r-obs-under",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "走地壳下的路",
     "en": "Take a path under the crust"
@@ -3549,7 +3556,7 @@
   {
    "id": "r-observatory",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "南部天文台",
     "en": "The Southern Observatory"
@@ -3566,7 +3573,10 @@
     "r-obs-door",
     "r-obs-under"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-cassava",
+    "c-tornado"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -3575,7 +3585,7 @@
   {
    "id": "r-qt-find",
    "type": "clue",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "航天飞机旁的记录指路",
     "en": "Directions near the recalled shuttle"
@@ -3609,7 +3619,7 @@
   {
    "id": "r-qt-fall",
    "type": "gate",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "等塔掉进黑洞，在白洞那边进",
     "en": "Let it fall through, enter at the white hole"
@@ -3645,7 +3655,7 @@
   {
    "id": "r-qtower",
    "type": "location",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "量子知识之塔上层",
     "en": "Top of the Tower of Quantum Knowledge"
@@ -3662,7 +3672,9 @@
     "r-qt-find",
     "r-qt-fall"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "q-knowledge"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -3671,7 +3683,7 @@
   {
    "id": "r-tqt-signal",
    "type": "clue",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "深巨星有量子信号",
     "en": "A quantum signal on Giant’s Deep"
@@ -3702,7 +3714,7 @@
   {
    "id": "r-tqt-above",
    "type": "clue",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "从云层上方降进去",
     "en": "Drop in from above the clouds"
@@ -3726,7 +3738,7 @@
   {
    "id": "r-tqt-below",
    "type": "clue",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "从水流下面浮上去",
     "en": "Come up from below the current"
@@ -3750,7 +3762,7 @@
   {
    "id": "r-tqt-way",
    "type": "gate",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "绕过北极的巨型气旋",
     "en": "Get past the giant polar cyclone"
@@ -3783,7 +3795,7 @@
   {
    "id": "r-tqt",
    "type": "location",
-   "band": "reach",
+   "band": "qm",
    "label": {
     "zh": "量子试验之塔",
     "en": "Tower of Quantum Trials"
@@ -3800,7 +3812,9 @@
     "r-tqt-signal",
     "r-tqt-way"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "q-trials"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -3809,7 +3823,7 @@
   {
    "id": "r-ws-kids",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "挪麦孩子说的危险小路",
     "en": "The risky route the Nomai children mentioned"
@@ -3837,7 +3851,7 @@
   {
    "id": "r-ws-under",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从岛底下的开口游进去",
     "en": "Swim in from under the island"
@@ -3877,7 +3891,7 @@
   {
    "id": "r-ws-way",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "绕过坏掉的大门",
     "en": "Get around the broken door"
@@ -3907,7 +3921,7 @@
   {
    "id": "r-ws-high",
    "type": "gate",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "高处平台要等岛被抛起",
     "en": "The high ledge needs the island in the air"
@@ -3940,7 +3954,7 @@
   {
    "id": "r-workshop",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "雕塑车间",
     "en": "The Statue Workshop"
@@ -3957,7 +3971,9 @@
     "r-ws-way",
     "r-ws-high"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-atp4"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [],
@@ -3966,7 +3982,7 @@
   {
    "id": "r-mine-geyser",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "最大的间歇泉山里有入口",
     "en": "An entrance inside the biggest geyser mountain"
@@ -3993,7 +4009,7 @@
   {
    "id": "r-mine-warp",
    "type": "clue",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "从灰烬双星的木炉星塔跃迁过来",
     "en": "Warp in from the Timber Hearth tower on Ash Twin"
@@ -4020,7 +4036,7 @@
   {
    "id": "r-mine",
    "type": "location",
-   "band": "reach",
+   "band": "main",
    "label": {
     "zh": "挪麦矿井",
     "en": "The Nomai Mines"
@@ -4037,7 +4053,9 @@
     "r-mine-geyser",
     "r-mine-warp"
    ],
-   "unlocks": [],
+   "unlocks": [
+    "c-mine"
+   ],
    "summary": null,
    "notes": [],
    "quotes": [
@@ -4170,7 +4188,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-tqt",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-tqt"
+   ],
    "unlocks": [
     "q-imaging"
    ],
@@ -4270,7 +4290,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-lakebed",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-lakebed"
+   ],
    "unlocks": [
     "q-entangle"
    ],
@@ -4391,7 +4413,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-qtower",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-qtower"
+   ],
    "unlocks": [
     "q-sixth"
    ],
@@ -4534,7 +4558,9 @@
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-sunstation",
-   "prerequisites": [],
+   "prerequisites": [
+    "r-sunstation"
+   ],
    "unlocks": [
     "i-know"
    ],

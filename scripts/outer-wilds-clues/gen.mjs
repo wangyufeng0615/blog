@@ -77,7 +77,58 @@ function resolve(n) {
   nodes[n.id] = out;
   return out;
 }
-const bands = BANDS.map(b => ({ ...b, roots: b.roots.map(resolve) }));
+const resolvedBands = BANDS.map(b => ({ ...b, roots: b.roots.map(resolve) }));
+
+/* ---------- one read-only map: each location joins the clues that need it ----------
+   The "getting there" band is folded into the others: a location subtree becomes a prerequisite of every clue
+   whose `at` points to it. Shared nodes are drawn once, under the parent that puts them furthest from the goal
+   (longest path), so every arrow points right; other parents get a {ref}. */
+function mergeLocations(src) {
+  const reach = src.find(b => b.key === 'reach');
+  const keep = src.filter(b => b.key !== 'reach');
+  const kidsOf = {}, bandOf2 = {};
+  const walk = (n, band) => {
+    if (n.ref) return;
+    bandOf2[n.id] = band;
+    const ks = (n.kids || []).map(k => k.ref || k.id);
+    if (n.at) ks.push(n.at);
+    kidsOf[n.id] = ks;
+    (n.kids || []).forEach(k => walk(k, band));
+  };
+  keep.forEach(b => b.roots.forEach(r => walk(r, b.key)));
+  reach.roots.forEach(r => walk(r, 'reach'));
+  // locations take the band of the clue that needs them
+  const used = new Set();
+  const claim = (id, band) => { if (bandOf2[id] === 'reach') bandOf2[id] = band; if (used.has(id + band)) return; used.add(id + band); kidsOf[id].forEach(k => claim(k, band)); };
+  keep.forEach(b => b.roots.forEach(r => claim(r.id, b.key)));
+  for (const id in bandOf2) if (bandOf2[id] === 'reach') throw new Error(`Location never used by a clue: ${id}`);
+  // longest distance from the band's root
+  const depth = {};
+  const visit = (id, d, stack) => {
+    if (stack.has(id)) throw new Error(`Cycle at ${id}`);
+    if (depth[id] !== undefined && depth[id] >= d) return;
+    depth[id] = d; stack.add(id);
+    kidsOf[id].forEach(k => visit(k, d + 1, stack));
+    stack.delete(id);
+  };
+  keep.forEach(b => b.roots.forEach(r => visit(r.id, 0, new Set())));
+  // tree parent = the parent sitting one column to the left of the child's deepest position
+  const treeParent = {};
+  for (const p in kidsOf) for (const k of kidsOf[p]) {
+    if (depth[p] === undefined) continue;
+    if (depth[p] + 1 === depth[k] && treeParent[k] === undefined) treeParent[k] = p;
+  }
+  const build = id => {
+    const n = { ...nodes[id] };
+    delete n.at;
+    const ks = kidsOf[id];
+    if (ks.length) n.kids = ks.map(k => (treeParent[k] === id ? build(k) : { ref: k }));
+    else delete n.kids;
+    return n;
+  };
+  return keep.map(b => ({ ...b, roots: b.roots.map(r => build(r.id)) }));
+}
+const bands = mergeLocations(resolvedBands);
 for (const id in ACT) if (!nodes[id]) throw new Error(`ACTION lists unknown node: ${id}`);
 for (const id in NOTE) if (!nodes[id]) throw new Error(`NOTE lists unknown node: ${id}`);
 const edges = [];
@@ -136,7 +187,7 @@ function timelineSvg(lang) {
     for (const it of lane.items) {
       const cy = y + it.row * ROW + 14;
       const cls = lane.sun ? ' tl-sun' : '';
-      const open = it.node ? `<g class="tl-link" data-node="${it.node}" tabindex="0" role="link">` : '<g>';
+      const open = '<g>';
       if (it.from !== undefined) {
         const bw = x(it.to) - x(it.from), fits = textW(it.label[lang]) + 12 <= bw;
         body += `${open}<rect class="tl-range${cls}" x="${x(it.from)}" y="${cy - 8}" width="${bw}" height="16" rx="3"/>`;
@@ -159,10 +210,10 @@ function timelineSvg(lang) {
 }
 function leadsHtml(lang) {
   return leads.map(tr => `    <article class="lead-card"><h3>${escX(tr.name[lang])} <small>${escX(tr.where[lang])}</small></h3><ul>${tr.items.map(it =>
-    `<li><div class="to">→ ${it.node ? `<a href="#stage" data-node="${it.node}">${escX(it.to[lang])}</a>` : escX(it.to[lang])}</div><p class="said">${escX(it.said[lang])}</p></li>`).join('')}</ul></article>`).join('\n');
+    `<li><div class="to">→ ${escX(it.to[lang])}</div><p class="said">${escX(it.said[lang])}</p></li>`).join('')}</ul></article>`).join('\n');
 }
 const endings = ENDINGS.items.map(e => ({ ...e, quote: resolveQuote(e.quote) }));
-const linkOr = (text, node, lang) => node ? `<a href="#stage" data-node="${node}">${escX(text[lang])}</a>` : escX(text[lang]);
+const linkOr = (text, node, lang) => escX(text[lang]);
 function endingsHtml(lang) {
   return endings.map(e => `    <article class="lead-card ending"><h3>${escX(e.name[lang])} <small>${escX(e.kind[lang])}</small></h3>
       <ol class="steps">${e.steps.map(([t, n]) => `<li>${linkOr(t, n, lang)}</li>`).join('')}</ol>
