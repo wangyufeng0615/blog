@@ -82,7 +82,8 @@ npm run preview
 
 ## 验证
 
-本项目当前没有独立测试或 lint 脚本。文档/文章修改后至少：
+本项目提供 `npm test` 和 `npm run check:output`，尚未配置独立 lint。
+文档/文章修改后至少：
 
 1. 运行完整 `npm run build`，确认没有跳过文章、JSON 解析警告或缺失 app 构建。
 2. 用 `npm run preview` 打开首页、修改过的文章和移动端视口。

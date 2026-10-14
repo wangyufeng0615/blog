@@ -149,6 +149,7 @@ for (const file of walk(dist)) {
   }
   // Explicit referrer policy also protects direct GitHub Pages visits.
   if (!find(head, node => node.tagName === 'meta' && attr(node, 'name') === 'referrer')) append(head, '<meta name="referrer" content="strict-origin-when-cross-origin">');
+  if (!find(head, node => node.tagName === 'link' && attr(node, 'rel')?.split(/\s+/).includes('icon'))) append(head, '<link rel="icon" href="/avatar.jpg" type="image/jpeg">');
   if (relative === 'storage-radar/index.html') splitRadar(document, file);
   imageHints(document, url);
   fs.writeFileSync(file, serialize(document));
