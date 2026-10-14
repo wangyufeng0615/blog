@@ -5,11 +5,11 @@
   const FONT = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif';
   const NODE_W = 200, INNER_W = NODE_W - 24, COL_GAP = 58, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
   const UI = {
-    zh: { official: '官方另一解', luck: '运气 / 试错 / 硬闯', shared: '两条线共用', all: '需全部', any: '任选一', timing: '时间窗口', risk: '小心坠落',
+    zh: { realize: '意识到', explore: '探索到', realizeLong: '意识到：要想明白的一件事', exploreLong: '探索到：要去到的地方或要做到的事', official: '官方另一解', luck: '运气 / 试错 / 硬闯', shared: '两条线共用', all: '需全部', any: '任选一', timing: '时间窗口', risk: '小心坠落',
       kinds: { goal: '终点', branchGoal: '支线终点', target: '必需品', gate: '要过的关', clue: '线索', alt: '其他走法', loc: '地点' },
       allLong: '左边的前置需全部满足', anyLong: '左边的前置满足一条即可', verify: '社区说法，未在游戏原文核实', src: '出处', pre: '前置', next: '通往',
       goHere: '怎么到这里', foundHere: '这里能找到', sep: '、', close: '关闭' },
-    en: { official: 'other in-game clue', luck: 'luck / trial / brute force', shared: 'shared by two lines', all: 'needs all', any: 'any one', timing: 'timing', risk: 'mind the drop',
+    en: { realize: 'Realize', explore: 'Explore', realizeLong: 'Realize: something to figure out', exploreLong: 'Explore: somewhere to get to or something to get through', official: 'other in-game clue', luck: 'luck / trial / brute force', shared: 'shared by two lines', all: 'needs all', any: 'any one', timing: 'timing', risk: 'mind the drop',
       kinds: { goal: 'Ending', branchGoal: 'Side goal', target: 'Must-have', gate: 'Gate', clue: 'Clue', alt: 'Another way', loc: 'Location' },
       allLong: 'needs every prerequisite on its left', anyLong: 'any one prerequisite on its left is enough', verify: 'community claim, not confirmed in the game text', src: 'Source', pre: 'Needs', next: 'Leads to',
       goHere: 'How to get here', foundHere: 'Clues found here', sep: ', ', close: 'Close' }
@@ -71,6 +71,7 @@
   }
   function metaText(n) {
     const m = [];
+    if (n.act) m.push(UI[n.act]);
     if (n.t === 'alt') m.push(UI[n.alt]);
     if (n.tag) m.push(UI[n.tag]);
     if (parentCount[n.id] > 1) m.push(UI.shared);
@@ -83,7 +84,7 @@
     const label = wrap(T(n.label), lblFont, INNER_W);
     const place = n.place ? wrap(T(n.place), `400 11px ${FONT}`, INNER_W).slice(0, 2) : [];
     const meta = metaText(n);
-    const metaLines = meta ? wrap(meta, `400 11px ${FONT}`, INNER_W) : [];
+    const metaLines = meta ? wrap(meta, `700 11.5px ${FONT}`, INNER_W) : [];
     const h = 10 + metaLines.length * 15 + (metaLines.length ? 2 : 0) + label.length * 18 + place.length * 15 + 9;
     return { label, place, metaLines, h };
   }
@@ -175,7 +176,18 @@
       gr.dataset.id = id;
       el('rect', { class: 'box', width: NODE_W, height: s.h, rx: 6 }, gr);
       let y = 10;
-      s.metaLines.forEach(line => { const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 10 }, gr); t.textContent = line; y += 15; });
+      s.metaLines.forEach((line, i) => {
+        const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 10 }, gr);
+        const kw = n.act && i === 0 ? UI[n.act] : '';
+        if (kw && line.startsWith(kw)) { // highlight the realize / explore keyword like a marker pen
+          ctx.font = `700 11.5px ${FONT}`;
+          const w = ctx.measureText(kw).width;
+          gr.insertBefore(el('rect', { class: 'kw-mark-' + n.act, x: 9, y: y - 1, width: w + 7, height: 15, rx: 3 }), t);
+          const a = el('tspan', { class: 'kw-' + n.act }, t); a.textContent = kw;
+          const b = el('tspan', {}, t); b.textContent = line.slice(kw.length);
+        } else t.textContent = line;
+        y += 15;
+      });
       if (s.metaLines.length) y += 2;
       s.label.forEach(line => { const t = el('text', { class: 'lbl', x: 12, y: y + 14 }, gr); t.textContent = line; y += 18; });
       s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + 11 }, gr); t.textContent = line; y += 15; });
@@ -310,6 +322,7 @@
     let h = `<button class="close" type="button" aria-label="${UI.close}">×</button><h2>${esc(T(n.label))}</h2>`;
     if (n.place) h += `<div class="place">${esc(T(n.place))}</div>`;
     h += `<div class="tags"><span class="tag">${kind}</span>`;
+    if (n.act) h += `<span class="tag kw-${n.act}">${UI[n.act + 'Long']}</span>`;
     if (n.t === 'alt') h += `<span class="tag alt">${UI[n.alt]}</span>`;
     if (n.tag) h += `<span class="tag ${n.tag}">${UI[n.tag]}</span>`;
     if (n.req && kids.length > 1) h += `<span class="tag">${n.req === 'all' ? UI.allLong : UI.anyLong}</span>`;

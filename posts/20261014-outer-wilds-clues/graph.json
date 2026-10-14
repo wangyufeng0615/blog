@@ -18,7 +18,7 @@
   "year": 2019
  },
  "sources": "Quotes: official English and Simplified Chinese game text (Steam build, October 2026). Alternatives: Outer Wilds Wiki and community guides, cited per node.",
- "how_to_read": "Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.",
+ "how_to_read": "player_action: realize = figure something out, explore = get somewhere or through something. Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.",
  "bands": [
   {
    "key": "main",
@@ -99,6 +99,7 @@
     "zh": "轨道探测炮 · 控制模块",
     "en": "Orbital Probe Cannon · Control Module"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -128,6 +129,7 @@
     "zh": "碎空星南部天文台 / 建造厂",
     "en": "Southern Observatory / Construction Yard"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-observatory",
@@ -157,6 +159,7 @@
     "zh": "黑棘星 · 费尔德斯巴",
     "en": "Dark Bramble · Feldspar"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -179,10 +182,11 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "知道模块沉在海底",
-    "en": "Learn the module sank"
+    "zh": "模块沉在了海底",
+    "en": "The module sank"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -215,6 +219,7 @@
     "zh": "碎空星 · 南部天文台的气旋模型",
     "en": "Brittle Hollow · cyclone model in the Southern Observatory"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-observatory",
@@ -244,6 +249,7 @@
     "zh": "深巨星海面",
     "en": "Giant’s Deep"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -278,6 +284,7 @@
     "zh": "深巨星",
     "en": "Giant’s Deep"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -308,6 +315,7 @@
     "zh": "深巨星",
     "en": "Giant’s Deep"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -338,6 +346,7 @@
     "zh": "碎空星重力炮 → 深巨星",
     "en": "Brittle Hollow gravity cannon → Giant’s Deep"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -362,12 +371,13 @@
    "band": "main",
    "label": {
     "zh": "潜到水流下面",
-    "en": "Get below the current"
+    "en": "Below the current"
    },
    "place": {
     "zh": "深巨星海面下的强水流",
     "en": "The strong current under the ocean"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -408,6 +418,7 @@
     "zh": "信号镜 · 旅行者频道",
     "en": "Signalscope · Travelers frequency"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -437,6 +448,7 @@
     "zh": "木炉星 · 撞击坑",
     "en": "Timber Hearth · impact crater"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -466,6 +478,7 @@
     "zh": "深巨星 · 荆棘岛",
     "en": "Giant’s Deep · Bramble Island"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -495,6 +508,7 @@
     "zh": "黑棘星",
     "en": "Dark Bramble"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -511,13 +525,14 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "找到费尔德斯巴",
-    "en": "Find Feldspar"
+    "zh": "费尔德斯巴的营地",
+    "en": "Feldspar’s camp"
    },
    "place": {
     "zh": "黑棘星某颗种子里",
     "en": "Inside one of Dark Bramble’s seeds"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -546,6 +561,7 @@
     "zh": "余烬双星 · 安康鱼化石",
     "en": "Ember Twin · anglerfish fossil"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-fossil",
@@ -580,6 +596,7 @@
     "zh": "黑棘星",
     "en": "Dark Bramble"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -610,6 +627,7 @@
     "zh": "黑棘星",
     "en": "Dark Bramble"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -635,6 +653,7 @@
     "zh": "黑棘星内部",
     "en": "Inside Dark Bramble"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -668,6 +687,7 @@
     "zh": "黑棘星 · 费尔德斯巴营地的冻水母",
     "en": "Dark Bramble · the frozen jellyfish at Feldspar’s camp"
    },
+   "player_action": "realize",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -710,6 +730,7 @@
     "zh": "深巨星核心外围",
     "en": "Around Giant’s Deep’s core"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -741,6 +762,7 @@
     "zh": "深巨星核心 · 探测器跟踪模块",
     "en": "Giant’s Deep core · Probe Tracking Module"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -779,6 +801,7 @@
     "zh": "碎空星 · 旧定居点",
     "en": "Brittle Hollow · Old Settlement"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-oldsettle",
@@ -808,6 +831,7 @@
     "zh": "碎空星 / 余烬双星的逃生舱",
     "en": "Escape pods on Brittle Hollow / Ember Twin"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -830,10 +854,11 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "知道有一艘飞船",
-    "en": "Learn there is a Vessel"
+    "zh": "有一艘飞船",
+    "en": "There is a Vessel"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -860,6 +885,7 @@
     "zh": "黑棘星 · 3号逃生舱",
     "en": "Dark Bramble · Escape Pod 3"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -894,6 +920,7 @@
     "zh": "黑棘星 · 挪麦坟墓",
     "en": "Dark Bramble · Nomai Grave"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -925,6 +952,7 @@
     "zh": "黑棘星",
     "en": "Dark Bramble"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -948,13 +976,14 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "知道飞船在哪颗种子里",
-    "en": "Find which seed hides it"
+    "zh": "飞船在哪颗种子里",
+    "en": "Which seed hides the Vessel"
    },
    "place": {
     "zh": "黑棘星",
     "en": "Dark Bramble"
    },
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -981,6 +1010,7 @@
     "zh": "黑棘星深处",
     "en": "Deep in Dark Bramble"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1019,6 +1049,7 @@
     "zh": "高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉",
     "en": "High Energy Lab / mines / Statue Workshop / Black Hole Forge"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1046,10 +1077,11 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "知道计划在灰烬双星中心",
-    "en": "Learn the project is inside Ash Twin"
+    "zh": "计划在灰烬双星中心",
+    "en": "The project is inside Ash Twin"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1075,6 +1107,7 @@
     "zh": "木炉星 · 挪麦矿井",
     "en": "Timber Hearth · Nomai Mines"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-mine",
@@ -1104,6 +1137,7 @@
     "zh": "灰烬双星",
     "en": "Ash Twin"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -1120,10 +1154,11 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "知道只能跃迁进去",
-    "en": "Learn you can only warp in"
+    "zh": "只能跃迁进去",
+    "en": "You can only warp in"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1150,6 +1185,7 @@
     "zh": "碎空星中心",
     "en": "Brittle Hollow’s core"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1184,6 +1220,7 @@
     "zh": "白洞站",
     "en": "White Hole Station"
    },
+   "player_action": "realize",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1215,6 +1252,7 @@
     "zh": "碎空星 · 黑洞熔炉",
     "en": "Brittle Hollow · Black Hole Forge"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-forge",
@@ -1244,6 +1282,7 @@
     "zh": "任意跃迁平台",
     "en": "Any warp pad"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -1260,10 +1299,11 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "会用跃迁平台",
-    "en": "Know how warp pads work"
+    "zh": "跃迁平台怎么用",
+    "en": "How warp pads work"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1291,6 +1331,7 @@
     "zh": "余烬双星 · 高能实验室",
     "en": "Ember Twin · High Energy Lab"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-hel",
@@ -1325,6 +1366,7 @@
     "zh": "碎空星 · 黑洞熔炉",
     "en": "Brittle Hollow · Black Hole Forge"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-forge",
@@ -1351,6 +1393,7 @@
     "en": "Deduce: the receiver is on Ash Twin"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1382,6 +1425,7 @@
     "zh": "灰烬双星 · 计划塔",
     "en": "Ash Twin · project tower"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "official",
    "unverified": true,
@@ -1413,6 +1457,7 @@
     "zh": "灰烬双星赤道",
     "en": "Ash Twin’s equator"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -1429,13 +1474,14 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "找到计划塔的接收点",
-    "en": "Find the project tower’s receiver"
+    "zh": "计划塔的接收点",
+    "en": "The project tower’s receiver"
    },
    "place": {
     "zh": "灰烬双星表面",
     "en": "Ash Twin’s surface"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1463,6 +1509,7 @@
     "zh": "沙漏双星",
     "en": "Hourglass Twins"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1493,6 +1540,7 @@
     "zh": "任意营火",
     "en": "Any campfire"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "official",
    "location_ref": null,
@@ -1521,6 +1569,7 @@
     "zh": "灰烬双星表面",
     "en": "Ash Twin’s surface"
    },
+   "player_action": null,
    "requires": "any",
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -1548,6 +1597,7 @@
     "zh": "灰烬双星 · 中央舱室",
     "en": "Ash Twin · central chamber"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1588,6 +1638,7 @@
     "zh": "黑棘星深处 · 挪麦飞船舰桥",
     "en": "Deep in Dark Bramble · the Vessel’s bridge"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1635,6 +1686,7 @@
     "en": "The front door is locked from inside"
    },
    "place": null,
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1664,6 +1716,7 @@
     "zh": "余烬双星 · 切特的营地",
     "en": "Ember Twin · Chert’s camp"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1693,6 +1746,7 @@
     "zh": "余烬双星 · 2号逃生舱",
     "en": "Ember Twin · Escape Pod 2"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1715,10 +1769,11 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "知道城在地下",
-    "en": "Learn it is underground"
+    "zh": "城在地下",
+    "en": "It is underground"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1738,13 +1793,14 @@
    "type": "clue",
    "band": "reach",
    "label": {
-    "zh": "找到2号逃生舱",
-    "en": "Find Escape Pod 2"
+    "zh": "2号逃生舱",
+    "en": "Escape Pod 2"
    },
    "place": {
     "zh": "余烬双星南半球",
     "en": "Ember Twin’s southern hemisphere"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1774,6 +1830,7 @@
     "zh": "余烬双星南半球",
     "en": "Ember Twin’s southern hemisphere"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1810,6 +1867,7 @@
     "zh": "余烬双星赤道 · 重力炮",
     "en": "Ember Twin’s equator · gravity cannon"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1839,10 +1897,11 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "找到进城的路",
-    "en": "Find a way in"
+    "zh": "进城的路",
+    "en": "A way into the city"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -1869,6 +1928,7 @@
     "zh": "沙子从下往上灌满城市",
     "en": "Sand fills the city from the bottom up"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -1900,6 +1960,7 @@
     "zh": "余烬双星地下",
     "en": "Beneath Ember Twin"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -1928,6 +1989,7 @@
     "zh": "背阴城最底层",
     "en": "The Sunless City’s lowest district"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -1958,6 +2020,7 @@
     "zh": "前段被淹，后段要等沙",
     "en": "Early half floods; later half needs sand"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -1989,6 +2052,7 @@
     "zh": "余烬双星赤道峡谷",
     "en": "Ember Twin’s equatorial canyon"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2012,6 +2076,7 @@
     "en": "Light up the fossil’s mouth first"
    },
    "place": null,
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2046,6 +2111,7 @@
     "zh": "垫脚石洞",
     "en": "Stepping Stone Cave"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -2062,13 +2128,14 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "找到垫脚石洞顶的裂缝",
-    "en": "Find the crack in Stepping Stone Cave’s ceiling"
+    "zh": "垫脚石洞顶的裂缝",
+    "en": "The crack in Stepping Stone Cave’s ceiling"
    },
    "place": {
     "zh": "背阴城 · 垫脚石洞",
     "en": "Sunless City · Stepping Stone Cave"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2101,6 +2168,7 @@
     "zh": "余烬双星地下",
     "en": "Beneath Ember Twin"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2133,6 +2201,7 @@
     "en": "Go in the first few minutes"
    },
    "place": null,
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -2164,6 +2233,7 @@
     "zh": "余烬双星北极的干湖底",
     "en": "Dry lakebed at Ember Twin’s north pole"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2193,6 +2263,7 @@
     "zh": "余烬双星 · 背阴城",
     "en": "Ember Twin · the Sunless City"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2219,6 +2290,7 @@
     "en": "The tower door clears around minute 5"
    },
    "place": null,
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -2247,6 +2319,7 @@
     "en": "Use the Sun Station tower on Ash Twin"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2273,6 +2346,7 @@
     "zh": "太阳站",
     "en": "Sun Station"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -2303,6 +2377,7 @@
     "zh": "贴着太阳的低轨道",
     "en": "Low orbit around the Sun"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2327,6 +2402,7 @@
     "zh": "碎空星赤道 · 瑞拜克",
     "en": "Brittle Hollow’s equator · Riebeck"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2356,6 +2432,7 @@
     "zh": "碎空星 · 旧定居点",
     "en": "Brittle Hollow · Old Settlement"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2378,10 +2455,11 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "知道它在哪",
-    "en": "Learn where it is"
+    "zh": "城的位置",
+    "en": "Where the city is"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2408,6 +2486,7 @@
     "zh": "碎空星北极",
     "en": "Brittle Hollow’s north pole"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2438,6 +2517,7 @@
     "zh": "入口在赤道上长树的废墟里",
     "en": "Entrance: the ruin with trees on the equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2473,6 +2553,7 @@
     "zh": "碎空星地壳下",
     "en": "Under Brittle Hollow’s crust"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -2506,6 +2587,7 @@
     "zh": "碎空星赤道",
     "en": "Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2540,6 +2622,7 @@
     "zh": "碎空星赤道的地壳下",
     "en": "Under the crust at Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2567,6 +2650,7 @@
     "en": "A way in"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2594,6 +2678,7 @@
     "zh": "碎空星北部冰川下",
     "en": "Under Brittle Hollow’s northern glacier"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2617,6 +2702,7 @@
     "en": "Raise the forge from the Meltwater District"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2653,6 +2739,7 @@
     "zh": "灰烬双星赤道",
     "en": "Ash Twin’s equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2676,10 +2763,11 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "到达熔炉区",
-    "en": "Reach the Forge District"
+    "zh": "熔炉区",
+    "en": "The Forge District"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2710,6 +2798,7 @@
     "zh": "悬空城最上层",
     "en": "Top of the Hanging City"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2734,6 +2823,7 @@
     "zh": "碎空星南极 · 瑞拜克的飞船",
     "en": "South pole · Riebeck’s ship"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2756,13 +2846,14 @@
    "type": "gate",
    "band": "reach",
    "label": {
-    "zh": "到达重力炮",
-    "en": "Reach the gravity cannon"
+    "zh": "重力炮",
+    "en": "The gravity cannon"
    },
    "place": {
     "zh": "碎空星赤道",
     "en": "Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2790,6 +2881,7 @@
     "en": "Before the cannon falls in"
    },
    "place": null,
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -2818,6 +2910,7 @@
     "en": "Start at the gravity cannon"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2851,6 +2944,7 @@
     "zh": "碎空星赤道",
     "en": "Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2871,6 +2965,7 @@
     "en": "Take a path under the crust"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -2903,6 +2998,7 @@
     "zh": "碎空星南极",
     "en": "Brittle Hollow’s south pole"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -2927,6 +3023,7 @@
     "zh": "碎空星 · 重力炮",
     "en": "Brittle Hollow · gravity cannon"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -2956,6 +3053,7 @@
     "zh": "白洞站附近",
     "en": "Near the White Hole Station"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -2987,6 +3085,7 @@
     "zh": "碎空星赤道",
     "en": "Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -3011,6 +3110,7 @@
     "zh": "信号镜 · 量子频道",
     "en": "Signalscope · Quantum Fluctuations"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3037,6 +3137,7 @@
     "en": "Drop in from above the clouds"
    },
    "place": null,
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3059,6 +3160,7 @@
     "en": "Come up from below the current"
    },
    "place": null,
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3081,6 +3183,7 @@
     "en": "Get past the giant polar cyclone"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3112,6 +3215,7 @@
     "zh": "深巨星北极",
     "en": "Giant’s Deep’s north pole"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -3133,6 +3237,7 @@
     "en": "The risky route the Nomai children mentioned"
    },
    "place": null,
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3159,6 +3264,7 @@
     "en": "Swim in from under the island"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -3194,6 +3300,7 @@
     "en": "Get around the broken door"
    },
    "place": null,
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3222,6 +3329,7 @@
     "en": "The high ledge needs the island in the air"
    },
    "place": null,
+   "player_action": null,
    "requires": null,
    "alternative_kind": null,
    "timing_sensitive": true,
@@ -3253,6 +3361,7 @@
     "zh": "深巨星 · 雕像岛",
     "en": "Giant’s Deep · Statue Island"
    },
+   "player_action": "explore",
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -3277,6 +3386,7 @@
     "zh": "木炉星 · 挪麦遗迹",
     "en": "Timber Hearth · Nomai ruins"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3302,6 +3412,7 @@
     "zh": "灰烬双星赤道",
     "en": "Ash Twin’s equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3327,6 +3438,7 @@
     "zh": "木炉星",
     "en": "Timber Hearth"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3357,6 +3469,7 @@
     "zh": "余烬双星 · 量子卫星定位器",
     "en": "Ember Twin · Quantum Moon locator"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3391,6 +3504,7 @@
     "zh": "量子卫星",
     "en": "Quantum Moon"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "official",
    "location_ref": null,
@@ -3421,6 +3535,7 @@
     "zh": "总是在南极着陆",
     "en": "You always land at the south pole"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3453,6 +3568,7 @@
     "zh": "深巨星北极",
     "en": "Giant’s Deep’s north pole"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-tqt",
@@ -3487,6 +3603,7 @@
     "zh": "任意量子物体",
     "en": "Any quantum object"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "unverified": true,
@@ -3518,6 +3635,7 @@
     "zh": "观察图像 = 观察本体",
     "en": "Observing an image = observing the object"
    },
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3544,6 +3662,7 @@
     "zh": "余烬双星 · 湖床洞穴",
     "en": "Ember Twin · Lakebed Cave"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-lakebed",
@@ -3573,6 +3692,7 @@
     "zh": "碎空星",
     "en": "Brittle Hollow"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "official",
    "unverified": true,
@@ -3604,6 +3724,7 @@
     "zh": "任意量子碎片",
     "en": "Any quantum shard"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -3627,6 +3748,7 @@
     "zh": "站在量子物体上，完全黑暗",
     "en": "Stand on it in complete darkness"
    },
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3654,6 +3776,7 @@
     "zh": "碎空星赤道",
     "en": "Brittle Hollow’s equator"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-qtower",
@@ -3683,6 +3806,7 @@
     "zh": "祭坛必须在卫星北极",
     "en": "The shrine must be at the north pole"
    },
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3717,6 +3841,7 @@
     "zh": "量子卫星 · 宇宙之眼的轨道",
     "en": "Quantum Moon · orbiting the Eye"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,
@@ -3754,6 +3879,7 @@
     "zh": "余烬双星 · 重力炮",
     "en": "Ember Twin · gravity cannon"
    },
+   "player_action": "explore",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3783,6 +3909,7 @@
     "zh": "太阳站",
     "en": "Sun Station"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": "r-sunstation",
@@ -3805,10 +3932,11 @@
    "type": "gate",
    "band": "comet",
    "label": {
-    "zh": "知道挪麦人去过彗星",
-    "en": "Learn the Nomai went to the comet"
+    "zh": "挪麦人去过彗星",
+    "en": "The Nomai went to the comet"
    },
    "place": null,
+   "player_action": "realize",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3835,6 +3963,7 @@
     "zh": "闯入者表面",
     "en": "The Interloper’s surface"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3864,6 +3993,7 @@
     "zh": "闯入者向阳面",
     "en": "Sunward side"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "timing_sensitive": true,
@@ -3895,6 +4025,7 @@
     "zh": "闯入者向阳面的冰缝",
     "en": "A fissure on the sunward side"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -3927,6 +4058,7 @@
     "zh": "木炉星 · 村子",
     "en": "Timber Hearth · village"
    },
+   "player_action": "realize",
    "requires": null,
    "alternative_kind": null,
    "location_ref": null,
@@ -3956,6 +4088,7 @@
     "zh": "任意幽灵物质",
     "en": "Any ghost matter"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "official",
    "location_ref": null,
@@ -3981,6 +4114,7 @@
     "zh": "闯入者",
     "en": "The Interloper"
    },
+   "player_action": null,
    "requires": null,
    "alternative_kind": "luck",
    "location_ref": null,
@@ -4004,6 +4138,7 @@
     "zh": "肉眼看不见的致命物质",
     "en": "Lethal and invisible to the eye"
    },
+   "player_action": "explore",
    "requires": "any",
    "alternative_kind": null,
    "location_ref": null,
@@ -4031,6 +4166,7 @@
     "zh": "闯入者 · 破裂的核心",
     "en": "The Interloper · ruptured core"
    },
+   "player_action": null,
    "requires": "all",
    "alternative_kind": null,
    "location_ref": null,

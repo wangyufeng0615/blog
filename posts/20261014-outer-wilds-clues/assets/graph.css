@@ -14,6 +14,8 @@
   --accent-soft: rgba(95, 212, 192, 0.13);
   --alt: #f2a14f;
   --sun: #ff8a3d;
+  --realize: #c6b4ff;
+  --explore: #ffd36e;
   --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
   color-scheme: dark;
 }
@@ -39,6 +41,15 @@ a { color: var(--accent); }
 .lg-main { width: 24px; border-top: 2px solid var(--edge); }
 .lg-alt { width: 24px; border-top: 2px dashed var(--alt); }
 .spoiler { color: var(--sun); }
+.legend b { font-weight: 700; margin-right: 2px; padding: 0 4px; border-radius: 3px; }
+.legend b.kw-realize { background: rgba(198, 180, 255, .2); }
+.legend b.kw-explore { background: rgba(255, 211, 110, .2); }
+.kw-realize { color: var(--realize); fill: var(--realize); font-weight: 700; }
+.kw-explore { color: var(--explore); fill: var(--explore); font-weight: 700; }
+.kw-mark-realize { fill: rgba(198, 180, 255, .2); }
+.kw-mark-explore { fill: rgba(255, 211, 110, .2); }
+.tag.kw-realize { border-color: var(--realize); font-weight: 600; }
+.tag.kw-explore { border-color: var(--explore); font-weight: 600; }
 
 .stage { position: relative; flex: none; height: clamp(360px, 60vh, 760px); height: clamp(360px, 60dvh, 760px); background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; touch-action: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .02) inset; }
 .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; user-select: none; -webkit-user-select: none; }
@@ -85,7 +96,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .node text.lbl { font-size: 13px; }
 .node.gate text.lbl { font-weight: 600; }
 .node.goal text.lbl, .node.target text.lbl, .node.loc text.lbl, .node.branch text.lbl { font-size: 14px; font-weight: 700; }
-.node text.sub, .node text.meta { font-size: 11px; fill: var(--muted); }
+.node text.sub { font-size: 11px; fill: var(--muted); }
+.node text.meta { font-size: 11.5px; fill: var(--muted); }
 .node text.meta.alt { fill: var(--alt); }
 .node text.meta.timing { fill: var(--sun); font-weight: 600; }
 .node:hover rect.box, .node.sel rect.box { stroke: #fff; stroke-width: 2; }
