@@ -406,7 +406,7 @@ const tpl = fs.readFileSync(path.join(here, 'index.template.html'), 'utf8');
 for (const lang of ['zh', 'en']) {
   const c = COPY[lang];
   const url = SITE + URLS[lang];
-  const image = `${SITE}${URLS.zh}assets/${c.og}`;
+  const image = `${SITE}${URLS.zh}assets/${c.og}?v=${ver(c.og)}`;
   const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
