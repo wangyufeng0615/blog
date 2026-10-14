@@ -8,7 +8,7 @@
 <meta name="keywords" content="{{keywords}}">
 <meta name="author" content="王雨峰 (Wang Yufeng)">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#faf9f7">
+<meta name="theme-color" content="#0a0f1f">
 <link rel="canonical" href="{{url}}">
 <link rel="alternate" hreflang="zh-CN" href="{{urlZh}}">
 <link rel="alternate" hreflang="en" href="{{urlEn}}">
@@ -56,28 +56,33 @@
 <link rel="stylesheet" href="{{assets}}graph.css?v={{vCss}}">
 </head>
 <body>
-<header class="top">
-  <div class="title-row">
-    <h1>{{h1}}</h1>
-    <a class="lang" href="{{switchHref}}" hreflang="{{switchHreflang}}" lang="{{switchHreflang}}" data-lang="{{switchLang}}">{{switchLabel}}</a>
-  </div>
-  <p class="what">{{what}}</p>
-  <div class="legend">
-    {{legend}}
-    <span class="spoiler">{{spoiler}}</span>
-  </div>
-</header>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="screen">
+  <header class="top">
+    <div class="sky-sun" aria-hidden="true"></div>
+    <div class="title-row">
+      <svg class="fire" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c1.5 4.5 6.5 6.8 6.5 12.4a6.5 6.5 0 0 1-13 0c0-3.3 1.8-5 3.2-6.8.3 2 1.2 3.3 2.4 3.9-.6-3.6.2-6.6.9-9.5Z" fill="#ff8a3d"/><path d="M16 13.5c.9 2.2 3.1 3.4 3.1 6a3.1 3.1 0 0 1-6.2 0c0-1.7.9-2.7 1.6-3.6.2 1 .6 1.6 1.1 1.9-.3-1.7.1-3 .4-4.3Z" fill="#ffd27a"/><path d="M6 27.5 26 23M6 23l20 4.5" stroke="#8a5a3c" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <h1>{{h1}}</h1>
+      <a class="lang" href="{{switchHref}}" hreflang="{{switchHreflang}}" lang="{{switchHreflang}}" data-lang="{{switchLang}}">{{switchLabel}}</a>
+    </div>
+    <p class="what">{{what}}</p>
+    <div class="legend">
+      {{legend}}
+      <span class="spoiler">{{spoiler}}</span>
+    </div>
+  </header>
 
-<div class="stage" id="stage">
-  <svg id="graph" role="img" aria-label="{{aria}}"></svg>
-  <div class="zoom" role="group">
-    <button type="button" id="z-out" aria-label="{{zoomOut}}">−</button>
-    <output id="z-val">100%</output>
-    <button type="button" id="z-in" aria-label="{{zoomIn}}">+</button>
-    <button type="button" id="z-fit">{{fit}}</button>
-    <span class="hint">{{hint}}</span>
+  <div class="stage" id="stage">
+    <svg id="graph" role="img" aria-label="{{aria}}"></svg>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="{{zoomOut}}">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="{{zoomIn}}">+</button>
+      <button type="button" id="z-fit">{{fit}}</button>
+      <span class="hint">{{hint}}</span>
+    </div>
+    <aside class="detail" id="detail" aria-live="polite" hidden></aside>
   </div>
-  <aside class="detail" id="detail" aria-live="polite" hidden></aside>
 </div>
 <noscript>
   <div class="noscript">
@@ -87,12 +92,25 @@
 </noscript>
 
 <main class="article">
-  <h2>{{faqTitle}}</h2>
+  <h2 id="loop">{{spiral}}{{tlTitle}}</h2>
+  <p class="lead">{{tlLead}}</p>
+  <figure class="timeline" style="margin:0">
+    {{timelineSvg}}
+    <figcaption class="tl-note">{{tlNote}}</figcaption>
+  </figure>
+
+  <h2 id="leads">{{spiral}}{{leadsTitle}}</h2>
+  <p class="lead">{{leadsLead}}</p>
+  <div class="leads">
+{{leads}}
+  </div>
+
+  <h2>{{spiral}}{{faqTitle}}</h2>
   <dl class="faq">
 {{faq}}
   </dl>
 
-  <h2>{{srcTitle}}</h2>
+  <h2>{{spiral}}{{srcTitle}}</h2>
   <p class="src">{{src}}</p>
   <p class="src">{{agents}}</p>
   <p class="src">{{byline}}</p>

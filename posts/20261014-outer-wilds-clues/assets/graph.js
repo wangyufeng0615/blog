@@ -125,6 +125,13 @@
     return { pos, height, maxDepth };
   }
 
+  // Nomai-style curl next to each band title.
+  function spiralPath(cx, cy, R) {
+    let d = '';
+    for (let i = 0; i <= 56; i++) { const a = i / 56 * Math.PI * 5, r = 0.8 + i / 56 * R; d += `${i ? 'L' : 'M'}${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }
+    return d;
+  }
+
   function render() {
     for (const id in G.nodes) state.size[id] = measure(G.nodes[id]);
     vp.innerHTML = '';
@@ -142,8 +149,9 @@
     BANDS.forEach((b, i) => {
       const l = L[i];
       if (i > 0) el('line', { class: 'band-line', x1: PAD, x2: width - PAD, y1: top - BAND_GAP / 2, y2: top - BAND_GAP / 2 }, gBand);
-      const t1 = el('text', { class: 'band-label', x: PAD, y: top + 18 }, gBand); t1.textContent = T(b.title);
-      const t2 = el('text', { class: 'band-sub', x: PAD, y: top + 38 }, gBand); t2.textContent = T(b.band);
+      el('path', { class: 'spiral', d: spiralPath(PAD + 9, top + 12, 8.5) }, gBand);
+      const t1 = el('text', { class: 'band-label', x: PAD + 26, y: top + 18 }, gBand); t1.textContent = T(b.title);
+      const t2 = el('text', { class: 'band-sub', x: PAD + 26, y: top + 38 }, gBand); t2.textContent = T(b.band);
       const y0 = top + BAND_HEAD;
       for (const id in l.pos) pos[id] = { x: PAD + (maxDepth - l.pos[id].d) * COL_W, y: y0 + l.pos[id].y };
       top = y0 + l.height + BAND_GAP;
@@ -326,6 +334,42 @@
   }
   function clear() { state.sel = null; applyHighlight(); renderDetail(); }
   document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && state.sel) clear(); });
+
+  // Timeline events and traveler leads below the canvas jump to their card on the map.
+  function jumpTo(id) {
+    if (!G.nodes[id]) return;
+    stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    select(id, true); focusNode(id);
+  }
+  document.addEventListener('click', ev => {
+    const a = ev.target.closest('[data-node]');
+    if (!a || svg.contains(a)) return;
+    ev.preventDefault(); jumpTo(a.dataset.node);
+  });
+  document.addEventListener('keydown', ev => {
+    const a = ev.target.closest && ev.target.closest('.tl-link[data-node]');
+    if (a && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); jumpTo(a.dataset.node); }
+  });
+
+  // A quiet starfield behind everything, drawn once per resize from a fixed seed.
+  const sky = document.getElementById('sky');
+  function drawSky() {
+    if (!sky) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+    sky.width = w * dpr; sky.height = h * dpr;
+    const c = sky.getContext('2d'); c.scale(dpr, dpr);
+    let seed = 22;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const n = Math.round(w * h / 2600);
+    for (let i = 0; i < n; i++) {
+      const x = rnd() * w, y = rnd() * h, r = rnd() < 0.92 ? rnd() * 0.9 + 0.2 : rnd() * 1.3 + 0.9, a = rnd() * 0.6 + 0.2;
+      const tint = rnd();
+      c.fillStyle = tint < 0.12 ? `rgba(255,200,150,${a})` : tint < 0.24 ? `rgba(160,220,255,${a})` : `rgba(235,240,255,${a})`;
+      c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();
+    }
+  }
+  drawSky();
+  window.addEventListener('resize', drawSky);
 
   render();
   fitWidth();

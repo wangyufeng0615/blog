@@ -8,7 +8,7 @@
 <meta name="keywords" content="星际拓荒, Outer Wilds, 星际拓荒攻略, 星际拓荒线索, 星际拓荒结局, 宇宙之眼坐标, 挪麦人, 灰烬双星计划, 背阴城怎么进, 高能实验室, 黑洞熔炉, 南部天文台, 量子卫星第六个位置, 黑棘星安康鱼, 深巨星核心">
 <meta name="author" content="王雨峰 (Wang Yufeng)">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#faf9f7">
+<meta name="theme-color" content="#0a0f1f">
 <link rel="canonical" href="https://wangyufeng.org/outer-wilds-clues/">
 <link rel="alternate" hreflang="zh-CN" href="https://wangyufeng.org/outer-wilds-clues/">
 <link rel="alternate" hreflang="en" href="https://wangyufeng.org/outer-wilds-clues/en/">
@@ -101,7 +101,7 @@
    "description": "《星际拓荒》（Outer Wilds）本体的线索依赖图：打出结局要凑齐宇宙之眼坐标、挪麦飞船、高级跃迁核心三样东西；每一步要先知道什么、在哪颗星球学到、关键地点怎么进、什么时候去，以及能靠运气或另一条线索绕过去的步骤。",
    "inLanguage": "zh-CN",
    "datePublished": "2026-10-14T21:00:00+08:00",
-   "dateModified": "2026-10-14T23:30:00+08:00",
+   "dateModified": "2026-10-15T01:30:00+08:00",
    "image": {
     "@id": "https://wangyufeng.org/outer-wilds-clues/#image"
    },
@@ -225,34 +225,39 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="assets/graph.css?v=efccfbdafa">
+<link rel="stylesheet" href="assets/graph.css?v=912c1e0bfa">
 </head>
 <body>
-<header class="top">
-  <div class="title-row">
-    <h1>星际拓荒通关线索图</h1>
-    <a class="lang" href="en/" hreflang="en" lang="en" data-lang="en">English</a>
-  </div>
-  <p class="what">《星际拓荒》（Outer Wilds）要打出结局，得先弄清一连串事情。这张图把它们串起来：每件事要先知道什么、在哪颗星球学到、关键地点怎么进、什么时候去，以及哪些步骤可以绕过去。越往右越接近结局。</p>
-  <div class="legend">
-    <span><i class="lg-goal"></i>绿框：结局和三样必需品</span>
-    <span><i class="lg-main"></i>实线：游戏设计好的路线</span>
-    <span><i class="lg-alt"></i>虚线：其他走法（运气、试错、硬闯或另一条线索）</span>
-    <span>点任意卡片看游戏原文</span>
-    <span class="spoiler">全是剧透，没通关慎看</span>
-  </div>
-</header>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="screen">
+  <header class="top">
+    <div class="sky-sun" aria-hidden="true"></div>
+    <div class="title-row">
+      <svg class="fire" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c1.5 4.5 6.5 6.8 6.5 12.4a6.5 6.5 0 0 1-13 0c0-3.3 1.8-5 3.2-6.8.3 2 1.2 3.3 2.4 3.9-.6-3.6.2-6.6.9-9.5Z" fill="#ff8a3d"/><path d="M16 13.5c.9 2.2 3.1 3.4 3.1 6a3.1 3.1 0 0 1-6.2 0c0-1.7.9-2.7 1.6-3.6.2 1 .6 1.6 1.1 1.9-.3-1.7.1-3 .4-4.3Z" fill="#ffd27a"/><path d="M6 27.5 26 23M6 23l20 4.5" stroke="#8a5a3c" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <h1>星际拓荒通关线索图</h1>
+      <a class="lang" href="en/" hreflang="en" lang="en" data-lang="en">English</a>
+    </div>
+    <p class="what">《星际拓荒》（Outer Wilds）打出结局前要弄清的每件事：先得知道什么、在哪颗星球学到、地点怎么进、什么时候去。越往右越接近结局。</p>
+    <div class="legend">
+      <span><i class="lg-goal"></i>青框：结局和三样必需品</span>
+    <span><i class="lg-main"></i>实线：设计好的路线</span>
+    <span><i class="lg-alt"></i>橙色虚线：其他走法（运气、试错、硬闯或另一条线索）</span>
+    <span>点卡片看游戏原文</span>
+      <span class="spoiler">全是剧透，没通关慎看</span>
+    </div>
+  </header>
 
-<div class="stage" id="stage">
-  <svg id="graph" role="img" aria-label="星际拓荒线索依赖图：通关主线、地点入口、量子卫星支线、闯入者支线。文字版见本页 llms.txt。"></svg>
-  <div class="zoom" role="group">
-    <button type="button" id="z-out" aria-label="缩小">−</button>
-    <output id="z-val">100%</output>
-    <button type="button" id="z-in" aria-label="放大">+</button>
-    <button type="button" id="z-fit">铺满宽度</button>
-    <span class="hint">拖动平移 · Ctrl/⌘ + 滚轮或双指缩放</span>
+  <div class="stage" id="stage">
+    <svg id="graph" role="img" aria-label="星际拓荒线索依赖图：通关主线、地点入口、量子卫星支线、闯入者支线。文字版见本页 llms.txt。"></svg>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="缩小">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="放大">+</button>
+      <button type="button" id="z-fit">铺满宽度</button>
+      <span class="hint">拖动平移 · Ctrl/⌘ + 滚轮或双指缩放</span>
+    </div>
+    <aside class="detail" id="detail" aria-live="polite" hidden></aside>
   </div>
-  <aside class="detail" id="detail" aria-live="polite" hidden></aside>
 </div>
 <noscript>
   <div class="noscript">
@@ -265,7 +270,25 @@
 </noscript>
 
 <main class="article">
-  <h2>常见问题</h2>
+  <h2 id="loop"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>一个循环里会发生什么</h2>
+  <p class="lead">每一轮只有 22 分钟，太阳一直在变老，各颗星球也在按自己的节奏变化。很多入口只在某段时间开着。</p>
+  <figure class="timeline" style="margin:0">
+    <svg viewBox="0 0 1040 466" role="img" aria-label="一个 22 分钟循环的时间轴"><line class="tl-grid" x1="150" x2="150" y1="24" y2="456"/><text class="tl-tick" x="150" y="18" text-anchor="middle">0:00</text><line class="tl-grid" x1="228.1818181818182" x2="228.1818181818182" y1="24" y2="456"/><text class="tl-tick" x="228.1818181818182" y="18" text-anchor="middle">2:00</text><line class="tl-grid" x1="306.3636363636364" x2="306.3636363636364" y1="24" y2="456"/><text class="tl-tick" x="306.3636363636364" y="18" text-anchor="middle">4:00</text><line class="tl-grid" x1="384.5454545454545" x2="384.5454545454545" y1="24" y2="456"/><text class="tl-tick" x="384.5454545454545" y="18" text-anchor="middle">6:00</text><line class="tl-grid" x1="462.72727272727275" x2="462.72727272727275" y1="24" y2="456"/><text class="tl-tick" x="462.72727272727275" y="18" text-anchor="middle">8:00</text><line class="tl-grid" x1="540.909090909091" x2="540.909090909091" y1="24" y2="456"/><text class="tl-tick" x="540.909090909091" y="18" text-anchor="middle">10:00</text><line class="tl-grid" x1="619.090909090909" x2="619.090909090909" y1="24" y2="456"/><text class="tl-tick" x="619.090909090909" y="18" text-anchor="middle">12:00</text><line class="tl-grid" x1="697.2727272727273" x2="697.2727272727273" y1="24" y2="456"/><text class="tl-tick" x="697.2727272727273" y="18" text-anchor="middle">14:00</text><line class="tl-grid" x1="775.4545454545455" x2="775.4545454545455" y1="24" y2="456"/><text class="tl-tick" x="775.4545454545455" y="18" text-anchor="middle">16:00</text><line class="tl-grid" x1="853.6363636363636" x2="853.6363636363636" y1="24" y2="456"/><text class="tl-tick" x="853.6363636363636" y="18" text-anchor="middle">18:00</text><line class="tl-grid" x1="931.8181818181819" x2="931.8181818181819" y1="24" y2="456"/><text class="tl-tick" x="931.8181818181819" y="18" text-anchor="middle">20:00</text><line class="tl-grid" x1="1010" x2="1010" y1="24" y2="456"/><text class="tl-tick" x="1010" y="18" text-anchor="middle">22:00</text><line class="tl-axis" x1="150" x2="1010" y1="68" y2="68"/><text class="tl-lane" x="8" y="48">木炉星</text><g><circle class="tl-dot" cx="150" cy="44" r="5.5"/><text class="tl-label" x="160" y="48" text-anchor="start">在营火边醒来</text></g><line class="tl-axis" x1="150" x2="1010" y1="112" y2="112"/><text class="tl-lane" x="8" y="92">深巨星</text><g class="tl-link" data-node="coords" tabindex="0" role="link"><circle class="tl-dot" cx="161.72727272727272" cy="88" r="5.5"/><text class="tl-label" x="171.72727272727272" y="92" text-anchor="start">轨道探测炮发射，天上一闪</text></g><line class="tl-axis" x1="150" x2="1010" y1="228" y2="228"/><text class="tl-lane" x="8" y="136">沙漏双星</text><g class="tl-link" data-node="r-lakebed" tabindex="0" role="link"><rect class="tl-range" x="150" y="124" width="117.27272727272725" height="16" rx="3"/><text class="tl-label" x="156" y="136">湖床洞穴只在开头几分钟能进</text></g><g class="tl-link" data-node="c-hourglass" tabindex="0" role="link"><circle class="tl-dot" cx="228.1818181818182" cy="156" r="5.5"/><text class="tl-label" x="238.1818181818182" y="160" text-anchor="start">沙子开始流动</text></g><g class="tl-link" data-node="r-sunstation" tabindex="0" role="link"><circle class="tl-dot" cx="345.4545454545455" cy="180" r="5.5"/><text class="tl-label" x="355.4545454545455" y="184" text-anchor="start">太阳站塔门露出</text></g><g class="tl-link" data-node="g-sand" tabindex="0" role="link"><circle class="tl-dot" cx="456.08181818181816" cy="156" r="5.5"/><text class="tl-label" x="466.08181818181816" y="160" text-anchor="start">约 7:50 计划塔接收点露出</text></g><g class="tl-link" data-node="r-sunless" tabindex="0" role="link"><rect class="tl-range" x="228.1818181818182" y="196" width="781.8181818181818" height="16" rx="3"/><text class="tl-label" x="234.1818181818182" y="208">背阴城从下往上被沙灌满</text></g><line class="tl-axis" x1="150" x2="1010" y1="272" y2="272"/><text class="tl-lane" x="8" y="252">碎空星</text><g class="tl-link" data-node="r-qtower" tabindex="0" role="link"><rect class="tl-range" x="150" y="240" width="860" height="16" rx="3"/><text class="tl-label" x="156" y="252">地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞</text></g><line class="tl-axis" x1="150" x2="1010" y1="340" y2="340"/><text class="tl-lane" x="8" y="296">闯入者</text><g class="tl-link" data-node="i-enter" tabindex="0" role="link"><rect class="tl-range" x="150" y="284" width="781.8181818181819" height="16" rx="3"/><text class="tl-label" x="156" y="296">绕太阳飞，越近太阳，向阳面的冰缝开得越大</text></g><g><circle class="tl-dot" cx="931.8181818181819" cy="316" r="5.5"/><text class="tl-label" x="921.8181818181819" y="320" text-anchor="end">约第 20 分钟撞进太阳</text></g><line class="tl-axis" x1="150" x2="1010" y1="456" y2="456"/><text class="tl-lane" x="8" y="364">太阳</text><g><rect class="tl-range tl-sun" x="150" y="352" width="410.4545454545455" height="16" rx="3"/><text class="tl-label" x="156" y="364">橙色恒星，太阳站还在</text></g><g><rect class="tl-range tl-sun" x="560.4545454545455" y="352" width="449.5454545454545" height="16" rx="3"/><text class="tl-label" x="566.4545454545455" y="364">膨胀成红巨星</text></g><g class="tl-link" data-node="r-sunstation" tabindex="0" role="link"><circle class="tl-dot tl-sun" cx="560.4545454545455" cy="384" r="5.5"/><text class="tl-label" x="570.4545454545455" y="388" text-anchor="start">约 10.5–12 分钟太阳站被吞没</text></g><g><circle class="tl-dot tl-sun" cx="951.3636363636364" cy="408" r="5.5"/><text class="tl-label" x="941.3636363636364" y="412" text-anchor="end">最后一两分钟响起《End Times》</text></g><g><circle class="tl-dot goal" cx="1010" cy="432" r="5.5"/><text class="tl-label" x="1000" y="436" text-anchor="end">超新星，循环重来</text></g></svg>
+    <figcaption class="tl-note">时间取自官方 Wiki，各页对太阳膨胀的时间说法在第 10.5 到 12 分钟之间，图上标的是大约位置。点带下划线的事件可跳到上面的画布。</figcaption>
+  </figure>
+
+  <h2 id="leads"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>谁给你指的路</h2>
+  <p class="lead">旅行者们各自在一颗星球上，他们的一句话往往就是你下一站的理由。下面是飞船日志里记下的、由他们引出的传闻，点地点可以跳到上面的画布。</p>
+  <div class="leads">
+    <article class="lead-card"><h3>木炉星村子 <small>哈尔、霍恩费斯等人</small></h3><ul><li><div class="to">→ 加布罗的岛屿</div><p class="said">哈尔说加布罗打算回到深巨星，对天文台的挪麦雕像作进一步的调查。</p></li><li><div class="to">→ 埃斯科的营地</div><p class="said">听起来埃斯科依然驻扎在废岩星。他已经在那儿独自待了好一阵子了。</p></li><li><div class="to">→ 宇宙之眼信号定位器</div><p class="said">我听说废岩星上有挪麦人的废墟。没人知道它们是干什么用的，也不知道挪麦人为什么要造它们。天文台里的挪麦文字提到，挪麦人正在对废岩星上的某种设备进行校准。</p></li></ul></article>
+    <article class="lead-card"><h3>埃斯科 <small>废岩星</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="c-harmonica">黑棘星种子</a></div><p class="said">埃斯科的信号镜日志报告说，木炉星的某处传来了口琴声。他说那声音听起来和费尔德斯巴的口琴一模一样。可是费尔德斯巴早就消失在太空里了。</p></li><li><div class="to">→ 月面瞭望所</div><p class="said">埃斯科说废岩星的北极（在我的小地图上用红色标出）非常适合用信号镜去聆听其他旅行者演奏的音乐。</p></li></ul></article>
+    <article class="lead-card"><h3>切特 <small>余烬双星</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="r-pod2">2号逃生舱</a></div><p class="said">切特看见一艘挪麦宇宙飞船残骸向余烬双星南半球的某个地方发射了一道光束。</p></li><li><div class="to">→ <a href="#stage" data-node="r-sunless">背阴城</a></div><p class="said">切特觉得地表很少有废墟这个事实，说明挪麦人一定住在地下的什么地方。</p></li></ul></article>
+    <article class="lead-card"><h3>瑞拜克 <small>碎空星</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="r-observatory">南部天文台</a></div><p class="said">根据瑞拜克的说法，从地面进入天文台是不可能的（他试过了），不过地壳下某个地方可能有条通路。</p></li></ul></article>
+    <article class="lead-card"><h3>加布罗 <small>深巨星</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="g-current">海洋深处</a></div><p class="said">加布罗说水面下有一股很强劲的水流，使得水里的东西无法沉下去。</p></li><li><div class="to">→ <a href="#stage" data-node="r-workshop">雕像岛</a></div><p class="said">深巨星某些岛屿的海滩上有挪麦雕像，这是其中的一座。这些雕像就和加布罗带回到木炉星的那个没什么两样。雕像岛（加布罗是这么称呼它的）就在两座由天然石拱门连接的岛屿那里。</p></li><li><div class="to">→ <a href="#stage" data-node="c-dmg">轨道探测炮</a></div><p class="said">加布罗在每个循环开始时，总会在天空中看到一道明亮的闪光。深巨星的轨道上一定发生了什么事情。</p></li></ul></article>
+    <article class="lead-card"><h3>费尔德斯巴 <small>黑棘星</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="c-jelly">冻住的水母</a></div><p class="said">费尔德斯巴提示说，抵达深巨星核心的秘密就藏在他的飞船坠毁的那棵空心藤蔓尽头里。我要去安康鱼骨架的尾巴那里，在迷雾里寻找闪烁的光亮，才能发现费尔德斯巴的飞船。</p></li></ul></article>
+  </div>
+
+  <h2><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>常见问题</h2>
   <dl class="faq">
     <dt>《星际拓荒》要打出结局，需要凑齐哪几样东西？</dt>
     <dd>三样：宇宙之眼的坐标（在深巨星核心的探测器跟踪模块里）、挪麦人的飞船（困在黑棘星深处）、高级跃迁核心（在灰烬双星计划的中央舱室里）。把核心装进飞船，在舰桥输入坐标，就能跃迁到宇宙之眼。取出核心会让时间循环停止，所以这一步要放在最后。</dd>
@@ -285,7 +308,7 @@
     <dd>太阳站没能引爆太阳后，挪麦人去调查刚到的彗星&quot;闯入者&quot;。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。幽灵物质肉眼看不见，用相机能看到。</dd>
   </dl>
 
-  <h2>资料来源</h2>
+  <h2><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>资料来源</h2>
   <p class="src">实线和引文来自游戏原文：2026 年 10 月 Steam 版本的飞船日志、挪麦文字和对话，用官方简体中文译文，以及日志里自带的"这条传闻从哪里听来"的数据。其他走法和地点入口的细节来自 <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds 官方 Wiki</a> 和玩家社区，每张卡片的详情里写了出处；标着"未在原文核实"的几条我没在游戏原文里找到依据。不含 DLC《回声之眼》。</p>
   <p class="src">给 AI 和程序读的版本：<a href="llms.txt">llms.txt</a>（全文）、<a href="graph.json">graph.json</a>（节点、前置关系和中英原文）。</p>
   <p class="src">王雨峰 · 2026 年 10 月 14 日</p>
@@ -296,7 +319,7 @@ document.querySelector('.lang').addEventListener('click', function () {
   try { localStorage.setItem('owc-lang', this.dataset.lang); } catch (e) {}
 });
 </script>
-<script src="assets/graph-data.js?v=f7bd0eb71b"></script>
-<script src="assets/graph.js?v=3e163f5a6c"></script>
+<script src="assets/graph-data.js?v=11a0ba0fd1"></script>
+<script src="assets/graph.js?v=ed3e0c7cfa"></script>
 </body>
 </html>

@@ -43,6 +43,24 @@ You need all three quantum rules: imaging (Tower of Quantum Trials on Giant’s 
 
 After the Sun Station failed, the Nomai went to study a newly arrived comet, the Interloper. Its core held ghost matter under extreme pressure; when it ruptured, the ghost matter covered the solar system almost instantly. It is invisible to the eye but shows up on camera.
 
+## One loop (English)
+
+- Timber Hearth: 0:00 Wake up by the campfire
+- Giant’s Deep: 0:18 The Orbital Probe Cannon fires — a flash in the sky
+- Hourglass Twins: Lakebed Cave: open only for the first few minutes; 2:00 Sand starts to flow; 5:00 Sun Station tower door clears; 7:50 ~7:50 project tower receiver uncovered; The Sunless City fills with sand from the bottom up
+- Brittle Hollow: The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole
+- The Interloper: Swings around the Sun; the closer it gets, the wider the sunward fissure opens; 20:00 ~20:00 crashes into the Sun
+- The Sun: Orange star; the Sun Station still stands; Swells into a red giant; 10:30 ~10.5–12 min: the Sun Station is swallowed; 20:30 Final minute or two: “End Times” plays; 22:00 Supernova — the loop starts over
+
+## Who points you where (English)
+
+- Timber Hearth village (Hal, Hornfels and the others): → Gabbro’s Island: "Hal says Gabbro went back to Giant’s Deep to try to learn more about the Nomai statue in the observatory." → Esker’s Camp: "Sounds like Esker is still stationed on the Attlerock. They’ve been there by themself for a while." → Eye Signal Locator: "I hear there are Nomai ruins somewhere on the Attlerock. No one knows what they are or why they were built. The Nomai text in the observatory talks about calibrating some sort of device on the Attlerock."
+- Esker (the Attlerock): → Dark Bramble Seed: "Esker's signalscope log reports harmonica music coming from somewhere on Timber Hearth. They claim it sounds just like Feldspar's harmonica, but Feldspar disappeared in space ages ago." → Lunar Lookout: "Esker says the Attlerock’s north pole (marked in red on my minimap) is a great spot to listen for the other travelers’ music with a signalscope."
+- Chert (Ember Twin): → Escape Pod 2: "Chert saw a Nomai shipwreck shooting a beam of light into the sky somewhere on Ember Twin's southern hemisphere." → The Sunless City: "Chert thinks the lack of surface ruins means the Nomai must have lived somewhere underground."
+- Riebeck (Brittle Hollow): → Southern Observatory: "Riebeck says you can't get into the observatory from the surface (they tried), but there's probably a path to it beneath the crust somewhere."
+- Gabbro (Giant’s Deep): → Ocean Depths: "Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it." → Statue Island: "One of the islands on Giant’s Deep has a Nomai statue on the beach just like the one Gabbro brought back to Timber Hearth. Statue Island (as Gabbro calls it) is the one with two islands connected by a natural rock arch." → Orbital Probe Cannon: "Gabbro sees a bright flash in the sky at the start of every loop. Something must be happening in orbit around Giant’s Deep."
+- Feldspar (Dark Bramble): → Frozen Jellyfish: "Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog."
+
 ## Full map (English)
 
 Indented items are prerequisites of the item above them.
@@ -231,6 +249,24 @@ Indented items are prerequisites of the item above them.
 ### 挪麦人是怎么灭绝的？
 
 太阳站没能引爆太阳后，挪麦人去调查刚到的彗星"闯入者"。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。幽灵物质肉眼看不见，用相机能看到。
+
+## 一个循环（中文）
+
+- 木炉星：在营火边醒来
+- 深巨星：轨道探测炮发射，天上一闪
+- 沙漏双星：湖床洞穴只在开头几分钟能进；沙子开始流动；太阳站塔门露出；约 7:50 计划塔接收点露出；背阴城从下往上被沙灌满
+- 碎空星：地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞
+- 闯入者：绕太阳飞，越近太阳，向阳面的冰缝开得越大；约第 20 分钟撞进太阳
+- 太阳：橙色恒星，太阳站还在；膨胀成红巨星；约 10.5–12 分钟太阳站被吞没；最后一两分钟响起《End Times》；超新星，循环重来
+
+## 谁给你指的路（中文）
+
+- 木炉星村子（哈尔、霍恩费斯等人）：→ 加布罗的岛屿：“哈尔说加布罗打算回到深巨星，对天文台的挪麦雕像作进一步的调查。” → 埃斯科的营地：“听起来埃斯科依然驻扎在废岩星。他已经在那儿独自待了好一阵子了。” → 宇宙之眼信号定位器：“我听说废岩星上有挪麦人的废墟。没人知道它们是干什么用的，也不知道挪麦人为什么要造它们。天文台里的挪麦文字提到，挪麦人正在对废岩星上的某种设备进行校准。”
+- 埃斯科（废岩星）：→ 黑棘星种子：“埃斯科的信号镜日志报告说，木炉星的某处传来了口琴声。他说那声音听起来和费尔德斯巴的口琴一模一样。可是费尔德斯巴早就消失在太空里了。” → 月面瞭望所：“埃斯科说废岩星的北极（在我的小地图上用红色标出）非常适合用信号镜去聆听其他旅行者演奏的音乐。”
+- 切特（余烬双星）：→ 2号逃生舱：“切特看见一艘挪麦宇宙飞船残骸向余烬双星南半球的某个地方发射了一道光束。” → 背阴城：“切特觉得地表很少有废墟这个事实，说明挪麦人一定住在地下的什么地方。”
+- 瑞拜克（碎空星）：→ 南部天文台：“根据瑞拜克的说法，从地面进入天文台是不可能的（他试过了），不过地壳下某个地方可能有条通路。”
+- 加布罗（深巨星）：→ 海洋深处：“加布罗说水面下有一股很强劲的水流，使得水里的东西无法沉下去。” → 雕像岛：“深巨星某些岛屿的海滩上有挪麦雕像，这是其中的一座。这些雕像就和加布罗带回到木炉星的那个没什么两样。雕像岛（加布罗是这么称呼它的）就在两座由天然石拱门连接的岛屿那里。” → 轨道探测炮：“加布罗在每个循环开始时，总会在天空中看到一道明亮的闪光。深巨星的轨道上一定发生了什么事情。”
+- 费尔德斯巴（黑棘星）：→ 冻住的水母：“费尔德斯巴提示说，抵达深巨星核心的秘密就藏在他的飞船坠毁的那棵空心藤蔓尽头里。我要去安康鱼骨架的尾巴那里，在迷雾里寻找闪烁的光亮，才能发现费尔德斯巴的飞船。”
 
 ## 完整依赖（中文）
 
