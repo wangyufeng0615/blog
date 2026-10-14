@@ -1,0 +1,40 @@
+{
+  "zone_name": "wangyufeng.org",
+  "http_request_cache_settings": [
+    {
+      "ref": "blog_public_documents",
+      "description": "Blog: cache public static documents from GitHub Pages",
+      "expression": "(http.host eq \"wangyufeng.org\" and http.request.method in {\"GET\" \"HEAD\"} and http.cookie eq \"\" and not any(http.request.headers[\"authorization\"][*] ne \"\") and not starts_with(http.request.uri.path, \"/api/\") and not starts_with(http.request.uri.path, \"/cdn-cgi/\") and http.request.uri.path ne \"/land-below-the-wind/\" and not http.request.uri.query contains \"lang=\" and (ends_with(http.request.uri.path, \"/\") or ends_with(http.request.uri.path, \".html\") or ends_with(http.request.uri.path, \".json\") or ends_with(http.request.uri.path, \".txt\") or ends_with(http.request.uri.path, \".xml\")))",
+      "action": "set_cache_settings",
+      "action_parameters": {
+        "cache": true,
+        "edge_ttl": { "mode": "respect_origin" }
+      }
+    },
+    {
+      "ref": "blog_private_and_language_bypass",
+      "description": "Blog: bypass cookies, authorization, API and language negotiation",
+      "expression": "(http.host eq \"wangyufeng.org\" and (http.cookie ne \"\" or any(http.request.headers[\"authorization\"][*] ne \"\") or starts_with(http.request.uri.path, \"/api/\") or starts_with(http.request.uri.path, \"/cdn-cgi/\") or http.request.uri.path eq \"/land-below-the-wind/\" or http.request.uri.query contains \"lang=\"))",
+      "action": "set_cache_settings",
+      "action_parameters": { "cache": false }
+    }
+  ],
+  "http_response_headers_transform": [
+    {
+      "ref": "blog_security_headers",
+      "description": "Blog: browser security baseline; preserve map and camera features",
+      "expression": "(http.host in {\"wangyufeng.org\" \"www.wangyufeng.org\"})",
+      "action": "rewrite",
+      "action_parameters": {
+        "headers": {
+          "x-content-type-options": { "operation": "set", "value": "nosniff" },
+          "x-frame-options": { "operation": "set", "value": "SAMEORIGIN" },
+          "referrer-policy": { "operation": "set", "value": "strict-origin-when-cross-origin" },
+          "permissions-policy": { "operation": "set", "value": "camera=(self), microphone=(self), geolocation=(self), payment=(), usb=()" },
+          "content-security-policy": { "operation": "set", "value": "base-uri 'self'; object-src 'none'; frame-ancestors 'self'" },
+          "content-security-policy-report-only": { "operation": "set", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https://server.arcgisonline.com https://cloudflareinsights.com https://*.cloudflareinsights.com; font-src 'self' data:; worker-src 'self' blob:; media-src 'self' blob:; frame-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'" }
+        }
+      }
+    }
+  ]
+}

@@ -67,9 +67,15 @@ export function languageRedirect(request) {
   return null;
 }
 
-function addLanguageHeaders(response, language) {
+export function addLanguageHeaders(response, language) {
   const headers = new Headers(response.headers);
   headers.set("Content-Language", language);
+  if (language === "zh-CN") {
+    // This URL negotiates on language/cookie before serving Chinese. Neither a
+    // browser nor a shared cache may reuse it for a later English preference.
+    headers.set("Cache-Control", "private, no-store");
+    headers.append("Vary", "Accept-Language, Cookie");
+  }
   headers.append(
     "Link",
     `<${ZH_URL}>; rel="alternate"; hreflang="zh-CN", <${EN_URL}>; rel="alternate"; hreflang="en", <${ZH_URL}>; rel="alternate"; hreflang="x-default"`

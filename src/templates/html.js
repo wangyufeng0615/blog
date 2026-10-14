@@ -1,12 +1,15 @@
+import { escapeHtml, scriptJson } from './escape.js';
+
 export function htmlTemplate({ title, content, css, description = '', url = '', date = '', isArticle = false, jsonLd = null }) {
   const siteName = '王雨峰的博客';
   const siteUrl = 'https://wangyufeng.org';
   const defaultDescription = '王雨峰的个人博客，分享编程、生活与思考';
-  const desc = description || defaultDescription;
-  const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
+  const desc = escapeHtml(description || defaultDescription);
+  const fullUrl = escapeHtml(url ? `${siteUrl}${url}` : siteUrl);
+  title = escapeHtml(title);
   const ogImage = `${siteUrl}/avatar.jpg`;
 
-  const jsonLdScript = jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : '';
+  const jsonLdScript = jsonLd ? `<script type="application/ld+json">${scriptJson(jsonLd)}</script>` : '';
 
   return `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -26,7 +29,7 @@ export function htmlTemplate({ title, content, css, description = '', url = '', 
   <meta property="og:site_name" content="${siteName}">
   <meta property="og:image" content="${ogImage}">
   <meta property="og:locale" content="zh_CN">
-  ${isArticle && date ? `<meta property="article:published_time" content="${date}">` : ''}
+  ${isArticle && date ? `<meta property="article:published_time" content="${escapeHtml(date)}">` : ''}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">

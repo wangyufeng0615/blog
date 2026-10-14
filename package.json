@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.js && npm --prefix apps/ball-moving run build && node scripts/copy-apps.js",
+    "build": "node scripts/build.js && npm --prefix apps/ball-moving run build && node scripts/copy-apps.js && node scripts/finalize.js",
     "preview": "npx serve dist",
     "check:storage-trend": "python3 ../storage-trend/scripts/public_page_readiness.py --snapshot ../storage-trend/data/processed/demo_snapshot.json --html public/storage-trend/index.html",
     "deploy:storage-trend": "npm run check:storage-trend && npx wrangler deploy --config wrangler.storage-trend.jsonc",
     "test:land-below-wind-edge": "node --test cloudflare/land-below-wind-router.test.js",
-    "deploy:land-below-wind-edge": "npx wrangler deploy --config wrangler.land-below-wind.jsonc"
+    "deploy:land-below-wind-edge": "npx wrangler deploy --config wrangler.land-below-wind.jsonc",
+    "test": "node --test scripts/*.test.js cloudflare/*.test.js",
+    "check:output": "node scripts/check-output.js"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -16,7 +18,9 @@
   },
   "devDependencies": {
     "esbuild": "^0.27.0",
-    "gray-matter": "^4.0.3",
-    "markdown-it": "^14.0.0"
+    "image-size": "^2.0.4",
+    "markdown-it": "^14.0.0",
+    "parse5": "^8.0.1",
+    "yaml": "^2.9.1"
   }
 }

@@ -3,7 +3,8 @@ import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
 import { build as esbuild } from 'esbuild';
-import matter from 'gray-matter';
+import { frontmatter, summarize, sourceModified } from './lib/content.js';
+import { escapeHtml, scriptJson } from '../src/templates/escape.js';
 import MarkdownIt from 'markdown-it';
 import { allProjects } from '../src/data/projects.js';
 
@@ -60,14 +61,13 @@ function readPosts() {
 
     if (hasMd) {
       const content = fs.readFileSync(mdFile, 'utf-8');
-      const { data, content: mdContent } = matter(content);
+      const { data, content: mdContent } = frontmatter(content);
       if (data.draft) continue;
 
       let htmlContent = md.render(mdContent);
       htmlContent = htmlContent.replace(/src="images\//g, `src="/posts/${dir}/images/`);
 
-      const plainText = mdContent.replace(/[#*`\[\]()!]/g, '').replace(/\n/g, ' ').trim();
-      const description = plainText.slice(0, 120) + (plainText.length > 120 ? '...' : '');
+      const description = data.description || summarize(htmlContent);
 
       posts.push({
         slug: dir,
@@ -75,6 +75,7 @@ function readPosts() {
         date: formatDate(data.date),
         rawDate: data.date,
         isoDate: data.date ? new Date(data.date).toISOString() : '',
+        modifiedDate: data.modified ? formatDate(data.modified) : sourceModified([`posts/${dir}/index.md`], formatDate(data.date)),
         content: htmlContent,
         description,
         dir,
@@ -105,7 +106,7 @@ function readPosts() {
         date: formatDate(meta.date),
         rawDate: meta.date,
         isoDate: meta.date ? new Date(meta.date).toISOString() : '',
-        modifiedDate: formatDate(meta.modified || meta.date),
+        modifiedDate: meta.modified ? formatDate(meta.modified) : sourceModified([`posts/${dir}`], formatDate(meta.date)),
         description: meta.description || '',
         dir,
         type: 'custom',
@@ -309,14 +310,6 @@ function injectFloatingBack(html, language) {
   return html + control;
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
-}
-
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -370,7 +363,7 @@ function translateStaticCopy(html, copy, sourceName) {
       throw new Error(`Missing alt attribute for data-i18n-alt="${key}" in ${sourceName}`);
     }
     translatedAlts += 1;
-    return element.replace(/\balt="[^"]*"/i, `alt="${escapeHtml(copy[key])}"`);
+    return element.replace(/\balt="[^"]*"/i, () => `alt="${escapeHtml(copy[key])}"`);
   });
   if (translatedAlts !== altKeys.length) {
     throw new Error(`Translated ${translatedAlts}/${altKeys.length} alt attributes in ${sourceName}`);
@@ -387,7 +380,7 @@ function replaceMetaContent(html, selector, value, content) {
     if (!/\bcontent="[^"]*"/i.test(tag)) {
       throw new Error(`Missing content on meta[${selector}="${value}"]`);
     }
-    return tag.replace(/\bcontent="[^"]*"/i, `content="${escapeHtml(content)}"`);
+    return tag.replace(/\bcontent="[^"]*"/i, () => `content="${escapeHtml(content)}"`);
   });
 }
 
@@ -463,7 +456,7 @@ function localizeCustomHtml(sourceHtml, post, language, locale, englishCopy) {
   }
 
   html = html.replace(/<html\s+lang="[^"]+">/i, `<html lang="${language}">`);
-  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(locale.title)}</title>`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${escapeHtml(locale.title)}</title>`);
   html = replaceMetaContent(html, 'name', 'description', locale.description);
   html = replaceMetaContent(html, 'name', 'keywords', locale.keywords || 'Land Below the Wind, Agnes Newton Keith, Sabah, North Borneo, literary map');
   html = replaceMetaContent(html, 'property', 'og:title', locale.socialTitle);
@@ -485,10 +478,10 @@ function localizeCustomHtml(sourceHtml, post, language, locale, englishCopy) {
     .join('\n');
   html = html.replace(/<link\s+rel="canonical"\s+href="[^"]+"\s*\/>/i, `${canonical}\n${alternates}`);
 
-  const jsonLd = JSON.stringify(buildStructuredData(post, language, locale), null, 2);
+  const jsonLd = scriptJson(buildStructuredData(post, language, locale), 2);
   html = html.replace(
     /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/i,
-    `<script type="application/ld+json">\n${jsonLd}\n    </script>`
+    () => `<script type="application/ld+json">\n${jsonLd}\n    </script>`
   );
   html = html.replace(/\bdata-lang="zh"\s+aria-current="[^"]+"/g, `data-lang="zh" aria-current="${isEnglish ? 'false' : 'page'}"`);
   html = html.replace(/\bdata-lang="en"\s+aria-current="[^"]+"/g, `data-lang="en" aria-current="${isEnglish ? 'page' : 'false'}"`);
@@ -614,6 +607,8 @@ for (const post of posts) {
     '@type': 'Article',
     headline: post.title,
     datePublished: post.isoDate,
+    dateModified: post.modifiedDate,
+    description: post.description,
     author: {
       '@type': 'Person',
       name: '王雨峰',
@@ -716,7 +711,7 @@ function copyPublicFiles() {
 
 // 生成 sitemap.xml
 function generateSitemap(posts) {
-  const today = new Date().toISOString().split('T')[0];
+  const today = sourceModified(['src', 'scripts', 'src/data'], posts[0]?.date || '');
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -729,7 +724,7 @@ function generateSitemap(posts) {
 `;
 
   for (const post of posts) {
-    const lastmod = post.modifiedDate || post.date || today;
+    const lastmod = post.modifiedDate || post.date;
     const langMap = post.locales
       ? Object.fromEntries(Object.entries(post.locales).map(([language, locale]) => [language, locale.url]))
       : post.alternates;
@@ -755,7 +750,7 @@ ${alternates}    <lastmod>${lastmod}</lastmod>
     if (!project.url.startsWith(`${SITE_URL}/`)) continue;
     xml += `  <url>
     <loc>${project.url}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${sourceModified([project.url.includes('/ball-moving/') ? 'apps/ball-moving' : `public/${project.url.slice(SITE_URL.length + 1)}`], today)}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

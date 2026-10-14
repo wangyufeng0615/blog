@@ -1,0 +1,45 @@
+{
+  "sources": {
+    "maplibre-gl-5.12.0": "https://www.npmjs.com/package/maplibre-gl/v/5.12.0",
+    "three-0.160.0": "https://www.npmjs.com/package/three/v/0.160.0",
+    "mediapipe-hands-0.4.1675469240": "https://www.npmjs.com/package/@mediapipe/hands/v/0.4.1675469240",
+    "mediapipe-camera-utils-0.3.1675466862": "https://www.npmjs.com/package/@mediapipe/camera_utils/v/0.3.1675466862"
+  },
+  "files": [
+    {
+      "file": "vendor/maplibre-gl-5.12.0/LICENSE.txt",
+      "sha256": "ee5fc05a0677eaf69601d2c7db0d9ecd6cc27c3abc1d0733bc9ed34707cf8ef2",
+      "bytes": 5984
+    },
+    {
+      "file": "vendor/maplibre-gl-5.12.0/maplibre-gl.css",
+      "sha256": "1dae8925ee5906e442f0fd7028dded2884381b9acd7a780e5270025e09fc7c5e",
+      "bytes": 69449
+    },
+    {
+      "file": "vendor/maplibre-gl-5.12.0/maplibre-gl.js",
+      "sha256": "06b392de571c99e242581b0f3f23893e6e95efd3656974d6edfd8f8599ddf362",
+      "bytes": 1013855
+    },
+    {
+      "file": "vendor/mediapipe-camera-utils-0.3.1675466862/camera_utils.js",
+      "sha256": "ee14cd241f693504a9ea55fa2f2ed3b24da1f7cf804926716069d0d232434d8e",
+      "bytes": 7881
+    },
+    {
+      "file": "vendor/mediapipe-hands-0.4.1675469240/hands.js",
+      "sha256": "a68b21c9553d614384f7f459622e46e02e3c9cfdf7392915a2fa1d615e338473",
+      "bytes": 45581
+    },
+    {
+      "file": "vendor/three-0.160.0/LICENSE",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "bytes": 1081
+    },
+    {
+      "file": "vendor/three-0.160.0/three.min.js",
+      "sha256": "170c6789f43217c96b3170f4b42fafe135de7f7cd48497a4218f9757ee1d49fa",
+      "bytes": 669884
+    }
+  ]
+}
