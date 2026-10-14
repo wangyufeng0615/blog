@@ -65,6 +65,27 @@ After the Sun Station failed, the Nomai went to study a newly arrived comet, the
 - Gabbro (Giant’s Deep): → Ocean Depths: "Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it." → Statue Island: "One of the islands on Giant’s Deep has a Nomai statue on the beach just like the one Gabbro brought back to Timber Hearth. Statue Island (as Gabbro calls it) is the one with two islands connected by a natural rock arch." → Orbital Probe Cannon: "Gabbro sees a bright flash in the sky at the start of every loop. Something must be happening in orbit around Giant’s Deep."
 - Feldspar (Dark Bramble): → Frozen Jellyfish: "Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog."
 
+## Tools and abilities (English)
+
+- Launch codes (Hornfels at the observatory): Ride the lift up the launch tower; Unlocks dozing at campfires
+- Little Scout (Launcher on your suit): A photo pins a quantum object in place; Peek through small seeds; Its tracker shows it in two places at once; Its camera sees ghost matter; Light up the fossil’s mouth
+- Signalscope (Starts with the Travelers frequency; learns others near their sources): Travelers: follow the harmonica to Feldspar; Distress Beacon: appears after your first escape pod, leads to Escape Pod 3; Quantum Fluctuations: shards and the Quantum Moon; Find the travelers’ instruments at the Eye
+- Translator (Standard gear): Read Nomai spiral text and recordings — nearly every clue depends on it
+- Flashlight (Your suit): Turn it off for total darkness and you become entangled; Lights out in the shrine to move with the moon
+- Suit and jetpack (By the launch tower): Jump between misaligned gravity lifts; Too weak for Giant’s Deep’s gravity on high ledges
+- Ship and ship log (Timber Hearth launch tower): Cut the engines and drift past anglerfish; The log records every clue and rumor; the question marks in rumor mode are places you haven’t been
+- Campfire (On every planet): Doze to skip time, e.g. until the sand drains; Meditate to end the loop early: from the third loop, ask Gabbro how they stay so calm; Roast marshmallows to heal
+- Nomai devices (All over the system): Warp pads: wait for the target overhead; Gravity cannons: recall a shuttle; Projection pools: see far-off places, like the sunken tracking module
+
+## Endings (English)
+
+- The Eye of the Universe (Main ending): Put the project’s core in the Vessel, enter the coordinates, warp → Walk from the north pole to the south, drop into the crater in the quantum storm, arrive at a quantum observatory → Light a campfire in the glade, find each traveler’s instrument with the signalscope, and play together → If you met Solanum she joins too, and the post-credits shot gains a new campfire with alien campers. Line: "But I think the rules are about to change."
+- Stay at the sixth location (Hidden ending): Take the project’s core; the loop stops → Land on the Quantum Moon, go to its sixth location, wait for the supernova. Line: "HOW LONG HAVE YOU BEEN HERE? MINUTES? YEARS? YOU ARE UNSURE BUT IT SEEMS YOUR JOURNEY HAS REACHED ITS END."
+- Adrift (Hidden ending): Take the project’s core → Fly far enough from the Sun to outrun the supernova. Line: "NOW BEYOND THE REACH OF THE SUPERNOVA, YOU DRIFT THROUGH SPACE UNTIL YOUR SHIP'S RESOURCES ARE FINALLY DEPLETED"
+- Breaking spacetime (Hidden ending): In the High Energy Lab, fit a black hole core and a white hole core and fire your scout into the black hole → After it comes out of the white hole but before it goes in, pull a core: now two scouts exist. Line: "YOU DESTROYED THE FABRIC OF SPACETIME"
+- Meeting yourself (Hidden ending): As the supernova hits, jump into the black hole that opens at the center of the Ash Twin Project → Next loop another you is waiting in the project; skip the jump this time and spacetime breaks. Line: "Are you me from the last loop?"
+- Game over (Death): Die before the statue pairs with you, and the game starts over → Die after taking the project’s core, and you don’t wake up. Line: "YOU ARE DEAD"
+
 ## Full map (English)
 
 Indented items are prerequisites of the item above them.
@@ -284,6 +305,27 @@ Indented items are prerequisites of the item above them.
 - 瑞拜克（碎空星）：→ 南部天文台：“根据瑞拜克的说法，从地面进入天文台是不可能的（他试过了），不过地壳下某个地方可能有条通路。”
 - 加布罗（深巨星）：→ 海洋深处：“加布罗说水面下有一股很强劲的水流，使得水里的东西无法沉下去。” → 雕像岛：“深巨星某些岛屿的海滩上有挪麦雕像，这是其中的一座。这些雕像就和加布罗带回到木炉星的那个没什么两样。雕像岛（加布罗是这么称呼它的）就在两座由天然石拱门连接的岛屿那里。” → 轨道探测炮：“加布罗在每个循环开始时，总会在天空中看到一道明亮的闪光。深巨星的轨道上一定发生了什么事情。”
 - 费尔德斯巴（黑棘星）：→ 冻住的水母：“费尔德斯巴提示说，抵达深巨星核心的秘密就藏在他的飞船坠毁的那棵空心藤蔓尽头里。我要去安康鱼骨架的尾巴那里，在迷雾里寻找闪烁的光亮，才能发现费尔德斯巴的飞船。”
+
+## 工具与能力（中文）
+
+- 发射密码（天文台的霍恩费斯）：坐升降梯上发射台；拿到之后，营火边才能打盹
+- 侦察兵（宇航服上的发射器）：拍下的照片能定住量子物体；射进小种子看里面；追踪器显示它同时在两个地方；相机能看到幽灵物质；当灯照亮化石的嘴
+- 信号镜（自带旅行者频道，其他频道靠近信号源时学会）：旅行者频道：循着口琴声找到费尔德斯巴；求救信号：找到第一个逃生舱后出现，带你找到3号逃生舱；量子波动：量子碎片和量子卫星；在宇宙之眼找回旅行者们的乐器
+- 翻译器（随身装备）：读懂挪麦人的螺旋文字和记录：几乎每条线索都靠它
+- 手电筒（宇航服）：关掉它，完全黑暗：和量子物体纠缠在一起；在祭坛里关灯，随卫星换位置
+- 宇航服与喷气背包（发射台旁）：在错位的重力电梯之间跳；深巨星重力太大，高处够不着
+- 飞船与飞船日志（木炉星发射台）：关掉引擎，靠惯性滑过安康鱼；飞船日志记下每条线索和传闻，传闻模式里的问号就是还没去的地方
+- 营火（每颗星球上都有）：打盹快进时间，等沙子流走；冥想直接结束这一轮：第三轮起问加布罗"你怎么能这么冷静"就能学会；烤棉花糖回血
+- 挪麦设施（散落在各颗星球）：跃迁平台：等对应天体过头顶；重力炮：召回航天飞机；投影池：看到远处的场景，比如沉在海底的跟踪模块
+
+## 结局图鉴（中文）
+
+- 宇宙之眼（正常结局）：把计划的核心装进飞船，输入坐标，跃迁 → 从北极走到南极，跳进量子风暴中心的坑，回到一座量子版的天文台 → 在林地里生起营火，用信号镜把旅行者们的乐器一个个找回来，一起演奏 → 见过所莱内姆的话，她也会加入；片尾的新宇宙里会多出一圈围着营火的外星人。原文："不过我觉得规则就快变了。"
+- 留在第六个位置（隐藏结局）：取下计划的核心，循环停止 → 登上量子卫星，去它的第六个位置，等超新星。原文："你在这儿待了有多久了？几分钟？还是几年？对此你并不清楚，但你的旅途似乎已经到达了终点。"
+- 飘向深空（隐藏结局）：取下计划的核心 → 开飞船飞得足够远，躲过超新星。原文："你已经再也无法到达超新星，只能在太空中飘荡，直到宇宙飞船的资源耗尽"
+- 打破时空（隐藏结局）：在高能实验室装上黑洞核心和白洞核心，把侦察兵射进黑洞 → 侦察兵从白洞出来之后、进黑洞之前，拔掉一个核心：两个侦察兵同时存在。原文："你摧毁了时空结构"
+- 遇见自己（隐藏结局）：超新星爆发时，跳进灰烬双星计划中心张开的黑洞 → 下一轮计划里会多出一个你；这一轮不再跳一次，就会打破时空。原文："你是上一个循环的我自己吗？"
+- 游戏结束（死亡）：雕像和你配对之前就死了，游戏从头开始 → 取下计划的核心之后死掉，不会再醒来。原文："你死了"
 
 ## 完整依赖（中文）
 
