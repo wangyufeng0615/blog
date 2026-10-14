@@ -25,31 +25,52 @@ a { color: var(--accent); }
 .screen, .article, .noscript { position: relative; z-index: 1; }
 
 /* First screen: never taller than the viewport. */
-.screen { height: 100vh; height: 100dvh; min-height: 520px; display: flex; flex-direction: column; padding: clamp(10px, 1.6vw, 18px) clamp(10px, 1.4vw, 18px) 12px; gap: 10px; }
-.top { position: relative; flex: none; display: grid; gap: 4px; padding: 2px 6px 0; }
+.screen { display: flex; flex-direction: column; padding: clamp(10px, 1.6vw, 18px) clamp(10px, 1.4vw, 18px) 12px; gap: 10px; }
+.top { position: relative; flex: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: 4px 24px; align-items: center; padding: 2px 6px 0; }
+.intro { display: grid; gap: 4px; min-width: 0; }
 .title-row { display: flex; align-items: center; gap: 12px; }
 .title-row h1 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.25; font-weight: 700; letter-spacing: .01em; text-wrap: balance; }
 .title-row .fire { flex: none; width: 30px; height: 30px; }
-.lang { margin-left: auto; flex-shrink: 0; font-size: 14px; color: var(--fg); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; background: rgba(21, 30, 59, .7); position: relative; z-index: 2; }
+.lang { position: absolute; right: 6px; top: 0; z-index: 3; font-size: 14px; color: var(--fg); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; background: rgba(21, 30, 59, .8); }
 .lang:hover { border-color: var(--accent); }
-.top .what { margin: 0; max-width: 78ch; color: var(--muted); font-size: 14px; }
-.legend { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center; color: var(--muted); font-size: 12.5px; }
+.top .what { margin: 0; max-width: 62ch; color: var(--muted); font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 2px 16px; align-items: center; color: var(--muted); font-size: 12.5px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .lg-goal { width: 16px; height: 12px; border: 2px solid var(--accent); background: var(--accent-soft); border-radius: 3px; }
 .lg-main { width: 24px; border-top: 2px solid var(--edge); }
 .lg-alt { width: 24px; border-top: 2px dashed var(--alt); }
 .spoiler { color: var(--sun); }
-.sky-sun { position: absolute; right: 120px; top: -30px; width: 90px; height: 90px; border-radius: 50%; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle at 50% 50%, #ffd27a 0%, #ff9a3d 38%, rgba(255, 110, 40, .35) 62%, transparent 72%); filter: blur(.3px); opacity: .85; }
+
+/* Planet line-up: original cartoon drawings, each one jumps to its spot on the map. */
+.planets { display: block; width: 100%; height: auto; max-height: 150px; margin-top: 30px; overflow: visible; }
+.pl { cursor: pointer; }
+.pl:hover .pl-name, .pl:focus-visible .pl-name { fill: var(--accent); }
+.pl:focus { outline: none; }
+.pl:focus-visible { outline: 2px solid var(--accent); }
+.pl-name { fill: var(--muted); font-size: 12px; font-family: var(--font); }
+.pl-orbit { stroke: var(--line); stroke-dasharray: 2 6; fill: none; }
+.pl-sun, .pl-cyclone, .pl-qm, .pl-glow { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: no-preference) {
-  /* 22 minutes of slow swelling, a flash, then the loop starts over. */
-  .sky-sun { animation: loop 1320s linear infinite; }
-  @keyframes loop { 0% { transform: scale(.75); filter: hue-rotate(0); } 94% { transform: scale(1.35); filter: hue-rotate(-18deg); } 97% { transform: scale(.5); } 98.5% { transform: scale(2.2); opacity: 1; filter: hue-rotate(150deg) brightness(2); } 100% { transform: scale(.75); opacity: .85; } }
+  /* The Sun swells for 22 minutes, flashes, and the loop starts over. */
+  .pl-sun { animation: loop 1320s linear infinite; }
+  @keyframes loop { 0% { transform: scale(.82); } 94% { transform: scale(1.22); filter: hue-rotate(-15deg); } 97% { transform: scale(.55); } 98.5% { transform: scale(1.6); filter: hue-rotate(150deg) brightness(1.8); } 100% { transform: scale(.82); } }
+  .pl-cyclone { animation: spin 7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pl-qm { animation: qm 9s steps(1) infinite; }
+  @keyframes qm { 0%, 61%, 66%, 100% { opacity: 1; } 62%, 65% { opacity: .08; } }
+  .pl-glow { animation: glow 2.6s ease-in-out infinite alternate; }
+  @keyframes glow { to { opacity: .55; } }
 }
 
-.stage { position: relative; flex: 1 1 auto; min-height: 280px; background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; touch-action: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .02) inset; }
+.stage { position: relative; flex: none; height: clamp(360px, 60vh, 760px); height: clamp(360px, 60dvh, 760px); background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; touch-action: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .02) inset; }
 .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; user-select: none; -webkit-user-select: none; }
 .stage svg.dragging { cursor: grabbing; }
+
+.below { flex: none; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 18px; padding: 6px 10px 2px; font-size: 14px; color: var(--muted); }
+.below a { color: var(--fg); text-decoration: none; border-bottom: 1px dashed var(--line); }
+.below a:hover { color: var(--accent); border-color: var(--accent); }
+.below .arrow { color: var(--accent); font-size: 16px; }
+@media (prefers-reduced-motion: no-preference) { .below .arrow { animation: nudge 1.8s ease-in-out infinite; } @keyframes nudge { 50% { transform: translateY(4px); } } }
 
 .zoom { position: absolute; left: 12px; bottom: 12px; display: flex; align-items: center; gap: 2px; background: rgba(21, 30, 59, .92); border: 1px solid var(--line); border-radius: 8px; padding: 3px; }
 .zoom button { font: inherit; font-size: 15px; color: var(--fg); background: transparent; border: 0; border-radius: 6px; min-width: 40px; height: 36px; padding: 0 10px; cursor: pointer; }
@@ -147,10 +168,12 @@ svg.focus .edge.hl { stroke-width: 2.4; opacity: 1; }
 .noscript { max-width: 860px; margin: 16px auto; padding: 0 20px; }
 .noscript ul { padding-left: 1.3em; }
 
+@media (max-width: 900px) {
+  .top { grid-template-columns: minmax(0, 1fr); }
+  .planets { margin-top: 0; max-height: 96px; }
+}
 @media (max-width: 760px) {
-  .screen { min-height: 560px; }
-  .sky-sun { right: 70px; width: 70px; height: 70px; }
-  .zoom .hint { display: none; }
+    .zoom .hint { display: none; }
   .legend { font-size: 12px; gap: 2px 12px; }
   .top .what { font-size: 13px; }
   .detail { left: 8px; right: 8px; top: auto; bottom: 8px; width: auto; max-height: 58%; }

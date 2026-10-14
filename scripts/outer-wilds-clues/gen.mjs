@@ -148,6 +148,60 @@ function leadsHtml(lang) {
 // A small Archimedean spiral, the way Nomai writing curls.
 const SPIRAL = (() => { let d = ''; for (let i = 0; i <= 64; i++) { const a = i / 64 * Math.PI * 5.2, r = 1 + i / 64 * 9.5; d += `${i ? 'L' : 'M'}${(11 + r * Math.cos(a)).toFixed(2)},${(11 + r * Math.sin(a)).toFixed(2)}`; } return `<svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="${d}"/></svg>`; })();
 
+/* ---------- header: a cartoon line-up of the solar system (original drawings) ---------- */
+const PLANETS = [
+  { id: 'sun', x: 48, name: L('太阳', 'The Sun'), node: 'r-sunstation' },
+  { id: 'twins', x: 160, name: L('沙漏双星', 'Hourglass Twins'), node: 'core' },
+  { id: 'th', x: 270, name: L('木炉星', 'Timber Hearth'), node: 'r-mine' },
+  { id: 'bh', x: 380, name: L('碎空星', 'Brittle Hollow'), node: 'r-bhcity' },
+  { id: 'gd', x: 497, name: L('深巨星', 'Giant’s Deep'), node: 'coords' },
+  { id: 'db', x: 616, name: L('黑棘星', 'Dark Bramble'), node: 'vessel' },
+  { id: 'qm', x: 722, name: L('量子卫星', 'Quantum Moon'), node: 'q-goal' },
+  { id: 'comet', x: 814, name: L('闯入者', 'Interloper'), node: 'i-goal' },
+  { id: 'eye', x: 912, name: L('宇宙之眼', 'The Eye'), node: 'goal' }
+];
+function L(zh, en) { return { zh, en }; }
+function spiralD(cx, cy, R, turns = 2.2, n = 40) {
+  let d = '';
+  for (let i = 0; i <= n; i++) { const a = i / n * Math.PI * 2 * turns, r = 0.6 + i / n * R; d += `${i ? 'L' : 'M'}${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }
+  return d;
+}
+const ART = {
+  sun: x => `<circle class="pl-sun" cx="${x}" cy="60" r="30" fill="url(#g-sun)"/>`,
+  twins: x => `<circle cx="${x - 16}" cy="60" r="13" fill="#d8b46a"/><circle cx="${x + 16}" cy="60" r="14" fill="#df7438"/>
+    <path d="M${x - 4},56 Q${x},60 ${x + 3},64" stroke="#e9cf8c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M${x + 9},50 l4,3 M${x + 20},68 l3,-4" stroke="#a9471f" stroke-width="2" stroke-linecap="round"/>`,
+  th: x => `<circle cx="${x}" cy="60" r="21" fill="#3d8b4f"/><path d="M${x - 15},68 q8,8 22,4 q-6,-6 -22,-4z" fill="#3b7fb8" opacity=".9"/>
+    <path d="M${x - 10},44 l4,-9 l4,9z M${x - 1},41 l4,-10 l4,10z M${x + 8},45 l4,-8 l4,8z" fill="#1f5a33"/>
+    <path d="M${x + 4},40 v-12" stroke="#dff3ff" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+    <circle cx="${x + 30}" cy="32" r="6.5" fill="#9aa1ad"/><circle cx="${x + 28}" cy="31" r="1.6" fill="#737a86"/><circle cx="${x + 32}" cy="34" r="1.1" fill="#737a86"/>`,
+  bh: x => `<circle cx="${x}" cy="60" r="23" fill="#6b5cb8"/><path d="M${x - 18},50 l9,6 l-3,8 M${x + 6},40 l2,10 l9,4 M${x + 4},78 l-3,-9 l-10,-2" stroke="#b9b0f0" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <circle cx="${x}" cy="60" r="6.5" fill="#05060c" stroke="#9f8cff" stroke-width="1.5"/>
+    <circle class="pl-glow" cx="${x + 32}" cy="30" r="7" fill="#ff6a3a"/><circle cx="${x + 32}" cy="30" r="11" fill="#ff6a3a" opacity=".18"/>`,
+  gd: x => `<circle cx="${x}" cy="60" r="31" fill="#1d8a86"/><path d="M${x - 29},52 q29,-9 58,0 M${x - 30},66 q30,9 60,0" stroke="#37b3a8" stroke-width="5" fill="none" opacity=".7"/>
+    <path class="pl-cyclone" d="${spiralD(x - 10, 50, 8)}" stroke="#e6fffb" stroke-width="1.6" fill="none" opacity=".85"/>
+    <path class="pl-cyclone" d="${spiralD(x + 12, 70, 6)}" stroke="#e6fffb" stroke-width="1.4" fill="none" opacity=".75"/>
+    <circle cx="${x + 15}" cy="46" r="2.4" fill="#cdbb7a"/><circle cx="${x - 14}" cy="73" r="2" fill="#cdbb7a"/>`,
+  db: x => `<path d="M${x - 24},44 q-10,-6 -16,-14 M${x + 22},40 q9,-9 18,-10 M${x + 25},76 q10,6 16,15 M${x - 22},78 q-8,8 -18,10 M${x + 2},86 q2,8 -2,16"
+      stroke="#7a5a3a" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <path d="M${x - 33},35 l-4,1 M${x + 33},33 l2,-4 M${x + 34},84 l4,-1 M${x - 32},86 l-1,4" stroke="#7a5a3a" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="${x}" cy="60" r="26" fill="#e7ead8" opacity=".9"/><circle cx="${x}" cy="60" r="31" fill="#e7ead8" opacity=".18"/>
+    <circle cx="${x - 8}" cy="55" r="2.4" fill="#fff6c8"/><circle cx="${x + 9}" cy="67" r="1.8" fill="#fff6c8"/>`,
+  qm: x => `<g class="pl-qm"><circle cx="${x}" cy="60" r="13" fill="#8e8fb8"/><circle cx="${x}" cy="60" r="18" fill="none" stroke="#c9caf0" stroke-width="1.3" stroke-dasharray="3 4"/>
+    <path d="M${x - 9},57 q9,-6 18,0" stroke="#d9dafa" stroke-width="2" fill="none" opacity=".7"/></g>`,
+  comet: x => `<path d="M${x - 2},53 L${x + 44},44 L${x + 44},72 L${x - 2},67 Z" fill="url(#g-tail)"/><circle cx="${x}" cy="60" r="8" fill="#c6ecff"/><circle cx="${x - 2}" cy="58" r="3" fill="#ffffff"/>`,
+  eye: x => `<circle cx="${x}" cy="60" r="30" fill="url(#g-eye)"/><ellipse cx="${x}" cy="60" rx="20" ry="11" fill="#0a0f1f" stroke="#c2b3ff" stroke-width="1.6"/>
+    <circle cx="${x}" cy="60" r="7.5" fill="#7fd8ff"/><circle cx="${x}" cy="60" r="3" fill="#0a0f1f"/>`
+};
+function planetsSvg(lang) {
+  const items = PLANETS.map(p => `<g class="pl" data-node="${p.node}" tabindex="0" role="link" aria-label="${escX(p.name[lang])}"><title>${escX(p.name[lang])}</title>${ART[p.id](p.x)}<text class="pl-name" x="${p.x}" y="122" text-anchor="middle">${escX(p.name[lang])}</text></g>`).join('');
+  return `<svg class="planets" viewBox="0 0 960 132" role="group" aria-label="${lang === 'zh' ? '太阳系的星球，点击跳到画布上对应的位置' : 'Planets of the solar system — click one to jump to it on the map'}">
+<defs><radialGradient id="g-sun"><stop offset="0" stop-color="#ffe29a"/><stop offset=".45" stop-color="#ff9a3d"/><stop offset=".8" stop-color="#ff6f2b" stop-opacity=".55"/><stop offset="1" stop-color="#ff6f2b" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-tail" x1="0" x2="1"><stop offset="0" stop-color="#bfe9ff" stop-opacity=".75"/><stop offset="1" stop-color="#bfe9ff" stop-opacity="0"/></linearGradient>
+<radialGradient id="g-eye"><stop offset="0" stop-color="#7b6cff" stop-opacity=".9"/><stop offset=".6" stop-color="#3b2f8f" stop-opacity=".6"/><stop offset="1" stop-color="#3b2f8f" stop-opacity="0"/></radialGradient></defs>
+<path class="pl-orbit" d="M10,60 H950"/>${items}</svg>`;
+}
+
 /* ---------- graph.json for agents ---------- */
 const TYPE_EN = { goal: 'goal', target: 'required_item', gate: 'gate', clue: 'clue', alt: 'alternative', loc: 'location' };
 const graph = {
@@ -336,7 +390,8 @@ for (const lang of ['zh', 'en']) {
   const vars = {
     ...c, url, image, vCss: VER.css, vData: VER.data, vJs: VER.js,
     spiral: SPIRAL, tlTitle: TIMELINE.title[lang], tlLead: TIMELINE.lead[lang], tlNote: TIMELINE.note[lang],
-    timelineSvg: timelineSvg(lang), leads: leadsHtml(lang), urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
+    timelineSvg: timelineSvg(lang), leads: leadsHtml(lang), planets: planetsSvg(lang),
+    belowLabel: lang === 'zh' ? '往下还有' : 'Further down', belowFaq: c.faqTitle, urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
     otherPath: lang === 'zh' ? URLS.en : URLS.zh,
     jsonld: JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'),
     faq: faqHtml, noscriptList: noscript,
@@ -344,7 +399,7 @@ for (const lang of ['zh', 'en']) {
   };
   const html = tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => {
     if (!(k in vars)) throw new Error(`Template var missing: ${k}`);
-    return ['jsonld', 'faq', 'noscriptList', 'legend', 'src', 'agents', 'spiral', 'timelineSvg', 'leads'].includes(k) ? vars[k] : esc(vars[k]);
+    return ['jsonld', 'faq', 'noscriptList', 'legend', 'src', 'agents', 'spiral', 'timelineSvg', 'leads', 'planets'].includes(k) ? vars[k] : esc(vars[k]);
   });
   const out = lang === 'zh' ? path.join(POST, 'index.html') : path.join(POST, 'en/index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
