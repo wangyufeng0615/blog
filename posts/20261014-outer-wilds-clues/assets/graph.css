@@ -36,6 +36,8 @@ a { color: var(--accent); }
 .lang { position: absolute; right: 6px; top: 0; z-index: 3; font-size: 14px; color: var(--fg); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; background: rgba(21, 30, 59, .8); }
 .lang:hover { border-color: var(--accent); }
 .spoiler { color: var(--sun); font-size: 13px; white-space: nowrap; }
+.basis { color: var(--muted); font-size: 13px; padding-left: 12px; border-left: 1px solid var(--line); margin-right: 90px; }
+.title-row { flex-wrap: wrap; row-gap: 2px; }
 .kw-realize { color: var(--realize); fill: var(--realize); font-weight: 700; }
 .kw-explore { color: var(--explore); fill: var(--explore); font-weight: 700; }
 .kw-mark-realize { fill: rgba(198, 180, 255, .2); }
