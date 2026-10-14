@@ -120,6 +120,8 @@ const leads = TRAVELERS.map(tr => ({
 }));
 
 /* ---------- loop timeline (static SVG) ---------- */
+// Rough rendered width at the 12.5px label size: CJK and full-width glyphs ≈ 1em, other characters ≈ 0.56em.
+const textW = str => [...str].reduce((w, ch) => w + (/[\u2E80-\uFFEF]/.test(ch) ? 12.5 : 7), 0);
 const fmtMin = t => `${Math.floor(t)}:${String(Math.round((t % 1) * 60)).padStart(2, '0')}`;
 const escX = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 function timelineSvg(lang) {
@@ -136,8 +138,10 @@ function timelineSvg(lang) {
       const cls = lane.sun ? ' tl-sun' : '';
       const open = it.node ? `<g class="tl-link" data-node="${it.node}" tabindex="0" role="link">` : '<g>';
       if (it.from !== undefined) {
-        body += `${open}<rect class="tl-range${cls}" x="${x(it.from)}" y="${cy - 8}" width="${x(it.to) - x(it.from)}" height="16" rx="3"/>`;
-        body += `<text class="tl-label" x="${x(it.from) + 6}" y="${cy + 4}">${escX(it.label[lang])}</text></g>`;
+        const bw = x(it.to) - x(it.from), fits = textW(it.label[lang]) + 12 <= bw;
+        body += `${open}<rect class="tl-range${cls}" x="${x(it.from)}" y="${cy - 8}" width="${bw}" height="16" rx="3"/>`;
+        // a label that doesn't fit inside its bar sits right after it
+        body += `<text class="tl-label" x="${fits ? x(it.from) + 6 : x(it.to) + 8}" y="${cy + 4}">${escX(it.label[lang])}</text></g>`;
       } else {
         const left = it.side === 'left';
         body += `${open}<circle class="tl-dot${it.goal ? ' goal' : cls}" cx="${x(it.t)}" cy="${cy}" r="5.5"/>`;
