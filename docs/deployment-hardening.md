@@ -59,8 +59,25 @@ zone-scoped credential and run only after a successful Pages deployment.
 
 ## TLS prerequisite
 
-An edge HTTPS certificate does not prove origin certificate verification.
-GitHub must first issue a valid certificate for the custom domain before
-Enforce HTTPS and Cloudflare Full (strict) are enabled. Do not enable strict
-verification against an origin whose certificate does not match. Preserve
-Cloudflare's existing visitor HTTPS redirect/HSTS during certificate work.
+On 2026-10-14 the dashboard showed automatic Full (strict) already enabled.
+The apex and www are proxied CNAME records targeting
+`wangyufeng0615.github.io`; this setup is preserved. GitHub's own custom-domain
+certificate field is null and its Enforce HTTPS switch cannot currently be
+enabled. That is separate from Cloudflare's visitor HTTPS redirect/HSTS and
+its configured origin verification. Testing GitHub with the custom domain as
+SNI alone does not test the CNAME target's certificate. Do not disable the proxy
+or change a zone-wide TLS policy simply to toggle the GitHub setting.
+
+## Applied rules, 2026-10-14
+
+- Public document cache: `86ff541e0d674efe9838d570c4851e46`.
+- Cookie/Authorization/language bypass: `7129a894f56f4df194eabfa4f3b8c023`.
+- Response security headers: `78a1e84e346c4ef8b041e5963daaf8e9`.
+- Language Worker version: `540f462c-add8-4eed-ae8a-29a163618b9b`.
+
+The document cache explicitly respects both edge and browser origin TTLs,
+avoiding the zone's inherited four-hour browser TTL. Production checks observed
+MISS then HIT, 600-second Cache-Control, private/no-store language responses,
+and cache bypass with Cookie or Authorization. No DNS or zone-wide TLS setting
+was changed. Cache purge automation is not configured; document freshness is
+bounded by the origin's ten-minute TTL.
