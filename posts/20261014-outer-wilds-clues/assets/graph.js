@@ -3,7 +3,7 @@
   const LANG = /^en/i.test(document.documentElement.lang) ? 'en' : 'zh';
   const T = v => (v && typeof v === 'object' && !Array.isArray(v) ? v[LANG] : v);
   const FONT = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif';
-  const NODE_W = 190, INNER_W = NODE_W - 24, COL_GAP = 64, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
+  const NODE_W = 214, INNER_W = NODE_W - 24, COL_GAP = 52, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
   const UI = {
     zh: { realize: '意识到', explore: '探索到', official: '官方另一解', luck: '运气 / 试错 / 硬闯', timing: '时间窗口', risk: '小心坠落', verify: '社区说法', or: '或', go: '怎么去' },
     en: { realize: 'Realize', explore: 'Explore', official: 'other in-game clue', luck: 'luck / trial / brute force', timing: 'timing', risk: 'mind the drop', verify: 'community claim', or: 'or', go: 'how to get there' }
@@ -66,15 +66,17 @@
     if (n.verify) m.push(UI.verify);
     return m.join(' · ');
   }
+  // Font size and line height per text row; graph.css uses the same sizes.
+  const F = { meta: [12.5, 17], lbl: [15, 20], big: [16, 21], note: [13.5, 18], sub: [12.5, 17] };
   function measure(n) {
     const big = isBig(n);
-    const lblFont = `${big ? 700 : n.t === 'gate' ? 600 : 400} ${big ? 14 : 13}px ${FONT}`;
-    const label = wrap(T(n.label), lblFont, INNER_W);
-    const place = n.place ? wrap(T(n.place), `400 11px ${FONT}`, INNER_W).slice(0, 3) : [];
-    const note = n.note ? wrap(T(n.note), `400 12px ${FONT}`, INNER_W).slice(0, 3) : [];
+    const lbl = big ? F.big : F.lbl;
+    const label = wrap(T(n.label), `${big ? 700 : n.t === 'gate' ? 600 : 400} ${lbl[0]}px ${FONT}`, INNER_W);
+    const place = n.place ? wrap(T(n.place), `400 ${F.sub[0]}px ${FONT}`, INNER_W).slice(0, 3) : [];
+    const note = n.note ? wrap(T(n.note), `400 ${F.note[0]}px ${FONT}`, INNER_W).slice(0, 3) : [];
     const meta = metaText(n);
-    const metaLines = meta ? wrap(meta, `700 11.5px ${FONT}`, INNER_W) : [];
-    const h = 10 + metaLines.length * 15 + (metaLines.length ? 2 : 0) + label.length * 18 + note.length * 16 + (note.length ? 2 : 0) + place.length * 15 + 9;
+    const metaLines = meta ? wrap(meta, `700 ${F.meta[0]}px ${FONT}`, INNER_W) : [];
+    const h = 10 + metaLines.length * F.meta[1] + (metaLines.length ? 2 : 0) + label.length * lbl[1] + note.length * F.note[1] + (note.length ? 2 : 0) + place.length * F.sub[1] + 9;
     return { label, note, place, metaLines, h };
   }
 
@@ -92,7 +94,7 @@
       let top;
       const minTop = colBottom[d] === undefined ? 0 : colBottom[d] + V_GAP;
       if (!centers.length) {
-        top = Math.max(cursor, minTop);
+        top = minTop;
       } else {
         top = (centers[0] + centers[centers.length - 1]) / 2 - h / 2;
         if (top < minTop) {
@@ -188,22 +190,23 @@
       el('rect', { class: 'box', width: NODE_W, height: s.h, rx: 6 }, gr);
       let y = 10;
       s.metaLines.forEach((line, i) => {
-        const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 10 }, gr);
+        const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 12 }, gr);
         const kw = n.act && i === 0 ? UI[n.act] : '';
         if (kw && line.startsWith(kw)) { // highlight the realize / explore keyword like a marker pen
-          ctx.font = `700 11.5px ${FONT}`;
+          ctx.font = `700 ${F.meta[0]}px ${FONT}`;
           const w = ctx.measureText(kw).width;
-          gr.insertBefore(el('rect', { class: 'kw-mark-' + n.act, x: 9, y: y - 1, width: w + 7, height: 15, rx: 3 }), t);
+          gr.insertBefore(el('rect', { class: 'kw-mark-' + n.act, x: 9, y: y - 1, width: w + 7, height: F.meta[1], rx: 3 }), t);
           const a = el('tspan', { class: 'kw-' + n.act }, t); a.textContent = kw;
           const b = el('tspan', {}, t); b.textContent = line.slice(kw.length);
         } else t.textContent = line;
-        y += 15;
+        y += F.meta[1];
       });
       if (s.metaLines.length) y += 2;
-      s.label.forEach(line => { const t = el('text', { class: 'lbl', x: 12, y: y + 14 }, gr); t.textContent = line; y += 18; });
+      const lbl = isBig(n) ? F.big : F.lbl;
+      s.label.forEach(line => { const t = el('text', { class: 'lbl', x: 12, y: y + lbl[0] + 1 }, gr); t.textContent = line; y += lbl[1]; });
       if (s.note.length) y += 2;
-      s.note.forEach(line => { const t = el('text', { class: 'note', x: 12, y: y + 12 }, gr); t.textContent = line; y += 16; });
-      s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + 11 }, gr); t.textContent = line; y += 15; });
+      s.note.forEach(line => { const t = el('text', { class: 'note', x: 12, y: y + F.note[0] }, gr); t.textContent = line; y += F.note[1]; });
+      s.place.forEach(line => { const t = el('text', { class: 'sub', x: 12, y: y + F.sub[0] }, gr); t.textContent = line; y += F.sub[1]; });
     }
   }
 
@@ -228,8 +231,8 @@
     if (tip) tip.hidden = true;
   }
   const center = () => [stage.clientWidth / 2, stage.clientHeight / 2];
-  document.getElementById('z-in').onclick = () => zoomAt(1.6, ...center());
-  document.getElementById('z-out').onclick = () => zoomAt(1 / 1.6, ...center());
+  document.getElementById('z-in').onclick = () => zoomAt(1.5, ...center());
+  document.getElementById('z-out').onclick = () => zoomAt(1 / 1.5, ...center());
   document.getElementById('z-fit').onclick = () => { state.moved = false; fitAll(); };
 
   // Ctrl/⌘ + wheel or a trackpad pinch zooms. A plain wheel moves a zoomed-in map and hands the scroll
