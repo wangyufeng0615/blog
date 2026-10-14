@@ -23,14 +23,14 @@ export const BANDS = [
           info: [L('跟踪模块从轨道探测炮上脱落，沉进了深巨星核心。它的投影池里存着第 9,318,054 号探测器找到的宇宙之眼坐标。', 'The tracking module broke off the Orbital Probe Cannon and sank to the core of Giant’s Deep. Its projection pool holds the coordinates found by probe 9,318,054.')],
           quote: [q('LOG:OPC_SUNKEN_MODULE_X2')],
           kids: [
-            { id: 'g-sunk', t: 'gate', label: L('知道模块沉在海底', 'Learn the module sank'), req: 'any',
+            { id: 'g-sunk', t: 'gate', label: L('模块沉在了海底', 'The module sank'), req: 'any',
               info: [L('先得知道坐标在海底，才会去想办法下潜。', 'You have to know the coordinates are underwater before you look for a way down.')],
               kids: [
                 { id: 'c-dmg', t: 'clue', label: L('损伤报告：跟踪模块遗失', 'Damage report: tracking module missing'), place: L('轨道探测炮 · 控制模块', 'Orbital Probe Cannon · Control Module'), quote: [q('NOMAI:Probe Tracking Module: MISSING')] },
                 { id: 'c-cassava', t: 'clue', label: L('有部件沉到了水流下面', 'A part sank below the current'), place: L('碎空星南部天文台 / 建造厂', 'Southern Observatory / Construction Yard'), at: 'r-observatory', quote: [q('LOG:GD_OCEAN_R2')] },
                 { id: 'c-feld-core', t: 'clue', label: L('费尔德斯巴到过核心', 'Feldspar reached the core'), place: L('黑棘星 · 费尔德斯巴', 'Dark Bramble · Feldspar'), quote: [q('LOG:GD_OCEAN_R3')] }
               ] },
-            { id: 'g-current', t: 'gate', label: L('潜到水流下面', 'Get below the current'), place: L('深巨星海面下的强水流', 'The strong current under the ocean'), req: 'any',
+            { id: 'g-current', t: 'gate', label: L('潜到水流下面', 'Below the current'), place: L('深巨星海面下的强水流', 'The strong current under the ocean'), req: 'any',
               info: [L('深巨星海面下有一层强水流，正常情况下任何东西都沉不下去。', 'A strong current under the surface of Giant’s Deep keeps everything from sinking.')],
               quote: [q('LOG:GD_OCEAN_R1')],
               kids: [
@@ -51,7 +51,7 @@ export const BANDS = [
                   info: [L('钻进深巨星的水母体内，就能随它穿过电场。', 'Get inside a Giant’s Deep jellyfish and ride it through the field.')],
                   quote: [q('LOG:DB_FROZEN_JELLYFISH_X1'), q('LOG:DB_FROZEN_JELLYFISH_X3')],
                   kids: [
-                    { id: 'g-findfeld', t: 'gate', label: L('找到费尔德斯巴', 'Find Feldspar'), place: L('黑棘星某颗种子里', 'Inside one of Dark Bramble’s seeds'), req: 'any',
+                    { id: 'g-findfeld', t: 'gate', label: L('费尔德斯巴的营地', 'Feldspar’s camp'), place: L('黑棘星某颗种子里', 'Inside one of Dark Bramble’s seeds'), req: 'any',
                       kids: [
                         { id: 'c-harmonica', t: 'clue', label: L('口琴信号', 'Harmonica signal'), place: L('信号镜 · 旅行者频道', 'Signalscope · Travelers frequency'), quote: [q('LOG:TH_IMPACT_CRATER_R1')] },
                         { id: 'c-thseed', t: 'clue', label: L('侦察兵射进木炉星的种子', 'Scout into Timber Hearth’s seed'), place: L('木炉星 · 撞击坑', 'Timber Hearth · impact crater'), quote: [q('LOG:DB_FELDSPAR_R2')] },
@@ -75,12 +75,12 @@ export const BANDS = [
           info: [L('飞船当年被黑棘星缠住，跃迁核心摔坏了，但还能接收消息，也存着宇宙之眼的原始信号。', 'Dark Bramble caught the Vessel and broke its warp core, but it can still receive messages and holds the Eye’s original signal.')],
           quote: [q('LOG:DB_VESSEL_R3')],
           kids: [
-            { id: 'g-knowvessel', t: 'gate', label: L('知道有一艘飞船', 'Learn there is a Vessel'), req: 'any',
+            { id: 'g-knowvessel', t: 'gate', label: L('有一艘飞船', 'There is a Vessel'), req: 'any',
               kids: [
                 { id: 'c-murals', t: 'clue', label: L('三块壁画', 'The three murals'), place: L('碎空星 · 旧定居点', 'Brittle Hollow · Old Settlement'), at: 'r-oldsettle', quote: [q('LOG:BH_MURAL_2_X1')] },
                 { id: 'c-podlogs', t: 'clue', label: L('逃生舱飞行日志', 'Escape pod flight logs'), place: L('碎空星 / 余烬双星的逃生舱', 'Escape pods on Brittle Hollow / Ember Twin'), quote: [q('LOG:BH_ESCAPE_POD_X2')] }
               ] },
-            { id: 'g-whichseed', t: 'gate', label: L('知道飞船在哪颗种子里', 'Find which seed hides it'), place: L('黑棘星', 'Dark Bramble'), req: 'any',
+            { id: 'g-whichseed', t: 'gate', label: L('飞船在哪颗种子里', 'Which seed hides the Vessel'), place: L('黑棘星', 'Dark Bramble'), req: 'any',
               kids: [
                 { id: 'c-grave', t: 'clue', label: L('侦察兵射进小种子，拍到飞船', 'Scout into the small seed and photograph it'), place: L('黑棘星 · 挪麦坟墓', 'Dark Bramble · Nomai Grave'), req: 'all',
                   quote: [q('LOG:DB_NOMAI_GRAVE_X4')],
@@ -99,18 +99,18 @@ export const BANDS = [
           info: [L('灰烬双星计划的核心。飞船原来的核心坏了，只有这一颗能带它跃迁。', 'The core that powers the Ash Twin Project. The Vessel’s own core is broken; this is the only one that can make it warp.')],
           quote: [q('LOG:TT_TIME_LOOP_DEVICE_X5')],
           kids: [
-            { id: 'g-whereatp', t: 'gate', label: L('知道计划在灰烬双星中心', 'Learn the project is inside Ash Twin'), req: 'any',
+            { id: 'g-whereatp', t: 'gate', label: L('计划在灰烬双星中心', 'The project is inside Ash Twin'), req: 'any',
               kids: [
                 { id: 'c-atp4', t: 'clue', label: L('四处原文都指向它', 'Four places point to it'), place: L('高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉', 'High Energy Lab / mines / Statue Workshop / Black Hole Forge'),
                   info: [L('高能实验室提议选址灰烬双星；木炉星矿井在造它的保护壳；雕塑车间的面具装在里面；黑洞熔炉为它铸核心。', 'The High Energy Lab proposed Ash Twin; Timber Hearth’s mines supplied its shell; the Statue Workshop’s masks are inside; the Black Hole Forge cast its core.')],
                   quote: [q('LOG:CT_HIGH_ENERGY_LAB_X3')] }
               ] },
-            { id: 'g-sealed', t: 'gate', label: L('知道只能跃迁进去', 'Learn you can only warp in'), req: 'any',
+            { id: 'g-sealed', t: 'gate', label: L('只能跃迁进去', 'You can only warp in'), req: 'any',
               kids: [
                 { id: 'c-mine', t: 'clue', label: L('保护壳没有任何入口', 'The shell has no physical entrance'), place: L('木炉星 · 挪麦矿井', 'Timber Hearth · Nomai Mines'), at: 'r-mine', quote: [q('LOG:TH_NOMAI_MINE_X2')] },
                 { id: 'a-sealed-try', t: 'alt', alt: 'luck', label: L('飞过去发现进不去', 'Fly there and find no way in'), place: L('灰烬双星', 'Ash Twin') }
               ] },
-            { id: 'g-warp', t: 'gate', label: L('会用跃迁平台', 'Know how warp pads work'), req: 'any',
+            { id: 'g-warp', t: 'gate', label: L('跃迁平台怎么用', 'How warp pads work'), req: 'any',
               kids: [
                 { id: 'c-whs', t: 'clue', label: L('站上平台，等目标过头顶', 'Stand on the pad until the target is overhead'), place: L('白洞站', 'White Hole Station'), req: 'all',
                   quote: [q('LOG:WHS_X1')],
@@ -121,7 +121,7 @@ export const BANDS = [
                 { id: 'c-window', t: 'clue', label: L('对齐有约五度的窗口', 'Alignment has a ~5° window'), place: L('碎空星 · 黑洞熔炉', 'Brittle Hollow · Black Hole Forge'), at: 'r-forge', quote: [q('LOG:BH_WARP_ALIGNMENT_MAP_X4')] },
                 { id: 'a-warp-accident', t: 'alt', alt: 'luck', label: L('碰巧站上平台被传走', 'Get warped by accident'), place: L('任意跃迁平台', 'Any warp pad') }
               ] },
-            { id: 'g-receiver', t: 'gate', label: L('找到计划塔的接收点', 'Find the project tower’s receiver'), place: L('灰烬双星表面', 'Ash Twin’s surface'), req: 'any',
+            { id: 'g-receiver', t: 'gate', label: L('计划塔的接收点', 'The project tower’s receiver'), place: L('灰烬双星表面', 'Ash Twin’s surface'), req: 'any',
               kids: [
                 { id: 'c-deduce', t: 'clue', label: L('推理：接收点就在灰烬双星上', 'Deduce: the receiver is on Ash Twin'), req: 'all',
                   info: [L('赤道那圈高塔各通一处，只有计划塔看不出通向哪里。按黑洞熔炉的规则，沙漏双星共用两星之间的对准点，所以它的接收点就在灰烬双星自己身上。', 'Each tower on the equator leads somewhere, except the project tower. By the Forge’s rule the Hourglass Twins share an alignment point between them, so its receiver must be on Ash Twin itself.')],
@@ -155,17 +155,17 @@ export const BANDS = [
           { id: 'r-hel-door', t: 'clue', label: L('正门从里面锁着', 'The front door is locked from inside'), quote: [q('LOG:CT_HIGH_ENERGY_LAB_R3')] },
           { id: 'r-sunless', t: 'loc', label: L('背阴城', 'The Sunless City'), place: L('余烬双星地下', 'Beneath Ember Twin'), req: 'all',
             kids: [
-              { id: 'r-sun-know', t: 'gate', label: L('知道城在地下', 'Learn it is underground'), req: 'any',
+              { id: 'r-sun-know', t: 'gate', label: L('城在地下', 'It is underground'), req: 'any',
                 kids: [
                   { id: 'r-sun-chert', t: 'clue', label: L('切特：地表几乎没有废墟', 'Chert: hardly any ruins on the surface'), place: L('余烬双星 · 切特的营地', 'Ember Twin · Chert’s camp'), quote: [q('LOG:CT_SUNLESS_CITY_R4')] },
                   { id: 'r-sun-shelter', t: 'clue', label: L('幸存者躲进了逃生舱下的洞', 'Survivors sheltered beneath their pod'), place: L('余烬双星 · 2号逃生舱', 'Ember Twin · Escape Pod 2'), quote: [q('LOG:CT_SUNLESS_CITY_R1')] }
                 ] },
-              { id: 'r-sun-way', t: 'gate', label: L('找到进城的路', 'Find a way in'), req: 'any',
+              { id: 'r-sun-way', t: 'gate', label: L('进城的路', 'A way into the city'), req: 'any',
                 kids: [
                   { id: 'r-sun-pod', t: 'clue', label: L('从2号逃生舱下的洞穴跟着路标走', 'Follow the markers from under Escape Pod 2'), place: L('余烬双星南半球', 'Ember Twin’s southern hemisphere'), req: 'all',
                     info: [L('洞里漆黑，像迷宫，挪麦人在墙上留了路标。', 'The caves are dark and maze-like; the Nomai marked the walls.')], quote: [q('NOMAI:We can mark our findings on the walls')],
                     kids: [
-                      { id: 'r-pod2', t: 'clue', label: L('找到2号逃生舱', 'Find Escape Pod 2'), place: L('余烬双星南半球', 'Ember Twin’s southern hemisphere'), quote: [q('LOG:CT_ESCAPE_POD_R2')] }
+                      { id: 'r-pod2', t: 'clue', label: L('2号逃生舱', 'Escape Pod 2'), place: L('余烬双星南半球', 'Ember Twin’s southern hemisphere'), quote: [q('LOG:CT_ESCAPE_POD_R2')] }
                     ] },
                   { id: 'r-sun-hole', t: 'clue', label: L('重力炮上方的隐藏洞口', 'A hidden hole above the gravity cannon'), place: L('余烬双星赤道 · 重力炮', 'Ember Twin’s equator · gravity cannon'),
                     info: [L('通到城顶的宇宙之眼祭坛区，沿途有幽灵物质和仙人掌。重力炮旁边那扇城门被仙人掌堵着。', 'Leads to the Eye Shrine District at the top of the city, past ghost matter and cacti. The door next to the cannon is blocked by cacti.')], quote: [q('LOG:CT_SUNLESS_CITY_R2')], src: [wiki('Hourglass_Twins', 'Hourglass Twins', '沙漏双星')] }
@@ -183,7 +183,7 @@ export const BANDS = [
         info: [L('从别的开口只能看到化石，进不去。', 'Other openings only let you look in.')], quote: [q('LOG:CT_ANGLERFISH_FOSSIL_R1')],
         kids: [
           { ref: 'r-sunless' },
-          { id: 'r-fos-crack', t: 'gate', label: L('找到垫脚石洞顶的裂缝', 'Find the crack in Stepping Stone Cave’s ceiling'), place: L('背阴城 · 垫脚石洞', 'Sunless City · Stepping Stone Cave'), req: 'any', quote: [q('LOG:CT_ANGLERFISH_FOSSIL_R3')],
+          { id: 'r-fos-crack', t: 'gate', label: L('垫脚石洞顶的裂缝', 'The crack in Stepping Stone Cave’s ceiling'), place: L('背阴城 · 垫脚石洞', 'Sunless City · Stepping Stone Cave'), req: 'any', quote: [q('LOG:CT_ANGLERFISH_FOSSIL_R3')],
             kids: [
               { id: 'r-fos-light', t: 'clue', label: L('先给化石嘴里打个光', 'Light up the fossil’s mouth first'),
                 info: [L('往化石嘴里射侦察兵当灯，入口就显出来了。', 'Shoot your scout into the fossil’s mouth as a lamp and the entrance shows.')], quote: [q('LOG:CT_ANGLERFISH_FOSSIL_R4')] },
@@ -217,7 +217,7 @@ export const BANDS = [
             kids: [
               { id: 'r-bhcity', t: 'loc', label: L('悬空城', 'The Hanging City'), place: L('碎空星北部冰川下', 'Under Brittle Hollow’s northern glacier'), req: 'all',
                 kids: [
-                  { id: 'r-bh-know', t: 'gate', label: L('知道它在哪', 'Learn where it is'), req: 'any',
+                  { id: 'r-bh-know', t: 'gate', label: L('城的位置', 'Where the city is'), req: 'any',
                     kids: [
                       { id: 'r-bh-north', t: 'clue', label: L('瑞拜克营地北边有座大城', 'A huge city north of Riebeck’s camp'), place: L('碎空星赤道 · 瑞拜克', 'Brittle Hollow’s equator · Riebeck'), quote: [q('LOG:BH_HANGING_CITY_R2')] },
                       { id: 'r-bh-migrate', t: 'clue', label: L('旧定居点的人搬去了冰川', 'The settlers moved to the glacier'), place: L('碎空星 · 旧定居点', 'Brittle Hollow · Old Settlement'), quote: [q('LOG:BH_HANGING_CITY_R1')] }
@@ -242,7 +242,7 @@ export const BANDS = [
                     ] }
                 ] }
             ] },
-          { id: 'r-forge-district', t: 'gate', label: L('到达熔炉区', 'Reach the Forge District'), req: 'any',
+          { id: 'r-forge-district', t: 'gate', label: L('熔炉区', 'The Forge District'), req: 'any',
             info: [L('通往最上层的竖井断了，正常走不上去。', 'The shaft up to the top district is broken.')],
             kids: [
               { id: 'r-forge-warp', t: 'clue', label: L('从灰烬双星的碎空星塔跃迁过来', 'Warp in from the Brittle Hollow tower on Ash Twin'), place: L('灰烬双星赤道', 'Ash Twin’s equator'),
@@ -258,7 +258,7 @@ export const BANDS = [
               { id: 'r-obs-cannon', t: 'clue', label: L('从重力炮出发', 'Start at the gravity cannon'), req: 'all',
                 info: [L('一串错位的重力电梯和碎地壳，要用喷气背包在电梯之间跳。', 'A run of misaligned gravity lifts and broken crust; jetpack between the lifts.')], src: [wiki('Brittle_Hollow', 'Brittle Hollow', '碎空星')],
                 kids: [
-                  { id: 'r-cannon', t: 'gate', label: L('到达重力炮', 'Reach the gravity cannon'), place: L('碎空星赤道', 'Brittle Hollow’s equator'), req: 'any',
+                  { id: 'r-cannon', t: 'gate', label: L('重力炮', 'The gravity cannon'), place: L('碎空星赤道', 'Brittle Hollow’s equator'), req: 'any',
                     info: [L('从地面能直接走到，也可以从十字路口往东跳过一串地壳碎块。', 'You can walk there on the surface, or head east from the Crossroads across floating crust.')],
                     kids: [{ ref: 'r-crossroads' }] },
                   { id: 'r-cannon-time', t: 'gate', tag: TIMING, label: L('趁重力炮还没掉进黑洞', 'Before the cannon falls in'),
@@ -355,7 +355,7 @@ export const BANDS = [
       id: 'i-goal', t: 'goal', label: L('挪麦人灭绝的真相', 'What killed the Nomai'), place: L('闯入者 · 破裂的核心', 'The Interloper · ruptured core'), req: 'all',
       quote: [q('LOG:COMET_INTERIOR_X3')],
       kids: [
-        { id: 'i-know', t: 'gate', label: L('知道挪麦人去过彗星', 'Learn the Nomai went to the comet'), req: 'any',
+        { id: 'i-know', t: 'gate', label: L('挪麦人去过彗星', 'The Nomai went to the comet'), req: 'any',
           kids: [
             { id: 'i-shuttle', t: 'clue', label: L('召回冻住的航天飞机', 'Recall the frozen shuttle'), place: L('余烬双星 · 重力炮', 'Ember Twin · gravity cannon'), quote: [q('LOG:CT_GRAVITY_CANNON_R1')] },
             { id: 'i-sunstation', t: 'clue', label: L('太阳站失败后去看彗星', 'After the Sun Station failed'), place: L('太阳站', 'Sun Station'), at: 'r-sunstation', quote: [q('LOG:S_SUNSTATION_X3')] }
@@ -447,4 +447,18 @@ export const TRAVELERS = [
 export const ENTRY_NODE = {
   TH_IMPACT_CRATER: 'c-harmonica', CT_ESCAPE_POD: 'r-pod2', CT_SUNLESS_CITY: 'r-sunless', BH_OBSERVATORY: 'r-observatory',
   ORBITAL_PROBE_CANNON: 'c-dmg', GD_OCEAN: 'g-current', GD_STATUE_ISLAND: 'r-workshop', DB_FROZEN_JELLYFISH: 'c-jelly'
+};
+
+// What the player does at each step: realize = figure something out, explore = get somewhere or get through something.
+// Goals, must-haves, alternatives and timing gates are left untagged.
+export const ACTION = {
+  realize: ['g-sunk', 'c-dmg', 'c-cassava', 'c-feld-core', 'c-tornado', 'c-jelly', 'c-fossil', 'g-knowvessel', 'c-murals', 'c-podlogs', 'g-whichseed', 'c-pod3',
+    'g-whereatp', 'c-atp4', 'g-sealed', 'c-mine', 'g-warp', 'c-whs', 'c-window', 'c-deduce', 'c-towermap', 'c-forge', 'c-hourglass',
+    'r-sun-know', 'r-sun-chert', 'r-sun-shelter', 'r-hel-door', 'r-fos-light', 'r-ss-hint', 'r-bh-know', 'r-bh-north', 'r-bh-migrate', 'r-obs-door', 'r-qt-find', 'r-tqt-signal', 'r-ws-kids',
+    'q-locator', 'q-imaging', 'q-entangle', 'q-lakebed', 'q-sixth', 'i-know', 'i-sunstation', 'i-frozen', 'i-photo'],
+  explore: ['g-current', 'g-field', 'g-findfeld', 'c-harmonica', 'c-thseed', 'c-bramisland', 'g-angler', 'c-grave', 'c-bhfall', 'g-receiver',
+    'r-sunless', 'r-sun-way', 'r-sun-pod', 'r-pod2', 'r-sun-hole', 'r-hel', 'r-hel-trail', 'r-fossil', 'r-fos-crack', 'r-lakebed', 'r-sunstation', 'r-ss-tower',
+    'r-forge', 'r-forge-raise', 'r-bhcity', 'r-bh-way', 'r-bh-river', 'r-bh-bridge', 'r-crossroads', 'r-oldsettle', 'r-pod1', 'r-forge-district', 'r-forge-warp',
+    'r-observatory', 'r-obs-under', 'r-obs-cannon', 'r-cannon', 'r-obs-tower', 'r-qtower', 'r-tqt', 'r-tqt-way', 'r-tqt-above', 'r-tqt-below',
+    'r-workshop', 'r-ws-way', 'r-ws-under', 'r-mine', 'r-mine-geyser', 'r-mine-warp', 'q-land', 'q-trials', 'q-knowledge', 'i-shuttle', 'i-enter', 'i-ghost']
 };

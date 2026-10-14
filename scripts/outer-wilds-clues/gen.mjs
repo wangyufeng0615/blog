@@ -10,7 +10,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE } from './data.src.mjs';
+import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION } from './data.src.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const POST = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
@@ -58,16 +58,20 @@ function resolveQuote(key) {
 }
 
 /* ---------- resolve data ---------- */
+const ACT = {};
+for (const [k, ids] of Object.entries(ACTION)) ids.forEach(id => { ACT[id] = k; });
 const nodes = {};
 function resolve(n) {
   if (n.ref) return { ref: n.ref };
   const out = { ...n };
+  if (ACT[n.id]) out.act = ACT[n.id];
   if (n.quote) out.quote = n.quote.map(x => resolveQuote(x.$q));
   if (n.kids) out.kids = n.kids.map(resolve);
   nodes[n.id] = out;
   return out;
 }
 const bands = BANDS.map(b => ({ ...b, roots: b.roots.map(resolve) }));
+for (const id in ACT) if (!nodes[id]) throw new Error(`ACTION lists unknown node: ${id}`);
 const edges = [];
 (function link() {
   const walk = n => { if (n.ref) return; (n.kids || []).forEach(k => { edges.push({ from: k.ref || k.id, to: n.id }); walk(k); }); };
@@ -161,11 +165,11 @@ const graph = {
   dateModified: MODIFIED.slice(0, 10),
   game: { name: 'Outer Wilds', name_zh: '星际拓荒', developer: 'Mobius Digital', publisher: 'Annapurna Interactive', year: 2019 },
   sources: 'Quotes: official English and Simplified Chinese game text (Steam build, October 2026). Alternatives: Outer Wilds Wiki and community guides, cited per node.',
-  how_to_read: 'Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.',
+  how_to_read: 'player_action: realize = figure something out, explore = get somewhere or through something. Each node lists prerequisites (node ids that point into it). requires=all means every prerequisite is needed; requires=any means one is enough. type=alternative nodes are non-intended ways through (alternative_kind: official = another in-game clue or mechanic, luck = trial and error or brute force). location_ref points to a location node describing how to get there.',
   bands: bands.map(b => ({ key: b.key, title: b.title, summary: b.band, roots: b.roots.map(r => r.id) })),
   nodes: Object.values(nodes).map(n => ({
     id: n.id, type: TYPE_EN[n.t], band: bandOf[n.id], label: n.label, place: n.place || null,
-    requires: n.req || null, alternative_kind: n.alt || null, timing_sensitive: n.tag === 'timing' || undefined,
+    player_action: n.act || null, requires: n.req || null, alternative_kind: n.alt || null, timing_sensitive: n.tag === 'timing' || undefined,
     unverified: n.verify || undefined, location_ref: n.at || null,
     prerequisites: edges.filter(e => e.to === n.id).map(e => e.from),
     unlocks: edges.filter(e => e.from === n.id).map(e => e.to),
@@ -182,10 +186,11 @@ fs.writeFileSync(path.join(POST, 'graph.json'), JSON.stringify(graph, null, 1));
 const ALT = { official: { zh: '官方另一解', en: 'other in-game clue' }, luck: { zh: '运气 / 试错 / 硬闯', en: 'luck / trial / brute force' } };
 const REQ = { all: { zh: '以下全部需要', en: 'needs all of' }, any: { zh: '以下任选一', en: 'any one of' } };
 const TIMING_TXT = { zh: '时间窗口', en: 'timing' };
+const ACT_TXT = { realize: { zh: '意识到', en: 'Realize' }, explore: { zh: '探索到', en: 'Explore' } };
 function line(n, lang) {
   if (n.ref) return { text: `${lang === 'zh' ? '（同上：' : '(see above: '}${nodes[n.ref].label[lang]}${lang === 'zh' ? '）' : ')'}`, kids: [] };
   const kids = n.kids || [];
-  let text = n.t === 'alt' ? `[${ALT[n.alt][lang]}] ${n.label[lang]}` : n.label[lang];
+  let text = n.t === 'alt' ? `[${ALT[n.alt][lang]}] ${n.label[lang]}` : (n.act ? `[${ACT_TXT[n.act][lang]}] ` : '') + n.label[lang];
   if (n.tag === 'timing') text += ` [${TIMING_TXT[lang]}]`;
   if (n.place) text += ` — ${n.place[lang]}`;
   if (n.req && kids.length > 1) text += ` (${REQ[n.req][lang]})`;
@@ -261,6 +266,7 @@ const COPY = {
     socialDesc: '打出《星际拓荒》结局要凑齐哪三样东西、每样要先知道什么、关键地点怎么进，一张图看全。',
     imageAlt: '星际拓荒通关线索依赖图', og: 'og-outer-wilds-clues.png',
     h1: '星际拓荒通关线索图',
+    lgAct: '<span><b class="kw-realize">意识到</b>想明白一件事</span>\n    <span><b class="kw-explore">探索到</b>去到一个地方</span>',
     lg: ['青框：结局和三样必需品', '实线：设计好的路线', '橙色虚线：其他走法（运气、试错、硬闯或另一条线索）', '点卡片看游戏原文'],
     spoiler: '全是剧透，没通关慎看',
     switchLabel: 'English', switchHref: 'en/', switchLang: 'en', switchHreflang: 'en',
@@ -283,6 +289,7 @@ const COPY = {
     socialDesc: 'What you need for the Outer Wilds ending, what to learn first, and how to get into every key location — on one zoomable map.',
     imageAlt: 'Outer Wilds clue dependency map', og: 'og-outer-wilds-clues-en.png',
     h1: 'Outer Wilds Clue Map',
+    lgAct: '<span><b class="kw-realize">Realize</b>figure something out</span>\n    <span><b class="kw-explore">Explore</b>get somewhere</span>',
     lg: ['Teal: the ending and its must-haves', 'Solid: the intended route', 'Orange dashed: another way (luck, trial, brute force or another clue)', 'Click a card for the game text'],
     spoiler: 'Full spoilers — finish the game first',
     switchLabel: '中文', switchHref: '../', switchLang: 'zh', switchHreflang: 'zh-CN',
@@ -339,7 +346,7 @@ for (const lang of ['zh', 'en']) {
     otherPath: lang === 'zh' ? URLS.en : URLS.zh,
     jsonld: JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'),
     faq: faqHtml, noscriptList: noscript,
-    legend: c.lg.map((t, i) => `<span>${['<i class="lg-goal"></i>', '<i class="lg-main"></i>', '<i class="lg-alt"></i>', ''][i]}${esc(t)}</span>`).join('\n    ')
+    legend: [c.lgAct].concat(c.lg.map((t, i) => `<span>${['<i class="lg-goal"></i>', '<i class="lg-main"></i>', '<i class="lg-alt"></i>', ''][i]}${esc(t)}</span>`)).join('\n    ')
   };
   const html = tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => {
     if (!(k in vars)) throw new Error(`Template var missing: ${k}`);
