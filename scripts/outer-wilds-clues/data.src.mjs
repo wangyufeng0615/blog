@@ -146,8 +146,8 @@ export const BANDS = [
                     { id: 'c-towermap', t: 'clue', label: L('高塔设计图', 'The tower designs'), place: L('余烬双星 · 高能实验室', 'Ember Twin · High Energy Lab'), at: 'r-hel', quote: [q('LOG:CT_WARP_TOWER_MAP_X3'), q('NOMAI:The tower designs in the High Energy Lab')] },
                     { id: 'c-forge', t: 'clue', label: L('双星共用一个对准点', 'The twins share an alignment point'), place: L('碎空星 · 黑洞熔炉', 'Brittle Hollow · Black Hole Forge'), at: 'r-forge', quote: [q('NOMAI:Yarrow believes he spotted a flaw'), q('LOG:BH_BLACK_HOLE_FORGE_X6')] }
                   ] },
-                { id: 'a-recv-body', t: 'alt', alt: 'official', label: L('正确的塔外有挪麦遗体', 'A Nomai body lies outside the right tower'), place: L('灰烬双星 · 计划塔', 'Ash Twin · project tower'), verify: true,
-                  info: [L('Wiki 说计划塔外躺着一具挪麦遗体，可以当作提示。我没有在游戏原文里核到这一点。', 'The wiki says a Nomai body lies outside the project tower. I could not confirm it in the game text.')], src: [wiki('Ash_Twin_Project', 'Ash Twin Project', '灰烬双星计划')] },
+                { id: 'a-recv-body', t: 'alt', alt: 'official', label: L('正确的塔外有挪麦遗体', 'A Nomai body lies outside the right tower'), place: L('灰烬双星 · 计划塔', 'Ash Twin · project tower'),
+                  info: [L('通往计划的那座塔门口躺着一具挪麦遗体，可以当作认塔的标记。', 'A Nomai body lies at the door of the tower that leads into the project — a marker for the right one.')], src: [wiki('Ash_Twin_Project', 'Ash Twin Project', '灰烬双星计划')] },
                 { id: 'a-recv-try', t: 'alt', alt: 'luck', label: L('把每座塔的平台挨个试', 'Try every tower’s pad'), place: L('灰烬双星赤道', 'Ash Twin’s equator') }
               ] },
             { id: 'g-sand', t: 'gate', tag: TIMING, label: L('等沙子让出塔门', 'Wait for the sand to clear the tower'), place: L('灰烬双星赤道', 'Ash Twin’s equator'), req: 'any',
@@ -489,4 +489,69 @@ export const ACTION = {
     'r-forge', 'r-forge-raise', 'r-bhcity', 'r-bh-way', 'r-bh-river', 'r-bh-bridge', 'r-crossroads', 'r-oldsettle', 'r-pod1', 'r-forge-district', 'r-forge-warp',
     'r-observatory', 'r-obs-under', 'r-obs-cannon', 'r-cannon', 'r-obs-tower', 'r-qtower', 'r-tqt', 'r-tqt-way', 'r-tqt-above', 'r-tqt-below',
     'r-workshop', 'r-ws-way', 'r-ws-under', 'r-mine', 'r-mine-geyser', 'r-mine-warp', 'q-land', 'q-trials', 'q-knowledge', 'i-shuttle', 'i-enter', 'i-ghost']
+};
+
+// Endings in the base game. steps: [text, node?]. quote: the line the game shows (UI:<id> or DLG:).
+export const ENDINGS = {
+  title: L('结局图鉴', 'Endings'),
+  items: [
+    { name: L('宇宙之眼', 'The Eye of the Universe'), kind: L('正常结局', 'Main ending'), node: 'goal',
+      steps: [[L('把计划的核心装进飞船，输入坐标，跃迁', 'Put the project’s core in the Vessel, enter the coordinates, warp'), 'g-insight'],
+              [L('从北极走到南极，跳进量子风暴中心的坑，回到一座量子版的天文台', 'Walk from the north pole to the south, drop into the crater in the quantum storm, arrive at a quantum observatory')],
+              [L('在林地里生起营火，用信号镜把旅行者们的乐器一个个找回来，一起演奏', 'Light a campfire in the glade, find each traveler’s instrument with the signalscope, and play together')],
+              [L('见过所莱内姆的话，她也会加入；片尾的新宇宙里会多出一圈围着营火的外星人', 'If you met Solanum she joins too, and the post-credits shot gains a new campfire with alien campers'), 'q-goal']],
+      quote: 'DLG:But I think the rules are about to change.' },
+    { name: L('留在第六个位置', 'Stay at the sixth location'), kind: L('隐藏结局', 'Hidden ending'), node: 'q-goal',
+      steps: [[L('取下计划的核心，循环停止', 'Take the project’s core; the loop stops'), 'c-atp-core'], [L('登上量子卫星，去它的第六个位置，等超新星', 'Land on the Quantum Moon, go to its sixth location, wait for the supernova'), 'q-sixth']],
+      quote: 'UI:813',
+      note: L('发售时这句结束语只显示成"813"，正好是它在游戏文本里的编号，玩家因此叫它"813 结局"，1.0.2 才修好。', 'At launch this ending showed only “813” — the line’s ID in the game text — so players called it the 813 ending until patch 1.0.2.') },
+    { name: L('飘向深空', 'Adrift'), kind: L('隐藏结局', 'Hidden ending'), node: 'core',
+      steps: [[L('取下计划的核心', 'Take the project’s core'), 'c-atp-core'], [L('开飞船飞得足够远，躲过超新星', 'Fly far enough from the Sun to outrun the supernova')]],
+      quote: 'UI:812' },
+    { name: L('打破时空', 'Breaking spacetime'), kind: L('隐藏结局', 'Hidden ending'), node: 'r-hel',
+      steps: [[L('在高能实验室装上黑洞核心和白洞核心，把侦察兵射进黑洞', 'In the High Energy Lab, fit a black hole core and a white hole core and fire your scout into the black hole'), 'r-hel'],
+              [L('侦察兵从白洞出来之后、进黑洞之前，拔掉一个核心：两个侦察兵同时存在', 'After it comes out of the white hole but before it goes in, pull a core: now two scouts exist')]],
+      quote: 'UI:811', note: L('片尾字幕会用卡祖笛版主题曲飞快滚完。', 'The credits then race by to a kazoo cover of the theme.') },
+    { name: L('遇见自己', 'Meeting yourself'), kind: L('隐藏结局', 'Hidden ending'), node: 'core',
+      steps: [[L('超新星爆发时，跳进灰烬双星计划中心张开的黑洞', 'As the supernova hits, jump into the black hole that opens at the center of the Ash Twin Project'), 'core'],
+              [L('下一轮计划里会多出一个你；这一轮不再跳一次，就会打破时空', 'Next loop another you is waiting in the project; skip the jump this time and spacetime breaks')]],
+      quote: 'DLG:Are you me from the last loop?', note: L('1.0.4 版本加入。', 'Added in patch 1.0.4.') },
+    { name: L('游戏结束', 'Game over'), kind: L('死亡', 'Death'), node: 'c-loop',
+      steps: [[L('雕像和你配对之前就死了，游戏从头开始', 'Die before the statue pairs with you, and the game starts over'), 'c-loop'],
+              [L('取下计划的核心之后死掉，不会再醒来', 'Die after taking the project’s core, and you don’t wake up'), 'c-atp-core']],
+      quote: 'UI:810' }
+  ]
+};
+
+// Tools and abilities, and the steps on the map where each one matters. uses: [text, node?]
+export const TOOLS = {
+  title: L('工具与能力', 'Tools and abilities'),
+  items: [
+    { name: L('发射密码', 'Launch codes'), from: L('天文台的霍恩费斯', 'Hornfels at the observatory'),
+      uses: [[L('坐升降梯上发射台', 'Ride the lift up the launch tower'), 'g-start'], [L('拿到之后，营火边才能打盹', 'Unlocks dozing at campfires'), 'a-sand-sleep']] },
+    { name: L('侦察兵', 'Little Scout'), from: L('宇航服上的发射器', 'Launcher on your suit'),
+      uses: [[L('拍下的照片能定住量子物体', 'A photo pins a quantum object in place'), 'q-imaging'], [L('射进小种子看里面', 'Peek through small seeds'), 'c-grave'],
+             [L('追踪器显示它同时在两个地方', 'Its tracker shows it in two places at once'), 'c-nest'], [L('相机能看到幽灵物质', 'Its camera sees ghost matter'), 'i-photo'],
+             [L('当灯照亮化石的嘴', 'Light up the fossil’s mouth'), 'r-fos-light']] },
+    { name: L('信号镜', 'Signalscope'), from: L('自带旅行者频道，其他频道靠近信号源时学会', 'Starts with the Travelers frequency; learns others near their sources'),
+      uses: [[L('旅行者频道：循着口琴声找到费尔德斯巴', 'Travelers: follow the harmonica to Feldspar'), 'c-harmonica'],
+             [L('求救信号：找到第一个逃生舱后出现，带你找到3号逃生舱', 'Distress Beacon: appears after your first escape pod, leads to Escape Pod 3'), 'c-pod3'],
+             [L('量子波动：量子碎片和量子卫星', 'Quantum Fluctuations: shards and the Quantum Moon'), 'r-tqt-signal'],
+             [L('在宇宙之眼找回旅行者们的乐器', 'Find the travelers’ instruments at the Eye'), 'goal']] },
+    { name: L('翻译器', 'Translator'), from: L('随身装备', 'Standard gear'),
+      uses: [[L('读懂挪麦人的螺旋文字和记录：几乎每条线索都靠它', 'Read Nomai spiral text and recordings — nearly every clue depends on it'), 'c-deduce']] },
+    { name: L('手电筒', 'Flashlight'), from: L('宇航服', 'Your suit'),
+      uses: [[L('关掉它，完全黑暗：和量子物体纠缠在一起', 'Turn it off for total darkness and you become entangled'), 'q-entangle'], [L('在祭坛里关灯，随卫星换位置', 'Lights out in the shrine to move with the moon'), 'q-sixth']] },
+    { name: L('宇航服与喷气背包', 'Suit and jetpack'), from: L('发射台旁', 'By the launch tower'),
+      uses: [[L('在错位的重力电梯之间跳', 'Jump between misaligned gravity lifts'), 'r-obs-cannon'], [L('深巨星重力太大，高处够不着', 'Too weak for Giant’s Deep’s gravity on high ledges'), 'r-ws-high']] },
+    { name: L('飞船与飞船日志', 'Ship and ship log'), from: L('木炉星发射台', 'Timber Hearth launch tower'),
+      uses: [[L('关掉引擎，靠惯性滑过安康鱼', 'Cut the engines and drift past anglerfish'), 'g-angler'], [L('飞船日志记下每条线索和传闻，传闻模式里的问号就是还没去的地方', 'The log records every clue and rumor; the question marks in rumor mode are places you haven’t been')]] },
+    { name: L('营火', 'Campfire'), from: L('每颗星球上都有', 'On every planet'),
+      uses: [[L('打盹快进时间，等沙子流走', 'Doze to skip time, e.g. until the sand drains'), 'a-sand-sleep'],
+             [L('冥想直接结束这一轮：第三轮起问加布罗"你怎么能这么冷静"就能学会', 'Meditate to end the loop early: from the third loop, ask Gabbro how they stay so calm'), null],
+             [L('烤棉花糖回血', 'Roast marshmallows to heal')]] },
+    { name: L('挪麦设施', 'Nomai devices'), from: L('散落在各颗星球', 'All over the system'),
+      uses: [[L('跃迁平台：等对应天体过头顶', 'Warp pads: wait for the target overhead'), 'g-warp'], [L('重力炮：召回航天飞机', 'Gravity cannons: recall a shuttle'), 'i-shuttle'],
+             [L('投影池：看到远处的场景，比如沉在海底的跟踪模块', 'Projection pools: see far-off places, like the sunken tracking module'), 'c-dmg']] }
+  ]
 };

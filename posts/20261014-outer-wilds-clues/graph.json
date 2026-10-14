@@ -1608,7 +1608,6 @@
    "player_action": null,
    "requires": null,
    "alternative_kind": "official",
-   "unverified": true,
    "location_ref": null,
    "prerequisites": [],
    "unlocks": [
@@ -1616,8 +1615,8 @@
    ],
    "notes": [
     {
-     "zh": "Wiki 说计划塔外躺着一具挪麦遗体，可以当作提示。我没有在游戏原文里核到这一点。",
-     "en": "The wiki says a Nomai body lies outside the project tower. I could not confirm it in the game text."
+     "zh": "通往计划的那座塔门口躺着一具挪麦遗体，可以当作认塔的标记。",
+     "en": "A Nomai body lies at the door of the tower that leads into the project — a marker for the right one."
     }
    ],
    "quotes": [],
@@ -4774,6 +4773,501 @@
    }
   ]
  },
+ "endings": [
+  {
+   "name": {
+    "zh": "宇宙之眼",
+    "en": "The Eye of the Universe"
+   },
+   "kind": {
+    "zh": "正常结局",
+    "en": "Main ending"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "把计划的核心装进飞船，输入坐标，跃迁",
+      "en": "Put the project’s core in the Vessel, enter the coordinates, warp"
+     },
+     "node": "g-insight"
+    },
+    {
+     "step": {
+      "zh": "从北极走到南极，跳进量子风暴中心的坑，回到一座量子版的天文台",
+      "en": "Walk from the north pole to the south, drop into the crater in the quantum storm, arrive at a quantum observatory"
+     },
+     "node": null
+    },
+    {
+     "step": {
+      "zh": "在林地里生起营火，用信号镜把旅行者们的乐器一个个找回来，一起演奏",
+      "en": "Light a campfire in the glade, find each traveler’s instrument with the signalscope, and play together"
+     },
+     "node": null
+    },
+    {
+     "step": {
+      "zh": "见过所莱内姆的话，她也会加入；片尾的新宇宙里会多出一圈围着营火的外星人",
+      "en": "If you met Solanum she joins too, and the post-credits shot gains a new campfire with alien campers"
+     },
+     "node": "q-goal"
+    }
+   ],
+   "line": {
+    "en": "But I think the rules are about to change.",
+    "zh": "不过我觉得规则就快变了。",
+    "source": "Dialogue and signs"
+   },
+   "note": null
+  },
+  {
+   "name": {
+    "zh": "留在第六个位置",
+    "en": "Stay at the sixth location"
+   },
+   "kind": {
+    "zh": "隐藏结局",
+    "en": "Hidden ending"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "取下计划的核心，循环停止",
+      "en": "Take the project’s core; the loop stops"
+     },
+     "node": "c-atp-core"
+    },
+    {
+     "step": {
+      "zh": "登上量子卫星，去它的第六个位置，等超新星",
+      "en": "Land on the Quantum Moon, go to its sixth location, wait for the supernova"
+     },
+     "node": "q-sixth"
+    }
+   ],
+   "line": {
+    "en": "HOW LONG HAVE YOU BEEN HERE? MINUTES? YEARS? YOU ARE UNSURE BUT IT SEEMS YOUR JOURNEY HAS REACHED ITS END.",
+    "zh": "你在这儿待了有多久了？几分钟？还是几年？对此你并不清楚，但你的旅途似乎已经到达了终点。",
+    "source": "Ending screen"
+   },
+   "note": {
+    "zh": "发售时这句结束语只显示成\"813\"，正好是它在游戏文本里的编号，玩家因此叫它\"813 结局\"，1.0.2 才修好。",
+    "en": "At launch this ending showed only “813” — the line’s ID in the game text — so players called it the 813 ending until patch 1.0.2."
+   }
+  },
+  {
+   "name": {
+    "zh": "飘向深空",
+    "en": "Adrift"
+   },
+   "kind": {
+    "zh": "隐藏结局",
+    "en": "Hidden ending"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "取下计划的核心",
+      "en": "Take the project’s core"
+     },
+     "node": "c-atp-core"
+    },
+    {
+     "step": {
+      "zh": "开飞船飞得足够远，躲过超新星",
+      "en": "Fly far enough from the Sun to outrun the supernova"
+     },
+     "node": null
+    }
+   ],
+   "line": {
+    "en": "NOW BEYOND THE REACH OF THE SUPERNOVA, YOU DRIFT THROUGH SPACE UNTIL YOUR SHIP'S RESOURCES ARE FINALLY DEPLETED",
+    "zh": "你已经再也无法到达超新星，只能在太空中飘荡，直到宇宙飞船的资源耗尽",
+    "source": "Ending screen"
+   },
+   "note": null
+  },
+  {
+   "name": {
+    "zh": "打破时空",
+    "en": "Breaking spacetime"
+   },
+   "kind": {
+    "zh": "隐藏结局",
+    "en": "Hidden ending"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "在高能实验室装上黑洞核心和白洞核心，把侦察兵射进黑洞",
+      "en": "In the High Energy Lab, fit a black hole core and a white hole core and fire your scout into the black hole"
+     },
+     "node": "r-hel"
+    },
+    {
+     "step": {
+      "zh": "侦察兵从白洞出来之后、进黑洞之前，拔掉一个核心：两个侦察兵同时存在",
+      "en": "After it comes out of the white hole but before it goes in, pull a core: now two scouts exist"
+     },
+     "node": null
+    }
+   ],
+   "line": {
+    "en": "YOU DESTROYED THE FABRIC OF SPACETIME",
+    "zh": "你摧毁了时空结构",
+    "source": "Ending screen"
+   },
+   "note": {
+    "zh": "片尾字幕会用卡祖笛版主题曲飞快滚完。",
+    "en": "The credits then race by to a kazoo cover of the theme."
+   }
+  },
+  {
+   "name": {
+    "zh": "遇见自己",
+    "en": "Meeting yourself"
+   },
+   "kind": {
+    "zh": "隐藏结局",
+    "en": "Hidden ending"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "超新星爆发时，跳进灰烬双星计划中心张开的黑洞",
+      "en": "As the supernova hits, jump into the black hole that opens at the center of the Ash Twin Project"
+     },
+     "node": "core"
+    },
+    {
+     "step": {
+      "zh": "下一轮计划里会多出一个你；这一轮不再跳一次，就会打破时空",
+      "en": "Next loop another you is waiting in the project; skip the jump this time and spacetime breaks"
+     },
+     "node": null
+    }
+   ],
+   "line": {
+    "en": "Are you me from the last loop?",
+    "zh": "你是上一个循环的我自己吗？",
+    "source": "Dialogue and signs"
+   },
+   "note": {
+    "zh": "1.0.4 版本加入。",
+    "en": "Added in patch 1.0.4."
+   }
+  },
+  {
+   "name": {
+    "zh": "游戏结束",
+    "en": "Game over"
+   },
+   "kind": {
+    "zh": "死亡",
+    "en": "Death"
+   },
+   "how": [
+    {
+     "step": {
+      "zh": "雕像和你配对之前就死了，游戏从头开始",
+      "en": "Die before the statue pairs with you, and the game starts over"
+     },
+     "node": "c-loop"
+    },
+    {
+     "step": {
+      "zh": "取下计划的核心之后死掉，不会再醒来",
+      "en": "Die after taking the project’s core, and you don’t wake up"
+     },
+     "node": "c-atp-core"
+    }
+   ],
+   "line": {
+    "en": "YOU ARE DEAD",
+    "zh": "你死了",
+    "source": "Ending screen"
+   },
+   "note": null
+  }
+ ],
+ "tools": [
+  {
+   "name": {
+    "zh": "发射密码",
+    "en": "Launch codes"
+   },
+   "from": {
+    "zh": "天文台的霍恩费斯",
+    "en": "Hornfels at the observatory"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "坐升降梯上发射台",
+      "en": "Ride the lift up the launch tower"
+     },
+     "node": "g-start"
+    },
+    {
+     "use": {
+      "zh": "拿到之后，营火边才能打盹",
+      "en": "Unlocks dozing at campfires"
+     },
+     "node": "a-sand-sleep"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "侦察兵",
+    "en": "Little Scout"
+   },
+   "from": {
+    "zh": "宇航服上的发射器",
+    "en": "Launcher on your suit"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "拍下的照片能定住量子物体",
+      "en": "A photo pins a quantum object in place"
+     },
+     "node": "q-imaging"
+    },
+    {
+     "use": {
+      "zh": "射进小种子看里面",
+      "en": "Peek through small seeds"
+     },
+     "node": "c-grave"
+    },
+    {
+     "use": {
+      "zh": "追踪器显示它同时在两个地方",
+      "en": "Its tracker shows it in two places at once"
+     },
+     "node": "c-nest"
+    },
+    {
+     "use": {
+      "zh": "相机能看到幽灵物质",
+      "en": "Its camera sees ghost matter"
+     },
+     "node": "i-photo"
+    },
+    {
+     "use": {
+      "zh": "当灯照亮化石的嘴",
+      "en": "Light up the fossil’s mouth"
+     },
+     "node": "r-fos-light"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "信号镜",
+    "en": "Signalscope"
+   },
+   "from": {
+    "zh": "自带旅行者频道，其他频道靠近信号源时学会",
+    "en": "Starts with the Travelers frequency; learns others near their sources"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "旅行者频道：循着口琴声找到费尔德斯巴",
+      "en": "Travelers: follow the harmonica to Feldspar"
+     },
+     "node": "c-harmonica"
+    },
+    {
+     "use": {
+      "zh": "求救信号：找到第一个逃生舱后出现，带你找到3号逃生舱",
+      "en": "Distress Beacon: appears after your first escape pod, leads to Escape Pod 3"
+     },
+     "node": "c-pod3"
+    },
+    {
+     "use": {
+      "zh": "量子波动：量子碎片和量子卫星",
+      "en": "Quantum Fluctuations: shards and the Quantum Moon"
+     },
+     "node": "r-tqt-signal"
+    },
+    {
+     "use": {
+      "zh": "在宇宙之眼找回旅行者们的乐器",
+      "en": "Find the travelers’ instruments at the Eye"
+     },
+     "node": "goal"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "翻译器",
+    "en": "Translator"
+   },
+   "from": {
+    "zh": "随身装备",
+    "en": "Standard gear"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "读懂挪麦人的螺旋文字和记录：几乎每条线索都靠它",
+      "en": "Read Nomai spiral text and recordings — nearly every clue depends on it"
+     },
+     "node": "c-deduce"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "手电筒",
+    "en": "Flashlight"
+   },
+   "from": {
+    "zh": "宇航服",
+    "en": "Your suit"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "关掉它，完全黑暗：和量子物体纠缠在一起",
+      "en": "Turn it off for total darkness and you become entangled"
+     },
+     "node": "q-entangle"
+    },
+    {
+     "use": {
+      "zh": "在祭坛里关灯，随卫星换位置",
+      "en": "Lights out in the shrine to move with the moon"
+     },
+     "node": "q-sixth"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "宇航服与喷气背包",
+    "en": "Suit and jetpack"
+   },
+   "from": {
+    "zh": "发射台旁",
+    "en": "By the launch tower"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "在错位的重力电梯之间跳",
+      "en": "Jump between misaligned gravity lifts"
+     },
+     "node": "r-obs-cannon"
+    },
+    {
+     "use": {
+      "zh": "深巨星重力太大，高处够不着",
+      "en": "Too weak for Giant’s Deep’s gravity on high ledges"
+     },
+     "node": "r-ws-high"
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "飞船与飞船日志",
+    "en": "Ship and ship log"
+   },
+   "from": {
+    "zh": "木炉星发射台",
+    "en": "Timber Hearth launch tower"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "关掉引擎，靠惯性滑过安康鱼",
+      "en": "Cut the engines and drift past anglerfish"
+     },
+     "node": "g-angler"
+    },
+    {
+     "use": {
+      "zh": "飞船日志记下每条线索和传闻，传闻模式里的问号就是还没去的地方",
+      "en": "The log records every clue and rumor; the question marks in rumor mode are places you haven’t been"
+     },
+     "node": null
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "营火",
+    "en": "Campfire"
+   },
+   "from": {
+    "zh": "每颗星球上都有",
+    "en": "On every planet"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "打盹快进时间，等沙子流走",
+      "en": "Doze to skip time, e.g. until the sand drains"
+     },
+     "node": "a-sand-sleep"
+    },
+    {
+     "use": {
+      "zh": "冥想直接结束这一轮：第三轮起问加布罗\"你怎么能这么冷静\"就能学会",
+      "en": "Meditate to end the loop early: from the third loop, ask Gabbro how they stay so calm"
+     },
+     "node": null
+    },
+    {
+     "use": {
+      "zh": "烤棉花糖回血",
+      "en": "Roast marshmallows to heal"
+     },
+     "node": null
+    }
+   ]
+  },
+  {
+   "name": {
+    "zh": "挪麦设施",
+    "en": "Nomai devices"
+   },
+   "from": {
+    "zh": "散落在各颗星球",
+    "en": "All over the system"
+   },
+   "uses": [
+    {
+     "use": {
+      "zh": "跃迁平台：等对应天体过头顶",
+      "en": "Warp pads: wait for the target overhead"
+     },
+     "node": "g-warp"
+    },
+    {
+     "use": {
+      "zh": "重力炮：召回航天飞机",
+      "en": "Gravity cannons: recall a shuttle"
+     },
+     "node": "i-shuttle"
+    },
+    {
+     "use": {
+      "zh": "投影池：看到远处的场景，比如沉在海底的跟踪模块",
+      "en": "Projection pools: see far-off places, like the sunken tracking module"
+     },
+     "node": "c-dmg"
+    }
+   ]
+  }
+ ],
  "traveler_leads": [
   {
    "traveler": {

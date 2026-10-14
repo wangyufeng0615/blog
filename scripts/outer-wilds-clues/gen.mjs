@@ -10,7 +10,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION } from './data.src.mjs';
+import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION, ENDINGS, TOOLS } from './data.src.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const POST = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
@@ -24,7 +24,7 @@ const MODIFIED = '2026-10-15T03:00:00+08:00';
 function pairs(file) {
   const t = fs.readFileSync(path.join(GAME_TEXT_DIR, file), 'utf8');
   const out = [];
-  const re = /(?:### (\S+) · (shiplog_text|shiplog_name)\n\n)?\*\*EN\*\*\n\n([\s\S]*?)\n\n\*\*中文\*\*\n\n([\s\S]*?)(?=\n\n(?:\*\*|#|位置与字体信息|选项条件|```)|\n*$)/g;
+  const re = /(?:### (\S+) · (shiplog_text|shiplog_name|ui)\n\n)?\*\*EN\*\*\n\n([\s\S]*?)\n\n\*\*中文\*\*\n\n([\s\S]*?)(?=\n\n(?:\*\*|#|位置与字体信息|选项条件|```)|\n*$)/g;
   let m;
   while ((m = re.exec(t))) {
     const en = m[3].split(/\n\n/).join(' ').replace(/\s+/g, ' ').trim();
@@ -36,12 +36,18 @@ function pairs(file) {
 const LOG = pairs('飞船日志中英对照.md');
 const NOMAI = pairs('挪麦文字中英对照.md');
 const DLG = pairs('对话与说明牌中英对照.md');
+const UI_TEXT = Object.fromEntries(pairs('界面中英对照.md').filter(p => p.kind === 'ui').map(p => [p.id, p]));
 const logText = Object.fromEntries(LOG.filter(p => p.kind === 'shiplog_text').map(p => [p.id, p]));
 const logName = Object.fromEntries(LOG.filter(p => p.kind === 'shiplog_name').map(p => [p.id, p]));
 
 function resolveQuote(key) {
   const [src, ...rest] = key.split(':');
   const arg = rest.join(':');
+  if (src === 'UI') {
+    const p = UI_TEXT[arg];
+    if (!p) throw new Error(`UI text not found: ${arg}`);
+    return { zh: p.zh, en: p.en, cite: { zh: '结局画面', en: 'Ending screen' } };
+  }
   if (src === 'LOG') {
     const p = logText[arg];
     if (!p) throw new Error(`Ship log entry not found: ${arg}`);
@@ -149,6 +155,17 @@ function leadsHtml(lang) {
   return leads.map(tr => `    <article class="lead-card"><h3>${escX(tr.name[lang])} <small>${escX(tr.where[lang])}</small></h3><ul>${tr.items.map(it =>
     `<li><div class="to">→ ${it.node ? `<a href="#stage" data-node="${it.node}">${escX(it.to[lang])}</a>` : escX(it.to[lang])}</div><p class="said">${escX(it.said[lang])}</p></li>`).join('')}</ul></article>`).join('\n');
 }
+const endings = ENDINGS.items.map(e => ({ ...e, quote: resolveQuote(e.quote) }));
+const linkOr = (text, node, lang) => node ? `<a href="#stage" data-node="${node}">${escX(text[lang])}</a>` : escX(text[lang]);
+function endingsHtml(lang) {
+  return endings.map(e => `    <article class="lead-card ending"><h3>${escX(e.name[lang])} <small>${escX(e.kind[lang])}</small></h3>
+      <ol class="steps">${e.steps.map(([t, n]) => `<li>${linkOr(t, n, lang)}</li>`).join('')}</ol>
+      <blockquote class="end-line">${escX(e.quote[lang])}</blockquote>${e.note ? `<p class="said">${escX(e.note[lang])}</p>` : ''}</article>`).join('\n');
+}
+function toolsHtml(lang) {
+  return TOOLS.items.map(t => `    <article class="lead-card tool"><h3>${escX(t.name[lang])} <small>${escX(t.from[lang])}</small></h3>
+      <ul class="uses">${t.uses.map(([u, n]) => `<li>${linkOr(u, n, lang)}</li>`).join('')}</ul></article>`).join('\n');
+}
 // A small Archimedean spiral, the way Nomai writing curls.
 const SPIRAL = (() => { let d = ''; for (let i = 0; i <= 64; i++) { const a = i / 64 * Math.PI * 5.2, r = 1 + i / 64 * 9.5; d += `${i ? 'L' : 'M'}${(11 + r * Math.cos(a)).toFixed(2)},${(11 + r * Math.sin(a)).toFixed(2)}`; } return `<svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="${d}"/></svg>`; })();
 
@@ -178,6 +195,8 @@ const graph = {
   })),
   faq: FAQ.map(([qq, a]) => ({ question: qq, answer: a })),
   loop_timeline: { minutes: 22, lanes: TIMELINE.lanes.map(l => ({ name: l.name, events: l.items.map(i => ({ label: i.label, at_minute: i.t ?? null, from_minute: i.from ?? null, to_minute: i.to ?? null, node: i.node || null })) })) },
+  endings: endings.map(e => ({ name: e.name, kind: e.kind, how: e.steps.map(([t, n]) => ({ step: t, node: n || null })), line: { en: e.quote.en, zh: e.quote.zh, source: e.quote.cite.en }, note: e.note || null })),
+  tools: TOOLS.items.map(t => ({ name: t.name, from: t.from, uses: t.uses.map(([u, n]) => ({ use: u, node: n || null })) })),
   traveler_leads: leads.map(tr => ({ traveler: tr.name, where: tr.where, leads: tr.items.map(i => ({ to: i.to, said: i.said, node: i.node, ship_log_rumor: i.rumor })) }))
 };
 fs.writeFileSync(path.join(POST, 'graph.json'), JSON.stringify(graph, null, 1));
@@ -229,6 +248,14 @@ ${TIMELINE.lanes.map(l => `- ${l.name.en}: ${l.items.map(i => (i.t !== undefined
 
 ${leads.map(tr => `- ${tr.name.en} (${tr.where.en}): ${tr.items.map(i => `→ ${i.to.en}: "${i.said.en}"`).join(' ')}`).join('\n')}
 
+## Tools and abilities (English)
+
+${TOOLS.items.map(t => `- ${t.name.en} (${t.from.en}): ${t.uses.map(u => u[0].en).join('; ')}`).join('\n')}
+
+## Endings (English)
+
+${endings.map(e => `- ${e.name.en} (${e.kind.en}): ${e.steps.map(s => s[0].en).join(' → ')}. Line: "${e.quote.en}"`).join('\n')}
+
 ## Full map (English)
 
 Indented items are prerequisites of the item above them.
@@ -246,6 +273,14 @@ ${TIMELINE.lanes.map(l => `- ${l.name.zh}：${l.items.map(i => i.label.zh).join(
 ## 谁给你指的路（中文）
 
 ${leads.map(tr => `- ${tr.name.zh}（${tr.where.zh}）：${tr.items.map(i => `→ ${i.to.zh}：“${i.said.zh}”`).join(' ')}`).join('\n')}
+
+## 工具与能力（中文）
+
+${TOOLS.items.map(t => `- ${t.name.zh}（${t.from.zh}）：${t.uses.map(u => u[0].zh).join('；')}`).join('\n')}
+
+## 结局图鉴（中文）
+
+${endings.map(e => `- ${e.name.zh}（${e.kind.zh}）：${e.steps.map(s => s[0].zh).join(' → ')}。原文："${e.quote.zh}"`).join('\n')}
 
 ## 完整依赖（中文）
 
@@ -341,7 +376,8 @@ for (const lang of ['zh', 'en']) {
   const vars = {
     ...c, url, image, vCss: VER.css, vData: VER.data, vJs: VER.js,
     spiral: SPIRAL, tlTitle: TIMELINE.title[lang], tlNote: TIMELINE.note[lang],
-    timelineSvg: timelineSvg(lang), leads: leadsHtml(lang),
+    timelineSvg: timelineSvg(lang), leads: leadsHtml(lang), endingsHtml: endingsHtml(lang), toolsHtml: toolsHtml(lang),
+    endTitle: ENDINGS.title[lang], toolTitle: TOOLS.title[lang],
     belowLabel: lang === 'zh' ? '往下还有' : 'Further down', belowFaq: c.faqTitle, urlZh: SITE + URLS.zh, urlEn: SITE + URLS.en, pageLang: lang,
     otherPath: lang === 'zh' ? URLS.en : URLS.zh,
     jsonld: JSON.stringify(jsonld, null, 1).replace(/<\//g, '<\\/'),
@@ -350,7 +386,7 @@ for (const lang of ['zh', 'en']) {
   };
   const html = tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => {
     if (!(k in vars)) throw new Error(`Template var missing: ${k}`);
-    return ['jsonld', 'faq', 'noscriptList', 'legend', 'src', 'agents', 'spiral', 'timelineSvg', 'leads'].includes(k) ? vars[k] : esc(vars[k]);
+    return ['jsonld', 'faq', 'noscriptList', 'legend', 'src', 'agents', 'spiral', 'timelineSvg', 'leads', 'endingsHtml', 'toolsHtml'].includes(k) ? vars[k] : esc(vars[k]);
   });
   const out = lang === 'zh' ? path.join(POST, 'index.html') : path.join(POST, 'en/index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });

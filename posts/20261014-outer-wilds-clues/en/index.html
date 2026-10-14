@@ -233,7 +233,7 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="../assets/graph.css?v=663b5c13f9">
+<link rel="stylesheet" href="../assets/graph.css?v=5ccf2b7b0a">
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -272,6 +272,8 @@
     <span>Further down</span>
     <a href="#loop">What happens in one loop</a>
     <a href="#leads">Who points you where</a>
+    <a href="#tools">Tools and abilities</a>
+    <a href="#endings">Endings</a>
     <a href="#faq">FAQ</a>
     <span class="arrow" aria-hidden="true">↓</span>
   </nav>
@@ -301,6 +303,50 @@
     <article class="lead-card"><h3>Riebeck <small>Brittle Hollow</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="r-observatory">Southern Observatory</a></div><p class="said">Riebeck says you can't get into the observatory from the surface (they tried), but there's probably a path to it beneath the crust somewhere.</p></li></ul></article>
     <article class="lead-card"><h3>Gabbro <small>Giant’s Deep</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="g-current">Ocean Depths</a></div><p class="said">Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it.</p></li><li><div class="to">→ <a href="#stage" data-node="r-workshop">Statue Island</a></div><p class="said">One of the islands on Giant’s Deep has a Nomai statue on the beach just like the one Gabbro brought back to Timber Hearth. Statue Island (as Gabbro calls it) is the one with two islands connected by a natural rock arch.</p></li><li><div class="to">→ <a href="#stage" data-node="c-dmg">Orbital Probe Cannon</a></div><p class="said">Gabbro sees a bright flash in the sky at the start of every loop. Something must be happening in orbit around Giant’s Deep.</p></li></ul></article>
     <article class="lead-card"><h3>Feldspar <small>Dark Bramble</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="c-jelly">Frozen Jellyfish</a></div><p class="said">Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog.</p></li></ul></article>
+  </div>
+
+  <h2 id="tools"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>Tools and abilities</h2>
+  <div class="leads">
+    <article class="lead-card tool"><h3>Launch codes <small>Hornfels at the observatory</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="g-start">Ride the lift up the launch tower</a></li><li><a href="#stage" data-node="a-sand-sleep">Unlocks dozing at campfires</a></li></ul></article>
+    <article class="lead-card tool"><h3>Little Scout <small>Launcher on your suit</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="q-imaging">A photo pins a quantum object in place</a></li><li><a href="#stage" data-node="c-grave">Peek through small seeds</a></li><li><a href="#stage" data-node="c-nest">Its tracker shows it in two places at once</a></li><li><a href="#stage" data-node="i-photo">Its camera sees ghost matter</a></li><li><a href="#stage" data-node="r-fos-light">Light up the fossil’s mouth</a></li></ul></article>
+    <article class="lead-card tool"><h3>Signalscope <small>Starts with the Travelers frequency; learns others near their sources</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="c-harmonica">Travelers: follow the harmonica to Feldspar</a></li><li><a href="#stage" data-node="c-pod3">Distress Beacon: appears after your first escape pod, leads to Escape Pod 3</a></li><li><a href="#stage" data-node="r-tqt-signal">Quantum Fluctuations: shards and the Quantum Moon</a></li><li><a href="#stage" data-node="goal">Find the travelers’ instruments at the Eye</a></li></ul></article>
+    <article class="lead-card tool"><h3>Translator <small>Standard gear</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="c-deduce">Read Nomai spiral text and recordings — nearly every clue depends on it</a></li></ul></article>
+    <article class="lead-card tool"><h3>Flashlight <small>Your suit</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="q-entangle">Turn it off for total darkness and you become entangled</a></li><li><a href="#stage" data-node="q-sixth">Lights out in the shrine to move with the moon</a></li></ul></article>
+    <article class="lead-card tool"><h3>Suit and jetpack <small>By the launch tower</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="r-obs-cannon">Jump between misaligned gravity lifts</a></li><li><a href="#stage" data-node="r-ws-high">Too weak for Giant’s Deep’s gravity on high ledges</a></li></ul></article>
+    <article class="lead-card tool"><h3>Ship and ship log <small>Timber Hearth launch tower</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="g-angler">Cut the engines and drift past anglerfish</a></li><li>The log records every clue and rumor; the question marks in rumor mode are places you haven’t been</li></ul></article>
+    <article class="lead-card tool"><h3>Campfire <small>On every planet</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="a-sand-sleep">Doze to skip time, e.g. until the sand drains</a></li><li>Meditate to end the loop early: from the third loop, ask Gabbro how they stay so calm</li><li>Roast marshmallows to heal</li></ul></article>
+    <article class="lead-card tool"><h3>Nomai devices <small>All over the system</small></h3>
+      <ul class="uses"><li><a href="#stage" data-node="g-warp">Warp pads: wait for the target overhead</a></li><li><a href="#stage" data-node="i-shuttle">Gravity cannons: recall a shuttle</a></li><li><a href="#stage" data-node="c-dmg">Projection pools: see far-off places, like the sunken tracking module</a></li></ul></article>
+  </div>
+
+  <h2 id="endings"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>Endings</h2>
+  <div class="leads">
+    <article class="lead-card ending"><h3>The Eye of the Universe <small>Main ending</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="g-insight">Put the project’s core in the Vessel, enter the coordinates, warp</a></li><li>Walk from the north pole to the south, drop into the crater in the quantum storm, arrive at a quantum observatory</li><li>Light a campfire in the glade, find each traveler’s instrument with the signalscope, and play together</li><li><a href="#stage" data-node="q-goal">If you met Solanum she joins too, and the post-credits shot gains a new campfire with alien campers</a></li></ol>
+      <blockquote class="end-line">But I think the rules are about to change.</blockquote></article>
+    <article class="lead-card ending"><h3>Stay at the sixth location <small>Hidden ending</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="c-atp-core">Take the project’s core; the loop stops</a></li><li><a href="#stage" data-node="q-sixth">Land on the Quantum Moon, go to its sixth location, wait for the supernova</a></li></ol>
+      <blockquote class="end-line">HOW LONG HAVE YOU BEEN HERE? MINUTES? YEARS? YOU ARE UNSURE BUT IT SEEMS YOUR JOURNEY HAS REACHED ITS END.</blockquote><p class="said">At launch this ending showed only “813” — the line’s ID in the game text — so players called it the 813 ending until patch 1.0.2.</p></article>
+    <article class="lead-card ending"><h3>Adrift <small>Hidden ending</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="c-atp-core">Take the project’s core</a></li><li>Fly far enough from the Sun to outrun the supernova</li></ol>
+      <blockquote class="end-line">NOW BEYOND THE REACH OF THE SUPERNOVA, YOU DRIFT THROUGH SPACE UNTIL YOUR SHIP'S RESOURCES ARE FINALLY DEPLETED</blockquote></article>
+    <article class="lead-card ending"><h3>Breaking spacetime <small>Hidden ending</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="r-hel">In the High Energy Lab, fit a black hole core and a white hole core and fire your scout into the black hole</a></li><li>After it comes out of the white hole but before it goes in, pull a core: now two scouts exist</li></ol>
+      <blockquote class="end-line">YOU DESTROYED THE FABRIC OF SPACETIME</blockquote><p class="said">The credits then race by to a kazoo cover of the theme.</p></article>
+    <article class="lead-card ending"><h3>Meeting yourself <small>Hidden ending</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="core">As the supernova hits, jump into the black hole that opens at the center of the Ash Twin Project</a></li><li>Next loop another you is waiting in the project; skip the jump this time and spacetime breaks</li></ol>
+      <blockquote class="end-line">Are you me from the last loop?</blockquote><p class="said">Added in patch 1.0.4.</p></article>
+    <article class="lead-card ending"><h3>Game over <small>Death</small></h3>
+      <ol class="steps"><li><a href="#stage" data-node="c-loop">Die before the statue pairs with you, and the game starts over</a></li><li><a href="#stage" data-node="c-atp-core">Die after taking the project’s core, and you don’t wake up</a></li></ol>
+      <blockquote class="end-line">YOU ARE DEAD</blockquote></article>
   </div>
 
   <h2 id="faq"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>FAQ</h2>
@@ -336,7 +382,7 @@ document.querySelector('.lang').addEventListener('click', function () {
   try { localStorage.setItem('owc-lang', this.dataset.lang); } catch (e) {}
 });
 </script>
-<script src="../assets/graph-data.js?v=262ff03eb4"></script>
+<script src="../assets/graph-data.js?v=0983770627"></script>
 <script src="../assets/graph.js?v=a8befed627"></script>
 </body>
 </html>

@@ -153,6 +153,12 @@ svg.focus .edge.hl { stroke-width: 2.4; opacity: 1; }
 .lead-card .to a { color: var(--accent); text-decoration: none; }
 .lead-card .to a:hover { text-decoration: underline; }
 .lead-card .said { margin: 3px 0 0; font-size: 13px; color: var(--muted); }
+.lead-card .steps, .lead-card .uses { margin: 10px 0 0; padding-left: 1.3em; display: grid; gap: 5px; font-size: 14px; }
+.lead-card .uses { list-style: none; padding-left: 0; }
+.lead-card .uses li { border-top: 1px solid var(--line); padding-top: 6px; }
+.lead-card .steps a, .lead-card .uses a { color: var(--fg); text-decoration: none; border-bottom: 1px dashed var(--accent); }
+.lead-card .steps a:hover, .lead-card .uses a:hover { color: var(--accent); }
+.lead-card .end-line { margin: 12px 0 0; padding: 8px 12px; border-left: 3px solid var(--sun); background: var(--bg-2); border-radius: 0 6px 6px 0; font-size: 13px; letter-spacing: .02em; }
 
 .noscript { max-width: 860px; margin: 16px auto; padding: 0 20px; }
 .noscript ul { padding-left: 1.3em; }
