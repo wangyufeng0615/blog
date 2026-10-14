@@ -233,7 +233,7 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="assets/graph.css?v=1db078fba9">
+<link rel="stylesheet" href="assets/graph.css?v=97e23c9039">
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -252,6 +252,13 @@
 
   <div class="stage" id="stage">
     <svg id="graph" role="img" aria-label="星际拓荒线索依赖图：通关主线、地点入口、量子卫星支线、闯入者支线。文字版见本页 llms.txt。"></svg>
+    <p class="zoom-tip" id="zoom-tip">双指或 Ctrl/⌘ + 滚轮放大，拖动查看细节</p>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="缩小">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="放大">+</button>
+      <button type="button" id="z-fit">全貌</button>
+    </div>
   </div>
 </div>
 <noscript>
@@ -358,6 +365,6 @@ document.querySelector('.lang').addEventListener('click', function () {
 });
 </script>
 <script src="assets/graph-data.js?v=a7fc08bd76"></script>
-<script src="assets/graph.js?v=cd81e19a79"></script>
+<script src="assets/graph.js?v=9dd2e4d643"></script>
 </body>
 </html>
