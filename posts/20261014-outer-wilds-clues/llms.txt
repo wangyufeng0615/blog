@@ -65,7 +65,7 @@ After the Sun Station failed, the Nomai went to study a newly arrived comet, the
 
 Indented items are prerequisites of the item above them.
 
-### Main path: Get all three — the coordinates, the Vessel and the advanced warp core — to warp to the Eye of the Universe
+### Main path
 
 - Warp to the Eye of the Universe — Deep in Dark Bramble · the Vessel’s bridge (needs all of)
   - The Eye’s coordinates — Giant’s Deep core · Probe Tracking Module (needs all of)
@@ -120,7 +120,7 @@ Indented items are prerequisites of the item above them.
       - Sand flows from Ash Twin to Ember Twin — Hourglass Twins
       - [other in-game clue] Doze at a campfire to skip ahead — Any campfire
 
-### Getting there: Entrances, how you find them, and when to go. Places on the cards above link here
+### Getting there
 
 - The High Energy Lab — Ember Twin’s equatorial canyon (needs all of)
   - The front door is locked from inside
@@ -186,7 +186,7 @@ Indented items are prerequisites of the item above them.
   - An entrance inside the biggest geyser mountain — Timber Hearth · Nomai ruins
   - Warp in from the Timber Hearth tower on Ash Twin — Ash Twin’s equator
 
-### Quantum Moon: Optional. Finish it and Solanum joins the campfire at the end
+### Quantum Moon: Optional
 
 - Meet Solanum at the sixth location — Quantum Moon · orbiting the Eye (needs all of)
   - Land on the Quantum Moon — You always land at the south pole (any one of)
@@ -202,7 +202,7 @@ Indented items are prerequisites of the item above them.
   - Rule of the sixth location — The shrine must be at the north pole
     - Tower of Quantum Knowledge — Brittle Hollow’s equator
 
-### The Interloper: Optional. Explains what wiped out the Nomai; not needed to finish
+### The Interloper: Optional
 
 - What killed the Nomai — The Interloper · ruptured core (needs all of)
   - Learn the Nomai went to the comet (any one of)
@@ -272,7 +272,7 @@ Indented items are prerequisites of the item above them.
 
 缩进项是上一项的前置。
 
-### 通关主线：坐标、飞船、高级跃迁核心三样凑齐，才能跃迁到宇宙之眼
+### 通关主线
 
 - 跃迁到宇宙之眼 — 黑棘星深处 · 挪麦飞船舰桥 (以下全部需要)
   - 宇宙之眼坐标 — 深巨星核心 · 探测器跟踪模块 (以下全部需要)
@@ -327,7 +327,7 @@ Indented items are prerequisites of the item above them.
       - 沙子从灰烬流向余烬 — 沙漏双星
       - [官方另一解] 在营火边打盹快进 — 任意营火
 
-### 怎么到那儿：关键地点的入口、发现方式和时机。上面卡片里的地点，点开详情能跳到这里
+### 怎么到那儿
 
 - 高能实验室 — 余烬双星赤道峡谷 (以下全部需要)
   - 正门从里面锁着
@@ -393,7 +393,7 @@ Indented items are prerequisites of the item above them.
   - 最大的间歇泉山里有入口 — 木炉星 · 挪麦遗迹
   - 从灰烬双星的木炉星塔跃迁过来 — 灰烬双星赤道
 
-### 量子卫星支线：可选。走完后，结局营火边会多出所莱内姆
+### 量子卫星支线：可选
 
 - 在第六个位置见到所莱内姆 — 量子卫星 · 宇宙之眼的轨道 (以下全部需要)
   - 登上量子卫星 — 总是在南极着陆 (以下任选一)
@@ -409,7 +409,7 @@ Indented items are prerequisites of the item above them.
   - 第六位置法则 — 祭坛必须在卫星北极
     - 量子知识之塔 — 碎空星赤道
 
-### 闯入者支线：可选。只解释挪麦人为什么灭绝，不影响通关
+### 闯入者支线：可选
 
 - 挪麦人灭绝的真相 — 闯入者 · 破裂的核心 (以下全部需要)
   - 知道挪麦人去过彗星 (以下任选一)

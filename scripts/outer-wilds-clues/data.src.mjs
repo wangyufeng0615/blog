@@ -12,7 +12,7 @@ export const BANDS = [
   {
     key: 'main',
     title: L('通关主线', 'Main path'),
-    band: L('坐标、飞船、高级跃迁核心三样凑齐，才能跃迁到宇宙之眼', 'Get all three — the coordinates, the Vessel and the advanced warp core — to warp to the Eye of the Universe'),
+    band: L('', ''),
     roots: [{
       id: 'goal', t: 'goal', label: L('跃迁到宇宙之眼', 'Warp to the Eye of the Universe'), place: L('黑棘星深处 · 挪麦飞船舰桥', 'Deep in Dark Bramble · the Vessel’s bridge'), req: 'all',
       info: [L('把高级跃迁核心装进飞船，在舰桥的三面柱上输入坐标，飞船就会跃迁到宇宙之眼。', 'Install the advanced warp core in the Vessel, enter the coordinates on the three-sided pillar on the bridge, and the Vessel warps to the Eye.'),
@@ -148,7 +148,7 @@ export const BANDS = [
   {
     key: 'reach',
     title: L('怎么到那儿', 'Getting there'),
-    band: L('关键地点的入口、发现方式和时机。上面卡片里的地点，点开详情能跳到这里', 'Entrances, how you find them, and when to go. Places on the cards above link here'),
+    band: L('', ''),
     roots: [
       { id: 'r-hel', t: 'loc', label: L('高能实验室', 'The High Energy Lab'), place: L('余烬双星赤道峡谷', 'Ember Twin’s equatorial canyon'), req: 'all',
         kids: [
@@ -311,7 +311,7 @@ export const BANDS = [
   {
     key: 'qm',
     title: L('量子卫星支线', 'Quantum Moon'),
-    band: L('可选。走完后，结局营火边会多出所莱内姆', 'Optional. Finish it and Solanum joins the campfire at the end'),
+    band: L('可选', 'Optional'),
     roots: [{
       id: 'q-goal', t: 'goal', label: L('在第六个位置见到所莱内姆', 'Meet Solanum at the sixth location'), place: L('量子卫星 · 宇宙之眼的轨道', 'Quantum Moon · orbiting the Eye'), req: 'all',
       quote: [q('LOG:QM_SIXTH_LOCATION_X3'), q('LOG:QM_SIXTH_LOCATION_X2')],
@@ -350,7 +350,7 @@ export const BANDS = [
   {
     key: 'comet',
     title: L('闯入者支线', 'The Interloper'),
-    band: L('可选。只解释挪麦人为什么灭绝，不影响通关', 'Optional. Explains what wiped out the Nomai; not needed to finish'),
+    band: L('可选', 'Optional'),
     roots: [{
       id: 'i-goal', t: 'goal', label: L('挪麦人灭绝的真相', 'What killed the Nomai'), place: L('闯入者 · 破裂的核心', 'The Interloper · ruptured core'), req: 'all',
       quote: [q('LOG:COMET_INTERIOR_X3')],
@@ -408,8 +408,7 @@ export const FAQ = [
 // node: canvas node to jump to. Times from the Outer Wilds Wiki (Sun, Sun Station, Interloper, Ash Twin Project, Hourglass Twins pages).
 export const TIMELINE = {
   title: L('一个循环里会发生什么', 'What happens in one loop'),
-  lead: L('每一轮只有 22 分钟，太阳一直在变老，各颗星球也在按自己的节奏变化。很多入口只在某段时间开着。', 'Every loop lasts 22 minutes. The Sun keeps aging and each planet changes on its own schedule, so many ways in are only open for part of the loop.'),
-  note: L('时间取自官方 Wiki，各页对太阳膨胀的时间说法在第 10.5 到 12 分钟之间，图上标的是大约位置。点带下划线的事件可跳到上面的画布。', 'Times come from the Outer Wilds Wiki; its pages put the Sun’s swelling between 10.5 and 12 minutes, so positions are approximate. Click an event to jump to it on the map above.'),
+  note: L('时间为约数', 'Times are approximate'),
   lanes: [
     { name: L('木炉星', 'Timber Hearth'), items: [
       { t: 0, row: 0, label: L('在营火边醒来', 'Wake up by the campfire') } ] },
