@@ -88,6 +88,78 @@
  ],
  "nodes": [
   {
+   "id": "c-loop",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "你被困在 22 分钟的循环里",
+    "en": "You are stuck in a 22-minute loop"
+   },
+   "place": {
+    "zh": "木炉星 · 天文台的挪麦雕像",
+    "en": "Timber Hearth · the Nomai statue in the observatory"
+   },
+   "player_action": "realize",
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-start"
+   ],
+   "notes": [
+    {
+     "zh": "第一次死亡或看到超新星后，你会在营火边重新醒来。原因是天文台的挪麦雕像睁眼和你配对了，之后每一轮你都带着记忆回来。",
+     "en": "After your first death or supernova you wake at the campfire again: the observatory’s Nomai statue opened its eyes and paired with you, so you keep your memories every loop."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "The Nomai statue in the observatory opened its eyes and looked at me! I saw strange glowing lights and my own memories flashed before my eyes.",
+     "zh": "天文台里的那座挪麦雕像睁开了眼睛，还盯着我看！我看见了奇怪的光芒，我的回忆在眼前闪过。",
+     "source": "Ship log · Village"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-start",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "拿到发射密码，起飞",
+    "en": "Get the launch codes and lift off"
+   },
+   "place": {
+    "zh": "木炉星 · 天文台的霍恩费斯",
+    "en": "Timber Hearth · Hornfels at the observatory"
+   },
+   "player_action": "explore",
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-loop"
+   ],
+   "unlocks": [
+    "goal"
+   ],
+   "notes": [
+    {
+     "zh": "一切的起点。去天文台找霍恩费斯拿发射密码，才能坐升降梯上发射台。",
+     "en": "Where it all starts: Hornfels at the observatory gives you the launch codes for the launch tower lift."
+    }
+   ],
+   "quotes": [
+    {
+     "en": "Here they are. Best get off the ground before Slate makes any more modifications to your ship, eh?",
+     "zh": "在这儿呢。我们最好在斯雷特对宇宙飞船做出任何调整之前赶紧升空，怎么样？",
+     "source": "Dialogue and signs"
+    }
+   ],
+   "references": []
+  },
+  {
    "id": "c-dmg",
    "type": "clue",
    "band": "main",
@@ -156,8 +228,8 @@
     "en": "Feldspar reached the core"
    },
    "place": {
-    "zh": "黑棘星 · 费尔德斯巴",
-    "en": "Dark Bramble · Feldspar"
+    "zh": "深巨星 · 荆棘岛上他的旧营地",
+    "en": "Giant’s Deep · his old camp on Bramble Island"
    },
    "player_action": "realize",
    "requires": null,
@@ -668,8 +740,8 @@
    ],
    "notes": [
     {
-     "zh": "飞船线和水母线都要穿过黑棘星，所以这是整张图里两条线共用的门槛。",
-     "en": "Both the Vessel line and the jellyfish line run through Dark Bramble, so this gate is shared."
+     "zh": "飞船线和水母线都要穿过黑棘星：入口的中枢里就有一条，飞船所在的种子更是在有五条安康鱼的鱼巢里。",
+     "en": "Both the Vessel line and the jellyfish line run through Dark Bramble: one waits in the hub you enter first, and the Vessel’s seed sits in the nest guarded by five."
     }
    ],
    "quotes": [],
@@ -684,8 +756,8 @@
     "en": "Jellyfish insides are insulated"
    },
    "place": {
-    "zh": "黑棘星 · 费尔德斯巴营地的冻水母",
-    "en": "Dark Bramble · the frozen jellyfish at Feldspar’s camp"
+    "zh": "黑棘星南极外壳 · 空心藤尽头的冻水母",
+    "en": "Dark Bramble’s south pole crust · frozen jellyfish at the end of the hollow vine"
    },
    "player_action": "realize",
    "requires": "all",
@@ -700,11 +772,16 @@
    ],
    "notes": [
     {
-     "zh": "钻进深巨星的水母体内，就能随它穿过电场。",
-     "en": "Get inside a Giant’s Deep jellyfish and ride it through the field."
+     "zh": "问费尔德斯巴怎么去深巨星核心，他不直说，只让你去他飞船撞上的那根空心藤尽头看看。藤通到黑棘星外壳的一道裂缝，里面冻着一只水母和他的笔记。钻进深巨星的水母体内，就能随它穿过电场。",
+     "en": "Ask Feldspar how to reach Giant’s Deep’s core and he only tells you to see where the hollow vine his ship hit ends. It leads to a crack in Dark Bramble’s outer crust with a frozen jellyfish and his notes. Get inside a Giant’s Deep jellyfish and ride it through the field."
     }
    ],
    "quotes": [
+    {
+     "en": "Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog.",
+     "zh": "费尔德斯巴提示说，抵达深巨星核心的秘密就藏在他的飞船坠毁的那棵空心藤蔓尽头里。我要去安康鱼骨架的尾巴那里，在迷雾里寻找闪烁的光亮，才能发现费尔德斯巴的飞船。",
+     "source": "Ship log · Frozen Jellyfish"
+    },
     {
      "en": "Feldspar documented their attempts to eat this enormous jellyfish frozen in the ice. The outside was all rubbery and tough, possibly because it insulates the jellyfish’s insides from getting zapped by electricity.",
      "zh": "费尔德斯巴曾经多次尝试吃掉这条冰封起来的巨大水母，并把这些内容记录了下来。外皮就像橡胶，根本咬不动。可能是为了起到绝缘的作用，保护水母内部，以免触电。",
@@ -717,6 +794,37 @@
     }
    ],
    "references": []
+  },
+  {
+   "id": "a-jelly-crust",
+   "type": "alternative",
+   "band": "main",
+   "label": {
+    "zh": "从外面撞见冻水母",
+    "en": "Find the frozen jellyfish from outside"
+   },
+   "place": {
+    "zh": "黑棘星南极的外壳碎片",
+    "en": "Dark Bramble’s south pole crust"
+   },
+   "player_action": null,
+   "requires": null,
+   "alternative_kind": "luck",
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-field"
+   ],
+   "notes": [
+    {
+     "zh": "那道裂缝也能从黑棘星外面找到，不必先见费尔德斯巴。",
+     "en": "The crack can also be found from outside Dark Bramble, without meeting Feldspar first."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Dark_Bramble"
+   ]
   },
   {
    "id": "g-field",
@@ -735,7 +843,8 @@
    "alternative_kind": null,
    "location_ref": null,
    "prerequisites": [
-    "c-jelly"
+    "c-jelly",
+    "a-jelly-crust"
    ],
    "unlocks": [
     "coords"
@@ -882,8 +991,8 @@
     "en": "Escape Pod 3: two beacons"
    },
    "place": {
-    "zh": "黑棘星 · 3号逃生舱",
-    "en": "Dark Bramble · Escape Pod 3"
+    "zh": "顺着信号镜的求救信号找到",
+    "en": "Found by its distress signal on the signalscope"
    },
    "player_action": "realize",
    "requires": null,
@@ -895,8 +1004,8 @@
    ],
    "notes": [
     {
-     "zh": "3号逃生舱的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。",
-     "en": "The Escape Pod 3 survivors heard two identical Vessel beacons, followed the nearer one leaving a trail of lights, and died at a small seed. Follow the lights to the grave."
+     "zh": "找到碎空星或余烬双星的逃生舱后，信号镜会多出\"求救信号\"频道，黑棘星里有一颗种子正发着这个信号。舱里的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。",
+     "en": "After you find the escape pod on Brittle Hollow or Ember Twin, your signalscope picks up the distress frequency, and one seed in Dark Bramble is sending it. The survivors heard two identical Vessel beacons, followed the nearer one leaving a trail of lights, and died at a small seed. Follow the lights to the grave."
     }
    ],
    "quotes": [
@@ -906,15 +1015,17 @@
      "source": "Ship log · Escape Pod 3"
     }
    ],
-   "references": []
+   "references": [
+    "https://outerwilds.fandom.com/wiki/Escape_Pods"
+   ]
   },
   {
    "id": "c-grave",
    "type": "clue",
    "band": "main",
    "label": {
-    "zh": "侦察兵射进小种子，拍到飞船",
-    "en": "Scout into the small seed and photograph it"
+    "zh": "侦察兵射进坟墓的小种子",
+    "en": "Fire the scout into the grave’s small seed"
    },
    "place": {
     "zh": "黑棘星 · 挪麦坟墓",
@@ -928,7 +1039,7 @@
     "c-pod3"
    ],
    "unlocks": [
-    "g-whichseed"
+    "c-nest"
    ],
    "notes": [],
    "quotes": [
@@ -939,6 +1050,70 @@
     }
    ],
    "references": []
+  },
+  {
+   "id": "c-feld-two",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "费尔德斯巴：这里的空间不正常",
+    "en": "Feldspar: space works differently here"
+   },
+   "place": {
+    "zh": "黑棘星 · 费尔德斯巴的营地",
+    "en": "Dark Bramble · Feldspar’s camp"
+   },
+   "player_action": "realize",
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "c-nest"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "Feldspar doesn't think my scout tracker is wrong when it says my scout is in two places at once. They have a theory that space doesn’t work the same inside Dark Bramble.",
+     "zh": "我的侦查跟踪器说，侦查兵同时出现在了两个地方。而费尔德斯巴认为跟踪器说得没错。他得出了一个理论，认为那里的空间和黑棘星内部的空间是不一样的。",
+     "source": "Ship log · Feldspar’s Camp"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-nest",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "另一个入口在安康鱼巢里",
+    "en": "The other way in is in the anglerfish nest"
+   },
+   "place": {
+    "zh": "黑棘星 · 鱼巢里那颗不发光的种子",
+    "en": "Dark Bramble · the unlit seed in the nest"
+   },
+   "player_action": "realize",
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-grave",
+    "c-feld-two"
+   ],
+   "unlocks": [
+    "g-whichseed"
+   ],
+   "notes": [
+    {
+     "zh": "坟墓那颗种子太小，只有侦察兵进得去。侦察兵进去后，追踪器显示它同时在两个地方：另一处是安康鱼巢里一颗不发光的大种子，飞船只能从那里进。这就是两个信标的真相。",
+     "en": "The grave seed only fits your scout. Once inside, the tracker shows the scout in two places at once; the other is an unlit, ship-sized seed in the anglerfish nest. That is the second beacon."
+    }
+   ],
+   "quotes": [],
+   "references": [
+    "https://outerwilds.fandom.com/wiki/The_Vessel"
+   ]
   },
   {
    "id": "a-seed-explore",
@@ -962,8 +1137,8 @@
    ],
    "notes": [
     {
-     "zh": "飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗。",
-     "en": "The Vessel’s seed is in the anglerfish nest — the only one that doesn’t glow."
+     "zh": "飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗；巢里另外三颗通向一个死循环的空间。",
+     "en": "The Vessel’s seed is in the anglerfish nest — the only one that doesn’t glow; the other three lead to a space that loops back on itself."
     }
    ],
    "quotes": [],
@@ -988,7 +1163,7 @@
    "alternative_kind": null,
    "location_ref": null,
    "prerequisites": [
-    "c-grave",
+    "c-nest",
     "a-seed-explore"
    ],
    "unlocks": [
@@ -1377,6 +1552,11 @@
    "notes": [],
    "quotes": [
     {
+     "en": "POKE: Of note: Yarrow believes he spotted a flaw in the warp tower designs: namely, that one of the warp towers on Ash Twin will never activate, because its warp receiver will never align overhead.",
+     "zh": "珀克：注意事项：亚罗相信自己发现了跃迁塔设计图上的一处缺陷：灰烬双星上的一座跃迁塔无法激活，因为它的跃迁接收点无法对准正上方。",
+     "source": "Nomai text"
+    },
+    {
      "en": "The Hourglass Twins are so close together they function as a single astral body, with a shared alignment point in between them.",
      "zh": "沙漏双星离得特别近，就像一个天体一样，它们共用的对准点就在双星之间。",
      "source": "Ship log · Black Hole Forge"
@@ -1389,8 +1569,8 @@
    "type": "clue",
    "band": "main",
    "label": {
-    "zh": "推理：接收点就在灰烬双星上",
-    "en": "Deduce: the receiver is on Ash Twin"
+    "zh": "推理：余烬双星到头顶时它就启动",
+    "en": "Deduce: it fires when Ember Twin is overhead"
    },
    "place": null,
    "player_action": "realize",
@@ -1406,8 +1586,8 @@
    ],
    "notes": [
     {
-     "zh": "赤道那圈高塔各通一处，只有计划塔看不出通向哪里。按黑洞熔炉的规则，沙漏双星共用两星之间的对准点，所以它的接收点就在灰烬双星自己身上。",
-     "en": "Each tower on the equator leads somewhere, except the project tower. By the Forge’s rule the Hourglass Twins share an alignment point between them, so its receiver must be on Ash Twin itself."
+     "zh": "赤道那圈塔各通一处，样子对应目的地。有一座塔看起来永远对不上，因为它的接收点就在灰烬双星中心。按熔炉的规则，沙漏双星共用两星之间的对准点：站在这座塔里的平台上，等余烬双星经过头顶，就会被传进计划。",
+     "en": "Each tower on the equator leads somewhere and looks like its destination. One seems like it could never align, because its receiver is inside Ash Twin itself. By the Forge’s rule the twins share an alignment point between them: stand on the pad inside that tower and wait for Ember Twin to pass overhead."
     }
    ],
    "quotes": [],
@@ -1474,12 +1654,12 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "计划塔的接收点",
-    "en": "The project tower’s receiver"
+    "zh": "通往计划的那座塔",
+    "en": "The tower that leads into the project"
    },
    "place": {
-    "zh": "灰烬双星表面",
-    "en": "Ash Twin’s surface"
+    "zh": "灰烬双星赤道 · 一对用桥相连的塔",
+    "en": "Ash Twin’s equator · a pair of towers joined by a bridge"
    },
    "player_action": "explore",
    "requires": "any",
@@ -1519,8 +1699,8 @@
    ],
    "notes": [
     {
-     "zh": "循环开始时接收点埋在沙下，大约第 7 分 50 秒才露出来能用。",
-     "en": "The receiver starts buried; it becomes usable about 7:50 into the loop."
+     "zh": "这座塔一开始埋在沙里，大约第 7 分 50 秒才露出足够的空间站上塔里的平台。塔顶有破口，小心被落沙冲走。",
+     "en": "The tower starts buried; from about 7:50 enough of it is clear to stand on the pad inside. Mind the sand pouring through its broken roof."
     }
    ],
    "quotes": [],
@@ -1562,12 +1742,12 @@
    "type": "gate",
    "band": "main",
    "label": {
-    "zh": "等沙子露出接收点",
-    "en": "Wait for the sand to uncover it"
+    "zh": "等沙子让出塔门",
+    "en": "Wait for the sand to clear the tower"
    },
    "place": {
-    "zh": "灰烬双星表面",
-    "en": "Ash Twin’s surface"
+    "zh": "灰烬双星赤道",
+    "en": "Ash Twin’s equator"
    },
    "player_action": null,
    "requires": "any",
@@ -1627,6 +1807,126 @@
    "references": []
   },
   {
+   "id": "c-v-core",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "飞船的跃迁核心早已失灵",
+    "en": "The Vessel’s warp core is long dead"
+   },
+   "place": {
+    "zh": "挪麦飞船 · 舰桥",
+    "en": "Nomai Vessel · bridge"
+   },
+   "player_action": "realize",
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-insight"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "The Vessel's warp core is long dead.",
+     "zh": "飞船的跃迁核心早已失灵。",
+     "source": "Ship log · The Vessel"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-v-input",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "舰桥的三面柱能输入坐标",
+    "en": "The three-sided pillar takes coordinates"
+   },
+   "place": {
+    "zh": "挪麦飞船 · 舰桥",
+    "en": "Nomai Vessel · bridge"
+   },
+   "player_action": "realize",
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-insight"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "I activated a three-sided pillar on the Vessel's bridge that appears to be some sort of input device.",
+     "zh": "我启动了飞船舰桥上的一根三面柱。它看上去像是某种输入装置。",
+     "source": "Ship log · The Vessel"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "c-atp-core",
+   "type": "clue",
+   "band": "main",
+   "label": {
+    "zh": "计划中心的核心可以取下",
+    "en": "The project’s core can be removed"
+   },
+   "place": {
+    "zh": "灰烬双星计划 · 中央",
+    "en": "Ash Twin Project · center"
+   },
+   "player_action": "realize",
+   "requires": null,
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [],
+   "unlocks": [
+    "g-insight"
+   ],
+   "notes": [],
+   "quotes": [
+    {
+     "en": "WARNING: Removing the core will disable the Ash Twin Project.",
+     "zh": "警告：移除核心将会关闭灰烬双星计划。",
+     "source": "Nomai text"
+    }
+   ],
+   "references": []
+  },
+  {
+   "id": "g-insight",
+   "type": "gate",
+   "band": "main",
+   "label": {
+    "zh": "把计划的核心装进飞船",
+    "en": "Put the project’s core into the Vessel"
+   },
+   "place": null,
+   "player_action": "realize",
+   "requires": "all",
+   "alternative_kind": null,
+   "location_ref": null,
+   "prerequisites": [
+    "c-v-core",
+    "c-v-input",
+    "c-atp-core"
+   ],
+   "unlocks": [
+    "goal"
+   ],
+   "notes": [
+    {
+     "zh": "最后的顿悟：飞船缺一颗核心，计划里正好有一颗。取下它，循环就停了，所以要在同一轮里把核心带进黑棘星。",
+     "en": "The last realization: the Vessel is missing a core and the project has one. Taking it stops the loop, so you have to carry it into Dark Bramble in that same loop."
+    }
+   ],
+   "quotes": [],
+   "references": []
+  },
+  {
    "id": "goal",
    "type": "goal",
    "band": "main",
@@ -1643,9 +1943,11 @@
    "alternative_kind": null,
    "location_ref": null,
    "prerequisites": [
+    "g-start",
     "coords",
     "vessel",
-    "core"
+    "core",
+    "g-insight"
    ],
    "unlocks": [],
    "notes": [
@@ -1660,19 +1962,9 @@
    ],
    "quotes": [
     {
-     "en": "The Vessel's warp core is long dead.",
-     "zh": "飞船的跃迁核心早已失灵。",
+     "en": "I found a recording of the original signal the Nomai encountered from the Eye of the universe. The Nomai were worried the signal might disappear, so they warped before they could tell another clan where they were going.",
+     "zh": "我找到了一份记录，上面是挪麦人从宇宙之眼那里收到的原始信号。挪麦人担心信号会消失，那个信号是从某个比宇宙还要古老的地方发出来的因此他们还没有来得及告诉其它家族自己要去哪里，就跃迁走了。",
      "source": "Ship log · The Vessel"
-    },
-    {
-     "en": "I activated a three-sided pillar on the Vessel's bridge that appears to be some sort of input device.",
-     "zh": "我启动了飞船舰桥上的一根三面柱。它看上去像是某种输入装置。",
-     "source": "Ship log · The Vessel"
-    },
-    {
-     "en": "WARNING: Removing the core will disable the Ash Twin Project.",
-     "zh": "警告：移除核心将会关闭灰烬双星计划。",
-     "source": "Nomai text"
     }
    ],
    "references": []
@@ -4200,6 +4492,16 @@
   },
   {
    "question": {
+    "zh": "飞船在黑棘星哪里，怎么进去？",
+    "en": "Where is the Vessel in Dark Bramble and how do you get in?"
+   },
+   "answer": {
+    "zh": "先用信号镜的求救信号频道找到3号逃生舱，顺着幸存者留下的灯走到挪麦坟墓。坟墓前那颗种子太小，只能射侦察兵进去；进去后追踪器显示侦察兵同时在两个地方，另一处就是安康鱼巢里一颗不发光的大种子。穿过鱼巢的安康鱼，从那颗种子进去就是飞船。",
+    "en": "Use the signalscope’s distress frequency to find Escape Pod 3 and follow the survivors’ lights to the Nomai Grave. The seed there only fits your scout; once inside, the tracker shows the scout in two places, and the other one is an unlit, ship-sized seed in the anglerfish nest. Slip past the anglerfish in the nest and take that seed to the Vessel."
+   }
+  },
+  {
+   "question": {
     "zh": "黑棘星的安康鱼怎么躲？",
     "en": "How do you get past the anglerfish in Dark Bramble?"
    },
@@ -4224,8 +4526,8 @@
     "en": "How do you get into the Ash Twin Project?"
    },
    "answer": {
-    "zh": "保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；黑洞熔炉说明沙漏双星共用两星之间的对准点，高能实验室的高塔设计图对应每座塔的去向，合起来能推出计划塔的接收点就在灰烬双星表面。接收点一开始埋在沙下，大约第 7 分 50 秒露出来。",
-    "en": "Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the Black Hole Forge says the Hourglass Twins share one alignment point between them; the tower designs in the High Energy Lab show where each tower goes. Together they tell you the project tower’s receiver is on Ash Twin’s surface. It is buried by sand until about 7:50 into the loop."
+    "zh": "保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；高能实验室的高塔设计图对应每座塔的去向；黑洞熔炉说明沙漏双星共用两星之间的对准点。合起来就知道：灰烬双星赤道上有一座塔的接收点在星球中心，站在那座塔里的平台上，等余烬双星经过头顶就会被传进去。那座塔一开始埋在沙里，大约第 7 分 50 秒才进得去。",
+    "en": "Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the tower designs in the High Energy Lab show where each tower goes; the Black Hole Forge says the Hourglass Twins share one alignment point between them. Put together: one tower on Ash Twin’s equator has its receiver at the planet’s center — stand on the pad inside it and wait for Ember Twin to pass overhead. The tower is buried in sand until about 7:50 into the loop."
    }
   },
   {
@@ -4346,8 +4648,8 @@
      },
      {
       "label": {
-       "zh": "约 7:50 计划塔接收点露出",
-       "en": "~7:50 project tower receiver uncovered"
+       "zh": "约 7:50 通往计划的塔露出",
+       "en": "~7:50 the project tower is uncovered"
       },
       "at_minute": 7.83,
       "from_minute": null,

@@ -15,6 +15,10 @@
 
 Three things: the Eye of the Universe’s coordinates (in the Probe Tracking Module at the core of Giant’s Deep), the Nomai Vessel (stuck deep in Dark Bramble), and the advanced warp core (in the central chamber of the Ash Twin Project). Put the core in the Vessel, enter the coordinates on the bridge, and warp to the Eye. Taking the core stops the time loop, so do it last.
 
+### Where is the Vessel in Dark Bramble and how do you get in?
+
+Use the signalscope’s distress frequency to find Escape Pod 3 and follow the survivors’ lights to the Nomai Grave. The seed there only fits your scout; once inside, the tracker shows the scout in two places, and the other one is an unlit, ship-sized seed in the anglerfish nest. Slip past the anglerfish in the nest and take that seed to the Vessel.
+
 ### How do you get past the anglerfish in Dark Bramble?
 
 Anglerfish are blind and hunt by sound, so cut your engines and drift. The clue is the anglerfish fossil on Ember Twin, where Nomai children played a game in which the “anglerfish” wore a blindfold. You leave each seed at a fixed speed and heading, so simply drifting works well.
@@ -25,7 +29,7 @@ The intended way is to ride a counterclockwise cyclone down; the clue is the cyc
 
 ### How do you get into the Ash Twin Project?
 
-Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the Black Hole Forge says the Hourglass Twins share one alignment point between them; the tower designs in the High Energy Lab show where each tower goes. Together they tell you the project tower’s receiver is on Ash Twin’s surface. It is buried by sand until about 7:50 into the loop.
+Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the tower designs in the High Energy Lab show where each tower goes; the Black Hole Forge says the Hourglass Twins share one alignment point between them. Put together: one tower on Ash Twin’s equator has its receiver at the planet’s center — stand on the pad inside it and wait for Ember Twin to pass overhead. The tower is buried in sand until about 7:50 into the loop.
 
 ### How do you get into the Sunless City and the High Energy Lab?
 
@@ -47,7 +51,7 @@ After the Sun Station failed, the Nomai went to study a newly arrived comet, the
 
 - Timber Hearth: 0:00 Wake up by the campfire
 - Giant’s Deep: 0:18 The Orbital Probe Cannon fires — a flash in the sky
-- Hourglass Twins: Lakebed Cave: open only for the first few minutes; 2:00 Sand starts to flow; 5:00 Sun Station tower door clears; 7:50 ~7:50 project tower receiver uncovered; The Sunless City fills with sand from the bottom up
+- Hourglass Twins: Lakebed Cave: open only for the first few minutes; 2:00 Sand starts to flow; 5:00 Sun Station tower door clears; 7:50 ~7:50 the project tower is uncovered; The Sunless City fills with sand from the bottom up
 - Brittle Hollow: The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole
 - The Interloper: Swings around the Sun; the closer it gets, the wider the sunward fissure opens; 20:00 ~20:00 crashes into the Sun
 - The Sun: Orange star; the Sun Station still stands; Swells into a red giant; 10:30 ~10.5–12 min: the Sun Station is swallowed; 20:30 Final minute or two: “End Times” plays; 22:00 Supernova — the loop starts over
@@ -68,19 +72,21 @@ Indented items are prerequisites of the item above them.
 ### Main path
 
 - Warp to the Eye of the Universe — Deep in Dark Bramble · the Vessel’s bridge (needs all of)
+  - [Explore] Get the launch codes and lift off — Timber Hearth · Hornfels at the observatory
+    - [Realize] You are stuck in a 22-minute loop — Timber Hearth · the Nomai statue in the observatory
   - The Eye’s coordinates — Giant’s Deep core · Probe Tracking Module (needs all of)
     - [Realize] The module sank (any one of)
       - [Realize] Damage report: tracking module missing — Orbital Probe Cannon · Control Module
       - [Realize] A part sank below the current — Southern Observatory / Construction Yard
-      - [Realize] Feldspar reached the core — Dark Bramble · Feldspar
+      - [Realize] Feldspar reached the core — Giant’s Deep · his old camp on Bramble Island
     - [Explore] Below the current — The strong current under the ocean (any one of)
       - [Realize] Counterclockwise cyclones push down — Brittle Hollow · cyclone model in the Southern Observatory
       - [luck / trial / brute force] Get swept down by luck — Giant’s Deep
       - [luck / trial / brute force] Dive in at very high speed — Giant’s Deep
       - [luck / trial / brute force] Wait under a thrown island — Giant’s Deep
       - [luck / trial / brute force] Fire the Nomai shuttle at it — Brittle Hollow gravity cannon → Giant’s Deep
-    - [Explore] Get through the electric field — Around Giant’s Deep’s core
-      - [Realize] Jellyfish insides are insulated — Dark Bramble · the frozen jellyfish at Feldspar’s camp (needs all of)
+    - [Explore] Get through the electric field — Around Giant’s Deep’s core (any one of)
+      - [Realize] Jellyfish insides are insulated — Dark Bramble’s south pole crust · frozen jellyfish at the end of the hollow vine (needs all of)
         - [Explore] Feldspar’s camp — Inside one of Dark Bramble’s seeds (any one of)
           - [Explore] Harmonica signal — Signalscope · Travelers frequency
           - [Explore] Scout into Timber Hearth’s seed — Timber Hearth · impact crater
@@ -90,13 +96,16 @@ Indented items are prerequisites of the item above them.
           - [Realize] Anglerfish are blind and hunt by sound — Ember Twin · anglerfish fossil
           - [luck / trial / brute force] Do nothing after entering a seed — Dark Bramble
           - [luck / trial / brute force] Outrun them or snag them on vines — Dark Bramble
+      - [luck / trial / brute force] Find the frozen jellyfish from outside — Dark Bramble’s south pole crust
   - Reach the Nomai Vessel — Deep in Dark Bramble (needs all of)
     - [Realize] There is a Vessel (any one of)
       - [Realize] The three murals — Brittle Hollow · Old Settlement
       - [Realize] Escape pod flight logs — Escape pods on Brittle Hollow / Ember Twin
     - [Realize] Which seed hides the Vessel — Dark Bramble (any one of)
-      - [Explore] Scout into the small seed and photograph it — Dark Bramble · Nomai Grave
-        - [Realize] Escape Pod 3: two beacons — Dark Bramble · Escape Pod 3
+      - [Realize] The other way in is in the anglerfish nest — Dark Bramble · the unlit seed in the nest (needs all of)
+        - [Explore] Fire the scout into the grave’s small seed — Dark Bramble · Nomai Grave
+          - [Realize] Escape Pod 3: two beacons — Found by its distress signal on the signalscope
+        - [Realize] Feldspar: space works differently here — Dark Bramble · Feldspar’s camp
       - [luck / trial / brute force] Search the seeds one by one — Dark Bramble
     - (see above: Get past the anglerfish)
   - Take the advanced warp core — Ash Twin · central chamber (needs all of)
@@ -110,15 +119,19 @@ Indented items are prerequisites of the item above them.
         - [Explore] Fall into Brittle Hollow’s black hole — Brittle Hollow’s core
       - [Realize] Alignment has a ~5° window — Brittle Hollow · Black Hole Forge
       - [luck / trial / brute force] Get warped by accident — Any warp pad
-    - [Explore] The project tower’s receiver — Ash Twin’s surface (any one of)
-      - [Realize] Deduce: the receiver is on Ash Twin (needs all of)
+    - [Explore] The tower that leads into the project — Ash Twin’s equator · a pair of towers joined by a bridge (any one of)
+      - [Realize] Deduce: it fires when Ember Twin is overhead (needs all of)
         - [Realize] The tower designs — Ember Twin · High Energy Lab
         - [Realize] The twins share an alignment point — Brittle Hollow · Black Hole Forge
       - [other in-game clue] A Nomai body lies outside the right tower — Ash Twin · project tower
       - [luck / trial / brute force] Try every tower’s pad — Ash Twin’s equator
-    - Wait for the sand to uncover it [timing] — Ash Twin’s surface (any one of)
+    - Wait for the sand to clear the tower [timing] — Ash Twin’s equator (any one of)
       - [Realize] Sand flows from Ash Twin to Ember Twin — Hourglass Twins
       - [other in-game clue] Doze at a campfire to skip ahead — Any campfire
+  - [Realize] Put the project’s core into the Vessel (needs all of)
+    - [Realize] The Vessel’s warp core is long dead — Nomai Vessel · bridge
+    - [Realize] The three-sided pillar takes coordinates — Nomai Vessel · bridge
+    - [Realize] The project’s core can be removed — Ash Twin Project · center
 
 ### Getting there
 
@@ -222,6 +235,10 @@ Indented items are prerequisites of the item above them.
 
 三样：宇宙之眼的坐标（在深巨星核心的探测器跟踪模块里）、挪麦人的飞船（困在黑棘星深处）、高级跃迁核心（在灰烬双星计划的中央舱室里）。把核心装进飞船，在舰桥输入坐标，就能跃迁到宇宙之眼。取出核心会让时间循环停止，所以这一步要放在最后。
 
+### 飞船在黑棘星哪里，怎么进去？
+
+先用信号镜的求救信号频道找到3号逃生舱，顺着幸存者留下的灯走到挪麦坟墓。坟墓前那颗种子太小，只能射侦察兵进去；进去后追踪器显示侦察兵同时在两个地方，另一处就是安康鱼巢里一颗不发光的大种子。穿过鱼巢的安康鱼，从那颗种子进去就是飞船。
+
 ### 黑棘星的安康鱼怎么躲？
 
 安康鱼是瞎的，靠声音找猎物，关掉引擎靠惯性滑过去就不会被发现。线索在余烬双星的安康鱼化石：挪麦小孩玩"安康鱼和小鱼"时，扮安康鱼的要戴眼罩。从种子出来时速度方向固定，什么都不按直接漂也很稳。
@@ -232,7 +249,7 @@ Indented items are prerequisites of the item above them.
 
 ### 灰烬双星计划怎么进去？
 
-保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；黑洞熔炉说明沙漏双星共用两星之间的对准点，高能实验室的高塔设计图对应每座塔的去向，合起来能推出计划塔的接收点就在灰烬双星表面。接收点一开始埋在沙下，大约第 7 分 50 秒露出来。
+保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；高能实验室的高塔设计图对应每座塔的去向；黑洞熔炉说明沙漏双星共用两星之间的对准点。合起来就知道：灰烬双星赤道上有一座塔的接收点在星球中心，站在那座塔里的平台上，等余烬双星经过头顶就会被传进去。那座塔一开始埋在沙里，大约第 7 分 50 秒才进得去。
 
 ### 背阴城和高能实验室怎么进？
 
@@ -254,7 +271,7 @@ Indented items are prerequisites of the item above them.
 
 - 木炉星：在营火边醒来
 - 深巨星：轨道探测炮发射，天上一闪
-- 沙漏双星：湖床洞穴只在开头几分钟能进；沙子开始流动；太阳站塔门露出；约 7:50 计划塔接收点露出；背阴城从下往上被沙灌满
+- 沙漏双星：湖床洞穴只在开头几分钟能进；沙子开始流动；太阳站塔门露出；约 7:50 通往计划的塔露出；背阴城从下往上被沙灌满
 - 碎空星：地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞
 - 闯入者：绕太阳飞，越近太阳，向阳面的冰缝开得越大；约第 20 分钟撞进太阳
 - 太阳：橙色恒星，太阳站还在；膨胀成红巨星；约 10.5–12 分钟太阳站被吞没；最后一两分钟响起《End Times》；超新星，循环重来
@@ -275,19 +292,21 @@ Indented items are prerequisites of the item above them.
 ### 通关主线
 
 - 跃迁到宇宙之眼 — 黑棘星深处 · 挪麦飞船舰桥 (以下全部需要)
+  - [探索到] 拿到发射密码，起飞 — 木炉星 · 天文台的霍恩费斯
+    - [意识到] 你被困在 22 分钟的循环里 — 木炉星 · 天文台的挪麦雕像
   - 宇宙之眼坐标 — 深巨星核心 · 探测器跟踪模块 (以下全部需要)
     - [意识到] 模块沉在了海底 (以下任选一)
       - [意识到] 损伤报告：跟踪模块遗失 — 轨道探测炮 · 控制模块
       - [意识到] 有部件沉到了水流下面 — 碎空星南部天文台 / 建造厂
-      - [意识到] 费尔德斯巴到过核心 — 黑棘星 · 费尔德斯巴
+      - [意识到] 费尔德斯巴到过核心 — 深巨星 · 荆棘岛上他的旧营地
     - [探索到] 潜到水流下面 — 深巨星海面下的强水流 (以下任选一)
       - [意识到] 逆时针气旋会往下压 — 碎空星 · 南部天文台的气旋模型
       - [运气 / 试错 / 硬闯] 碰巧被逆时针气旋卷下去 — 深巨星海面
       - [运气 / 试错 / 硬闯] 高速直冲核心 — 深巨星
       - [运气 / 试错 / 硬闯] 停在被抛起的岛下面 — 深巨星
       - [运气 / 试错 / 硬闯] 用重力炮把航天飞机打过去 — 碎空星重力炮 → 深巨星
-    - [探索到] 穿过核心外的电场 — 深巨星核心外围
-      - [意识到] 水母内部是绝缘的 — 黑棘星 · 费尔德斯巴营地的冻水母 (以下全部需要)
+    - [探索到] 穿过核心外的电场 — 深巨星核心外围 (以下任选一)
+      - [意识到] 水母内部是绝缘的 — 黑棘星南极外壳 · 空心藤尽头的冻水母 (以下全部需要)
         - [探索到] 费尔德斯巴的营地 — 黑棘星某颗种子里 (以下任选一)
           - [探索到] 口琴信号 — 信号镜 · 旅行者频道
           - [探索到] 侦察兵射进木炉星的种子 — 木炉星 · 撞击坑
@@ -297,13 +316,16 @@ Indented items are prerequisites of the item above them.
           - [意识到] 安康鱼是瞎的，靠听声 — 余烬双星 · 安康鱼化石
           - [运气 / 试错 / 硬闯] 出种子后什么都不按 — 黑棘星
           - [运气 / 试错 / 硬闯] 全速甩开，或让它卡在藤蔓间 — 黑棘星
+      - [运气 / 试错 / 硬闯] 从外面撞见冻水母 — 黑棘星南极的外壳碎片
   - 进入挪麦飞船 — 黑棘星深处 (以下全部需要)
     - [意识到] 有一艘飞船 (以下任选一)
       - [意识到] 三块壁画 — 碎空星 · 旧定居点
       - [意识到] 逃生舱飞行日志 — 碎空星 / 余烬双星的逃生舱
     - [意识到] 飞船在哪颗种子里 — 黑棘星 (以下任选一)
-      - [探索到] 侦察兵射进小种子，拍到飞船 — 黑棘星 · 挪麦坟墓
-        - [意识到] 3号逃生舱：两个信标 — 黑棘星 · 3号逃生舱
+      - [意识到] 另一个入口在安康鱼巢里 — 黑棘星 · 鱼巢里那颗不发光的种子 (以下全部需要)
+        - [探索到] 侦察兵射进坟墓的小种子 — 黑棘星 · 挪麦坟墓
+          - [意识到] 3号逃生舱：两个信标 — 顺着信号镜的求救信号找到
+        - [意识到] 费尔德斯巴：这里的空间不正常 — 黑棘星 · 费尔德斯巴的营地
       - [运气 / 试错 / 硬闯] 在黑棘星里一颗颗试 — 黑棘星
     - （同上：活着躲过安康鱼）
   - 取得高级跃迁核心 — 灰烬双星 · 中央舱室 (以下全部需要)
@@ -317,15 +339,19 @@ Indented items are prerequisites of the item above them.
         - [探索到] 掉进碎空星的黑洞 — 碎空星中心
       - [意识到] 对齐有约五度的窗口 — 碎空星 · 黑洞熔炉
       - [运气 / 试错 / 硬闯] 碰巧站上平台被传走 — 任意跃迁平台
-    - [探索到] 计划塔的接收点 — 灰烬双星表面 (以下任选一)
-      - [意识到] 推理：接收点就在灰烬双星上 (以下全部需要)
+    - [探索到] 通往计划的那座塔 — 灰烬双星赤道 · 一对用桥相连的塔 (以下任选一)
+      - [意识到] 推理：余烬双星到头顶时它就启动 (以下全部需要)
         - [意识到] 高塔设计图 — 余烬双星 · 高能实验室
         - [意识到] 双星共用一个对准点 — 碎空星 · 黑洞熔炉
       - [官方另一解] 正确的塔外有挪麦遗体 — 灰烬双星 · 计划塔
       - [运气 / 试错 / 硬闯] 把每座塔的平台挨个试 — 灰烬双星赤道
-    - 等沙子露出接收点 [时间窗口] — 灰烬双星表面 (以下任选一)
+    - 等沙子让出塔门 [时间窗口] — 灰烬双星赤道 (以下任选一)
       - [意识到] 沙子从灰烬流向余烬 — 沙漏双星
       - [官方另一解] 在营火边打盹快进 — 任意营火
+  - [意识到] 把计划的核心装进飞船 (以下全部需要)
+    - [意识到] 飞船的跃迁核心早已失灵 — 挪麦飞船 · 舰桥
+    - [意识到] 舰桥的三面柱能输入坐标 — 挪麦飞船 · 舰桥
+    - [意识到] 计划中心的核心可以取下 — 灰烬双星计划 · 中央
 
 ### 怎么到那儿
 

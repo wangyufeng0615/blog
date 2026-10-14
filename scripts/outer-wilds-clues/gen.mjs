@@ -18,7 +18,7 @@ const GAME_TEXT_DIR = process.env.OW_TEXT_DIR || path.join(process.env.HOME, 'Do
 const SITE = 'https://wangyufeng.org';
 const URLS = { zh: '/outer-wilds-clues/', en: '/outer-wilds-clues/en/' };
 const PUBLISHED = '2026-10-14T21:00:00+08:00';
-const MODIFIED = '2026-10-15T01:30:00+08:00';
+const MODIFIED = '2026-10-15T03:00:00+08:00';
 
 /* ---------- game text lookup ---------- */
 function pairs(file) {

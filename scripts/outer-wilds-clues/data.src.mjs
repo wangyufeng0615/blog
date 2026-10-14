@@ -17,8 +17,16 @@ export const BANDS = [
       id: 'goal', t: 'goal', label: L('跃迁到宇宙之眼', 'Warp to the Eye of the Universe'), place: L('黑棘星深处 · 挪麦飞船舰桥', 'Deep in Dark Bramble · the Vessel’s bridge'), req: 'all',
       info: [L('把高级跃迁核心装进飞船，在舰桥的三面柱上输入坐标，飞船就会跃迁到宇宙之眼。', 'Install the advanced warp core in the Vessel, enter the coordinates on the three-sided pillar on the bridge, and the Vessel warps to the Eye.'),
              L('取出核心的同时时间循环就停了，所以这一步只能放在最后一轮。', 'Taking the core out stops the time loop, so this has to be your last loop.')],
-      quote: [q('LOG:DB_VESSEL_X2'), q('LOG:DB_VESSEL_X3'), q('NOMAI:Removing the core will disable')],
+      quote: [q('LOG:DB_VESSEL_X6')],
       kids: [
+        { id: 'g-start', t: 'gate', label: L('拿到发射密码，起飞', 'Get the launch codes and lift off'), place: L('木炉星 · 天文台的霍恩费斯', 'Timber Hearth · Hornfels at the observatory'), req: 'all',
+          info: [L('一切的起点。去天文台找霍恩费斯拿发射密码，才能坐升降梯上发射台。', 'Where it all starts: Hornfels at the observatory gives you the launch codes for the launch tower lift.')],
+          quote: [q('DLG:Here they are. Best get off the ground before Slate')],
+          kids: [
+            { id: 'c-loop', t: 'clue', label: L('你被困在 22 分钟的循环里', 'You are stuck in a 22-minute loop'), place: L('木炉星 · 天文台的挪麦雕像', 'Timber Hearth · the Nomai statue in the observatory'),
+              info: [L('第一次死亡或看到超新星后，你会在营火边重新醒来。原因是天文台的挪麦雕像睁眼和你配对了，之后每一轮你都带着记忆回来。', 'After your first death or supernova you wake at the campfire again: the observatory’s Nomai statue opened its eyes and paired with you, so you keep your memories every loop.')],
+              quote: [q('LOG:TH_VILLAGE_X2')] }
+          ] },
         { id: 'coords', t: 'target', label: L('宇宙之眼坐标', 'The Eye’s coordinates'), place: L('深巨星核心 · 探测器跟踪模块', 'Giant’s Deep core · Probe Tracking Module'), req: 'all',
           info: [L('跟踪模块从轨道探测炮上脱落，沉进了深巨星核心。它的投影池里存着第 9,318,054 号探测器找到的宇宙之眼坐标。', 'The tracking module broke off the Orbital Probe Cannon and sank to the core of Giant’s Deep. Its projection pool holds the coordinates found by probe 9,318,054.')],
           quote: [q('LOG:OPC_SUNKEN_MODULE_X2')],
@@ -28,7 +36,7 @@ export const BANDS = [
               kids: [
                 { id: 'c-dmg', t: 'clue', label: L('损伤报告：跟踪模块遗失', 'Damage report: tracking module missing'), place: L('轨道探测炮 · 控制模块', 'Orbital Probe Cannon · Control Module'), quote: [q('NOMAI:Probe Tracking Module: MISSING')] },
                 { id: 'c-cassava', t: 'clue', label: L('有部件沉到了水流下面', 'A part sank below the current'), place: L('碎空星南部天文台 / 建造厂', 'Southern Observatory / Construction Yard'), at: 'r-observatory', quote: [q('LOG:GD_OCEAN_R2')] },
-                { id: 'c-feld-core', t: 'clue', label: L('费尔德斯巴到过核心', 'Feldspar reached the core'), place: L('黑棘星 · 费尔德斯巴', 'Dark Bramble · Feldspar'), quote: [q('LOG:GD_OCEAN_R3')] }
+                { id: 'c-feld-core', t: 'clue', label: L('费尔德斯巴到过核心', 'Feldspar reached the core'), place: L('深巨星 · 荆棘岛上他的旧营地', 'Giant’s Deep · his old camp on Bramble Island'), quote: [q('LOG:GD_OCEAN_R3')] }
               ] },
             { id: 'g-current', t: 'gate', label: L('潜到水流下面', 'Below the current'), place: L('深巨星海面下的强水流', 'The strong current under the ocean'), req: 'any',
               info: [L('深巨星海面下有一层强水流，正常情况下任何东西都沉不下去。', 'A strong current under the surface of Giant’s Deep keeps everything from sinking.')],
@@ -47,9 +55,9 @@ export const BANDS = [
             { id: 'g-field', t: 'gate', label: L('穿过核心外的电场', 'Get through the electric field'), place: L('深巨星核心外围', 'Around Giant’s Deep’s core'), req: 'any',
               quote: [q('LOG:GD_OCEAN_X1')],
               kids: [
-                { id: 'c-jelly', t: 'clue', label: L('水母内部是绝缘的', 'Jellyfish insides are insulated'), place: L('黑棘星 · 费尔德斯巴营地的冻水母', 'Dark Bramble · the frozen jellyfish at Feldspar’s camp'), req: 'all',
-                  info: [L('钻进深巨星的水母体内，就能随它穿过电场。', 'Get inside a Giant’s Deep jellyfish and ride it through the field.')],
-                  quote: [q('LOG:DB_FROZEN_JELLYFISH_X1'), q('LOG:DB_FROZEN_JELLYFISH_X3')],
+                { id: 'c-jelly', t: 'clue', label: L('水母内部是绝缘的', 'Jellyfish insides are insulated'), place: L('黑棘星南极外壳 · 空心藤尽头的冻水母', 'Dark Bramble’s south pole crust · frozen jellyfish at the end of the hollow vine'), req: 'all',
+                  info: [L('问费尔德斯巴怎么去深巨星核心，他不直说，只让你去他飞船撞上的那根空心藤尽头看看。藤通到黑棘星外壳的一道裂缝，里面冻着一只水母和他的笔记。钻进深巨星的水母体内，就能随它穿过电场。', 'Ask Feldspar how to reach Giant’s Deep’s core and he only tells you to see where the hollow vine his ship hit ends. It leads to a crack in Dark Bramble’s outer crust with a frozen jellyfish and his notes. Get inside a Giant’s Deep jellyfish and ride it through the field.')],
+                  quote: [q('LOG:DB_FROZEN_JELLYFISH_R1'), q('LOG:DB_FROZEN_JELLYFISH_X1'), q('LOG:DB_FROZEN_JELLYFISH_X3')],
                   kids: [
                     { id: 'g-findfeld', t: 'gate', label: L('费尔德斯巴的营地', 'Feldspar’s camp'), place: L('黑棘星某颗种子里', 'Inside one of Dark Bramble’s seeds'), req: 'any',
                       kids: [
@@ -59,7 +67,7 @@ export const BANDS = [
                         { id: 'a-feld-wander', t: 'alt', alt: 'luck', label: L('在黑棘星里乱逛撞见', 'Stumble on him in Dark Bramble'), place: L('黑棘星', 'Dark Bramble') }
                       ] },
                     { id: 'g-angler', t: 'gate', label: L('活着躲过安康鱼', 'Get past the anglerfish'), place: L('黑棘星内部', 'Inside Dark Bramble'), req: 'any',
-                      info: [L('飞船线和水母线都要穿过黑棘星，所以这是整张图里两条线共用的门槛。', 'Both the Vessel line and the jellyfish line run through Dark Bramble, so this gate is shared.')],
+                      info: [L('飞船线和水母线都要穿过黑棘星：入口的中枢里就有一条，飞船所在的种子更是在有五条安康鱼的鱼巢里。', 'Both the Vessel line and the jellyfish line run through Dark Bramble: one waits in the hub you enter first, and the Vessel’s seed sits in the nest guarded by five.')],
                       kids: [
                         { id: 'c-fossil', t: 'clue', label: L('安康鱼是瞎的，靠听声', 'Anglerfish are blind and hunt by sound'), place: L('余烬双星 · 安康鱼化石', 'Ember Twin · anglerfish fossil'), at: 'r-fossil',
                           info: [L('关掉引擎靠惯性滑过去，安康鱼就发现不了你。', 'Cut the engines and drift; they won’t notice you.')], quote: [q('LOG:CT_ANGLERFISH_FOSSIL_X2')] },
@@ -67,7 +75,9 @@ export const BANDS = [
                           info: [L('从种子出来时速度和方向是固定的，什么都不按就能稳定漂过去；转动机身不会惊动它们。', 'You always come out of a seed at a fixed speed and heading, so doing nothing drifts you past reliably. Rotating the ship doesn’t alert them.')], src: [wiki('Anglerfish', 'Anglerfish', '安康鱼')] },
                         { id: 'a-ang-dodge', t: 'alt', alt: 'luck', label: L('全速甩开，或让它卡在藤蔓间', 'Outrun them or snag them on vines'), place: L('黑棘星', 'Dark Bramble'), src: [wiki('Anglerfish', 'Anglerfish', '安康鱼')] }
                       ] }
-                  ] }
+                  ] },
+                { id: 'a-jelly-crust', t: 'alt', alt: 'luck', label: L('从外面撞见冻水母', 'Find the frozen jellyfish from outside'), place: L('黑棘星南极的外壳碎片', 'Dark Bramble’s south pole crust'),
+                  info: [L('那道裂缝也能从黑棘星外面找到，不必先见费尔德斯巴。', 'The crack can also be found from outside Dark Bramble, without meeting Feldspar first.')], src: [wiki('Dark_Bramble', 'Dark Bramble', '黑棘星')] }
               ] }
           ] },
 
@@ -82,15 +92,22 @@ export const BANDS = [
               ] },
             { id: 'g-whichseed', t: 'gate', label: L('飞船在哪颗种子里', 'Which seed hides the Vessel'), place: L('黑棘星', 'Dark Bramble'), req: 'any',
               kids: [
-                { id: 'c-grave', t: 'clue', label: L('侦察兵射进小种子，拍到飞船', 'Scout into the small seed and photograph it'), place: L('黑棘星 · 挪麦坟墓', 'Dark Bramble · Nomai Grave'), req: 'all',
-                  quote: [q('LOG:DB_NOMAI_GRAVE_X4')],
+                { id: 'c-nest', t: 'clue', label: L('另一个入口在安康鱼巢里', 'The other way in is in the anglerfish nest'), place: L('黑棘星 · 鱼巢里那颗不发光的种子', 'Dark Bramble · the unlit seed in the nest'), req: 'all',
+                  info: [L('坟墓那颗种子太小，只有侦察兵进得去。侦察兵进去后，追踪器显示它同时在两个地方：另一处是安康鱼巢里一颗不发光的大种子，飞船只能从那里进。这就是两个信标的真相。', 'The grave seed only fits your scout. Once inside, the tracker shows the scout in two places at once; the other is an unlit, ship-sized seed in the anglerfish nest. That is the second beacon.')],
+                  src: [wiki('The_Vessel', 'The Vessel', '飞船')],
                   kids: [
-                    { id: 'c-pod3', t: 'clue', label: L('3号逃生舱：两个信标', 'Escape Pod 3: two beacons'), place: L('黑棘星 · 3号逃生舱', 'Dark Bramble · Escape Pod 3'),
-                      info: [L('3号逃生舱的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。', 'The Escape Pod 3 survivors heard two identical Vessel beacons, followed the nearer one leaving a trail of lights, and died at a small seed. Follow the lights to the grave.')],
-                      quote: [q('LOG:DB_ESCAPE_POD_X3')] }
+                    { id: 'c-grave', t: 'clue', label: L('侦察兵射进坟墓的小种子', 'Fire the scout into the grave’s small seed'), place: L('黑棘星 · 挪麦坟墓', 'Dark Bramble · Nomai Grave'), req: 'all',
+                      quote: [q('LOG:DB_NOMAI_GRAVE_X4')],
+                      kids: [
+                        { id: 'c-pod3', t: 'clue', label: L('3号逃生舱：两个信标', 'Escape Pod 3: two beacons'), place: L('顺着信号镜的求救信号找到', 'Found by its distress signal on the signalscope'),
+                          info: [L('找到碎空星或余烬双星的逃生舱后，信号镜会多出"求救信号"频道，黑棘星里有一颗种子正发着这个信号。舱里的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。', 'After you find the escape pod on Brittle Hollow or Ember Twin, your signalscope picks up the distress frequency, and one seed in Dark Bramble is sending it. The survivors heard two identical Vessel beacons, followed the nearer one leaving a trail of lights, and died at a small seed. Follow the lights to the grave.')],
+                          quote: [q('LOG:DB_ESCAPE_POD_X3')], src: [wiki('Escape_Pods', 'Escape Pods', '逃生舱')] }
+                      ] },
+                    { id: 'c-feld-two', t: 'clue', label: L('费尔德斯巴：这里的空间不正常', 'Feldspar: space works differently here'), place: L('黑棘星 · 费尔德斯巴的营地', 'Dark Bramble · Feldspar’s camp'),
+                      quote: [q('LOG:DB_FELDSPAR_X2')] }
                   ] },
                 { id: 'a-seed-explore', t: 'alt', alt: 'luck', label: L('在黑棘星里一颗颗试', 'Search the seeds one by one'), place: L('黑棘星', 'Dark Bramble'),
-                  info: [L('飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗。', 'The Vessel’s seed is in the anglerfish nest — the only one that doesn’t glow.')], src: [wiki('Dark_Bramble', 'Dark Bramble', '黑棘星')] }
+                  info: [L('飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗；巢里另外三颗通向一个死循环的空间。', 'The Vessel’s seed is in the anglerfish nest — the only one that doesn’t glow; the other three lead to a space that loops back on itself.')], src: [wiki('Dark_Bramble', 'Dark Bramble', '黑棘星')] }
               ] },
             { ref: 'g-angler' }
           ] },
@@ -121,25 +138,33 @@ export const BANDS = [
                 { id: 'c-window', t: 'clue', label: L('对齐有约五度的窗口', 'Alignment has a ~5° window'), place: L('碎空星 · 黑洞熔炉', 'Brittle Hollow · Black Hole Forge'), at: 'r-forge', quote: [q('LOG:BH_WARP_ALIGNMENT_MAP_X4')] },
                 { id: 'a-warp-accident', t: 'alt', alt: 'luck', label: L('碰巧站上平台被传走', 'Get warped by accident'), place: L('任意跃迁平台', 'Any warp pad') }
               ] },
-            { id: 'g-receiver', t: 'gate', label: L('计划塔的接收点', 'The project tower’s receiver'), place: L('灰烬双星表面', 'Ash Twin’s surface'), req: 'any',
+            { id: 'g-receiver', t: 'gate', label: L('通往计划的那座塔', 'The tower that leads into the project'), place: L('灰烬双星赤道 · 一对用桥相连的塔', 'Ash Twin’s equator · a pair of towers joined by a bridge'), req: 'any',
               kids: [
-                { id: 'c-deduce', t: 'clue', label: L('推理：接收点就在灰烬双星上', 'Deduce: the receiver is on Ash Twin'), req: 'all',
-                  info: [L('赤道那圈高塔各通一处，只有计划塔看不出通向哪里。按黑洞熔炉的规则，沙漏双星共用两星之间的对准点，所以它的接收点就在灰烬双星自己身上。', 'Each tower on the equator leads somewhere, except the project tower. By the Forge’s rule the Hourglass Twins share an alignment point between them, so its receiver must be on Ash Twin itself.')],
+                { id: 'c-deduce', t: 'clue', label: L('推理：余烬双星到头顶时它就启动', 'Deduce: it fires when Ember Twin is overhead'), req: 'all',
+                  info: [L('赤道那圈塔各通一处，样子对应目的地。有一座塔看起来永远对不上，因为它的接收点就在灰烬双星中心。按熔炉的规则，沙漏双星共用两星之间的对准点：站在这座塔里的平台上，等余烬双星经过头顶，就会被传进计划。', 'Each tower on the equator leads somewhere and looks like its destination. One seems like it could never align, because its receiver is inside Ash Twin itself. By the Forge’s rule the twins share an alignment point between them: stand on the pad inside that tower and wait for Ember Twin to pass overhead.')],
                   kids: [
                     { id: 'c-towermap', t: 'clue', label: L('高塔设计图', 'The tower designs'), place: L('余烬双星 · 高能实验室', 'Ember Twin · High Energy Lab'), at: 'r-hel', quote: [q('LOG:CT_WARP_TOWER_MAP_X3'), q('NOMAI:The tower designs in the High Energy Lab')] },
-                    { id: 'c-forge', t: 'clue', label: L('双星共用一个对准点', 'The twins share an alignment point'), place: L('碎空星 · 黑洞熔炉', 'Brittle Hollow · Black Hole Forge'), at: 'r-forge', quote: [q('LOG:BH_BLACK_HOLE_FORGE_X6')] }
+                    { id: 'c-forge', t: 'clue', label: L('双星共用一个对准点', 'The twins share an alignment point'), place: L('碎空星 · 黑洞熔炉', 'Brittle Hollow · Black Hole Forge'), at: 'r-forge', quote: [q('NOMAI:Yarrow believes he spotted a flaw'), q('LOG:BH_BLACK_HOLE_FORGE_X6')] }
                   ] },
                 { id: 'a-recv-body', t: 'alt', alt: 'official', label: L('正确的塔外有挪麦遗体', 'A Nomai body lies outside the right tower'), place: L('灰烬双星 · 计划塔', 'Ash Twin · project tower'), verify: true,
                   info: [L('Wiki 说计划塔外躺着一具挪麦遗体，可以当作提示。我没有在游戏原文里核到这一点。', 'The wiki says a Nomai body lies outside the project tower. I could not confirm it in the game text.')], src: [wiki('Ash_Twin_Project', 'Ash Twin Project', '灰烬双星计划')] },
                 { id: 'a-recv-try', t: 'alt', alt: 'luck', label: L('把每座塔的平台挨个试', 'Try every tower’s pad'), place: L('灰烬双星赤道', 'Ash Twin’s equator') }
               ] },
-            { id: 'g-sand', t: 'gate', tag: TIMING, label: L('等沙子露出接收点', 'Wait for the sand to uncover it'), place: L('灰烬双星表面', 'Ash Twin’s surface'), req: 'any',
+            { id: 'g-sand', t: 'gate', tag: TIMING, label: L('等沙子让出塔门', 'Wait for the sand to clear the tower'), place: L('灰烬双星赤道', 'Ash Twin’s equator'), req: 'any',
               kids: [
                 { id: 'c-hourglass', t: 'clue', label: L('沙子从灰烬流向余烬', 'Sand flows from Ash Twin to Ember Twin'), place: L('沙漏双星', 'Hourglass Twins'),
-                  info: [L('循环开始时接收点埋在沙下，大约第 7 分 50 秒才露出来能用。', 'The receiver starts buried; it becomes usable about 7:50 into the loop.')], src: [wiki('Ash_Twin_Project', 'Ash Twin Project', '灰烬双星计划')] },
+                  info: [L('这座塔一开始埋在沙里，大约第 7 分 50 秒才露出足够的空间站上塔里的平台。塔顶有破口，小心被落沙冲走。', 'The tower starts buried; from about 7:50 enough of it is clear to stand on the pad inside. Mind the sand pouring through its broken roof.')], src: [wiki('Ash_Twin_Project', 'Ash Twin Project', '灰烬双星计划')] },
                 { id: 'a-sand-sleep', t: 'alt', alt: 'official', label: L('在营火边打盹快进', 'Doze at a campfire to skip ahead'), place: L('任意营火', 'Any campfire'),
                   info: [L('拿到发射密码后，就可以在营火边打盹跳过一段时间。', 'Once you have the launch codes you can doze at a campfire to skip time.')] }
               ] }
+          ] },
+
+        { id: 'g-insight', t: 'gate', label: L('把计划的核心装进飞船', 'Put the project’s core into the Vessel'), req: 'all',
+          info: [L('最后的顿悟：飞船缺一颗核心，计划里正好有一颗。取下它，循环就停了，所以要在同一轮里把核心带进黑棘星。', 'The last realization: the Vessel is missing a core and the project has one. Taking it stops the loop, so you have to carry it into Dark Bramble in that same loop.')],
+          kids: [
+            { id: 'c-v-core', t: 'clue', label: L('飞船的跃迁核心早已失灵', 'The Vessel’s warp core is long dead'), place: L('挪麦飞船 · 舰桥', 'Nomai Vessel · bridge'), quote: [q('LOG:DB_VESSEL_X2')] },
+            { id: 'c-v-input', t: 'clue', label: L('舰桥的三面柱能输入坐标', 'The three-sided pillar takes coordinates'), place: L('挪麦飞船 · 舰桥', 'Nomai Vessel · bridge'), quote: [q('LOG:DB_VESSEL_X3')] },
+            { id: 'c-atp-core', t: 'clue', label: L('计划中心的核心可以取下', 'The project’s core can be removed'), place: L('灰烬双星计划 · 中央', 'Ash Twin Project · center'), quote: [q('NOMAI:Removing the core will disable')] }
           ] }
       ]
     }]
@@ -381,6 +406,9 @@ export const FAQ = [
   [L('《星际拓荒》要打出结局，需要凑齐哪几样东西？', 'What do you need to reach the ending of Outer Wilds?'),
    L('三样：宇宙之眼的坐标（在深巨星核心的探测器跟踪模块里）、挪麦人的飞船（困在黑棘星深处）、高级跃迁核心（在灰烬双星计划的中央舱室里）。把核心装进飞船，在舰桥输入坐标，就能跃迁到宇宙之眼。取出核心会让时间循环停止，所以这一步要放在最后。',
      'Three things: the Eye of the Universe’s coordinates (in the Probe Tracking Module at the core of Giant’s Deep), the Nomai Vessel (stuck deep in Dark Bramble), and the advanced warp core (in the central chamber of the Ash Twin Project). Put the core in the Vessel, enter the coordinates on the bridge, and warp to the Eye. Taking the core stops the time loop, so do it last.')],
+  [L('飞船在黑棘星哪里，怎么进去？', 'Where is the Vessel in Dark Bramble and how do you get in?'),
+   L('先用信号镜的求救信号频道找到3号逃生舱，顺着幸存者留下的灯走到挪麦坟墓。坟墓前那颗种子太小，只能射侦察兵进去；进去后追踪器显示侦察兵同时在两个地方，另一处就是安康鱼巢里一颗不发光的大种子。穿过鱼巢的安康鱼，从那颗种子进去就是飞船。',
+     'Use the signalscope’s distress frequency to find Escape Pod 3 and follow the survivors’ lights to the Nomai Grave. The seed there only fits your scout; once inside, the tracker shows the scout in two places, and the other one is an unlit, ship-sized seed in the anglerfish nest. Slip past the anglerfish in the nest and take that seed to the Vessel.')],
   [L('黑棘星的安康鱼怎么躲？', 'How do you get past the anglerfish in Dark Bramble?'),
    L('安康鱼是瞎的，靠声音找猎物，关掉引擎靠惯性滑过去就不会被发现。线索在余烬双星的安康鱼化石：挪麦小孩玩"安康鱼和小鱼"时，扮安康鱼的要戴眼罩。从种子出来时速度方向固定，什么都不按直接漂也很稳。',
      'Anglerfish are blind and hunt by sound, so cut your engines and drift. The clue is the anglerfish fossil on Ember Twin, where Nomai children played a game in which the “anglerfish” wore a blindfold. You leave each seed at a fixed speed and heading, so simply drifting works well.')],
@@ -388,8 +416,8 @@ export const FAQ = [
    L('设计好的办法是坐逆时针旋转的气旋下去，线索在碎空星南部天文台的气旋模型。也能高速直冲，或停在被抛起的岛下面等它砸下来。核心外的电场只能钻进水母穿过，线索是黑棘星里费尔德斯巴吃水母的笔记：外皮像橡胶，能绝缘。',
      'The intended way is to ride a counterclockwise cyclone down; the clue is the cyclone model in Brittle Hollow’s Southern Observatory. A very fast dive or a falling island also works. The electric field around the core can only be crossed inside a jellyfish; Feldspar’s notes in Dark Bramble say their rubbery skin insulates them.')],
   [L('灰烬双星计划怎么进去？', 'How do you get into the Ash Twin Project?'),
-   L('保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；黑洞熔炉说明沙漏双星共用两星之间的对准点，高能实验室的高塔设计图对应每座塔的去向，合起来能推出计划塔的接收点就在灰烬双星表面。接收点一开始埋在沙下，大约第 7 分 50 秒露出来。',
-     'Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the Black Hole Forge says the Hourglass Twins share one alignment point between them; the tower designs in the High Energy Lab show where each tower goes. Together they tell you the project tower’s receiver is on Ash Twin’s surface. It is buried by sand until about 7:50 into the loop.')],
+   L('保护外壳没有任何物理入口，只能跃迁。白洞站教你跃迁平台的用法；高能实验室的高塔设计图对应每座塔的去向；黑洞熔炉说明沙漏双星共用两星之间的对准点。合起来就知道：灰烬双星赤道上有一座塔的接收点在星球中心，站在那座塔里的平台上，等余烬双星经过头顶就会被传进去。那座塔一开始埋在沙里，大约第 7 分 50 秒才进得去。',
+     'Its shell has no physical entrance, so you have to warp. The White Hole Station teaches how warp pads work; the tower designs in the High Energy Lab show where each tower goes; the Black Hole Forge says the Hourglass Twins share one alignment point between them. Put together: one tower on Ash Twin’s equator has its receiver at the planet’s center — stand on the pad inside it and wait for Ember Twin to pass overhead. The tower is buried in sand until about 7:50 into the loop.')],
   [L('背阴城和高能实验室怎么进？', 'How do you get into the Sunless City and the High Energy Lab?'),
    L('背阴城在余烬双星地下：从2号逃生舱下的洞穴跟着墙上的路标走，或从重力炮上方的隐藏洞口下去，要趁沙子还没灌满。高能实验室正门从里面锁着，只能从背阴城最底层沿能量电缆的小路过去，前半段怕沙子淹，后半段要等沙子盖住仙人掌。',
      'The Sunless City is beneath Ember Twin: follow the wall markers from the caves under Escape Pod 2, or drop through a hidden hole above the gravity cannon, before the sand fills it. The High Energy Lab’s front door is locked from inside; take the trail along the power cable from the city’s lowest district, early enough that the first half isn’t flooded and late enough that sand has buried the cacti on the second half.')],
@@ -418,7 +446,7 @@ export const TIMELINE = {
       { from: 0, to: 3, row: 0, label: L('湖床洞穴只在开头几分钟能进', 'Lakebed Cave: open only for the first few minutes'), node: 'r-lakebed' },
       { t: 2, row: 1, label: L('沙子开始流动', 'Sand starts to flow'), node: 'c-hourglass' },
       { t: 5, row: 2, label: L('太阳站塔门露出', 'Sun Station tower door clears'), node: 'r-sunstation' },
-      { t: 7.83, row: 1, label: L('约 7:50 计划塔接收点露出', '~7:50 project tower receiver uncovered'), node: 'g-sand' },
+      { t: 7.83, row: 1, label: L('约 7:50 通往计划的塔露出', '~7:50 the project tower is uncovered'), node: 'g-sand' },
       { from: 2, to: 22, row: 3, label: L('背阴城从下往上被沙灌满', 'The Sunless City fills with sand from the bottom up'), node: 'r-sunless' } ] },
     { name: L('碎空星', 'Brittle Hollow'), items: [
       { from: 0, to: 22, row: 0, label: L('地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞', 'The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole'), node: 'r-qtower' } ] },
@@ -452,11 +480,11 @@ export const ENTRY_NODE = {
 // What the player does at each step: realize = figure something out, explore = get somewhere or get through something.
 // Goals, must-haves, alternatives and timing gates are left untagged.
 export const ACTION = {
-  realize: ['g-sunk', 'c-dmg', 'c-cassava', 'c-feld-core', 'c-tornado', 'c-jelly', 'c-fossil', 'g-knowvessel', 'c-murals', 'c-podlogs', 'g-whichseed', 'c-pod3',
+  realize: ['c-loop', 'g-insight', 'c-v-core', 'c-v-input', 'c-atp-core', 'c-nest', 'c-feld-two', 'g-sunk', 'c-dmg', 'c-cassava', 'c-feld-core', 'c-tornado', 'c-jelly', 'c-fossil', 'g-knowvessel', 'c-murals', 'c-podlogs', 'g-whichseed', 'c-pod3',
     'g-whereatp', 'c-atp4', 'g-sealed', 'c-mine', 'g-warp', 'c-whs', 'c-window', 'c-deduce', 'c-towermap', 'c-forge', 'c-hourglass',
     'r-sun-know', 'r-sun-chert', 'r-sun-shelter', 'r-hel-door', 'r-fos-light', 'r-ss-hint', 'r-bh-know', 'r-bh-north', 'r-bh-migrate', 'r-obs-door', 'r-qt-find', 'r-tqt-signal', 'r-ws-kids',
     'q-locator', 'q-imaging', 'q-entangle', 'q-lakebed', 'q-sixth', 'i-know', 'i-sunstation', 'i-frozen', 'i-photo'],
-  explore: ['g-current', 'g-field', 'g-findfeld', 'c-harmonica', 'c-thseed', 'c-bramisland', 'g-angler', 'c-grave', 'c-bhfall', 'g-receiver',
+  explore: ['g-start', 'g-current', 'g-field', 'g-findfeld', 'c-harmonica', 'c-thseed', 'c-bramisland', 'g-angler', 'c-grave', 'c-bhfall', 'g-receiver',
     'r-sunless', 'r-sun-way', 'r-sun-pod', 'r-pod2', 'r-sun-hole', 'r-hel', 'r-hel-trail', 'r-fossil', 'r-fos-crack', 'r-lakebed', 'r-sunstation', 'r-ss-tower',
     'r-forge', 'r-forge-raise', 'r-bhcity', 'r-bh-way', 'r-bh-river', 'r-bh-bridge', 'r-crossroads', 'r-oldsettle', 'r-pod1', 'r-forge-district', 'r-forge-warp',
     'r-observatory', 'r-obs-under', 'r-obs-cannon', 'r-cannon', 'r-obs-tower', 'r-qtower', 'r-tqt', 'r-tqt-way', 'r-tqt-above', 'r-tqt-below',
