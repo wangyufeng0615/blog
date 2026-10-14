@@ -8,7 +8,7 @@
 <meta name="keywords" content="Outer Wilds, Outer Wilds guide, Outer Wilds clues, Outer Wilds ending, Eye of the Universe coordinates, Nomai, Ash Twin Project, Sunless City, High Energy Lab, Black Hole Forge, Southern Observatory, Quantum Moon sixth location, Dark Bramble anglerfish, Giant’s Deep core">
 <meta name="author" content="王雨峰 (Wang Yufeng)">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#faf9f7">
+<meta name="theme-color" content="#0a0f1f">
 <link rel="canonical" href="https://wangyufeng.org/outer-wilds-clues/en/">
 <link rel="alternate" hreflang="zh-CN" href="https://wangyufeng.org/outer-wilds-clues/">
 <link rel="alternate" hreflang="en" href="https://wangyufeng.org/outer-wilds-clues/en/">
@@ -101,7 +101,7 @@
    "description": "A dependency map of the Outer Wilds base game. To reach the ending you need the Eye of the Universe’s coordinates, the Nomai Vessel and the advanced warp core; see what you must learn first, where each clue is, how to get into key locations and when, and which steps you can get past another way.",
    "inLanguage": "en",
    "datePublished": "2026-10-14T21:00:00+08:00",
-   "dateModified": "2026-10-14T23:30:00+08:00",
+   "dateModified": "2026-10-15T01:30:00+08:00",
    "image": {
     "@id": "https://wangyufeng.org/outer-wilds-clues/en/#image"
    },
@@ -225,34 +225,39 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="../assets/graph.css?v=efccfbdafa">
+<link rel="stylesheet" href="../assets/graph.css?v=912c1e0bfa">
 </head>
 <body>
-<header class="top">
-  <div class="title-row">
-    <h1>Outer Wilds Clue Map</h1>
-    <a class="lang" href="../" hreflang="zh-CN" lang="zh-CN" data-lang="zh">中文</a>
-  </div>
-  <p class="what">Reaching the ending of Outer Wilds means figuring out a chain of things. This map connects them: what you need to know first, which planet teaches it, how to get into key places and when, and which steps you can get past another way. The closer to the right, the closer to the ending.</p>
-  <div class="legend">
-    <span><i class="lg-goal"></i>Green: the ending and its three must-haves</span>
-    <span><i class="lg-main"></i>Solid line: the intended route</span>
-    <span><i class="lg-alt"></i>Dashed line: another way (luck, trial and error, brute force, or a different clue)</span>
-    <span>Click any card for the game text</span>
-    <span class="spoiler">Full spoilers — finish the game first</span>
-  </div>
-</header>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="screen">
+  <header class="top">
+    <div class="sky-sun" aria-hidden="true"></div>
+    <div class="title-row">
+      <svg class="fire" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c1.5 4.5 6.5 6.8 6.5 12.4a6.5 6.5 0 0 1-13 0c0-3.3 1.8-5 3.2-6.8.3 2 1.2 3.3 2.4 3.9-.6-3.6.2-6.6.9-9.5Z" fill="#ff8a3d"/><path d="M16 13.5c.9 2.2 3.1 3.4 3.1 6a3.1 3.1 0 0 1-6.2 0c0-1.7.9-2.7 1.6-3.6.2 1 .6 1.6 1.1 1.9-.3-1.7.1-3 .4-4.3Z" fill="#ffd27a"/><path d="M6 27.5 26 23M6 23l20 4.5" stroke="#8a5a3c" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <h1>Outer Wilds Clue Map</h1>
+      <a class="lang" href="../" hreflang="zh-CN" lang="zh-CN" data-lang="zh">中文</a>
+    </div>
+    <p class="what">Everything Outer Wilds asks you to figure out before the ending: what to learn first, on which planet, how to get in and when. The further right, the closer to the ending.</p>
+    <div class="legend">
+      <span><i class="lg-goal"></i>Teal: the ending and its must-haves</span>
+    <span><i class="lg-main"></i>Solid: the intended route</span>
+    <span><i class="lg-alt"></i>Orange dashed: another way (luck, trial, brute force or another clue)</span>
+    <span>Click a card for the game text</span>
+      <span class="spoiler">Full spoilers — finish the game first</span>
+    </div>
+  </header>
 
-<div class="stage" id="stage">
-  <svg id="graph" role="img" aria-label="Outer Wilds clue dependency map: main path, getting there, Quantum Moon, the Interloper. A text version is in llms.txt."></svg>
-  <div class="zoom" role="group">
-    <button type="button" id="z-out" aria-label="Zoom out">−</button>
-    <output id="z-val">100%</output>
-    <button type="button" id="z-in" aria-label="Zoom in">+</button>
-    <button type="button" id="z-fit">Fit width</button>
-    <span class="hint">Drag to pan · Ctrl/⌘ + scroll or pinch to zoom</span>
+  <div class="stage" id="stage">
+    <svg id="graph" role="img" aria-label="Outer Wilds clue dependency map: main path, getting there, Quantum Moon, the Interloper. A text version is in llms.txt."></svg>
+    <div class="zoom" role="group">
+      <button type="button" id="z-out" aria-label="Zoom out">−</button>
+      <output id="z-val">100%</output>
+      <button type="button" id="z-in" aria-label="Zoom in">+</button>
+      <button type="button" id="z-fit">Fit width</button>
+      <span class="hint">Drag to pan · Ctrl/⌘ + scroll or pinch to zoom</span>
+    </div>
+    <aside class="detail" id="detail" aria-live="polite" hidden></aside>
   </div>
-  <aside class="detail" id="detail" aria-live="polite" hidden></aside>
 </div>
 <noscript>
   <div class="noscript">
@@ -265,7 +270,25 @@
 </noscript>
 
 <main class="article">
-  <h2>FAQ</h2>
+  <h2 id="loop"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>What happens in one loop</h2>
+  <p class="lead">Every loop lasts 22 minutes. The Sun keeps aging and each planet changes on its own schedule, so many ways in are only open for part of the loop.</p>
+  <figure class="timeline" style="margin:0">
+    <svg viewBox="0 0 1040 466" role="img" aria-label="Timeline of one 22-minute loop"><line class="tl-grid" x1="150" x2="150" y1="24" y2="456"/><text class="tl-tick" x="150" y="18" text-anchor="middle">0:00</text><line class="tl-grid" x1="228.1818181818182" x2="228.1818181818182" y1="24" y2="456"/><text class="tl-tick" x="228.1818181818182" y="18" text-anchor="middle">2:00</text><line class="tl-grid" x1="306.3636363636364" x2="306.3636363636364" y1="24" y2="456"/><text class="tl-tick" x="306.3636363636364" y="18" text-anchor="middle">4:00</text><line class="tl-grid" x1="384.5454545454545" x2="384.5454545454545" y1="24" y2="456"/><text class="tl-tick" x="384.5454545454545" y="18" text-anchor="middle">6:00</text><line class="tl-grid" x1="462.72727272727275" x2="462.72727272727275" y1="24" y2="456"/><text class="tl-tick" x="462.72727272727275" y="18" text-anchor="middle">8:00</text><line class="tl-grid" x1="540.909090909091" x2="540.909090909091" y1="24" y2="456"/><text class="tl-tick" x="540.909090909091" y="18" text-anchor="middle">10:00</text><line class="tl-grid" x1="619.090909090909" x2="619.090909090909" y1="24" y2="456"/><text class="tl-tick" x="619.090909090909" y="18" text-anchor="middle">12:00</text><line class="tl-grid" x1="697.2727272727273" x2="697.2727272727273" y1="24" y2="456"/><text class="tl-tick" x="697.2727272727273" y="18" text-anchor="middle">14:00</text><line class="tl-grid" x1="775.4545454545455" x2="775.4545454545455" y1="24" y2="456"/><text class="tl-tick" x="775.4545454545455" y="18" text-anchor="middle">16:00</text><line class="tl-grid" x1="853.6363636363636" x2="853.6363636363636" y1="24" y2="456"/><text class="tl-tick" x="853.6363636363636" y="18" text-anchor="middle">18:00</text><line class="tl-grid" x1="931.8181818181819" x2="931.8181818181819" y1="24" y2="456"/><text class="tl-tick" x="931.8181818181819" y="18" text-anchor="middle">20:00</text><line class="tl-grid" x1="1010" x2="1010" y1="24" y2="456"/><text class="tl-tick" x="1010" y="18" text-anchor="middle">22:00</text><line class="tl-axis" x1="150" x2="1010" y1="68" y2="68"/><text class="tl-lane" x="8" y="48">Timber Hearth</text><g><circle class="tl-dot" cx="150" cy="44" r="5.5"/><text class="tl-label" x="160" y="48" text-anchor="start">Wake up by the campfire</text></g><line class="tl-axis" x1="150" x2="1010" y1="112" y2="112"/><text class="tl-lane" x="8" y="92">Giant’s Deep</text><g class="tl-link" data-node="coords" tabindex="0" role="link"><circle class="tl-dot" cx="161.72727272727272" cy="88" r="5.5"/><text class="tl-label" x="171.72727272727272" y="92" text-anchor="start">The Orbital Probe Cannon fires — a flash in the sky</text></g><line class="tl-axis" x1="150" x2="1010" y1="228" y2="228"/><text class="tl-lane" x="8" y="136">Hourglass Twins</text><g class="tl-link" data-node="r-lakebed" tabindex="0" role="link"><rect class="tl-range" x="150" y="124" width="117.27272727272725" height="16" rx="3"/><text class="tl-label" x="156" y="136">Lakebed Cave: open only for the first few minutes</text></g><g class="tl-link" data-node="c-hourglass" tabindex="0" role="link"><circle class="tl-dot" cx="228.1818181818182" cy="156" r="5.5"/><text class="tl-label" x="238.1818181818182" y="160" text-anchor="start">Sand starts to flow</text></g><g class="tl-link" data-node="r-sunstation" tabindex="0" role="link"><circle class="tl-dot" cx="345.4545454545455" cy="180" r="5.5"/><text class="tl-label" x="355.4545454545455" y="184" text-anchor="start">Sun Station tower door clears</text></g><g class="tl-link" data-node="g-sand" tabindex="0" role="link"><circle class="tl-dot" cx="456.08181818181816" cy="156" r="5.5"/><text class="tl-label" x="466.08181818181816" y="160" text-anchor="start">~7:50 project tower receiver uncovered</text></g><g class="tl-link" data-node="r-sunless" tabindex="0" role="link"><rect class="tl-range" x="228.1818181818182" y="196" width="781.8181818181818" height="16" rx="3"/><text class="tl-label" x="234.1818181818182" y="208">The Sunless City fills with sand from the bottom up</text></g><line class="tl-axis" x1="150" x2="1010" y1="272" y2="272"/><text class="tl-lane" x="8" y="252">Brittle Hollow</text><g class="tl-link" data-node="r-qtower" tabindex="0" role="link"><rect class="tl-range" x="150" y="240" width="860" height="16" rx="3"/><text class="tl-label" x="156" y="252">The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole</text></g><line class="tl-axis" x1="150" x2="1010" y1="340" y2="340"/><text class="tl-lane" x="8" y="296">The Interloper</text><g class="tl-link" data-node="i-enter" tabindex="0" role="link"><rect class="tl-range" x="150" y="284" width="781.8181818181819" height="16" rx="3"/><text class="tl-label" x="156" y="296">Swings around the Sun; the closer it gets, the wider the sunward fissure opens</text></g><g><circle class="tl-dot" cx="931.8181818181819" cy="316" r="5.5"/><text class="tl-label" x="921.8181818181819" y="320" text-anchor="end">~20:00 crashes into the Sun</text></g><line class="tl-axis" x1="150" x2="1010" y1="456" y2="456"/><text class="tl-lane" x="8" y="364">The Sun</text><g><rect class="tl-range tl-sun" x="150" y="352" width="410.4545454545455" height="16" rx="3"/><text class="tl-label" x="156" y="364">Orange star; the Sun Station still stands</text></g><g><rect class="tl-range tl-sun" x="560.4545454545455" y="352" width="449.5454545454545" height="16" rx="3"/><text class="tl-label" x="566.4545454545455" y="364">Swells into a red giant</text></g><g class="tl-link" data-node="r-sunstation" tabindex="0" role="link"><circle class="tl-dot tl-sun" cx="560.4545454545455" cy="384" r="5.5"/><text class="tl-label" x="570.4545454545455" y="388" text-anchor="start">~10.5–12 min: the Sun Station is swallowed</text></g><g><circle class="tl-dot tl-sun" cx="951.3636363636364" cy="408" r="5.5"/><text class="tl-label" x="941.3636363636364" y="412" text-anchor="end">Final minute or two: “End Times” plays</text></g><g><circle class="tl-dot goal" cx="1010" cy="432" r="5.5"/><text class="tl-label" x="1000" y="436" text-anchor="end">Supernova — the loop starts over</text></g></svg>
+    <figcaption class="tl-note">Times come from the Outer Wilds Wiki; its pages put the Sun’s swelling between 10.5 and 12 minutes, so positions are approximate. Click an event to jump to it on the map above.</figcaption>
+  </figure>
+
+  <h2 id="leads"><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>Who points you where</h2>
+  <p class="lead">Each traveler sits on a different planet, and one line from them is often the reason for your next trip. These are the rumors your ship log credits to them; click a place to jump to it on the map.</p>
+  <div class="leads">
+    <article class="lead-card"><h3>Timber Hearth village <small>Hal, Hornfels and the others</small></h3><ul><li><div class="to">→ Gabbro’s Island</div><p class="said">Hal says Gabbro went back to Giant’s Deep to try to learn more about the Nomai statue in the observatory.</p></li><li><div class="to">→ Esker’s Camp</div><p class="said">Sounds like Esker is still stationed on the Attlerock. They’ve been there by themself for a while.</p></li><li><div class="to">→ Eye Signal Locator</div><p class="said">I hear there are Nomai ruins somewhere on the Attlerock. No one knows what they are or why they were built. The Nomai text in the observatory talks about calibrating some sort of device on the Attlerock.</p></li></ul></article>
+    <article class="lead-card"><h3>Esker <small>the Attlerock</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="c-harmonica">Dark Bramble Seed</a></div><p class="said">Esker's signalscope log reports harmonica music coming from somewhere on Timber Hearth. They claim it sounds just like Feldspar's harmonica, but Feldspar disappeared in space ages ago.</p></li><li><div class="to">→ Lunar Lookout</div><p class="said">Esker says the Attlerock’s north pole (marked in red on my minimap) is a great spot to listen for the other travelers’ music with a signalscope.</p></li></ul></article>
+    <article class="lead-card"><h3>Chert <small>Ember Twin</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="r-pod2">Escape Pod 2</a></div><p class="said">Chert saw a Nomai shipwreck shooting a beam of light into the sky somewhere on Ember Twin's southern hemisphere.</p></li><li><div class="to">→ <a href="#stage" data-node="r-sunless">The Sunless City</a></div><p class="said">Chert thinks the lack of surface ruins means the Nomai must have lived somewhere underground.</p></li></ul></article>
+    <article class="lead-card"><h3>Riebeck <small>Brittle Hollow</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="r-observatory">Southern Observatory</a></div><p class="said">Riebeck says you can't get into the observatory from the surface (they tried), but there's probably a path to it beneath the crust somewhere.</p></li></ul></article>
+    <article class="lead-card"><h3>Gabbro <small>Giant’s Deep</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="g-current">Ocean Depths</a></div><p class="said">Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it.</p></li><li><div class="to">→ <a href="#stage" data-node="r-workshop">Statue Island</a></div><p class="said">One of the islands on Giant’s Deep has a Nomai statue on the beach just like the one Gabbro brought back to Timber Hearth. Statue Island (as Gabbro calls it) is the one with two islands connected by a natural rock arch.</p></li><li><div class="to">→ <a href="#stage" data-node="c-dmg">Orbital Probe Cannon</a></div><p class="said">Gabbro sees a bright flash in the sky at the start of every loop. Something must be happening in orbit around Giant’s Deep.</p></li></ul></article>
+    <article class="lead-card"><h3>Feldspar <small>Dark Bramble</small></h3><ul><li><div class="to">→ <a href="#stage" data-node="c-jelly">Frozen Jellyfish</a></div><p class="said">Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog.</p></li></ul></article>
+  </div>
+
+  <h2><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>FAQ</h2>
   <dl class="faq">
     <dt>What do you need to reach the ending of Outer Wilds?</dt>
     <dd>Three things: the Eye of the Universe’s coordinates (in the Probe Tracking Module at the core of Giant’s Deep), the Nomai Vessel (stuck deep in Dark Bramble), and the advanced warp core (in the central chamber of the Ash Twin Project). Put the core in the Vessel, enter the coordinates on the bridge, and warp to the Eye. Taking the core stops the time loop, so do it last.</dd>
@@ -285,7 +308,7 @@
     <dd>After the Sun Station failed, the Nomai went to study a newly arrived comet, the Interloper. Its core held ghost matter under extreme pressure; when it ruptured, the ghost matter covered the solar system almost instantly. It is invisible to the eye but shows up on camera.</dd>
   </dl>
 
-  <h2>Sources</h2>
+  <h2><svg viewBox="0 0 22 22" aria-hidden="true"><path class="spiral" d="M12.00,11.00L12.11,11.29L12.13,11.63L12.04,12.00L11.83,12.36L11.51,12.67L11.07,12.89L10.56,12.99L10.01,12.95L9.45,12.75L8.93,12.38L8.51,11.86L8.23,11.22L8.12,10.48L8.20,9.71L8.51,8.95L9.02,8.27L9.72,7.72L10.57,7.35L11.52,7.22L12.52,7.33L13.48,7.72L14.35,8.36L15.04,9.23L15.51,10.29L15.69,11.46L15.56,12.68L15.11,13.86L14.35,14.92L13.32,15.77L12.06,16.35L10.67,16.59L9.22,16.47L7.82,15.97L6.56,15.10L5.54,13.92L4.83,12.48L4.51,10.87L4.61,9.20L5.14,7.57L6.09,6.09L7.42,4.89L9.04,4.04L10.86,3.62L12.76,3.68L14.62,4.23L16.31,5.25L17.72,6.70L18.73,8.49L19.26,10.51L19.26,12.64L18.71,14.74L17.63,16.66L16.07,18.27L14.12,19.46L11.90,20.12L9.54,20.20L7.21,19.67L5.05,18.55L3.22,16.89L1.85,14.79L1.04,12.38L0.87,9.80L1.36,7.23L2.51,4.83"/></svg>Sources</h2>
   <p class="src">Solid lines and quotes come from the game itself: ship log, Nomai text and dialogue from the October 2026 Steam build, in the official English text, plus the ship log’s own “where did you hear this” data. Alternatives and location details come from the <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds Wiki</a> and the player community, cited on each card; a few marked “not confirmed in the game text” are community claims. Base game only, no Echoes of the Eye.</p>
   <p class="src">For AI and programs: <a href="../llms.txt">llms.txt</a> (full text) and <a href="../graph.json">graph.json</a> (nodes, prerequisites, English and Chinese game text).</p>
   <p class="src">Wang Yufeng · October 14, 2026</p>
@@ -296,7 +319,7 @@ document.querySelector('.lang').addEventListener('click', function () {
   try { localStorage.setItem('owc-lang', this.dataset.lang); } catch (e) {}
 });
 </script>
-<script src="../assets/graph-data.js?v=f7bd0eb71b"></script>
-<script src="../assets/graph.js?v=3e163f5a6c"></script>
+<script src="../assets/graph-data.js?v=11a0ba0fd1"></script>
+<script src="../assets/graph.js?v=ed3e0c7cfa"></script>
 </body>
 </html>

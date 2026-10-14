@@ -9,7 +9,7 @@
   "url": "https://wangyufeng.org/"
  },
  "datePublished": "2026-10-14",
- "dateModified": "2026-10-14",
+ "dateModified": "2026-10-15",
  "game": {
   "name": "Outer Wilds",
   "name_zh": "星际拓荒",
@@ -4131,6 +4131,427 @@
     "zh": "太阳站没能引爆太阳后，挪麦人去调查刚到的彗星\"闯入者\"。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。幽灵物质肉眼看不见，用相机能看到。",
     "en": "After the Sun Station failed, the Nomai went to study a newly arrived comet, the Interloper. Its core held ghost matter under extreme pressure; when it ruptured, the ghost matter covered the solar system almost instantly. It is invisible to the eye but shows up on camera."
    }
+  }
+ ],
+ "loop_timeline": {
+  "minutes": 22,
+  "lanes": [
+   {
+    "name": {
+     "zh": "木炉星",
+     "en": "Timber Hearth"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "在营火边醒来",
+       "en": "Wake up by the campfire"
+      },
+      "at_minute": 0,
+      "from_minute": null,
+      "to_minute": null,
+      "node": null
+     }
+    ]
+   },
+   {
+    "name": {
+     "zh": "深巨星",
+     "en": "Giant’s Deep"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "轨道探测炮发射，天上一闪",
+       "en": "The Orbital Probe Cannon fires — a flash in the sky"
+      },
+      "at_minute": 0.3,
+      "from_minute": null,
+      "to_minute": null,
+      "node": "coords"
+     }
+    ]
+   },
+   {
+    "name": {
+     "zh": "沙漏双星",
+     "en": "Hourglass Twins"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "湖床洞穴只在开头几分钟能进",
+       "en": "Lakebed Cave: open only for the first few minutes"
+      },
+      "at_minute": null,
+      "from_minute": 0,
+      "to_minute": 3,
+      "node": "r-lakebed"
+     },
+     {
+      "label": {
+       "zh": "沙子开始流动",
+       "en": "Sand starts to flow"
+      },
+      "at_minute": 2,
+      "from_minute": null,
+      "to_minute": null,
+      "node": "c-hourglass"
+     },
+     {
+      "label": {
+       "zh": "太阳站塔门露出",
+       "en": "Sun Station tower door clears"
+      },
+      "at_minute": 5,
+      "from_minute": null,
+      "to_minute": null,
+      "node": "r-sunstation"
+     },
+     {
+      "label": {
+       "zh": "约 7:50 计划塔接收点露出",
+       "en": "~7:50 project tower receiver uncovered"
+      },
+      "at_minute": 7.83,
+      "from_minute": null,
+      "to_minute": null,
+      "node": "g-sand"
+     },
+     {
+      "label": {
+       "zh": "背阴城从下往上被沙灌满",
+       "en": "The Sunless City fills with sand from the bottom up"
+      },
+      "at_minute": null,
+      "from_minute": 2,
+      "to_minute": 22,
+      "node": "r-sunless"
+     }
+    ]
+   },
+   {
+    "name": {
+     "zh": "碎空星",
+     "en": "Brittle Hollow"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞",
+       "en": "The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole"
+      },
+      "at_minute": null,
+      "from_minute": 0,
+      "to_minute": 22,
+      "node": "r-qtower"
+     }
+    ]
+   },
+   {
+    "name": {
+     "zh": "闯入者",
+     "en": "The Interloper"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "绕太阳飞，越近太阳，向阳面的冰缝开得越大",
+       "en": "Swings around the Sun; the closer it gets, the wider the sunward fissure opens"
+      },
+      "at_minute": null,
+      "from_minute": 0,
+      "to_minute": 20,
+      "node": "i-enter"
+     },
+     {
+      "label": {
+       "zh": "约第 20 分钟撞进太阳",
+       "en": "~20:00 crashes into the Sun"
+      },
+      "at_minute": 20,
+      "from_minute": null,
+      "to_minute": null,
+      "node": null
+     }
+    ]
+   },
+   {
+    "name": {
+     "zh": "太阳",
+     "en": "The Sun"
+    },
+    "events": [
+     {
+      "label": {
+       "zh": "橙色恒星，太阳站还在",
+       "en": "Orange star; the Sun Station still stands"
+      },
+      "at_minute": null,
+      "from_minute": 0,
+      "to_minute": 10.5,
+      "node": null
+     },
+     {
+      "label": {
+       "zh": "膨胀成红巨星",
+       "en": "Swells into a red giant"
+      },
+      "at_minute": null,
+      "from_minute": 10.5,
+      "to_minute": 22,
+      "node": null
+     },
+     {
+      "label": {
+       "zh": "约 10.5–12 分钟太阳站被吞没",
+       "en": "~10.5–12 min: the Sun Station is swallowed"
+      },
+      "at_minute": 10.5,
+      "from_minute": null,
+      "to_minute": null,
+      "node": "r-sunstation"
+     },
+     {
+      "label": {
+       "zh": "最后一两分钟响起《End Times》",
+       "en": "Final minute or two: “End Times” plays"
+      },
+      "at_minute": 20.5,
+      "from_minute": null,
+      "to_minute": null,
+      "node": null
+     },
+     {
+      "label": {
+       "zh": "超新星，循环重来",
+       "en": "Supernova — the loop starts over"
+      },
+      "at_minute": 22,
+      "from_minute": null,
+      "to_minute": null,
+      "node": null
+     }
+    ]
+   }
+  ]
+ },
+ "traveler_leads": [
+  {
+   "traveler": {
+    "zh": "木炉星村子",
+    "en": "Timber Hearth village"
+   },
+   "where": {
+    "zh": "哈尔、霍恩费斯等人",
+    "en": "Hal, Hornfels and the others"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "加布罗的岛屿",
+      "en": "Gabbro’s Island"
+     },
+     "said": {
+      "zh": "哈尔说加布罗打算回到深巨星，对天文台的挪麦雕像作进一步的调查。",
+      "en": "Hal says Gabbro went back to Giant’s Deep to try to learn more about the Nomai statue in the observatory."
+     },
+     "node": null,
+     "ship_log_rumor": "GD_GABBRO_ISLAND_R1"
+    },
+    {
+     "to": {
+      "zh": "埃斯科的营地",
+      "en": "Esker’s Camp"
+     },
+     "said": {
+      "zh": "听起来埃斯科依然驻扎在废岩星。他已经在那儿独自待了好一阵子了。",
+      "en": "Sounds like Esker is still stationed on the Attlerock. They’ve been there by themself for a while."
+     },
+     "node": null,
+     "ship_log_rumor": "TM_ESKER_R1"
+    },
+    {
+     "to": {
+      "zh": "宇宙之眼信号定位器",
+      "en": "Eye Signal Locator"
+     },
+     "said": {
+      "zh": "我听说废岩星上有挪麦人的废墟。没人知道它们是干什么用的，也不知道挪麦人为什么要造它们。天文台里的挪麦文字提到，挪麦人正在对废岩星上的某种设备进行校准。",
+      "en": "I hear there are Nomai ruins somewhere on the Attlerock. No one knows what they are or why they were built. The Nomai text in the observatory talks about calibrating some sort of device on the Attlerock."
+     },
+     "node": null,
+     "ship_log_rumor": "TM_EYE_LOCATOR_R1,TM_EYE_LOCATOR_R2"
+    }
+   ]
+  },
+  {
+   "traveler": {
+    "zh": "埃斯科",
+    "en": "Esker"
+   },
+   "where": {
+    "zh": "废岩星",
+    "en": "the Attlerock"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "黑棘星种子",
+      "en": "Dark Bramble Seed"
+     },
+     "said": {
+      "zh": "埃斯科的信号镜日志报告说，木炉星的某处传来了口琴声。他说那声音听起来和费尔德斯巴的口琴一模一样。可是费尔德斯巴早就消失在太空里了。",
+      "en": "Esker's signalscope log reports harmonica music coming from somewhere on Timber Hearth. They claim it sounds just like Feldspar's harmonica, but Feldspar disappeared in space ages ago."
+     },
+     "node": "c-harmonica",
+     "ship_log_rumor": "TH_IMPACT_CRATER_R1"
+    },
+    {
+     "to": {
+      "zh": "月面瞭望所",
+      "en": "Lunar Lookout"
+     },
+     "said": {
+      "zh": "埃斯科说废岩星的北极（在我的小地图上用红色标出）非常适合用信号镜去聆听其他旅行者演奏的音乐。",
+      "en": "Esker says the Attlerock’s north pole (marked in red on my minimap) is a great spot to listen for the other travelers’ music with a signalscope."
+     },
+     "node": null,
+     "ship_log_rumor": "TM_NORTH_POLE_R1"
+    }
+   ]
+  },
+  {
+   "traveler": {
+    "zh": "切特",
+    "en": "Chert"
+   },
+   "where": {
+    "zh": "余烬双星",
+    "en": "Ember Twin"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "2号逃生舱",
+      "en": "Escape Pod 2"
+     },
+     "said": {
+      "zh": "切特看见一艘挪麦宇宙飞船残骸向余烬双星南半球的某个地方发射了一道光束。",
+      "en": "Chert saw a Nomai shipwreck shooting a beam of light into the sky somewhere on Ember Twin's southern hemisphere."
+     },
+     "node": "r-pod2",
+     "ship_log_rumor": "CT_ESCAPE_POD_R2"
+    },
+    {
+     "to": {
+      "zh": "背阴城",
+      "en": "The Sunless City"
+     },
+     "said": {
+      "zh": "切特觉得地表很少有废墟这个事实，说明挪麦人一定住在地下的什么地方。",
+      "en": "Chert thinks the lack of surface ruins means the Nomai must have lived somewhere underground."
+     },
+     "node": "r-sunless",
+     "ship_log_rumor": "CT_SUNLESS_CITY_R4"
+    }
+   ]
+  },
+  {
+   "traveler": {
+    "zh": "瑞拜克",
+    "en": "Riebeck"
+   },
+   "where": {
+    "zh": "碎空星",
+    "en": "Brittle Hollow"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "南部天文台",
+      "en": "Southern Observatory"
+     },
+     "said": {
+      "zh": "根据瑞拜克的说法，从地面进入天文台是不可能的（他试过了），不过地壳下某个地方可能有条通路。",
+      "en": "Riebeck says you can't get into the observatory from the surface (they tried), but there's probably a path to it beneath the crust somewhere."
+     },
+     "node": "r-observatory",
+     "ship_log_rumor": "BH_OBSERVATORY_R3"
+    }
+   ]
+  },
+  {
+   "traveler": {
+    "zh": "加布罗",
+    "en": "Gabbro"
+   },
+   "where": {
+    "zh": "深巨星",
+    "en": "Giant’s Deep"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "海洋深处",
+      "en": "Ocean Depths"
+     },
+     "said": {
+      "zh": "加布罗说水面下有一股很强劲的水流，使得水里的东西无法沉下去。",
+      "en": "Gabbro says there’s a strong current beneath the surface of the ocean that prevents anything from sinking below it."
+     },
+     "node": "g-current",
+     "ship_log_rumor": "GD_OCEAN_R1"
+    },
+    {
+     "to": {
+      "zh": "雕像岛",
+      "en": "Statue Island"
+     },
+     "said": {
+      "zh": "深巨星某些岛屿的海滩上有挪麦雕像，这是其中的一座。这些雕像就和加布罗带回到木炉星的那个没什么两样。雕像岛（加布罗是这么称呼它的）就在两座由天然石拱门连接的岛屿那里。",
+      "en": "One of the islands on Giant’s Deep has a Nomai statue on the beach just like the one Gabbro brought back to Timber Hearth. Statue Island (as Gabbro calls it) is the one with two islands connected by a natural rock arch."
+     },
+     "node": "r-workshop",
+     "ship_log_rumor": "GD_STATUE_ISLAND_R1,GD_STATUE_ISLAND_R2"
+    },
+    {
+     "to": {
+      "zh": "轨道探测炮",
+      "en": "Orbital Probe Cannon"
+     },
+     "said": {
+      "zh": "加布罗在每个循环开始时，总会在天空中看到一道明亮的闪光。深巨星的轨道上一定发生了什么事情。",
+      "en": "Gabbro sees a bright flash in the sky at the start of every loop. Something must be happening in orbit around Giant’s Deep."
+     },
+     "node": "c-dmg",
+     "ship_log_rumor": "ORBITAL_PROBE_CANNON_R3"
+    }
+   ]
+  },
+  {
+   "traveler": {
+    "zh": "费尔德斯巴",
+    "en": "Feldspar"
+   },
+   "where": {
+    "zh": "黑棘星",
+    "en": "Dark Bramble"
+   },
+   "leads": [
+    {
+     "to": {
+      "zh": "冻住的水母",
+      "en": "Frozen Jellyfish"
+     },
+     "said": {
+      "zh": "费尔德斯巴提示说，抵达深巨星核心的秘密就藏在他的飞船坠毁的那棵空心藤蔓尽头里。我要去安康鱼骨架的尾巴那里，在迷雾里寻找闪烁的光亮，才能发现费尔德斯巴的飞船。",
+      "en": "Feldspar hinted that a secret to reaching the core of Giant's Deep lies at the end of the hollow vine they crashed their ship into. To find Feldspar's ship, I'll want to go to the tail end of the anglerfish skeleton and look for a flickering light in the fog."
+     },
+     "node": "c-jelly",
+     "ship_log_rumor": "DB_FROZEN_JELLYFISH_R1"
+    }
+   ]
   }
  ]
 }

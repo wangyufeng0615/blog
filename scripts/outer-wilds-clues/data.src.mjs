@@ -403,3 +403,49 @@ export const FAQ = [
    L('太阳站没能引爆太阳后，挪麦人去调查刚到的彗星"闯入者"。彗星核心里是高压的幽灵物质，外壳破裂后几乎一瞬间覆盖了整个星系。幽灵物质肉眼看不见，用相机能看到。',
      'After the Sun Station failed, the Nomai went to study a newly arrived comet, the Interloper. Its core held ghost matter under extreme pressure; when it ruptured, the ghost matter covered the solar system almost instantly. It is invisible to the eye but shows up on camera.')]
 ];
+
+// One 22-minute loop. t / from–to in minutes. row: which line inside the lane; side: 'left' puts the label left of the dot.
+// node: canvas node to jump to. Times from the Outer Wilds Wiki (Sun, Sun Station, Interloper, Ash Twin Project, Hourglass Twins pages).
+export const TIMELINE = {
+  title: L('一个循环里会发生什么', 'What happens in one loop'),
+  lead: L('每一轮只有 22 分钟，太阳一直在变老，各颗星球也在按自己的节奏变化。很多入口只在某段时间开着。', 'Every loop lasts 22 minutes. The Sun keeps aging and each planet changes on its own schedule, so many ways in are only open for part of the loop.'),
+  note: L('时间取自官方 Wiki，各页对太阳膨胀的时间说法在第 10.5 到 12 分钟之间，图上标的是大约位置。点带下划线的事件可跳到上面的画布。', 'Times come from the Outer Wilds Wiki; its pages put the Sun’s swelling between 10.5 and 12 minutes, so positions are approximate. Click an event to jump to it on the map above.'),
+  lanes: [
+    { name: L('木炉星', 'Timber Hearth'), items: [
+      { t: 0, row: 0, label: L('在营火边醒来', 'Wake up by the campfire') } ] },
+    { name: L('深巨星', 'Giant’s Deep'), items: [
+      { t: 0.3, row: 0, label: L('轨道探测炮发射，天上一闪', 'The Orbital Probe Cannon fires — a flash in the sky'), node: 'coords' } ] },
+    { name: L('沙漏双星', 'Hourglass Twins'), items: [
+      { from: 0, to: 3, row: 0, label: L('湖床洞穴只在开头几分钟能进', 'Lakebed Cave: open only for the first few minutes'), node: 'r-lakebed' },
+      { t: 2, row: 1, label: L('沙子开始流动', 'Sand starts to flow'), node: 'c-hourglass' },
+      { t: 5, row: 2, label: L('太阳站塔门露出', 'Sun Station tower door clears'), node: 'r-sunstation' },
+      { t: 7.83, row: 1, label: L('约 7:50 计划塔接收点露出', '~7:50 project tower receiver uncovered'), node: 'g-sand' },
+      { from: 2, to: 22, row: 3, label: L('背阴城从下往上被沙灌满', 'The Sunless City fills with sand from the bottom up'), node: 'r-sunless' } ] },
+    { name: L('碎空星', 'Brittle Hollow'), items: [
+      { from: 0, to: 22, row: 0, label: L('地壳被火山弹陆续砸塌：量子知识之塔、重力炮先后掉进黑洞', 'The crust keeps collapsing: the Tower of Quantum Knowledge and the gravity cannon fall into the black hole'), node: 'r-qtower' } ] },
+    { name: L('闯入者', 'The Interloper'), items: [
+      { from: 0, to: 20, row: 0, label: L('绕太阳飞，越近太阳，向阳面的冰缝开得越大', 'Swings around the Sun; the closer it gets, the wider the sunward fissure opens'), node: 'i-enter' },
+      { t: 20, row: 1, side: 'left', label: L('约第 20 分钟撞进太阳', '~20:00 crashes into the Sun') } ] },
+    { name: L('太阳', 'The Sun'), sun: true, items: [
+      { from: 0, to: 10.5, row: 0, label: L('橙色恒星，太阳站还在', 'Orange star; the Sun Station still stands') },
+      { from: 10.5, to: 22, row: 0, label: L('膨胀成红巨星', 'Swells into a red giant') },
+      { t: 10.5, row: 1, label: L('约 10.5–12 分钟太阳站被吞没', '~10.5–12 min: the Sun Station is swallowed'), node: 'r-sunstation' },
+      { t: 20.5, row: 2, side: 'left', label: L('最后一两分钟响起《End Times》', 'Final minute or two: “End Times” plays') },
+      { t: 22, row: 3, side: 'left', goal: true, label: L('超新星，循环重来', 'Supernova — the loop starts over') } ] }
+  ]
+};
+
+// Who sends you where: ship log rumors whose source is a traveler. Text and place names come from the game.
+export const TRAVELERS = [
+  { src: ['TH_VILLAGE'], name: L('木炉星村子', 'Timber Hearth village'), where: L('哈尔、霍恩费斯等人', 'Hal, Hornfels and the others') },
+  { src: ['TM_ESKER', 'TM_NORTH_POLE'], name: L('埃斯科', 'Esker'), where: L('废岩星', 'the Attlerock') },
+  { src: ['CT_CHERT'], name: L('切特', 'Chert'), where: L('余烬双星', 'Ember Twin') },
+  { src: ['BH_RIEBECK'], name: L('瑞拜克', 'Riebeck'), where: L('碎空星', 'Brittle Hollow') },
+  { src: ['GD_GABBRO_ISLAND'], name: L('加布罗', 'Gabbro'), where: L('深巨星', 'Giant’s Deep') },
+  { src: ['DB_FELDSPAR'], name: L('费尔德斯巴', 'Feldspar'), where: L('黑棘星', 'Dark Bramble') }
+];
+// Ship log entry → canvas node, so a lead can jump to the map.
+export const ENTRY_NODE = {
+  TH_IMPACT_CRATER: 'c-harmonica', CT_ESCAPE_POD: 'r-pod2', CT_SUNLESS_CITY: 'r-sunless', BH_OBSERVATORY: 'r-observatory',
+  ORBITAL_PROBE_CANNON: 'c-dmg', GD_OCEAN: 'g-current', GD_STATUE_ISLAND: 'r-workshop', DB_FROZEN_JELLYFISH: 'c-jelly'
+};
