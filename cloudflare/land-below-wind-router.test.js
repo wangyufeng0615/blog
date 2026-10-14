@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { languageRedirect, preferredLanguage } from "./land-below-wind-router.js";
+import { addLanguageHeaders, languageRedirect, preferredLanguage } from "./land-below-wind-router.js";
 
 test("negotiates the highest-quality browser language", () => {
   assert.equal(preferredLanguage("zh-CN,zh;q=0.9,en;q=0.8"), "zh");
@@ -44,4 +44,13 @@ test("an explicit Chinese cookie overrides an English browser at the default URL
     },
   });
   assert.equal(languageRedirect(request), null);
+});
+
+test("the negotiated root cannot be reused by a shared cache or a browser", () => {
+  const original = new Response('中文', { headers: { 'Cache-Control': 'max-age=600' } });
+  const zh = addLanguageHeaders(original, 'zh-CN');
+  assert.equal(zh.headers.get('Cache-Control'), 'private, no-store');
+  assert.match(zh.headers.get('Vary'), /Accept-Language, Cookie/);
+  const en = addLanguageHeaders(new Response('English', { headers: { 'Cache-Control': 'max-age=600' } }), 'en');
+  assert.equal(en.headers.get('Cache-Control'), 'max-age=600');
 });

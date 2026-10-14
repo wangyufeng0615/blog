@@ -76,6 +76,10 @@ npm run preview
 - `projects.json`、`posts.json`、`llms.txt`。
 - `sitemap.xml` 与 `robots.txt`。
 
+最终输出还会统一检查页面元数据、补充图片尺寸，并把存储雷达的大型内嵌数据
+拆成可分别缓存的文件。构建后运行 `npm run check:output`；部署及 Cloudflare
+规则说明见 [docs/deployment-hardening.md](docs/deployment-hardening.md)。
+
 ## 验证
 
 本项目当前没有独立测试或 lint 脚本。文档/文章修改后至少：
