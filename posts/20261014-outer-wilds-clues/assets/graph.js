@@ -3,7 +3,7 @@
   const LANG = /^en/i.test(document.documentElement.lang) ? 'en' : 'zh';
   const T = v => (v && typeof v === 'object' && !Array.isArray(v) ? v[LANG] : v);
   const FONT = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif';
-  const NODE_W = 214, INNER_W = NODE_W - 24, COL_GAP = 52, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 28, BAND_HEAD = 56, BAND_GAP = 60;
+  const NODE_W = 214, INNER_W = NODE_W - 24, COL_GAP = 52, COL_W = NODE_W + COL_GAP, V_GAP = 14, PAD = 48, BAND_HEAD = 56, BAND_GAP = 60;
   const UI = {
     zh: { realize: '意识到', explore: '探索到', official: '官方另一解', luck: '运气 / 试错 / 硬闯', timing: '时间窗口', risk: '小心坠落', verify: '社区说法', or: '或', go: '怎么去' },
     en: { realize: 'Realize', explore: 'Explore', official: 'other in-game clue', luck: 'luck / trial / brute force', timing: 'timing', risk: 'mind the drop', verify: 'community claim', or: 'or', go: 'how to get there' }
@@ -117,6 +117,29 @@
     return { pos, height, maxDepth };
   }
 
+  // One tile of plain-weave canvas: 4 px threads going over and under, each thread a little lighter
+  // or darker than its neighbours, with fine grain. It repeats seamlessly and scales with the map.
+  function clothTile() {
+    const S = 360, TW = 4, n = S / TW;
+    let seed = 7;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    const warp = Array.from({ length: n }, () => rnd() - 0.5), weft = Array.from({ length: n }, () => (rnd() - 0.5) * (rnd() < 0.05 ? 1.6 : 1));
+    const c = document.createElement('canvas'); c.width = c.height = S;
+    const g = c.getContext('2d'), img = g.createImageData(S, S), d = img.data;
+    const base = [60, 43, 32];
+    for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+      const i = Math.floor(x / TW), j = Math.floor(y / TW), warpUp = (i + j) % 2 === 0;
+      const across = warpUp ? (x % TW) / (TW - 1) : (y % TW) / (TW - 1); // 0..1 across the thread on top
+      const round = 1 - Math.pow(across * 2 - 1, 2); // thread centre catches the light
+      let l = 0.84 + 0.2 * round + 0.09 * (warpUp ? warp[i] : weft[j]) + (rnd() - 0.5) * 0.1;
+      if (!warpUp) l *= 0.96;
+      const k = (y * S + x) * 4;
+      d[k] = base[0] * l; d[k + 1] = base[1] * l; d[k + 2] = base[2] * l; d[k + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    return { url: c.toDataURL('image/png'), size: S };
+  }
+
   // Nomai-style curl next to each band title.
   function spiralPath(cx, cy, R) {
     let d = '';
@@ -128,7 +151,10 @@
     for (const id in G.nodes) state.size[id] = measure(G.nodes[id]);
     vp.innerHTML = '';
     const defs = el('defs', {}, vp);
-    [['ah', 'var(--edge)'], ['ah-alt', 'var(--alt)']].forEach(([id, col]) => {
+    const tile = clothTile();
+    const pat = el('pattern', { id: 'cloth', patternUnits: 'userSpaceOnUse', width: tile.size, height: tile.size }, defs);
+    el('image', { href: tile.url, width: tile.size, height: tile.size }, pat);
+    [['ah', '#e6d3b3'], ['ah-alt', '#f0a35a']].forEach(([id, col]) => {
       const m = el('marker', { id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, defs);
       el('path', { d: 'M0,0 L10,5 L0,10 z', style: `fill:${col}` }, m);
     });
@@ -136,7 +162,7 @@
     const maxDepth = Math.max(...L.map(l => l.maxDepth));
     const width = PAD * 2 + maxDepth * COL_W + NODE_W;
     const pos = {};
-    const gBand = el('g', {}, vp), gE = el('g', {}, vp), gN = el('g', {}, vp);
+    const gCloth = el('g', {}, vp), gBand = el('g', {}, vp), gES = el('g', { class: 'edge-shadows' }, vp), gE = el('g', {}, vp), gN = el('g', {}, vp);
     let top = PAD;
     BANDS.forEach((b, i) => {
       const l = L[i];
@@ -152,6 +178,13 @@
       top = y0 + l.height + BAND_GAP;
     });
     state.gw = width; state.gh = top - BAND_GAP + PAD; state.pos = pos;
+    // the cloth itself: a soft shadow under it, the woven surface, and a folded hem near the edge
+    const cw = state.gw, ch = state.gh;
+    el('rect', { class: 'cloth-shadow', x: -6, y: 10, width: cw + 12, height: ch + 6, rx: 14 }, gCloth);
+    el('rect', { class: 'cloth-shadow', x: -2, y: 4, width: cw + 4, height: ch + 2, rx: 10 }, gCloth);
+    el('rect', { class: 'cloth', width: cw, height: ch, rx: 8 }, gCloth);
+    el('rect', { class: 'hem-dark', x: 10, y: 10, width: cw - 20, height: ch - 20, rx: 4 }, gCloth);
+    el('rect', { class: 'hem-light', x: 12, y: 12, width: cw - 24, height: ch - 24, rx: 3 }, gCloth);
 
     // Where any one prerequisite is enough, the arrows merge into an "or" dot before the card;
     // arrows that reach the card directly are all required.
@@ -170,12 +203,14 @@
       const alt = a.t === 'alt';
       const attrs = { d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`, class: 'edge' + (alt ? ' alt' : '') };
       if (!or) attrs['marker-end'] = `url(#${alt ? 'ah-alt' : 'ah'})`;
+      el('path', { d: attrs.d, class: 'edge-shadow' }, gES);
       const p = el('path', attrs, gE);
       p.dataset.from = a.id; p.dataset.to = b.id;
     });
     for (const id in pos) {
       if (!isOr(id)) continue;
       const pb = pos[id], y = pb.y + state.size[id].h / 2, cx = pb.x - 26;
+      el('path', { d: `M${cx + R},${y} L${pb.x - 2},${y}`, class: 'edge-shadow' }, gES);
       const c = el('path', { d: `M${cx + R},${y} L${pb.x - 2},${y}`, class: 'edge join', 'marker-end': 'url(#ah)' }, gE);
       c.dataset.join = id;
       const g = el('g', { class: 'or' }, gE); g.dataset.join = id;
@@ -187,7 +222,12 @@
       const n = G.nodes[id], p = pos[id], s = state.size[id];
       const gr = el('g', { class: 'node ' + nodeClass(n), transform: `translate(${p.x},${p.y})` }, gN);
       gr.dataset.id = id;
+      // a cotton patch sewn onto the cloth: two shadows, the patch, then a hem line or, for
+      // other ways through, a running stitch in orange thread
+      el('rect', { class: 'shade', x: -1, y: 4, width: NODE_W + 2, height: s.h + 3, rx: 8 }, gr);
+      el('rect', { class: 'shade', x: 0, y: 1.5, width: NODE_W, height: s.h, rx: 6 }, gr);
       el('rect', { class: 'box', width: NODE_W, height: s.h, rx: 6 }, gr);
+      el('rect', { class: n.t === 'alt' ? 'stitch' : 'hem', x: 4, y: 4, width: NODE_W - 8, height: s.h - 8, rx: 3.5 }, gr);
       let y = 10;
       s.metaLines.forEach((line, i) => {
         const t = el('text', { class: n.t === 'alt' ? 'meta alt' : n.tag === 'timing' ? 'meta timing' : 'meta', x: 12, y: y + 12 }, gr);
