@@ -99,9 +99,18 @@ Indented items are prerequisites of the item above them.
     - [Realize] The module sank (any one of)
       - [Realize] Damage report: tracking module missing — Orbital Probe Cannon · Control Module
       - [Realize] A part sank below the current — Southern Observatory / Construction Yard
+        - [Explore] The Southern Observatory — Brittle Hollow’s south pole (needs all of)
+          - [Realize] The surface door is broken — South pole · Riebeck’s ship
+          - [Explore] Take a path under the crust (any one of)
+            - [Explore] Start at the gravity cannon (needs all of)
+              - [Explore] The gravity cannon — Brittle Hollow’s equator
+                - (see above: The Crossroads)
+              - Before the cannon falls in [timing]
+            - [Explore] Start at the base of the Tower of Quantum Knowledge — Brittle Hollow’s equator
       - [Realize] Feldspar reached the core — Giant’s Deep · his old camp on Bramble Island
     - [Explore] Below the current — The strong current under the ocean (any one of)
       - [Realize] Counterclockwise cyclones push down — Brittle Hollow · cyclone model in the Southern Observatory
+        - (see above: The Southern Observatory)
       - [luck / trial / brute force] Get swept down by luck — Giant’s Deep
       - [luck / trial / brute force] Dive in at very high speed — Giant’s Deep
       - [luck / trial / brute force] Wait under a thrown island — Giant’s Deep
@@ -115,12 +124,26 @@ Indented items are prerequisites of the item above them.
           - [luck / trial / brute force] Stumble on him in Dark Bramble — Dark Bramble
         - [Explore] Get past the anglerfish — Inside Dark Bramble (any one of)
           - [Realize] Anglerfish are blind and hunt by sound — Ember Twin · anglerfish fossil
+            - [Explore] Fossil Fish Cave — Beneath Ember Twin (needs all of)
+              - [Explore] The Sunless City — Beneath Ember Twin (needs all of)
+                - [Realize] It is underground (any one of)
+                  - [Realize] Chert: hardly any ruins on the surface — Ember Twin · Chert’s camp
+                  - [Realize] Survivors sheltered beneath their pod — Ember Twin · Escape Pod 2
+                - [Explore] A way into the city (any one of)
+                  - [Explore] Follow the markers from under Escape Pod 2 — Ember Twin’s southern hemisphere
+                    - [Explore] Escape Pod 2 — Ember Twin’s southern hemisphere
+                  - [Explore] A hidden hole above the gravity cannon — Ember Twin’s equator · gravity cannon
+                - Go early [timing] — Sand fills the city from the bottom up
+              - [Explore] The crack in Stepping Stone Cave’s ceiling — Sunless City · Stepping Stone Cave (any one of)
+                - [Realize] Light up the fossil’s mouth first
+                - [luck / trial / brute force] Search the ceiling carefully — Stepping Stone Cave
           - [luck / trial / brute force] Do nothing after entering a seed — Dark Bramble
           - [luck / trial / brute force] Outrun them or snag them on vines — Dark Bramble
       - [luck / trial / brute force] Find the frozen jellyfish from outside — Dark Bramble’s south pole crust
   - Reach the Nomai Vessel — Deep in Dark Bramble (needs all of)
     - [Realize] There is a Vessel (any one of)
       - [Realize] The three murals — Brittle Hollow · Old Settlement
+        - (see above: The Old Settlement)
       - [Realize] Escape pod flight logs — Escape pods on Brittle Hollow / Ember Twin
     - [Realize] Which seed hides the Vessel — Dark Bramble (any one of)
       - [Realize] The other way in is in the anglerfish nest — Dark Bramble · the unlit seed in the nest (needs all of)
@@ -132,18 +155,46 @@ Indented items are prerequisites of the item above them.
   - Take the advanced warp core — Ash Twin · central chamber (needs all of)
     - [Realize] The project is inside Ash Twin
       - [Realize] Four places point to it — High Energy Lab / mines / Statue Workshop / Black Hole Forge
+        - [Explore] The Statue Workshop — Giant’s Deep · Statue Island (needs all of)
+          - [Explore] Get around the broken door
+            - [Explore] Swim in from under the island
+              - [Realize] The risky route the Nomai children mentioned
+          - The high ledge needs the island in the air [timing]
     - [Realize] You can only warp in (any one of)
       - [Realize] The shell has no physical entrance — Timber Hearth · Nomai Mines
+        - [Explore] The Nomai Mines — Timber Hearth (any one of)
+          - [Explore] An entrance inside the biggest geyser mountain — Timber Hearth · Nomai ruins
+          - [Explore] Warp in from the Timber Hearth tower on Ash Twin — Ash Twin’s equator
       - [luck / trial / brute force] Fly there and find no way in — Ash Twin
     - [Realize] How warp pads work (any one of)
       - [Realize] Stand on the pad until the target is overhead — White Hole Station
         - [Explore] Fall into Brittle Hollow’s black hole — Brittle Hollow’s core
       - [Realize] Alignment has a ~5° window — Brittle Hollow · Black Hole Forge
+        - (see above: The Black Hole Forge)
       - [luck / trial / brute force] Get warped by accident — Any warp pad
     - [Explore] The tower that leads into the project — Ash Twin’s equator · a pair of towers joined by a bridge (any one of)
       - [Realize] Deduce: it fires when Ember Twin is overhead (needs all of)
         - [Realize] The tower designs — Ember Twin · High Energy Lab
+          - [Explore] The High Energy Lab — Ember Twin’s equatorial canyon (needs all of)
+            - [Realize] The front door is locked from inside
+            - (see above: The Sunless City)
+            - [Explore] Follow the power cable from the bottom of the city — The Sunless City’s lowest district
+            - Time it for the middle of the loop [timing] — Early half floods; later half needs sand
         - [Realize] The twins share an alignment point — Brittle Hollow · Black Hole Forge
+          - [Explore] The Black Hole Forge — Top of the Hanging City (needs all of)
+            - [Explore] Raise the forge from the Meltwater District
+              - [Explore] The Hanging City — Under Brittle Hollow’s northern glacier (needs all of)
+                - [Realize] Where the city is (any one of)
+                  - [Realize] A huge city north of Riebeck’s camp — Brittle Hollow’s equator · Riebeck
+                  - [Realize] The settlers moved to the glacier — Brittle Hollow · Old Settlement
+                - [Explore] A way in (any one of)
+                  - [Explore] A hidden hole where the glacier river ends — Brittle Hollow’s north pole
+                  - [Explore] Cross the bridges from the Crossroads [timing] — Under Brittle Hollow’s crust
+                    - [Explore] The Crossroads — Entrance: the ruin with trees on the equator
+                  - [Explore] The Old Settlement — Under the crust at Brittle Hollow’s equator
+                    - [Explore] Open Escape Pod 1’s hatch and climb down — Brittle Hollow’s equator
+            - [Explore] The Forge District
+              - [Explore] Warp in from the Brittle Hollow tower on Ash Twin — Ash Twin’s equator
       - [other in-game clue] A Nomai body lies outside the right tower — Ash Twin · project tower
       - [luck / trial / brute force] Try every tower’s pad — Ash Twin’s equator
     - Wait for the sand to clear the tower [timing] — Ash Twin’s equator (any one of)
@@ -154,72 +205,6 @@ Indented items are prerequisites of the item above them.
     - [Realize] The three-sided pillar takes coordinates — Nomai Vessel · bridge
     - [Realize] The project’s core can be removed — Ash Twin Project · center
 
-### Getting there
-
-- [Explore] The High Energy Lab — Ember Twin’s equatorial canyon (needs all of)
-  - [Realize] The front door is locked from inside
-  - [Explore] The Sunless City — Beneath Ember Twin (needs all of)
-    - [Realize] It is underground (any one of)
-      - [Realize] Chert: hardly any ruins on the surface — Ember Twin · Chert’s camp
-      - [Realize] Survivors sheltered beneath their pod — Ember Twin · Escape Pod 2
-    - [Explore] A way into the city (any one of)
-      - [Explore] Follow the markers from under Escape Pod 2 — Ember Twin’s southern hemisphere
-        - [Explore] Escape Pod 2 — Ember Twin’s southern hemisphere
-      - [Explore] A hidden hole above the gravity cannon — Ember Twin’s equator · gravity cannon
-    - Go early [timing] — Sand fills the city from the bottom up
-  - [Explore] Follow the power cable from the bottom of the city — The Sunless City’s lowest district
-  - Time it for the middle of the loop [timing] — Early half floods; later half needs sand
-- [Explore] Fossil Fish Cave — Beneath Ember Twin (needs all of)
-  - (see above: The Sunless City)
-  - [Explore] The crack in Stepping Stone Cave’s ceiling — Sunless City · Stepping Stone Cave (any one of)
-    - [Realize] Light up the fossil’s mouth first
-    - [luck / trial / brute force] Search the ceiling carefully — Stepping Stone Cave
-- [Explore] Lakebed Cave — Dry lakebed at Ember Twin’s north pole
-  - Go in the first few minutes [timing]
-- [Explore] The Sun Station — Low orbit around the Sun (any one of)
-  - [Explore] Use the Sun Station tower on Ash Twin (needs all of)
-    - [Realize] There is a safer way — Ember Twin · the Sunless City
-    - The tower door clears around minute 5 [timing]
-  - [luck / trial / brute force] Land the ship on it — Sun Station
-- [Explore] The Black Hole Forge — Top of the Hanging City (needs all of)
-  - [Explore] Raise the forge from the Meltwater District
-    - [Explore] The Hanging City — Under Brittle Hollow’s northern glacier (needs all of)
-      - [Realize] Where the city is (any one of)
-        - [Realize] A huge city north of Riebeck’s camp — Brittle Hollow’s equator · Riebeck
-        - [Realize] The settlers moved to the glacier — Brittle Hollow · Old Settlement
-      - [Explore] A way in (any one of)
-        - [Explore] A hidden hole where the glacier river ends — Brittle Hollow’s north pole
-        - [Explore] Cross the bridges from the Crossroads [timing] — Under Brittle Hollow’s crust
-          - [Explore] The Crossroads — Entrance: the ruin with trees on the equator
-        - [Explore] The Old Settlement — Under the crust at Brittle Hollow’s equator
-          - [Explore] Open Escape Pod 1’s hatch and climb down — Brittle Hollow’s equator
-  - [Explore] The Forge District
-    - [Explore] Warp in from the Brittle Hollow tower on Ash Twin — Ash Twin’s equator
-- [Explore] The Southern Observatory — Brittle Hollow’s south pole (needs all of)
-  - [Realize] The surface door is broken — South pole · Riebeck’s ship
-  - [Explore] Take a path under the crust (any one of)
-    - [Explore] Start at the gravity cannon (needs all of)
-      - [Explore] The gravity cannon — Brittle Hollow’s equator
-        - (see above: The Crossroads)
-      - Before the cannon falls in [timing]
-    - [Explore] Start at the base of the Tower of Quantum Knowledge — Brittle Hollow’s equator
-- [Explore] Top of the Tower of Quantum Knowledge — Brittle Hollow’s equator (needs all of)
-  - [Realize] Directions near the recalled shuttle — Brittle Hollow · gravity cannon
-  - Let it fall through, enter at the white hole [timing] — Near the White Hole Station
-- [Explore] Tower of Quantum Trials — Giant’s Deep’s north pole (needs all of)
-  - [Realize] A quantum signal on Giant’s Deep — Signalscope · Quantum Fluctuations
-  - [Explore] Get past the giant polar cyclone (any one of)
-    - [Explore] Drop in from above the clouds
-    - [Explore] Come up from below the current
-- [Explore] The Statue Workshop — Giant’s Deep · Statue Island (needs all of)
-  - [Explore] Get around the broken door
-    - [Explore] Swim in from under the island
-      - [Realize] The risky route the Nomai children mentioned
-  - The high ledge needs the island in the air [timing]
-- [Explore] The Nomai Mines — Timber Hearth (any one of)
-  - [Explore] An entrance inside the biggest geyser mountain — Timber Hearth · Nomai ruins
-  - [Explore] Warp in from the Timber Hearth tower on Ash Twin — Ash Twin’s equator
-
 ### Quantum Moon: Optional
 
 - Meet Solanum at the sixth location — Quantum Moon · orbiting the Eye (needs all of)
@@ -228,13 +213,23 @@ Indented items are prerequisites of the item above them.
     - [other in-game clue] Photograph it, then watch it as you land — Quantum Moon
   - [Realize] Rule of quantum imaging — Observing an image = observing the object (any one of)
     - [Explore] Tower of Quantum Trials — Giant’s Deep’s north pole
+      - [Explore] Tower of Quantum Trials — Giant’s Deep’s north pole (needs all of)
+        - [Realize] A quantum signal on Giant’s Deep — Signalscope · Quantum Fluctuations
+        - [Explore] Get past the giant polar cyclone (any one of)
+          - [Explore] Drop in from above the clouds
+          - [Explore] Come up from below the current
     - [luck / trial / brute force] Work it out by experimenting — Any quantum object
   - [Realize] Rule of quantum entanglement — Stand on it in complete darkness (any one of)
     - [Realize] How Coleus vanished — Ember Twin · Lakebed Cave
+      - [Explore] Lakebed Cave — Dry lakebed at Ember Twin’s north pole
+        - Go in the first few minutes [timing]
     - [other in-game clue] Text by Brittle Hollow’s tower shard — Brittle Hollow
     - [luck / trial / brute force] Turn your light off on a shard — Any quantum shard
   - [Realize] Rule of the sixth location — The shrine must be at the north pole
     - [Explore] Tower of Quantum Knowledge — Brittle Hollow’s equator
+      - [Explore] Top of the Tower of Quantum Knowledge — Brittle Hollow’s equator (needs all of)
+        - [Realize] Directions near the recalled shuttle — Brittle Hollow · gravity cannon
+        - Let it fall through, enter at the white hole [timing] — Near the White Hole Station
 
 ### The Interloper: Optional
 
@@ -242,6 +237,11 @@ Indented items are prerequisites of the item above them.
   - [Realize] The Nomai went to the comet (any one of)
     - [Explore] Recall the frozen shuttle — Ember Twin · gravity cannon
     - [Realize] After the Sun Station failed — Sun Station
+      - [Explore] The Sun Station — Low orbit around the Sun (any one of)
+        - [Explore] Use the Sun Station tower on Ash Twin (needs all of)
+          - [Realize] There is a safer way — Ember Twin · the Sunless City
+          - The tower door clears around minute 5 [timing]
+        - [luck / trial / brute force] Land the ship on it — Sun Station
   - [Explore] Get under the comet’s ice — A fissure on the sunward side (any one of)
     - [Realize] The frozen shuttle’s log — The Interloper’s surface
     - [luck / trial / brute force] Wait for the ice to melt near the Sun [timing] — Sunward side
@@ -340,9 +340,18 @@ Indented items are prerequisites of the item above them.
     - [意识到] 模块沉在了海底 (以下任选一)
       - [意识到] 损伤报告：跟踪模块遗失 — 轨道探测炮 · 控制模块
       - [意识到] 有部件沉到了水流下面 — 碎空星南部天文台 / 建造厂
+        - [探索到] 南部天文台 — 碎空星南极 (以下全部需要)
+          - [意识到] 地面上的大门坏了 — 碎空星南极 · 瑞拜克的飞船
+          - [探索到] 走地壳下的路 (以下任选一)
+            - [探索到] 从重力炮出发 (以下全部需要)
+              - [探索到] 重力炮 — 碎空星赤道
+                - （同上：十字路口）
+              - 趁重力炮还没掉进黑洞 [时间窗口]
+            - [探索到] 从量子知识之塔底层出发 — 碎空星赤道
       - [意识到] 费尔德斯巴到过核心 — 深巨星 · 荆棘岛上他的旧营地
     - [探索到] 潜到水流下面 — 深巨星海面下的强水流 (以下任选一)
       - [意识到] 逆时针气旋会往下压 — 碎空星 · 南部天文台的气旋模型
+        - （同上：南部天文台）
       - [运气 / 试错 / 硬闯] 碰巧被逆时针气旋卷下去 — 深巨星海面
       - [运气 / 试错 / 硬闯] 高速直冲核心 — 深巨星
       - [运气 / 试错 / 硬闯] 停在被抛起的岛下面 — 深巨星
@@ -356,12 +365,26 @@ Indented items are prerequisites of the item above them.
           - [运气 / 试错 / 硬闯] 在黑棘星里乱逛撞见 — 黑棘星
         - [探索到] 活着躲过安康鱼 — 黑棘星内部 (以下任选一)
           - [意识到] 安康鱼是瞎的，靠听声 — 余烬双星 · 安康鱼化石
+            - [探索到] 安康鱼化石洞 — 余烬双星地下 (以下全部需要)
+              - [探索到] 背阴城 — 余烬双星地下 (以下全部需要)
+                - [意识到] 城在地下 (以下任选一)
+                  - [意识到] 切特：地表几乎没有废墟 — 余烬双星 · 切特的营地
+                  - [意识到] 幸存者躲进了逃生舱下的洞 — 余烬双星 · 2号逃生舱
+                - [探索到] 进城的路 (以下任选一)
+                  - [探索到] 从2号逃生舱下的洞穴跟着路标走 — 余烬双星南半球
+                    - [探索到] 2号逃生舱 — 余烬双星南半球
+                  - [探索到] 重力炮上方的隐藏洞口 — 余烬双星赤道 · 重力炮
+                - 越早去越好 [时间窗口] — 沙子从下往上灌满城市
+              - [探索到] 垫脚石洞顶的裂缝 — 背阴城 · 垫脚石洞 (以下任选一)
+                - [意识到] 先给化石嘴里打个光
+                - [运气 / 试错 / 硬闯] 沿着天花板仔细找 — 垫脚石洞
           - [运气 / 试错 / 硬闯] 出种子后什么都不按 — 黑棘星
           - [运气 / 试错 / 硬闯] 全速甩开，或让它卡在藤蔓间 — 黑棘星
       - [运气 / 试错 / 硬闯] 从外面撞见冻水母 — 黑棘星南极的外壳碎片
   - 进入挪麦飞船 — 黑棘星深处 (以下全部需要)
     - [意识到] 有一艘飞船 (以下任选一)
       - [意识到] 三块壁画 — 碎空星 · 旧定居点
+        - （同上：旧定居点）
       - [意识到] 逃生舱飞行日志 — 碎空星 / 余烬双星的逃生舱
     - [意识到] 飞船在哪颗种子里 — 黑棘星 (以下任选一)
       - [意识到] 另一个入口在安康鱼巢里 — 黑棘星 · 鱼巢里那颗不发光的种子 (以下全部需要)
@@ -373,18 +396,46 @@ Indented items are prerequisites of the item above them.
   - 取得高级跃迁核心 — 灰烬双星 · 中央舱室 (以下全部需要)
     - [意识到] 计划在灰烬双星中心
       - [意识到] 四处原文都指向它 — 高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉
+        - [探索到] 雕塑车间 — 深巨星 · 雕像岛 (以下全部需要)
+          - [探索到] 绕过坏掉的大门
+            - [探索到] 从岛底下的开口游进去
+              - [意识到] 挪麦孩子说的危险小路
+          - 高处平台要等岛被抛起 [时间窗口]
     - [意识到] 只能跃迁进去 (以下任选一)
       - [意识到] 保护壳没有任何入口 — 木炉星 · 挪麦矿井
+        - [探索到] 挪麦矿井 — 木炉星 (以下任选一)
+          - [探索到] 最大的间歇泉山里有入口 — 木炉星 · 挪麦遗迹
+          - [探索到] 从灰烬双星的木炉星塔跃迁过来 — 灰烬双星赤道
       - [运气 / 试错 / 硬闯] 飞过去发现进不去 — 灰烬双星
     - [意识到] 跃迁平台怎么用 (以下任选一)
       - [意识到] 站上平台，等目标过头顶 — 白洞站
         - [探索到] 掉进碎空星的黑洞 — 碎空星中心
       - [意识到] 对齐有约五度的窗口 — 碎空星 · 黑洞熔炉
+        - （同上：黑洞熔炉）
       - [运气 / 试错 / 硬闯] 碰巧站上平台被传走 — 任意跃迁平台
     - [探索到] 通往计划的那座塔 — 灰烬双星赤道 · 一对用桥相连的塔 (以下任选一)
       - [意识到] 推理：余烬双星到头顶时它就启动 (以下全部需要)
         - [意识到] 高塔设计图 — 余烬双星 · 高能实验室
+          - [探索到] 高能实验室 — 余烬双星赤道峡谷 (以下全部需要)
+            - [意识到] 正门从里面锁着
+            - （同上：背阴城）
+            - [探索到] 沿能量电缆走城底的小路 — 背阴城最底层
+            - 时机要卡在中间 [时间窗口] — 前段被淹，后段要等沙
         - [意识到] 双星共用一个对准点 — 碎空星 · 黑洞熔炉
+          - [探索到] 黑洞熔炉 — 悬空城最上层 (以下全部需要)
+            - [探索到] 在融水区把熔炉升上来
+              - [探索到] 悬空城 — 碎空星北部冰川下 (以下全部需要)
+                - [意识到] 城的位置 (以下任选一)
+                  - [意识到] 瑞拜克营地北边有座大城 — 碎空星赤道 · 瑞拜克
+                  - [意识到] 旧定居点的人搬去了冰川 — 碎空星 · 旧定居点
+                - [探索到] 进城的路 (以下任选一)
+                  - [探索到] 冰川河流尽头的隐藏洞 — 碎空星北极
+                  - [探索到] 从十字路口过桥 [时间窗口] — 碎空星地壳下
+                    - [探索到] 十字路口 — 入口在赤道上长树的废墟里
+                  - [探索到] 旧定居点 — 碎空星赤道的地壳下
+                    - [探索到] 打开1号逃生舱舱门，沿栈桥下去 — 碎空星赤道
+            - [探索到] 熔炉区
+              - [探索到] 从灰烬双星的碎空星塔跃迁过来 — 灰烬双星赤道
       - [官方另一解] 正确的塔外有挪麦遗体 — 灰烬双星 · 计划塔
       - [运气 / 试错 / 硬闯] 把每座塔的平台挨个试 — 灰烬双星赤道
     - 等沙子让出塔门 [时间窗口] — 灰烬双星赤道 (以下任选一)
@@ -395,72 +446,6 @@ Indented items are prerequisites of the item above them.
     - [意识到] 舰桥的三面柱能输入坐标 — 挪麦飞船 · 舰桥
     - [意识到] 计划中心的核心可以取下 — 灰烬双星计划 · 中央
 
-### 怎么到那儿
-
-- [探索到] 高能实验室 — 余烬双星赤道峡谷 (以下全部需要)
-  - [意识到] 正门从里面锁着
-  - [探索到] 背阴城 — 余烬双星地下 (以下全部需要)
-    - [意识到] 城在地下 (以下任选一)
-      - [意识到] 切特：地表几乎没有废墟 — 余烬双星 · 切特的营地
-      - [意识到] 幸存者躲进了逃生舱下的洞 — 余烬双星 · 2号逃生舱
-    - [探索到] 进城的路 (以下任选一)
-      - [探索到] 从2号逃生舱下的洞穴跟着路标走 — 余烬双星南半球
-        - [探索到] 2号逃生舱 — 余烬双星南半球
-      - [探索到] 重力炮上方的隐藏洞口 — 余烬双星赤道 · 重力炮
-    - 越早去越好 [时间窗口] — 沙子从下往上灌满城市
-  - [探索到] 沿能量电缆走城底的小路 — 背阴城最底层
-  - 时机要卡在中间 [时间窗口] — 前段被淹，后段要等沙
-- [探索到] 安康鱼化石洞 — 余烬双星地下 (以下全部需要)
-  - （同上：背阴城）
-  - [探索到] 垫脚石洞顶的裂缝 — 背阴城 · 垫脚石洞 (以下任选一)
-    - [意识到] 先给化石嘴里打个光
-    - [运气 / 试错 / 硬闯] 沿着天花板仔细找 — 垫脚石洞
-- [探索到] 湖床洞穴 — 余烬双星北极的干湖底
-  - 循环开头几分钟内去 [时间窗口]
-- [探索到] 太阳站 — 贴着太阳的低轨道 (以下任选一)
-  - [探索到] 走灰烬双星上的太阳站塔 (以下全部需要)
-    - [意识到] 有一条更安全的路 — 余烬双星 · 背阴城
-    - 约第 5 分钟塔门露出 [时间窗口]
-  - [运气 / 试错 / 硬闯] 直接开飞船降落 — 太阳站
-- [探索到] 黑洞熔炉 — 悬空城最上层 (以下全部需要)
-  - [探索到] 在融水区把熔炉升上来
-    - [探索到] 悬空城 — 碎空星北部冰川下 (以下全部需要)
-      - [意识到] 城的位置 (以下任选一)
-        - [意识到] 瑞拜克营地北边有座大城 — 碎空星赤道 · 瑞拜克
-        - [意识到] 旧定居点的人搬去了冰川 — 碎空星 · 旧定居点
-      - [探索到] 进城的路 (以下任选一)
-        - [探索到] 冰川河流尽头的隐藏洞 — 碎空星北极
-        - [探索到] 从十字路口过桥 [时间窗口] — 碎空星地壳下
-          - [探索到] 十字路口 — 入口在赤道上长树的废墟里
-        - [探索到] 旧定居点 — 碎空星赤道的地壳下
-          - [探索到] 打开1号逃生舱舱门，沿栈桥下去 — 碎空星赤道
-  - [探索到] 熔炉区
-    - [探索到] 从灰烬双星的碎空星塔跃迁过来 — 灰烬双星赤道
-- [探索到] 南部天文台 — 碎空星南极 (以下全部需要)
-  - [意识到] 地面上的大门坏了 — 碎空星南极 · 瑞拜克的飞船
-  - [探索到] 走地壳下的路 (以下任选一)
-    - [探索到] 从重力炮出发 (以下全部需要)
-      - [探索到] 重力炮 — 碎空星赤道
-        - （同上：十字路口）
-      - 趁重力炮还没掉进黑洞 [时间窗口]
-    - [探索到] 从量子知识之塔底层出发 — 碎空星赤道
-- [探索到] 量子知识之塔上层 — 碎空星赤道 (以下全部需要)
-  - [意识到] 航天飞机旁的记录指路 — 碎空星 · 重力炮
-  - 等塔掉进黑洞，在白洞那边进 [时间窗口] — 白洞站附近
-- [探索到] 量子试验之塔 — 深巨星北极 (以下全部需要)
-  - [意识到] 深巨星有量子信号 — 信号镜 · 量子频道
-  - [探索到] 绕过北极的巨型气旋 (以下任选一)
-    - [探索到] 从云层上方降进去
-    - [探索到] 从水流下面浮上去
-- [探索到] 雕塑车间 — 深巨星 · 雕像岛 (以下全部需要)
-  - [探索到] 绕过坏掉的大门
-    - [探索到] 从岛底下的开口游进去
-      - [意识到] 挪麦孩子说的危险小路
-  - 高处平台要等岛被抛起 [时间窗口]
-- [探索到] 挪麦矿井 — 木炉星 (以下任选一)
-  - [探索到] 最大的间歇泉山里有入口 — 木炉星 · 挪麦遗迹
-  - [探索到] 从灰烬双星的木炉星塔跃迁过来 — 灰烬双星赤道
-
 ### 量子卫星支线：可选
 
 - 在第六个位置见到所莱内姆 — 量子卫星 · 宇宙之眼的轨道 (以下全部需要)
@@ -469,13 +454,23 @@ Indented items are prerequisites of the item above them.
     - [官方另一解] 拍张照，再盯着它降落 — 量子卫星
   - [意识到] 成像法则 — 观察图像 = 观察本体 (以下任选一)
     - [探索到] 量子试验之塔 — 深巨星北极
+      - [探索到] 量子试验之塔 — 深巨星北极 (以下全部需要)
+        - [意识到] 深巨星有量子信号 — 信号镜 · 量子频道
+        - [探索到] 绕过北极的巨型气旋 (以下任选一)
+          - [探索到] 从云层上方降进去
+          - [探索到] 从水流下面浮上去
     - [运气 / 试错 / 硬闯] 自己试出拍照能定住它 — 任意量子物体
   - [意识到] 纠缠法则 — 站在量子物体上，完全黑暗 (以下任选一)
     - [意识到] 科利耶斯消失之谜 — 余烬双星 · 湖床洞穴
+      - [探索到] 湖床洞穴 — 余烬双星北极的干湖底
+        - 循环开头几分钟内去 [时间窗口]
     - [官方另一解] 碎空星高塔碎片旁的文字 — 碎空星
     - [运气 / 试错 / 硬闯] 站在量子碎片上关灯试试 — 任意量子碎片
   - [意识到] 第六位置法则 — 祭坛必须在卫星北极
     - [探索到] 量子知识之塔 — 碎空星赤道
+      - [探索到] 量子知识之塔上层 — 碎空星赤道 (以下全部需要)
+        - [意识到] 航天飞机旁的记录指路 — 碎空星 · 重力炮
+        - 等塔掉进黑洞，在白洞那边进 [时间窗口] — 白洞站附近
 
 ### 闯入者支线：可选
 
@@ -483,6 +478,11 @@ Indented items are prerequisites of the item above them.
   - [意识到] 挪麦人去过彗星 (以下任选一)
     - [探索到] 召回冻住的航天飞机 — 余烬双星 · 重力炮
     - [意识到] 太阳站失败后去看彗星 — 太阳站
+      - [探索到] 太阳站 — 贴着太阳的低轨道 (以下任选一)
+        - [探索到] 走灰烬双星上的太阳站塔 (以下全部需要)
+          - [意识到] 有一条更安全的路 — 余烬双星 · 背阴城
+          - 约第 5 分钟塔门露出 [时间窗口]
+        - [运气 / 试错 / 硬闯] 直接开飞船降落 — 太阳站
   - [探索到] 进到彗星冰层下面 — 闯入者向阳面的冰缝 (以下任选一)
     - [意识到] 冰封航天飞机的记录 — 闯入者表面
     - [运气 / 试错 / 硬闯] 等彗星靠近太阳、冰面融开 [时间窗口] — 闯入者向阳面

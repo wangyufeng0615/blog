@@ -118,7 +118,7 @@ export const BANDS = [
           kids: [
             { id: 'g-whereatp', t: 'gate', label: L('计划在灰烬双星中心', 'The project is inside Ash Twin'), req: 'any',
               kids: [
-                { id: 'c-atp4', t: 'clue', label: L('四处原文都指向它', 'Four places point to it'), place: L('高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉', 'High Energy Lab / mines / Statue Workshop / Black Hole Forge'),
+                { id: 'c-atp4', t: 'clue', label: L('四处原文都指向它', 'Four places point to it'), place: L('高能实验室 / 矿井 / 雕塑车间 / 黑洞熔炉', 'High Energy Lab / mines / Statue Workshop / Black Hole Forge'), at: 'r-workshop',
                   info: [L('高能实验室提议选址灰烬双星；木炉星矿井在造它的保护壳；雕塑车间的面具装在里面；黑洞熔炉为它铸核心。', 'The High Energy Lab proposed Ash Twin; Timber Hearth’s mines supplied its shell; the Statue Workshop’s masks are inside; the Black Hole Forge cast its core.')],
                   quote: [q('LOG:CT_HIGH_ENERGY_LAB_X3')] }
               ] },

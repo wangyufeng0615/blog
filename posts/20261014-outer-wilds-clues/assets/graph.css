@@ -43,21 +43,14 @@ a { color: var(--accent); }
 .kw-mark-realize { fill: rgba(198, 180, 255, .2); }
 .kw-mark-explore { fill: rgba(255, 211, 110, .2); }
 
-.stage { position: relative; flex: none; height: max(360px, calc(100vh - 140px)); height: max(360px, calc(100dvh - 140px)); background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; touch-action: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .02) inset; }
-.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; user-select: none; -webkit-user-select: none; }
-.stage svg.dragging { cursor: grabbing; }
+.stage { position: relative; flex: none; background: linear-gradient(180deg, rgba(15, 22, 48, .82), rgba(10, 15, 31, .9)); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; overflow-y: hidden; }
+.stage svg { display: block; max-width: none; }
 
 
-.zoom { position: absolute; left: 12px; bottom: 12px; display: flex; align-items: center; gap: 2px; background: rgba(21, 30, 59, .92); border: 1px solid var(--line); border-radius: 8px; padding: 3px; }
-.zoom button { font: inherit; font-size: 15px; color: var(--fg); background: transparent; border: 0; border-radius: 6px; min-width: 40px; height: 36px; padding: 0 10px; cursor: pointer; }
-.zoom button:hover { background: var(--gate); }
-.zoom output { min-width: 50px; text-align: center; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
-.zoom .hint { color: var(--muted); font-size: 12px; padding: 0 10px; border-left: 1px solid var(--line); }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 
 /* SVG canvas */
-.node { cursor: pointer; }
 .node rect.box { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
 .node.gate rect.box { fill: var(--gate); }
 .node.goal rect.box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.2; }
@@ -71,28 +64,17 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .node.goal text.lbl, .node.target text.lbl, .node.loc text.lbl, .node.branch text.lbl { font-size: 14px; font-weight: 700; }
 .node text.sub { font-size: 11px; fill: var(--muted); }
 .node text.note { font-size: 12px; fill: #cdd5ee; }
-.node text.sub.go { fill: var(--accent); cursor: pointer; }
-.node text.sub.go:hover { text-decoration: underline; }
 .or circle { fill: var(--bg-2); stroke: var(--edge); stroke-width: 1.4; }
 .or text { fill: var(--fg); font-size: 11px; font-weight: 700; font-family: var(--font); }
-.or.hl circle { stroke: #fff; }
-svg.focus .or:not(.hl) { opacity: .15; }
 .node text.meta { font-size: 11.5px; fill: var(--muted); }
 .node text.meta.alt { fill: var(--alt); }
 .node text.meta.timing { fill: var(--sun); font-weight: 600; }
-.node:hover rect.box, .node.sel rect.box { stroke: #fff; stroke-width: 2; }
-.node:focus { outline: none; }
-.node:focus-visible rect.box { stroke: var(--accent); stroke-width: 3; }
 .edge { fill: none; stroke: var(--edge); stroke-width: 1.4; opacity: .85; }
 .edge.alt { stroke: var(--alt); stroke-dasharray: 6 5; }
 .band-label { font-size: 17px; font-weight: 700; fill: var(--fg); font-family: var(--font); }
 .band-sub { font-size: 13px; fill: var(--muted); font-family: var(--font); }
 .band-line { stroke: var(--line); }
 .spiral { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; }
-svg.focus .node:not(.hl) { opacity: .2; }
-svg.focus .edge:not(.hl) { opacity: .07; }
-svg.focus .edge.hl { stroke-width: 2.4; opacity: 1; }
-@media (prefers-reduced-motion: no-preference) { .node, .edge { transition: opacity .15s; } }
 
 /* Below the first screen */
 .article { max-width: 1080px; margin: 0 auto; padding: 6px 20px 90px; }
@@ -119,8 +101,6 @@ svg.focus .edge.hl { stroke-width: 2.4; opacity: 1; }
 .tl-dot.goal { fill: var(--accent); }
 .tl-label { fill: var(--fg); font-size: 12.5px; }
 .tl-label.muted { fill: var(--muted); }
-.tl-link { cursor: pointer; }
-.tl-link:hover .tl-label { fill: var(--accent); text-decoration: underline; }
 .tl-note { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
 
 /* Who pointed you where */
@@ -131,19 +111,14 @@ svg.focus .edge.hl { stroke-width: 2.4; opacity: 1; }
 .lead-card ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
 .lead-card li { border-top: 1px solid var(--line); padding-top: 9px; }
 .lead-card .to { font-weight: 600; font-size: 14px; }
-.lead-card .to a { color: var(--accent); text-decoration: none; }
-.lead-card .to a:hover { text-decoration: underline; }
 .lead-card .said { margin: 3px 0 0; font-size: 13px; color: var(--muted); }
 .lead-card .steps, .lead-card .uses { margin: 10px 0 0; padding-left: 1.3em; display: grid; gap: 5px; font-size: 14px; }
 .lead-card .uses { list-style: none; padding-left: 0; }
 .lead-card .uses li { border-top: 1px solid var(--line); padding-top: 6px; }
-.lead-card .steps a, .lead-card .uses a { color: var(--fg); text-decoration: none; border-bottom: 1px dashed var(--accent); }
-.lead-card .steps a:hover, .lead-card .uses a:hover { color: var(--accent); }
 .lead-card .end-line { margin: 12px 0 0; padding: 8px 12px; border-left: 3px solid var(--sun); background: var(--bg-2); border-radius: 0 6px 6px 0; font-size: 13px; letter-spacing: .02em; }
 
 .noscript { max-width: 860px; margin: 16px auto; padding: 0 20px; }
 .noscript ul { padding-left: 1.3em; }
 
 @media (max-width: 760px) {
-    .zoom .hint { display: none; }
-    }
+        }
