@@ -10,7 +10,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION, ENDINGS, TOOLS } from './data.src.mjs';
+import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION, ENDINGS, TOOLS, NOTE } from './data.src.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const POST = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
@@ -71,6 +71,7 @@ function resolve(n) {
   if (n.ref) return { ref: n.ref };
   const out = { ...n };
   if (ACT[n.id]) out.act = ACT[n.id];
+  if (NOTE[n.id]) out.note = NOTE[n.id];
   if (n.quote) out.quote = n.quote.map(x => resolveQuote(x.$q));
   if (n.kids) out.kids = n.kids.map(resolve);
   nodes[n.id] = out;
@@ -78,6 +79,7 @@ function resolve(n) {
 }
 const bands = BANDS.map(b => ({ ...b, roots: b.roots.map(resolve) }));
 for (const id in ACT) if (!nodes[id]) throw new Error(`ACTION lists unknown node: ${id}`);
+for (const id in NOTE) if (!nodes[id]) throw new Error(`NOTE lists unknown node: ${id}`);
 const edges = [];
 (function link() {
   const walk = n => { if (n.ref) return; (n.kids || []).forEach(k => { edges.push({ from: k.ref || k.id, to: n.id }); walk(k); }); };
@@ -190,7 +192,7 @@ const graph = {
     unverified: n.verify || undefined, location_ref: n.at || null,
     prerequisites: edges.filter(e => e.to === n.id).map(e => e.from),
     unlocks: edges.filter(e => e.from === n.id).map(e => e.to),
-    notes: n.info || [], quotes: (n.quote || []).map(q => ({ en: q.en, zh: q.zh, source: q.cite.en })),
+    summary: n.note || null, notes: n.info || [], quotes: (n.quote || []).map(q => ({ en: q.en, zh: q.zh, source: q.cite.en })),
     references: (n.src || []).map(s => s.url)
   })),
   faq: FAQ.map(([qq, a]) => ({ question: qq, answer: a })),

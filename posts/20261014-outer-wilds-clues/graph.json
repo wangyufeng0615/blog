@@ -107,6 +107,10 @@
    "unlocks": [
     "g-start"
    ],
+   "summary": {
+    "zh": "雕像和你配对，每轮都带着记忆醒来",
+    "en": "The statue paired with you; you keep your memories"
+   },
    "notes": [
     {
      "zh": "第一次死亡或看到超新星后，你会在营火边重新醒来。原因是天文台的挪麦雕像睁眼和你配对了，之后每一轮你都带着记忆回来。",
@@ -144,6 +148,7 @@
    "unlocks": [
     "goal"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "一切的起点。去天文台找霍恩费斯拿发射密码，才能坐升降梯上发射台。",
@@ -179,6 +184,7 @@
    "unlocks": [
     "g-sunk"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -209,6 +215,7 @@
    "unlocks": [
     "g-sunk"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -239,6 +246,7 @@
    "unlocks": [
     "g-sunk"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -270,6 +278,7 @@
    "unlocks": [
     "coords"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "先得知道坐标在海底，才会去想办法下潜。",
@@ -299,6 +308,7 @@
    "unlocks": [
     "g-current"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -329,6 +339,10 @@
    "unlocks": [
     "g-current"
    ],
+   "summary": {
+    "zh": "费尔德斯巴就是这么发现的",
+    "en": "That is how Feldspar found it"
+   },
    "notes": [
     {
      "zh": "费尔德斯巴自己就是这么发现的。",
@@ -364,6 +378,10 @@
    "unlocks": [
     "g-current"
    ],
+   "summary": {
+    "zh": "约每秒一万米，撞上岛就会死",
+    "en": "About 10 km/s; hit an island and you die"
+   },
    "notes": [
     {
      "zh": "速度够快（每秒约一万米）可以直接冲破水流，撞上岛就会死。有对应的成就。",
@@ -395,6 +413,10 @@
    "unlocks": [
     "g-current"
    ],
+   "summary": {
+    "zh": "岛砸回海面时把飞船压下去",
+    "en": "The island slams back down and pushes you under"
+   },
    "notes": [
     {
      "zh": "岛被气旋抛上天再砸回海面时，有时会把下面的飞船压到水流以下。",
@@ -426,6 +448,10 @@
    "unlocks": [
     "g-current"
    ],
+   "summary": {
+    "zh": "能过水流，过不了电场",
+    "en": "Gets past the current, not the field"
+   },
    "notes": [
     {
      "zh": "两颗星靠近时，用碎空星重力炮发射所莱内姆的航天飞机，能穿过水流，但穿不过核心外的电场。前提是已经把它从量子卫星召回来。",
@@ -463,6 +489,10 @@
    "unlocks": [
     "coords"
    ],
+   "summary": {
+    "zh": "强水流让任何东西都沉不下去",
+    "en": "A strong current keeps everything afloat"
+   },
    "notes": [
     {
      "zh": "深巨星海面下有一层强水流，正常情况下任何东西都沉不下去。",
@@ -498,6 +528,7 @@
    "unlocks": [
     "g-findfeld"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -528,6 +559,10 @@
    "unlocks": [
     "g-findfeld"
    ],
+   "summary": {
+    "zh": "侦察兵出现在满是雾和藤的大空间",
+    "en": "The scout ends up in a vast space of fog and vines"
+   },
    "notes": [],
    "quotes": [
     {
@@ -558,6 +593,10 @@
    "unlocks": [
     "g-findfeld"
    ],
+   "summary": {
+    "zh": "他去黑棘星前在这里扎过营",
+    "en": "He camped here before heading to Dark Bramble"
+   },
    "notes": [],
    "quotes": [
     {
@@ -588,6 +627,7 @@
    "unlocks": [
     "g-findfeld"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -617,6 +657,7 @@
    "unlocks": [
     "c-jelly"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -641,6 +682,10 @@
    "unlocks": [
     "g-angler"
    ],
+   "summary": {
+    "zh": "关掉引擎，靠惯性滑过去",
+    "en": "Cut the engines and drift"
+   },
    "notes": [
     {
      "zh": "关掉引擎靠惯性滑过去，安康鱼就发现不了你。",
@@ -676,6 +721,10 @@
    "unlocks": [
     "g-angler"
    ],
+   "summary": {
+    "zh": "出种子时速度方向固定，直接漂",
+    "en": "Seeds launch you at a fixed speed — just drift"
+   },
    "notes": [
     {
      "zh": "从种子出来时速度和方向是固定的，什么都不按就能稳定漂过去；转动机身不会惊动它们。",
@@ -707,6 +756,7 @@
    "unlocks": [
     "g-angler"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -738,6 +788,10 @@
     "c-jelly",
     "vessel"
    ],
+   "summary": {
+    "zh": "入口中枢 1 条，鱼巢 5 条",
+    "en": "One in the hub, five in the nest"
+   },
    "notes": [
     {
      "zh": "飞船线和水母线都要穿过黑棘星：入口的中枢里就有一条，飞船所在的种子更是在有五条安康鱼的鱼巢里。",
@@ -770,6 +824,10 @@
    "unlocks": [
     "g-field"
    ],
+   "summary": {
+    "zh": "钻进水母体内，随它穿过电场",
+    "en": "Ride inside a jellyfish through the field"
+   },
    "notes": [
     {
      "zh": "问费尔德斯巴怎么去深巨星核心，他不直说，只让你去他飞船撞上的那根空心藤尽头看看。藤通到黑棘星外壳的一道裂缝，里面冻着一只水母和他的笔记。钻进深巨星的水母体内，就能随它穿过电场。",
@@ -815,6 +873,10 @@
    "unlocks": [
     "g-field"
    ],
+   "summary": {
+    "zh": "不见费尔德斯巴也能找到那道裂缝",
+    "en": "Reach the crack without meeting Feldspar"
+   },
    "notes": [
     {
      "zh": "那道裂缝也能从黑棘星外面找到，不必先见费尔德斯巴。",
@@ -849,6 +911,7 @@
    "unlocks": [
     "coords"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -883,6 +946,10 @@
    "unlocks": [
     "goal"
    ],
+   "summary": {
+    "zh": "第 9,318,054 号探测器找到，存在投影池里",
+    "en": "Found by probe 9,318,054, kept in its projection pool"
+   },
    "notes": [
     {
      "zh": "跟踪模块从轨道探测炮上脱落，沉进了深巨星核心。它的投影池里存着第 9,318,054 号探测器找到的宇宙之眼坐标。",
@@ -918,6 +985,10 @@
    "unlocks": [
     "g-knowvessel"
    ],
+   "summary": {
+    "zh": "遇到信号 → 被黑棘星缠住 → 放出逃生舱",
+    "en": "Signal → caught by Dark Bramble → pods launched"
+   },
    "notes": [],
    "quotes": [
     {
@@ -948,6 +1019,10 @@
    "unlocks": [
     "g-knowvessel"
    ],
+   "summary": {
+    "zh": "三个逃生舱都来自一艘叫\"飞船\"的大船",
+    "en": "All three pods came from the Vessel"
+   },
    "notes": [],
    "quotes": [
     {
@@ -978,6 +1053,7 @@
    "unlocks": [
     "vessel"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1002,6 +1078,10 @@
    "unlocks": [
     "c-grave"
    ],
+   "summary": {
+    "zh": "两个一样的信标；顺着灯走到坟墓",
+    "en": "Two identical beacons; follow the lights to the grave"
+   },
    "notes": [
     {
      "zh": "找到碎空星或余烬双星的逃生舱后，信号镜会多出\"求救信号\"频道，黑棘星里有一颗种子正发着这个信号。舱里的人测到两个一模一样的飞船信标，跟着近的那个走，沿途留下一串灯，最后死在小种子前。顺着灯就能找到坟墓。",
@@ -1041,6 +1121,10 @@
    "unlocks": [
     "c-nest"
    ],
+   "summary": {
+    "zh": "种子太小，只有侦察兵进得去",
+    "en": "Too small for anything but your scout"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1071,6 +1155,10 @@
    "unlocks": [
     "c-nest"
    ],
+   "summary": {
+    "zh": "侦察兵同时在两个地方，并没有错",
+    "en": "The scout really can be in two places"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1104,6 +1192,10 @@
    "unlocks": [
     "g-whichseed"
    ],
+   "summary": {
+    "zh": "不发光的大种子，飞船从那里进",
+    "en": "An unlit, ship-sized seed — the way in"
+   },
    "notes": [
     {
      "zh": "坟墓那颗种子太小，只有侦察兵进得去。侦察兵进去后，追踪器显示它同时在两个地方：另一处是安康鱼巢里一颗不发光的大种子，飞船只能从那里进。这就是两个信标的真相。",
@@ -1135,6 +1227,10 @@
    "unlocks": [
     "g-whichseed"
    ],
+   "summary": {
+    "zh": "鱼巢里唯一不发光的那颗",
+    "en": "The only unlit seed in the nest"
+   },
    "notes": [
     {
      "zh": "飞船所在的种子就在安康鱼巢里，是唯一不发光的那颗；巢里另外三颗通向一个死循环的空间。",
@@ -1169,6 +1265,7 @@
    "unlocks": [
     "vessel"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1197,6 +1294,10 @@
    "unlocks": [
     "goal"
    ],
+   "summary": {
+    "zh": "核心摔坏了，但存着宇宙之眼的原始信号",
+    "en": "Its core is broken, but it holds the Eye’s original signal"
+   },
    "notes": [
     {
      "zh": "飞船当年被黑棘星缠住，跃迁核心摔坏了，但还能接收消息，也存着宇宙之眼的原始信号。",
@@ -1232,6 +1333,10 @@
    "unlocks": [
     "g-whereatp"
    ],
+   "summary": {
+    "zh": "实验室选址、矿井造壳、熔炉铸核心",
+    "en": "Lab chose the site, mines built the shell, forge cast the core"
+   },
    "notes": [
     {
      "zh": "高能实验室提议选址灰烬双星；木炉星矿井在造它的保护壳；雕塑车间的面具装在里面；黑洞熔炉为它铸核心。",
@@ -1266,6 +1371,7 @@
    "unlocks": [
     "core"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1290,6 +1396,10 @@
    "unlocks": [
     "g-sealed"
    ],
+   "summary": {
+    "zh": "保护壳完工后检查过：没有入口",
+    "en": "Checked after sealing: no way in"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1320,6 +1430,7 @@
    "unlocks": [
     "g-sealed"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1344,6 +1455,7 @@
    "unlocks": [
     "core"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1368,6 +1480,10 @@
    "unlocks": [
     "c-whs"
    ],
+   "summary": {
+    "zh": "掉进去的东西从白洞出来",
+    "en": "What falls in comes out of the white hole"
+   },
    "notes": [
     {
      "zh": "碎空星的地壳一直在碎，掉进中心黑洞的东西会从白洞出来，白洞站就在旁边。",
@@ -1405,6 +1521,7 @@
    "unlocks": [
     "g-warp"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -1435,6 +1552,10 @@
    "unlocks": [
     "g-warp"
    ],
+   "summary": {
+    "zh": "偏差五度以内都算对准",
+    "en": "Within five degrees counts as aligned"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1465,6 +1586,7 @@
    "unlocks": [
     "g-warp"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1490,6 +1612,7 @@
    "unlocks": [
     "core"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1514,6 +1637,10 @@
    "unlocks": [
     "c-deduce"
    ],
+   "summary": {
+    "zh": "每座塔的样子对应它的目的地",
+    "en": "Each tower looks like where it goes"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1549,6 +1676,10 @@
    "unlocks": [
     "c-deduce"
    ],
+   "summary": {
+    "zh": "亚罗以为有座塔永远对不上",
+    "en": "Yarrow thought one tower could never align"
+   },
    "notes": [],
    "quotes": [
     {
@@ -1584,6 +1715,10 @@
    "unlocks": [
     "g-receiver"
    ],
+   "summary": {
+    "zh": "这座塔的接收点在星球中心",
+    "en": "Its receiver is at the planet’s center"
+   },
    "notes": [
     {
      "zh": "赤道那圈塔各通一处，样子对应目的地。有一座塔看起来永远对不上，因为它的接收点就在灰烬双星中心。按熔炉的规则，沙漏双星共用两星之间的对准点：站在这座塔里的平台上，等余烬双星经过头顶，就会被传进计划。",
@@ -1613,6 +1748,10 @@
    "unlocks": [
     "g-receiver"
    ],
+   "summary": {
+    "zh": "塔门口的标记",
+    "en": "A marker at the door"
+   },
    "notes": [
     {
      "zh": "通往计划的那座塔门口躺着一具挪麦遗体，可以当作认塔的标记。",
@@ -1644,6 +1783,7 @@
    "unlocks": [
     "g-receiver"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1672,6 +1812,10 @@
    "unlocks": [
     "core"
    ],
+   "summary": {
+    "zh": "站进塔里的平台",
+    "en": "Stand on the pad inside"
+   },
    "notes": [],
    "quotes": [],
    "references": []
@@ -1696,6 +1840,10 @@
    "unlocks": [
     "g-sand"
    ],
+   "summary": {
+    "zh": "约第 7 分 50 秒起能站进塔里",
+    "en": "From about 7:50 you can stand inside"
+   },
    "notes": [
     {
      "zh": "这座塔一开始埋在沙里，大约第 7 分 50 秒才露出足够的空间站上塔里的平台。塔顶有破口，小心被落沙冲走。",
@@ -1727,6 +1875,10 @@
    "unlocks": [
     "g-sand"
    ],
+   "summary": {
+    "zh": "拿到发射密码后可用",
+    "en": "Available after the launch codes"
+   },
    "notes": [
     {
      "zh": "拿到发射密码后，就可以在营火边打盹跳过一段时间。",
@@ -1760,6 +1912,7 @@
    "unlocks": [
     "core"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -1790,6 +1943,10 @@
    "unlocks": [
     "goal"
    ],
+   "summary": {
+    "zh": "计划的动力源，取下循环就停",
+    "en": "Powers the project; taking it stops the loop"
+   },
    "notes": [
     {
      "zh": "灰烬双星计划的核心。飞船原来的核心坏了，只有这一颗能带它跃迁。",
@@ -1825,6 +1982,7 @@
    "unlocks": [
     "g-insight"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -1855,6 +2013,7 @@
    "unlocks": [
     "g-insight"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -1885,6 +2044,7 @@
    "unlocks": [
     "g-insight"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -1916,6 +2076,10 @@
    "unlocks": [
     "goal"
    ],
+   "summary": {
+    "zh": "取下核心循环就停，要同一轮带到飞船",
+    "en": "It stops the loop — deliver it in the same loop"
+   },
    "notes": [
     {
      "zh": "最后的顿悟：飞船缺一颗核心，计划里正好有一颗。取下它，循环就停了，所以要在同一轮里把核心带进黑棘星。",
@@ -1949,6 +2113,10 @@
     "g-insight"
    ],
    "unlocks": [],
+   "summary": {
+    "zh": "装好核心、输入坐标、跃迁",
+    "en": "Fit the core, enter the coordinates, warp"
+   },
    "notes": [
     {
      "zh": "把高级跃迁核心装进飞船，在舰桥的三面柱上输入坐标，飞船就会跃迁到宇宙之眼。",
@@ -1985,6 +2153,7 @@
    "unlocks": [
     "r-hel"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2015,6 +2184,7 @@
    "unlocks": [
     "r-sun-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2045,6 +2215,7 @@
    "unlocks": [
     "r-sun-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2075,6 +2246,7 @@
    "unlocks": [
     "r-sunless"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2099,6 +2271,10 @@
    "unlocks": [
     "r-sun-pod"
    ],
+   "summary": {
+    "zh": "切特看见南半球有光束射向天空",
+    "en": "Chert saw a beam of light in the south"
+   },
    "notes": [],
    "quotes": [
     {
@@ -2131,6 +2307,10 @@
    "unlocks": [
     "r-sun-way"
    ],
+   "summary": {
+    "zh": "洞里漆黑，墙上有挪麦路标",
+    "en": "Dark maze; the Nomai marked the walls"
+   },
    "notes": [
     {
      "zh": "洞里漆黑，像迷宫，挪麦人在墙上留了路标。",
@@ -2166,6 +2346,10 @@
    "unlocks": [
     "r-sun-way"
    ],
+   "summary": {
+    "zh": "通到城顶；旁边的城门被仙人掌堵着",
+    "en": "Leads to the top; the nearby door is blocked by cacti"
+   },
    "notes": [
     {
      "zh": "通到城顶的宇宙之眼祭坛区，沿途有幽灵物质和仙人掌。重力炮旁边那扇城门被仙人掌堵着。",
@@ -2203,6 +2387,7 @@
    "unlocks": [
     "r-sunless"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2228,6 +2413,7 @@
    "unlocks": [
     "r-sunless"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "沙子会从下往上灌满整座城，晚了下层就进不去，回头路也常被沙瀑截断。",
@@ -2264,6 +2450,7 @@
     "r-hel",
     "r-fossil"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2288,6 +2475,10 @@
    "unlocks": [
     "r-hel"
    ],
+   "summary": {
+    "zh": "最后坐重力升降机穿过峡谷桥",
+    "en": "Ends with a gravity lift through the canyon bridge"
+   },
    "notes": [
     {
      "zh": "小路从背阴城最底层出发，沿一路延伸的能量电缆走，最后坐重力升降机、穿过峡谷桥内部进入实验室。",
@@ -2320,6 +2511,7 @@
    "unlocks": [
     "r-hel"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "小路前半段很快会被沙子淹没；后半段一开始有沙瀑把人冲进仙人掌丛，喷气背包过不去，要等沙子把仙人掌盖住才能走。",
@@ -2354,6 +2546,7 @@
     "r-hel-time"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2375,6 +2568,10 @@
    "unlocks": [
     "r-fos-crack"
    ],
+   "summary": {
+    "zh": "往化石嘴里射侦察兵当灯",
+    "en": "Shoot your scout into its mouth as a lamp"
+   },
    "notes": [
     {
      "zh": "往化石嘴里射侦察兵当灯，入口就显出来了。",
@@ -2410,6 +2607,7 @@
    "unlocks": [
     "r-fos-crack"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2437,6 +2635,7 @@
    "unlocks": [
     "r-fossil"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2468,6 +2667,10 @@
     "r-fos-crack"
    ],
    "unlocks": [],
+   "summary": {
+    "zh": "别的开口只能看，进不去",
+    "en": "Other openings only let you look"
+   },
    "notes": [
     {
      "zh": "从别的开口只能看到化石，进不去。",
@@ -2501,6 +2704,10 @@
    "unlocks": [
     "r-lakebed"
    ],
+   "summary": {
+    "zh": "开局几分钟就被沙填满",
+    "en": "Fills with sand within minutes"
+   },
    "notes": [
     {
      "zh": "洞穴在循环开始后几分钟内就会被沙子填满，要第一时间赶过去。",
@@ -2532,6 +2739,7 @@
     "r-lake-time"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2562,6 +2770,10 @@
    "unlocks": [
     "r-ss-tower"
    ],
+   "summary": {
+    "zh": "背阴城的挪麦人说造了更安全的路",
+    "en": "Nomai in the city mention a safer way"
+   },
    "notes": [],
    "quotes": [
     {
@@ -2590,6 +2802,10 @@
    "unlocks": [
     "r-ss-tower"
    ],
+   "summary": {
+    "zh": "有阳台的那侧，窗口很短；等太阳到头顶",
+    "en": "Balcony side, brief window; wait for the Sun overhead"
+   },
    "notes": [
     {
      "zh": "沙子大约第 5 分钟流过太阳站塔，带阳台那一侧的门露出来，窗口很短。进去后站在平台上，等太阳到头顶。",
@@ -2621,6 +2837,7 @@
    "unlocks": [
     "r-sunstation"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2645,6 +2862,10 @@
    "unlocks": [
     "r-sunstation"
    ],
+   "summary": {
+    "zh": "极难，成功有成就",
+    "en": "Very hard; there is an achievement"
+   },
    "notes": [
     {
      "zh": "太阳引力极强、太阳站又绕得飞快，非常难，成功了有成就。",
@@ -2677,6 +2898,7 @@
     "r-ss-land"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2701,6 +2923,7 @@
    "unlocks": [
     "r-bh-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2731,6 +2954,7 @@
    "unlocks": [
     "r-bh-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -2761,6 +2985,7 @@
    "unlocks": [
     "r-bhcity"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2785,6 +3010,10 @@
    "unlocks": [
     "r-bh-way"
    ],
+   "summary": {
+    "zh": "顺着瀑布下到融水区",
+    "en": "Ride the waterfall down to the Meltwater District"
+   },
    "notes": [
     {
      "zh": "河水灌进洞口成了瀑布，顺着下去就是融水区。北极那座大建筑里的升降梯是坏的。",
@@ -2817,6 +3046,7 @@
     "r-bh-bridge",
     "r-cannon"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "赤道上瑞拜克营地对面有座长满树的废墟，里面的挪麦小路一直通到地壳下的十字路口。",
@@ -2855,6 +3085,10 @@
    "unlocks": [
     "r-bh-way"
    ],
+   "summary": {
+    "zh": "桥会被火山弹砸断",
+    "en": "Volcanic bombs break the bridges"
+   },
    "notes": [
     {
      "zh": "两座桥会被空心灯的火山弹陆续砸断，越晚越难走。",
@@ -2886,6 +3120,10 @@
    "unlocks": [
     "r-oldsettle"
    ],
+   "summary": {
+    "zh": "栈桥一踩就塌，掉下去就进黑洞",
+    "en": "The bridges crumble into the black hole"
+   },
    "notes": [
     {
      "zh": "木栈桥和台阶很脆，一踩就塌，掉下去就进黑洞。",
@@ -2923,6 +3161,10 @@
    "unlocks": [
     "r-bh-way"
    ],
+   "summary": {
+    "zh": "重力水晶小路通到悬空城底层",
+    "en": "A crystal path leads to the city’s bottom"
+   },
    "notes": [
     {
      "zh": "从旧定居点有一条重力水晶小路沿地壳背面通到悬空城最底层的学校区。",
@@ -2953,6 +3195,7 @@
    "unlocks": [
     "r-bhcity"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -2980,6 +3223,7 @@
    "unlocks": [
     "r-forge-raise"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3003,6 +3247,10 @@
    "unlocks": [
     "r-forge"
    ],
+   "summary": {
+    "zh": "平时降在黑洞旁，升上来才进得去",
+    "en": "Normally hangs down by the black hole"
+   },
    "notes": [
     {
      "zh": "熔炉平时降在星球中心的黑洞旁边，只有升到悬空城最上层才进得去。",
@@ -3038,6 +3286,10 @@
    "unlocks": [
     "r-forge-district"
    ],
+   "summary": {
+    "zh": "熔炉区里就有接收点",
+    "en": "Its receiver is in the Forge District"
+   },
    "notes": [
     {
      "zh": "熔炉区里就有这座塔对应的接收点。",
@@ -3068,6 +3320,10 @@
    "unlocks": [
     "r-forge"
    ],
+   "summary": {
+    "zh": "通往最上层的竖井断了",
+    "en": "The shaft up is broken"
+   },
    "notes": [
     {
      "zh": "通往最上层的竖井断了，正常走不上去。",
@@ -3098,6 +3354,7 @@
     "r-forge-district"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3122,6 +3379,7 @@
    "unlocks": [
     "r-observatory"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3154,6 +3412,10 @@
    "unlocks": [
     "r-obs-cannon"
    ],
+   "summary": {
+    "zh": "地面能走到，或从十字路口往东跳",
+    "en": "Walk there, or hop east from the Crossroads"
+   },
    "notes": [
     {
      "zh": "从地面能直接走到，也可以从十字路口往东跳过一串地壳碎块。",
@@ -3181,6 +3443,7 @@
    "unlocks": [
     "r-obs-cannon"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "重力炮在循环后期很可能随地壳掉进黑洞。",
@@ -3212,6 +3475,10 @@
    "unlocks": [
     "r-obs-under"
    ],
+   "summary": {
+    "zh": "在错位的重力电梯之间跳",
+    "en": "Jetpack between misaligned lifts"
+   },
    "notes": [
     {
      "zh": "一串错位的重力电梯和碎地壳，要用喷气背包在电梯之间跳。",
@@ -3243,6 +3510,7 @@
    "unlocks": [
     "r-obs-under"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3267,6 +3535,7 @@
    "unlocks": [
     "r-observatory"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3298,6 +3567,7 @@
     "r-obs-under"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3322,6 +3592,10 @@
    "unlocks": [
     "r-qtower"
    ],
+   "summary": {
+    "zh": "往西走到十字路口再过去",
+    "en": "West to the Crossroads, then on"
+   },
    "notes": [],
    "quotes": [
     {
@@ -3353,6 +3627,10 @@
    "unlocks": [
     "r-qtower"
    ],
+   "summary": {
+    "zh": "上层入口断了，在零重力里飘进去",
+    "en": "Upper entrance broken; float in"
+   },
    "notes": [
     {
      "zh": "塔的上层入口断了。地壳崩塌时整座塔会掉进黑洞，从白洞出来后在零重力里就能进去。",
@@ -3385,6 +3663,7 @@
     "r-qt-fall"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3409,6 +3688,7 @@
    "unlocks": [
     "r-tqt"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3436,6 +3716,7 @@
    "unlocks": [
     "r-tqt-way"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -3459,6 +3740,7 @@
    "unlocks": [
     "r-tqt-way"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -3485,6 +3767,10 @@
    "unlocks": [
     "r-tqt"
    ],
+   "summary": {
+    "zh": "风墙飞不过去",
+    "en": "You can’t fly through the wind wall"
+   },
    "notes": [
     {
      "zh": "北极有一个不会移动的巨型气旋，风墙过不去。",
@@ -3515,6 +3801,7 @@
     "r-tqt-way"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3536,6 +3823,7 @@
    "unlocks": [
     "r-ws-under"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3565,6 +3853,10 @@
    "unlocks": [
     "r-ws-way"
    ],
+   "summary": {
+    "zh": "圆顶岛，车间绕着内侧一圈",
+    "en": "A dome; the workshop rings its inside"
+   },
    "notes": [
     {
      "zh": "雕像岛是个圆顶，车间绕着内侧一圈，正中间通着大海。",
@@ -3601,6 +3893,7 @@
    "unlocks": [
     "r-workshop"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3629,6 +3922,10 @@
    "unlocks": [
     "r-workshop"
    ],
+   "summary": {
+    "zh": "重力太大，喷气背包够不着",
+    "en": "Gravity too strong to jetpack up"
+   },
    "notes": [
     {
      "zh": "深巨星重力大，喷气背包够不着；气旋把岛抛上天时才上得去。",
@@ -3661,6 +3958,7 @@
     "r-ws-high"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3685,6 +3983,7 @@
    "unlocks": [
     "r-mine"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -3711,6 +4010,7 @@
    "unlocks": [
     "r-mine"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -3738,6 +4038,7 @@
     "r-mine-warp"
    ],
    "unlocks": [],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3768,6 +4069,10 @@
    "unlocks": [
     "q-land"
    ],
+   "summary": {
+    "zh": "守在某处等它，飞近时一直盯着",
+    "en": "Wait for it and keep watching as you approach"
+   },
    "notes": [
     {
      "zh": "知道它会在几颗行星之间跳，就能守着某处等它，飞近时一直盯着它。",
@@ -3803,6 +4108,7 @@
    "unlocks": [
     "q-land"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "先给量子卫星拍张照，降落途中一直看着它，它就不会跳走。这本身就是成像法则的用法。",
@@ -3837,6 +4143,7 @@
    "unlocks": [
     "q-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -3867,6 +4174,10 @@
    "unlocks": [
     "q-imaging"
    ],
+   "summary": {
+    "zh": "塔里的谜题要靠拍照定住物体",
+    "en": "Its puzzles need photos to pin objects"
+   },
    "notes": [
     {
      "zh": "塔里的谜题本身就要用拍照来\"定住\"量子物体，过了关就学会了。",
@@ -3903,6 +4214,7 @@
    "unlocks": [
     "q-imaging"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "社区里有玩家完全靠试错摸出这条规则，属于个人说法。",
@@ -3937,6 +4249,7 @@
    "unlocks": [
     "q-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -3961,6 +4274,10 @@
    "unlocks": [
     "q-entangle"
    ],
+   "summary": {
+    "zh": "灯灭时站在石头上，人和石头一起消失",
+    "en": "Lights out on the rock, and both vanish"
+   },
    "notes": [],
    "quotes": [
     {
@@ -3992,6 +4309,7 @@
    "unlocks": [
     "q-entangle"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "Wiki 说碎空星\"高塔碎片\"旁的挪麦文字也暗示了黑暗规则，我没逐条核对原文。",
@@ -4023,6 +4341,7 @@
    "unlocks": [
     "q-entangle"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -4051,6 +4370,7 @@
    "unlocks": [
     "q-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -4075,6 +4395,7 @@
    "unlocks": [
     "q-sixth"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -4107,6 +4428,10 @@
    "unlocks": [
     "q-goal"
    ],
+   "summary": {
+    "zh": "在祭坛里关门关灯，随它移动",
+    "en": "Shut the door, lights off, travel with it"
+   },
    "notes": [
     {
      "zh": "实际操作要把三条法则合起来用：祭坛本身也是量子物体，没人看着时会换位置。在祭坛里关门关灯，就会随它移动，卫星跳到别的行星。有些行星版本的地形挡住了北极，要先换到能走到北极的版本，站在北极背对着等祭坛出现，再进祭坛关灯一次，就到第六个位置。",
@@ -4143,6 +4468,10 @@
     "q-sixth"
    ],
    "unlocks": [],
+   "summary": {
+    "zh": "量子卫星是宇宙之眼的卫星",
+    "en": "The Quantum Moon orbits the Eye"
+   },
    "notes": [],
    "quotes": [
     {
@@ -4178,6 +4507,7 @@
    "unlocks": [
     "i-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -4208,6 +4538,7 @@
    "unlocks": [
     "i-know"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -4238,6 +4569,7 @@
    "unlocks": [
     "i-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -4262,6 +4594,10 @@
    "unlocks": [
     "i-enter"
    ],
+   "summary": {
+    "zh": "一人留守保温，两人下去探索",
+    "en": "One stayed to keep warm, two went in"
+   },
    "notes": [],
    "quotes": [
     {
@@ -4293,6 +4629,7 @@
    "unlocks": [
     "i-enter"
    ],
+   "summary": null,
    "notes": [
     {
      "zh": "向阳面的冰会随着接近太阳融开，自己观察也能找到入口。",
@@ -4327,6 +4664,7 @@
    "unlocks": [
     "i-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -4357,6 +4695,7 @@
    "unlocks": [
     "i-ghost"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [
     {
@@ -4387,6 +4726,7 @@
    "unlocks": [
     "i-ghost"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": [
@@ -4413,6 +4753,7 @@
    "unlocks": [
     "i-ghost"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -4441,6 +4782,7 @@
    "unlocks": [
     "i-goal"
    ],
+   "summary": null,
    "notes": [],
    "quotes": [],
    "references": []
@@ -4467,6 +4809,10 @@
     "i-ghost"
    ],
    "unlocks": [],
+   "summary": {
+    "zh": "核心破裂，幽灵物质一眨眼覆盖星系",
+    "en": "The core burst; ghost matter covered the system"
+   },
    "notes": [],
    "quotes": [
     {
