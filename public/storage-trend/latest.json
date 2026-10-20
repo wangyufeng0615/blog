@@ -1,7 +1,7 @@
 {
  "name": "王工存储指数",
  "url": "https://wangyufeng.org/storage-trend/",
- "generated_at": "2026-10-20T08:48:01Z",
+ "generated_at": "2026-10-20T18:01:45Z",
  "as_of": "2026-10-20",
  "cycle": {
   "state": "分化",
@@ -11,12 +11,12 @@
    "dram_spot_temperature",
    "dram_ett_marginal",
    "cfm_dram_price_index",
-   "legacy_dram_pressure",
-   "cfm_nand_price_index"
+   "legacy_dram_pressure"
   ],
   "down": [
    "nand_wafer_temperature",
-   "nand_qlc_density"
+   "nand_qlc_density",
+   "cfm_nand_price_index"
   ],
   "flat_count": 1,
   "pending": [
@@ -558,21 +558,21 @@
    "title": "CFM NAND 价格指数",
    "short": "CFM NAND 指数",
    "group": "warm",
-   "value": 2959.28,
-   "value_text": "2,959.28",
+   "value": 2946.77,
+   "value_text": "2,946.77",
    "unit": "指数",
    "date": "2026-10-20",
    "freshness": "fresh",
    "cycle": "ready",
    "trend": {
-    "direction": "up",
+    "direction": "down",
     "window_days": 225,
-    "start": "2026-03-03",
-    "end": "2026-10-13",
-    "first": 2901.01,
-    "last": 2959.28,
-    "text": "+2.0%",
-    "change_pct": 2.01,
+    "start": "2026-03-10",
+    "end": "2026-10-20",
+    "first": 3046.26,
+    "last": 2946.77,
+    "text": "−3.3%",
+    "change_pct": -3.27,
     "change_points": null
    },
    "market_type": "index",
@@ -584,8 +584,8 @@
    "title": "CFM DRAM 价格指数",
    "short": "CFM DRAM 指数",
    "group": "hot",
-   "value": 4407.53,
-   "value_text": "4,407.53",
+   "value": 4406.51,
+   "value_text": "4,406.51",
    "unit": "指数",
    "date": "2026-10-20",
    "freshness": "fresh",
@@ -593,12 +593,12 @@
    "trend": {
     "direction": "up",
     "window_days": 225,
-    "start": "2026-03-03",
-    "end": "2026-10-13",
-    "first": 3633.16,
-    "last": 4407.53,
-    "text": "+21.3%",
-    "change_pct": 21.31,
+    "start": "2026-03-10",
+    "end": "2026-10-20",
+    "first": 3811.51,
+    "last": 4406.51,
+    "text": "+15.6%",
+    "change_pct": 15.61,
     "change_points": null
    },
    "market_type": "index",
