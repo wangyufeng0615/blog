@@ -823,6 +823,8 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 - [Projects JSON](${SITE_URL}/projects.json): Structured project list with names, descriptions, URLs, types, tags, years, and status.
 - [Posts JSON](${SITE_URL}/posts.json): Structured post list with titles, dates, URLs, descriptions, types, and slugs.
 - [王工存储指数 llms.txt](${SITE_URL}/storage-trend/llms.txt): 存储指数的指标分组、数据接口与引用注意事项。
+- [王工存储指数 Markdown 版](${SITE_URL}/storage-trend/index.md): 最新周期结论与全部指标表格（当前值、单位、涨跌、数据日期、来源）。
+- [王工存储指数 JSON 摘要](${SITE_URL}/storage-trend/latest.json): 每项指标的当前值、单位、趋势与来源，字段稳定，适合程序读取。
 - [王工存储指数 JSON 快照](https://storage-trend-api.wangyufeng.workers.dev/api/snapshot): DRAM、HBM、NAND、SSD 等存储指标的最新完整数据。
 - [和AI一起探索地球 llms.txt](https://earth.wangyufeng.org/llms.txt): 街景探索游戏的玩法与入口说明。
 - [Outer Wilds clue map llms.txt / 星际拓荒通关线索图](${SITE_URL}/outer-wilds-clues/llms.txt): Bilingual text version of the Outer Wilds clue dependency map (English page: ${SITE_URL}/outer-wilds-clues/en/).
