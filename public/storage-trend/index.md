@@ -1,11 +1,11 @@
 # 王工存储指数
 
-> 存储产业价格与周期看板。数据截至 2026-10-20，快照生成于 2026-10-20 16:48（北京时间）。数据仅供产业研究，不构成投资建议。
+> 存储产业价格与周期看板。数据截至 2026-10-20，快照生成于 2026-10-21 02:01（北京时间）。数据仅供产业研究，不构成投资建议。
 
 - 网页：https://wangyufeng.org/storage-trend/
-- 周期状态：**分化**（6 上行 · 2 下行 · 1 持平；9 项参与判断）
+- 周期状态：**分化**（5 上行 · 3 下行 · 1 持平；9 项参与判断）
 - 领涨：DDR5 RDIMM 32GB +63.7%（102 天）、DDR5 16Gb 现货 +30.1%（110 天）、DDR5 16Gb eTT +22.3%（107 天）
-- 走弱：512Gb TLC 原片 −6.2%（113 天）、1Tb QLC 原片 −5.7%（107 天）
+- 走弱：512Gb TLC 原片 −6.2%（113 天）、1Tb QLC 原片 −5.7%（107 天）、CFM NAND 指数 −3.3%（225 天）
 - DRAM 现货：DDR5 16Gb 60.70 USD / 颗（2026-10-20）
 - 暂不参与判断：DRAM 合约价（数据偏旧）
 
@@ -32,7 +32,7 @@ DRAM · HBM · 最先反应
 | DDR5 消费级内存零售低价 | 13.4062 | USD / GB | +519% | 2025-07-01 → 2026-09-01 | 2026-09-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | HBM3e 公开估算中点 | ≈ 16 | USD / GB | +6.7% | 2025-09-01 → 2026-03-01 | 2026-03-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | HBM AI 芯片组件成本占比 | 63.42% | 占 AI 芯片组件成本 | +3.5% | 2025-07-01 → 2025-10-01 | 2025-10-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
-| CFM DRAM 价格指数 | 4,407.53 | 指数 | +21.3% | 2026-03-03 → 2026-10-13 | 2026-10-20 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
+| CFM DRAM 价格指数 | 4,406.51 | 指数 | +15.6% | 2026-03-10 → 2026-10-20 | 2026-10-20 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
 | DRAM 合约价（DDR5 8GB SO-DIMM） | 133.00 | USD / 条 | +15.7% | 2026-06-30 → 2026-08-31 | 2026-08-31 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_contract) | 暂不参与 |
 
 ## 温层
@@ -46,7 +46,7 @@ NAND · SSD · 跟随热层
 | 1TB Client SSD 合约均价 | 321.00 | USD / 块 | +18.8% | 2026-04-27 → 2026-08-05 | 2026-08-05 | [TrendForce NAND / Flash Price](https://www.trendforce.com/pricedetail/flash/pcc_oem_ssd_contract) | — |
 | UFS 2.2 256GB 移动存储当前价 | 60.00 | USD · 来源口径 | 0.0% | 2026-07-06 → 2026-10-20 | 2026-10-20 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | — |
 | NAND 消费级 NVMe SSD 零售低价 | 0.0793 | USD / GB | +77.8% | 2025-07-01 → 2026-09-01 | 2026-09-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
-| CFM NAND 价格指数 | 2,959.28 | 指数 | +2.0% | 2026-03-03 → 2026-10-13 | 2026-10-20 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
+| CFM NAND 价格指数 | 2,946.77 | 指数 | −3.3% | 2026-03-10 → 2026-10-20 | 2026-10-20 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
 
 ## 冷层
 
