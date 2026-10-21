@@ -1,0 +1,109 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>挪麦人物关系图谱核验记录</title><style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#faf7ef;color:#3a3228;font:15px/1.85 -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif}main{max-width:1000px;margin:0 auto;padding:22px 22px 90px;overflow-wrap:anywhere}h1{font-size:26px}h2{font-size:21px;margin-top:42px}h3{font-size:18px}a{color:#276e60;overflow-wrap:anywhere}pre{white-space:pre-wrap;font-size:12px}table{border-collapse:collapse;display:block;overflow:auto}td,th{padding:8px;border:1px solid #d9cbb6;text-align:left}blockquote{margin:12px 0;border-left:2px solid #799e88;padding:5px 15px;color:#675b47}details{margin:14px 0;padding:10px;border:1px solid #d9cbb6;border-radius:4px}summary{cursor:pointer;color:#336b59}small{color:#8b795e;overflow-wrap:anywhere}p{white-space:pre-wrap}section{scroll-margin-top:20px}label{display:block;position:sticky;top:0;background:#faf7ef;padding:10px 0}input{width:100%;max-width:450px;height:42px;border:1px solid #bdad91;padding:0 12px;background:#fffaf2;font:inherit}[hidden]{display:none!important}</style></head><body><main><p>2026-10-20专题整合说明：此处保留独立人物画布的原核验记录。专题版改为“关系星图＋人物档案”的展示方式，人物、事迹、联系与证据数据和Vault中的数据文件逐字一致；Vault中的独立画布不变。</p><h1 id="挪麦人物关系图谱核验记录">挪麦人物关系图谱核验记录</h1>
+<p><strong>本轮已修正过强表述，并把每条人物事迹定位到具体原文块。</strong> 不把来源存在、哈希一致或图能运行当作语义正确的替代。</p>
+<blockquote>
+<p><strong>2026-10-18 再次核验补充：</strong> 下文“三项复核”及“画布版验收”保留首版记录，其中26条关系是当时范围。当前已扩至123组具名联系与8条未具名亲属联系，当前视觉和结果见紧接的再次核验。</p>
+</blockquote>
+<h2 id="紧凑布局验收（2026-10-18）">紧凑布局验收（2026-10-18）</h2>
+<p>本次只调整布局、尺寸、视角和纸页定位；事实数据JSON的SHA256与调整前相同，未重写剧情、关系类别或引用。下方来源核验与语义考据是此前的工作，本节不将其计作新一轮语义审计。</p>
+<ul>
+<li>人物卡宽380→280像素，完整事迹正文14像素，桌面工具栏84→54像素；移除重复副标题、卡片底部关系清单、常驻边界段落与多余间隔。完整边界和上下文改由“边界”按钮打开。</li>
+<li>项目移入同画布的独立区域，不再打断人物排布；仍有19个项目，当前为9分区、78个Canvas节点和131条联系。</li>
+<li>1488×981的Chrome窗口中，100%比例默认阅读视角的完整人物由3位增至11位；不是通过缩小整张画布得到。此数只对应该窗口尺寸和视角。</li>
+<li>页面43张人物卡中的137条事迹逐字等于权威JSON，137个事迹原文按钮保留。19张项目卡、6个未具名占位及131条关系均在；Canvas事实、项目摘要、关系端点和标签与数据一致。</li>
+<li>全量131条联系有路径和标签；实际卡片几何检查未发现卡片相互覆盖、标签覆盖卡片、标签互相重叠或连线穿过无关卡片。关系概览也检查了区域标题无遮挡。</li>
+<li>Chrome完成搜索定位、人物全部联系、证据边界、双语事迹原文、关闭与Escape、项目分工原文、区域导航和Canvas导出检查。390×844及844×390视口没有整页或横向溢出；窄屏人物顶端对齐，旋转屏幕后原文纸页保持在视口内并可内部滚动。这里是Chrome视口验收，不是手机实机验收。</li>
+<li>最终HTML内嵌数据与原JSON一致，并内嵌本次避障路径；复现源码和说明已同步。没有修改原始游戏文本。</li>
+</ul>
+<h2 id="再次核验：关系覆盖与重设计">再次核验：关系覆盖与重设计</h2>
+<ul>
+<li>从全部209组、773块挪麦文字重新扫描41位具名说话者、点名提及和XML父块回复；499次事件归为121组候选，逐组判断后无未处理候选。另保留原有两组第三方／组合亲属证据，得到123组具名联系。</li>
+<li>保留原26组联系，新增97组合作、讨论、同行、知识讲述、关切或明确标为提及／转述的联系。补上经戴兹推得的卡萨瓦／埃文斯、戴兹／玛罗姻亲，但不枚举任意多跳关系的传递闭包。</li>
+<li>额外检查10组仅在同段被并列提及的姓名，没有自动连成直接关系；各项排除理由保存在图谱数据与画布来源卡。74组多位具名发言者的共同文本单独保留，不能据此断言同时见面或两两合作。</li>
+<li>新增6个未具名亲属占位、8条联系：普鲁姆的兄弟，所莱内姆的父亲，科诺伊的祖母，布洛密的祖父，莱阿维／拉米共同的父母。占位可能与已有具名人物重合；不增补身份或认领遗体。</li>
+<li>209份原XML哈希和773块中英文字再次对照通过。仍只有既有5个缺译标记与1处格式差异；未发现新增、未解释的来源差异。所有事迹、关系和占位的引用块号均可解析。</li>
+<li>原43位人物与137条事迹逐字保留，19组项目保留。具名关系采用每对人物一条联系，必要时在说明和完整上下文中保留多种往来。</li>
+<li>当前网页全量模式绘出131条带标签的联系。几何检查未发现卡片相互覆盖、标签覆盖卡片／标题、标签重叠或连线穿过无关卡片；以最终导出布局检查为准。</li>
+<li>Chrome检查桌面、390×844竖屏和844×390横屏；搜索定位、个人全部联系、双语事迹证据与关闭已检查，无整页或横向溢出。修正了浏览器自动滚动导致纸页标题离开视口的问题；横屏纸页保持可读字号并内部滚动。这里只是Chrome视口检查，不是手机实机验收。</li>
+<li>网页采用已有路径缓存加可让出主线程的路由计算；缓存仅在卡片真实几何尺寸一致时复用。切换不改写事实或证据。</li>
+</ul>
+<h3 id="再次核验的边界">再次核验的边界</h3>
+<p>“候选已处理”是对当前提取文本和检查方法的覆盖声明，不是所有未写出关系的绝对无误保证。关系的语义分类来自回读原文；机器校验只检查来源、块号、集合覆盖和交付一致性。没有把同项目、同文本、后世听闻或希望发生的事情升级为直接交往、已完成事件或正式身份。</p>
+<p>网络交叉材料包括本轮读取的 <a href="https://outerwilds.fandom.com/wiki/Nomai">Nomai</a>、<a href="https://outerwilds.fandom.com/wiki/Laevi">Laevi</a>、<a href="https://outerwilds.fandom.com/wiki/Cassava">Cassava</a>、<a href="https://outerwilds.fandom.com/wiki/Daz">Daz</a>、<a href="https://outerwilds.fandom.com/wiki/Filix">Filix</a>、<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2904939346">Steam人物整理</a>与<a href="https://www.reddit.com/r/outerwilds/comments/1lsjhle">玩家关系图纠错讨论</a>。部分Wiki整页抓取受限，采用可读取的检索正文交叉检查；全部具体联系仍以本机原文块为依据。</p>
+<p>只读复现检查：人物图谱复现说明 中的 <code>verify_relations.py</code>。可检查原始来源与所有引用、候选覆盖、共提排除、现代组归属，不能替代人工语义判断。</p>
+<h2 id="三项复核（首轮记录）">三项复核（首轮记录）</h2>
+<ol>
+<li><strong>语义与时态</strong>：重新回读人物事迹、26 条人物关系的支持文本，检查“计划／准备／已经完成”“提出假说／实验确认”“本人说话／后世转述”。形成 137 条事迹与块号映射；26 条关系均有块号映射。</li>
+<li><strong>来源独立对照</strong>：从提取结构重新枚举 41 位文字发言者，加 Keek、Foli 两位仅被提及者，确认 43 位不重不漏；209 份 NomaiObject 原始 XML 哈希与提取清单相同，773 个原始英文块逐一与提取来源文本对照，再将中英阅读文本与结构化提取对照。对照仅忽略已知字号颜色标签、换行与空白，不改事实内容。</li>
+<li><strong>交付一致性</strong>：图谱网页、JSON、人物档案与 Canvas 从同一份修订数据生成；继续核对关系方向、现代组五人、内部 Ilex 文件名对应的实际 SOLANUM 说话者，以及引用路径。</li>
+</ol>
+<p>本轮网页交互与渲染回归的实际完成情况见会话回复；这里的来源对照不是浏览器验收。</p>
+<h2 id="本轮修正">本轮修正</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>原表述的问题</th>
+<th>修订后的边界</th>
+<th>原文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daz／Phlox 存储测试</td>
+<td>与戴兹完成配对及存储测试</td>
+<td>首次配对成功；接下来可以测试存储原型，不能当作测试结果已成功</td>
+<td>GD_StatueIsland_FirstMemoryStatueTest 块 2、4、5</td>
+</tr>
+<tr>
+<td>Oeno 外壳检查的时间</td>
+<td>听到防护壳完成后主动申请参与最终检查</td>
+<td>最终矿石到位，计划待外壳完工后检查；Oeno 申请参加</td>
+<td>Shared_TH_Mine_TT_TimeLoopInterior 块 1、2、3、4</td>
+</tr>
+<tr>
+<td>Conoy 祖母与年代</td>
+<td>有亲历坠落的祖母，据此理解星系内代数</td>
+<td>只确认转述祖母的话；祖母是否亲历未明。出生于坠落很久之后另有 Filix 的明确原文</td>
+<td>BH_City_Forum_2 / THM_SignalDish_2 块 3、3</td>
+</tr>
+<tr>
+<td>Phlox 配对触发条件</td>
+<td>成功或重大故障</td>
+<td>成功或设备故障；原文没有重大这一限制</td>
+<td>Shared_GD_StatueIsland_TT_TimeLoopInterior 块 3、5</td>
+</tr>
+<tr>
+<td>Thatch 发现节角色</td>
+<td>曾作为家族代表展示研究</td>
+<td>曾任发现节代表；具体展示成果未记载</td>
+<td>BH_City_School_FestivalLesson 块 6</td>
+</tr>
+</tbody>
+</table>
+<h2 id="仍然明确保留的不确定性">仍然明确保留的不确定性</h2>
+<ul>
+<li>Keek／Foli 的具体亲属或婚姻身份、结局；不把 Wiki 的 partner 或总表“死于撞击”提升为游戏正文定论。</li>
+<li>Bells 对 Solanum 的朝圣指导与正式导师身份之间的区别。</li>
+<li>未具名亲属的姓名、Conoy 祖母是否亲历坠落、所有人的精确出生年和生物学代数。</li>
+<li>未说明的婚姻、性别、同胞长幼、遗体身份，不按常见玩家猜测补全。</li>
+<li>设备故障触发雕像与工程失败不是同一个含义；太阳站失败不等于寻找眼的完整循环曾在生前运行。</li>
+<li>关联项目不表示每人都实际执行了全部任务。比如 Oeno 是申请参与检查，Poke 是受邀前往高能实验室查看结果。</li>
+</ul>
+<h2 id="画布版验收（2026-10-18）">画布版验收（2026-10-18）</h2>
+<ul>
+<li>原137条事迹逐字保留在43张人物卡中；19张项目卡位于同一画布。</li>
+<li>26条关系均有直接标签；程序检查没有卡片互相覆盖、标签压住卡片或连线穿过无关卡片。</li>
+<li>页面只保留工具栏与画布，没有画布下的重复阅读区。</li>
+<li>继续保留已核对的事实、组合证据与未定关系，视觉调整没有改写原始游戏文本。</li>
+<li>Chrome 已验收：人物／项目搜索、关系标签证据、人物事迹证据、原文纸页关闭、缩放与分区定位；390×844 窄屏没有横向或整页溢出。这里是浏览器窄屏检查，未声称 iPhone 实机验收。</li>
+<li>网页内嵌数据与已审计 JSON 相同；Canvas 中43位人物的137条事迹、19组项目与26条关系均与数据对照一致。</li>
+</ul>
+<h2 id="源文本的已知差异">源文本的已知差异</h2>
+<ul>
+<li><code>jeffdidwhatnow</code> 的五块没有官方简中，本轮保留既有缺译标记，没有写成已翻译。</li>
+<li><code>THM_SignalDish_1</code> 块2的简中阅读版有既有换行转义残留的反斜杠；去掉该转义差异后文字一致。原始导出没有改写。</li>
+<li><code>CT_EscapePod_FossilDiscovery</code> 块4简中遗漏英文“不太可能起源于此”的否定；人物事迹判断按英文，不把原翻译错误扩成设定。</li>
+</ul>
+<p>以上对照没有剩余未解释的文字不一致；这只证明引用没有被本图改写或错配，不证明所有剧情推断天然成立。</p>
+<p>返回 人物档案与证据 · 主题索引。</p>
+</main></body></html>
