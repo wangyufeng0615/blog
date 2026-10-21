@@ -9,7 +9,7 @@
   "url": "https://wangyufeng.org/"
  },
  "datePublished": "2026-10-14",
- "dateModified": "2026-10-15",
+ "dateModified": "2026-10-19",
  "game": {
   "name": "Outer Wilds",
   "name_zh": "星际拓荒",
@@ -5857,5 +5857,27 @@
     }
    ]
   }
- ]
+ ],
+ "topic_sections": [
+  {
+   "id": "base-map",
+   "dataset": "graph.json",
+   "scope": "base game prerequisite graph"
+  },
+  {
+   "id": "nomai",
+   "dataset": "nomai/graph.json",
+   "scope": "audited Nomai relationships and complete achievements"
+  },
+  {
+   "id": "dlc",
+   "dataset": "dlc/graph.json",
+   "scope": "Echoes of the Eye: discovery routes, mechanical requirements, alternatives, historical causation and endings; no speedrun exploits or datamined codes."
+  }
+ ],
+ "integration": {
+  "nomai_source_sha256": "a1dcbe5e4209a68fc3527639a37192ba13997aac856df496c5dccbc26108578f",
+  "dlc_source_xml_checked": 11,
+  "dlc_log_records": 98
+ }
 }

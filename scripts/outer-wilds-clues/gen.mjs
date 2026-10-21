@@ -11,6 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { BANDS, FAQ, TIMELINE, TRAVELERS, ENTRY_NODE, ACTION, ENDINGS, TOOLS, NOTE } from './data.src.mjs';
+import { extendTopic } from './extend.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const POST = path.resolve(here, '../../posts/20261014-outer-wilds-clues');
@@ -452,3 +453,4 @@ for (const lang of ['zh', 'en']) {
   fs.writeFileSync(out, html);
 }
 console.log('ok', Object.keys(nodes).length, 'nodes', edges.length, 'edges');
+extendTopic();

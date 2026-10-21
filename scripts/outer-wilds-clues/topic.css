@@ -1,0 +1,22 @@
+/* Base map keeps the warm cloth palette; the Nomai chart is a dark inset, the DLC route reads as part of the page. */
+.topic-nav{display:flex;gap:4px 18px;flex-wrap:wrap;margin-top:8px;padding-right:84px;font-size:13px}
+.topic-nav a{text-decoration:none;min-height:30px;display:inline-flex;align-items:center;border-bottom:1px solid transparent}
+.topic-nav a:hover,.topic-nav a:focus-visible{border-color:var(--accent)}
+.topic-section{margin:32px 18px 44px;scroll-margin-top:20px}
+.section-heading{display:flex;gap:20px;justify-content:space-between;align-items:end;margin:0 6px 12px}
+.section-heading h2{font-size:clamp(22px,2.1vw,29px);line-height:1.3;margin:4px 0 8px}
+.section-heading p{margin:0;max-width:850px;font-size:14px;color:var(--muted)}
+.section-actions{display:flex;gap:7px;flex:none;flex-wrap:wrap}
+.section-actions a{font-size:12px;text-decoration:none;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:9px 11px;min-height:40px}
+.topic-frame{display:block;width:100%;height:min(880px,90dvh);min-height:580px;border:1px solid #bdac8e;border-radius:8px;background:#eee4d1;box-shadow:0 5px 15px #7254370c}
+.topic-frame#nomai-frame{background:#101820;border-color:#2a3640}
+.topic-frame.dlc-frame{height:2400px;min-height:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden}
+.topic-footnote{font-size:12px;line-height:1.7;color:var(--muted);margin:10px 6px 0}
+.topic-footnote a{margin-right:15px;display:inline-block;min-height:28px}
+.article{scroll-margin-top:25px}
+html{scroll-behavior:smooth}
+@media(max-width:640px){.topic-section{margin:28px 10px 35px}.section-heading{display:block;margin-inline:3px}.section-heading p{font-size:13px}.section-actions{margin-top:12px}.section-actions a{min-height:44px}.topic-frame{height:82dvh;min-height:530px}.topic-nav{gap:3px 13px;padding-right:0;margin-top:10px}.topic-nav a{min-height:44px}.top .basis{display:none}.stage{height:max(320px,calc(100dvh - 205px))}}
+@media(max-height:520px) and (min-width:641px){.topic-section{margin-top:20px}.section-heading{margin-bottom:8px}.section-heading h2{font-size:21px;margin-block:2px 4px}.section-heading p{display:none}.topic-frame:not(.dlc-frame){height:calc(100dvh - 110px);min-height:240px}.section-actions a{padding:6px 9px;min-height:34px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media(max-width:640px){#blog-back-fab{width:44px!important;height:44px!important;right:10px!important;bottom:10px!important;padding:0!important;justify-content:center}#blog-back-fab span{display:none!important}.lang{min-height:44px;display:flex;align-items:center}.topic-footnote a{min-height:44px}}
