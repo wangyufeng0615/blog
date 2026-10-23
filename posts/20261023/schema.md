@@ -11,7 +11,9 @@ Python example (no JavaScript required):
 ```python
 import json, urllib.request
 base = "https://wangyufeng.org/stellaris/"
-load = lambda path: json.load(urllib.request.urlopen(base + path))
+def load(path):
+    request = urllib.request.Request(base + path, headers={"User-Agent": "StellarisCorpusReader/1.0"})
+    return json.load(urllib.request.urlopen(request))
 lookup = load("lookup/cr.json")["gameplay:crisis.2010.desc"]
 row = next(r for r in load(lookup["json"])["entries"] if r["namespace"] == "gameplay" and r["key"] == "crisis.2010.desc")
 print(row["en"], row["zh"], row["es"], row["el"], row["zs"], row["zl"])
