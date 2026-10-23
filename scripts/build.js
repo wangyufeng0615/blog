@@ -830,6 +830,9 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 - [Outer Wilds clue map llms.txt / 星际拓荒通关线索图](${SITE_URL}/outer-wilds-clues/llms.txt): Bilingual text version of the Outer Wilds clue dependency map (English page: ${SITE_URL}/outer-wilds-clues/en/).
 - [Outer Wilds clue graph JSON](${SITE_URL}/outer-wilds-clues/graph.json): Nodes, prerequisites and official English/Chinese game text for the Outer Wilds clue map.
 
+- [Stellaris text archive / 群星文库](${SITE_URL}/stellaris/llms.txt): Complete 4.5.2 official English/Chinese text corpus, scope and lookup guide.
+- [Stellaris JSON catalog](${SITE_URL}/stellaris/catalog.json): Every source group, lossless Markdown/JSON exports and exact namespace:key lookup shards.
+
 ## Featured work
 
 ${projectIndex.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}

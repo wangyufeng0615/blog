@@ -1,6 +1,16 @@
 // 页面展示 name/description/sticker，其余字段供 projects.json 和 JSON-LD 使用
 export const allProjects = [
   {
+    name: '群星 · 星海文库',
+    description: '完整阅读与检索群星 4.5.2 的 150,415 条官方中英文案，保留来源，支持 AI 直接读取',
+    sticker: 'outerwilds',
+    url: 'https://wangyufeng.org/stellaris/',
+    type: 'Game text archive',
+    year: '2026',
+    tags: ['Stellaris', 'Game', 'Text', 'Bilingual'],
+    status: 'Live',
+  },
+  {
     name: '和AI一起探索地球',
     description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
     sticker: 'earth',
