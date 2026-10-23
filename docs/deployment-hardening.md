@@ -81,3 +81,33 @@ MISS then HIT, 600-second Cache-Control, private/no-store language responses,
 and cache bypass with Cookie or Authorization. No DNS or zone-wide TLS setting
 was changed. Cache purge automation is not configured; document freshness is
 bounded by the origin's ten-minute TTL.
+
+
+## Public agent reading, 2026-10-23
+
+The `http_config_settings` entry point now sets `bic: false` only for
+unauthenticated GET/HEAD on `wangyufeng.org` and `www.wangyufeng.org`.
+Requests with Cookie or Authorization headers, `/api`, `/api/*`, `/cdn-cgi/*`,
+`/home`, and `/home/*` are excluded. The global Browser Integrity Check stays
+on, and other hostnames do not match this rule. Bot settings, the existing
+credential-related rate rule, cache rules and response header rules were read
+before and after application and were unchanged.
+
+- Ruleset: `1dbe46ea7d0540f89f4b52da89b3aebf`, version `1`.
+- Rule: `f1bed425c5b0476da7651c3a80fd9972`.
+- Stable rule ref: `blog_public_reading_no_bic`.
+- Definition: `cloudflare/blog-rules.json`, `http_config_settings`.
+
+Before application, Python's default client received Cloudflare 403/1010 on
+public JSON. After applying through `cf rulesets account-rulesets create`,
+Python default GET/HEAD, curl and an identified corpus reader returned 200.
+Python with a Cookie header and requests to `/home/` and `/api/health` still
+received 403. The default Python client also fetched the corpus catalog,
+exact-key lookup and source JSON and parsed both raw languages and source lines.
+This permits public reading; it is not a blanket allow action for all traffic.
+
+To roll back this change, remove this single rule from the configuration phase;
+the global BIC setting was not changed. If other configuration rules are added
+later, preserve them. Do not replace an existing phase entry point wholesale.
+
+Reference: https://developers.cloudflare.com/waf/tools/browser-integrity-check/#disable-selectively
