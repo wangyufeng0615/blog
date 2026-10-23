@@ -61,5 +61,17 @@
         }
       }
     }
+  ],
+  "http_config_settings": [
+    {
+      "ref": "blog_public_reading_no_bic",
+      "description": "Blog: public GET/HEAD is readable by agents",
+      "enabled": true,
+      "expression": "(http.host in {\"wangyufeng.org\" \"www.wangyufeng.org\"} and http.request.method in {\"GET\" \"HEAD\"} and http.cookie eq \"\" and not any(http.request.headers[\"authorization\"][*] ne \"\") and not starts_with(http.request.uri.path, \"/api/\") and http.request.uri.path ne \"/api\" and not starts_with(http.request.uri.path, \"/cdn-cgi/\") and http.request.uri.path ne \"/home\" and not starts_with(http.request.uri.path, \"/home/\"))",
+      "action": "set_config",
+      "action_parameters": {
+        "bic": false
+      }
+    }
   ]
 }
