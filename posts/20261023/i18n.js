@@ -1,4 +1,6 @@
 const messages={
+blogReturn:["返回王雨峰的博客首页","Back to Wang Yufeng’s blog"],blogName:["王雨峰的博客","Wang Yufeng’s blog"],
+
 themeLabel:['显示主题','Color theme'],themeSystem:['跟随系统','System'],themeLight:['浅色','Light'],themeDark:['深色','Dark'],switchLanguage:['Switch to English','切换到中文'],textCatalog:['文本目录','Text catalog'],permalink:['此条文本的链接','Link to this entry'],clearEntry:['显示全部文本','Show all entries'],
 
 brand:['星海文库','Stellar Archive'],pageTitle:['群星 · 星海文库','Stellaris · Stellar Archive'],library:['文库','LIBRARY'],
@@ -13,5 +15,7 @@ function browserLocale(){return /^zh(?:-|$)/i.test(navigator.languages?.[0]||nav
 let uiLocale=uiPreference==='auto'?browserLocale():uiPreference;const urlLanguage=new URLSearchParams(location.search).get('lang');if(['zh','en'].includes(urlLanguage))uiLocale=urlLanguage;
 function t(key,vars={}){let value=messages[key]?.[uiLocale==='zh'?0:1]??key;return value.replace(/\{(\w+)\}/g,(_,k)=>String(vars[k]??''))}
 function num(n){return Number(n).toLocaleString(uiLocale==='zh'?'zh-CN':'en-US')}
-function applyLocale(){document.documentElement.lang=uiLocale==='zh'?'zh-CN':'en';document.title=t('pageTitle');document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));for(let attr of ['placeholder','title','aria-label'])document.querySelectorAll('[data-i18n-'+attr+']').forEach(el=>el.setAttribute(attr,t(el.getAttribute('data-i18n-'+attr))));document.querySelector('#uiLanguage').textContent=uiLocale==='zh'?'English':'中文';document.querySelector('#uiLanguage').setAttribute('aria-label',t('switchLanguage'));document.querySelector('#theme').value=window.stellarTheme.preference;document.dispatchEvent(new Event('uilanguagechange'))}
+function syncBlogReturn(){const link=document.querySelector('#blog-back-fab');if(link){link.setAttribute('aria-label',t('blogReturn'));link.querySelector('span').textContent=t('blogName')}}
+document.addEventListener('DOMContentLoaded',syncBlogReturn);
+function applyLocale(){document.documentElement.lang=uiLocale==='zh'?'zh-CN':'en';document.title=t('pageTitle');document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));for(let attr of ['placeholder','title','aria-label'])document.querySelectorAll('[data-i18n-'+attr+']').forEach(el=>el.setAttribute(attr,t(el.getAttribute('data-i18n-'+attr))));document.querySelector('#uiLanguage').textContent=uiLocale==='zh'?'English':'中文';document.querySelector('#uiLanguage').setAttribute('aria-label',t('switchLanguage'));document.querySelector('#uiLanguage').title=t('switchLanguage');syncBlogReturn();document.querySelector('#theme').value=window.stellarTheme.preference;document.dispatchEvent(new Event('uilanguagechange'))}
 document.querySelector('#uiLanguage').onclick=()=>{uiPreference=uiLocale==='zh'?'en':'zh';uiLocale=uiPreference;try{localStorage.setItem('stellar-ui-language',uiPreference)}catch{}applyLocale()};window.addEventListener('languagechange',()=>{if(uiPreference==='auto'){uiLocale=browserLocale();applyLocale()}});applyLocale();

@@ -9,7 +9,7 @@
     },
     {
       "path": "style.css",
-      "sha256": "eaa358b69d6e3e6cf3c55a9adfd7d0bec13ac2796fadce901cb4746bac281720"
+      "sha256": "ef731f1c43515c894a0032029d9e75db6ff83cebc059c4fcf7ff1a8055401cce"
     },
     {
       "path": "app.js",
@@ -17,7 +17,7 @@
     },
     {
       "path": "i18n.js",
-      "sha256": "91fb0846461273597cd5826f0fdb57a99a7de49a6beafa2b689561b0e702a21a"
+      "sha256": "72e577473063ab2cbfb98219d69a3701fb3c3bda60a78ec28ddbc86fe9be0dc7"
     },
     {
       "path": "preferences.js",
