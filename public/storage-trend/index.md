@@ -1,6 +1,6 @@
 # 王工存储指数
 
-> 存储产业价格与周期看板。数据截至 2026-10-23，快照生成于 2026-10-23 15:33（北京时间）。数据仅供产业研究，不构成投资建议。
+> 存储产业价格与周期看板。数据截至 2026-10-24，快照生成于 2026-10-24 15:32（北京时间）。数据仅供产业研究，不构成投资建议。
 
 - 网页：https://wangyufeng.org/storage-trend/
 - 周期状态：**分化**（4 上行 · 3 下行 · 1 持平；8 项参与判断）
@@ -65,7 +65,7 @@ NAND · SSD · 跟随热层
 | 指标 | 当前值 | 单位 | 首尾变化 | 窗口 | 数据日期 | 来源 | 周期判断 |
 |---|---:|---|---:|---|---|---|---|
 | 台湾 DRAM 厂月营收合计 | 81,005 | 百万新台币 | +403% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_9_0.html) | — |
-| 台湾存储模组/控制器月营收合计 | 59,487 | 百万新台币 | +339% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/otc/t21sc03_115_9_0.html) | — |
+| 台湾存储模组/控制器月营收合计 | 59,487 | 百万新台币 | +1549% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/otc/t21sc03_115_9_0.html) | — |
 | Micron 库存天数 | 129 | 天 | +4.0% | 2025-09-23 → 2026-09-30 | 2026-09-30 | [存储厂商官方经营指标](https://s25.q4cdn.com/621799436/files/doc_financials/2026/q4/Q4-FY26-Prepared-Remarks.pdf) | — |
 | 韩国 DRAM 出口重量单价 | 71,696.58 | USD / 千克 | +380% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
 | 韩国 DRAM 出口额 | 16,777.00 | 百万美元 | +603% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
@@ -87,7 +87,7 @@ ETF 价格 · 不参与周期判断
 | [TrendForce NAND / Flash Price](https://www.trendforce.com/price/flash/emmc_spot) | 留意 | 2026-10-12 |
 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 当期 | 2026-10-23 |
 | [AWS S3 Price List (us-east-1)](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv) | 当期 | 2026-10-15 |
-| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-10-23 |
+| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-10-24 |
 | [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU334112334112,PCU33443344) | 留意 | 2026-09-01 |
 | HBM Proxy Events | 留意 | 2026-09-30 |
 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | 当期 | 2026-09-30 |
