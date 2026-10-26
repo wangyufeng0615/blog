@@ -518,22 +518,22 @@ Source IDs: IP_RING_WORLD_X1
 ### 进入人工环形世界 / Enter an artificial ring world
 用灯光操作入口，进入环形河流。主要区域是河流洼地、余烬群岛、隐藏峡谷和水库；木筏靠照亮操纵装置行驶。
 Use light to operate the entrance. The river links the River Lowlands, Cinder Isles, Hidden Gorge and Reservoir; light operates the rafts.
-这里不是哈斯人或挪麦人所造。先读幻灯片与视觉记录，再结合飞船日志；不要把陌生文字当作挪麦文字。
-This is neither Hearthian nor Nomai construction. Read the slide reels, visions and ship log; do not treat its writing as Nomai text.
+这是另一支文明建造的世界，翻译器无法读懂他们的文字。通过幻灯片和视觉记录理解这里，再结合飞船日志整理发现。
+This world was built by another civilization, whose writing your translator cannot read. Learn through slide reels and visions, then use the ship log to connect your discoveries.
 Source IDs: IP_RING_WORLD_X1, IP_ZONE_1_X1, IP_ZONE_2_X1, IP_ZONE_3_X1, IP_ZONE_4_X2
 
 ## 02 文物、绿火与梦境 / 02 Artifact, green fire and the dream
 ### 取得可用的文物 / Find a working Artifact
 车间内有可用文物。先用侦察兵拍照确认幽灵物质分布，沿安全入口取走；幽灵物质不是肉眼可见的绿色火焰。
 The workshop contains working Artifacts. Use Scout photographs to check the ghost matter and take a safe entrance; ghost matter is distinct from green fire.
-文物有聚光和遮光功能。实验室另有失败原型，不能把任意提灯或会爆炸的原型当成可用文物。
+文物能聚光，也能遮住自己的光。普通提灯无法代替文物；实验室里会爆炸的失败原型也不能用来连接梦境。
 The working Artifact can focus and conceal its light. The lab also contains failed prototypes; neither an ordinary lantern nor an explosive prototype substitutes for it.
 Source IDs: IP_ZONE_1_X2, IP_ZONE_3_ENTRANCE_X3
 
 ### 实验记录教你如何连接 / The laboratory shows how to connect
 峡谷的卷盘指出外壳爆炸破洞。可从外部破洞进入第二测试间，查看三种原型实验和绿火前入睡的视觉记录。
 A reel in the gorge reveals the explosion and hull breach. Enter the second chamber from outside to study three prototype experiments and the vision of sleeping at a green fire.
-第三次实验似乎成功。这里提供使用方法；如果你自己先试出正确方法，不必再把实验室当作硬性门锁。
+第三次实验似乎成功，记录给出的使用方法是在绿火旁入睡。如果你已经自行试出这个方法，可以直接进入梦境。
 The third experiment appears successful. The lab teaches the method; it is not a mandatory lock if you discover the method yourself.
 Source IDs: IP_ZONE_3_ENTRANCE_R1, IP_ZONE_3_ENTRANCE_X1, IP_ZONE_3_ENTRANCE_X2, IP_ZONE_3_ENTRANCE_X3
 
@@ -562,7 +562,7 @@ Source IDs: IP_PRISON_X1, IP_PRISON_X2, IP_DREAM_LAKE_X1
 ### 尝试开门，接住漏出的光 / Try the vault and receive its vision
 转动储藏库前的机关。链条拉住门，片刻后绿光漏出；光中的记忆指向岛屿高塔上层壁画房间。
 Turn the vault mechanism. The chains hold the door shut; light leaks out after a moment. Its vision points to the mural room high in the Island Tower.
-这是寻找下一条线索的提示，不是要求你对三个密码反复穷举。
+顺着记忆去找高塔里的房间，就能继续追查封印的线索，无须穷举密码。
 This is a clue to your next investigation, not an instruction to brute-force three codes.
 Source IDs: IP_DREAM_LAKE_X2, IP_ZONE_2_CODE_R1
 
@@ -583,7 +583,7 @@ Source IDs: IP_ZONE_3_LAB_X1, IP_ZONE_3_LAB_X3, IP_ZONE_3_LAB_X4, IP_ZONE_3_LAB_
 ### 三处焚片室 → 三个隐藏入口 / Three burning rooms → three hidden entrances
 按投影分别找回隐藏卷盘：洼地卷盘画出森林音乐屋的壁炉；群岛卷盘画出熄灯后的井；峡谷卷盘画出熄灯后的树形壁画。
 Follow each projection to a hidden reel: the Lowlands reel shows a forest lodge fireplace, the Isles reel a darkened well, and the gorge reel a tree mural in darkness.
-这些是档案馆入口线索。没有要求按“森林→海湾→峡谷”固定顺序探索，也不要求把密码找齐。
+三卷记录分别给出一座档案馆的入口。你可以按任意顺序探索三馆，从完整档案中寻找解封方法。
 These reveal archive entrances. The forest, cove and canyon have no mandatory visit order, and you are not collecting intact vault passwords.
 Source IDs: IP_ZONE_1_SECRET_X1, IP_ZONE_2_SECRET_X1, IP_ZONE_3_SECRET_X1
 
@@ -648,14 +648,14 @@ Source IDs: IP_DREAM_2_RULE_X1, IP_DREAM_2_RULE_X2
 ### 隐桥封印：看见并对齐平台 / Bridge seal: reveal and align the platforms
 把文物留在安全处，走出投影范围，观察控制装置如何改变平台位置。调整至连续可走的路径后，取回文物通过并熄灭封印。
 Leave the Artifact somewhere safe, step beyond its projection, and observe how the interface moves the platforms. Align a walkable route, retrieve the Artifact, then cross and extinguish the seal.
-所需的是看清几何结构，不是从被烧毁的卷盘里找回一组完整密码。
+看见平台结构后，就能直接调出可走的路径，即使封印密码已被烧毁也可以通过。
 You need to see the geometry, not recover an intact code from destroyed slides.
 Source IDs: IP_DREAM_3_RULE_X1, IP_ZONE_2_CODE_X2
 
 ### 三道封印全灭 → 开门 / All three seals out → open the vault
 确认三个发光封印都已熄灭，回到岸边转动开门机关。进入储藏库，向下抵达幽禁者所在处。
 Check that all three glowing seals are extinguished and operate the shore mechanism. Enter and descend to the Prisoner.
-解封发生在模拟世界；不要把它写成打开现实箱体、复活肉身或阻止太阳爆炸。
+你打开的是模拟世界中的储藏库。现实箱体依然封闭，居民的肉身不会复活，太阳也仍会走向超新星。
 This releases a vault in the simulation; it does not open the physical container, revive a body, or stop the Sun.
 Source IDs: IP_SARCOPHAGUS_X2, IP_DREAM_LAKE_X1
 
@@ -670,7 +670,7 @@ Source IDs: IP_SARCOPHAGUS_X3, IP_SARCOPHAGUS_X4, DLG:Prisoner_Eye_Campfire:I ha
 ### 水边最后的愿景 / The final vision at the water
 幽禁者离开后，查看水边留下的视觉火把，观看最后的告别愿景。它不是一艘等待你实际登上的逃生船。
 After the Prisoner leaves, inspect the vision torch at the water for their farewell. The vision is not an escape raft waiting for you to board.
-脚印通向水中；“熄灭火焰、结束模拟中的存在”是场景暗示，不要写成日志明确记载的对白或复活后的远航。
+脚印一直通向水中，暗示幽禁者熄灭了火焰，结束了自己在模拟世界中的存在。日志没有明确说明这一动作；水边的远航是告别愿景。
 Footprints lead into the water. Ending their simulated existence is an implication of the scene, not an explicit spoken log entry or a voyage after physical revival.
 Source IDs: IP_SARCOPHAGUS_X5
 
@@ -685,15 +685,15 @@ Source IDs: DLG:Prisoner_Eye_Choice:Are you certain you want to remember me, DLG
 ### 追随眼的信号，付出故乡的代价 / Follow the signal at the cost of home
 未焚毁的卷盘补出建造外星站的牺牲：他们消耗故乡资源建造远行设施，离开环状行星旁的母星卫星。
 The intact reel restores the sacrifice behind the Stranger: their home moon’s resources were consumed to build the vessel that took them away.
-这里补全的是残缺历史，不是一件解封时必须携带的道具。
-This completes a damaged historical record; it is not an item required at the vault.
+完整卷盘让你看清远行背后的代价。读完即可继续探索，不必携带卷盘去解封。
+The intact reel reveals the cost of the journey. You can continue after reading it; the reel does not need to be carried to the vault.
 Source IDs: IP_DREAM_1_STORY_X1, IP_DREAM_1_STORY_X2
 
 ### 恐惧眼的力量，封锁信号 / Fear the Eye and block its signal
 他们观察眼的力量后感到恐惧，建造并发射阻挡信号的装置。幽禁者在眼中的对白补充了这种拒绝结束的心态。
 After observing the Eye’s power they became afraid, built a signal blocker and launched it. The Prisoner’s Eye dialogue adds their reluctance to let their story end.
-这是居民对眼的反应；不能把他们看到的毁灭图像直接当成“眼主动恶意杀害挪麦人”的证据。
-This describes their response, not proof that the Eye maliciously killed the Nomai.
+卷盘呈现的是居民对宇宙之眼的恐惧。挪麦人的灭绝另有原因：闯入者内部释放的幽灵物质。
+The reel depicts the inhabitants’ fear of the Eye. The Nomai died for a different reason: ghost matter released from the Interloper.
 Source IDs: IP_DREAM_2_STORY_X2, DLG:Prisoner_Eye_Choice:When my kind found the Eye
 
 ### 把失去的故乡重建为模拟世界 / Recreate their lost home in a simulation
@@ -706,15 +706,15 @@ Source IDs: IP_DREAM_3_STORY_X2, IP_ZONE_3_LAB_X2, IP_DREAM_2_RULE_X1
 ### 短暂放开信号 → 被永久幽禁 / Briefly release the signal → imprisonment
 幽禁者曾关闭阻挡装置，眼的信号短暂传出；其他居民重新封锁信号，并把他囚禁。封印密码随后被销毁。
 The Prisoner briefly disabled the blocker. The others restored it and confined them; the seal codes were later destroyed.
-“短暂”有幽禁者对白支持，具体持续多久没有明确记载；不要为此补造时间表。
+幽禁者后来形容那次信号只持续了很短的时间，具体有多久并没有记载。
 The Prisoner explicitly describes a brief release. Its exact duration is not stated.
 Source IDs: IP_SARCOPHAGUS_X3, IP_ZONE_2_CODE_X2, DLG:Prisoner_Eye_Campfire:I hadn’t dared to hope
 
 ### 那次回声把两段故事连起来 / That brief echo connects both stories
 玩家展示的记忆把信号、挪麦人的追寻、灭绝和哈斯人的探索连在一起。幽禁者终于知道自己的行动并未毫无结果。
 Your vision connects the signal with the Nomai search, their extinction and Hearthian exploration. The Prisoner learns that their action was not in vain.
-这是一条跨时代的因果联系，不能把幽禁者、艾斯科尔和现代哈斯人画成见过面的同代团队。
-This is a causal link across eras, not evidence that the Prisoner, Escall and modern Hearthians met or worked together.
+幽禁者释放信号、挪麦人追寻信号、哈斯人追查遗迹，发生在不同的时代。你的记忆让幽禁者第一次看见这些后续。
+The Prisoner released the signal, the Nomai followed it, and the Hearthians explored their ruins in different eras. Your memories show the Prisoner what followed.
 Source IDs: IP_SARCOPHAGUS_X4, DLG:Prisoner_Eye_Choice:my efforts weren’t in vain, DLG:Prisoner_Eye_Campfire:I hadn’t dared to hope
 
 ## 08 另外可走的路，不倒置初次线索 / 08 Alternatives without circular prerequisites
@@ -728,8 +728,8 @@ Source IDs: IP_DREAM_LIBRARY_3_R1
 ### 已知投影机制：峡谷隐桥回访 / Known projection mechanism: canyon bridge shortcut
 如果已经发现离灯机制，可以先查看隐形桥，再取回文物沿记住的路径前往码头侧。树形壁画仍需要处于黑暗中。
 If you already know the radius mechanism, reveal the hidden bridge, retrieve the Artifact and follow the remembered path toward the dock side. The tree mural must still be dark.
-不要把这条捷径画成初次进入档案馆的唯一前置，否则会变成“先知道馆内答案才能进馆”的循环。
-Do not make this the only first-visit prerequisite: that would require knowing the archive’s answer before entering it.
+这条路适合已经知道投影机制后的回访。第一次进馆仍可走重亮内部桥或码头升降机的路线。
+Use this shortcut once you know the projection mechanism. On your first visit, you can relight the interior bridge or return by the dock elevator.
 Source IDs: IP_DREAM_3_RULE_X1
 
 ### 已知死亡机制：海湾警铃回访 / Known death mechanism: revisit the cove
@@ -749,16 +749,16 @@ Source IDs: IP_DREAM_1_RULE_X1
 ### 阻挡器控制室不是第四道封印 / The blocker control room is not a fourth seal
 符号室另有控制室序列，可查看水库控制室的烧毁界面和断开连接的投影。它补充历史与技术背景。
 The Symbol Room also has a control-room sequence. Inside the Reservoir room are a burned interface and a disconnected-link projection, adding historical and technical context.
-不必修复它才能完成DLC，也不应把“关闭阻挡器、找到眼的新坐标”写成玩家的必经目标。
-Repairing it is not a DLC completion requirement. Do not invent a mandatory objective to disable the blocker or find new Eye coordinates.
+这里能补充阻挡器的背景。完成幽禁者相遇无须修复控制室，也无须关闭阻挡器或寻找新的眼坐标。
+The room adds context about the blocker. Meeting the Prisoner does not require repairing the room, disabling the blocker, or finding new Eye coordinates.
 Source IDs: IP_ZONE_4_X3, IP_ZONE_2_CODE_X1
 
 ## 09 时间、循环与两种替代结局 / 09 Time, the loop and two alternative endings
 ### 洪水改变入口，现实身体决定断连 / The flood changes access; the physical body matters
 约循环第13分钟大坝溃决，洼地绿火被淹；岛屿高塔更晚倒塌，约20分30秒。峡谷入口位于更高处，不会被同一波洪水淹没。
 The dam breaks at roughly 13 minutes, flooding the Lowlands fire. The Island Tower falls later, around 20:30. The higher gorge fire is not flooded by the same wave.
-这些是近似流程时间，并非游戏文本给出的精确倒计时。从洼地入梦的人自己也会断连，不能原地等待居民消失后继续行动。
-These are approximate gameplay timings, not exact timers stated in the text. If your body is at the Lowlands fire, you disconnect too; do not wait there expecting to remain after the occupants vanish.
+时间为近似值。从洼地绿火入梦，你也会在洪水到来时断开连接。要等居民消失后继续探索，应先把现实身体换到另一处不会同时被淹的绿火旁。
+These times are approximate. If your body is at the Lowlands fire, the flood disconnects you too. To remain after the inhabitants vanish, first move your body to a fire that will not flood at the same time.
 Source IDs: IP_ZONE_4_X4
 
 ### 外星站逃过爆炸，不等于逃过记忆回传 / Escaping the blast does not escape memory transmission
@@ -771,13 +771,13 @@ Source IDs: IP_ZONE_4_X4, TT_TIME_LOOP_DEVICE_X3, GD_STATUE_WORKSHOP_X2, IP_DREA
 ### 替代结局：被遗弃的世界 / Alternative ending: the abandoned world
 先关闭灰烬双星计划，再留在驶出爆炸范围的现实外星站，等待终局文本出现。仅仅飞来外星站、保持循环开启，不会得到这个结局。
 Disable the Ash Twin Project, then wait in the physical Stranger beyond the blast. Visiting with the loop still active does not trigger this ending.
-结局原文已提取，编号814；简中对“beyond the reach of the supernova”的表述不够自然，机制判断同时核对英文。
-The extracted ending text is UI 814. Its Chinese wording of “beyond the reach of the supernova” is awkward, so the English also informs the interpretation.
+你虽然躲过了超新星，却也失去了返回下一循环的机会，只能留在已被遗弃的外星站。下方保留结局的中英原文；英文明确说明你已在爆炸范围之外。
+You survive the supernova but lose the chance to return to another loop, leaving you alone aboard the abandoned Stranger. The bilingual ending text below is preserved verbatim; the English makes clear that you are beyond the blast.
 Source IDs: UI:814
 
 ### 替代结局：无法醒来的梦 / Alternative ending: unable to wake
 先取出高级核心，带可用文物在绿火旁死亡并进入模拟世界，保持文物火焰且不要被终止连接，等待结局。
 Remove the advanced warp core, connect by dying at a green fire with a working Artifact, and remain connected with its flame intact until the ending.
-这是编号815的替代结局，不是普通解封时每次在绿火上死亡都会触发的结局，也不是救出幽禁者后的必然收场。
-This is alternative ending UI 815, not the result of every green-fire death during normal exploration, nor the unavoidable end of meeting the Prisoner.
+只有先关闭循环，才会走向这个无法醒来的结局。正常解封时保留灰烬双星计划，即使现实身体已死亡，仍会在记忆回传后开始下一轮。
+This ending requires disabling the loop first. During normal exploration, the active Ash Twin Project still returns your memories after physical death, beginning another loop.
 Source IDs: UI:815, IP_DREAM_2_RULE_X1

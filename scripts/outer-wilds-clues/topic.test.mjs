@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {DLC_VIEW} from './dlc-view.mjs';
+import {DLC_GROUPS,createDlcLayout} from './dlc-layout.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),post=path.resolve(here,'../../posts/20261014-outer-wilds-clues');
 const text=process.env.OW_TEXT_DIR||path.join(process.env.HOME,'Documents/Obsidian Vault/生活/游戏/Outer Wilds');
 const read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
@@ -56,12 +57,53 @@ test('both topic languages embed the two new sections and retain the base map',(
  const graph=read(path.join(post,'graph.json'));assert.equal(graph.topic_sections.length,3);assert.equal(graph.nodes.length,145);assert.equal(graph.nodes.reduce((n,x)=>n+x.prerequisites.length,0),148);
 });
 test('route and star-chart layouts place every audited DLC clue and Nomai person exactly once',()=>{
- const route=fs.readFileSync(path.join(here,'dlc-route.js'),'utf8'),layout=route.slice(route.indexOf('const FLOW='),route.indexOf('const branchOf'));
- const ids=dlc.phases.flatMap(p=>p.nodes.map(n=>n.id)),placed=[...layout.matchAll(/(?<!phase:)'([a-z-]+)'(?!:)/g)].map(m=>m[1]).filter(id=>ids.includes(id));
- const lanes=['woods','cove','canyon'];
- for(const id of ids)assert.ok(placed.includes(id),'DLC clue not placed: '+id);
- for(const id of ids.filter(id=>!lanes.includes(id)))assert.equal(placed.filter(x=>x===id).length,1,'DLC clue placed more than once: '+id);
+ const ids=dlc.phases.flatMap(p=>p.nodes.map(n=>n.id));
+ const placed=DLC_GROUPS.flatMap(s=>s.ids);
+ assert.deepEqual([...placed].sort(),[...ids].sort(),'every clue appears once');
  const chart=fs.readFileSync(path.join(here,'nomai-view.js'),'utf8'),groups=chart.slice(chart.indexOf('const GROUPS='),chart.indexOf('const ERA='));
  const nomai=read(path.join(post,'nomai/graph.json')),members=[...groups.matchAll(/'([A-Z_]+)'/g)].map(m=>m[1]);
  assert.deepEqual([...members].sort(),nomai.people.map(p=>p.id).sort());
+});
+
+test('DLC map uses short, directly visible cards, with full sources preserved separately',()=>{
+ const ids=dlc.phases.flatMap(p=>p.nodes.map(n=>n.id));
+ for(const file of ['dlc/index.html','dlc/en/index.html']){
+  const html=fs.readFileSync(path.join(post,file),'utf8');
+  const body=html.slice(html.indexOf('<main id="flow">'),html.indexOf('<footer class="foot">'));
+  assert.doesNotMatch(body,/<(?:button|details|summary|blockquote)\b|aria-expanded=|class="(?:evidence|facts)"/);
+  for(const mode of ['wide','narrow']){
+   const svg=body.match(new RegExp('<svg class="clue-sheet '+mode+'"[\\s\\S]*?<\\/svg>'))?.[0];
+   assert.ok(svg,mode);
+   const rendered=[...svg.matchAll(/data-id="([a-z-]+)"/g)].map(m=>m[1]);
+   assert.deepEqual(rendered.sort(),[...ids].sort());
+  }
+ }
+ // A card carries one actionable idea; the source paragraphs must not leak back onto its face.
+ for(const [id,v] of Object.entries(DLC_VIEW)){
+  assert.ok(v.title.zh.length<=25,id+' Chinese title');
+  assert.ok(v.note.zh.length<=48,id+' Chinese note');
+  assert.ok(v.note.en.length<=160,id+' English note');
+ }
+});
+
+test('both responsive DLC layouts keep nodes separate and route edges outside other cards',()=>{
+ for(const lang of ['zh','en'])for(const mobile of [false,true]){
+  const layout=createDlcLayout(dlc,DLC_VIEW,lang,mobile),nodes=Object.values(layout.nodes);
+  assert.equal(nodes.length,39);
+  for(const n of nodes){assert.ok(n.x>=0&&n.y>=0&&n.x+n.w<=layout.width&&n.y+n.h<=layout.height,n.id+' stays inside the cloth')}
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+   const a=nodes[i],b=nodes[j];
+   assert.ok(!(a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y),`${lang} ${mobile}: ${a.id} overlaps ${b.id}`);
+  }
+  for(const edge of layout.edges)for(let i=1;i<edge.points.length;i++){
+   const a=edge.points[i-1],b=edge.points[i];
+   assert.ok(a.x===b.x||a.y===b.y,'orthogonal route segment');
+   for(const n of nodes){
+    if(n.id===edge.from||n.id===edge.to)continue;
+    const hit=a.x===b.x?a.x>n.x&&a.x<n.x+n.w&&Math.max(a.y,b.y)>n.y&&Math.min(a.y,b.y)<n.y+n.h:a.y>n.y&&a.y<n.y+n.h&&Math.max(a.x,b.x)>n.x&&Math.min(a.x,b.x)<n.x+n.w;
+    assert.ok(!hit,`${lang} ${mobile}: ${edge.from} → ${edge.to} crosses ${n.id}`);
+   }
+  }
+  for(const edge of dlc.edges)assert.ok(layout.edges.some(e=>e.from===edge.from&&e.to===edge.to&&e.kind===edge.kind),'keep audited edge semantics');
+ }
 });

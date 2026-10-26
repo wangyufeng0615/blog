@@ -30,17 +30,17 @@ export const DLC_PHASES = [
   ],['IP_RING_WORLD_X1'],['satellite']),
   n('stranger',['进入人工环形世界','Enter an artificial ring world'],['外星站 · 停泊区／河流洼地','The Stranger · hangar / River Lowlands'],[
    ['用灯光操作入口，进入环形河流。主要区域是河流洼地、余烬群岛、隐藏峡谷和水库；木筏靠照亮操纵装置行驶。','Use light to operate the entrance. The river links the River Lowlands, Cinder Isles, Hidden Gorge and Reservoir; light operates the rafts.'],
-   ['这里不是哈斯人或挪麦人所造。先读幻灯片与视觉记录，再结合飞船日志；不要把陌生文字当作挪麦文字。','This is neither Hearthian nor Nomai construction. Read the slide reels, visions and ship log; do not treat its writing as Nomai text.']
+   ['这是另一支文明建造的世界，翻译器无法读懂他们的文字。通过幻灯片和视觉记录理解这里，再结合飞船日志整理发现。','This world was built by another civilization, whose writing your translator cannot read. Learn through slide reels and visions, then use the ship log to connect your discoveries.']
   ],['IP_RING_WORLD_X1','IP_ZONE_1_X1','IP_ZONE_2_X1','IP_ZONE_3_X1','IP_ZONE_4_X2'],['simulation'])
  ]},
  {id:'entry',title:L('02 文物、绿火与梦境','02 Artifact, green fire and the dream'),summary:L('完整文物和绿火缺一不可；普通提灯不替代文物。','A working Artifact and a green fire are both needed; a normal lantern will not do.'),nodes:[
   n('artifact',['取得可用的文物','Find a working Artifact'],['河流洼地 · 幽灵物质车间','River Lowlands · ghost-matter workshop'],[
    ['车间内有可用文物。先用侦察兵拍照确认幽灵物质分布，沿安全入口取走；幽灵物质不是肉眼可见的绿色火焰。','The workshop contains working Artifacts. Use Scout photographs to check the ghost matter and take a safe entrance; ghost matter is distinct from green fire.'],
-   ['文物有聚光和遮光功能。实验室另有失败原型，不能把任意提灯或会爆炸的原型当成可用文物。','The working Artifact can focus and conceal its light. The lab also contains failed prototypes; neither an ordinary lantern nor an explosive prototype substitutes for it.']
+   ['文物能聚光，也能遮住自己的光。普通提灯无法代替文物；实验室里会爆炸的失败原型也不能用来连接梦境。','The working Artifact can focus and conceal its light. The lab also contains failed prototypes; neither an ordinary lantern nor an explosive prototype substitutes for it.']
   ],['IP_ZONE_1_X2','IP_ZONE_3_ENTRANCE_X3'],['simulation','prototype']),
   n('lab',['实验记录教你如何连接','The laboratory shows how to connect'],['隐藏峡谷 · 损毁的实验室','Hidden Gorge · Damaged Laboratory'],[
    ['峡谷的卷盘指出外壳爆炸破洞。可从外部破洞进入第二测试间，查看三种原型实验和绿火前入睡的视觉记录。','A reel in the gorge reveals the explosion and hull breach. Enter the second chamber from outside to study three prototype experiments and the vision of sleeping at a green fire.'],
-   ['第三次实验似乎成功。这里提供使用方法；如果你自己先试出正确方法，不必再把实验室当作硬性门锁。','The third experiment appears successful. The lab teaches the method; it is not a mandatory lock if you discover the method yourself.']
+   ['第三次实验似乎成功，记录给出的使用方法是在绿火旁入睡。如果你已经自行试出这个方法，可以直接进入梦境。','The third experiment appears successful. The lab teaches the method; it is not a mandatory lock if you discover the method yourself.']
   ],['IP_ZONE_3_ENTRANCE_R1','IP_ZONE_3_ENTRANCE_X1','IP_ZONE_3_ENTRANCE_X2','IP_ZONE_3_ENTRANCE_X3']),
   n('fire-rooms',['打开壁画后的绿火房间','Open the green-fire rooms'],['洼地／岛屿高塔／峡谷；水库另有入口','Lowlands / Island Tower / gorge; a fourth at the Reservoir'],[
    ['岛屿高塔的卷盘显示：移走圆形房间里的提灯，使特定壁画不再被照亮，出现通道。居民的身体在绿火旁。','The Island Tower reel shows lanterns being removed from a circular mural room, leaving a particular mural dark and opening a passage. Bodies sit around the green fire.'],
@@ -58,7 +58,7 @@ export const DLC_PHASES = [
   ],['IP_PRISON_X1','IP_PRISON_X2','IP_DREAM_LAKE_X1'],['vault']),
   n('vault-vision',['尝试开门，接住漏出的光','Try the vault and receive its vision'],['梦境 · 地下湖岸','Simulation · lake shore'],[
    ['转动储藏库前的机关。链条拉住门，片刻后绿光漏出；光中的记忆指向岛屿高塔上层壁画房间。','Turn the vault mechanism. The chains hold the door shut; light leaks out after a moment. Its vision points to the mural room high in the Island Tower.'],
-   ['这是寻找下一条线索的提示，不是要求你对三个密码反复穷举。','This is a clue to your next investigation, not an instruction to brute-force three codes.']
+   ['顺着记忆去找高塔里的房间，就能继续追查封印的线索，无须穷举密码。','This is a clue to your next investigation, not an instruction to brute-force three codes.']
   ],['IP_DREAM_LAKE_X2','IP_ZONE_2_CODE_R1']),
   n('symbol-room',['在梦境吹灭蜡烛，现实灯才灭','Extinguish dream candles to darken the real mural'],['现实岛屿高塔 ↔ 梦境星光海湾高塔','Physical Island Tower ↔ Starlit Cove tower'],[
    ['高塔背面入口通往上层。梦境中点亮通向塔后入口的路径，进入对应壁画房，吹灭两侧蜡烛；醒来查看现实中的暗壁画。','Use the tower’s rear entrance for its upper floor. In the dream, project the route to its rear entrance and extinguish the corresponding mural-room candles. Wake and inspect the now-dark physical mural.'],
@@ -70,7 +70,7 @@ export const DLC_PHASES = [
   ],['IP_ZONE_3_LAB_X1','IP_ZONE_3_LAB_X3','IP_ZONE_3_LAB_X4','IP_ZONE_3_LAB_X2','IP_MAP_PROJECTION_1_X1','IP_MAP_PROJECTION_2_X1','IP_MAP_PROJECTION_3_X1']),
   n('burning-rooms',['三处焚片室 → 三个隐藏入口','Three burning rooms → three hidden entrances'],['河流洼地／余烬群岛／隐藏峡谷','River Lowlands / Cinder Isles / Hidden Gorge'],[
    ['按投影分别找回隐藏卷盘：洼地卷盘画出森林音乐屋的壁炉；群岛卷盘画出熄灯后的井；峡谷卷盘画出熄灯后的树形壁画。','Follow each projection to a hidden reel: the Lowlands reel shows a forest lodge fireplace, the Isles reel a darkened well, and the gorge reel a tree mural in darkness.'],
-   ['这些是档案馆入口线索。没有要求按“森林→海湾→峡谷”固定顺序探索，也不要求把密码找齐。','These reveal archive entrances. The forest, cove and canyon have no mandatory visit order, and you are not collecting intact vault passwords.']
+   ['三卷记录分别给出一座档案馆的入口。你可以按任意顺序探索三馆，从完整档案中寻找解封方法。','These reveal archive entrances. The forest, cove and canyon have no mandatory visit order, and you are not collecting intact vault passwords.']
   ],['IP_ZONE_1_SECRET_X1','IP_ZONE_2_SECRET_X1','IP_ZONE_3_SECRET_X1'])
  ]},
  {id:'archives',title:L('04 三座档案馆，三种机制','04 Three archives, three mechanisms'),summary:L('每一列是“如何到达 → 学到什么”。档案馆本身没有可用的封印密码。','Each column reads “how to reach it → what it teaches.” None contains a usable seal code.'),nodes:[
@@ -110,11 +110,11 @@ export const DLC_PHASES = [
   ],['IP_DREAM_2_RULE_X1','IP_DREAM_2_RULE_X2'],['simulation','alarm-discussion']),
   n('bridge-seal',['隐桥封印：看见并对齐平台','Bridge seal: reveal and align the platforms'],['梦境 · 地下湖的隐形平台','Simulation · invisible lake platforms'],[
    ['把文物留在安全处，走出投影范围，观察控制装置如何改变平台位置。调整至连续可走的路径后，取回文物通过并熄灭封印。','Leave the Artifact somewhere safe, step beyond its projection, and observe how the interface moves the platforms. Align a walkable route, retrieve the Artifact, then cross and extinguish the seal.'],
-   ['所需的是看清几何结构，不是从被烧毁的卷盘里找回一组完整密码。','You need to see the geometry, not recover an intact code from destroyed slides.']
+   ['看见平台结构后，就能直接调出可走的路径，即使封印密码已被烧毁也可以通过。','You need to see the geometry, not recover an intact code from destroyed slides.']
   ],['IP_DREAM_3_RULE_X1','IP_ZONE_2_CODE_X2'],['simulation']),
   n('open-vault',['三道封印全灭 → 开门','All three seals out → open the vault'],['梦境 · 密封储藏库','Simulation · Sealed Vault'],[
    ['确认三个发光封印都已熄灭，回到岸边转动开门机关。进入储藏库，向下抵达幽禁者所在处。','Check that all three glowing seals are extinguished and operate the shore mechanism. Enter and descend to the Prisoner.'],
-   ['解封发生在模拟世界；不要把它写成打开现实箱体、复活肉身或阻止太阳爆炸。','This releases a vault in the simulation; it does not open the physical container, revive a body, or stop the Sun.']
+   ['你打开的是模拟世界中的储藏库。现实箱体依然封闭，居民的肉身不会复活，太阳也仍会走向超新星。','This releases a vault in the simulation; it does not open the physical container, revive a body, or stop the Sun.']
   ],['IP_SARCOPHAGUS_X2','IP_DREAM_LAKE_X1'],['vault'])
  ]},
  {id:'farewell',title:L('06 交换记忆，再决定如何告别','06 Exchange memories and say farewell'),summary:L('DLC的相遇有自己的终点；宇宙之眼仍沿本体路线抵达。','The encounter concludes here. Reaching the Eye still follows the base-game route.'),nodes:[
@@ -124,7 +124,7 @@ export const DLC_PHASES = [
   ],['IP_SARCOPHAGUS_X3','IP_SARCOPHAGUS_X4','DLG:Prisoner_Eye_Campfire:I hadn’t dared to hope'],['endings','vision-discussion']),
   n('farewell',['水边最后的愿景','The final vision at the water'],['地下湖 · 储藏库外','Subterranean Lake · outside the vault'],[
    ['幽禁者离开后，查看水边留下的视觉火把，观看最后的告别愿景。它不是一艘等待你实际登上的逃生船。','After the Prisoner leaves, inspect the vision torch at the water for their farewell. The vision is not an escape raft waiting for you to board.'],
-   ['脚印通向水中；“熄灭火焰、结束模拟中的存在”是场景暗示，不要写成日志明确记载的对白或复活后的远航。','Footprints lead into the water. Ending their simulated existence is an implication of the scene, not an explicit spoken log entry or a voyage after physical revival.']
+   ['脚印一直通向水中，暗示幽禁者熄灭了火焰，结束了自己在模拟世界中的存在。日志没有明确说明这一动作；水边的远航是告别愿景。','Footprints lead into the water. Ending their simulated existence is an implication of the scene, not an explicit spoken log entry or a voyage after physical revival.']
   ],['IP_SARCOPHAGUS_X5'],['vault']),
   n('eye-coda',['下一循环去眼，邀请他的记忆','On a later loop, reach the Eye and invite their memory'],['本体终局 · 远古空地营火','Base ending · Ancient Glade campfire'],[
    ['完成相遇后，不必在同一循环逃回飞船。保持计划运行，下一轮按本体路线取得核心、带入飞船、输入眼坐标。','You do not need to escape to the ship in the same loop. Keep the Project active, then follow the base route on a later loop: core, Vessel and Eye coordinates.'],
@@ -134,11 +134,11 @@ export const DLC_PHASES = [
  {id:'history',title:L('07 把被删去的历史接回本体','07 Reconnect the erased history'),summary:L('这是历史因果链，独立于玩家寻找线索的顺序。','Historical causation is distinct from your order of discovery.'),nodes:[
   n('home-moon',['追随眼的信号，付出故乡的代价','Follow the signal at the cost of home'],['覆盖林地档案馆 · 完整历史卷盘','Woodlands archive · intact history reel'],[
    ['未焚毁的卷盘补出建造外星站的牺牲：他们消耗故乡资源建造远行设施，离开环状行星旁的母星卫星。','The intact reel restores the sacrifice behind the Stranger: their home moon’s resources were consumed to build the vessel that took them away.'],
-   ['这里补全的是残缺历史，不是一件解封时必须携带的道具。','This completes a damaged historical record; it is not an item required at the vault.']
+   ['完整卷盘让你看清远行背后的代价。读完即可继续探索，不必携带卷盘去解封。','The intact reel reveals the cost of the journey. You can continue after reading it; the reel does not need to be carried to the vault.']
   ],['IP_DREAM_1_STORY_X1','IP_DREAM_1_STORY_X2'],['woods']),
   n('block-signal',['恐惧眼的力量，封锁信号','Fear the Eye and block its signal'],['星光海湾档案馆 · 完整历史卷盘','Cove archive · intact history reel'],[
    ['他们观察眼的力量后感到恐惧，建造并发射阻挡信号的装置。幽禁者在眼中的对白补充了这种拒绝结束的心态。','After observing the Eye’s power they became afraid, built a signal blocker and launched it. The Prisoner’s Eye dialogue adds their reluctance to let their story end.'],
-   ['这是居民对眼的反应；不能把他们看到的毁灭图像直接当成“眼主动恶意杀害挪麦人”的证据。','This describes their response, not proof that the Eye maliciously killed the Nomai.']
+   ['卷盘呈现的是居民对宇宙之眼的恐惧。挪麦人的灭绝另有原因：闯入者内部释放的幽灵物质。','The reel depicts the inhabitants’ fear of the Eye. The Nomai died for a different reason: ghost matter released from the Interloper.']
   ],['IP_DREAM_2_STORY_X2','DLG:Prisoner_Eye_Choice:When my kind found the Eye']),
   n('build-dream',['把失去的故乡重建为模拟世界','Recreate their lost home in a simulation'],['无尽峡谷档案馆 · 完整历史卷盘','Canyon archive · intact history reel'],[
    ['完整卷盘说明梦境按他们的母星卫星重建。现实肉身死亡后，点亮的文物仍可维持连接；不等于真实故乡被复原。','The intact reel shows a simulation modeled on their home moon. Lit Artifacts can sustain a connection after physical death; the real home moon was not restored.'],
@@ -146,11 +146,11 @@ export const DLC_PHASES = [
   ],['IP_DREAM_3_STORY_X2','IP_ZONE_3_LAB_X2','IP_DREAM_2_RULE_X1']),
   n('release-signal',['短暂放开信号 → 被永久幽禁','Briefly release the signal → imprisonment'],['幽禁者的视觉记忆','The Prisoner’s vision'],[
    ['幽禁者曾关闭阻挡装置，眼的信号短暂传出；其他居民重新封锁信号，并把他囚禁。封印密码随后被销毁。','The Prisoner briefly disabled the blocker. The others restored it and confined them; the seal codes were later destroyed.'],
-   ['“短暂”有幽禁者对白支持，具体持续多久没有明确记载；不要为此补造时间表。','The Prisoner explicitly describes a brief release. Its exact duration is not stated.']
+   ['幽禁者后来形容那次信号只持续了很短的时间，具体有多久并没有记载。','The Prisoner explicitly describes a brief release. Its exact duration is not stated.']
   ],['IP_SARCOPHAGUS_X3','IP_ZONE_2_CODE_X2','DLG:Prisoner_Eye_Campfire:I hadn’t dared to hope']),
   n('heard-signal',['那次回声把两段故事连起来','That brief echo connects both stories'],['幽禁者 ↔ 挪麦飞船 ↔ 玩家','Prisoner ↔ Nomai Vessel ↔ you'],[
    ['玩家展示的记忆把信号、挪麦人的追寻、灭绝和哈斯人的探索连在一起。幽禁者终于知道自己的行动并未毫无结果。','Your vision connects the signal with the Nomai search, their extinction and Hearthian exploration. The Prisoner learns that their action was not in vain.'],
-   ['这是一条跨时代的因果联系，不能把幽禁者、艾斯科尔和现代哈斯人画成见过面的同代团队。','This is a causal link across eras, not evidence that the Prisoner, Escall and modern Hearthians met or worked together.']
+   ['幽禁者释放信号、挪麦人追寻信号、哈斯人追查遗迹，发生在不同的时代。你的记忆让幽禁者第一次看见这些后续。','The Prisoner released the signal, the Nomai followed it, and the Hearthians explored their ruins in different eras. Your memories show the Prisoner what followed.']
   ],['IP_SARCOPHAGUS_X4','DLG:Prisoner_Eye_Choice:my efforts weren’t in vain','DLG:Prisoner_Eye_Campfire:I hadn’t dared to hope'])
  ]},
  {id:'alternatives',title:L('08 另外可走的路，不倒置初次线索','08 Alternatives without circular prerequisites'),summary:L('橙色是可选绕路。先学会机制，和用机制回访，是两件事。','Orange marks optional alternatives. Learning a mechanism and using it to revisit are different steps.'),nodes:[
@@ -160,7 +160,7 @@ export const DLC_PHASES = [
   ],['IP_DREAM_LIBRARY_3_R1'],['lift-discussion','canyon']),
   n('known-radius',['已知投影机制：峡谷隐桥回访','Known projection mechanism: canyon bridge shortcut'],['无尽峡谷 · 码头侧隐桥','Endless Canyon · hidden dock-side bridge'],[
    ['如果已经发现离灯机制，可以先查看隐形桥，再取回文物沿记住的路径前往码头侧。树形壁画仍需要处于黑暗中。','If you already know the radius mechanism, reveal the hidden bridge, retrieve the Artifact and follow the remembered path toward the dock side. The tree mural must still be dark.'],
-   ['不要把这条捷径画成初次进入档案馆的唯一前置，否则会变成“先知道馆内答案才能进馆”的循环。','Do not make this the only first-visit prerequisite: that would require knowing the archive’s answer before entering it.']
+   ['这条路适合已经知道投影机制后的回访。第一次进馆仍可走重亮内部桥或码头升降机的路线。','Use this shortcut once you know the projection mechanism. On your first visit, you can relight the interior bridge or return by the dock elevator.']
   ],['IP_DREAM_3_RULE_X1'],['canyon','raft-discussion']),
   n('known-death',['已知死亡机制：海湾警铃回访','Known death mechanism: revisit the cove'],['星光海湾 · 水井','Starlit Cove · well'],[
    ['如果已自行试出死亡连接，或已经看过档案卷盘，可在绿火旁死亡后穿过警铃区域。它是替代进入方式，不是初次探索必须取得的能力。','If you independently discover death-connection or have seen its reel, enter after physical death and pass the alarm. It is an alternative route, not an ability required for the first visit.'],
@@ -172,13 +172,13 @@ export const DLC_PHASES = [
   ],['IP_DREAM_1_RULE_X1'],['raft-discussion','woods']),
   n('control-room',['阻挡器控制室不是第四道封印','The blocker control room is not a fourth seal'],['现实 · 水库','Physical world · Reservoir'],[
    ['符号室另有控制室序列，可查看水库控制室的烧毁界面和断开连接的投影。它补充历史与技术背景。','The Symbol Room also has a control-room sequence. Inside the Reservoir room are a burned interface and a disconnected-link projection, adding historical and technical context.'],
-   ['不必修复它才能完成DLC，也不应把“关闭阻挡器、找到眼的新坐标”写成玩家的必经目标。','Repairing it is not a DLC completion requirement. Do not invent a mandatory objective to disable the blocker or find new Eye coordinates.']
+   ['这里能补充阻挡器的背景。完成幽禁者相遇无须修复控制室，也无须关闭阻挡器或寻找新的眼坐标。','The room adds context about the blocker. Meeting the Prisoner does not require repairing the room, disabling the blocker, or finding new Eye coordinates.']
   ],['IP_ZONE_4_X3','IP_ZONE_2_CODE_X1'])
  ]},
  {id:'limits',title:L('09 时间、循环与两种替代结局','09 Time, the loop and two alternative endings'),summary:L('普通DLC探索保留灰烬双星计划；两项替代结局需要先停掉循环。','Keep the Ash Twin Project active for normal exploration. Both alternatives require disabling the loop first.'),nodes:[
   n('flood',['洪水改变入口，现实身体决定断连','The flood changes access; the physical body matters'],['现实外星站 ↔ 梦境','Physical Stranger ↔ simulation'],[
    ['约循环第13分钟大坝溃决，洼地绿火被淹；岛屿高塔更晚倒塌，约20分30秒。峡谷入口位于更高处，不会被同一波洪水淹没。','The dam breaks at roughly 13 minutes, flooding the Lowlands fire. The Island Tower falls later, around 20:30. The higher gorge fire is not flooded by the same wave.'],
-   ['这些是近似流程时间，并非游戏文本给出的精确倒计时。从洼地入梦的人自己也会断连，不能原地等待居民消失后继续行动。','These are approximate gameplay timings, not exact timers stated in the text. If your body is at the Lowlands fire, you disconnect too; do not wait there expecting to remain after the occupants vanish.']
+   ['时间为近似值。从洼地绿火入梦，你也会在洪水到来时断开连接。要等居民消失后继续探索，应先把现实身体换到另一处不会同时被淹的绿火旁。','These times are approximate. If your body is at the Lowlands fire, the flood disconnects you too. To remain after the inhabitants vanish, first move your body to a fire that will not flood at the same time.']
   ],['IP_ZONE_4_X4'],['tower','woods','canyon']),
   n('loop',['外星站逃过爆炸，不等于逃过记忆回传','Escaping the blast does not escape memory transmission'],['外星站轨迹／灰烬双星计划','Stranger trajectory / Ash Twin Project'],[
    ['外星站自动驶出超新星范围。但只要灰烬双星计划仍运行，结束时仍会回传你的记忆；在绿火旁死亡解谜也没有自动关闭计划。','The Stranger moves beyond the supernova. While the Ash Twin Project remains active, it still transmits your memories; dying at a green fire does not disable the Project.'],
@@ -186,11 +186,11 @@ export const DLC_PHASES = [
   ],['IP_ZONE_4_X4','TT_TIME_LOOP_DEVICE_X3','GD_STATUE_WORKSHOP_X2','IP_DREAM_2_RULE_X1'],['endings']),
   n('stranger-ending',['替代结局：被遗弃的世界','Alternative ending: the abandoned world'],['先取出高级核心 → 外星站等候','Remove the advanced core → wait aboard the Stranger'],[
    ['先关闭灰烬双星计划，再留在驶出爆炸范围的现实外星站，等待终局文本出现。仅仅飞来外星站、保持循环开启，不会得到这个结局。','Disable the Ash Twin Project, then wait in the physical Stranger beyond the blast. Visiting with the loop still active does not trigger this ending.'],
-   ['结局原文已提取，编号814；简中对“beyond the reach of the supernova”的表述不够自然，机制判断同时核对英文。','The extracted ending text is UI 814. Its Chinese wording of “beyond the reach of the supernova” is awkward, so the English also informs the interpretation.']
+   ['你虽然躲过了超新星，却也失去了返回下一循环的机会，只能留在已被遗弃的外星站。下方保留结局的中英原文；英文明确说明你已在爆炸范围之外。','You survive the supernova but lose the chance to return to another loop, leaving you alone aboard the abandoned Stranger. The bilingual ending text below is preserved verbatim; the English makes clear that you are beyond the blast.']
   ],['UI:814'],['endings']),
   n('dream-ending',['替代结局：无法醒来的梦','Alternative ending: unable to wake'],['先关闭计划 → 绿火旁死亡 → 留在模拟世界','Disable the Project → die at green fire → remain in the simulation'],[
    ['先取出高级核心，带可用文物在绿火旁死亡并进入模拟世界，保持文物火焰且不要被终止连接，等待结局。','Remove the advanced warp core, connect by dying at a green fire with a working Artifact, and remain connected with its flame intact until the ending.'],
-   ['这是编号815的替代结局，不是普通解封时每次在绿火上死亡都会触发的结局，也不是救出幽禁者后的必然收场。','This is alternative ending UI 815, not the result of every green-fire death during normal exploration, nor the unavoidable end of meeting the Prisoner.']
+   ['只有先关闭循环，才会走向这个无法醒来的结局。正常解封时保留灰烬双星计划，即使现实身体已死亡，仍会在记忆回传后开始下一轮。','This ending requires disabling the loop first. During normal exploration, the active Ash Twin Project still returns your memories after physical death, beginning another loop.']
   ],['UI:815','IP_DREAM_2_RULE_X1'],['endings'])
  ]}
 ];

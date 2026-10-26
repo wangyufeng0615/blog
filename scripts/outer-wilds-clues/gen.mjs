@@ -217,7 +217,7 @@ const endings = ENDINGS.items.map(e => ({ ...e, quote: resolveQuote(e.quote) }))
 const linkOr = (text, node, lang) => escX(text[lang]);
 function endingsHtml(lang) {
   return endings.map(e => `    <article class="lead-card ending"><h3>${escX(e.name[lang])} <small>${escX(e.kind[lang])}</small></h3>
-      <ol class="steps">${e.steps.map(([t, n]) => `<li>${linkOr(t, n, lang)}</li>`).join('')}</ol>
+      <ol class="steps${e.name.zh==='游戏结束'?' ending-alternatives':''}">${e.steps.map(([t, n]) => `<li>${linkOr(t, n, lang)}</li>`).join('')}</ol>
       <blockquote class="end-line">${escX(e.quote[lang])}</blockquote>${e.note ? `<p class="said">${escX(e.note[lang])}</p>` : ''}</article>`).join('\n');
 }
 function toolsHtml(lang) {
@@ -369,7 +369,7 @@ const COPY = {
     noscript: '画布需要 JavaScript。下面是同一张图的文字版：缩进项是上一项的前置。',
     faqTitle: '常见问题', srcTitle: '资料来源',
     leadsTitle: '谁给你指的路',
-    src: '实线和引文来自游戏原文：2026 年 10 月 Steam 版本的飞船日志、挪麦文字和对话，用官方简体中文译文，以及日志里自带的"这条传闻从哪里听来"的数据。其他走法和地点入口的细节来自 <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds 官方 Wiki</a> 和玩家社区，每张卡片的详情里写了出处；标着"未在原文核实"的几条我没在游戏原文里找到依据。不含 DLC《回声之眼》。',
+    src: '实线和引文来自游戏原文：2026 年 10 月 Steam 版本的飞船日志、挪麦文字和对话，用官方简体中文译文，以及日志里自带的"这条传闻从哪里听来"的数据。其他走法和地点入口的细节来自 <a href="https://outerwilds.fandom.com/wiki/Outer_Wilds_Wiki" rel="noopener">Outer Wilds 官方 Wiki</a> 和玩家社区，出处保留在对应的数据记录中；标着"未在原文核实"的几条我没在游戏原文里找到依据。不含 DLC《回声之眼》。',
     agents: '给 AI 和程序读的版本：<a href="llms.txt">llms.txt</a>（全文）、<a href="graph.json">graph.json</a>（节点、前置关系和中英原文）。',
     byline: '王雨峰 · 2026 年 10 月 14 日', assets: 'assets/', root: './',
     breadcrumbHome: '王雨峰的博客'
@@ -431,7 +431,7 @@ for (const lang of ['zh', 'en']) {
         mainEntity: FAQ.map(([qq, a]) => ({ '@type': 'Question', name: qq[lang], acceptedAnswer: { '@type': 'Answer', text: a[lang] } })) }
     ]
   };
-  const faqHtml = FAQ.map(([qq, a]) => `    <dt>${esc(qq[lang])}</dt>\n    <dd>${esc(a[lang])}</dd>`).join('\n');
+  const faqHtml = FAQ.map(([qq, a]) => `    <article class="question-route"><h3>${esc(qq[lang])}</h3><p>${esc(a[lang])}</p></article>`).join('\n');
   const noscript = bands.map(b => `<h3>${esc(b.title[lang])}${b.band[lang] ? ' · ' + esc(b.band[lang]) : ''}</h3><ul>${b.roots.map(r => htmlTree(r, lang)).join('')}</ul>`).join('\n');
   const vars = {
     ...c, url, image, vCss: VER.css, vData: VER.data, vJs: VER.js,
