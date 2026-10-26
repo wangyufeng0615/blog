@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-10-19",
+  "updated": "2026-10-24",
   "scope": "Echoes of the Eye: discovery routes, mechanical requirements, alternatives, historical causation and endings; no speedrun exploits or datamined codes.",
   "phases": [
     {
@@ -197,8 +197,8 @@
               "en": "Use light to operate the entrance. The river links the River Lowlands, Cinder Isles, Hidden Gorge and Reservoir; light operates the rafts."
             },
             {
-              "zh": "这里不是哈斯人或挪麦人所造。先读幻灯片与视觉记录，再结合飞船日志；不要把陌生文字当作挪麦文字。",
-              "en": "This is neither Hearthian nor Nomai construction. Read the slide reels, visions and ship log; do not treat its writing as Nomai text."
+              "zh": "这是另一支文明建造的世界，翻译器无法读懂他们的文字。通过幻灯片和视觉记录理解这里，再结合飞船日志整理发现。",
+              "en": "This world was built by another civilization, whose writing your translator cannot read. Learn through slide reels and visions, then use the ship log to connect your discoveries."
             }
           ],
           "refs": [
@@ -458,7 +458,7 @@
               "en": "The workshop contains working Artifacts. Use Scout photographs to check the ghost matter and take a safe entrance; ghost matter is distinct from green fire."
             },
             {
-              "zh": "文物有聚光和遮光功能。实验室另有失败原型，不能把任意提灯或会爆炸的原型当成可用文物。",
+              "zh": "文物能聚光，也能遮住自己的光。普通提灯无法代替文物；实验室里会爆炸的失败原型也不能用来连接梦境。",
               "en": "The working Artifact can focus and conceal its light. The lab also contains failed prototypes; neither an ordinary lantern nor an explosive prototype substitutes for it."
             }
           ],
@@ -575,7 +575,7 @@
               "en": "A reel in the gorge reveals the explosion and hull breach. Enter the second chamber from outside to study three prototype experiments and the vision of sleeping at a green fire."
             },
             {
-              "zh": "第三次实验似乎成功。这里提供使用方法；如果你自己先试出正确方法，不必再把实验室当作硬性门锁。",
+              "zh": "第三次实验似乎成功，记录给出的使用方法是在绿火旁入睡。如果你已经自行试出这个方法，可以直接进入梦境。",
               "en": "The third experiment appears successful. The lab teaches the method; it is not a mandatory lock if you discover the method yourself."
             }
           ],
@@ -1329,7 +1329,7 @@
               "en": "Turn the vault mechanism. The chains hold the door shut; light leaks out after a moment. Its vision points to the mural room high in the Island Tower."
             },
             {
-              "zh": "这是寻找下一条线索的提示，不是要求你对三个密码反复穷举。",
+              "zh": "顺着记忆去找高塔里的房间，就能继续追查封印的线索，无须穷举密码。",
               "en": "This is a clue to your next investigation, not an instruction to brute-force three codes."
             }
           ],
@@ -2046,7 +2046,7 @@
               "en": "Follow each projection to a hidden reel: the Lowlands reel shows a forest lodge fireplace, the Isles reel a darkened well, and the gorge reel a tree mural in darkness."
             },
             {
-              "zh": "这些是档案馆入口线索。没有要求按“森林→海湾→峡谷”固定顺序探索，也不要求把密码找齐。",
+              "zh": "三卷记录分别给出一座档案馆的入口。你可以按任意顺序探索三馆，从完整档案中寻找解封方法。",
               "en": "These reveal archive entrances. The forest, cove and canyon have no mandatory visit order, and you are not collecting intact vault passwords."
             }
           ],
@@ -3336,7 +3336,7 @@
               "en": "Leave the Artifact somewhere safe, step beyond its projection, and observe how the interface moves the platforms. Align a walkable route, retrieve the Artifact, then cross and extinguish the seal."
             },
             {
-              "zh": "所需的是看清几何结构，不是从被烧毁的卷盘里找回一组完整密码。",
+              "zh": "看见平台结构后，就能直接调出可走的路径，即使封印密码已被烧毁也可以通过。",
               "en": "You need to see the geometry, not recover an intact code from destroyed slides."
             }
           ],
@@ -3459,7 +3459,7 @@
               "en": "Check that all three glowing seals are extinguished and operate the shore mechanism. Enter and descend to the Prisoner."
             },
             {
-              "zh": "解封发生在模拟世界；不要把它写成打开现实箱体、复活肉身或阻止太阳爆炸。",
+              "zh": "你打开的是模拟世界中的储藏库。现实箱体依然封闭，居民的肉身不会复活，太阳也仍会走向超新星。",
               "en": "This releases a vault in the simulation; it does not open the physical container, revive a body, or stop the Sun."
             }
           ],
@@ -3728,7 +3728,7 @@
               "en": "After the Prisoner leaves, inspect the vision torch at the water for their farewell. The vision is not an escape raft waiting for you to board."
             },
             {
-              "zh": "脚印通向水中；“熄灭火焰、结束模拟中的存在”是场景暗示，不要写成日志明确记载的对白或复活后的远航。",
+              "zh": "脚印一直通向水中，暗示幽禁者熄灭了火焰，结束了自己在模拟世界中的存在。日志没有明确说明这一动作；水边的远航是告别愿景。",
               "en": "Footprints lead into the water. Ending their simulated existence is an implication of the scene, not an explicit spoken log entry or a voyage after physical revival."
             }
           ],
@@ -3916,8 +3916,8 @@
               "en": "The intact reel restores the sacrifice behind the Stranger: their home moon’s resources were consumed to build the vessel that took them away."
             },
             {
-              "zh": "这里补全的是残缺历史，不是一件解封时必须携带的道具。",
-              "en": "This completes a damaged historical record; it is not an item required at the vault."
+              "zh": "完整卷盘让你看清远行背后的代价。读完即可继续探索，不必携带卷盘去解封。",
+              "en": "The intact reel reveals the cost of the journey. You can continue after reading it; the reel does not need to be carried to the vault."
             }
           ],
           "refs": [
@@ -4032,8 +4032,8 @@
               "en": "After observing the Eye’s power they became afraid, built a signal blocker and launched it. The Prisoner’s Eye dialogue adds their reluctance to let their story end."
             },
             {
-              "zh": "这是居民对眼的反应；不能把他们看到的毁灭图像直接当成“眼主动恶意杀害挪麦人”的证据。",
-              "en": "This describes their response, not proof that the Eye maliciously killed the Nomai."
+              "zh": "卷盘呈现的是居民对宇宙之眼的恐惧。挪麦人的灭绝另有原因：闯入者内部释放的幽灵物质。",
+              "en": "The reel depicts the inhabitants’ fear of the Eye. The Nomai died for a different reason: ghost matter released from the Interloper."
             }
           ],
           "refs": [
@@ -4283,7 +4283,7 @@
               "en": "The Prisoner briefly disabled the blocker. The others restored it and confined them; the seal codes were later destroyed."
             },
             {
-              "zh": "“短暂”有幽禁者对白支持，具体持续多久没有明确记载；不要为此补造时间表。",
+              "zh": "幽禁者后来形容那次信号只持续了很短的时间，具体有多久并没有记载。",
               "en": "The Prisoner explicitly describes a brief release. Its exact duration is not stated."
             }
           ],
@@ -4427,8 +4427,8 @@
               "en": "Your vision connects the signal with the Nomai search, their extinction and Hearthian exploration. The Prisoner learns that their action was not in vain."
             },
             {
-              "zh": "这是一条跨时代的因果联系，不能把幽禁者、艾斯科尔和现代哈斯人画成见过面的同代团队。",
-              "en": "This is a causal link across eras, not evidence that the Prisoner, Escall and modern Hearthians met or worked together."
+              "zh": "幽禁者释放信号、挪麦人追寻信号、哈斯人追查遗迹，发生在不同的时代。你的记忆让幽禁者第一次看见这些后续。",
+              "en": "The Prisoner released the signal, the Nomai followed it, and the Hearthians explored their ruins in different eras. Your memories show the Prisoner what followed."
             }
           ],
           "refs": [
@@ -4643,8 +4643,8 @@
               "en": "If you already know the radius mechanism, reveal the hidden bridge, retrieve the Artifact and follow the remembered path toward the dock side. The tree mural must still be dark."
             },
             {
-              "zh": "不要把这条捷径画成初次进入档案馆的唯一前置，否则会变成“先知道馆内答案才能进馆”的循环。",
-              "en": "Do not make this the only first-visit prerequisite: that would require knowing the archive’s answer before entering it."
+              "zh": "这条路适合已经知道投影机制后的回访。第一次进馆仍可走重亮内部桥或码头升降机的路线。",
+              "en": "Use this shortcut once you know the projection mechanism. On your first visit, you can relight the interior bridge or return by the dock elevator."
             }
           ],
           "refs": [
@@ -4906,8 +4906,8 @@
               "en": "The Symbol Room also has a control-room sequence. Inside the Reservoir room are a burned interface and a disconnected-link projection, adding historical and technical context."
             },
             {
-              "zh": "不必修复它才能完成DLC，也不应把“关闭阻挡器、找到眼的新坐标”写成玩家的必经目标。",
-              "en": "Repairing it is not a DLC completion requirement. Do not invent a mandatory objective to disable the blocker or find new Eye coordinates."
+              "zh": "这里能补充阻挡器的背景。完成幽禁者相遇无须修复控制室，也无须关闭阻挡器或寻找新的眼坐标。",
+              "en": "The room adds context about the blocker. Meeting the Prisoner does not require repairing the room, disabling the blocker, or finding new Eye coordinates."
             }
           ],
           "refs": [
@@ -5040,8 +5040,8 @@
               "en": "The dam breaks at roughly 13 minutes, flooding the Lowlands fire. The Island Tower falls later, around 20:30. The higher gorge fire is not flooded by the same wave."
             },
             {
-              "zh": "这些是近似流程时间，并非游戏文本给出的精确倒计时。从洼地入梦的人自己也会断连，不能原地等待居民消失后继续行动。",
-              "en": "These are approximate gameplay timings, not exact timers stated in the text. If your body is at the Lowlands fire, you disconnect too; do not wait there expecting to remain after the occupants vanish."
+              "zh": "时间为近似值。从洼地绿火入梦，你也会在洪水到来时断开连接。要等居民消失后继续探索，应先把现实身体换到另一处不会同时被淹的绿火旁。",
+              "en": "These times are approximate. If your body is at the Lowlands fire, the flood disconnects you too. To remain after the inhabitants vanish, first move your body to a fire that will not flood at the same time."
             }
           ],
           "refs": [
@@ -5332,8 +5332,8 @@
               "en": "Disable the Ash Twin Project, then wait in the physical Stranger beyond the blast. Visiting with the loop still active does not trigger this ending."
             },
             {
-              "zh": "结局原文已提取，编号814；简中对“beyond the reach of the supernova”的表述不够自然，机制判断同时核对英文。",
-              "en": "The extracted ending text is UI 814. Its Chinese wording of “beyond the reach of the supernova” is awkward, so the English also informs the interpretation."
+              "zh": "你虽然躲过了超新星，却也失去了返回下一循环的机会，只能留在已被遗弃的外星站。下方保留结局的中英原文；英文明确说明你已在爆炸范围之外。",
+              "en": "You survive the supernova but lose the chance to return to another loop, leaving you alone aboard the abandoned Stranger. The bilingual ending text below is preserved verbatim; the English makes clear that you are beyond the blast."
             }
           ],
           "refs": [
@@ -5401,8 +5401,8 @@
               "en": "Remove the advanced warp core, connect by dying at a green fire with a working Artifact, and remain connected with its flame intact until the ending."
             },
             {
-              "zh": "这是编号815的替代结局，不是普通解封时每次在绿火上死亡都会触发的结局，也不是救出幽禁者后的必然收场。",
-              "en": "This is alternative ending UI 815, not the result of every green-fire death during normal exploration, nor the unavoidable end of meeting the Prisoner."
+              "zh": "只有先关闭循环，才会走向这个无法醒来的结局。正常解封时保留灰烬双星计划，即使现实身体已死亡，仍会在记忆回传后开始下一轮。",
+              "en": "This ending requires disabling the loop first. During normal exploration, the active Ash Twin Project still returns your memories after physical death, beginning another loop."
             }
           ],
           "refs": [
