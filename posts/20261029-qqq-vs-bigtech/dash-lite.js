@@ -3,7 +3,6 @@
 (() => {
   const SOURCES = {
     cohorts: 'data/cohorts.csv',
-    paths: 'data/paths.csv',
     edu_profiles: 'data/edu_profiles.csv',
     edu_years: 'data/edu_years.csv',
     elite: 'data/elite.csv',

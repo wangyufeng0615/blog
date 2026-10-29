@@ -166,8 +166,8 @@ main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 6
       <div class="qd-chart qd-chart-cline2" id="chart-cline2" data-draw="cline" data-source="lines summary">—</div>
     </section>
     <section class="qd-card" id="heatmap">
-      <h3>1 月出生的孩子，每个生日时的账户（万元）</h3>
-      <div class="qd-chart qd-chart-heat" id="chart-heat" data-draw="heat" data-source="paths cohorts summary">—</div>
+      <h3>1 月出生的孩子，每个生日时的账户（万元）· 1999 年前用纳指 100 指数推算</h3>
+      <div class="qd-chart qd-chart-heat" id="chart-heat" data-draw="heat" data-source="lines summary">—</div>
       <div class="qd-legend" id="legend-heat" data-draw="legend">—</div>
     </section>
   </section>
@@ -506,12 +506,12 @@ dash.draw('cline', (el) => {
   const lines = births.map((b) => {
     const p = by.get(b).sort((x, y) => x.a - y.a);
     return { b, p, end: p[p.length - 1], done: p[p.length - 1].a === 216 };
-  });
+  }).filter((l) => l.done);
   const W = el.clientWidth, narrow = W < 560;
   const H = narrow ? 340 : 400;
   const m = { t: narrow ? 74 : 48, r: narrow ? 8 : 16, b: 26, l: 40 };
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
-  const x = d3.scaleUtc().domain([pm('1990-01'), d3.max(rows, (r) => pm(r.month))]).range([m.l, W - m.r]);
+  const x = d3.scaleUtc().domain([pm('1990-01'), d3.max(lines, (l) => l.end.t)]).range([m.l, W - m.r]);
   const vmax = d3.max(lines, (l) => d3.max(l.p, (q) => q.v));
   const y = d3.scaleLinear().domain([0, vmax * 1.06]).nice().range([H - m.b, m.t]);
   const qStart = pm('1999-03');
@@ -519,12 +519,10 @@ dash.draw('cline', (el) => {
     .attr('fill', 'var(--cds-chart-grid)').attr('opacity', 0.6);
   svg.append('text').attr('class', 'qd-lab').attr('x', 0).attr('y', 14).text('阴影段 QQQ 还没上市，用纳指 100 指数推算');
   const lg = svg.append('g').attr('transform', narrow ? 'translate(0,36)' : `translate(${W - m.r},14)`);
-  const lgx = narrow ? 0 : -228;
+  const lgx = narrow ? 0 : -110;
   lg.append('line').attr('x1', lgx).attr('x2', lgx + 18).attr('y1', -4).attr('y2', -4).style('stroke', 'var(--color-fg)').attr('stroke-width', 1.6).attr('opacity', 0.55);
   lg.append('circle').attr('cx', lgx + 9).attr('cy', -4).attr('r', 3.6).style('fill', 'var(--color-fg)');
   lg.append('text').attr('class', 'qd-lab').attr('x', lgx + 24).attr('y', 0).text('18 岁时的账户');
-  lg.append('circle').attr('cx', lgx + 138).attr('cy', -4).attr('r', 3).attr('fill', 'var(--color-panel)').style('stroke', 'var(--color-fg)').attr('stroke-width', 1.5);
-  lg.append('text').attr('class', 'qd-lab').attr('x', lgx + 147).attr('y', 0).text('还没满 18 岁');
   y.ticks(narrow ? 4 : 6).forEach((v) => {
     svg.append('line').attr('class', 'qd-grid-line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v));
     svg.append('text').attr('class', 'qd-tick').attr('x', m.l - 6).attr('y', y(v)).attr('dy', '0.32em').attr('text-anchor', 'end').text(v);
@@ -593,21 +591,28 @@ dash.draw('cline', (el) => {
     .on('click', (ev) => {
       const [px, py] = d3.pointer(ev, el);
       const h = near(px, py);
-      if (h && h.l.b >= 1999) { qd.sel = h.l.b + '-01'; dash.draw('heat'); dash.draw('cline'); }
+      if (h) { qd.sel = h.l.b + '-01'; dash.draw('heat'); dash.draw('cline'); }
     });
 });
 
 dash.draw('heat', (el) => {
   const qd = window.qd;
-  if (!qd.ready(el, ['paths', 'cohorts', 'summary'])) return;
+  if (!qd.ready(el, ['lines', 'summary'])) return;
   const month = '01', metric = 'amount', layout = 'age';
-  const P = qd.paths(), C = qd.cohorts();
+  const LR = dash.data('lines').data;
   const dark = qd.isDark(el);
   const heat = qd.heat(dark);
   const AMT = qd.K.amt;
-  const births = C.map((c) => c.birth).filter((b) => b.slice(5) === month && P.has(b));
+  const P = new Map();
+  for (const r of LR) {
+    const k = r.birth + '-01';
+    if (!P.has(k)) P.set(k, []);
+    P.get(k).push({ a: +r.age_m, m: (+r.value_wan * 1e4) / (+r.age_m * AMT) });
+  }
+  for (const a of P.values()) a.sort((x, y) => x.a - y.a);
+  const births = [...P.keys()].sort();
   const bm = +month;
-  const lastCal = C.map((c) => c.end).sort().pop();
+  const lastCal = LR.reduce((mx, r) => (r.month > mx ? r.month : mx), '');
   const lastY = +lastCal.slice(0, 4);
   // Every cell: one birth row, one column (an age or a calendar year), and the account on that day.
   const STEP = (() => { const W0 = el.clientWidth; return [1, 2, 3].find((k) => (W0 - 44) / (18 / k) >= 26) || 3; })();
@@ -690,6 +695,8 @@ dash.draw('heat', (el) => {
   const texts = showT ? g.selectAll('text').data(cells).join('text')
     .attr('class', 'qd-cell-t').attr('x', (c) => cx(c) + cw / 2).attr('y', (c) => cy(c) + rh / 2).attr('dy', '0.34em')
     .attr('text-anchor', 'middle').attr('fill', (c) => heat.ink(c.m)).text(label) : null;
+  const cut = rows.findIndex((r) => r.by >= 1999);
+  if (cut > 0) svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', top + cut * rh).attr('y2', top + cut * rh).style('stroke', 'var(--color-fg)').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
   const selRow = rows.findIndex((r) => r.b === sel);
   if (selRow >= 0) {
     const rc = cells.filter((c) => c.ri === selRow);
