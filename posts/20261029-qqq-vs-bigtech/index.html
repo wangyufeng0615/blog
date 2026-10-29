@@ -193,12 +193,12 @@ main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 6
   <section class="qd-part qd-src" id="sources">
     <h2 class="qd-h2">数据与假设</h2>
     <ul>
-      <li>定投：雅虎财经 QQQ 日线与分红、美联储 FRED 人民币汇率；1999 年 3 月 QQQ 上市前用纳指 100 指数价格按上市当天的比例接上，不含分红；每月第一个交易日买入，分红在除息日再投入，数据截至 2026-10-28；18 岁之后按年化 7% 推到 35 岁。</li>
+      <li>定投：雅虎财经 QQQ 日线与分红、美联储 FRED 人民币汇率；1999 年 3 月 QQQ 上市前用纳指 100 指数价格按上市当天的比例接上，不含分红；每月第一个交易日买入，分红在除息日再投入，数据截至 2026-10-28；18 岁之后按年化 7% 推到 35 岁；顶部结论按 1990 年 1 月起每个已满 18 岁的出生月份统计。</li>
       <li>教育成本：一线城市中产重度投入，0–2 岁每年 1 万、学前每年 3 万、小学初中每年 5.75 万（含学区房使用成本 1.5 万）、高中每年 5.25 万；各项取北京大学中国教育财政家庭调查、新京报 2021、艾瑞 2017 和学区房研究给出的区间中值，2023 年价格，不含吃穿住。</li>
       <li>升学：国家统计局出生人口、教育部招生人数，以 2000 年出生的一届为例；985 每年本科招生按约 21 万。</li>
       <li>进大厂：头部 10 家互联网公司每年实际入职的应届研发，按校招报道汇总，近年约 1.5–2.5 万；晋升资深按应届研发的 10%。</li>
       <li>收入：levels.fyi 字节跳动自报中位数打八折，31 岁起资深年薪 162 万不打折；按个税税率表、6 万基本减除和约 22.5% 社保公积金算税后。</li>
-      <li>凯利公式：卷的赔率按比普通程序员多赚的税后收入除以比普通家庭多花的教育支出（都折到 35 岁）；定投按 QQQ 人民币月度收益算年化收益和波动，存款利率按 2%。</li>
+      <li>凯利公式：卷的赔率按比普通程序员多赚的税后收入除以比普通家庭多花的教育支出（都折到 35 岁）；定投按 1990 年起纳指 100 和 QQQ 的人民币月度收益算年化收益和波动，存款利率按 2%。</li>
     </ul>
   </section>
 </div>
@@ -615,7 +615,7 @@ dash.draw('heat', (el) => {
   const lastCal = LR.reduce((mx, r) => (r.month > mx ? r.month : mx), '');
   const lastY = +lastCal.slice(0, 4);
   // Every cell: one birth row, one column (an age or a calendar year), and the account on that day.
-  const STEP = (() => { const W0 = el.clientWidth; return [1, 2, 3].find((k) => (W0 - 44) / (18 / k) >= 26) || 3; })();
+  const STEP = (() => { const W0 = el.clientWidth; return [1, 2, 3].find((k) => (W0 - 92) / (18 / k) >= 24) || 3; })();
   const cells = [];
   const rows = births.map((b, ri) => {
     const pts = P.get(b);
@@ -651,9 +651,12 @@ dash.draw('heat', (el) => {
   if (layout === 'age') cols = d3.range(0, 18 / STEP).map((i) => ({ key: i, label: String((i + 1) * STEP) }));
   else { const y0 = d3.min(rows, (r) => r.by); cols = d3.range(y0, lastY + 1).map((Y) => ({ key: Y, label: String(Y) })); }
   const colIndex = new Map(cols.map((c, i) => [c.key, i]));
-  const cw = (W - lw - 2) / cols.length;
+  const base = W - lw - 2;
+  const x35w = Math.max(40, (base / (cols.length + 1.4)) * 1.4);
+  const cw = (base - x35w - 6) / cols.length;
+  const x35 = lw + cols.length * cw + 6;
   const rh = cw >= 30 ? 22 : cw >= 20 ? 18 : 14;
-  const top = 22;
+  const top = 36;
   const H = top + rows.length * rh + 4;
   svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
   // Column labels: skip some so they never touch.
@@ -662,9 +665,9 @@ dash.draw('heat', (el) => {
   cols.forEach((c, i) => {
     if (i % every !== 0 && i !== cols.length - 1) return;
     if (i === cols.length - 1 && i % every !== 0 && (i % every) * cw < lblW) return;
-    svg.append('text').attr('class', 'qd-tick').attr('x', lw + (i + 0.5) * cw).attr('y', 13).attr('text-anchor', 'middle').text(c.label);
+    svg.append('text').attr('class', 'qd-tick').attr('x', lw + (i + 0.5) * cw).attr('y', 28).attr('text-anchor', 'middle').text(c.label);
   });
-  svg.append('text').attr('class', 'qd-tick').attr('x', lw - 10).attr('y', 13).attr('text-anchor', 'end').text(layout === 'age' ? '岁' : '年底');
+  svg.append('text').attr('class', 'qd-tick').attr('x', lw - 10).attr('y', 28).attr('text-anchor', 'end').text(layout === 'age' ? '岁' : '年底');
   rows.forEach((r, ri) => {
     svg.append('text').attr('class', r.b === sel ? 'qd-lab' : 'qd-tick').attr('x', lw - 10).attr('y', top + ri * rh + rh / 2).attr('dy', '0.32em')
       .attr('text-anchor', 'end').attr('font-weight', r.b === sel ? 600 : null).text(r.by);
@@ -695,12 +698,25 @@ dash.draw('heat', (el) => {
   const texts = showT ? g.selectAll('text').data(cells).join('text')
     .attr('class', 'qd-cell-t').attr('x', (c) => cx(c) + cw / 2).attr('y', (c) => cy(c) + rh / 2).attr('dy', '0.34em')
     .attr('text-anchor', 'middle').attr('fill', (c) => heat.ink(c.m)).text(label) : null;
+  // Projected account at 35: the 18th-birthday value growing at the assumed rate.
+  const R35 = qd.K.r / 100;
+  const v35 = new Map(cells.filter((c) => c.am === 216 && !c.partial).map((c) => [c.ri, ((c.m * 216 * AMT) / 1e4) * Math.pow(1 + R35, 17)]));
+  const c35 = dash.colors[0];
+  svg.append('text').attr('class', 'qd-tick').attr('x', x35 + x35w / 2).attr('y', 12).attr('text-anchor', 'middle').text('预计');
+  svg.append('text').attr('class', 'qd-tick').attr('x', x35 + x35w / 2).attr('y', 28).attr('text-anchor', 'middle').attr('font-weight', 600).text('35');
+  v35.forEach((v, ri) => {
+    const yy = top + ri * rh;
+    svg.append('rect').attr('x', x35 + 0.5).attr('y', yy + 0.5).attr('width', x35w - 1).attr('height', rh - 1).attr('rx', 2).style('fill', c35).attr('fill-opacity', 0.16)
+      .append('title').text(rows[ri].by + ' 年 1 月出生：35 岁预计 ' + Math.round(v) + ' 万（18 岁后按年化 ' + qd.K.r + '%）');
+    svg.append('text').attr('class', 'qd-cell-t').attr('x', x35 + x35w / 2).attr('y', yy + rh / 2).attr('dy', '0.34em').attr('text-anchor', 'middle')
+      .attr('font-weight', 600).style('fill', 'var(--color-fg)').text(Math.round(v));
+  });
   const cut = rows.findIndex((r) => r.by >= 1999);
   if (cut > 0) svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', top + cut * rh).attr('y2', top + cut * rh).style('stroke', 'var(--color-fg)').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
   const selRow = rows.findIndex((r) => r.b === sel);
   if (selRow >= 0) {
     const rc = cells.filter((c) => c.ri === selRow);
-    const x0 = d3.min(rc, cx), x1 = d3.max(rc, cx) + cw;
+    const x0 = d3.min(rc, cx), x1 = v35.has(selRow) ? x35 + x35w : d3.max(rc, cx) + cw;
     svg.append('rect').attr('x', x0 - 0.5).attr('y', top + selRow * rh - 0.5).attr('width', x1 - x0 + 1).attr('height', rh + 1).attr('rx', 3)
       .attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.5).attr('pointer-events', 'none');
   }
@@ -808,7 +824,7 @@ dash.calc('kelly', {
       { name: '卷 · 按 985 毕业生上限', win: pc(c.cap_985_pct / 100), odds, kelly: '0%，不押', why: '就算孩子已经进了 985，胜率仍远低于不亏的 ' + evenTxt },
       { name: '卷 · 刚好不亏', win: evenTxt, odds, kelly: '0%', why: '这是不赚不亏的分界线，押多少都不比把钱拿去定投更好' },
       { name: '卷 · 九成把握', win: pc(P_HIGH), odds, kelly: pc(fk(P_HIGH)), why: '胜率远超 ' + evenTxt + ' 才值得押；但赔率低，输了亏掉押上的钱，所以也不押满' },
-      { name: '定投 QQQ', win: '历史上任意 18 年都赚钱', odds: '平均每年赚 ' + pc(mu) + '，单年可能涨跌 ' + pc(sigma), kelly: pc(fq) + '，实际押一半约 ' + pc(fq / 2), why: '比存款每年多赚约 ' + pc(mu - RF) + '，波动又不算极端，算出来要借钱加仓；但这建立在纳指过去 27 年的高收益上，所以一般只押一半，大致就是满仓不借钱' },
+      { name: '定投 QQQ', win: '历史上任意 18 年都赚钱', odds: '平均每年赚 ' + pc(mu) + '，单年可能涨跌 ' + pc(sigma), kelly: pc(fq) + '，实际押一半约 ' + pc(fq / 2), why: '比存款每年多赚约 ' + pc(mu - RF) + '，波动又不算极端，算出来要借钱加仓；但这建立在纳指过去 ' + Math.round(lr.length / 12) + ' 年的高收益上，所以一般只押一半，大致就是满仓不借钱' },
     ];
   },
 });
