@@ -41,6 +41,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '定投纳指，还是卷大厂',
+    description: '从出生每月定投 2000 元 QQQ，对比一线城市重度投入教育、进大厂、晋升资深的投入、回报与概率',
+    sticker: 'investing',
+    url: 'https://wangyufeng.org/qqq-vs-bigtech/',
+    type: 'Data story',
+    year: '2026',
+    tags: ['QQQ', 'Education', 'Kelly', 'Data'],
+    status: 'Live',
+  },
+  {
     name: '得到老师预测回测',
     description: '卓克、万维钢、香帅、吴军课程里的两千多条预测，逐条对照今天的现实',
     sticker: 'forecast',

@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>定投纳指，还是卷大厂</title>
+<meta name="description" content="从孩子出生起每月定投 2000 元 QQQ，和一线城市重度投入教育、进大厂研发、晋升资深相比：投多少、回多少、有多大把握，再用凯利公式看各该押多少。">
+<style>
+:root {
+  --font-anthropic-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+  --font-anthropic-serif: var(--font-anthropic-sans);
+  --color-bg: #faf9f7; --color-panel: #ffffff; --color-fg: #3d3d3d; --color-fg-muted: #5f5f5f;
+  --color-border-line: #e6e2db; --color-bad: #b23b27;
+  --cds-chart-grid: #ece8e1; --cds-chart-axis: #b9b3a8; --cds-chart-reference: #9a948a;
+  --cds-surface-popover: #ffffff; --cds-border: #e6e2db; --cds-shadow-popover: 0 6px 24px rgba(0,0,0,.08); --cds-text-secondary: #5f5f5f;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 20px; --cds-gap-xl: clamp(28px, 4vw, 48px);
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: clamp(14px, 2vw, 20px);
+  --cds-font-size-caption: 13px; --cds-font-size-body: 15px; --cds-font-size-heading: 17px; --cds-font-size-title: clamp(20px, 1.2rem + 0.8vw, 26px);
+  --cds-font-weight-medium: 600; --cds-radius: 10px; --cds-dur-slow: 240ms; --cds-ease-out: cubic-bezier(.2,.7,.2,1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
+main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 64px; overflow-x: hidden; }
+.qd .qd-title { font-size: clamp(28px, 1.4rem + 2vw, 40px); font-weight: 600; color: var(--color-fg); }
+.qd .qd-h2 { font-weight: 600; }
+.qd-src ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; font-size: var(--cds-font-size-body); line-height: 1.7; max-width: 60rem; }
+</style>
+<style>
+.qd { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
+.qd-head { display: flex; flex-direction: column; gap: var(--cds-gap-sm); max-width: 52rem; }
+.qd-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.qd-lede { margin: 0; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); line-height: 1.6; }
+.qd .qd-lede b, .qd .qd-note b, .qd .qd-sel b { font-weight: 600; color: var(--color-fg); font-variant-numeric: tabular-nums; }
+.qd-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.qd-tile { display: flex; flex-direction: column; gap: var(--cds-gap-xs); padding: var(--cds-pad-lg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); position: relative; overflow: hidden; }
+.qd-tile::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--qd-swatch, transparent); }
+.qd-tl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.qd-tv { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.15; }
+.qd-unit { font-size: var(--cds-font-size-body); color: var(--color-fg-muted); margin-left: 0.2em; font-family: var(--font-anthropic-sans); }
+.qd-ts { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.qd-sel { margin: 0; padding: var(--cds-pad-sm) var(--cds-pad-md); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); font-size: var(--cds-font-size-body); color: var(--color-fg-muted); line-height: 1.6; min-height: 1.6em; }
+.qd-sel-dot { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; margin-right: 0.45rem; vertical-align: -0.05rem; }
+.qd-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+.qd-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-wrap: balance; }
+.qd-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.55; max-width: 48rem; }
+.qd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: var(--cds-gap-md); }
+.qd-chart { position: relative; min-width: 0; }
+.qd-chart-bars { min-height: 240px; }
+.qd-chart-paths { min-height: 280px; }
+.qd-chart-heat { min-height: 300px; }
+.qd-chart-market { min-height: 240px; }
+.qd-legend { min-height: 34px; position: relative; }
+.qd svg { display: block; overflow: visible; }
+.qd .qd-tick { fill: var(--color-fg); font-size: 13px; font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+.qd .qd-lab { fill: var(--color-fg); font-size: 13px; font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+.qd .qd-cell-t { font-size: 10px; font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; pointer-events: none; }
+.qd-grid-line { stroke: var(--cds-chart-grid); stroke-width: 1; }
+.qd-axis-line { stroke: var(--cds-chart-axis); stroke-width: 1; }
+.qd-ref { stroke: var(--cds-chart-reference); stroke-width: 1; stroke-dasharray: 4 3; fill: none; }
+.qd-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); line-height: 1.5; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.qd-tip-h { color: var(--cds-text-secondary); }
+.qd-tip-sw { display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: 0; }
+.qd-fail { display: flex; align-items: center; justify-content: center; gap: 0.4rem; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.qd-fail i { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--color-bad); display: inline-block; }
+.qd-table-wrap { overflow-x: auto; }
+.qd-table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+.qd-table th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.qd-table td { text-align: right; padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.qd-table th:first-child, .qd-table td:first-child { text-align: left; white-space: normal; }
+.qd-table tr.qd-main td { font-weight: 600; }
+.qd-methods { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.qd-methods p { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.65; }
+.qd-methods b { color: var(--color-fg); font-weight: 600; }
+.qd-hit { cursor: pointer; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+[data-dash-source-state=empty] { color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  .qd-anim { animation: qd-rise var(--cds-dur-slow) var(--cds-ease-out) both; }
+  @keyframes qd-rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}
+
+.qd-part { display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+.qd-h2 { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); text-wrap: balance; }
+.qd-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-wrap: balance; }
+.qd-card-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--cds-gap-sm) var(--cds-gap-md); }
+.qd-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm); }
+.qd-ctl { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.qd-ctl select { font: inherit; color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 0.2rem 0.4rem; }
+.qd-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; }
+.qd-seg-b { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); background: transparent; border: 0; padding: 0.3rem 0.65rem; cursor: pointer; }
+.qd-seg-b + .qd-seg-b { border-left: 1px solid var(--color-border-line); }
+.qd-seg-b[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+.qd-seg-b:focus-visible, .qd-ctl select:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 1px; }
+.qd-foot { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.6; max-width: 60rem; }
+.qd-chart-waffle { min-height: 300px; display: flex; justify-content: center; }
+.qd-chart-waffle canvas { display: block; max-width: 100%; }
+.qd-chart-range { min-height: 230px; }
+.qd-chart-be { min-height: 260px; }
+.qd-wlegend { display: flex; flex-direction: column; gap: 0.3rem; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-height: 7rem; }
+.qd-wl { display: flex; align-items: center; gap: 0.5rem; font-variant-numeric: tabular-nums; }
+.qd-wl b { margin-left: auto; color: var(--color-fg); font-weight: 600; }
+.qd-wl-sw { width: 0.8rem; height: 0.8rem; border-radius: 2px; flex: none; }
+.qd-wl-note { margin-top: 0.2rem; }
+.qd-scroll { max-height: 22rem; overflow: auto; }
+.qd-scroll th { position: sticky; top: 0; background: var(--color-panel); }
+.qd-chart-trend { min-height: 220px; }
+.qd-chart-cbar { min-height: 180px; }
+.qd-chart-hbar { min-height: 260px; }
+.qd-chart-vs { min-height: 260px; }
+.qd-keys { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.qd-key { display: inline-flex; align-items: center; gap: 0.4rem; }
+.qd-key-sw { width: 0.8rem; height: 0.8rem; border-radius: 2px; display: inline-block; }
+.qd-key-ass { border: 1.5px dashed; background: transparent; }
+.qd .qd-big { fill: var(--color-fg); font-size: 22px; font-family: var(--font-anthropic-serif); font-variant-numeric: tabular-nums; }
+.qd-hscroll { overflow-x: auto; }
+.qd-chart-cline { min-height: 300px; }
+.qd-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); }
+.qd-stat { display: flex; flex-direction: column; gap: 0.2rem; padding: var(--cds-pad-md) var(--cds-pad-lg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
+.qd-stat-l { font-size: var(--cds-font-size-body); color: var(--color-fg); }
+.qd-stat-v { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); color: var(--color-fg); font-variant-numeric: tabular-nums; }
+.qd .qd-stat-v b { font-weight: 400; }
+.qd .qd-ktable { font-size: var(--cds-font-size-body); }
+.qd .qd-ktable th { color: var(--color-fg); font-size: var(--cds-font-size-body); text-align: left; }
+.qd .qd-ktable td { text-align: left; white-space: normal; color: var(--color-fg); padding: var(--cds-pad-sm) var(--cds-pad-md); }
+.qd .qd-ktable td:nth-child(4) { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); }
+.qd .qd-ktable td:nth-child(5) { min-width: 16rem; }
+.qd .qd-ktable td:first-child { font-weight: 600; white-space: nowrap; }
+.qd .qd-ktable td:nth-child(2) { white-space: nowrap; }
+.qd .qd-ktable tr.qd-row-dca td { color: var(--qd-dca, var(--color-fg)); }
+.qd-chart-paths2 { min-height: 420px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: var(--cds-gap-xl); align-items: start; }
+.qd-chart-paths2 > div { min-width: 0; }
+.qd { container-type: inline-size; }
+.qd .qd-concl-h { margin: 0; color: var(--color-fg); font-family: var(--font-anthropic-serif); font-weight: 400; font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem); line-height: 1.4; text-wrap: balance; }
+.qd .qd-concl-h b { font-weight: 400; color: var(--qd-c); }
+.qd-chart-range2 { min-height: 120px; display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.qd .qd-path-name { margin: 0 0 var(--cds-gap-md); border: 0; text-decoration: none; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: clamp(1.3rem, 1.05rem + 1.2vw, 1.8rem); line-height: 1.25; }
+@container (max-width: 640px) {
+  .qd-card { padding: var(--cds-pad-md); }
+  .qd-stats { grid-template-columns: repeat(2, 1fr); gap: var(--cds-gap-sm); }
+  .qd-stat { padding: var(--cds-pad-sm) var(--cds-pad-md); }
+  .qd-stat:first-child { grid-column: 1 / -1; }
+  .qd .qd-ktable thead { display: none; }
+  .qd .qd-ktable, .qd .qd-ktable tbody, .qd .qd-ktable tr, .qd .qd-ktable td { display: block; width: 100%; }
+  .qd .qd-ktable tr { padding: var(--cds-pad-sm) 0 var(--cds-pad-md); border-bottom: 1px solid var(--color-border-line); }
+  .qd .qd-ktable td { border: 0; padding: 0.2rem 0; min-width: 0 !important; white-space: normal !important; }
+  .qd .qd-ktable td:first-child { font-size: var(--cds-font-size-heading); padding-bottom: 0.35rem; }
+  .qd .qd-ktable td[data-label]:not(:first-child)::before { content: attr(data-label) "："; font-weight: 600; }
+  .qd .qd-ktable td:nth-child(4) { font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); }
+}
+</style>
+</head>
+<body>
+<main>
+<div class="qd">
+  <h1 class="qd-title" id="top">定投纳指，还是卷大厂</h1>
+
+  <section class="qd-part" id="dca">
+    <h2 class="qd-h2">一、从出生定投 QQQ 到 18 岁</h2>
+    <section class="qd-card qd-concl" id="dca-concl">
+      <div class="qd-chart qd-chart-range2" id="chart-range2" data-draw="dcarange" data-source="summary">—</div>
+    </section>
+    <section class="qd-card" id="heatmap">
+      <h3>1 月出生的孩子，每个生日时的账户（万元）</h3>
+      <div class="qd-chart qd-chart-heat" id="chart-heat" data-draw="heat" data-source="paths cohorts summary">—</div>
+      <div class="qd-legend" id="legend-heat" data-draw="legend">—</div>
+    </section>
+  </section>
+
+  <section class="qd-part" id="roi">
+    <h2 class="qd-h2">二、两条路：投多少，回多少，有多大把握</h2>
+    <section class="qd-card" id="two-paths">
+      <div class="qd-chart qd-chart-paths2" id="chart-paths2" data-draw="twopaths" data-source="compare2">—</div>
+    </section>
+  </section>
+
+  <section class="qd-part" id="kelly">
+    <h2 class="qd-h2">三、凯利公式：两种策略各该押多少</h2>
+    <section class="qd-card" id="kelly-card">
+      <div class="qd-table-wrap">
+        <table class="qd-table qd-ktable" data-source="kelly" data-row-key="name">
+          <thead><tr><th data-field="name">策略</th><th data-field="win">胜率</th><th data-field="odds">赔率</th><th data-field="kelly">建议押上家庭资产的</th><th data-field="why">为什么</th></tr></thead>
+          <tbody data-draw="kellytab"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+  <section class="qd-part qd-src" id="sources">
+    <h2 class="qd-h2">数据与假设</h2>
+    <ul>
+      <li>定投：雅虎财经 QQQ 日线与分红、美联储 FRED 人民币汇率；每月第一个交易日买入，分红在除息日再投入，数据截至 2026-10-28；18 岁之后按年化 7% 推到 35 岁。</li>
+      <li>教育成本：一线城市中产重度投入，0–2 岁每年 1 万、学前每年 3 万、小学初中每年 5.75 万（含学区房使用成本 1.5 万）、高中每年 5.25 万；各项取北京大学中国教育财政家庭调查、新京报 2021、艾瑞 2017 和学区房研究给出的区间中值，2023 年价格，不含吃穿住。</li>
+      <li>升学：国家统计局出生人口、教育部招生人数，以 2000 年出生的一届为例；985 每年本科招生按约 21 万。</li>
+      <li>进大厂：头部 10 家互联网公司每年实际入职的应届研发，按校招报道汇总，近年约 1.5–2.5 万；晋升资深按应届研发的 10%。</li>
+      <li>收入：levels.fyi 字节跳动自报中位数打八折，31 岁起资深年薪 162 万不打折；按个税税率表、6 万基本减除和约 22.5% 社保公积金算税后。</li>
+      <li>凯利公式：卷的赔率按比普通程序员多赚的税后收入除以比普通家庭多花的教育支出（都折到 35 岁）；定投按 QQQ 人民币月度收益算年化收益和波动，存款利率按 2%。</li>
+    </ul>
+  </section>
+</div>
+</main>
+<script src="d3.v7.min.js"></script>
+<script src="dash-lite.js"></script>
+<script>
+dash.calc('summary', {
+  inputs: ['cohorts'],
+  title: '已满 18 岁的出生月份汇总',
+  description: '从已满 18 岁的出生月份里取最差、中位、最好；金额换算成万元；另算扣 30% 分红税后中位倍数降多少。',
+  fn: (cohorts) => {
+    const c = cohorts.filter((r) => r.complete === 'yes').map((r) => ({ ...r, mult: +r.mult, mult_wh: +r.mult_wh, value: +r.value, irr: +r.irr, invested: +r.invested }));
+    const byMult = [...c].sort((a, b) => a.mult - b.mult);
+    const wan = (v) => Math.round(v / 1000) / 10;
+    const pct = (v) => Math.round(v * 1000) / 10;
+    const m2 = (v) => Math.round(v * 100) / 100;
+    const mid = Math.floor(byMult.length / 2);
+    const worst = byMult[0], best = byMult[byMult.length - 1], med = byMult[mid];
+    const wh = c.map((r) => r.mult_wh).sort((a, b) => a - b)[mid];
+    const asof = cohorts.map((r) => r.end).sort().pop();
+    return [{
+      n: c.length, asof,
+      invested_wan: wan(worst.invested),
+      worst_wan: wan(worst.value), worst_mult: m2(worst.mult), worst_birth: worst.birth, worst_irr_pct: pct(worst.irr),
+      med_wan: wan(med.value), med_mult: m2(med.mult), med_birth: med.birth, med_irr_pct: pct(med.irr),
+      best_wan: wan(best.value), best_mult: m2(best.mult), best_birth: best.birth, best_irr_pct: pct(best.irr),
+      wh_drop: m2(med.mult - wh),
+    }];
+  },
+});
+
+dash.calc('funnel', {
+  inputs: ['edu_years', 'rd_hires', 'elite'],
+  title: '每一届出生人口的升学与大厂漏斗',
+  description: '出生年 b：初中取 b+12 年招生，普高取 b+15 年，本科取 b+18、b+19 两年均值，985 与清北按近年每年规模，大厂应届研发取 b+23 年招聘数，资深按应届研发的 10%；2025 年以后按假设推算。',
+  fn: (edu_years, rd_hires, elite) => {
+    const LAST = 2025, HIRE_FUTURE = 2.0, SENIOR_SHARE = 0.10;
+    const n = (v) => (v === '' || v == null ? null : +v);
+    const E = new Map(edu_years.map((r) => [+r.year, r]));
+    const H = new Map(rd_hires.map((r) => [+r.year, n(r.hires_wan)]));
+    const el = Object.fromEntries(elite.map((r) => [r.item, +r.per_year_wan]));
+    const cap = n(E.get(LAST).bachelor_enroll);
+    const seniorRate = n(E.get(LAST).senior_general_enroll) / n(E.get(LAST - 15).births);
+    const out = [];
+    for (let b = 1980; b <= LAST; b++) {
+      const births = n(E.get(b).births);
+      const jr = b + 12 <= LAST ? Math.min(1, n(E.get(b + 12).junior_enroll) / births) : 1;
+      const sr = b + 15 <= LAST ? Math.min(1, n(E.get(b + 15).senior_general_enroll) / births) : seniorRate;
+      const ug = [b + 18, b + 19].map((y) => (y <= LAST ? n(E.get(y).bachelor_enroll) : Math.min(cap, 0.9 * sr * births)));
+      const bach = Math.min(1, (ug[0] + ug[1]) / 2 / births);
+      const hire = (H.get(b + 23) ?? HIRE_FUTURE) / births;
+      const r5 = (v) => Math.round(v * 1e6) / 1e6;
+      out.push({
+        birth: b, births_wan: births,
+        junior: r5(jr), senior: r5(sr), bachelor: r5(bach), c985: r5(el.c985 / births), qingbei: r5(el.qingbei / births),
+        hire: r5(hire), senior_role: r5(hire * SENIOR_SHARE),
+        bachelor_pct: Math.round(bach * 1000) / 10, c985_pct: Math.round((el.c985 / births) * 1000) / 10,
+        qingbei_pct: Math.round((el.qingbei / births) * 10000) / 100, hire_per10k: Math.round(hire * 1e5) / 10,
+        proj_junior: b + 12 > LAST, proj_senior: b + 15 > LAST, proj_bachelor: b + 18 > LAST, proj_hire: b + 23 > 2026,
+      });
+    }
+    return out;
+  },
+});
+</script>
+<script>
+(() => {
+  const qd = (window.qd = window.qd || {});
+  qd.K = { amt: 2000, years: 18, months: 216, wh: 30, cn: 10, r: 7 };
+
+  qd.rows = (id) => { const d = dash.data(id); return d.status === 'ok' ? d.data : null; };
+
+  qd.cohorts = () => {
+    const r = qd.rows('cohorts');
+    if (!r) return null;
+    if (qd._c && qd._c.src === r) return qd._c.v;
+    const v = r.map((o) => ({
+      birth: o.birth, end: o.end, complete: o.complete === 'yes', months: +o.months, invested: +o.invested,
+      value: +o.value, mult: +o.mult, irr: +o.irr, min_mult: +o.min_mult,
+    }));
+    qd._c = { src: r, v };
+    return v;
+  };
+
+  qd.paths = () => {
+    const r = qd.rows('paths');
+    if (!r) return null;
+    if (qd._p && qd._p.src === r) return qd._p.v;
+    const v = new Map();
+    for (const o of r) {
+      let a = v.get(o.birth);
+      if (!a) v.set(o.birth, (a = []));
+      a.push({ a: +o.age_m, m: +o.mult });
+    }
+    for (const a of v.values()) a.sort((x, y) => x.a - y.a);
+    qd._p = { src: r, v };
+    return v;
+  };
+
+  qd.yearBirths = (C) => {
+    const out = [];
+    const seen = new Set();
+    for (const c of C) {
+      const y = c.birth.slice(0, 4);
+      if (seen.has(y)) continue;
+      if (c.birth.endsWith('-01') || y === C[0].birth.slice(0, 4)) { seen.add(y); out.push(c.birth); }
+    }
+    return out;
+  };
+
+  qd.selBirth = () => {
+    if (qd.sel) return qd.sel;
+    const s = qd.rows('summary');
+    return s && s[0] ? s[0].med_birth : null;
+  };
+
+  // The highlighted heatmap row: the clicked one, or by default the median child's birth year in the chosen month.
+  // The highlighted heatmap row: the clicked one, or by default the median child's birth year (January).
+  qd.heatSel = () => {
+    if (qd.sel) return qd.sel;
+    const s = qd.rows('summary');
+    return s && s[0] ? s[0].med_birth.slice(0, 4) + '-01' : null;
+  };
+
+  // Returns true when every source is ready; otherwise puts the element in its loading or failed state.
+  qd.ready = (el, ids) => {
+    const st = ids.map((id) => dash.data(id).status);
+    if (st.every((s) => s === 'ok')) { el.classList.remove('dash-skeleton'); return true; }
+    el.replaceChildren();
+    if (st.some((s) => s === 'error')) {
+      el.classList.remove('dash-skeleton');
+      const f = document.createElement('div');
+      f.className = 'qd-fail';
+      f.append(document.createElement('i'), 'Failed to load');
+      el.append(f);
+    } else {
+      el.classList.add('dash-skeleton');
+      el.textContent = '—';
+    }
+    return false;
+  };
+
+  qd.rgb = (css, host) => {
+    const p = document.createElement('span');
+    p.style.color = css;
+    host.appendChild(p);
+    const c = getComputedStyle(p).color;
+    p.remove();
+    const cv = document.createElement('canvas');
+    cv.width = cv.height = 1;
+    const x = cv.getContext('2d');
+    x.fillStyle = '#808080';
+    x.fillStyle = c;
+    x.fillRect(0, 0, 1, 1);
+    const d = x.getImageData(0, 0, 1, 1).data;
+    return d3.rgb(d[0], d[1], d[2]);
+  };
+
+  qd.isDark = (host) => d3.hcl(qd.rgb('var(--color-bg)', host)).l < 50;
+
+  // One color scale for multiples everywhere on the page: red below the principal, neutral at 1x, mint, blue, violet above.
+  qd.heat = (dark) => {
+    const stops = dark
+      ? [[25, 62, 50], [55, 55, 62], [80, 8, 24], [135, 45, 48], [190, 38, 58], [245, 45, 62], [300, 45, 74]]
+      : [[25, 72, 44], [55, 60, 68], [85, 8, 95], [135, 48, 78], [190, 40, 62], [250, 52, 46], [300, 58, 32]];
+    const s = d3.scaleLinear().domain([-1.25, -0.5, 0, 1, 1.8, 2.5, 3.1]).range(stops.map(([h, c, l]) => d3.hcl(h, c, l))).interpolate(d3.interpolateLab).clamp(true);
+    const f = (m) => d3.rgb(s(Math.log2(Math.max(m, 0.01))));
+    f.ink = (m) => ((d3.hcl(f(m)).l > 60) === dark ? 'var(--color-bg)' : 'var(--color-fg)');
+    return f;
+  };
+
+  // Birth-year hue ramp: warm for early births, cool for late ones.
+  qd.yearColor = (t, dark) => d3.hcl(32 + t * 255, dark ? 50 : 58, dark ? 70 : 54).formatHex();
+
+  qd.measure = (svg, strs, cls) => {
+    const t = svg.append('text').attr('class', cls);
+    let w = 0;
+    for (const s of strs) { t.text(s); w = Math.max(w, t.node().getComputedTextLength()); }
+    t.remove();
+    return w;
+  };
+
+  qd.tip = (el) => {
+    const t = document.createElement('div');
+    t.className = 'qd-tip';
+    t.hidden = true;
+    el.appendChild(t);
+    return {
+      show(lines, x, y) {
+        t.replaceChildren(...lines.map((l, i) => {
+          const d = document.createElement('div');
+          if (i === 0) d.className = 'qd-tip-h';
+          if (l.sw) { const s = document.createElement('span'); s.className = 'qd-tip-sw'; s.style.background = l.sw; d.append(s); }
+          d.append(l.t ?? l);
+          return d;
+        }));
+        t.hidden = false;
+        const W = el.clientWidth, tw = t.offsetWidth, th = t.offsetHeight;
+        let left = x + 14;
+        if (left + tw > W) left = x - 14 - tw;
+        left = Math.max(0, Math.min(left, W - tw));
+        let top = y - th - 10;
+        if (top < 0) top = y + 14;
+        t.style.left = left + 'px';
+        t.style.top = top + 'px';
+      },
+      hide() { t.hidden = true; },
+    };
+  };
+
+  qd.wan = (v) => (v / 10000).toFixed(1) + ' 万';
+  qd.x = (m) => (m >= 10 ? m.toFixed(1) : m.toFixed(2)) + ' 倍';
+  qd.ageOf = (months) => Math.floor(months / 12);
+})();
+</script>
+<script>
+dash.draw('k', (el) => { el.textContent = String(window.qd.K[el.dataset.k] ?? '—'); });
+dash.draw('v', (el) => {
+  const d = dash.data(el.dataset.source);
+  if (d.status !== 'ok') { el.textContent = '—'; el.classList.toggle('dash-skeleton', d.status === 'loading'); return; }
+  el.classList.remove('dash-skeleton');
+  let row;
+  if (el.dataset.where) {
+    const conds = el.dataset.where.split('&').map((p) => p.split('=').map(decodeURIComponent));
+    row = d.data.find((r) => conds.every(([k, v]) => String(r[k]) === v));
+  } else row = d.data[+el.dataset.row || 0];
+  const f = el.dataset.field;
+  const v = row ? row[f] : null;
+  if (v == null) { el.textContent = '—'; return; }
+  if (typeof v === 'number') {
+    if (f.endsWith('_mult')) el.textContent = v.toFixed(2);
+    else if (Number.isInteger(v)) el.textContent = String(v);
+    else if (f.endsWith('_wan') || f.endsWith('_pct')) el.textContent = Math.abs(v) < 0.1 ? v.toFixed(2) : v.toFixed(1);
+    else el.textContent = String(v);
+  } else el.textContent = String(v);
+});
+dash.draw('legend', (el) => {
+  const qd = window.qd;
+  el.replaceChildren();
+  const W = el.clientWidth || 300;
+  const heat = qd.heat(qd.isDark(el));
+  const bw = Math.min(W, 360);
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} 34`).attr('height', 34);
+  const lo = -1.25, hi = 3.1;
+  const x = d3.scaleLinear().domain([lo, hi]).range([0, bw]);
+  const id = 'qd-heat-grad';
+  const g = svg.append('defs').append('linearGradient').attr('id', id);
+  d3.range(0, 1.0001, 0.05).forEach((t) => g.append('stop').attr('offset', t).attr('stop-color', heat(Math.pow(2, lo + t * (hi - lo))).formatHex()));
+  svg.append('rect').attr('x', 0).attr('y', 2).attr('width', bw).attr('height', 10).attr('rx', 3).attr('fill', `url(#${id})`);
+  [0.5, 1, 2, 4, 8].forEach((m) => {
+    const px = x(Math.log2(m));
+    svg.append('line').attr('x1', px).attr('x2', px).attr('y1', 12).attr('y2', 16).attr('class', 'qd-axis-line');
+    svg.append('text').attr('class', 'qd-tick').attr('x', px).attr('y', 29).attr('text-anchor', m === 0.5 ? 'start' : 'middle').text(m === 1 ? '1×（本金）' : m + '×');
+  });
+  if (W > bw + 120) svg.append('text').attr('class', 'qd-tick').attr('x', bw + 12).attr('y', 11).text('颜色始终按倍数');
+});
+dash.draw('dcarange', (el) => {
+  const qd = window.qd;
+  if (!qd.ready(el, ['summary'])) return;
+  const d = dash.data('summary').data[0];
+  el.replaceChildren();
+  if (!d) { el.textContent = '—'; return; }
+  const c = dash.colors[0];
+  const x1 = (v) => (Math.round(v * 10) / 10).toFixed(1);
+  const h = document.createElement('p');
+  h.className = 'qd-concl-h';
+  h.style.setProperty('--qd-c', c);
+  const B = (t) => { const e = document.createElement('b'); e.textContent = t; return e; };
+  h.append('每月 ' + qd.K.amt + ' 元、18 年本金 ' + x1(d.invested_wan) + ' 万，到 18 岁变成本金的 ', B(x1(d.worst_mult) + '–' + x1(d.best_mult) + ' 倍'), '，中位 ', B(x1(d.med_mult) + ' 倍'));
+  el.append(h);
+  const box = document.createElement('div');
+  el.append(box);
+  const W = box.clientWidth, H = 84, y = 40;
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
+  const x = d3.scaleLinear().domain([0, d.best_wan * 1.02]).range([2, W - 2]);
+  svg.append('rect').attr('x', x(0)).attr('y', y - 3).attr('width', x(d.best_wan * 1.02) - x(0)).attr('height', 6).attr('rx', 3).attr('fill', 'var(--cds-chart-grid)');
+  svg.append('rect').attr('x', x(0)).attr('y', y - 9).attr('width', x(d.invested_wan) - x(0)).attr('height', 18).attr('rx', 4).style('fill', 'var(--color-fg)').attr('opacity', 0.75);
+  svg.append('rect').attr('x', x(d.worst_wan)).attr('y', y - 9).attr('width', x(d.best_wan) - x(d.worst_wan)).attr('height', 18).attr('rx', 9).style('fill', c).attr('fill-opacity', 0.35);
+  svg.append('circle').attr('cx', x(d.med_wan)).attr('cy', y).attr('r', 9).style('fill', c).style('stroke', 'var(--color-panel)').attr('stroke-width', 2.5);
+  const T = (px, py, s, o = {}) => {
+    const t = svg.append('text').attr('class', 'qd-lab').attr('x', px).attr('y', py).attr('text-anchor', o.a || 'middle').text(s);
+    if (o.b) t.attr('font-weight', 600);
+    if (o.c) t.style('fill', c);
+    return t;
+  };
+  T(x(0), y - 20, '本金 ' + x1(d.invested_wan) + ' 万', { a: 'start', b: true });
+  T(x(d.med_wan), y - 20, '中位 ' + x1(d.med_wan) + ' 万', { b: true, c: true });
+  T(x(d.worst_wan), y + 30, '最少 ' + x1(d.worst_wan) + ' 万', { a: 'middle' });
+  T(x(d.best_wan), y + 30, '最多 ' + x1(d.best_wan) + ' 万', { a: 'end' });
+});
+
+dash.draw('heat', (el) => {
+  const qd = window.qd;
+  if (!qd.ready(el, ['paths', 'cohorts', 'summary'])) return;
+  const month = '01', metric = 'amount', layout = 'age';
+  const P = qd.paths(), C = qd.cohorts();
+  const dark = qd.isDark(el);
+  const heat = qd.heat(dark);
+  const AMT = qd.K.amt;
+  const births = C.map((c) => c.birth).filter((b) => b.slice(5) === month && P.has(b));
+  const bm = +month;
+  const lastCal = C.map((c) => c.end).sort().pop();
+  const lastY = +lastCal.slice(0, 4);
+  // Every cell: one birth row, one column (an age or a calendar year), and the account on that day.
+  const STEP = (() => { const W0 = el.clientWidth; return [1, 2, 3].find((k) => (W0 - 44) / (18 / k) >= 26) || 3; })();
+  const cells = [];
+  const rows = births.map((b, ri) => {
+    const pts = P.get(b);
+    const by = +b.slice(0, 4);
+    const byA = new Map(pts.map((q) => [q.a, q.m]));
+    const last = pts[pts.length - 1];
+    const calOf = (am) => { const d = new Date(Date.UTC(by, bm - 1 + am - 1, 1)); return { y: d.getUTCFullYear(), mo: d.getUTCMonth() + 1 }; };
+    if (layout === 'age') {
+      for (let a = 1; a <= 18; a++) {
+        const m = byA.get(a * 12);
+        if (m != null && a % STEP === 0) cells.push({ ri, b, col: a / STEP - 1, am: a * 12, m, cal: calOf(a * 12), partial: false });
+      }
+      if (last.a < 216 && Math.ceil(last.a / 12 / STEP) > Math.floor(Math.floor(last.a / 12) / STEP)) cells.push({ ri, b, col: Math.ceil(last.a / 12 / STEP) - 1, am: last.a, m: last.m, cal: calOf(last.a), partial: true });
+    } else {
+      for (let Y = by; Y <= lastY; Y++) {
+        let am = (Y - by) * 12 + 13 - bm;
+        let partial = false;
+        if (Y === lastY && am > last.a && last.a < 216) { am = last.a; partial = true; }
+        if (am < 1 || am > Math.min(216, last.a)) continue;
+        const m = byA.get(am);
+        if (m != null) cells.push({ ri, b, col: Y, am, m, cal: calOf(am), partial: partial || (am === last.a && last.a < 216 && calOf(am).mo !== 12) });
+      }
+    }
+    return { b, by };
+  });
+  const sel = qd.heatSel();
+  el.replaceChildren();
+  if (!rows.length) { el.textContent = '—'; return; }
+  const W = el.clientWidth;
+  const svg = d3.select(el).append('svg').attr('width', '100%');
+  const lw = qd.measure(svg, rows.map((r) => String(r.by)), 'qd-tick') + 10;
+  let cols;
+  if (layout === 'age') cols = d3.range(0, 18 / STEP).map((i) => ({ key: i, label: String((i + 1) * STEP) }));
+  else { const y0 = d3.min(rows, (r) => r.by); cols = d3.range(y0, lastY + 1).map((Y) => ({ key: Y, label: String(Y) })); }
+  const colIndex = new Map(cols.map((c, i) => [c.key, i]));
+  const cw = (W - lw - 2) / cols.length;
+  const rh = cw >= 30 ? 22 : cw >= 20 ? 18 : 14;
+  const top = 22;
+  const H = top + rows.length * rh + 4;
+  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+  // Column labels: skip some so they never touch.
+  const lblW = qd.measure(svg, cols.map((c) => c.label), 'qd-tick') + 6;
+  const every = Math.max(1, Math.ceil(lblW / cw));
+  cols.forEach((c, i) => {
+    if (i % every !== 0 && i !== cols.length - 1) return;
+    if (i === cols.length - 1 && i % every !== 0 && (i % every) * cw < lblW) return;
+    svg.append('text').attr('class', 'qd-tick').attr('x', lw + (i + 0.5) * cw).attr('y', 13).attr('text-anchor', 'middle').text(c.label);
+  });
+  svg.append('text').attr('class', 'qd-tick').attr('x', lw - 10).attr('y', 13).attr('text-anchor', 'end').text(layout === 'age' ? '岁' : '年底');
+  rows.forEach((r, ri) => {
+    svg.append('text').attr('class', r.b === sel ? 'qd-lab' : 'qd-tick').attr('x', lw - 10).attr('y', top + ri * rh + rh / 2).attr('dy', '0.32em')
+      .attr('text-anchor', 'end').attr('font-weight', r.b === sel ? 600 : null).text(r.by);
+  });
+  const irrOf = (m, n) => {
+    let lo = -0.08, hi = 0.08;
+    const f = (r) => (Math.abs(r) < 1e-9 ? n : ((1 + r) * (Math.pow(1 + r, n) - 1)) / r) - m * n;
+    for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (f(mid) > 0) hi = mid; else lo = mid; }
+    return Math.pow(1 + (lo + hi) / 2, 12) - 1;
+  };
+  const label = (c) => {
+    if (metric === 'amount') { const v = (c.m * c.am * AMT) / 10000; return v >= 10 ? v.toFixed(0) : v.toFixed(1); }
+    if (metric === 'irr') { const v = irrOf(c.m, c.am) * 100; return (v > 0 ? '' : '') + v.toFixed(0) + '%'; }
+    return c.m >= 10 ? c.m.toFixed(0) : c.m.toFixed(1);
+  };
+  const tW = metric === 'irr' ? 30 : 24;
+  const showT = cw >= tW;
+  const cx = (c) => lw + colIndex.get(c.col) * cw;
+  const cy = (c) => top + c.ri * rh;
+  const g = svg.append('g');
+  const rects = g.selectAll('rect').data(cells).join('rect')
+    .attr('class', 'qd-hit')
+    .attr('x', (c) => cx(c) + 0.5).attr('y', (c) => cy(c) + 0.5)
+    .attr('width', Math.max(1, cw - 1)).attr('height', rh - 1).attr('rx', 2)
+    .attr('fill', (c) => heat(c.m).formatHex())
+    .attr('stroke', (c) => (c.partial ? 'var(--color-fg-muted)' : 'none'))
+    .attr('stroke-dasharray', (c) => (c.partial ? '2 2' : null));
+  const texts = showT ? g.selectAll('text').data(cells).join('text')
+    .attr('class', 'qd-cell-t').attr('x', (c) => cx(c) + cw / 2).attr('y', (c) => cy(c) + rh / 2).attr('dy', '0.34em')
+    .attr('text-anchor', 'middle').attr('fill', (c) => heat.ink(c.m)).text(label) : null;
+  const selRow = rows.findIndex((r) => r.b === sel);
+  if (selRow >= 0) {
+    const rc = cells.filter((c) => c.ri === selRow);
+    const x0 = d3.min(rc, cx), x1 = d3.max(rc, cx) + cw;
+    svg.append('rect').attr('x', x0 - 0.5).attr('y', top + selRow * rh - 0.5).attr('width', x1 - x0 + 1).attr('height', rh + 1).attr('rx', 3)
+      .attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.5).attr('pointer-events', 'none');
+  }
+  const same = (a, h) => (layout === 'age' ? a.cal.y === h.cal.y : Math.floor(a.am / 12) === Math.floor(h.am / 12) && !a.partial === !h.partial);
+  const tip = qd.tip(el);
+  rects.on('pointerenter', (ev, h) => {
+    rects.attr('opacity', (c) => (same(c, h) ? 1 : 0.22));
+    if (texts) texts.attr('opacity', (c) => (same(c, h) ? 1 : 0.22));
+  }).on('pointermove', (ev, c) => {
+    const [px, py] = d3.pointer(ev, el);
+    const yrs = Math.floor(c.am / 12), mo = c.am % 12;
+    const inv = c.am * AMT;
+    const when = c.cal.y + '-' + String(c.cal.mo).padStart(2, '0') + (c.partial ? '（最新）' : ' 月底');
+    tip.show([
+      c.b + ' 出生 · ' + yrs + ' 岁' + (mo ? ' ' + mo + ' 个月' : '') + ' · ' + when,
+      { sw: heat(c.m).formatHex(), t: '账户 ' + qd.wan(inv * c.m) + '，本金 ' + qd.wan(inv) },
+      qd.x(c.m) + ' · 年化 ' + (irrOf(c.m, c.am) * 100).toFixed(1) + '%',
+    ], px, py);
+  }).on('pointerleave', () => {
+    rects.attr('opacity', 1);
+    if (texts) texts.attr('opacity', 1);
+    tip.hide();
+  }).on('click', (ev, c) => { qd.sel = c.b; dash.draw('heat'); });
+});
+</script>
+<script>
+dash.calc('income', {
+  inputs: ['pay_paths'],
+  title: '23–35 岁税后年收入',
+  description: '普通本科程序员、大厂研发、31 岁起晋升资深（levels.fyi 字节 3-1 级自报中位总包 162 万，不打折）三条路径的税后年收入，万元；税后按个税税率表、6 万基本减除、约 22.5% 社保公积金（基数封顶 42 万）。',
+  fn: (pay_paths) => {
+    const SENIOR_PAY = 162, SENIOR_FROM = 31;
+    const net = (x) => {
+      const si = Math.min(x, 42) * 0.225;
+      const t = Math.max(0, x - 6 - si);
+      const br = [[3.6, 0.03, 0], [14.4, 0.1, 0.252], [30, 0.2, 1.692], [42, 0.25, 3.192], [66, 0.3, 5.292], [96, 0.35, 8.592], [1e9, 0.45, 18.192]];
+      const [, rate, q] = br.find(([lim]) => t <= lim);
+      return x - si - (t * rate - q);
+    };
+    const r1 = (x) => Math.round(x * 10) / 10;
+    return pay_paths.map((w) => ({
+      age: +w.age, base_net: r1(net(+w.baseline)), big_net: r1(net(+w.bigtech)),
+      senior_net: r1(net(+w.age >= SENIOR_FROM ? SENIOR_PAY : +w.bigtech)),
+    }));
+  },
+});
+
+dash.calc('compare2', {
+  inputs: ['cohorts', 'edu_profiles', 'income', 'rd_hires', 'elite', 'funnel'],
+  title: '两条路的投入、回报和概率',
+  description: '定投：已满 18 岁出生月份的本金、18 岁账户和赚钱比例，18 岁后按年化 7% 到 35 岁。卷：一线重度投入的教育支出；2000 年出生一届走到每一步的比例；进大厂、晋升资深比普通程序员多拿的税后收入（按 7% 再投资到 35 岁）；平均到每个孩子的期望。',
+  fn: (cohorts, edu_profiles, income, rd_hires, elite, funnel) => {
+    const R = 0.07, REF = 2000;
+    const g = 1 + R;
+    const c = cohorts.filter((r) => r.complete === 'yes');
+    const v = c.map((r) => +r.value).sort((a, b) => a - b);
+    const med = v[Math.floor(v.length / 2)];
+    const fv = (k) => income.reduce((s, w) => s + w[k] * Math.pow(g, 35 - w.age), 0);
+    const tot = (k) => income.reduce((s, w) => s + w[k], 0);
+    const prem = fv('big_net') - fv('base_net');
+    const senior = fv('senior_net') - fv('big_net');
+    const sum = (k) => edu_profiles.reduce((s, r) => s + +r[k], 0) / 1e4;
+    const extra35 = edu_profiles.reduce((s, r) => s + ((+r.C - +r.A) / 1e4) * Math.pow(g, 35 - +r.age - 0.5), 0);
+    const f = funnel.find((r) => r.birth === REF);
+    const cap = +rd_hires.find((r) => +r.year === 2025).hires_wan / +elite.find((r) => r.item === 'c985').per_year_wan;
+    const r1 = (x) => Math.round(x * 10) / 10;
+    return [{
+      r_pct: Math.round(R * 100),
+      a_principal_wan: r1(+c[0].invested / 1e4), a_med18_wan: r1(med / 1e4), a_min18_wan: r1(v[0] / 1e4), a_max18_wan: r1(v[v.length - 1] / 1e4),
+      a_months: c.length, a_win_pct: Math.round((c.filter((r) => +r.mult > 1).length / c.length) * 100),
+      a_med35_wan: Math.round((med / 1e4) * Math.pow(g, 17)),
+      b_total_wan: r1(sum('C')), b_extra_wan: r1(sum('C') - sum('A')), b_extra35_wan: Math.round(extra35),
+      p_bachelor_pct: r1(f.bachelor * 100), p_985_pct: r1(f.c985 * 100), p_hire_pct: Math.round(f.hire * 1e5) / 1000, p_senior_pct: Math.round(f.senior_role * 1e6) / 10000,
+      p_bachelor_per10k: Math.round(f.bachelor * 1e4), p_985_per10k: Math.round(f.c985 * 1e4), p_hire_per10k: r1(f.hire * 1e4), p_senior_per10k: Math.round(f.senior_role * 1e5) / 10,
+      cum_base_wan: Math.round(tot('base_net')), cum_big_wan: Math.round(tot('big_net')), cum_senior_wan: Math.round(tot('senior_net')),
+      b_prem35_wan: Math.round(prem), b_senior35_wan: Math.round(senior), b_seniortot35_wan: Math.round(prem + senior),
+      b_ev_hire_wan: r1(f.hire * prem), b_ev_senior_wan: Math.round(f.senior_role * (prem + senior) * 100) / 100,
+      b_ev_wan: r1(f.hire * prem + f.senior_role * senior), cap_985_pct: r1(cap * 100), b_ev_cap_wan: Math.round(cap * prem),
+    }];
+  },
+});
+
+dash.calc('kelly', {
+  inputs: ['qqq_monthly', 'compare2'],
+  title: '凯利公式对比',
+  description: '卷：押上教育投入（按 7% 折到 35 岁），进了大厂拿回多赚的税后收入，凯利比例 = 胜率 − 输的概率 ÷ 净赔率；定投：QQQ 按人民币计的月度收益算年化收益和波动，无风险利率按 2%，凯利比例 = 超额收益 ÷ 波动的平方。',
+  fn: (qqq_monthly, compare2) => {
+    const RF = 0.02, P_HIGH = 0.9;
+    const v = qqq_monthly.map((r) => +r.tr_cny);
+    const lr = v.slice(1).map((x, i) => Math.log(x / v[i]));
+    const m = lr.reduce((s, x) => s + x, 0) / lr.length;
+    const sd = Math.sqrt(lr.reduce((s, x) => s + (x - m) * (x - m), 0) / (lr.length - 1));
+    const sigma = sd * Math.sqrt(12), mu = m * 12 + (sigma * sigma) / 2;
+    const c = compare2[0];
+    const b = c.b_prem35_wan / c.b_extra35_wan - 1;
+    const even = 1 / (1 + b);
+    const pc = (x) => (x >= 0.01 ? Math.round(x * 1000) / 10 : Math.round(x * 100000) / 1000) + '%';
+    const fk = (p) => Math.max(0, p - (1 - p) / b);
+    const odds = '赢了拿回押注的 ' + (1 + b).toFixed(2) + ' 倍，输了押注归零';
+    const evenTxt = pc(even);
+    const fq = (mu - RF) / (sigma * sigma);
+    const times = Math.round(even / (c.p_hire_pct / 100));
+    return [
+      { name: '卷 · 按全国平均', win: pc(c.p_hire_pct / 100), odds, kelly: '0%，不押', why: '赔率只有 ' + (1 + b).toFixed(2) + ' 倍，胜率至少要 ' + evenTxt + ' 才不亏；全国平均只有它的约 ' + times.toLocaleString('en') + ' 分之一' },
+      { name: '卷 · 按 985 毕业生上限', win: pc(c.cap_985_pct / 100), odds, kelly: '0%，不押', why: '就算孩子已经进了 985，胜率仍远低于不亏的 ' + evenTxt },
+      { name: '卷 · 刚好不亏', win: evenTxt, odds, kelly: '0%', why: '这是不赚不亏的分界线，押多少都不比把钱拿去定投更好' },
+      { name: '卷 · 九成把握', win: pc(P_HIGH), odds, kelly: pc(fk(P_HIGH)), why: '胜率远超 ' + evenTxt + ' 才值得押；但赔率低，输了亏掉押上的钱，所以也不押满' },
+      { name: '定投 QQQ', win: '历史上任意 18 年都赚钱', odds: '平均每年赚 ' + pc(mu) + '，单年可能涨跌 ' + pc(sigma), kelly: pc(fq) + '，实际押一半约 ' + pc(fq / 2), why: '比存款每年多赚约 ' + pc(mu - RF) + '，波动又不算极端，算出来要借钱加仓；但这建立在纳指过去 27 年的高收益上，所以一般只押一半，大致就是满仓不借钱' },
+    ];
+  },
+});
+</script>
+
+<script>
+dash.onData(() => { document.querySelectorAll('.qd-ktable').forEach((t) => t.style.setProperty('--qd-dca', dash.colors[0])); });
+dash.draw('twopaths', (el) => {
+  const qd = window.qd;
+  if (!qd.ready(el, ['compare2'])) return;
+  const d = dash.data('compare2').data[0];
+  el.replaceChildren();
+  if (!d) { el.textContent = '—'; return; }
+  const cA = dash.colors[0], cB = dash.colors[1];
+  const w = (v) => d3.format(',')(Math.round(v * 10) / 10) + ' 万';
+  const paths = [
+    { c: cA, name: '定投 QQQ', items: [
+      { t: 'card', label: '本金', big: w(d.a_principal_wan), line: '每月 ' + qd.K.amt + ' 元，投 18 年' },
+      { t: 'node', label: '18 岁 · 中位', val: w(d.a_med18_wan), sw: 14 },
+      { t: 'card', label: '35 岁拿到', big: w(d.a_med35_wan), line: '18 岁后按年化 ' + d.r_pct + '% 继续涨', badge: '成功概率 ' + d.a_win_pct + '%', sw: 14 },
+    ] },
+    { c: cB, name: '卷：升学 → 大厂 → 晋升', items: [
+      { t: 'card', label: '本金：教育成本', big: w(d.b_total_wan), line: ['一线城市中产重度投入，0–17 岁合计', '补习、民办园、学区房各取估算区间中值', '2023 年价格，不含吃穿住'] },
+      { t: 'node', label: '18 岁 · 上本科', val: d.p_bachelor_pct + '%', sw: 14 },
+      { t: 'node', label: '18 岁 · 进 985', val: d.p_985_pct + '%', sw: 9 },
+      { t: 'node', label: '23 岁 · 进大厂研发', val: d.p_hire_pct + '%', sw: 5 },
+      { t: 'card', label: '进大厂研发，35 岁拿到', big: w(d.cum_big_wan), line: '23–35 岁税后工资合计', badge: '成功概率 ' + d.p_hire_pct + '%', sw: 3 },
+      { t: 'node', label: '31 岁 · 晋升资深', val: d.p_senior_pct + '%', sw: 2 },
+      { t: 'card', label: '再晋升资深，35 岁拿到', big: w(d.cum_senior_wan), line: '31 岁起年薪 162 万，税后合计', badge: '成功概率 ' + d.p_senior_pct + '%', sw: 2 },
+    ] },
+  ];
+  const CH = 92, NH = 58, GAP = 22, LX = 22;
+  const boxes = paths.map(() => { const b = document.createElement('div'); el.append(b); return b; });
+  const widths = boxes.map((b) => b.clientWidth);
+  paths.forEach((p, pi) => {
+    const box = boxes[pi];
+    const W = widths[pi];
+    const nm = document.createElement('div');
+    nm.className = 'qd-path-name';
+    nm.style.color = p.c;
+    nm.textContent = p.name;
+    box.append(nm);
+    const lines = (it) => [].concat(it.line || []);
+    const hOf = (it) => (it.t === 'card' ? CH + (lines(it).length - 1) * 20 : NH);
+    const H = p.items.reduce((s, it, i) => s + hOf(it) + (i ? GAP : 0), 0);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
+    const T = (x, y, s, o = {}) => {
+      const t = svg.append('text').attr('x', x).attr('y', y).attr('text-anchor', o.anchor || 'start').attr('class', o.big ? 'qd-big' : 'qd-lab').text(s);
+      if (o.fill) t.style('fill', p.c);
+      if (o.bold) t.attr('font-weight', 600);
+      return t;
+    };
+    const lg = svg.append('g'), fg = svg.append('g');
+    let y = 0, prevMid = null;
+    p.items.forEach((it, i) => {
+      if (i) y += GAP;
+      const h = hOf(it);
+      const top = y, mid = y + h / 2;
+      if (prevMid != null) lg.append('line').attr('x1', LX).attr('x2', LX).attr('y1', prevMid).attr('y2', it.t === 'card' ? top + 1 : mid)
+        .style('stroke', p.c).attr('stroke-width', it.sw).attr('stroke-linecap', 'round');
+      if (it.t === 'card') {
+        fg.append('rect').attr('x', 0.75).attr('y', top + 0.75).attr('width', W - 1.5).attr('height', h - 1.5).attr('rx', 10)
+          .attr('fill', 'var(--color-panel)');
+        fg.append('rect').attr('x', 0.75).attr('y', top + 0.75).attr('width', W - 1.5).attr('height', h - 1.5).attr('rx', 10)
+          .style('fill', p.c).attr('fill-opacity', 0.1).style('stroke', p.c).attr('stroke-width', 1.5);
+        T(14, top + 24, it.label, { bold: true });
+        T(14, top + 56, it.big, { big: true, fill: true });
+        lines(it).forEach((ln, li) => T(14, top + 78 + li * 20, ln));
+        if (it.badge) {
+          const t = T(W - 14, top + 24, it.badge, { anchor: 'end', bold: true, fill: true });
+          const bb = t.node().getBBox();
+          svg.insert('rect', () => t.node()).attr('x', bb.x - 8).attr('y', bb.y - 3).attr('width', bb.width + 16).attr('height', bb.height + 6)
+            .attr('rx', (bb.height + 6) / 2).style('fill', p.c).attr('fill-opacity', 0.16);
+        }
+        prevMid = top + h - 1;
+      } else {
+        fg.append('circle').attr('cx', LX).attr('cy', mid).attr('r', 9).attr('fill', 'var(--color-panel)').style('stroke', p.c).attr('stroke-width', 3);
+        T(LX + 22, mid, it.label, { bold: true }).attr('dy', '0.35em');
+        T(W - 4, mid, it.val, { big: true, fill: true, anchor: 'end' }).attr('dy', '0.35em');
+        prevMid = mid;
+      }
+      y += h;
+    });
+  });
+});
+
+
+dash.draw('kellytab', (el) => {
+  const d = dash.data('kelly');
+  el.replaceChildren();
+  if (d.status !== 'ok') return;
+  d.data.forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.dataset.key = r.name;
+    if (r.name.startsWith('定投')) tr.className = 'qd-row-dca';
+    const L = ['策略', '胜率', '赔率', '建议押上家庭资产的', '为什么'];
+    [r.name, r.win, r.odds, r.kelly, r.why].forEach((v, i) => { const td = document.createElement('td'); td.dataset.label = L[i]; td.textContent = v; tr.append(td); });
+    el.append(tr);
+  });
+});
+</script>
+
+</body>
+</html>
