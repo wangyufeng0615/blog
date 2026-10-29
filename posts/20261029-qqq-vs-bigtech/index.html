@@ -115,6 +115,7 @@ main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 6
 .qd .qd-big { fill: var(--color-fg); font-size: 22px; font-family: var(--font-anthropic-serif); font-variant-numeric: tabular-nums; }
 .qd-hscroll { overflow-x: auto; }
 .qd-chart-cline { min-height: 300px; }
+.qd-chart-cline2 { min-height: 340px; }
 .qd-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); }
 .qd-stat { display: flex; flex-direction: column; gap: 0.2rem; padding: var(--cds-pad-md) var(--cds-pad-lg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
 .qd-stat-l { font-size: var(--cds-font-size-body); color: var(--color-fg); }
@@ -160,6 +161,10 @@ main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 6
     <section class="qd-card qd-concl" id="dca-concl">
       <div class="qd-chart qd-chart-range2" id="chart-range2" data-draw="dcarange" data-source="summary">—</div>
     </section>
+    <section class="qd-card" id="lines">
+      <h3>每年 1 月出生的孩子，账户从出生到 18 岁</h3>
+      <div class="qd-chart qd-chart-cline2" id="chart-cline2" data-draw="cline" data-source="lines summary">—</div>
+    </section>
     <section class="qd-card" id="heatmap">
       <h3>1 月出生的孩子，每个生日时的账户（万元）</h3>
       <div class="qd-chart qd-chart-heat" id="chart-heat" data-draw="heat" data-source="paths cohorts summary">—</div>
@@ -188,7 +193,7 @@ main { max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 80px) 16px 6
   <section class="qd-part qd-src" id="sources">
     <h2 class="qd-h2">数据与假设</h2>
     <ul>
-      <li>定投：雅虎财经 QQQ 日线与分红、美联储 FRED 人民币汇率；每月第一个交易日买入，分红在除息日再投入，数据截至 2026-10-28；18 岁之后按年化 7% 推到 35 岁。</li>
+      <li>定投：雅虎财经 QQQ 日线与分红、美联储 FRED 人民币汇率；1999 年 3 月 QQQ 上市前用纳指 100 指数价格按上市当天的比例接上，不含分红；每月第一个交易日买入，分红在除息日再投入，数据截至 2026-10-28；18 岁之后按年化 7% 推到 35 岁。</li>
       <li>教育成本：一线城市中产重度投入，0–2 岁每年 1 万、学前每年 3 万、小学初中每年 5.75 万（含学区房使用成本 1.5 万）、高中每年 5.25 万；各项取北京大学中国教育财政家庭调查、新京报 2021、艾瑞 2017 和学区房研究给出的区间中值，2023 年价格，不含吃穿住。</li>
       <li>升学：国家统计局出生人口、教育部招生人数，以 2000 年出生的一届为例；985 每年本科招生按约 21 万。</li>
       <li>进大厂：头部 10 家互联网公司每年实际入职的应届研发，按校招报道汇总，近年约 1.5–2.5 万；晋升资深按应届研发的 10%。</li>
@@ -486,6 +491,112 @@ dash.draw('dcarange', (el) => {
   T(x(d.best_wan), y + 30, '最多 ' + x1(d.best_wan) + ' 万', { a: 'end' });
 });
 
+dash.draw('cline', (el) => {
+  const qd = window.qd;
+  if (!qd.ready(el, ['lines'])) return;
+  const rows = dash.data('lines').data;
+  el.replaceChildren();
+  if (!rows.length) { el.textContent = '—'; return; }
+  const dark = qd.isDark(el);
+  const pm = d3.timeParse('%Y-%m');
+  const by = d3.group(rows.map((r) => ({ b: +r.birth, t: pm(r.month), a: +r.age_m, v: +r.value_wan, est: r.est === 'yes' })), (r) => r.b);
+  const births = [...by.keys()].sort((a, b) => a - b);
+  const b0 = births[0], b1 = births[births.length - 1];
+  const col = (b) => qd.yearColor((b - b0) / (b1 - b0), dark);
+  const lines = births.map((b) => {
+    const p = by.get(b).sort((x, y) => x.a - y.a);
+    return { b, p, end: p[p.length - 1], done: p[p.length - 1].a === 216 };
+  });
+  const W = el.clientWidth, narrow = W < 560;
+  const H = narrow ? 340 : 400;
+  const m = { t: narrow ? 74 : 48, r: narrow ? 8 : 16, b: 26, l: 40 };
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
+  const x = d3.scaleUtc().domain([pm('1990-01'), d3.max(rows, (r) => pm(r.month))]).range([m.l, W - m.r]);
+  const vmax = d3.max(lines, (l) => d3.max(l.p, (q) => q.v));
+  const y = d3.scaleLinear().domain([0, vmax * 1.06]).nice().range([H - m.b, m.t]);
+  const qStart = pm('1999-03');
+  svg.append('rect').attr('x', x(x.domain()[0])).attr('y', m.t).attr('width', x(qStart) - x(x.domain()[0])).attr('height', H - m.b - m.t)
+    .attr('fill', 'var(--cds-chart-grid)').attr('opacity', 0.6);
+  svg.append('text').attr('class', 'qd-lab').attr('x', 0).attr('y', 14).text('阴影段 QQQ 还没上市，用纳指 100 指数推算');
+  const lg = svg.append('g').attr('transform', narrow ? 'translate(0,36)' : `translate(${W - m.r},14)`);
+  const lgx = narrow ? 0 : -228;
+  lg.append('line').attr('x1', lgx).attr('x2', lgx + 18).attr('y1', -4).attr('y2', -4).style('stroke', 'var(--color-fg)').attr('stroke-width', 1.6).attr('opacity', 0.55);
+  lg.append('circle').attr('cx', lgx + 9).attr('cy', -4).attr('r', 3.6).style('fill', 'var(--color-fg)');
+  lg.append('text').attr('class', 'qd-lab').attr('x', lgx + 24).attr('y', 0).text('18 岁时的账户');
+  lg.append('circle').attr('cx', lgx + 138).attr('cy', -4).attr('r', 3).attr('fill', 'var(--color-panel)').style('stroke', 'var(--color-fg)').attr('stroke-width', 1.5);
+  lg.append('text').attr('class', 'qd-lab').attr('x', lgx + 147).attr('y', 0).text('还没满 18 岁');
+  y.ticks(narrow ? 4 : 6).forEach((v) => {
+    svg.append('line').attr('class', 'qd-grid-line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v));
+    svg.append('text').attr('class', 'qd-tick').attr('x', m.l - 6).attr('y', y(v)).attr('dy', '0.32em').attr('text-anchor', 'end').text(v);
+  });
+  svg.append('text').attr('class', 'qd-tick').attr('x', m.l - 6).attr('y', m.t - 16).attr('text-anchor', 'end').text('万');
+  const step = narrow ? 10 : 5;
+  d3.range(1990, 2027, step).forEach((yr) => {
+    svg.append('text').attr('class', 'qd-tick').attr('x', x(pm(yr + '-01'))).attr('y', H - 6).attr('text-anchor', 'middle').text(yr);
+  });
+  const ln = d3.line().x((q) => x(q.t)).y((q) => y(q.v));
+  const g = svg.append('g');
+  const sel = +String(qd.heatSel() || '').slice(0, 4) || null;
+  const paths = lines.map((l) => {
+    const gg = g.append('g').attr('data-b', l.b);
+    const est = l.p.filter((q) => q.est), real = l.p.filter((q) => !q.est);
+    if (est.length) gg.append('path').attr('d', ln(real.length ? est.concat(real[0]) : est)).attr('fill', 'none').style('stroke', col(l.b)).attr('stroke-width', 1.4).attr('stroke-dasharray', '3 3');
+    if (real.length) gg.append('path').attr('d', ln(real)).attr('fill', 'none').style('stroke', col(l.b)).attr('stroke-width', 1.4);
+    return gg;
+  });
+  // Where each child turned 18, joined up.
+  const ends = lines.filter((l) => l.done).map((l) => l.end);
+  svg.append('path').attr('d', ln(ends)).attr('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 1.6).attr('opacity', 0.55);
+  lines.forEach((l) => {
+    const c = svg.append('circle').attr('cx', x(l.end.t)).attr('cy', y(l.end.v)).attr('r', l.done ? 3.6 : 3).style('stroke', col(l.b)).attr('stroke-width', 1.5);
+    if (l.done) c.style('fill', col(l.b)); else c.attr('fill', 'var(--color-panel)');
+  });
+  const done = lines.filter((l) => l.done);
+  const hi = d3.greatest(done, (l) => l.end.v), lo = d3.least(done, (l) => l.end.v);
+  const fmt = (v) => (v >= 100 ? Math.round(v) : v.toFixed(1)) + ' 万';
+  const note = (l, dy, anchor) => svg.append('text').attr('class', 'qd-lab').attr('font-weight', 600).attr('x', x(l.end.t)).attr('y', y(l.end.v) + dy).attr('text-anchor', anchor).style('fill', col(l.b)).text(l.b + ' 年生 · 18 岁 ' + fmt(l.end.v));
+  note(hi, -10, 'end');
+  note(lo, 20, 'middle');
+  // Highlight one line: the tapped / hovered one, else the heatmap's selected birth year.
+  const focus = (b) => paths.forEach((p, i) => {
+    const on = b == null || lines[i].b === b;
+    p.attr('opacity', on ? 1 : 0.4).selectAll('path').attr('stroke-width', b != null && on ? 3 : 1.4);
+    if (b != null && on) p.raise();
+  });
+  focus(sel);
+  const tip = qd.tip(el);
+  const near = (px, py) => {
+    const t = x.invert(px);
+    let best = null, bd = Infinity;
+    for (const l of lines) {
+      const q = l.p[Math.min(l.p.length - 1, Math.max(0, d3.bisector((q) => q.t).left(l.p, t)))];
+      if (t < l.p[0].t || t > l.end.t) continue;
+      const d = Math.abs(y(q.v) - py);
+      if (d < bd) { bd = d; best = { l, q }; }
+    }
+    return bd < 30 ? best : null;
+  };
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('pointermove', (ev) => {
+      const [px, py] = d3.pointer(ev, el);
+      const h = near(px, py);
+      if (!h) { focus(sel); tip.hide(); return; }
+      focus(h.l.b);
+      const e = h.l.end, ya = Math.floor(e.a / 12);
+      tip.show([
+        h.l.b + ' 年 1 月出生' + (h.q.est ? '（指数推算）' : ''),
+        { sw: col(h.l.b), t: d3.utcFormat('%Y-%m')(h.q.t) + ' 账户 ' + fmt(h.q.v) + '，本金 ' + (h.q.a * qd.K.amt / 1e4).toFixed(1) + ' 万' },
+        (h.l.done ? '18 岁时 ' : '至今 ' + ya + ' 岁 ') + fmt(e.v) + '，本金的 ' + (e.v / (e.a * qd.K.amt / 1e4)).toFixed(1) + ' 倍',
+      ], px, py);
+    })
+    .on('pointerleave', () => { focus(sel); tip.hide(); })
+    .on('click', (ev) => {
+      const [px, py] = d3.pointer(ev, el);
+      const h = near(px, py);
+      if (h && h.l.b >= 1999) { qd.sel = h.l.b + '-01'; dash.draw('heat'); dash.draw('cline'); }
+    });
+});
+
 dash.draw('heat', (el) => {
   const qd = window.qd;
   if (!qd.ready(el, ['paths', 'cohorts', 'summary'])) return;
@@ -605,7 +716,7 @@ dash.draw('heat', (el) => {
     rects.attr('opacity', 1);
     if (texts) texts.attr('opacity', 1);
     tip.hide();
-  }).on('click', (ev, c) => { qd.sel = c.b; dash.draw('heat'); });
+  }).on('click', (ev, c) => { qd.sel = c.b; dash.draw('heat'); dash.draw('cline'); });
 });
 </script>
 <script>
@@ -792,6 +903,3 @@ dash.draw('kellytab', (el) => {
   });
 });
 </script>
-
-</body>
-</html>
