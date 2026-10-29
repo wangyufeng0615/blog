@@ -11,6 +11,8 @@
     rd_hires: 'data/rd_hires.csv',
     lines: 'data/lines.csv',
   };
+  // The page loads this file as dash-lite.js?v=…; the same tag busts cached CSVs when data changes.
+  const VER = new URL(document.currentScript.src).searchParams.get('v') || '';
   const state = {};
   const calcs = [];
   const draws = new Map();
@@ -48,7 +50,7 @@
   const load = async () => {
     const entries = await Promise.all(Object.entries(SOURCES).map(async ([id, url]) => {
       try {
-        const res = await fetch(url);
+        const res = await fetch(VER ? url + '?v=' + VER : url);
         if (!res.ok) throw new Error(res.status + ' ' + url);
         return [id, { status: 'ok', data: d3.csvParse(await res.text(), typed) }];
       } catch (e) {
