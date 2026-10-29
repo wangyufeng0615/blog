@@ -10,6 +10,7 @@
     pay_paths: 'data/pay_paths.csv',
     qqq_monthly: 'data/qqq_monthly.csv',
     rd_hires: 'data/rd_hires.csv',
+    lines: 'data/lines.csv',
   };
   const state = {};
   const calcs = [];
