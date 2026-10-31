@@ -1,8 +1,8 @@
 {
  "name": "王工存储指数",
  "url": "https://wangyufeng.org/storage-trend/",
- "generated_at": "2026-10-30T07:36:33Z",
- "as_of": "2026-10-30",
+ "generated_at": "2026-10-31T07:32:13Z",
+ "as_of": "2026-10-31",
  "cycle": {
   "state": "分化",
   "ready_count": 8,
@@ -616,14 +616,14 @@
    "value": 133.0,
    "value_text": "133.00",
    "unit": "USD / 条",
-   "date": "2026-08-31",
+   "date": "2026-09-30",
    "freshness": "stale",
    "cycle": "pending",
    "trend": {
     "direction": "up",
-    "window_days": 63,
+    "window_days": 93,
     "start": "2026-06-30",
-    "end": "2026-08-31",
+    "end": "2026-09-30",
     "first": 115.0,
     "last": 133.0,
     "text": "+15.7%",
@@ -819,7 +819,7 @@
   {
    "name": "Azure Blob Storage Retail Prices (eastus)",
    "url": "https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)",
-   "date": "2026-10-30",
+   "date": "2026-10-31",
    "freshness": "fresh"
   },
   {

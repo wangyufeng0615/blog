@@ -1,6 +1,6 @@
 # 王工存储指数
 
-> 存储产业价格与周期看板。数据截至 2026-10-30，快照生成于 2026-10-30 15:36（北京时间）。数据仅供产业研究，不构成投资建议。
+> 存储产业价格与周期看板。数据截至 2026-10-31，快照生成于 2026-10-31 15:32（北京时间）。数据仅供产业研究，不构成投资建议。
 
 - 网页：https://wangyufeng.org/storage-trend/
 - 周期状态：**分化**（4 上行 · 3 下行 · 1 持平；8 项参与判断）
@@ -33,7 +33,7 @@ DRAM · HBM · 最先反应
 | HBM3e 公开估算中点 | ≈ 16 | USD / GB | +6.7% | 2025-09-01 → 2026-03-01 | 2026-03-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | HBM AI 芯片组件成本占比 | 63.42% | 占 AI 芯片组件成本 | +3.5% | 2025-07-01 → 2025-10-01 | 2025-10-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | CFM DRAM 价格指数 | 4,406.51 | 指数 | +11.0% | 2026-03-17 → 2026-10-27 | 2026-10-30 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
-| DRAM 合约价（DDR5 8GB SO-DIMM） | 133.00 | USD / 条 | +15.7% | 2026-06-30 → 2026-08-31 | 2026-08-31 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_contract) | 暂不参与 |
+| DRAM 合约价（DDR5 8GB SO-DIMM） | 133.00 | USD / 条 | +15.7% | 2026-06-30 → 2026-09-30 | 2026-09-30 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_contract) | 暂不参与 |
 
 ## 温层
 
@@ -87,7 +87,7 @@ ETF 价格 · 不参与周期判断
 | [TrendForce NAND / Flash Price](https://www.trendforce.com/price/flash/emmc_spot) | 留意 | 2026-10-19 |
 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 当期 | 2026-10-30 |
 | [AWS S3 Price List (us-east-1)](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv) | 当期 | 2026-10-15 |
-| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-10-30 |
+| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-10-31 |
 | [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU334112334112,PCU33443344) | 留意 | 2026-09-01 |
 | HBM Proxy Events | 留意 | 2026-09-30 |
 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | 当期 | 2026-09-30 |
