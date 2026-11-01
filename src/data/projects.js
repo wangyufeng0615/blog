@@ -21,6 +21,16 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '所有地块的描述 · EU5 模组',
+    description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 700+ 订阅',
+    sticker: 'eu5',
+    url: 'https://wangyufeng.org/eu5-descriptions/',
+    type: 'Game mod',
+    year: '2026',
+    tags: ['Europa Universalis V', 'Mod', 'Bilingual', 'Steam Workshop'],
+    status: 'Live',
+  },
+  {
     name: '王工存储指数',
     description: '追踪 DRAM、NAND、SSD、HBM 与 X 存储博主情绪的存储产业指标面板',
     sticker: 'market',

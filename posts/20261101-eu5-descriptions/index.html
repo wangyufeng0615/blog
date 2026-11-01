@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>所有地块的描述：给《欧陆风云5》每个地块写介绍</title>
+<meta name="description" content="《欧陆风云5》地图上有 28,573 个地块，官方只给 257 个写了介绍。这个模组给剩下的 28,316 个地块补上了中英文介绍，上架 Steam 创意工坊第二天订阅就过了 700。">
+<meta property="og:title" content="所有地块的描述：给《欧陆风云5》每个地块写介绍">
+<meta property="og:description" content="给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 700+ 订阅。">
+<meta property="og:image" content="https://wangyufeng.org/eu5-descriptions/images/cover.zh-CN.webp">
+<style>
+:root {
+  --bg: #faf9f7;
+  --panel: #ffffff;
+  --fg: #3d3d3d;
+  --muted: #6a6660;
+  --line: #e6e2db;
+  --accent: #5c7a6f;
+  --accent-dark: #4a6359;
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.75; }
+main { max-width: 1080px; margin: 0 auto; padding: clamp(48px, 8vw, 88px) 16px 72px; overflow-x: hidden; }
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; display: block; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero h1 { margin: 0 0 6px; font-size: clamp(30px, 1.4rem + 2.4vw, 46px); font-weight: 700; line-height: 1.2; letter-spacing: 0.01em; }
+.hero .sub { margin: 0 0 22px; font-size: clamp(16px, 0.9rem + 0.4vw, 19px); color: var(--muted); }
+.hero p { margin: 0 0 14px; font-size: 16px; max-width: 34rem; }
+.cta { display: inline-flex; align-items: center; min-height: 46px; margin-top: 10px; padding: 0 22px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; text-decoration: none; }
+.cta:hover { background: var(--accent-dark); }
+.cover { border-radius: 10px; border: 1px solid var(--line); background: #fff; box-shadow: 0 10px 30px rgba(44, 36, 23, 0.08); }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: clamp(40px, 6vw, 64px) 0; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.stat b { display: block; font-size: clamp(24px, 1rem + 1.6vw, 32px); font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--fg); }
+.stat span { font-size: 14px; color: var(--muted); }
+
+h2 { margin: 0 0 14px; font-size: clamp(20px, 1rem + 0.6vw, 24px); font-weight: 700; }
+section { margin-top: clamp(44px, 6vw, 72px); }
+.prose { max-width: 42rem; }
+.prose p { margin: 0 0 14px; font-size: 16px; }
+.prose ul { margin: 0 0 14px; padding-left: 1.2em; }
+.prose li { margin-bottom: 8px; font-size: 16px; }
+
+.shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.shots figure { margin: 0; }
+.shots img { border-radius: 8px; box-shadow: 0 6px 20px rgba(44, 36, 23, 0.12); }
+.shots figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+.foot { margin-top: clamp(48px, 7vw, 80px); padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.foot p { margin: 0 0 6px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .cover-wrap { max-width: 420px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .shots { grid-template-columns: 1fr; }
+  .shots figure { max-width: 380px; }
+  .cta { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div>
+      <h1>所有地块的描述</h1>
+      <p class="sub">《欧陆风云5》模组 · Descriptions for Every Tile</p>
+      <p>《欧陆风云5》的地图有 28,573 个地块，官方只给其中 257 个写了介绍。其余地块把鼠标移上去，只能看到地形、人口和物产。</p>
+      <p>我给剩下的 28,316 个地块各写了一段英文和简体中文介绍：城镇、乡村、山脉、湖泊、海域，一个不落。2026 年 10 月 31 日上架 Steam 创意工坊，第二天订阅就过了 700。</p>
+      <a class="cta" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3830305546" target="_blank" rel="noopener noreferrer">在 Steam 创意工坊订阅</a>
+    </div>
+    <div class="cover-wrap">
+      <img class="cover" src="images/cover.zh-CN.webp" width="720" height="720" alt="模组封面：所有地块的描述，四色西西里地图，支持英文和中文">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>28,316</b><span>个地块新增介绍</span></div>
+    <div class="stat"><b>中 / 英</b><span>两种语言分别写成</span></div>
+    <div class="stat"><b>257</b><span>条官方介绍原样保留</span></div>
+    <div class="stat"><b>700+</b><span>Steam 创意工坊订阅</span></div>
+  </div>
+
+  <section>
+    <h2>游戏里的样子</h2>
+    <div class="shots">
+      <figure>
+        <img src="images/piazza.zh-CN.webp" width="595" height="790" alt="游戏内西西里基亚扎地块的中文介绍" loading="lazy">
+        <figcaption>西西里的基亚扎，两段中文介绍</figcaption>
+      </figure>
+      <figure>
+        <img src="images/mount-etna.zh-CN.webp" width="615" height="454" alt="游戏内埃特纳火山地块的中文介绍" loading="lazy">
+        <figcaption>无法通行的埃特纳火山也有介绍</figcaption>
+      </figure>
+      <figure>
+        <img src="images/nicosia.en.webp" width="600" height="876" alt="游戏内尼库西亚地块的英文介绍" loading="lazy">
+        <figcaption>英文界面：Nicusìa</figcaption>
+      </figure>
+      <figure>
+        <img src="images/mount-etna.en.webp" width="596" height="580" alt="游戏内埃特纳火山地块的英文介绍" loading="lazy">
+        <figcaption>英文界面：Mount Etna</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="prose">
+    <h2>怎么写的</h2>
+    <ul>
+      <li>每条介绍都从当地语言的资料出发，主要是维基百科，也有地方政府、文保机构和学术网站。每个词条都记下了出处，随模组一起发布。</li>
+      <li>文风对照官方自带的介绍：先讲这是个什么样的地方，再讲游戏年代（1337—1837 年）里发生的事，不写 1837 年以后。</li>
+      <li>游戏开局时城镇级以上的 923 个城市逐条核对过事实。乡村、山地和海域这类小地块资料少，就写得短一些，不硬凑。</li>
+      <li>中文和英文分别写成通顺的文字，不逐句翻译。前后用当时最好的几个模型修了很多轮，花了不少 token。</li>
+      <li>官方已经写了介绍的 257 个地点不覆盖，保留原文。</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>上架之后</h2>
+    <p>玩家在创意工坊评论区、Reddit 和 B 站指出的错误，我会尽快查资料修掉。比如萨尔河畔 Wallerfangen 出产的那种蓝色颜料，英文应写作 Wallerfanger blue；无锡“锡矿采尽，故名无锡”其实是后人的附会，现在只当传说来讲。到 11 月 1 日已经更新到 1.0.4。</p>
+    <p>模组只加介绍文字，并让海域和无法通行的地块也能显示介绍，不改玩法。可以中途加入已有存档，单人游戏照常能拿成就；联机时房主和玩家都要装上它。</p>
+    <p>我自己就是这个模组最大的用户，会一直维护下去。发现写错了，欢迎在<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3830305546" target="_blank" rel="noopener noreferrer">创意工坊页面</a>留言。</p>
+  </section>
+
+  <div class="foot">
+    <p>Steam 创意工坊条目 3830305546 · 当前版本 1.0.4 · 订阅数截至 2026 年 11 月 1 日</p>
+  </div>
+</main>
+</body>
+</html>
