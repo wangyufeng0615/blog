@@ -4,9 +4,12 @@ import { allProjects } from '../data/projects.js';
 import { friendLinks } from '../data/friends.js';
 
 export function HomePage({ posts }) {
-  // 页面 = 自定义 HTML 页面；文章 = markdown
-  const pages = posts.filter((p) => p.type === 'custom');
+  // 专题页面 = 自定义 HTML 页面，去掉已在作品 / 车库杂物里出现的；文章 = markdown
+  const projectUrls = new Set(allProjects.map((p) => p.url));
+  const pages = posts.filter((p) => p.type === 'custom' && !projectUrls.has(`https://wangyufeng.org${p.url}`));
   const articles = posts.filter((p) => p.type !== 'custom');
+  const works = allProjects.filter((p) => p.featured);
+  const garage = allProjects.filter((p) => !p.featured);
 
   const entry = (post) => (
     <li key={post.slug} className="entry-item">
@@ -20,7 +23,7 @@ export function HomePage({ posts }) {
   return (
     <Layout className="layout-home">
       <div className="home-grid">
-        {/* 第一列：身份 + 作品 */}
+        {/* 第一列：身份 + 作品 + 车库杂物 */}
         <aside className="home-side">
           <header className="home-header">
             <div className="campfire" aria-hidden="true"></div>
@@ -36,12 +39,28 @@ export function HomePage({ posts }) {
           <section className="home-works">
             <h2 className="home-h2">作品</h2>
             <ul className="works-list">
-              {allProjects.map((p) => (
+              {works.map((p) => (
                 <li key={p.name} className="work">
                   <span className={`work-sticker work-sticker-${p.sticker}`} aria-hidden="true"></span>
                   <span className="work-text">
                     <a className="work-name" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
                     <span className="work-desc">{p.description}</span>
+                    {p.stats && <span className="work-stats">{p.stats}</span>}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="home-garage">
+            <h2 className="home-h2">车库杂物<span className="home-count">{garage.length}</span></h2>
+            <ul className="garage-list">
+              {garage.map((p) => (
+                <li key={p.name} className="garage-item">
+                  <span className={`work-sticker garage-sticker work-sticker-${p.sticker}`} aria-hidden="true"></span>
+                  <span className="work-text">
+                    <a className="garage-name" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
+                    <span className="garage-desc">{p.description}</span>
                   </span>
                 </li>
               ))}
@@ -73,10 +92,10 @@ export function HomePage({ posts }) {
           </section>
         </main>
 
-        {/* 第三列：页面 */}
+        {/* 第三列：专题页面 */}
         <aside className="home-notes-col">
           <section className="home-notes">
-            <h2 className="home-h2">页面<span className="home-count">{pages.length}</span></h2>
+            <h2 className="home-h2">专题页面<span className="home-count">{pages.length}</span></h2>
             <ul className="entry-list note-list">
               {pages.map(entry)}
             </ul>

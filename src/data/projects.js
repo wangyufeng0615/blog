@@ -1,4 +1,4 @@
-// 页面展示 name/description/sticker，其余字段供 projects.json 和 JSON-LD 使用
+// 页面展示 name/description/sticker；featured 进首页「作品」，其余进「车库杂物」；其余字段供 projects.json 和 JSON-LD 使用
 export const allProjects = [
   {
     name: '群星 · 星海文库',
@@ -11,8 +11,11 @@ export const allProjects = [
     status: 'Live',
   },
   {
-    name: '和AI一起探索地球',
+    name: '和Atlas一起探索地球',
     description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
+    // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-01），访客按浏览器匿名 session 去重
+    stats: '上线以来 757 位访客，探索 2,588 次',
+    featured: true,
     sticker: 'earth',
     url: 'https://earth.wangyufeng.org',
     type: 'Map game',
@@ -24,6 +27,7 @@ export const allProjects = [
     name: '所有地块的描述 · EU5 模组',
     description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 700+ 订阅',
     sticker: 'eu5',
+    featured: true,
     url: 'https://wangyufeng.org/eu5-descriptions/',
     type: 'Game mod',
     year: '2026',
@@ -104,6 +108,7 @@ export const allProjects = [
     name: 'aimeter',
     description: 'macOS 菜单栏应用，实时追踪 Claude Code 和 Codex CLI 的用量和额度',
     sticker: 'meter',
+    featured: true,
     url: 'https://github.com/wangyufeng0615/aimeter',
     type: 'macOS app',
     year: '2026',
