@@ -1,13 +1,12 @@
 {
  "name": "王工存储指数",
  "url": "https://wangyufeng.org/storage-trend/",
- "generated_at": "2026-11-05T07:37:54Z",
- "as_of": "2026-11-05",
+ "generated_at": "2026-11-06T07:39:12Z",
+ "as_of": "2026-11-06",
  "cycle": {
   "state": "分化",
-  "ready_count": 9,
+  "ready_count": 8,
   "up": [
-   "server_dram_pass_through",
    "dram_spot_temperature",
    "dram_ett_marginal",
    "cfm_dram_price_index",
@@ -20,6 +19,10 @@
   ],
   "flat_count": 1,
   "pending": [
+   {
+    "id": "server_dram_pass_through",
+    "reason": "stale"
+   },
    {
     "id": "dram_contract_price",
     "reason": "stale"
@@ -198,7 +201,7 @@
    "value_text": "16.883",
    "unit": "USD / 颗",
    "date": "2026-10-26",
-   "freshness": "fresh",
+   "freshness": "watch",
    "cycle": "ready",
    "trend": {
     "direction": "down",
@@ -250,8 +253,8 @@
    "value_text": "2,165.00",
    "unit": "USD / 条",
    "date": "2026-10-26",
-   "freshness": "watch",
-   "cycle": "ready",
+   "freshness": "stale",
+   "cycle": "pending",
    "trend": {
     "direction": "up",
     "window_days": 116,
@@ -799,7 +802,7 @@
    "name": "TrendForce NAND / Flash Price",
    "url": "https://www.trendforce.com/price/flash/emmc_spot",
    "date": "2026-10-26",
-   "freshness": "fresh"
+   "freshness": "watch"
   },
   {
    "name": "CFM 闪存市场",
