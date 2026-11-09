@@ -6,7 +6,9 @@ records upstream package versions, file sizes and SHA-256 checksums; the output
 check verifies those checksums before deployment.
 
 - MapLibre GL JS 5.12.0: BSD-3-Clause; included LICENSE.txt.
-- Three.js 0.160.0: MIT; included LICENSE.
+- Three.js 0.187.0: MIT; included LICENSE. Upstream no longer ships minified
+  builds, so `three.module.js` and the `three.core.js` it imports are kept as
+  published.
 - MediaPipe Hands 0.4.1675469240 and Camera Utils 0.3.1675466862:
   Apache-2.0; upstream notices in the distributions are retained.
 

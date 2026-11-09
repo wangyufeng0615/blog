@@ -100,11 +100,11 @@
     <div id="debug"></div>
     <div class="loading" id="loading">正在加载手势识别</div>
 
-    <script src="/vendor/three-0.160.0/three.min.js"></script>
     <script src="/vendor/mediapipe-hands-0.4.1675469240/hands.js"></script>
     <script src="/vendor/mediapipe-camera-utils-0.3.1675466862/camera_utils.js"></script>
 
-    <script>
+    <script type="module">
+        import * as THREE from '/vendor/three-0.187.0/three.module.js';
 
         // ============ 配置参数 ============
         const CONFIG = {

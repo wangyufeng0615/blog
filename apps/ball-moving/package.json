@@ -12,12 +12,12 @@
     "@dimforge/rapier3d": "0.19.3",
     "react": "19.2.7",
     "react-dom": "19.2.7",
-    "three": "0.185.1"
+    "three": "0.187.0"
   },
   "devDependencies": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@types/three": "0.185.0",
+    "@types/three": "0.187.0",
     "@vitejs/plugin-react": "6.0.3",
     "typescript": "7.0.2",
     "vite": "8.3.5"
