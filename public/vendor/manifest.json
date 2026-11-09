@@ -1,7 +1,7 @@
 {
   "sources": {
     "maplibre-gl-5.12.0": "https://www.npmjs.com/package/maplibre-gl/v/5.12.0",
-    "three-0.160.0": "https://www.npmjs.com/package/three/v/0.160.0",
+    "three-0.187.0": "https://www.npmjs.com/package/three/v/0.187.0",
     "mediapipe-hands-0.4.1675469240": "https://www.npmjs.com/package/@mediapipe/hands/v/0.4.1675469240",
     "mediapipe-camera-utils-0.3.1675466862": "https://www.npmjs.com/package/@mediapipe/camera_utils/v/0.3.1675466862"
   },
@@ -32,14 +32,19 @@
       "bytes": 45581
     },
     {
-      "file": "vendor/three-0.160.0/LICENSE",
-      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "file": "vendor/three-0.187.0/LICENSE",
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
       "bytes": 1081
     },
     {
-      "file": "vendor/three-0.160.0/three.min.js",
-      "sha256": "170c6789f43217c96b3170f4b42fafe135de7f7cd48497a4218f9757ee1d49fa",
-      "bytes": 669884
+      "file": "vendor/three-0.187.0/three.core.js",
+      "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578",
+      "bytes": 1474799
+    },
+    {
+      "file": "vendor/three-0.187.0/three.module.js",
+      "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341",
+      "bytes": 658900
     }
   ]
 }
