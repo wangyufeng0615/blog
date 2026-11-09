@@ -13,8 +13,8 @@ export const allProjects = [
   {
     name: '和Atlas一起探索地球',
     description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
-    // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-01），访客按浏览器匿名 session 去重
-    stats: '上线以来 757 位访客，探索 2,588 次',
+    // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-09），访客按浏览器匿名 session 去重
+    stats: '上线以来 782 位访客，探索 2,629 次',
     featured: true,
     sticker: 'earth',
     url: 'https://earth.wangyufeng.org',
