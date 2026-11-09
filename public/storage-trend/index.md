@@ -1,13 +1,13 @@
 # 王工存储指数
 
-> 存储产业价格与周期看板。数据截至 2026-11-08，快照生成于 2026-11-08 15:32（北京时间）。数据仅供产业研究，不构成投资建议。
+> 存储产业价格与周期看板。数据截至 2026-11-09，快照生成于 2026-11-09 15:37（北京时间）。数据仅供产业研究，不构成投资建议。
 
 - 网页：https://wangyufeng.org/storage-trend/
-- 周期状态：**分化**（4 上行 · 3 下行 · 1 持平；8 项参与判断）
-- 领涨：DDR5 16Gb eTT +29.8%（124 天）、DDR5 16Gb 现货 +28.9%（127 天）、CFM DRAM 指数 +10.9%（225 天）
-- 走弱：512Gb TLC 原片 −15.9%（127 天）、CFM NAND 指数 −13.5%（225 天）、1Tb QLC 原片 −9.4%（124 天）
-- DRAM 现货：DDR5 16Gb 60.167 USD / 颗（2026-11-06）
-- 暂不参与判断：DDR5 RDIMM 32GB（数据偏旧）、DRAM 合约价（数据偏旧）
+- 周期状态：**分化**（5 上行 · 3 下行 · 1 持平；9 项参与判断）
+- 领涨：DDR5 RDIMM 32GB +51.7%（123 天）、DDR5 16Gb eTT +29.8%（127 天）、DDR5 16Gb 现货 +28.9%（130 天）
+- 走弱：512Gb TLC 原片 −19.5%（134 天）、CFM NAND 指数 −13.5%（225 天）、1Tb QLC 原片 −9.4%（127 天）
+- DRAM 现货：DDR5 16Gb 60.167 USD / 颗（2026-11-09）
+- 暂不参与判断：DRAM 合约价（数据偏旧）
 
 ## 王工自研情绪
 
@@ -24,15 +24,15 @@ DRAM · HBM · 最先反应
 
 | 指标 | 当前值 | 单位 | 首尾变化 | 窗口 | 数据日期 | 来源 | 周期判断 |
 |---|---:|---|---:|---|---|---|---|
-| DDR5 16Gb 颗粒现货均价 | 60.167 | USD / 颗 | +28.9% | 2026-07-03 → 2026-11-06 | 2026-11-06 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
-| DDR5 16Gb eTT 现货均价 | 30.25 | USD / 颗 | +29.8% | 2026-07-06 → 2026-11-06 | 2026-11-06 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
-| DDR4 16Gb 颗粒现货均价 | 80.815 | USD / 颗 | +5.5% | 2026-07-06 → 2026-11-06 | 2026-11-06 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
-| DDR5 RDIMM 32GB 服务器内存现货均价 | 2,165.00 | USD / 条 | +62.2% | 2026-07-03 → 2026-10-26 | 2026-10-26 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/module_spot) | 暂不参与 |
+| DDR5 16Gb 颗粒现货均价 | 60.167 | USD / 颗 | +28.9% | 2026-07-03 → 2026-11-09 | 2026-11-09 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
+| DDR5 16Gb eTT 现货均价 | 30.25 | USD / 颗 | +29.8% | 2026-07-06 → 2026-11-09 | 2026-11-09 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
+| DDR4 16Gb 颗粒现货均价 | 80.483 | USD / 颗 | +5.0% | 2026-07-06 → 2026-11-09 | 2026-11-09 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
+| DDR5 RDIMM 32GB 服务器内存现货均价 | 2,025.00 | USD / 条 | +51.7% | 2026-07-03 → 2026-11-02 | 2026-11-02 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/module_spot) | 参与 |
 | HBM 供需紧张度评分 | 4 | 分 · 满分 5 | 0.0% | 2026-07-05 → 2026-09-30 | 2026-09-30 | [HBM Proxy Events](https://s25.q4cdn.com/621799436/files/doc_financials/2026/q4/Q4-FY26-Prepared-Remarks.pdf) | 参与 |
 | DDR5 消费级内存零售低价 | 14.0609 | USD / GB | +549% | 2025-07-01 → 2026-10-01 | 2026-10-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | HBM3e 公开估算中点 | ≈ 16 | USD / GB | +6.7% | 2025-09-01 → 2026-03-01 | 2026-03-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
 | HBM AI 芯片组件成本占比 | 63.42% | 占 AI 芯片组件成本 | +3.5% | 2025-07-01 → 2025-10-01 | 2025-10-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
-| CFM DRAM 价格指数 | 4,399.48 | 指数 | +10.9% | 2026-03-24 → 2026-11-03 | 2026-11-06 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
+| CFM DRAM 价格指数 | 4,399.48 | 指数 | +10.9% | 2026-03-24 → 2026-11-03 | 2026-11-09 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
 | DRAM 合约价（DDR5 8GB SO-DIMM） | 133.00 | USD / 条 | +15.7% | 2026-06-30 → 2026-09-30 | 2026-09-30 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_contract) | 暂不参与 |
 
 ## 温层
@@ -41,12 +41,12 @@ NAND · SSD · 跟随热层
 
 | 指标 | 当前值 | 单位 | 首尾变化 | 窗口 | 数据日期 | 来源 | 周期判断 |
 |---|---:|---|---:|---|---|---|---|
-| 512Gb TLC NAND 原片现货均价 | 16.883 | USD / 颗 | −15.9% | 2026-06-22 → 2026-10-26 | 2026-10-26 | [TrendForce NAND / Flash Price](https://www.trendforce.com/pricedetail/flash/wafer_spot) | 参与 |
-| 1Tb QLC NAND 原片当前价 | 24.00 | USD · 来源口径 | −9.4% | 2026-07-06 → 2026-11-06 | 2026-11-06 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
+| 512Gb TLC NAND 原片现货均价 | 16.152 | USD / 颗 | −19.5% | 2026-06-22 → 2026-11-02 | 2026-11-02 | [TrendForce NAND / Flash Price](https://www.trendforce.com/pricedetail/flash/wafer_spot) | 参与 |
+| 1Tb QLC NAND 原片当前价 | 24.00 | USD · 来源口径 | −9.4% | 2026-07-06 → 2026-11-09 | 2026-11-09 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
 | 1TB Client SSD 合约均价 | 321.00 | USD / 块 | +18.8% | 2026-04-27 → 2026-08-05 | 2026-08-05 | [TrendForce NAND / Flash Price](https://www.trendforce.com/pricedetail/flash/pcc_oem_ssd_contract) | — |
-| UFS 2.2 256GB 移动存储当前价 | 60.00 | USD · 来源口径 | 0.0% | 2026-07-06 → 2026-11-06 | 2026-11-06 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | — |
+| UFS 2.2 256GB 移动存储当前价 | 60.00 | USD · 来源口径 | 0.0% | 2026-07-06 → 2026-11-09 | 2026-11-09 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | — |
 | NAND 消费级 NVMe SSD 零售低价 | 0.0926 | USD / GB | +108% | 2025-07-01 → 2026-10-01 | 2026-10-01 | [Stanford DAM Memory Prices](https://dam.stanford.edu/memory-prices.html) | — |
-| CFM NAND 价格指数 | 2,795.35 | 指数 | −13.5% | 2026-03-24 → 2026-11-03 | 2026-11-06 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
+| CFM NAND 价格指数 | 2,795.35 | 指数 | −13.5% | 2026-03-24 → 2026-11-03 | 2026-11-09 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 参与 |
 
 ## 冷层
 
@@ -83,11 +83,11 @@ ETF 价格 · 不参与周期判断
 
 | 来源 | 状态 | 数据日期 |
 |---|---|---|
-| [TrendForce DRAM Price](https://www.trendforce.com/price/dram/dram_spot) | 当期 | 2026-11-06 |
-| [TrendForce NAND / Flash Price](https://www.trendforce.com/price/flash/emmc_spot) | 留意 | 2026-10-26 |
-| [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 当期 | 2026-11-06 |
+| [TrendForce DRAM Price](https://www.trendforce.com/price/dram/dram_spot) | 当期 | 2026-11-09 |
+| [TrendForce NAND / Flash Price](https://www.trendforce.com/price/flash/emmc_spot) | 当期 | 2026-11-02 |
+| [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 当期 | 2026-11-09 |
 | [AWS S3 Price List (us-east-1)](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv) | 当期 | 2026-11-04 |
-| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-11-07 |
+| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-11-09 |
 | [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU334112334112,PCU33443344) | 留意 | 2026-09-01 |
 | HBM Proxy Events | 留意 | 2026-09-30 |
 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | 当期 | 2026-09-30 |
