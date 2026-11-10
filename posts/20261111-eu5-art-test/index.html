@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>《欧陆风云5》加载画面小实验</title>
+<meta name="description" content="看图点选的 5 分钟小实验：比较几组《欧陆风云5》风格的历史插画，选你更喜欢的，再猜猜它们的来历。">
+<style>
+:root {
+  --bg: #faf9f7;
+  --panel: #ffffff;
+  --fg: #3d3d3d;
+  --muted: #6a6660;
+  --line: #e6e2db;
+  --accent: #5c7a6f;
+  --accent-dark: #4a6359;
+  /* 看图区用中性灰，避免底色给画面带色偏 */
+  --stage: #2a2a2a;
+  --stage-fg: #ececec;
+  --stage-muted: #a8a8a8;
+  --stage-line: #454545;
+  --stage-btn: #383838;
+  --stage-btn-hover: #444444;
+  --sel: #a9cbbd;
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.7; overflow-x: hidden; }
+body.on-stage { background: var(--stage); color: var(--stage-fg); overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+
+/* 说明页 */
+.paper { max-width: 640px; margin: 0 auto; padding: clamp(48px, 10vh, 96px) 20px 96px; }
+.paper h1 { margin: 0 0 12px; font-size: clamp(26px, 1.2rem + 2vw, 36px); line-height: 1.25; font-weight: 700; }
+.paper h2 { margin: 0 0 16px; font-size: clamp(22px, 1rem + 1.2vw, 28px); line-height: 1.3; }
+.paper .lead { margin: 0 0 22px; font-size: 18px; color: var(--fg); }
+.paper ul { margin: 0 0 28px; padding-left: 1.1em; }
+.paper li { margin-bottom: 8px; font-size: 16px; }
+.paper p { font-size: 16px; }
+.paper .fine { margin-top: 18px; font-size: 13px; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn { min-height: 48px; padding: 0 24px; border-radius: 8px; border: 1px solid transparent; font-size: 16px; font-weight: 600; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-plain { background: transparent; border-color: var(--line); color: var(--fg); }
+.btn-plain:hover { border-color: #cfc9bf; }
+.btn:disabled { opacity: .5; cursor: default; }
+.bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin: 22px 0 10px; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+.q { margin: 0 0 26px; }
+.q-title { margin: 0 0 10px; font-size: 16px; font-weight: 600; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { min-height: 44px; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); font-size: 15px; text-align: left; }
+.opt[aria-pressed="true"] { border-color: var(--accent); background: #eef3f1; color: var(--accent-dark); font-weight: 600; }
+textarea { width: 100%; min-height: 88px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 15px; color: var(--fg); background: var(--panel); resize: vertical; }
+textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 8px 0 18px; }
+.score { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.score b { display: block; font-size: clamp(28px, 1rem + 2vw, 36px); line-height: 1.15; font-variant-numeric: tabular-nums; }
+.score span { font-size: 14px; color: var(--muted); }
+.note { color: var(--muted); font-size: 15px; }
+.debrief { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+
+/* 看图区 */
+.stage { position: fixed; inset: 0; display: flex; flex-direction: column; padding: max(10px, env(safe-area-inset-top)) 16px max(56px, calc(env(safe-area-inset-bottom) + 48px)); }
+.stage-top { flex: none; text-align: center; padding: 4px 0 10px; }
+.progress { height: 3px; background: var(--stage-line); border-radius: 2px; overflow: hidden; margin: 0 auto 10px; max-width: 960px; }
+.progress > i { display: block; height: 100%; width: 0; background: var(--stage-muted); transition: width .2s; }
+.where { font-size: 13px; color: var(--stage-muted); font-variant-numeric: tabular-nums; }
+.ask { margin: 2px 0 0; font-size: clamp(17px, .9rem + .5vw, 21px); font-weight: 600; }
+.stage-mid { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.imgs { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.imgs.column { flex-direction: column; }
+.shot { padding: 0; border: 0; border-radius: 4px; background: #1f1f1f; outline: 3px solid transparent; outline-offset: 3px; transition: outline-color .12s; touch-action: manipulation; }
+.shot img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 4px; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; }
+.shot.static { cursor: default; }
+@media (hover: hover) { .imgs.armed .shot:not(.static):hover { outline-color: rgba(255,255,255,.35); } }
+.shot.chosen, .shot.chosen:hover { outline-color: var(--sel) !important; }
+.shot:focus-visible { outline-color: var(--sel); }
+.stage-bottom { flex: none; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 12px; }
+.answers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 760px; }
+.ans, .conf { min-height: 48px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--stage-line); background: var(--stage-btn); font-size: 15px; line-height: 1.3; touch-action: manipulation; }
+.ans:hover, .conf:hover { background: var(--stage-btn-hover); }
+.ans.chosen, .conf.chosen { border-color: var(--sel); color: #fff; }
+.ans:focus-visible, .conf:focus-visible, .stage .btn:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.ans:nth-child(1), .ans:nth-child(4) { font-weight: 600; }
+.conf-row { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.conf-row.waiting { visibility: hidden; }
+.conf-label { font-size: 14px; color: var(--stage-muted); }
+.confs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 480px; }
+.blank .imgs, .blank .stage-bottom > * { visibility: hidden; }
+
+.card { max-width: 560px; margin: auto; padding: 0 4px; text-align: left; }
+.card .kicker { font-size: 14px; color: var(--stage-muted); margin: 0 0 8px; }
+.card h2 { margin: 0 0 12px; font-size: clamp(22px, 1rem + 1.4vw, 30px); line-height: 1.3; }
+.card p { margin: 0 0 24px; font-size: 16px; color: #d6d6d6; }
+.stage .btn-primary { background: #e9e9e9; color: #1d1d1d; }
+.stage .btn-primary:hover { background: #ffffff; }
+.keys { margin-top: 14px; font-size: 13px; color: var(--stage-muted); }
+@media (hover: none) { .keys { display: none; } }
+
+@media (max-width: 560px) {
+  .answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scores { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<main id="app">
+  <section class="paper" id="s-intro" hidden>
+    <h1>《欧陆风云5》加载画面小实验</h1>
+    <p class="lead">看图点选，一共三部分 32 次，大约 5 分钟。</p>
+    <ul>
+      <li>匿名：只记录你点了哪张、用了多久，以及屏幕尺寸这类设备信息。</li>
+      <li>电脑屏幕看得更清楚，手机也可以。</li>
+      <li>凭第一感觉选。中途关掉，再打开能接着做。</li>
+    </ul>
+    <div class="actions" id="intro-actions"></div>
+    <p class="fine" id="consent">点“开始”即表示同意把这些匿名作答用于统计。</p>
+  </section>
+
+  <section class="paper" id="s-loading" hidden>
+    <h2>正在准备图片</h2>
+    <div class="bar"><i id="load-bar"></i></div>
+    <p class="note" id="load-text">0 / 0</p>
+  </section>
+
+  <section class="paper" id="s-error" hidden>
+    <h2>出了点问题</h2>
+    <p id="error-text">服务暂时连不上，请稍后再试。</p>
+    <div class="actions"><button class="btn btn-primary" id="error-retry">重试</button></div>
+  </section>
+
+  <section class="stage" id="s-card" hidden>
+    <div class="card">
+      <p class="kicker" id="card-kicker"></p>
+      <h2 id="card-title"></h2>
+      <p id="card-body"></p>
+      <button class="btn btn-primary" id="card-go">开始</button>
+      <div class="keys" id="card-keys"></div>
+    </div>
+  </section>
+
+  <section class="stage" id="s-trial" hidden>
+    <div class="stage-top">
+      <div class="progress"><i id="progress"></i></div>
+      <div class="where" id="where"></div>
+      <p class="ask" id="ask"></p>
+    </div>
+    <div class="stage-mid"><div class="imgs" id="imgs"></div></div>
+    <div class="stage-bottom" id="bottom"></div>
+  </section>
+
+  <section class="paper" id="s-survey" hidden>
+    <h2>最后三个小问题</h2>
+    <p class="note">都可以跳过。</p>
+    <div class="q">
+      <p class="q-title">你玩过《欧陆风云》系列吗？</p>
+      <div class="opts" data-q="eu">
+        <button class="opt" data-v="none" aria-pressed="false">没玩过</button>
+        <button class="opt" data-v="played" aria-pressed="false">玩过</button>
+        <button class="opt" data-v="eu5" aria-pressed="false">玩过《欧陆风云5》，对加载画面有印象</button>
+      </div>
+    </div>
+    <div class="q">
+      <p class="q-title">你平时看 AI 生成的图多吗？</p>
+      <div class="opts" data-q="ai">
+        <button class="opt" data-v="rare" aria-pressed="false">很少</button>
+        <button class="opt" data-v="some" aria-pressed="false">偶尔</button>
+        <button class="opt" data-v="often" aria-pressed="false">经常，或自己也会生成</button>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title" for="cue">你主要靠什么判断官方还是 AI？（选填）</label>
+      <textarea id="cue" maxlength="500" placeholder="比如笔触、光线、人物、建筑……"></textarea>
+    </div>
+    <div class="actions"><button class="btn btn-primary" id="survey-go">看结果</button></div>
+    <p class="note" id="survey-msg" hidden></p>
+  </section>
+
+  <section class="paper" id="s-result" hidden>
+    <h2>你的结果</h2>
+    <div class="scores">
+      <div class="score"><b id="r-single"></b><span>单张判断答对</span></div>
+      <div class="score"><b id="r-pick"></b><span>二选一答对</span></div>
+    </div>
+    <p class="note" id="r-avg"></p>
+    <p id="r-like"></p>
+    <p class="note" id="r-attempt" hidden></p>
+    <div class="debrief">
+      <p>这些 AI 图是我为一个《欧陆风云5》加载画面模组做的：用即梦（Seedream）照着官方画风生成历史场景。第一部分没提 AI，是想知道在不知道来源时，大家更喜欢哪一类；那里面也混着官方图和 AI 图。</p>
+      <p>为了不影响后面参加的人，这里不公布每张图的答案。谢谢你花时间！</p>
+    </div>
+    <div class="actions" id="result-actions"></div>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const API = "/api/eu5-blind";
+  const imgUrl = (id) => `${API}/img/${id}.webp`;
+  const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1" };
+  const ISI_MS = 250; // 两题之间的空白
+
+  const BLOCKS = {
+    like: {
+      name: "第一部分", n: 12, ask: "你更喜欢哪一张？",
+      card: ["第一部分 · 共 12 组", "你更喜欢哪一张？", "每次两张画，点你更喜欢的那一张。不用想太久。"],
+      keys: "键盘：← → 或 ↑ ↓ 选择",
+    },
+    single: {
+      name: "第二部分", n: 12, ask: "这张是官方画的，还是 AI 生成的？",
+      card: ["第二部分 · 共 12 张", "官方画的，还是 AI 生成的？", "这些画里，有的是 Paradox 为游戏绘制的官方加载画面，有的是 AI 生成的。每次一张，选出你的判断。两类不一定各占一半，有的图刚才可能见过。"],
+      keys: "键盘：1–4 选择",
+    },
+    pick: {
+      name: "第三部分", n: 8, ask: "哪一张是官方的？",
+      card: ["第三部分 · 共 8 组", "哪一张是官方的？", "每组正好一张官方、一张 AI。先点你认为是官方的那张，再选有多大把握。"],
+      keys: "键盘：← → 或 ↑ ↓ 选图，1–3 选把握",
+    },
+  };
+  const SINGLE_ANSWERS = [["1", "肯定是官方"], ["2", "可能是官方"], ["3", "可能是 AI"], ["4", "肯定是 AI"]];
+  const CONF_ANSWERS = [[1, "猜的"], [2, "有点把握"], [3, "很确定"]];
+
+  const $ = (id) => document.getElementById(id);
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* 无痕模式等情况下不保存进度 */ } },
+    del(k) { try { localStorage.removeItem(k); } catch { /* 同上 */ } },
+  };
+  const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
+    : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = crypto.getRandomValues(new Uint8Array(1))[0] & 15;
+      return (c === "x" ? r : (r & 3) | 8).toString(16);
+    }));
+  function pid() {
+    let p = store.get(KEY.pid);
+    if (!p) { p = uuid(); store.set(KEY.pid, p); }
+    return p;
+  }
+
+  let state = null;       // { session_id, trials, next, seen: {block: true} }
+  let queue = store.get(KEY.queue) || [];
+  let flushing = false;
+  const images = new Map(); // id -> 已解码的 <img>
+  let resumedNext = false;
+
+  function show(id) {
+    for (const s of document.querySelectorAll("#app > section")) s.hidden = s.id !== id;
+    document.body.classList.toggle("on-stage", id === "s-card" || id === "s-trial");
+    window.scrollTo(0, 0);
+  }
+  const saveState = () => state && store.set(KEY.state, state);
+
+  async function post(path, body) {
+    const res = await fetch(API + path, {
+      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body), keepalive: true,
+    });
+    let data = null;
+    try { data = await res.json(); } catch { /* 空响应 */ }
+    if (!res.ok) { const e = new Error(data?.error || `HTTP ${res.status}`); e.status = res.status; throw e; }
+    return data;
+  }
+  function logEvent(type, data) {
+    if (!state) return;
+    post("/event", { session_id: state.session_id, type, data, client_ts: new Date().toISOString() }).catch(() => {});
+  }
+
+  // 每题立即上报；失败的留在本地队列，后面再补发（服务端按题号去重）
+  async function flush() {
+    if (flushing) return;
+    flushing = true;
+    try {
+      while (queue.length) {
+        try {
+          await post("/response", queue[0]);
+        } catch (e) {
+          if (!(e.status === 400 || e.status === 404)) break; // 网络或服务端错误：稍后重试
+          logEvent("error", { where: "response", status: e.status, i: queue[0].i });
+        }
+        queue.shift();
+        store.set(KEY.queue, queue);
+      }
+    } finally {
+      flushing = false;
+    }
+  }
+  function beaconQueue() {
+    if (!navigator.sendBeacon) return;
+    for (const b of queue) {
+      navigator.sendBeacon(API + "/response", new Blob([JSON.stringify(b)], { type: "application/json" }));
+    }
+  }
+
+  // ---------- 开场 ----------
+  function renderIntro() {
+    const box = $("intro-actions");
+    box.innerHTML = "";
+    const saved = store.get(KEY.state);
+    const done = store.get(KEY.done);
+    const mk = (label, cls, fn) => {
+      const b = document.createElement("button");
+      b.className = `btn ${cls}`; b.textContent = label; b.addEventListener("click", fn);
+      box.appendChild(b); return b;
+    };
+    if (saved && saved.session_id && saved.next < saved.trials.length) {
+      const lead = document.querySelector("#s-intro .lead");
+      lead.textContent = `上次做到第 ${saved.next + 1} / ${saved.trials.length} 题。`;
+      $("consent").hidden = true;
+      mk("接着做", "btn-primary", () => resume(saved));
+      mk("重新开始", "btn-plain", () => {
+        state = saved; logEvent("restart", { from: saved.next }); state = null;
+        store.del(KEY.state); start();
+      });
+    } else if (done) {
+      showResult(done, true);
+      return;
+    } else {
+      mk("开始", "btn-primary", start);
+    }
+    show("s-intro");
+  }
+
+  function clientInfo() {
+    const mm = (q) => window.matchMedia && matchMedia(q).matches;
+    let ref = null;
+    try { ref = document.referrer ? new URL(document.referrer).host : null; } catch { /* 忽略 */ }
+    return {
+      vw: innerWidth, vh: innerHeight, sw: screen.width, sh: screen.height, dpr: devicePixelRatio,
+      touch: mm("(pointer: coarse)"), gamut: mm("(color-gamut: p3)") ? "p3" : "srgb", dark: mm("(prefers-color-scheme: dark)"),
+      lang: navigator.language, tz: Intl.DateTimeFormat().resolvedOptions().timeZone, ref,
+    };
+  }
+
+  async function start() {
+    show("s-loading");
+    $("load-text").textContent = "正在连接…";
+    try {
+      const data = await post("/session", { pid: pid(), client: clientInfo() });
+      state = { session_id: data.session_id, design: data.design, trials: data.trials, next: 0, seen: {} };
+      queue = []; store.set(KEY.queue, queue);
+      saveState();
+    } catch (e) {
+      fail(e.status === 429 ? "刚才开始的次数太多了，请过一会儿再试。" : "服务暂时连不上，请稍后再试。", start);
+      return;
+    }
+    begin();
+  }
+
+  function resume(saved) {
+    state = saved;
+    resumedNext = true;
+    logEvent("resume", { next: state.next });
+    flush();
+    begin();
+  }
+
+  // 同一会话里重试只重新加载图片，不另开会话
+  async function begin() {
+    show("s-loading");
+    try {
+      await preload();
+    } catch {
+      fail("图片加载失败，请检查网络后重试。", begin);
+      return;
+    }
+    next();
+  }
+
+  function fail(msg, retry) {
+    $("error-text").textContent = msg;
+    $("error-retry").onclick = retry;
+    show("s-error");
+  }
+
+  async function preload() {
+    const ids = [...new Set(state.trials.flatMap((t) => t.ids))].filter((id) => !images.has(id));
+    let done = 0;
+    const total = ids.length;
+    const t0 = performance.now();
+    const tick = () => {
+      $("load-text").textContent = `${done} / ${total}`;
+      $("load-bar").style.width = `${total ? (100 * done) / total : 100}%`;
+    };
+    tick();
+    const loadOne = async (id, tries = 2) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.alt = "";
+      img.draggable = false;
+      img.src = imgUrl(id);
+      try {
+        await img.decode();
+      } catch (e) {
+        if (tries > 1) return loadOne(id, tries - 1);
+        logEvent("img_error", { id });
+        throw e;
+      }
+      images.set(id, img);
+      done += 1; tick();
+    };
+    // 同时最多 6 个请求
+    const pending = [...ids];
+    await Promise.all(Array.from({ length: Math.min(6, pending.length) }, async () => {
+      while (pending.length) await loadOne(pending.shift());
+    }));
+    logEvent("load_ms", { ms: Math.round(performance.now() - t0), n: total });
+  }
+
+  // ---------- 流程 ----------
+  function next() {
+    const t = state.trials[state.next];
+    if (!t) { showSurvey(); return; }
+    if (!state.seen[t.block]) { showCard(t.block); return; }
+    showTrial(t);
+  }
+
+  function showCard(block) {
+    const b = BLOCKS[block];
+    $("card-kicker").textContent = b.card[0];
+    $("card-title").textContent = b.card[1];
+    $("card-body").textContent = b.card[2];
+    $("card-keys").textContent = b.keys;
+    show("s-card");
+    const go = $("card-go");
+    go.onclick = () => { state.seen[block] = true; saveState(); next(); };
+    go.focus({ preventScroll: true });
+  }
+
+  // 当前题的计时与交互状态
+  let cur = null;
+
+  function bestPairLayout(availW, availH, gap) {
+    const row = Math.min((availW - gap) / 2, (availH * 16) / 9);
+    const col = Math.min(availW, ((availH - gap) / 2) * 16 / 9);
+    return row >= col ? { dir: "row", w: row } : { dir: "column", w: col };
+  }
+
+  function layout() {
+    if (!cur) return;
+    const mid = document.querySelector("#s-trial .stage-mid");
+    const availW = mid.clientWidth;
+    const availH = mid.clientHeight;
+    const gap = 12;
+    const box = $("imgs");
+    let w;
+    if (cur.t.kind === "pair") {
+      const best = bestPairLayout(availW, availH, gap);
+      box.classList.toggle("column", best.dir === "column");
+      cur.layout = best.dir;
+      w = best.w;
+    } else {
+      box.classList.remove("column");
+      cur.layout = "single";
+      w = Math.min(availW, (availH * 16) / 9);
+    }
+    w = Math.max(120, Math.floor(w));
+    for (const el of box.children) { el.style.width = `${w}px`; el.style.height = `${Math.round((w * 9) / 16)}px`; }
+    cur.shownW = w;
+  }
+  window.addEventListener("resize", layout);
+
+  function buildBottom(t) {
+    const bottom = $("bottom");
+    bottom.innerHTML = "";
+    if (t.block === "single") {
+      const grid = document.createElement("div");
+      grid.className = "answers";
+      for (const [v, label] of SINGLE_ANSWERS) {
+        const b = document.createElement("button");
+        b.className = "ans"; b.textContent = label; b.dataset.v = v;
+        b.addEventListener("click", () => answerSingle(v, b));
+        grid.appendChild(b);
+      }
+      bottom.appendChild(grid);
+    } else if (t.block === "pick") {
+      const row = document.createElement("div");
+      row.className = "conf-row waiting"; row.id = "conf-row";
+      row.innerHTML = '<div class="conf-label">有多大把握？</div>';
+      const grid = document.createElement("div");
+      grid.className = "confs";
+      for (const [v, label] of CONF_ANSWERS) {
+        const b = document.createElement("button");
+        b.className = "conf"; b.textContent = label;
+        b.addEventListener("click", () => answerConfidence(v, b));
+        grid.appendChild(b);
+      }
+      row.appendChild(grid);
+      bottom.appendChild(row);
+    }
+  }
+
+  async function showTrial(t) {
+    const b = BLOCKS[t.block];
+    const inBlock = state.trials.filter((x) => x.block === t.block);
+    const k = inBlock.indexOf(t) + 1;
+    $("where").textContent = `${b.name} · ${k} / ${inBlock.length}`;
+    $("ask").textContent = b.ask;
+    $("progress").style.width = `${(100 * state.next) / state.trials.length}%`;
+
+    const trialEl = $("s-trial");
+    trialEl.classList.add("blank");
+    show("s-trial");
+
+    const box = $("imgs");
+    box.innerHTML = "";
+    box.classList.remove("armed");
+    box.addEventListener("pointermove", () => box.classList.add("armed"), { once: true });
+    t.ids.forEach((id, idx) => {
+      const btn = document.createElement("button");
+      btn.className = "shot";
+      if (t.kind === "single") { btn.classList.add("static"); btn.tabIndex = -1; btn.setAttribute("aria-hidden", "true"); }
+      else btn.setAttribute("aria-label", idx === 0 ? "第一张（左或上）" : "第二张（右或下）");
+      btn.appendChild(images.get(id));
+      if (t.kind === "pair") btn.addEventListener("click", () => choosePair(idx === 0 ? "a" : "b"));
+      box.appendChild(btn);
+    });
+    buildBottom(t);
+    cur = { t, layout: null, shownW: null, hiddenMs: 0, hiddenAt: null, locked: true, choice: null, switched: 0, resumed: resumedNext };
+    resumedNext = false;
+    layout();
+
+    await Promise.all(t.ids.map((id) => images.get(id).decode().catch(() => {})));
+    await new Promise((r) => setTimeout(r, ISI_MS));
+    trialEl.classList.remove("blank");
+    // 等两帧，确保图已画到屏幕上再开始计时
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    if (!cur || cur.t !== t) return;
+    cur.t0 = performance.now();
+    cur.locked = false;
+  }
+
+  function finishTrial(choice, confidence, extra = {}) {
+    const c = cur;
+    c.locked = true;
+    const nowMs = performance.now();
+    const rt = (c.tChoice ?? nowMs) - c.t0;
+    queue.push({
+      session_id: state.session_id, i: c.t.i, choice, confidence, rt_ms: Math.round(rt),
+      client_ts: new Date().toISOString(),
+      flags: {
+        hidden_ms: Math.round(c.hiddenMs), resumed: c.resumed, layout: c.layout,
+        shown_w: c.shownW, switched: c.switched, conf_rt_ms: extra.confRt ?? null,
+      },
+    });
+    store.set(KEY.queue, queue);
+    state.next += 1;
+    saveState();
+    flush();
+    setTimeout(() => { cur = null; next(); }, 160);
+  }
+
+  function choosePair(v) {
+    if (!cur || cur.locked) return;
+    const t = cur.t;
+    const shots = $("imgs").children;
+    if (t.block === "like") {
+      shots[v === "a" ? 0 : 1].classList.add("chosen");
+      finishTrial(v, null);
+      return;
+    }
+    // 二选一：先选图，再选把握；可以改选
+    if (cur.choice && cur.choice !== v) cur.switched += 1;
+    cur.choice = v;
+    cur.tChoice = performance.now();
+    shots[0].classList.toggle("chosen", v === "a");
+    shots[1].classList.toggle("chosen", v === "b");
+    $("conf-row").classList.remove("waiting");
+  }
+
+  function answerConfidence(v, btn) {
+    if (!cur || cur.locked || !cur.choice) return;
+    btn.classList.add("chosen");
+    const confRt = performance.now() - cur.tChoice;
+    finishTrial(cur.choice, v, { confRt: Math.round(confRt) });
+  }
+
+  function answerSingle(v, btn) {
+    if (!cur || cur.locked) return;
+    btn.classList.add("chosen");
+    finishTrial(v, null);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!$("s-card").hidden && e.key === "Enter") { e.preventDefault(); $("card-go").click(); return; }
+    if (!cur || cur.locked) return;
+    const blk = cur.t.block;
+    const map = { ArrowLeft: "a", ArrowUp: "a", ArrowRight: "b", ArrowDown: "b" };
+    if (cur.t.kind === "pair" && map[e.key]) { e.preventDefault(); choosePair(map[e.key]); return; }
+    if (blk === "single" && ["1", "2", "3", "4"].includes(e.key)) {
+      answerSingle(e.key, document.querySelector(`.ans[data-v="${e.key}"]`));
+    } else if (blk === "pick" && ["1", "2", "3"].includes(e.key) && cur.choice) {
+      answerConfidence(Number(e.key), document.querySelectorAll(".conf")[Number(e.key) - 1]);
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      beaconQueue();
+      if (cur && !cur.locked) cur.hiddenAt = performance.now();
+      if (state && state.next < state.trials.length) logEvent("hidden", { next: state.next });
+    } else {
+      if (cur && cur.hiddenAt != null) { cur.hiddenMs += performance.now() - cur.hiddenAt; cur.hiddenAt = null; }
+      if (state && state.next < state.trials.length) logEvent("visible", { next: state.next });
+      flush();
+    }
+  });
+
+  // ---------- 问卷与结果 ----------
+  const survey = { eu: null, ai: null };
+  for (const group of document.querySelectorAll(".opts")) {
+    group.addEventListener("click", (e) => {
+      const b = e.target.closest(".opt");
+      if (!b) return;
+      const on = b.getAttribute("aria-pressed") !== "true";
+      for (const o of group.querySelectorAll(".opt")) o.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-pressed", String(on));
+      survey[group.dataset.q] = on ? b.dataset.v : null;
+    });
+  }
+
+  function showSurvey() {
+    cur = null;
+    show("s-survey");
+    $("survey-go").onclick = submit;
+  }
+
+  async function submit() {
+    const btn = $("survey-go");
+    btn.disabled = true; btn.textContent = "正在提交…";
+    try {
+      for (let k = 0; k < 4 && queue.length; k++) {
+        await flush();
+        if (queue.length) await new Promise((r) => setTimeout(r, 800 * (k + 1)));
+      }
+      const data = await post("/finish", { session_id: state.session_id, survey: { ...survey, cue: $("cue").value.trim() || null } });
+      const result = { ...data, at: new Date().toISOString() };
+      store.set(KEY.done, result);
+      store.del(KEY.state);
+      showResult(result, false);
+    } catch (e) {
+      const msg = $("survey-msg");
+      msg.hidden = false;
+      if (e.status === 404) {
+        // 服务端已没有这次会话（例如数据被重置），只能重新开始
+        store.del(KEY.state); store.del(KEY.queue); queue = [];
+        msg.textContent = "服务端找不到这次作答的记录了，只能重新开始。";
+        btn.disabled = false; btn.textContent = "重新开始"; btn.onclick = start;
+        return;
+      }
+      btn.disabled = false; btn.textContent = "重新提交";
+      msg.textContent = "提交没成功，请检查网络后再点一次。作答还保存在这台设备上。";
+    }
+  }
+
+  const pct = (x) => `${Math.round(x * 100)}%`;
+  function showResult(r, revisit) {
+    const s = r.score;
+    $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
+    $("r-pick").textContent = `${s.pick.correct} / ${s.pick.n}`;
+    $("r-avg").textContent = r.avg && r.avg.n
+      ? `目前 ${r.avg.n} 人参加：单张判断平均答对 ${pct(r.avg.single)}，二选一平均答对 ${pct(r.avg.pick)}。全靠瞎猜的话，期望是 50%。`
+      : "全靠瞎猜的话，期望是 50%。";
+    $("r-like").textContent = s.like.oa
+      ? `第一部分里有 ${s.like.oa} 组其实是官方图对 AI 图，你有 ${s.like.ai} 组选了 AI 那张。`
+      : "";
+    const att = $("r-attempt");
+    att.hidden = !(r.attempt > 1);
+    att.textContent = r.attempt > 1 ? `这是你在这台设备上第 ${r.attempt} 次参加，统计时会单独处理。` : "";
+    const box = $("result-actions");
+    box.innerHTML = "";
+    const home = document.createElement("a");
+    home.className = "btn btn-primary"; home.href = "/"; home.textContent = "回到博客";
+    home.style.cssText = "display:inline-flex;align-items:center;text-decoration:none";
+    box.appendChild(home);
+    if (revisit) {
+      const again = document.createElement("button");
+      again.className = "btn btn-plain"; again.textContent = "再做一次";
+      again.addEventListener("click", () => { store.del(KEY.done); start(); });
+      box.appendChild(again);
+    }
+    show("s-result");
+  }
+
+  renderIntro();
+})();
+</script>
+</body>
+</html>
