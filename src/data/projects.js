@@ -25,8 +25,8 @@ export const allProjects = [
   },
   {
     name: '所有地块的描述 · EU5 模组',
-    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-09 当前订阅 2,801；专题页 eu5-descriptions 要一起改
-    description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 2,800+ 订阅',
+    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
+    description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 3,000+ 订阅',
     sticker: 'eu5',
     featured: true,
     url: 'https://wangyufeng.org/eu5-descriptions/',
@@ -37,8 +37,8 @@ export const allProjects = [
   },
   {
     name: '所有历史人物的描述 · EU5 模组',
-    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-09 当前订阅 506
-    description: '给《欧陆风云5》7,789 位真实历史人物写中英文生平，悬停头像就能读，Steam 创意工坊 500+ 订阅',
+    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 796
+    description: '给《欧陆风云5》7,789 位真实历史人物写中英文生平，悬停头像就能读，Steam 创意工坊 700+ 订阅',
     sticker: 'eu5-characters',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833397845',
@@ -49,8 +49,8 @@ export const allProjects = [
   },
   {
     name: '所有省份和伟大工程的描述 · EU4 模组',
-    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-09 当前订阅 620
-    description: '给《欧陆风云4》3,272 个省份和 139 座伟大工程补上中英文介绍，Steam 创意工坊 600+ 订阅',
+    // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 887
+    description: '给《欧陆风云4》3,272 个省份和 139 座伟大工程补上中英文介绍，Steam 创意工坊 800+ 订阅',
     sticker: 'eu4',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833082096',
