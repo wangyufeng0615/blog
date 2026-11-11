@@ -122,6 +122,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     </ul>
     <div class="actions" id="intro-actions"></div>
     <p class="fine" id="consent">点“开始”即表示同意把这些匿名作答用于统计。</p>
+    <p class="fine" id="owner-note" hidden>这台设备已标记为作者自测，作答不计入统计。去掉标记：在网址后加 ?me=0。</p>
   </section>
 
   <section class="paper" id="s-loading" hidden>
@@ -205,7 +206,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   "use strict";
   const API = "/api/eu5-blind";
   const imgUrl = (id) => `${API}/img/${id}.webp`;
-  const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1" };
+  const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
   const DESIGN = "v2-2026-11-11"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
@@ -341,6 +342,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       vw: innerWidth, vh: innerHeight, sw: screen.width, sh: screen.height, dpr: devicePixelRatio,
       touch: mm("(pointer: coarse)"), gamut: mm("(color-gamut: p3)") ? "p3" : "srgb", dark: mm("(prefers-color-scheme: dark)"),
       lang: navigator.language, tz: Intl.DateTimeFormat().resolvedOptions().timeZone, ref,
+      owner: store.get(KEY.owner) === true,
     };
   }
 
@@ -696,6 +698,17 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     }
     show("s-result");
   }
+
+  // 作者自测标记：网址带 ?me 打开一次，这个浏览器之后的会话都带 owner 标记；?me=0 取消
+  (() => {
+    const q = new URLSearchParams(location.search);
+    if (!q.has("me")) return;
+    if (q.get("me") === "0") store.del(KEY.owner); else store.set(KEY.owner, true);
+    q.delete("me");
+    const rest = q.toString();
+    history.replaceState(null, "", location.pathname + (rest ? `?${rest}` : "") + location.hash);
+  })();
+  $("owner-note").hidden = store.get(KEY.owner) !== true;
 
   renderIntro();
 })();
