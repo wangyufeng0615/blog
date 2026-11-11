@@ -70,7 +70,6 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 .stage-top { flex: none; text-align: center; padding: 4px 0 10px; }
 .progress { height: 3px; background: var(--stage-line); border-radius: 2px; overflow: hidden; margin: 0 auto 10px; max-width: 960px; }
 .progress > i { display: block; height: 100%; width: 0; background: var(--stage-muted); transition: width .2s; }
-.where { font-size: 13px; color: var(--stage-muted); font-variant-numeric: tabular-nums; }
 .ask { margin: 2px 0 0; font-size: clamp(17px, .9rem + .5vw, 21px); font-weight: 600; }
 .stage-mid { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
 .imgs { display: flex; gap: 12px; align-items: center; justify-content: center; }
@@ -95,13 +94,12 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 .blank .imgs, .blank .stage-bottom > * { visibility: hidden; }
 
 .card { max-width: 560px; margin: auto; padding: 0 4px; text-align: left; }
-.card .kicker { font-size: 14px; color: var(--stage-muted); margin: 0 0 8px; }
 .card h2 { margin: 0 0 12px; font-size: clamp(22px, 1rem + 1.4vw, 30px); line-height: 1.3; }
 .card p { margin: 0 0 24px; font-size: 16px; color: #d6d6d6; }
 .stage .btn-primary { background: #e9e9e9; color: #1d1d1d; }
 .stage .btn-primary:hover { background: #ffffff; }
-.keys { margin-top: 14px; font-size: 13px; color: var(--stage-muted); }
-@media (hover: none) { .keys { display: none; } }
+.stage-mid { position: relative; }
+.wait { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; margin: 0; font-size: 14px; color: var(--stage-muted); }
 
 @media (max-width: 560px) {
   .answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -114,21 +112,14 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 <main id="app">
   <section class="paper" id="s-intro" hidden>
     <h1>《欧陆风云5》加载画面小实验</h1>
-    <p class="lead">看图点选，一共三部分 28 次，大约 4 分钟。</p>
-    <ul>
-      <li>匿名：只记录你点了哪张、用了多久，以及屏幕尺寸这类设备信息。</li>
-      <li>电脑屏幕看得更清楚，手机也可以。</li>
-      <li>凭第一感觉选。中途关掉，再打开能接着做。</li>
-    </ul>
+    <p class="lead">三部分，28 次点选，约 4 分钟。匿名，中途关掉可以接着做。</p>
     <div class="actions" id="intro-actions"></div>
-    <p class="fine" id="consent">点“开始”即表示同意把这些匿名作答用于统计。</p>
-    <p class="fine" id="owner-note" hidden>这台设备已标记为作者自测，作答不计入统计。去掉标记：在网址后加 ?me=0。</p>
+    <p class="fine" id="consent">点“开始”即同意把匿名作答用于统计。</p>
+    <p class="fine" id="owner-note" hidden>本设备已标记为作者自测，不计入统计。</p>
   </section>
 
   <section class="paper" id="s-loading" hidden>
-    <h2>正在准备图片</h2>
-    <div class="bar"><i id="load-bar"></i></div>
-    <p class="note" id="load-text">0 / 0</p>
+    <p class="note" id="load-text">正在连接…</p>
   </section>
 
   <section class="paper" id="s-error" hidden>
@@ -139,27 +130,23 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 
   <section class="stage" id="s-card" hidden>
     <div class="card">
-      <p class="kicker" id="card-kicker"></p>
       <h2 id="card-title"></h2>
       <p id="card-body"></p>
       <button class="btn btn-primary" id="card-go">开始</button>
-      <div class="keys" id="card-keys"></div>
     </div>
   </section>
 
   <section class="stage" id="s-trial" hidden>
     <div class="stage-top">
       <div class="progress"><i id="progress"></i></div>
-      <div class="where" id="where"></div>
       <p class="ask" id="ask"></p>
     </div>
-    <div class="stage-mid"><div class="imgs" id="imgs"></div></div>
+    <div class="stage-mid"><div class="imgs" id="imgs"></div><p class="wait" id="wait" hidden>加载中…</p></div>
     <div class="stage-bottom" id="bottom"></div>
   </section>
 
   <section class="paper" id="s-survey" hidden>
-    <h2>最后三个小问题</h2>
-    <p class="note">都可以跳过。</p>
+    <h2>最后三个问题（都可跳过）</h2>
     <div class="q">
       <p class="q-title">你玩过《欧陆风云》系列吗？</p>
       <div class="opts" data-q="eu">
@@ -177,7 +164,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       </div>
     </div>
     <div class="q">
-      <label class="q-title" for="cue">你主要靠什么判断官方还是 AI？（选填）</label>
+      <label class="q-title" for="cue">你主要靠什么判断？（选填）</label>
       <textarea id="cue" maxlength="500" placeholder="比如笔触、光线、人物、建筑……"></textarea>
     </div>
     <div class="actions"><button class="btn btn-primary" id="survey-go">看结果</button></div>
@@ -194,8 +181,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     <p id="r-like"></p>
     <p class="note" id="r-attempt" hidden></p>
     <div class="debrief">
-      <p>这些 AI 图是我为一个《欧陆风云5》加载画面模组做的：用即梦（Seedream）照着官方画风生成历史场景。</p>
-      <p>为了不影响后面参加的人，这里不公布每张图的答案。谢谢你花时间！</p>
+      <p>AI 图是我为一个《欧陆风云5》加载画面模组用即梦（Seedream）生成的。为了不影响后来的人，不公布单张答案。谢谢！</p>
     </div>
     <div class="actions" id="result-actions"></div>
   </section>
@@ -211,22 +197,11 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 
   const DESIGN = "v2-2026-11-11"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
-    pick: {
-      name: "第一部分", n: 8, ask: "哪一张是 AI 生成的？",
-      card: ["第一部分 · 共 8 组", "哪一张是 AI 生成的？", "下面这些画，有的是 Paradox 为《欧陆风云5》绘制的官方加载画面，有的是 AI 生成的。每组两张，正好一张是 AI。先点你认为是 AI 的那张，再选有多大把握。"],
-      keys: "键盘：← → 或 ↑ ↓ 选图，1–3 选把握",
-    },
-    single: {
-      name: "第二部分", n: 12, ask: "这张是官方画的，还是 AI 生成的？",
-      card: ["第二部分 · 共 12 张", "官方画的，还是 AI 生成的？", "这次每次只看一张，判断它的来源。两类不一定各占一半，有的图刚才可能见过。"],
-      keys: "键盘：1–4 选择",
-    },
-    like: {
-      name: "第三部分", n: 8, ask: "你更喜欢哪一张？",
-      card: ["第三部分 · 共 8 组", "你更喜欢哪一张？", "最后不管来源，只看画面：点你更喜欢的那一张，不用想太久。"],
-      keys: "键盘：← → 或 ↑ ↓ 选择",
-    },
+    pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
+    single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张，两类不一定各占一半。"] },
+    like: { ask: "你更喜欢哪一张？", card: ["你更喜欢哪一张？", "只看画面，凭感觉选。"] },
   };
+  const LOOKAHEAD = 4; // 预先加载后面几题的图
   const SINGLE_ANSWERS = [["1", "肯定是官方"], ["2", "可能是官方"], ["3", "可能是 AI"], ["4", "肯定是 AI"]];
   const CONF_ANSWERS = [[1, "猜的"], [2, "有点把握"], [3, "很确定"]];
 
@@ -371,15 +346,9 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     begin();
   }
 
-  // 同一会话里重试只重新加载图片，不另开会话
-  async function begin() {
-    show("s-loading");
-    try {
-      await preload();
-    } catch {
-      fail("图片加载失败，请检查网络后重试。", begin);
-      return;
-    }
+  // 不再一次性预载：当前题和后面几题的图先加载，其余边做边加载
+  function begin() {
+    prefetch(state.next);
     next();
   }
 
@@ -389,38 +358,30 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     show("s-error");
   }
 
-  async function preload() {
-    const ids = [...new Set(state.trials.flatMap((t) => t.ids))].filter((id) => !images.has(id));
-    let done = 0;
-    const total = ids.length;
-    const t0 = performance.now();
-    const tick = () => {
-      $("load-text").textContent = `${done} / ${total}`;
-      $("load-bar").style.width = `${total ? (100 * done) / total : 100}%`;
-    };
-    tick();
-    const loadOne = async (id, tries = 2) => {
-      const img = new Image();
-      img.decoding = "async";
-      img.alt = "";
-      img.draggable = false;
-      img.src = imgUrl(id);
-      try {
-        await img.decode();
-      } catch (e) {
-        if (tries > 1) return loadOne(id, tries - 1);
-        logEvent("img_error", { id });
-        throw e;
+  const loading = new Map(); // id -> Promise<已解码的 img>
+  function ensure(id) {
+    if (loading.has(id)) return loading.get(id);
+    const p = (async () => {
+      for (let k = 0; k < 2; k++) {
+        const img = new Image();
+        img.decoding = "async";
+        img.alt = "";
+        img.draggable = false;
+        img.src = imgUrl(id);
+        try {
+          await img.decode();
+          images.set(id, img);
+          return img;
+        } catch (e) {
+          if (k === 1) { loading.delete(id); logEvent("img_error", { id }); throw e; }
+        }
       }
-      images.set(id, img);
-      done += 1; tick();
-    };
-    // 同时最多 6 个请求
-    const pending = [...ids];
-    await Promise.all(Array.from({ length: Math.min(6, pending.length) }, async () => {
-      while (pending.length) await loadOne(pending.shift());
-    }));
-    logEvent("load_ms", { ms: Math.round(performance.now() - t0), n: total });
+    })();
+    loading.set(id, p);
+    return p;
+  }
+  function prefetch(from) {
+    for (const t of state.trials.slice(from, from + LOOKAHEAD)) for (const id of t.ids) ensure(id).catch(() => {});
   }
 
   // ---------- 流程 ----------
@@ -433,10 +394,9 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 
   function showCard(block) {
     const b = BLOCKS[block];
-    $("card-kicker").textContent = b.card[0];
-    $("card-title").textContent = b.card[1];
-    $("card-body").textContent = b.card[2];
-    $("card-keys").textContent = b.keys;
+    $("card-title").textContent = b.card[0];
+    $("card-body").textContent = b.card[1];
+    prefetch(state.next);
     show("s-card");
     const go = $("card-go");
     go.onclick = () => { state.seen[block] = true; saveState(); next(); };
@@ -507,16 +467,27 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   }
 
   async function showTrial(t) {
-    const b = BLOCKS[t.block];
-    const inBlock = state.trials.filter((x) => x.block === t.block);
-    const k = inBlock.indexOf(t) + 1;
-    $("where").textContent = `${b.name} · ${k} / ${inBlock.length}`;
-    $("ask").textContent = b.ask;
+    $("ask").textContent = BLOCKS[t.block].ask;
     $("progress").style.width = `${(100 * state.next) / state.trials.length}%`;
 
     const trialEl = $("s-trial");
     trialEl.classList.add("blank");
     show("s-trial");
+    cur = null;
+
+    // 等这一题的图加载好；超过 400 ms 才显示“加载中”
+    const tw = performance.now();
+    const slow = setTimeout(() => { $("wait").hidden = false; }, 400);
+    try {
+      await Promise.all(t.ids.map(ensure));
+    } catch {
+      clearTimeout(slow); $("wait").hidden = true;
+      fail("图片加载失败，请检查网络后重试。", () => next());
+      return;
+    }
+    clearTimeout(slow); $("wait").hidden = true;
+    const waitMs = performance.now() - tw;
+    prefetch(state.next + 1);
 
     const box = $("imgs");
     box.innerHTML = "";
@@ -532,12 +503,11 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       box.appendChild(btn);
     });
     buildBottom(t);
-    cur = { t, layout: null, shownW: null, hiddenMs: 0, hiddenAt: null, locked: true, choice: null, switched: 0, resumed: resumedNext };
+    cur = { t, layout: null, shownW: null, hiddenMs: 0, hiddenAt: null, locked: true, choice: null, switched: 0, resumed: resumedNext, waitMs };
     resumedNext = false;
     layout();
 
-    await Promise.all(t.ids.map((id) => images.get(id).decode().catch(() => {})));
-    await new Promise((r) => setTimeout(r, ISI_MS));
+    await new Promise((r) => setTimeout(r, Math.max(0, ISI_MS - waitMs)));
     trialEl.classList.remove("blank");
     // 等两帧，确保图已画到屏幕上再开始计时
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -556,7 +526,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       client_ts: new Date().toISOString(),
       flags: {
         hidden_ms: Math.round(c.hiddenMs), resumed: c.resumed, layout: c.layout,
-        shown_w: c.shownW, switched: c.switched, conf_rt_ms: extra.confRt ?? null,
+        shown_w: c.shownW, switched: c.switched, conf_rt_ms: extra.confRt ?? null, wait_ms: Math.round(c.waitMs),
       },
     });
     store.set(KEY.queue, queue);
@@ -676,10 +646,10 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
     $("r-pick").textContent = `${s.pick.correct} / ${s.pick.n}`;
     $("r-avg").textContent = r.avg && r.avg.n
-      ? `目前 ${r.avg.n} 人参加：二选一平均答对 ${pct(r.avg.pick)}，单张判断平均答对 ${pct(r.avg.single)}。全靠瞎猜的话，期望是 50%。`
-      : "全靠瞎猜的话，期望是 50%。";
+      ? `目前 ${r.avg.n} 人平均：二选一 ${pct(r.avg.pick)}，单张 ${pct(r.avg.single)}（瞎猜是 50%）。`
+      : "瞎猜的正确率是 50%。";
     $("r-like").textContent = s.like.oa
-      ? `第三部分里有 ${s.like.oa} 组是官方图对 AI 图，你有 ${s.like.ai} 组更喜欢 AI 那张。`
+      ? `官方对 AI 的 ${s.like.oa} 组里，你有 ${s.like.ai} 组更喜欢 AI 图。`
       : "";
     const att = $("r-attempt");
     att.hidden = !(r.attempt > 1);
