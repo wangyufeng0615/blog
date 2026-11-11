@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>《欧陆风云5》加载画面小实验</title>
-<meta name="description" content="看图点选的 5 分钟小实验：比较几组《欧陆风云5》风格的历史插画，选你更喜欢的，再猜猜它们的来历。">
+<meta name="description" content="看图点选的 4 分钟小实验：分辨《欧陆风云5》的官方加载画面和 AI 生成的插画，再选出你更喜欢的。">
 <style>
 :root {
   --bg: #faf9f7;
@@ -114,7 +114,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 <main id="app">
   <section class="paper" id="s-intro" hidden>
     <h1>《欧陆风云5》加载画面小实验</h1>
-    <p class="lead">看图点选，一共三部分 32 次，大约 5 分钟。</p>
+    <p class="lead">看图点选，一共三部分 28 次，大约 4 分钟。</p>
     <ul>
       <li>匿名：只记录你点了哪张、用了多久，以及屏幕尺寸这类设备信息。</li>
       <li>电脑屏幕看得更清楚，手机也可以。</li>
@@ -186,14 +186,14 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   <section class="paper" id="s-result" hidden>
     <h2>你的结果</h2>
     <div class="scores">
-      <div class="score"><b id="r-single"></b><span>单张判断答对</span></div>
       <div class="score"><b id="r-pick"></b><span>二选一答对</span></div>
+      <div class="score"><b id="r-single"></b><span>单张判断答对</span></div>
     </div>
     <p class="note" id="r-avg"></p>
     <p id="r-like"></p>
     <p class="note" id="r-attempt" hidden></p>
     <div class="debrief">
-      <p>这些 AI 图是我为一个《欧陆风云5》加载画面模组做的：用即梦（Seedream）照着官方画风生成历史场景。第一部分没提 AI，是想知道在不知道来源时，大家更喜欢哪一类；那里面也混着官方图和 AI 图。</p>
+      <p>这些 AI 图是我为一个《欧陆风云5》加载画面模组做的：用即梦（Seedream）照着官方画风生成历史场景。</p>
       <p>为了不影响后面参加的人，这里不公布每张图的答案。谢谢你花时间！</p>
     </div>
     <div class="actions" id="result-actions"></div>
@@ -208,21 +208,22 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1" };
   const ISI_MS = 250; // 两题之间的空白
 
+  const DESIGN = "v2-2026-11-11"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
-    like: {
-      name: "第一部分", n: 12, ask: "你更喜欢哪一张？",
-      card: ["第一部分 · 共 12 组", "你更喜欢哪一张？", "每次两张画，点你更喜欢的那一张。不用想太久。"],
-      keys: "键盘：← → 或 ↑ ↓ 选择",
+    pick: {
+      name: "第一部分", n: 8, ask: "哪一张是 AI 生成的？",
+      card: ["第一部分 · 共 8 组", "哪一张是 AI 生成的？", "下面这些画，有的是 Paradox 为《欧陆风云5》绘制的官方加载画面，有的是 AI 生成的。每组两张，正好一张是 AI。先点你认为是 AI 的那张，再选有多大把握。"],
+      keys: "键盘：← → 或 ↑ ↓ 选图，1–3 选把握",
     },
     single: {
       name: "第二部分", n: 12, ask: "这张是官方画的，还是 AI 生成的？",
-      card: ["第二部分 · 共 12 张", "官方画的，还是 AI 生成的？", "这些画里，有的是 Paradox 为游戏绘制的官方加载画面，有的是 AI 生成的。每次一张，选出你的判断。两类不一定各占一半，有的图刚才可能见过。"],
+      card: ["第二部分 · 共 12 张", "官方画的，还是 AI 生成的？", "这次每次只看一张，判断它的来源。两类不一定各占一半，有的图刚才可能见过。"],
       keys: "键盘：1–4 选择",
     },
-    pick: {
-      name: "第三部分", n: 8, ask: "哪一张是官方的？",
-      card: ["第三部分 · 共 8 组", "哪一张是官方的？", "每组正好一张官方、一张 AI。先点你认为是官方的那张，再选有多大把握。"],
-      keys: "键盘：← → 或 ↑ ↓ 选图，1–3 选把握",
+    like: {
+      name: "第三部分", n: 8, ask: "你更喜欢哪一张？",
+      card: ["第三部分 · 共 8 组", "你更喜欢哪一张？", "最后不管来源，只看画面：点你更喜欢的那一张，不用想太久。"],
+      keys: "键盘：← → 或 ↑ ↓ 选择",
     },
   };
   const SINGLE_ANSWERS = [["1", "肯定是官方"], ["2", "可能是官方"], ["3", "可能是 AI"], ["4", "肯定是 AI"]];
@@ -302,7 +303,12 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   function renderIntro() {
     const box = $("intro-actions");
     box.innerHTML = "";
-    const saved = store.get(KEY.state);
+    let saved = store.get(KEY.state);
+    if (saved && saved.design !== DESIGN) {
+      // 题目顺序和问法改过，旧版没做完的进度作废，重新开始
+      store.del(KEY.state);
+      saved = null;
+    }
     const done = store.get(KEY.done);
     const mk = (label, cls, fn) => {
       const b = document.createElement("button");
@@ -342,11 +348,13 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     show("s-loading");
     $("load-text").textContent = "正在连接…";
     try {
-      const data = await post("/session", { pid: pid(), client: clientInfo() });
+      const data = await post("/session", { pid: pid(), client: clientInfo(), design: DESIGN });
+      if (data.design !== DESIGN) { fail("页面刚更新过，请刷新后再开始。", () => location.reload()); return; }
       state = { session_id: data.session_id, design: data.design, trials: data.trials, next: 0, seen: {} };
       queue = []; store.set(KEY.queue, queue);
       saveState();
     } catch (e) {
+      if (e.status === 409) { fail("页面刚更新过，请刷新后再开始。", () => location.reload()); return; }
       fail(e.status === 429 ? "刚才开始的次数太多了，请过一会儿再试。" : "服务暂时连不上，请稍后再试。", start);
       return;
     }
@@ -666,10 +674,10 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
     $("r-pick").textContent = `${s.pick.correct} / ${s.pick.n}`;
     $("r-avg").textContent = r.avg && r.avg.n
-      ? `目前 ${r.avg.n} 人参加：单张判断平均答对 ${pct(r.avg.single)}，二选一平均答对 ${pct(r.avg.pick)}。全靠瞎猜的话，期望是 50%。`
+      ? `目前 ${r.avg.n} 人参加：二选一平均答对 ${pct(r.avg.pick)}，单张判断平均答对 ${pct(r.avg.single)}。全靠瞎猜的话，期望是 50%。`
       : "全靠瞎猜的话，期望是 50%。";
     $("r-like").textContent = s.like.oa
-      ? `第一部分里有 ${s.like.oa} 组其实是官方图对 AI 图，你有 ${s.like.ai} 组选了 AI 那张。`
+      ? `第三部分里有 ${s.like.oa} 组是官方图对 AI 图，你有 ${s.like.ai} 组更喜欢 AI 那张。`
       : "";
     const att = $("r-attempt");
     att.hidden = !(r.attempt > 1);
