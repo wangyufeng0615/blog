@@ -36,6 +36,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .paper h1 { margin: 0 0 12px; font-size: clamp(26px, 1.2rem + 2vw, 36px); line-height: 1.25; font-weight: 700; }
 .paper h2 { margin: 0 0 16px; font-size: clamp(22px, 1rem + 1.2vw, 28px); line-height: 1.3; }
 .paper .lead { margin: 0 0 22px; font-size: 18px; color: var(--fg); }
+.paper .lead-what { margin-bottom: 10px; }
 .paper ul { margin: 0 0 28px; padding-left: 1.1em; }
 .paper li { margin-bottom: 8px; font-size: 16px; }
 .paper p { font-size: 16px; }
@@ -112,7 +113,8 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 <main id="app">
   <section class="paper" id="s-intro" hidden>
     <h1>《欧陆风云5》加载画面小实验</h1>
-    <p class="lead">三部分，28 次点选，约 4 分钟。匿名，中途关掉可以接着做。</p>
+    <p class="lead lead-what">图片有两类：《欧陆风云5》游戏自带的官方加载画面，和我用 AI 生成的插画。</p>
+    <p class="lead" id="intro-how">两部分，20 次点选，约 3 分钟。匿名，中途关掉可以接着做。</p>
     <div class="actions" id="intro-actions"></div>
     <p class="fine" id="consent">点“开始”即同意把匿名作答用于统计。</p>
     <p class="fine" id="owner-note" hidden>本设备已标记为作者自测，不计入统计。</p>
@@ -174,14 +176,13 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   <section class="paper" id="s-result" hidden>
     <h2>你的结果</h2>
     <div class="scores">
-      <div class="score"><b id="r-pick"></b><span>二选一答对</span></div>
       <div class="score"><b id="r-single"></b><span>单张判断答对</span></div>
     </div>
     <p class="note" id="r-avg"></p>
     <p id="r-like"></p>
     <p class="note" id="r-attempt" hidden></p>
     <div class="debrief">
-      <p>AI 图是我为一个《欧陆风云5》加载画面模组用即梦（Seedream）生成的。为了不影响后来的人，不公布单张答案。谢谢！</p>
+      <p>官方图是《欧陆风云5》游戏自带的加载画面；AI 图是我为一个加载画面模组用即梦（Seedream）生成的。为了不影响后来的人，不公布单张答案。谢谢！</p>
     </div>
     <div class="actions" id="result-actions"></div>
   </section>
@@ -195,10 +196,10 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
-  const DESIGN = "v3-2026-11-11"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
+  const DESIGN = "v4-2026-11-11"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
     pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
-    single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张，两类不一定各占一半。"] },
+    single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张：是游戏自带的官方加载画面，还是 AI 图？两类不一定各占一半。"] },
     like: { ask: "你更喜欢哪一张？", card: ["你更喜欢哪一张？", "只看画面，凭感觉选。"] },
   };
   const LOOKAHEAD = 4; // 预先加载后面几题的图
@@ -292,7 +293,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       box.appendChild(b); return b;
     };
     if (saved && saved.session_id && saved.next < saved.trials.length) {
-      const lead = document.querySelector("#s-intro .lead");
+      const lead = $("intro-how");
       lead.textContent = `上次做到第 ${saved.next + 1} / ${saved.trials.length} 题。`;
       $("consent").hidden = true;
       mk("接着做", "btn-primary", () => resume(saved));
@@ -644,9 +645,8 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   function showResult(r, revisit) {
     const s = r.score;
     $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
-    $("r-pick").textContent = `${s.pick.correct} / ${s.pick.n}`;
     $("r-avg").textContent = r.avg && r.avg.n
-      ? `目前 ${r.avg.n} 人平均：二选一 ${pct(r.avg.pick)}，单张 ${pct(r.avg.single)}（瞎猜是 50%）。`
+      ? `目前 ${r.avg.n} 人平均答对 ${pct(r.avg.single)}（瞎猜是 50%）。`
       : "瞎猜的正确率是 50%。";
     $("r-like").textContent = s.like.oa
       ? `官方对 AI 的 ${s.like.oa} 组里，你有 ${s.like.ai} 组更喜欢 AI 图。`
