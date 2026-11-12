@@ -183,20 +183,20 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
     imgBase = IMG_FORCE === "tos" ? TOS_IMG : IMG_FORCE === "cf" ? CF_IMG : (serverBase || CF_IMG);
   }
   const imgSrc = () => (imgBase === CF_IMG ? "cf" : "tos");
-  // 图片档位（v4g 起，质量 90）：4k = 3840×2160，m = 1920×1080。按图片最大显示宽度×像素密度挑；?size=4k|m 可强制
+  // 图片档位（质量 90）：2k = 2560×1440（v4i 起，官方图和 AI 图同样封顶 2560；v4g–v4h 是 4k），m = 1920×1080。按图片最大显示宽度×像素密度挑；?size=2k|m 可强制
   const IMG_SIZE = (() => {
     let f = null;
     try { f = new URLSearchParams(location.search).get("size"); } catch { /* 忽略 */ }
-    if (f === "4k" || f === "m") return f;
+    if (f === "2k" || f === "m") return f;
     const need = Math.min(innerWidth, innerHeight * 16 / 9) * (devicePixelRatio || 1);
-    return need > 2200 ? "4k" : "m";
+    return need > 2200 ? "2k" : "m";
   })();
   const imgUrl = (id, base = imgBase) => `${base}/${IMG_SIZE}/${id}.webp`;
   const legacyUrl = (id) => `${CF_IMG}/${id}.webp`; // v4f 及以前的 1280 版，只给旧会话的结果页兜底
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
-  const DESIGN = "v4h-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
+  const DESIGN = "v4i-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
     pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
     single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张：是游戏自带的官方加载画面，还是 AI 图？两类不一定各占一半。"] },
