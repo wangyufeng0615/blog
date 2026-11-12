@@ -215,7 +215,16 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 (() => {
   "use strict";
   const API = "/api/eu5-blind";
-  const imgUrl = (id) => `${API}/img/${id}.webp`;
+  // 图片源：默认走 Cloudflare；服务端判断为中国大陆时给火山引擎地址（img_base）。?img=tos / ?img=cf 可强制指定，便于测试
+  const CF_IMG = `${API}/img`;
+  const TOS_IMG = "https://eu5-art-test-img.tos-cn-shanghai.volces.com/img";
+  const IMG_FORCE = (() => { try { return new URLSearchParams(location.search).get("img"); } catch { return null; } })();
+  let imgBase = CF_IMG;
+  function setImgBase(serverBase) {
+    imgBase = IMG_FORCE === "tos" ? TOS_IMG : IMG_FORCE === "cf" ? CF_IMG : (serverBase || CF_IMG);
+  }
+  const imgSrc = () => (imgBase === CF_IMG ? "cf" : "tos");
+  const imgUrl = (id, base = imgBase) => `${base}/${id}.webp`;
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
@@ -350,7 +359,8 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     try {
       const data = await post("/session", { pid: pid(), client: clientInfo(), design: DESIGN });
       if (data.design !== DESIGN) { fail("页面刚更新过，请刷新后再开始。", () => location.reload()); return; }
-      state = { session_id: data.session_id, design: data.design, trials: data.trials, next: 0, seen: {} };
+      state = { session_id: data.session_id, design: data.design, trials: data.trials, next: 0, seen: {}, img_base: data.img_base || null };
+      setImgBase(state.img_base);
       queue = []; store.set(KEY.queue, queue);
       saveState();
     } catch (e) {
@@ -363,6 +373,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 
   function resume(saved) {
     state = saved;
+    setImgBase(state.img_base);
     resumedNext = true;
     logEvent("resume", { next: state.next });
     flush();
@@ -390,7 +401,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
         img.decoding = "async";
         img.alt = "";
         img.draggable = false;
-        img.src = imgUrl(id);
+        img.src = k === 0 ? imgUrl(id) : imgUrl(id, CF_IMG); // 第一次失败就换回 Cloudflare
         try {
           await img.decode();
           images.set(id, img);
@@ -524,6 +535,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     }
     clearTimeout(slow); $("wait").hidden = true;
     const waitMs = performance.now() - tw;
+    logEvent("load_ms", { i: t.i, ms: Math.round(waitMs), src: imgSrc() });
     prefetch(state.next + 1);
 
     const box = $("imgs");
@@ -683,7 +695,9 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const srcTag = (source) => el("span", "tag " + (source === "ai" ? "tag-ai" : "tag-off"), source === "ai" ? "AI" : "官方");
   const srcName = (source, label) => source === "ai" ? label : `《${label}》`;
   function img(id) {
-    const i = el("img"); i.src = imgUrl(id); i.loading = "lazy"; i.decoding = "async"; i.alt = ""; return i;
+    const i = el("img"); i.src = imgUrl(id); i.loading = "lazy"; i.decoding = "async"; i.alt = "";
+    i.onerror = () => { if (!i.dataset.fb) { i.dataset.fb = "1"; i.src = imgUrl(id, CF_IMG); } };
+    return i;
   }
   function renderReview(review) {
     const box = $("review");
@@ -732,6 +746,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   }
 
   function showResult(r, revisit) {
+    setImgBase(r.img_base);
     const s = r.score;
     $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
     $("r-avg").textContent = r.avg && r.avg.n
