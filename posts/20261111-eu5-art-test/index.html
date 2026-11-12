@@ -66,6 +66,27 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 .note { color: var(--muted); font-size: 15px; }
 .debrief { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 
+/* 逐题回顾 */
+.review { margin-top: 32px; }
+.review h3 { margin: 32px 0 4px; font-size: 20px; line-height: 1.35; }
+.review .sub { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.rv { padding: 18px 0; border-top: 1px solid var(--line); }
+.rv-head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 8px; font-size: 15px; }
+.rv-head .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.rv-head .ok { color: var(--accent-dark); font-weight: 700; }
+.rv-head .bad { color: #a4553f; font-weight: 700; }
+.rv img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; background: var(--line); }
+.rv-text { margin: 8px 0 0; font-size: 15px; line-height: 1.6; }
+.rv-text b { font-weight: 600; }
+.rv-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.rv-pair figure { margin: 0; }
+.rv-pair img { outline: 3px solid transparent; outline-offset: 2px; }
+.rv-pair .picked img { outline-color: var(--accent); }
+.rv-pair figcaption { margin-top: 6px; font-size: 14px; line-height: 1.5; }
+.tag { display: inline-block; margin-right: 6px; padding: 0 6px; border-radius: 4px; font-size: 12px; font-weight: 700; line-height: 20px; vertical-align: 1px; }
+.tag-ai { background: #f2e3dc; color: #8a4430; }
+.tag-off { background: #e3ece8; color: var(--accent-dark); }
+
 /* 看图区 */
 .stage { position: fixed; inset: 0; display: flex; flex-direction: column; padding: max(10px, env(safe-area-inset-top)) 16px max(56px, calc(env(safe-area-inset-bottom) + 48px)); }
 .stage-top { flex: none; text-align: center; padding: 4px 0 10px; }
@@ -105,6 +126,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
 @media (max-width: 560px) {
   .answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scores { grid-template-columns: 1fr; }
+  .rv-pair { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -182,8 +204,9 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     <p id="r-like"></p>
     <p class="note" id="r-attempt" hidden></p>
     <div class="debrief">
-      <p>官方图是《欧陆风云5》游戏自带的加载画面；AI 图是我为一个加载画面模组用即梦（Seedream）生成的。为了不影响后来的人，不公布单张答案。谢谢！</p>
+      <p>官方图是《欧陆风云5》游戏自带的加载画面；AI 图是我为一个加载画面模组先用即梦（Seedream）生成、再用代码逐张重画修改的。下面是你每一题的答案。谢谢！</p>
     </div>
+    <div class="review" id="review" hidden></div>
     <div class="actions" id="result-actions"></div>
   </section>
 </main>
@@ -196,7 +219,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
-  const DESIGN = "v4d-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
+  const DESIGN = "v4e-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
     pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
     single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张：是游戏自带的官方加载画面，还是 AI 图？两类不一定各占一半。"] },
@@ -622,7 +645,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
         if (queue.length) await new Promise((r) => setTimeout(r, 800 * (k + 1)));
       }
       const data = await post("/finish", { session_id: state.session_id, survey: { ...survey, cue: $("cue").value.trim() || null } });
-      const result = { ...data, at: new Date().toISOString() };
+      const result = { ...data, session_id: state.session_id, at: new Date().toISOString() };
       store.set(KEY.done, result);
       store.del(KEY.state);
       showResult(result, false);
@@ -642,6 +665,59 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   }
 
   const pct = (x) => `${Math.round(x * 100)}%`;
+  const ANSWER_TEXT = Object.fromEntries(SINGLE_ANSWERS);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const srcTag = (source) => el("span", "tag " + (source === "ai" ? "tag-ai" : "tag-off"), source === "ai" ? "AI" : "官方");
+  const srcName = (source, label) => source === "ai" ? label : `《${label}》`;
+  function img(id) {
+    const i = el("img"); i.src = imgUrl(id); i.loading = "lazy"; i.decoding = "async"; i.alt = ""; return i;
+  }
+  function renderReview(review) {
+    const box = $("review");
+    box.innerHTML = "";
+    if (!Array.isArray(review) || !review.length) { box.hidden = true; return; }
+    const singles = review.filter((t) => t.block === "single" || t.block === "pick");
+    const likes = review.filter((t) => t.block === "like" && !t.repeat);
+    if (singles.length) {
+      const wrong = singles.filter((t) => !t.correct).length;
+      box.appendChild(el("h3", null, "官方，还是 AI？逐题答案"));
+      box.appendChild(el("p", "sub", wrong ? `按作答顺序排列，答错 ${wrong} 题。` : "按作答顺序排列，全部答对。"));
+      singles.forEach((t, k) => {
+        const item = el("div", "rv");
+        const head = el("p", "rv-head");
+        head.append(el("span", "n", `第 ${k + 1} 题`), el("span", t.correct ? "ok" : "bad", t.correct ? "答对" : "答错"));
+        item.appendChild(head);
+        if (t.block === "single") {
+          item.appendChild(img(t.ids[0]));
+          const p = el("p", "rv-text");
+          p.append("你选：", el("b", null, ANSWER_TEXT[t.choice] || t.choice), "。实际：", srcTag(t.sources[0]), srcName(t.sources[0], t.labels[0]));
+          item.appendChild(p);
+        } else {
+          item.appendChild(pair(t));
+        }
+        box.appendChild(item);
+      });
+    }
+    if (likes.length) {
+      box.appendChild(el("h3", null, "你更喜欢哪一张？两张各是什么"));
+      box.appendChild(el("p", "sub", "这一部分没有对错，带框的是你选的那张。"));
+      likes.forEach((t) => { const item = el("div", "rv"); item.appendChild(pair(t)); box.appendChild(item); });
+    }
+    box.hidden = false;
+  }
+  function pair(t) {
+    const g = el("div", "rv-pair");
+    t.ids.forEach((id, j) => {
+      const f = el("figure", t.choice === (j === 0 ? "a" : "b") ? "picked" : "");
+      f.appendChild(img(id));
+      const c = el("figcaption");
+      c.append(srcTag(t.sources[j]), t.sources[j] === "ai" ? t.labels[j] : `《${t.labels[j]}》`);
+      f.appendChild(c);
+      g.appendChild(f);
+    });
+    return g;
+  }
+
   function showResult(r, revisit) {
     const s = r.score;
     $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
@@ -666,7 +742,14 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       again.addEventListener("click", () => { store.del(KEY.done); start(); });
       box.appendChild(again);
     }
+    renderReview(r.review);
     show("s-result");
+    // 旧版本存下的结果没有逐题回顾：有会话号就向服务端补拉一次
+    if (!r.review && r.session_id) {
+      post("/finish", { session_id: r.session_id }).then((d) => {
+        if (d && d.review) { r.review = d.review; store.set(KEY.done, r); renderReview(d.review); }
+      }).catch(() => {});
+    }
   }
 
   // 作者自测标记：网址带 ?me 打开一次，这个浏览器之后的会话都带 owner 标记；?me=0 取消
