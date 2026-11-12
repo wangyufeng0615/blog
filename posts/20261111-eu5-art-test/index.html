@@ -53,31 +53,29 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 
 .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 8px 0 18px; }
-.score { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
-.score b { display: block; font-size: clamp(28px, 1rem + 2vw, 36px); line-height: 1.15; font-variant-numeric: tabular-nums; }
-.score span { font-size: 14px; color: var(--muted); }
 .note { color: var(--muted); font-size: 15px; }
-.debrief { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 
 /* 逐题回顾：图片网格，角标标实际来源，✓✗ 标对错 */
-.review { margin-top: 24px; }
-.review h3 { display: flex; align-items: baseline; gap: 10px; margin: 28px 0 12px; font-size: 18px; line-height: 1.35; }
-.review h3 small { font-size: 14px; font-weight: 400; color: var(--muted); }
-.rv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
-.rv-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.result { max-width: 1600px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 40px) 64px; }
+.result .actions { margin-top: 32px; }
+.review h3 { display: flex; align-items: baseline; gap: 12px; margin: 40px 0 14px; font-size: clamp(20px, 1rem + .6vw, 26px); line-height: 1.3; }
+.review h3:first-child { margin-top: 0; }
+.review h3 small { font-size: 17px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
+.rv-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding: 20px 0; border-top: 1px solid var(--line); }
+.review h3 + .rv-pair { border-top: 0; padding-top: 0; }
 .rv-card { margin: 0; }
 .ph { position: relative; }
-.ph img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; background: var(--line); }
+.ph img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; background: var(--line); }
 .ph.picked img { outline: 3px solid var(--accent); outline-offset: 2px; }
-.badge { position: absolute; top: 6px; left: 6px; padding: 0 7px; border-radius: 4px; font-size: 12px; font-weight: 700; line-height: 20px; color: #fff; }
+.badge { position: absolute; top: 10px; left: 10px; padding: 0 9px; border-radius: 5px; font-size: 14px; font-weight: 700; line-height: 26px; color: #fff; }
 .badge-ai { background: rgba(156, 70, 44, .92); }
 .badge-off { background: rgba(58, 98, 84, .92); }
-.mark { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; line-height: 1; color: #fff; }
+.mark { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; line-height: 1; color: #fff; }
 .mark-ok { background: #3f7a5f; }
 .mark-bad { background: #b0503a; }
-.you { position: absolute; bottom: 6px; left: 6px; padding: 0 7px; border-radius: 4px; font-size: 12px; font-weight: 700; line-height: 20px; background: rgba(255, 255, 255, .92); color: #2a2a2a; }
-.rv-card figcaption { margin-top: 4px; font-size: 13px; color: var(--muted); }
+.you { position: absolute; bottom: 10px; left: 10px; padding: 0 9px; border-radius: 5px; font-size: 14px; font-weight: 700; line-height: 26px; background: rgba(255, 255, 255, .92); color: #2a2a2a; }
+.rv-card figcaption { margin-top: 6px; font-size: 15px; color: var(--muted); }
 
 /* 看图区 */
 .stage { position: fixed; inset: 0; display: flex; flex-direction: column; padding: max(10px, env(safe-area-inset-top)) 16px max(56px, calc(env(safe-area-inset-bottom) + 48px)); }
@@ -117,7 +115,8 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 
 @media (max-width: 560px) {
   .answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .scores { grid-template-columns: 1fr; }
+  .rv-grid { grid-template-columns: 1fr; }
+  .rv-pair { gap: 10px; }
 }
 </style>
 </head>
@@ -165,17 +164,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
     <div class="actions"><button class="btn btn-primary" id="survey-go" hidden>重新提交</button></div>
   </section>
 
-  <section class="paper" id="s-result" hidden>
-    <h2>你的结果</h2>
-    <div class="scores">
-      <div class="score"><b id="r-single"></b><span>单张判断答对</span></div>
-    </div>
-    <p class="note" id="r-avg"></p>
-    <p id="r-like"></p>
-    <p class="note" id="r-attempt" hidden></p>
-    <div class="debrief">
-      <p>官方图是游戏自带的加载画面；AI 图由即梦生成、再用代码重画。谢谢参与！</p>
-    </div>
+  <section class="result" id="s-result" hidden>
     <div class="review" id="review" hidden></div>
     <div class="actions" id="result-actions"></div>
   </section>
@@ -661,7 +650,6 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
     }
   }
 
-  const pct = (x) => `${Math.round(x * 100)}%`;
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const SHORT_ANSWER = { "1": "肯定官方", "2": "可能官方", "3": "可能 AI", "4": "肯定 AI" };
   function img(id) {
@@ -721,17 +709,6 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 
   function showResult(r, revisit) {
     setImgBase(r.img_base);
-    const s = r.score;
-    $("r-single").textContent = `${s.single.correct} / ${s.single.n}`;
-    $("r-avg").textContent = r.avg && r.avg.n
-      ? `目前 ${r.avg.n} 人平均答对 ${pct(r.avg.single)}（瞎猜是 50%）。`
-      : "瞎猜的正确率是 50%。";
-    $("r-like").textContent = s.like.oa
-      ? `官方对 AI 的 ${s.like.oa} 组里，你有 ${s.like.ai} 组更喜欢 AI 图。`
-      : "";
-    const att = $("r-attempt");
-    att.hidden = !(r.attempt > 1);
-    att.textContent = r.attempt > 1 ? `这是你在这台设备上第 ${r.attempt} 次参加，统计时会单独处理。` : "";
     const box = $("result-actions");
     box.innerHTML = "";
     const home = document.createElement("a");
