@@ -219,13 +219,12 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
-  const DESIGN = "v4e-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
+  const DESIGN = "v4f-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
     pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
     single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张：是游戏自带的官方加载画面，还是 AI 图？两类不一定各占一半。"] },
     like: { ask: "你更喜欢哪一张？", card: ["你更喜欢哪一张？", "只看画面，凭感觉选。"] },
   };
-  const LOOKAHEAD = 4; // 预先加载后面几题的图
   const SINGLE_ANSWERS = [["1", "肯定是官方"], ["2", "可能是官方"], ["3", "可能是 AI"], ["4", "肯定是 AI"]];
   const CONF_ANSWERS = [[1, "猜的"], [2, "有点把握"], [3, "很确定"]];
 
@@ -404,8 +403,22 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     loading.set(id, p);
     return p;
   }
+  // 后台按题目顺序预加载剩下的全部图，同时最多下 WARM_PARALLEL 张：
+  // 近的先到，不让 20 张一起抢带宽（大陆访问 Cloudflare 跨境慢，第一题不能现等）
+  const WARM_PARALLEL = 3;
+  let warmOrder = [], warming = 0;
   function prefetch(from) {
-    for (const t of state.trials.slice(from, from + LOOKAHEAD)) for (const id of t.ids) ensure(id).catch(() => {});
+    warmOrder = [];
+    for (const t of state.trials.slice(from)) for (const id of t.ids) if (!loading.has(id)) warmOrder.push(id);
+    pump();
+  }
+  function pump() {
+    while (warming < WARM_PARALLEL && warmOrder.length) {
+      const id = warmOrder.shift();
+      if (loading.has(id)) continue;
+      warming++;
+      ensure(id).catch(() => {}).finally(() => { warming--; pump(); });
+    }
   }
 
   // ---------- 流程 ----------
