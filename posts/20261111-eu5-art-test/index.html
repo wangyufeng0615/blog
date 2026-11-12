@@ -51,13 +51,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin: 22px 0 10px; }
 .bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 
-.q { margin: 0 0 26px; }
-.q-title { margin: 0 0 10px; font-size: 16px; font-weight: 600; }
-.opts { display: flex; flex-wrap: wrap; gap: 8px; }
-.opt { min-height: 44px; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); font-size: 15px; text-align: left; }
-.opt[aria-pressed="true"] { border-color: var(--accent); background: #eef3f1; color: var(--accent-dark); font-weight: 600; }
-textarea { width: 100%; min-height: 88px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 15px; color: var(--fg); background: var(--panel); resize: vertical; }
-textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 8px 0 18px; }
 .score { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
@@ -170,29 +164,8 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   </section>
 
   <section class="paper" id="s-survey" hidden>
-    <h2>最后三个问题（都可跳过）</h2>
-    <div class="q">
-      <p class="q-title">你玩过《欧陆风云》系列吗？</p>
-      <div class="opts" data-q="eu">
-        <button class="opt" data-v="none" aria-pressed="false">没玩过</button>
-        <button class="opt" data-v="played" aria-pressed="false">玩过</button>
-        <button class="opt" data-v="eu5" aria-pressed="false">玩过《欧陆风云5》，对加载画面有印象</button>
-      </div>
-    </div>
-    <div class="q">
-      <p class="q-title">你平时看 AI 生成的图多吗？</p>
-      <div class="opts" data-q="ai">
-        <button class="opt" data-v="rare" aria-pressed="false">很少</button>
-        <button class="opt" data-v="some" aria-pressed="false">偶尔</button>
-        <button class="opt" data-v="often" aria-pressed="false">经常，或自己也会生成</button>
-      </div>
-    </div>
-    <div class="q">
-      <label class="q-title" for="cue">你主要靠什么判断？（选填）</label>
-      <textarea id="cue" maxlength="500" placeholder="比如笔触、光线、人物、建筑……"></textarea>
-    </div>
-    <div class="actions"><button class="btn btn-primary" id="survey-go">看结果</button></div>
-    <p class="note" id="survey-msg" hidden></p>
+    <p class="note" id="survey-msg">正在提交…</p>
+    <div class="actions"><button class="btn btn-primary" id="survey-go" hidden>重新提交</button></div>
   </section>
 
   <section class="paper" id="s-result" hidden>
@@ -224,11 +197,20 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     imgBase = IMG_FORCE === "tos" ? TOS_IMG : IMG_FORCE === "cf" ? CF_IMG : (serverBase || CF_IMG);
   }
   const imgSrc = () => (imgBase === CF_IMG ? "cf" : "tos");
-  const imgUrl = (id, base = imgBase) => `${base}/${id}.webp`;
+  // 图片档位（v4g 起，质量 90）：4k = 3840×2160，m = 1920×1080。按图片最大显示宽度×像素密度挑；?size=4k|m 可强制
+  const IMG_SIZE = (() => {
+    let f = null;
+    try { f = new URLSearchParams(location.search).get("size"); } catch { /* 忽略 */ }
+    if (f === "4k" || f === "m") return f;
+    const need = Math.min(innerWidth, innerHeight * 16 / 9) * (devicePixelRatio || 1);
+    return need > 2200 ? "4k" : "m";
+  })();
+  const imgUrl = (id, base = imgBase) => `${base}/${IMG_SIZE}/${id}.webp`;
+  const legacyUrl = (id) => `${CF_IMG}/${id}.webp`; // v4f 及以前的 1280 版，只给旧会话的结果页兜底
   const KEY = { pid: "eu5art.pid", state: "eu5art.state.v1", done: "eu5art.done.v1", queue: "eu5art.queue.v1", owner: "eu5art.owner" };
   const ISI_MS = 250; // 两题之间的空白
 
-  const DESIGN = "v4f-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
+  const DESIGN = "v4g-2026-11-12"; // 和服务端 DESIGN_VERSION 一致；旧版未做完的进度不续做
   const BLOCKS = {
     pick: { ask: "哪一张是 AI 生成的？", card: ["哪一张是 AI 生成的？", "每组一张官方加载画面、一张 AI 图。选图后再选把握。"] },
     single: { ask: "官方，还是 AI？", card: ["官方，还是 AI？", "每次一张：是游戏自带的官方加载画面，还是 AI 图？两类不一定各占一半。"] },
@@ -350,6 +332,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
       touch: mm("(pointer: coarse)"), gamut: mm("(color-gamut: p3)") ? "p3" : "srgb", dark: mm("(prefers-color-scheme: dark)"),
       lang: navigator.language, tz: Intl.DateTimeFormat().resolvedOptions().timeZone, ref,
       owner: store.get(KEY.owner) === true,
+      img_size: IMG_SIZE,
     };
   }
 
@@ -535,7 +518,7 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     }
     clearTimeout(slow); $("wait").hidden = true;
     const waitMs = performance.now() - tw;
-    logEvent("load_ms", { i: t.i, ms: Math.round(waitMs), src: imgSrc() });
+    logEvent("load_ms", { i: t.i, ms: Math.round(waitMs), src: imgSrc(), size: IMG_SIZE });
     prefetch(state.next + 1);
 
     const box = $("imgs");
@@ -642,50 +625,38 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
     }
   });
 
-  // ---------- 问卷与结果 ----------
-  const survey = { eu: null, ai: null };
-  for (const group of document.querySelectorAll(".opts")) {
-    group.addEventListener("click", (e) => {
-      const b = e.target.closest(".opt");
-      if (!b) return;
-      const on = b.getAttribute("aria-pressed") !== "true";
-      for (const o of group.querySelectorAll(".opt")) o.setAttribute("aria-pressed", "false");
-      b.setAttribute("aria-pressed", String(on));
-      survey[group.dataset.q] = on ? b.dataset.v : null;
-    });
-  }
-
+  // ---------- 提交与结果 ----------
+  // 2026-11-12 起去掉最后的三个问卷题：答完最后一题直接提交、出结果
   function showSurvey() {
     cur = null;
     show("s-survey");
-    $("survey-go").onclick = submit;
+    submit();
   }
 
   async function submit() {
-    const btn = $("survey-go");
-    btn.disabled = true; btn.textContent = "正在提交…";
+    const btn = $("survey-go"), msg = $("survey-msg");
+    btn.hidden = true; msg.textContent = "正在提交…";
     try {
       for (let k = 0; k < 4 && queue.length; k++) {
         await flush();
         if (queue.length) await new Promise((r) => setTimeout(r, 800 * (k + 1)));
       }
-      const data = await post("/finish", { session_id: state.session_id, survey: { ...survey, cue: $("cue").value.trim() || null } });
+      const data = await post("/finish", { session_id: state.session_id, survey: {} });
       const result = { ...data, session_id: state.session_id, at: new Date().toISOString() };
       store.set(KEY.done, result);
       store.del(KEY.state);
       showResult(result, false);
     } catch (e) {
-      const msg = $("survey-msg");
-      msg.hidden = false;
+      btn.hidden = false;
       if (e.status === 404) {
         // 服务端已没有这次会话（例如数据被重置），只能重新开始
         store.del(KEY.state); store.del(KEY.queue); queue = [];
         msg.textContent = "服务端找不到这次作答的记录了，只能重新开始。";
-        btn.disabled = false; btn.textContent = "重新开始"; btn.onclick = start;
+        btn.textContent = "重新开始"; btn.onclick = start;
         return;
       }
-      btn.disabled = false; btn.textContent = "重新提交";
-      msg.textContent = "提交没成功，请检查网络后再点一次。作答还保存在这台设备上。";
+      msg.textContent = "提交没成功，请检查网络后再试。作答还保存在这台设备上。";
+      btn.textContent = "重新提交"; btn.onclick = submit;
     }
   }
 
@@ -696,7 +667,10 @@ textarea:focus, .opt:focus-visible, .btn:focus-visible { outline: 2px solid var(
   const srcName = (source, label) => source === "ai" ? label : `《${label}》`;
   function img(id) {
     const i = el("img"); i.src = imgUrl(id); i.loading = "lazy"; i.decoding = "async"; i.alt = "";
-    i.onerror = () => { if (!i.dataset.fb) { i.dataset.fb = "1"; i.src = imgUrl(id, CF_IMG); } };
+    i.onerror = () => {
+      const k = Number(i.dataset.fb || 0);
+      if (k < 2) { i.dataset.fb = String(k + 1); i.src = k === 0 ? imgUrl(id, CF_IMG) : legacyUrl(id); }
+    };
     return i;
   }
   function renderReview(review) {
