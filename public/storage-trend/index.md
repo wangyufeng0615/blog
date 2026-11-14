@@ -1,12 +1,12 @@
 # 王工存储指数
 
-> 存储产业价格与周期看板。数据截至 2026-11-13，快照生成于 2026-11-13 15:41（北京时间）。数据仅供产业研究，不构成投资建议。
+> 存储产业价格与周期看板。数据截至 2026-11-14，快照生成于 2026-11-14 15:32（北京时间）。数据仅供产业研究，不构成投资建议。
 
 - 网页：https://wangyufeng.org/storage-trend/
 - 周期状态：**分化**（4 上行 · 3 下行 · 1 持平；8 项参与判断）
 - 领涨：DDR5 16Gb eTT +30.9%（131 天）、DDR5 16Gb 现货 +29.1%（134 天）、CFM DRAM 指数 +16.4%（225 天）
 - 走弱：512Gb TLC 原片 −19.5%（134 天）、CFM NAND 指数 −12.9%（225 天）、1Tb QLC 原片 −9.4%（131 天）
-- DRAM 现货：DDR5 16Gb 60.233 USD / 颗（2026-11-13）
+- DRAM 现货：DDR5 16Gb 60.267 USD / 颗（2026-11-13）
 - 暂不参与判断：DDR5 RDIMM 32GB（数据偏旧）、DRAM 合约价（数据偏旧）
 
 ## 王工自研情绪
@@ -24,7 +24,7 @@ DRAM · HBM · 最先反应
 
 | 指标 | 当前值 | 单位 | 首尾变化 | 窗口 | 数据日期 | 来源 | 周期判断 |
 |---|---:|---|---:|---|---|---|---|
-| DDR5 16Gb 颗粒现货均价 | 60.233 | USD / 颗 | +29.1% | 2026-07-03 → 2026-11-13 | 2026-11-13 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
+| DDR5 16Gb 颗粒现货均价 | 60.267 | USD / 颗 | +29.1% | 2026-07-03 → 2026-11-13 | 2026-11-13 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
 | DDR5 16Gb eTT 现货均价 | 30.50 | USD / 颗 | +30.9% | 2026-07-06 → 2026-11-13 | 2026-11-13 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
 | DDR4 16Gb 颗粒现货均价 | 79.50 | USD / 颗 | +3.8% | 2026-07-06 → 2026-11-13 | 2026-11-13 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/dram_spot) | 参与 |
 | DDR5 RDIMM 32GB 服务器内存现货均价 | 2,025.00 | USD / 条 | +51.7% | 2026-07-03 → 2026-11-02 | 2026-11-02 | [TrendForce DRAM Price](https://www.trendforce.com/pricedetail/dram/module_spot) | 暂不参与 |
@@ -55,7 +55,7 @@ NAND · SSD · 跟随热层
 | 指标 | 当前值 | 单位 | 首尾变化 | 窗口 | 数据日期 | 来源 | 周期判断 |
 |---|---:|---|---:|---|---|---|---|
 | AWS S3 Standard 每 GB 月单价 | 0.023 | USD / GB · 月 | 0.0% | 2026-07-03 → 2026-11-09 | 2026-11-09 | [AWS S3 Price List (us-east-1)](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv) | — |
-| 美国存储设备 PPI 指数 | 117.231 | 指数 · 2004-12 = 100 | +58.9% | 2026-05-01 → 2026-09-01 | 2026-09-01 | [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/series/PCU334112334112) | — |
+| 美国存储设备 PPI 指数 | 117.231 | 指数 · 2004-12 = 100 | +58.9% | 2026-05-01 → 2026-10-01 | 2026-10-01 | [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/series/PCU334112334112) | — |
 | Western Digital 近线 HDD 季度出货容量 | 209 | EB · 季度出货 | +22.9% | 2025-07-30 → 2026-08-05 | 2026-08-05 | [存储厂商官方经营指标](https://investor.wdc.com/static-files/e1f02f77-4432-42c3-8bd4-024371f40e54) | — |
 
 ## 供给与经营验证
@@ -67,9 +67,9 @@ NAND · SSD · 跟随热层
 | 台湾 DRAM 厂月营收合计 | 83,864 | 百万新台币 | +421% | 2025-07-31 → 2026-10-31 | 2026-10-31 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_10_0.html) | — |
 | 台湾存储模组/控制器月营收合计 | 59,554 | 百万新台币 | +339% | 2025-07-31 → 2026-10-31 | 2026-10-31 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/otc/t21sc03_115_10_0.html) | — |
 | Micron 库存天数 | 129 | 天 | +4.0% | 2025-09-23 → 2026-09-30 | 2026-09-30 | [存储厂商官方经营指标](https://s25.q4cdn.com/621799436/files/doc_financials/2026/q4/Q4-FY26-Prepared-Remarks.pdf) | — |
-| 韩国 DRAM 出口重量单价 | 71,696.58 | USD / 千克 | +380% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
-| 韩国 DRAM 出口额 | 16,777.00 | 百万美元 | +603% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
-| 韩国 Flash/NAND 出口额 | 3,297.00 | 百万美元 | +614% | 2025-07-31 → 2026-09-30 | 2026-09-30 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
+| 韩国 DRAM 出口重量单价 | 79,817.78 | USD / 千克 | +435% | 2025-07-31 → 2026-10-31 | 2026-10-31 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
+| 韩国 DRAM 出口额 | 17,959.00 | 百万美元 | +652% | 2025-07-31 → 2026-10-31 | 2026-10-31 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
+| 韩国 Flash/NAND 出口额 | 2,971.00 | 百万美元 | +543% | 2025-07-31 → 2026-10-31 | 2026-10-31 | [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | — |
 
 ## 市场价格参考
 
@@ -87,10 +87,10 @@ ETF 价格 · 不参与周期判断
 | [TrendForce NAND / Flash Price](https://www.trendforce.com/price/flash/emmc_spot) | 留意 | 2026-11-02 |
 | [CFM 闪存市场](https://www.chinaflashmarket.com/price) | 当期 | 2026-11-13 |
 | [AWS S3 Price List (us-east-1)](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv) | 当期 | 2026-11-09 |
-| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-11-13 |
-| [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU334112334112,PCU33443344) | 留意 | 2026-09-01 |
+| [Azure Blob Storage Retail Prices (eastus)](https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)) | 当期 | 2026-11-14 |
+| [FRED / BLS Storage and Semiconductor PPI](https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCU334112334112,PCU33443344) | 当期 | 2026-10-01 |
 | HBM Proxy Events | 留意 | 2026-09-30 |
-| [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | 当期 | 2026-09-30 |
+| [K-Stat Korea Memory Exports](https://m.stat.kita.net/stat/kts/pum/ItemImpExpDetailPopup.screen) | 当期 | 2026-10-31 |
 | [Stanford DAM Memory Prices](https://dam.stanford.edu/assets/memory-prices/memory-prices.csv) | 当期 | 2026-10-01 |
 | [TWSE / MOPS Taiwan Memory Revenue](https://mopsov.twse.com.tw/nas/t21/) | 当期 | 2026-10-31 |
 | B站 AI 评论情绪 | 偏旧 | 2026-09-29 |
