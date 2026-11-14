@@ -24,6 +24,18 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: 'EU5 模组百科',
+    // 词条数写死，来源：eu5-wiki build_data 输出，2026-11-14
+    description: '我三个《欧陆风云5》模组的中英文百科，在地图上浏览地块、人物、国家、文化、宗教等 4.3 万条词条',
+    sticker: 'eu5',
+    featured: true,
+    url: 'https://eu5.wangyufeng.org',
+    type: 'Game wiki',
+    year: '2026',
+    tags: ['Europa Universalis V', 'Wiki', 'Map', 'Bilingual'],
+    status: 'Live',
+  },
+  {
     name: '所有地块的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
     description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 3,000+ 订阅',

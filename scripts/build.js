@@ -832,6 +832,7 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 
 - [Stellaris text archive / 群星文库](${SITE_URL}/stellaris/llms.txt): Complete 4.5.2 official English/Chinese text corpus, scope and lookup guide.
 - [Stellaris JSON catalog](${SITE_URL}/stellaris/catalog.json): Every source group, lossless Markdown/JSON exports and exact namespace:key lookup shards.
+- [EU5 mod wiki llms.txt / EU5 模组百科](https://eu5.wangyufeng.org/llms.txt): Bilingual wiki of my three Europa Universalis V description mods, with URL scheme, data endpoints and license.
 
 ## Featured work
 
