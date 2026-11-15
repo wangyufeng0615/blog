@@ -1,11 +1,11 @@
 {
  "name": "王工存储指数",
  "url": "https://wangyufeng.org/storage-trend/",
- "generated_at": "2026-11-14T07:32:54Z",
- "as_of": "2026-11-14",
+ "generated_at": "2026-11-15T07:32:35Z",
+ "as_of": "2026-11-15",
  "cycle": {
   "state": "分化",
-  "ready_count": 8,
+  "ready_count": 7,
   "up": [
    "dram_ett_marginal",
    "dram_spot_temperature",
@@ -17,10 +17,14 @@
    "cfm_nand_price_index",
    "nand_qlc_density"
   ],
-  "flat_count": 1,
+  "flat_count": 0,
   "pending": [
    {
     "id": "server_dram_pass_through",
+    "reason": "stale"
+   },
+   {
+    "id": "hbm_hot_layer_tightness",
     "reason": "stale"
    },
    {
@@ -331,8 +335,8 @@
    "value_text": "4",
    "unit": "分 · 满分 5",
    "date": "2026-09-30",
-   "freshness": "watch",
-   "cycle": "ready",
+   "freshness": "stale",
+   "cycle": "pending",
    "trend": {
     "direction": "flat",
     "window_days": 88,
@@ -819,7 +823,7 @@
   {
    "name": "Azure Blob Storage Retail Prices (eastus)",
    "url": "https://prices.azure.com/api/retail/prices?currencyCode=USD&$filter=serviceName%20eq%20%27Storage%27%20and%20armRegionName%20eq%20%27eastus%27%20and%20priceType%20eq%20%27Consumption%27%20and%20productName%20eq%20%27Blob%20Storage%27%20and%20contains(meterName,%20%27Data%20Stored%27)",
-   "date": "2026-11-14",
+   "date": "2026-11-15",
    "freshness": "fresh"
   },
   {
@@ -832,7 +836,7 @@
    "name": "HBM Proxy Events",
    "url": null,
    "date": "2026-09-30",
-   "freshness": "watch"
+   "freshness": "stale"
   },
   {
    "name": "K-Stat Korea Memory Exports",
