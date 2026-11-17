@@ -11,6 +11,7 @@
     h1, h2 { line-height: 1.25; }
     section { margin-top: 40px; }
     code { overflow-wrap: anywhere; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; padding: 12px 14px; border-radius: 10px; background: color-mix(in srgb, currentColor 7%, transparent); }
   </style>
 </head>
 <body>
@@ -18,28 +19,36 @@
   <main>
     <section lang="en">
       <h1>Photo Courier Support</h1>
-      <p>Photo Courier runs only on your iPhone or iPad and communicates with an approved agent on the same Wi-Fi. It has no user account or developer cloud.</p>
+      <p>Photo Courier runs only on your iPhone or iPad and communicates with an approved agent on the same Wi-Fi or over a cable. It has no user account or developer cloud.</p>
       <h2>Quick checks</h2>
       <ol>
         <li>Keep Photo Courier open in the foreground.</li>
         <li>Confirm Photos and Local Network access in iOS Settings.</li>
-        <li>Make sure the device and agent are on the same Wi-Fi and that the network does not isolate clients.</li>
+        <li>Make sure the device and the agent's computer are on the same Wi-Fi (and the network does not isolate clients), or connect them with a cable.</li>
         <li>Start a new connection and check the agent name, source address, and requested access before allowing it.</li>
       </ol>
+      <h2>Agent skill (optional)</h2>
+      <p>The copied connection details are all an agent needs. If you use Claude Code or Codex, you can also install this <a href="../skill/SKILL.md">skill</a> so the agent knows how to connect and behave:</p>
+      <pre><code>mkdir -p ~/.claude/skills/photo-courier &amp;&amp; curl -fsSL https://wangyufeng.org/photo-courier/skill/SKILL.md -o ~/.claude/skills/photo-courier/SKILL.md</code></pre>
+      <p>For Codex, use <code>~/.codex/skills/photo-courier</code> instead.</p>
       <p>Support email: <a href="mailto:alanwang424@gmail.com">alanwang424@gmail.com</a></p>
       <p>When reporting a problem, include the app version, iOS version, device model, and the stable API error code. Do not send photos, access tokens, private IP addresses, or photo identifiers.</p>
     </section>
 
     <section lang="zh-Hans">
       <h1>照片信使支持</h1>
-      <p>照片信使只在 iPhone 或 iPad 上运行，并与同一 Wi-Fi 中由你批准的 Agent 通信；它没有用户账号或开发者云端。</p>
+      <p>照片信使只在 iPhone 或 iPad 上运行，并与同一 Wi-Fi 或数据线连接的、由你批准的 Agent 通信；它没有用户账号或开发者云端。</p>
       <h2>快速检查</h2>
       <ol>
         <li>让照片信使保持在前台。</li>
         <li>在 iOS 设置中确认 Photos 和本地网络权限。</li>
-        <li>确认设备与 Agent 位于同一 Wi-Fi，且路由器没有启用客户端隔离。</li>
+        <li>确认设备与运行 Agent 的电脑连同一个 Wi-Fi（且路由器没有启用客户端隔离），或用数据线连接。</li>
         <li>重新发起连接，确认 Agent 名称、来源地址和请求读取的内容后再允许。</li>
       </ol>
+      <h2>Agent Skill（可选）</h2>
+      <p>Agent 只需要你复制的连接信息就能工作。如果你用 Claude Code 或 Codex，也可以安装这份 <a href="../skill/SKILL.md">Skill</a>，让 Agent 知道怎么连接、怎么做：</p>
+      <pre><code>mkdir -p ~/.claude/skills/photo-courier &amp;&amp; curl -fsSL https://wangyufeng.org/photo-courier/skill/SKILL.md -o ~/.claude/skills/photo-courier/SKILL.md</code></pre>
+      <p>Codex 改用 <code>~/.codex/skills/photo-courier</code> 目录。</p>
       <p>支持邮箱：<a href="mailto:alanwang424@gmail.com">alanwang424@gmail.com</a></p>
       <p>报告问题时可附上 App 版本、iOS 版本、设备型号和稳定 API 错误码。请勿发送照片、访问令牌、私有 IP 地址或照片标识。</p>
     </section>
