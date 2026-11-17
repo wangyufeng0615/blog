@@ -12,7 +12,7 @@ export const allProjects = [
   },
   {
     name: '和Atlas一起探索地球',
-    description: '随机落进地球某个街角',
+    description: '随机落在地球某个街角，Atlas 在身边讲它的故事',
     // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-09），访客按浏览器匿名 session 去重
     stats: '上线以来 782 位访客，探索 2,629 次',
     featured: true,
@@ -26,7 +26,7 @@ export const allProjects = [
   {
     name: 'EU5 模组百科',
     // 词条数写死，来源：eu5-wiki build_data 输出，2026-11-14
-    description: '四万个名字铺满中世纪地图',
+    description: '四万三千个名字，铺满一张中世纪末的世界地图',
     sticker: 'eu5',
     featured: true,
     url: 'https://eu5.wangyufeng.org',
@@ -38,7 +38,7 @@ export const allProjects = [
   {
     name: '所有地块的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
-    description: '两万八千块沉默的土地有了过去',
+    description: '两万八千块沉默的土地，第一次有人讲起它们的过去',
     stats: 'Steam 创意工坊 3,000+ 订阅',
     sticker: 'eu5',
     featured: true,
@@ -51,7 +51,7 @@ export const allProjects = [
   {
     name: '所有历史人物的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 796
-    description: '七千个真实活过的人的一生',
+    description: '七千多位真实活过的人，鼠标停下，他们的一生就展开',
     stats: 'Steam 创意工坊 700+ 订阅',
     sticker: 'eu5-characters',
     featured: true,
@@ -64,7 +64,7 @@ export const allProjects = [
   {
     name: '所有省份和伟大工程的描述 · EU4 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 887
-    description: '三千个省份，各有各的故事',
+    description: '三千个省份、一百多座奇观，每一处都有了自己的故事',
     stats: 'Steam 创意工坊 800+ 订阅',
     sticker: 'eu4',
     featured: true,
@@ -76,7 +76,7 @@ export const allProjects = [
   },
   {
     name: '冰原对决',
-    description: '雪原散落着枪，百人同时冲去',
+    description: '雪原中央散落着枪，一百个人同时冲向它们',
     sticker: 'snowgun',
     featured: true,
     url: 'https://ice.wangyufeng.org/',
@@ -87,7 +87,7 @@ export const allProjects = [
   },
   {
     name: '照片信使',
-    description: '手机里的回忆，悄悄递给 AI',
+    description: '你点一下允许，手机里的回忆才被悄悄递给 AI',
     sticker: 'photo-courier',
     featured: true,
     url: 'https://apps.apple.com/app/id6800279514',
@@ -168,7 +168,7 @@ export const allProjects = [
   },
   {
     name: 'aimeter',
-    description: '菜单栏里记着 AI 余量的小表',
+    description: '菜单栏里一只小表，记着今天还能让 AI 干多少活',
     sticker: 'meter',
     featured: true,
     url: 'https://github.com/wangyufeng0615/aimeter',
