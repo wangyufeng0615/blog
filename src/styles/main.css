@@ -95,7 +95,7 @@ body:has(.layout-home) a:hover { color: var(--sp-fire); text-decoration: none; }
 
 .home-grid {
   display: grid;
-  grid-template-columns: 262px minmax(0, 1fr) 250px;
+  grid-template-columns: 380px minmax(0, 1fr) 240px;
   gap: 46px;
   align-items: start;
 }
@@ -615,7 +615,7 @@ body:has(.layout-home) a:hover { color: var(--sp-fire); text-decoration: none; }
 
 @media (max-width: 1100px) {
   .home-grid {
-    grid-template-columns: 230px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 40px;
   }
   .home-notes-col {
