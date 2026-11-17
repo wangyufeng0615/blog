@@ -2,7 +2,7 @@
 export const allProjects = [
   {
     name: '群星 · 星海文库',
-    description: '银河里的十五万段文字，一页页都翻得到',
+    description: '十五万段银河里的文字，每一句都能找到它的出处',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/stellaris/',
     type: 'Game text archive',
@@ -98,7 +98,7 @@ export const allProjects = [
   },
   {
     name: '王工存储指数',
-    description: '听存储芯片周期起落的心跳',
+    description: '内存和闪存的价格涨了又落，这里听着芯片周期的心跳',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-trend/',
     type: 'Industry dashboard',
@@ -108,7 +108,7 @@ export const allProjects = [
   },
   {
     name: 'X 存储情绪雷达',
-    description: '记下存储博主们每一次的乐观与恐慌',
+    description: '存储博主们的乐观与恐慌，一条条记下，等时间来检验',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-radar/',
     type: 'Industry dashboard',
@@ -118,7 +118,7 @@ export const allProjects = [
   },
   {
     name: '定投纳指，还是卷大厂',
-    description: '一个孩子从出生起的两条路：定投纳指，或拼进大厂',
+    description: '孩子出生那天起的两条路：每月定投纳指，或一路拼进大厂',
     sticker: 'investing',
     url: 'https://wangyufeng.org/qqq-vs-bigtech/',
     type: 'Data story',
@@ -128,7 +128,7 @@ export const allProjects = [
   },
   {
     name: '得到老师预测回测',
-    description: '几年前老师们说的未来，今天来对一对答案',
+    description: '几年前老师们讲过的两千多个未来，今天一条条对答案',
     sticker: 'forecast',
     url: 'https://wangyufeng.org/forecast-review/',
     type: 'Data story',
@@ -138,7 +138,7 @@ export const allProjects = [
   },
   {
     name: '星际拓荒通关线索图',
-    description: '宇宙循环了无数次，你需要知道的每一条线索',
+    description: '太阳一次次爆炸，循环里你要找回的每一条线索',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/outer-wilds-clues/',
     type: 'Game guide',
@@ -148,7 +148,7 @@ export const allProjects = [
   },
   {
     name: 'Rapier Galton Lab',
-    description: '小球一颗颗落下，钟形曲线自己长了出来',
+    description: '小球一颗颗落下，没人安排，钟形曲线自己长了出来',
     sticker: 'galton',
     url: 'https://wangyufeng.org/galton/',
     type: 'Physics simulation',
@@ -158,7 +158,7 @@ export const allProjects = [
   },
   {
     name: '提前退休计算器',
-    description: '算一算，离自由还差多少钱',
+    description: '输入几个数字，算一算离不用上班的那天还有多远',
     sticker: 'retirement',
     url: 'https://retirement.wangyufeng.org',
     type: 'Calculator',
@@ -179,7 +179,7 @@ export const allProjects = [
   },
   {
     name: 'aitop',
-    description: '盯着终端里同时干活的一群 Claude',
+    description: '几个 Claude 同时干活，它替我盯着谁在忙、谁卡住了',
     sticker: 'terminal',
     url: 'https://github.com/wangyufeng0615/aitop',
     type: 'Terminal tool',
@@ -189,7 +189,7 @@ export const allProjects = [
   },
   {
     name: 'LOF基金溢价计算器',
-    description: '给自己用的小算盘，盯着基金的溢价',
+    description: '给自己用的小算盘，每天盯着场内基金比净值贵了多少',
     sticker: 'investing',
     url: 'https://github.com/wangyufeng0615/lof-premium-calculator',
     type: 'Investing tool',
@@ -199,7 +199,7 @@ export const allProjects = [
   },
   {
     name: '小球移动重置版',
-    description: '童年的小球移动游戏，在 3D 里重新滚了起来',
+    description: '童年玩过的小球移动，换上真实物理，在 3D 里重新滚起来',
     sticker: 'ball',
     url: 'https://wangyufeng.org/ball-moving/',
     type: '3D browser game',
