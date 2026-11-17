@@ -12,7 +12,7 @@ export const allProjects = [
   },
   {
     name: '和Atlas一起探索地球',
-    description: '随机街景 + AI 解读，我和好朋友玩的很开心，近期自己最自豪的项目',
+    description: '随机街景配 AI 解读，和朋友玩得很开心',
     // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-09），访客按浏览器匿名 session 去重
     stats: '上线以来 782 位访客，探索 2,629 次',
     featured: true,
@@ -26,7 +26,7 @@ export const allProjects = [
   {
     name: 'EU5 模组百科',
     // 词条数写死，来源：eu5-wiki build_data 输出，2026-11-14
-    description: '我三个《欧陆风云5》模组的中英文百科，在地图上浏览地块、人物、国家、文化、宗教等 4.3 万条词条',
+    description: '在地图上浏览三个 EU5 模组的 4.3 万条中英文词条',
     sticker: 'eu5',
     featured: true,
     url: 'https://eu5.wangyufeng.org',
@@ -38,7 +38,7 @@ export const allProjects = [
   {
     name: '所有地块的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
-    description: '给《欧陆风云5》28,316 个没有官方介绍的地块补上中英文介绍，Steam 创意工坊 3,000+ 订阅',
+    description: '为 28,316 个地块补上中英文介绍，3,000+ 订阅',
     sticker: 'eu5',
     featured: true,
     url: 'https://wangyufeng.org/eu5-descriptions/',
@@ -50,7 +50,7 @@ export const allProjects = [
   {
     name: '所有历史人物的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 796
-    description: '给《欧陆风云5》7,789 位真实历史人物写中英文生平，悬停头像就能读，Steam 创意工坊 700+ 订阅',
+    description: '为 7,789 位历史人物写中英文生平，700+ 订阅',
     sticker: 'eu5-characters',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833397845',
@@ -62,7 +62,7 @@ export const allProjects = [
   {
     name: '所有省份和伟大工程的描述 · EU4 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 887
-    description: '给《欧陆风云4》3,272 个省份和 139 座伟大工程补上中英文介绍，Steam 创意工坊 800+ 订阅',
+    description: '为 3,272 个省份和 139 座奇观补上介绍，800+ 订阅',
     sticker: 'eu4',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833082096',
@@ -73,7 +73,7 @@ export const allProjects = [
   },
   {
     name: '冰原对决',
-    description: '浏览器里的原创雪地抢枪对战，Rust 写的服务端，每房最多 100 人同场，人少时机器人补位',
+    description: '浏览器里的雪地抢枪对战，一房 100 人同场',
     sticker: 'snowgun',
     featured: true,
     url: 'https://ice.wangyufeng.org/',
@@ -84,7 +84,7 @@ export const allProjects = [
   },
   {
     name: '照片信使',
-    description: 'iPhone 应用，把你允许的照片经局域网临时交给电脑上的 AI Agent，不经过云端；已上架 App Store（中国大陆区暂不可下载）',
+    description: '让电脑上的 AI 经局域网读取 iPhone 照片',
     sticker: 'photo-courier',
     featured: true,
     url: 'https://apps.apple.com/app/id6800279514',
@@ -165,7 +165,7 @@ export const allProjects = [
   },
   {
     name: 'aimeter',
-    description: 'macOS 菜单栏应用，实时追踪 Claude Code 和 Codex CLI 的用量和额度',
+    description: '在 Mac 菜单栏看 Claude Code 和 Codex 用量',
     sticker: 'meter',
     featured: true,
     url: 'https://github.com/wangyufeng0615/aimeter',
