@@ -39,6 +39,7 @@ export const allProjects = [
     name: '所有地块的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
     description: '两万八千块沉默的土地，第一次有人讲起它们的过去',
+    stats: 'Steam 创意工坊 3,000+ 订阅',
     sticker: 'eu5',
     featured: true,
     url: 'https://wangyufeng.org/eu5-descriptions/',
@@ -51,6 +52,7 @@ export const allProjects = [
     name: '所有历史人物的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 796
     description: '七千多位真实活过的人，鼠标停下，他们的一生就展开',
+    stats: 'Steam 创意工坊 700+ 订阅',
     sticker: 'eu5-characters',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833397845',
@@ -63,6 +65,7 @@ export const allProjects = [
     name: '所有省份和伟大工程的描述 · EU4 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 887
     description: '三千个省份、一百多座奇观，每一处都有了自己的故事',
+    stats: 'Steam 创意工坊 800+ 订阅',
     sticker: 'eu4',
     featured: true,
     url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3833082096',
