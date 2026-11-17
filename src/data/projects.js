@@ -2,7 +2,7 @@
 export const allProjects = [
   {
     name: '群星 · 星海文库',
-    description: '完整阅读与检索群星 4.5.2 的 150,415 条官方中英文案，保留来源，支持 AI 直接读取',
+    description: '检索群星 15 万条官方中英文案',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/stellaris/',
     type: 'Game text archive',
@@ -95,7 +95,7 @@ export const allProjects = [
   },
   {
     name: '王工存储指数',
-    description: '追踪 DRAM、NAND、SSD、HBM 与 X 存储博主情绪的存储产业指标面板',
+    description: '存储行业的价格与情绪指标',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-trend/',
     type: 'Industry dashboard',
@@ -105,7 +105,7 @@ export const allProjects = [
   },
   {
     name: 'X 存储情绪雷达',
-    description: '追踪中英文存储博主公开观点，用 LLM 标注情绪、交易节点与样本覆盖边界',
+    description: '用 AI 标注存储博主观点的情绪',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-radar/',
     type: 'Industry dashboard',
@@ -115,7 +115,7 @@ export const allProjects = [
   },
   {
     name: '定投纳指，还是卷大厂',
-    description: '从出生每月定投 2000 元 QQQ，对比一线城市重度投入教育、进大厂、晋升资深的投入、回报与概率',
+    description: '定投纳指和卷大厂，哪个更划算',
     sticker: 'investing',
     url: 'https://wangyufeng.org/qqq-vs-bigtech/',
     type: 'Data story',
@@ -125,7 +125,7 @@ export const allProjects = [
   },
   {
     name: '得到老师预测回测',
-    description: '卓克、万维钢、香帅、吴军课程里的两千多条预测，逐条对照今天的现实',
+    description: '两千多条课程预测，逐条对照现实',
     sticker: 'forecast',
     url: 'https://wangyufeng.org/forecast-review/',
     type: 'Data story',
@@ -135,7 +135,7 @@ export const allProjects = [
   },
   {
     name: '星际拓荒通关线索图',
-    description: '《星际拓荒》打出结局要先知道哪些事、在哪学到、关键地点怎么进，一张可缩放的中英双语依赖图',
+    description: '通关所需线索的中英双语图',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/outer-wilds-clues/',
     type: 'Game guide',
@@ -145,7 +145,7 @@ export const allProjects = [
   },
   {
     name: 'Rapier Galton Lab',
-    description: '用真实刚体碰撞观察高尔顿板上的概率分布如何涌现',
+    description: '看高尔顿板上的正态分布如何出现',
     sticker: 'galton',
     url: 'https://wangyufeng.org/galton/',
     type: 'Physics simulation',
@@ -155,7 +155,7 @@ export const allProjects = [
   },
   {
     name: '提前退休计算器',
-    description: '计算你需要多少钱才能提前退休',
+    description: '算算提前退休需要多少钱',
     sticker: 'retirement',
     url: 'https://retirement.wangyufeng.org',
     type: 'Calculator',
@@ -176,7 +176,7 @@ export const allProjects = [
   },
   {
     name: 'aitop',
-    description: 'Claude Code 多进程监控终端（虽然能用，但效果不太好）',
+    description: '终端里监控多个 Claude Code 进程',
     sticker: 'terminal',
     url: 'https://github.com/wangyufeng0615/aitop',
     type: 'Terminal tool',
@@ -186,7 +186,7 @@ export const allProjects = [
   },
   {
     name: 'LOF基金溢价计算器',
-    description: 'LOF基金溢价计算器（自用）',
+    description: '自用的 LOF 基金溢价计算',
     sticker: 'investing',
     url: 'https://github.com/wangyufeng0615/lof-premium-calculator',
     type: 'Investing tool',
@@ -196,7 +196,7 @@ export const allProjects = [
   },
   {
     name: '小球移动重置版',
-    description: '用 Three.js 与 Rapier 3D 重现小球移动、点选计分和精确胜利规则',
+    description: '经典小球移动游戏的 3D 重制',
     sticker: 'ball',
     url: 'https://wangyufeng.org/ball-moving/',
     type: '3D browser game',
