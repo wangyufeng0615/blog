@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>四篇 AI 论文与存储需求学习手册</title>
-  <meta name="description" content="以四篇持续学习与智能体记忆论文为核心，推演 HBM / DRAM / NAND 的分层需求弹性。" />
+  <title>四篇 AI 经验学习论文与存储需求推演</title>
+  <meta name="description" content="精读四篇持续学习与智能体记忆论文，拆解 HBM / DRAM / NAND 的分层存储需求。" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f3ea'/%3E%3Cpath d='M7 8.5h18M7 16h18M7 23.5h11' stroke='%23b3412c' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -918,7 +918,7 @@
 </head>
 <body>
   <nav class="deck-nav" aria-label="页面导航">
-    <div class="brand"><span class="brand-mark">IR</span><span>AI 论文与存储需求学习手册</span></div>
+    <div class="brand"><span class="brand-mark">AI</span><span>四篇论文与存储需求笔记</span></div>
     <div class="nav-links">
       <a href="#cover">总览</a>
       <a href="#map">地图</a>
@@ -934,29 +934,29 @@
       <a href="#falsify">反证</a>
       <a href="#sources">来源</a>
     </div>
-    <div class="nav-meta">学习手册版 · 2026-06-22</div>
+    <div class="nav-meta">研究笔记 · 2026-06-22</div>
   </nav>
 
   <div class="deck">
-    <section class="slide" id="cover" data-takeaway="总判断：这组论文不是单纯的 NAND 故事，而是在定义持续智能体的状态管理基础设施。">
+    <section class="slide" id="cover" data-takeaway="总判断：这组论文不只是在讲 NAND 扩容，而是在勾勒持续学习智能体的分层状态基础设施。">
       <div class="slide-title">
         <div>
-          <p class="kicker">Executive Thesis</p>
-          <h1>从“经验学习”重读 AI 存储需求</h1>
+          <p class="kicker">Core Thesis</p>
+          <h1>从“经验学习”重新算一遍 AI 存储的账</h1>
         </div>
         <div class="date-box">
-          <b>2026-06-23 重编版</b>
-          四篇论文<br />HBM / DRAM / NAND 分层推演
+          <b>2026-06-23 整理</b>
+          四篇论文<br />HBM / DRAM / NAND 分层拆解
         </div>
       </div>
       <div class="cover-grid">
         <div class="cover-thesis">
-          <p class="lead">我会把这组材料读成一个基础设施命题：未来智能体不只调用模型，还会持续产生、筛选、检索、回放和蒸馏经验。存储需求的核心不再是“保存更多数据”，而是管理不同温度、不同生命周期的状态。</p>
-          <div class="quote">最适合的阅读顺序：先看四篇论文分别改变什么学习对象，再把这些对象放到热状态、工作记忆、温层经验库、冷归档四层里。</div>
+          <p class="lead">我把这四篇论文合在一起读，核心其实就一件事：未来的智能体不只是调模型问答，而是会持续产生、筛选、检索、回放和蒸馏经验。存储要解决的问题不再只是“多存点数据”，而是管好不同温度、不同生命周期的状态。</p>
+          <div class="quote">最顺的读法：先看四篇论文各自改变了什么学习对象，再把这些对象分别放进热路径、在线内存池、温层经验库和冷归档四层里。</div>
           <div class="driver-list">
-            <div class="driver"><b>HBM</b><span>只关心进入模型热路径的上下文、键值缓存、训练和蒸馏工作集。</span></div>
-            <div class="driver"><b>DRAM</b><span>负责在线检索、候选记忆池、重排、预取和任务状态，是最容易被低估的组织层。</span></div>
-            <div class="driver"><b>NAND</b><span>承接轨迹、失败样本、经验摘要、评测版本和回放缓冲，但会被抽象、去重和留存周期约束。</span></div>
+            <div class="driver"><b>HBM</b><span>只关心真正进到模型热路径里的上下文、KV cache、训练和蒸馏工作集。</span></div>
+            <div class="driver"><b>DRAM</b><span>扛在线检索、候选记忆池、重排、预取和任务状态，是最容易被市场看漏的组织层。</span></div>
+            <div class="driver"><b>NAND</b><span>承接轨迹、失败样本、经验摘要、评测版本和回放缓冲，但会被抽象、去重和留存周期强烈约束。</span></div>
           </div>
         </div>
         <ol class="paper-lineup" aria-label="四篇核心论文">
@@ -982,11 +982,11 @@
           <div class="paper-dot" style="left:75%;top:73%">Memory CL</div>
         </div>
         <div>
-          <h3 class="chart-title">这张图决定后续图表怎么画</h3>
+          <h3 class="chart-title">先定三个原则，别把结论读歪</h3>
           <div class="driver-list">
-            <div class="driver"><b>不要按论文逐条堆结论</b><span>那会变成四份摘要。更好的方式是先识别每篇论文改变的“学习对象”。</span></div>
-            <div class="driver"><b>不要把 memory 译成同一种存储</b><span>同一个词可能指热上下文、候选池、经验摘要、向量索引或冷归档。</span></div>
-            <div class="driver"><b>不要先问利好谁</b><span>先问它改变了哪类状态、保存多久、是否进入热路径、能否被抽象。</span></div>
+            <div class="driver"><b>别按论文逐篇堆摘要</b><span>那样看完只剩一堆概念。先盯住每篇论文到底改变了什么“学习对象”。</span></div>
+            <div class="driver"><b>别把 memory 都当成同一种存储</b><span>同样叫 memory，落地可能是热上下文、内存候选池、经验摘要、向量索引，也可能是冷归档。</span></div>
+            <div class="driver"><b>先别急着问利好哪只股票</b><span>先问清楚它改了哪类状态、留多久、进不进热路径、能不能被压缩抽象。</span></div>
           </div>
         </div>
       </div>
@@ -1007,18 +1007,18 @@
       <div class="quote">因此图表的核心不是“数据量越来越大”的线性箭头，而是不同状态在不同介质之间迁移。</div>
     </section>
 
-    <section class="slide compact" id="protocol" data-takeaway="学习手册的每篇论文都按四个问题读：机制、对象、介质、反证。">
-      <div class="slide-title"><div><p class="kicker">Study Protocol</p><h2>每篇论文只问四个问题</h2></div><div class="date-box"><b>阅读协议</b>机制 → 对象 → 介质 → 反证</div></div>
+    <section class="slide compact" id="protocol" data-takeaway="每篇论文都按同一套四个问题过一遍：机制、对象、介质、反证。">
+      <div class="slide-title"><div><p class="kicker">Study Protocol</p><h2>每篇论文只问四个问题</h2></div><div class="date-box"><b>拆解顺序</b>机制 → 对象 → 介质 → 反证</div></div>
       <table class="matrix">
-        <thead><tr><th>问题</th><th>要读出的内容</th><th>对应图表</th><th>存储映射</th></tr></thead>
+        <thead><tr><th>问题</th><th>要读出的内容</th><th>对应视图</th><th>存储映射</th></tr></thead>
         <tbody>
-          <tr><td><b>它改变什么学习机制？</b></td><td>部署经验、快权重、记忆演化、检索组织。</td><td>机制链</td><td>决定需求是否真实进入系统。</td></tr>
-          <tr><td><b>它新增什么状态对象？</b></td><td>轨迹、经验摘要、上下文池、检索索引、回放样本。</td><td>对象表</td><td>决定保存在哪里、多久、是否热。</td></tr>
-          <tr><td><b>它最强化哪层介质？</b></td><td>HBM、DRAM、NAND 的相对强度，而不是绝对预测。</td><td>三层条形图 / 热力图</td><td>决定投资表达的纯度。</td></tr>
-          <tr><td><b>什么会让结论下修？</b></td><td>抽象效率、短留存、离线检索、真实收益有限。</td><td>反证清单</td><td>避免把论文标题当需求证明。</td></tr>
+          <tr><td><b>它改变什么学习机制？</b></td><td>部署经验、快权重、记忆演化、检索组织。</td><td>机制链</td><td>判断需求是不是真的进了系统。</td></tr>
+          <tr><td><b>它新增什么状态对象？</b></td><td>轨迹、经验摘要、上下文池、检索索引、回放样本。</td><td>对象表</td><td>决定落在哪层、留多久、热不热。</td></tr>
+          <tr><td><b>它最强化哪层介质？</b></td><td>看 HBM、DRAM、NAND 的相对强度，不硬做绝对预测。</td><td>三层条形图 / 热力图</td><td>决定投资逻辑的纯度。</td></tr>
+          <tr><td><b>什么会让结论下修？</b></td><td>抽象效率太高、短留存、离线检索、真实收益有限。</td><td>反证清单</td><td>防止拿论文标题当采购证明。</td></tr>
         </tbody>
       </table>
-      <div class="quote">这套读法会让 PPT 从“论文摘要合集”变成“需求传导手册”。</div>
+      <div class="quote">按这四个问题过一遍，读完就不会只剩四份论文摘要，而是能直接落到存储需求上。</div>
     </section>
 
     <section class="slide" id="oel-1" data-takeaway="OEL 的本质：把真实部署轨迹变成可抽取、可积累、可蒸馏的经验资产。">
@@ -1093,10 +1093,10 @@
       <div class="grid-2"><div class="diagram"><h3>相对影响强度</h3><div class="bars"><div class="bar"><span>HBM</span><div class="bar-line"><span style="width:88%;background:var(--hbm)"></span></div><b>88</b></div><div class="bar"><span>DRAM</span><div class="bar-line"><span style="width:84%;background:var(--dram)"></span></div><b>84</b></div><div class="bar"><span>NAND</span><div class="bar-line"><span style="width:68%;background:var(--nand)"></span></div><b>68</b></div></div></div><div class="driver-list"><div class="driver"><b>核心变量</b><span>快权重长度、候选上下文数量、在线选择频率、训练/推理共用度。</span></div><div class="driver"><b>反证变量</b><span>快权重迅速蒸馏回参数，运行期上下文变短，候选池离线化。</span></div><div class="driver"><b>产业映射</b><span>HBM、DRAM、CXL、上下文缓存、提示/记忆中间件。</span></div></div></div>
     </section>
 
-    <section class="slide" id="survey-1" data-takeaway="这篇综述是整套 PPT 的分类器：Storage、Reflection、Experience 不是同一类存储需求。">
+    <section class="slide" id="survey-1" data-takeaway="这篇综述是最好的分类器：Storage、Reflection、Experience 对应完全不同的存储需求。">
       <div class="slide-title"><div><p class="kicker">Paper 3 · From Storage to Experience</p><h2>记忆系统从保存轨迹走向抽象经验</h2></div><div class="date-box"><b>From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms</b>2026-05-07<br /><a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">arXiv:2605.06716</a></div></div>
       <div class="paper-meta"><b>作者</b><span>Jinghao Luo 等；ACL 2026 Findings</span><b>一句话</b><span>智能体记忆从 Storage 到 Reflection 再到 Experience，核心驱动是长程一致性、动态环境和持续学习。</span></div>
-      <div class="quote">这篇不是新增一个系统，而是给我们一个分类器：一个产品或论文处在哪个记忆阶段，决定它的存储介质权重。</div>
+      <div class="quote">这篇不是新造一套系统，而是给了一个好用的分类器：一个产品或论文处在哪个记忆阶段，直接决定它拉动哪一层存储。</div>
       <div class="grid-3"><div class="block nand"><h3>Storage</h3><p>轨迹保存，一对一记录发生过什么。容量和生命周期管理最重要。</p></div><div class="block dram"><h3>Reflection</h3><p>从轨迹中生成批评、偏好、纠错和经验片段。检索和重排变重要。</p></div><div class="block hbm"><h3>Experience</h3><p>跨轨迹抽象为规则、技能、程序或模型能力。训练和评测回放更重要。</p></div></div>
     </section>
 
@@ -1144,7 +1144,7 @@
       <div class="grid-3"><div class="block hbm"><h3>热层</h3><p>上下文、KV cache、训练回放、蒸馏小批次。</p></div><div class="block dram"><h3>组织层</h3><p>候选池、索引、重排、预取、上下文预算。</p></div><div class="block nand"><h3>资产层</h3><p>轨迹、经验、失败样本、评测版本、回放缓冲。</p></div></div>
     </section>
 
-    <section class="slide compact" id="impact" data-takeaway="热力图是整份手册最重要的总图：它区分了四篇论文分别强化哪层介质。">
+    <section class="slide compact" id="impact" data-takeaway="这张热力图是最核心的总账：把四篇论文各自拉动哪一层介质拆开看。">
       <div class="slide-title"><div><p class="kicker">Impact Heatmap</p><h2>四篇论文对三层介质的相对影响</h2></div><div class="date-box"><b>研究打分</b>方向性，不是论文原始数据</div></div>
       <div class="impact-grid">
         <div></div><div class="head">HBM</div><div class="head">DRAM</div><div class="head">NAND</div>
@@ -1192,12 +1192,12 @@
       <div class="watch-grid"><div class="block risk"><h3>削弱 NAND</h3><ul><li>企业只保留经验摘要，原始轨迹短期删除。</li><li>抽象和去重效率极高，回放样本需求下降。</li><li>隐私限制让用户侧轨迹不能集中保存。</li><li>多模态智能体没有规模化生产。</li></ul></div><div class="block risk"><h3>削弱 DRAM/HBM</h3><ul><li>快权重迅速蒸馏回参数，运行期上下文变短。</li><li>检索质量靠离线批处理解决，而不是在线热索引。</li><li>长上下文成本下降太快，降低分层缓存必要性。</li><li>外部记忆在真实任务中收益有限或污染严重。</li></ul></div><div class="block dram"><h3>最该跟踪的验证信号</h3><ul><li>云厂是否把轨迹、记忆、评测、回放变成标准服务。</li><li>是否出现 SSD-backed KV cache / memory tiering 的生产化案例。</li><li>企业是否愿意长期保留失败样本和执行轨迹。</li></ul></div><div class="block nand"><h3>最该避免的误判</h3><ul><li>把“AI 存储”当作一个统一主题。</li><li>把论文机制直接外推成采购量。</li><li>忽视抽象、去重、短留存和检索污染。</li></ul></div></div>
     </section>
 
-    <section class="slide compact" id="sources" data-takeaway="这份手册的数量级和评分是研究推演；论文提供机制证据，产业证据需要持续跟踪。">
-      <div class="slide-title"><div><p class="kicker">Source Ledger</p><h2>原始链接、继续阅读和团队讨论题</h2></div><div class="date-box"><b>Links</b>四篇核心论文 + 辅助系统证据</div></div>
-      <div class="source-columns"><ul class="source-list"><li><b>Online Experiential Learning for Language Models</b> · 2026-03-17 · <a href="https://arxiv.org/abs/2603.16856" target="_blank" rel="noreferrer">arXiv:2603.16856</a></li><li><b>Learning, Fast and Slow: Towards LLMs That Adapt Continually</b> · 2026-05-12 / v2 2026-05-14 · <a href="https://arxiv.org/abs/2605.12484" target="_blank" rel="noreferrer">arXiv:2605.12484</a></li><li><b>From Storage to Experience</b> · 2026-05-07 · <a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">arXiv:2605.06716</a></li><li><b>When Continual Learning Moves to Memory</b> · 2026-04-29 · <a href="https://arxiv.org/abs/2604.27003" target="_blank" rel="noreferrer">arXiv:2604.27003</a></li><li><b>辅助系统证据</b>：Tutti / KVServe / NVIDIA CMX 等用于观察 SSD-backed KV cache 和上下文记忆平台方向。</li></ul><div class="driver-list"><div class="driver"><b>课堂问题</b><span>哪篇论文最强支持 NAND？哪篇最强支持 DRAM？为什么不能只看标题里的 memory？</span></div><div class="driver"><b>投研问题</b><span>如果云厂只保存摘要、不保留原始轨迹，容量 thesis 应该下修多少？</span></div><div class="driver"><b>复盘问题</b><span>下一篇新论文出现时，先把它放入本手册的哪张图？</span></div></div></div>
+    <section class="slide compact" id="sources" data-takeaway="这里的数量级和打分都是个人推演：论文给机制线索，真实采购得靠产业数据持续核对。">
+      <div class="slide-title"><div><p class="kicker">Source Ledger</p><h2>原始论文链接与后续跟踪问题</h2></div><div class="date-box"><b>Links</b>四篇核心论文 + 辅助系统证据</div></div>
+      <div class="source-columns"><ul class="source-list"><li><b>Online Experiential Learning for Language Models</b> · 2026-03-17 · <a href="https://arxiv.org/abs/2603.16856" target="_blank" rel="noreferrer">arXiv:2603.16856</a></li><li><b>Learning, Fast and Slow: Towards LLMs That Adapt Continually</b> · 2026-05-12 / v2 2026-05-14 · <a href="https://arxiv.org/abs/2605.12484" target="_blank" rel="noreferrer">arXiv:2605.12484</a></li><li><b>From Storage to Experience</b> · 2026-05-07 · <a href="https://arxiv.org/abs/2605.06716" target="_blank" rel="noreferrer">arXiv:2605.06716</a></li><li><b>When Continual Learning Moves to Memory</b> · 2026-04-29 · <a href="https://arxiv.org/abs/2604.27003" target="_blank" rel="noreferrer">arXiv:2604.27003</a></li><li><b>辅助系统证据</b>：Tutti / KVServe / NVIDIA CMX 等，用来观察 SSD-backed KV cache 和上下文记忆平台的工程落地进度。</li></ul><div class="driver-list"><div class="driver"><b>核心区分</b><span>哪篇论文最强支持 NAND？哪篇最强支持 DRAM？以后看到论文标题里的 memory，先问清楚落哪一层。</span></div><div class="driver"><b>关键下修情景</b><span>如果大云厂普遍只存经验摘要、很快删掉原始轨迹，NAND 容量预期要往下砍多少？</span></div><div class="driver"><b>后续校准</b><span>再冒出新的持续学习或记忆论文时，直接放进上面这张四象限地图，看它到底推高哪一层。</span></div></div></div>
     </section>
 
-    <div class="print-note">提示：浏览器打印时可选择横向，即可作为宽屏讲义导出。</div>
+    <div class="print-note">提示：浏览器打印时选横向，可以当宽屏笔记导出。</div>
   </div>
 
 </body>
