@@ -98,12 +98,12 @@ export function App() {
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <section className="cabinet" aria-label="小球移动重置版 3D 游戏">
+      <section className="cabinet" aria-label="小球移动重制版 3D 游戏">
         <aside className="left-rail">
           <header className="brand">
             <div className="brand-mark" aria-hidden="true"><span /></div>
             <div>
-              <h1>小球移动重置版</h1>
+              <h1>小球移动重制版</h1>
               <p>by GPT-5.6 Sol</p>
             </div>
           </header>
@@ -234,7 +234,7 @@ export function App() {
           <section className="intro-modal" role="dialog" aria-modal="true" aria-labelledby="intro-title">
             <div className="intro-copy">
               <p className="modal-year">2015 / 2026</p>
-              <h2 id="intro-title">小球移动重置版</h2>
+              <h2 id="intro-title">小球移动重制版</h2>
               <p className="modal-copy">欢迎回来，玩家。熟悉的规则，现在有了新的物理世界。</p>
               <p className="creator-credit">by GPT-5.6 Sol</p>
 

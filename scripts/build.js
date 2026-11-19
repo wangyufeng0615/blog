@@ -561,7 +561,7 @@ const homeJsonLd = {
       url: 'https://wangyufeng.org',
       email: 'mailto:alanwang424@gmail.com',
       sameAs: ['https://github.com/wangyufeng0615'],
-      knowsAbout: ['AI tools', 'map games', 'software engineering', 'personal software']
+      knowsAbout: ['AI tools', 'software engineering', 'personal software', 'game mods', 'map games', 'memory and storage industry']
     },
     {
       '@type': 'ItemList',
@@ -586,7 +586,7 @@ const homeHtml = htmlTemplate({
   title: '王雨峰的博客',
   content: homeContent,
   css,
-  description: '王雨峰的工程师主页，收集 AI 工具、地图游戏、个人软件和文章。',
+  description: '王雨峰的个人博客，放自己做的 AI 工具、游戏与模组、数据专题，以及关于 AI、存储和生活的文章。',
   url: '/',
   jsonLd: homeJsonLd
 });
@@ -806,15 +806,18 @@ function generateAiReadableFiles(posts) {
     }));
   });
 
+  const featuredProjects = allProjects.filter((project) => project.featured);
+  const garageProjects = allProjects.filter((project) => !project.featured);
+
   const llms = `# 王雨峰的博客
 
-> 王雨峰的个人网站，收集 AI 工具、地图游戏、个人软件、投资/技术/生活文章。站点是静态 HTML，适合人类阅读，也提供机器可读索引供 AI agents 使用。
+> 王雨峰的个人博客，收录我做的 AI 工具、游戏与模组、数据专题，以及关于 AI、存储、投资与生活的文章。全站为静态 HTML，同时提供结构化索引供 AI Agent 读取。
 
 The homepage is the best human-readable overview. For automated reading, prefer the JSON indexes below and use article URLs as canonical sources.
 
 ## Site
 
-- [Homepage](${SITE_URL}/): Engineer homepage, featured work, tools, writing archive, and AI-readable entry points.
+- [Homepage](${SITE_URL}/): Personal blog, featured works, garage projects, writing archive, and AI-readable entry points.
 - [Sitemap](${SITE_URL}/sitemap.xml): Canonical URLs for crawl discovery.
 - [Robots](${SITE_URL}/robots.txt): Crawler policy.
 
@@ -834,9 +837,13 @@ The homepage is the best human-readable overview. For automated reading, prefer 
 - [Stellaris JSON catalog](${SITE_URL}/stellaris/catalog.json): Every source group, lossless Markdown/JSON exports and exact namespace:key lookup shards.
 - [EU5 mod wiki llms.txt / EU5 模组百科](https://eu5.wangyufeng.org/llms.txt): Bilingual wiki of my three Europa Universalis V description mods, with URL scheme, data endpoints and license.
 
-## Featured work
+## Featured works
 
-${projectIndex.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}
+${featuredProjects.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}
+
+## Garage & experiments
+
+${garageProjects.map((project) => `- [${project.name}](${project.url}): ${project.description}`).join('\n')}
 
 ## Writing and pages
 

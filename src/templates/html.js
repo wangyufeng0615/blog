@@ -3,7 +3,7 @@ import { escapeHtml, scriptJson } from './escape.js';
 export function htmlTemplate({ title, content, css, description = '', url = '', date = '', isArticle = false, jsonLd = null }) {
   const siteName = '王雨峰的博客';
   const siteUrl = 'https://wangyufeng.org';
-  const defaultDescription = '王雨峰的个人博客，分享编程、生活与思考';
+  const defaultDescription = '王雨峰的个人博客，记录 AI、存储、游戏与投资思考，也放一些自己做的小软件。';
   const desc = escapeHtml(description || defaultDescription);
   const fullUrl = escapeHtml(url ? `${siteUrl}${url}` : siteUrl);
   title = escapeHtml(title);
