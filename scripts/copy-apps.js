@@ -7,7 +7,7 @@ const source = path.join(root, 'apps', 'ball-moving', 'dist');
 const destination = path.join(root, 'dist', 'ball-moving');
 
 if (!fs.existsSync(source)) {
-  throw new Error('小球移动重置版尚未构建：缺少 apps/ball-moving/dist');
+  throw new Error('小球移动重制版尚未构建：缺少 apps/ball-moving/dist');
 }
 
 fs.rmSync(destination, { recursive: true, force: true });

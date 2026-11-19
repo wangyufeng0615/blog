@@ -2,7 +2,7 @@
 export const allProjects = [
   {
     name: '群星 · 星海文库',
-    description: '十五万段银河里的文字，每一句都能找到它的出处',
+    description: '群星 4.5.2 全部 15 万条官方中英文案检索，保留出处，支持 AI 直读',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/stellaris/',
     type: 'Game text archive',
@@ -12,7 +12,7 @@ export const allProjects = [
   },
   {
     name: '和Atlas一起探索地球',
-    description: '随机落在地球某个街角，Atlas 在身边讲它的故事',
+    description: '随机街景 + AI 解读，我和好朋友玩得很开心，近期最自豪的作品',
     // 历史访问量写死，来源：线上 SQLite visit_history（2026-03-24 上线至 2026-11-09），访客按浏览器匿名 session 去重
     stats: '上线以来 782 位访客，探索 2,629 次',
     featured: true,
@@ -26,7 +26,7 @@ export const allProjects = [
   {
     name: 'EU5 模组百科',
     // 词条数写死，来源：eu5-wiki build_data 输出，2026-11-14
-    description: '四万三千个名字，铺满一张中世纪末的世界地图',
+    description: '我三个 EU5 模组的中英文地图百科，收录地块、人物等 4.3 万词条',
     sticker: 'eu5',
     featured: true,
     url: 'https://eu5.wangyufeng.org',
@@ -38,7 +38,7 @@ export const allProjects = [
   {
     name: '所有地块的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 3,002；专题页 eu5-descriptions 要一起改
-    description: '两万八千块沉默的土地，第一次有人讲起它们的过去',
+    description: '给游戏里 28,316 个空白地块补上中英文历史介绍',
     stats: 'Steam 创意工坊 3,000+ 订阅',
     sticker: 'eu5',
     featured: true,
@@ -51,7 +51,7 @@ export const allProjects = [
   {
     name: '所有历史人物的描述 · EU5 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 796
-    description: '七千多位真实活过的人，鼠标停下，他们的一生就展开',
+    description: '给 7,789 位历史人物补上中英文生平，悬停头像直接看',
     stats: 'Steam 创意工坊 700+ 订阅',
     sticker: 'eu5-characters',
     featured: true,
@@ -64,7 +64,7 @@ export const allProjects = [
   {
     name: '所有省份和伟大工程的描述 · EU4 模组',
     // 订阅数写死，来源：Steam 创意工坊接口，2026-11-12 当前订阅 887
-    description: '三千个省份、一百多座奇观，每一处都有了自己的故事',
+    description: '给 3,272 个省份和 139 座伟大工程补上中英文介绍',
     stats: 'Steam 创意工坊 800+ 订阅',
     sticker: 'eu4',
     featured: true,
@@ -76,7 +76,7 @@ export const allProjects = [
   },
   {
     name: '冰原对决',
-    description: '雪原中央散落着枪，一百个人同时冲向它们',
+    description: '浏览器直玩的百人雪地抢枪 FPS，Rust 服务端，人少时机器人补位',
     sticker: 'snowgun',
     featured: true,
     url: 'https://ice.wangyufeng.org/',
@@ -87,7 +87,8 @@ export const allProjects = [
   },
   {
     name: '照片信使',
-    description: '你点一下允许，手机里的回忆才被悄悄递给 AI',
+    description: 'iPhone 应用，经局域网或数据线把授权照片临时交给电脑上的 AI，不走云端',
+    stats: '已上架 App Store（国区暂不可下）',
     sticker: 'photo-courier',
     featured: true,
     url: 'https://apps.apple.com/app/id6800279514',
@@ -98,7 +99,7 @@ export const allProjects = [
   },
   {
     name: '王工存储指数',
-    description: '内存和闪存的价格涨了又落，这里听着芯片周期的心跳',
+    description: '追踪 DRAM、NAND、SSD、HBM 价格与情绪的存储行业看板',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-trend/',
     type: 'Industry dashboard',
@@ -108,7 +109,7 @@ export const allProjects = [
   },
   {
     name: 'X 存储情绪雷达',
-    description: '存储博主们的乐观与恐慌，一条条记下，等时间来检验',
+    description: '抓取中英文存储博主的 X 发言，用 LLM 标注多空情绪和观点变化',
     sticker: 'market',
     url: 'https://wangyufeng.org/storage-radar/',
     type: 'Industry dashboard',
@@ -118,7 +119,7 @@ export const allProjects = [
   },
   {
     name: '定投纳指，还是卷大厂',
-    description: '孩子出生那天起的两条路：每月定投纳指，或一路拼进大厂',
+    description: '出生起月投 2000 买 QQQ vs 重金卷进大厂，算投入、胜率和凯利仓位',
     sticker: 'investing',
     url: 'https://wangyufeng.org/qqq-vs-bigtech/',
     type: 'Data story',
@@ -128,7 +129,7 @@ export const allProjects = [
   },
   {
     name: '得到老师预测回测',
-    description: '几年前老师们讲过的两千多个未来，今天一条条对答案',
+    description: '整理卓克、万维钢、香帅、吴军的两千多条预测，拿今天的现实逐条对答案',
     sticker: 'forecast',
     url: 'https://wangyufeng.org/forecast-review/',
     type: 'Data story',
@@ -138,7 +139,7 @@ export const allProjects = [
   },
   {
     name: '星际拓荒通关线索图',
-    description: '太阳一次次爆炸，循环里你要找回的每一条线索',
+    description: '本体、挪麦人物与 DLC 的中英双语线索依赖图，附游戏原文（重度剧透）',
     sticker: 'outerwilds',
     url: 'https://wangyufeng.org/outer-wilds-clues/',
     type: 'Game guide',
@@ -148,7 +149,7 @@ export const allProjects = [
   },
   {
     name: 'Rapier Galton Lab',
-    description: '小球一颗颗落下，没人安排，钟形曲线自己长了出来',
+    description: '基于真实刚体物理的高尔顿板模拟，看小球一步步落出正态分布',
     sticker: 'galton',
     url: 'https://wangyufeng.org/galton/',
     type: 'Physics simulation',
@@ -158,7 +159,7 @@ export const allProjects = [
   },
   {
     name: '提前退休计算器',
-    description: '输入几个数字，算一算离不用上班的那天还有多远',
+    description: '输入几个数字，算算离不用上班还有多远',
     sticker: 'retirement',
     url: 'https://retirement.wangyufeng.org',
     type: 'Calculator',
@@ -168,7 +169,7 @@ export const allProjects = [
   },
   {
     name: 'aimeter',
-    description: '菜单栏里一只小表，记着今天还能让 AI 干多少活',
+    description: 'macOS 菜单栏工具，实时监控 Claude Code 和 Codex 的额度与用量',
     sticker: 'meter',
     featured: true,
     url: 'https://github.com/wangyufeng0615/aimeter',
@@ -179,7 +180,7 @@ export const allProjects = [
   },
   {
     name: 'aitop',
-    description: '几个 Claude 同时干活，它替我盯着谁在忙、谁卡住了',
+    description: '终端里同时盯多个 Claude Code 进程（能用，但效果一般）',
     sticker: 'terminal',
     url: 'https://github.com/wangyufeng0615/aitop',
     type: 'Terminal tool',
@@ -189,7 +190,7 @@ export const allProjects = [
   },
   {
     name: 'LOF基金溢价计算器',
-    description: '给自己用的小算盘，每天盯着场内基金比净值贵了多少',
+    description: '自用小工具，每天看场内 LOF 基金比净值溢价多少',
     sticker: 'investing',
     url: 'https://github.com/wangyufeng0615/lof-premium-calculator',
     type: 'Investing tool',
@@ -198,8 +199,8 @@ export const allProjects = [
     status: 'GitHub',
   },
   {
-    name: '小球移动重置版',
-    description: '童年玩过的小球移动，换上真实物理，在 3D 里重新滚起来',
+    name: '小球移动重制版',
+    description: '2015 年「小球移动」的 3D 物理复刻，Three.js + Rapier 还原原版计分规则',
     sticker: 'ball',
     url: 'https://wangyufeng.org/ball-moving/',
     type: '3D browser game',
