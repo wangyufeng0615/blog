@@ -67,7 +67,7 @@ function splitRadar(document, file) {
   fs.writeFileSync(path.join(path.dirname(file), 'data.json'), json);
   const code = runtime.childNodes[0].value.replace(
     "const DATA = JSON.parse(document.getElementById('dashboard-data').textContent);",
-    `const response = await fetch(${JSON.stringify(dataUrl)}, { credentials: 'omit' });\n    if (!response.ok) throw new Error('数据暂时不可用');\n    const DATA = await response.json();`);
+    `const response = await fetch(${JSON.stringify(dataUrl)});\n    if (!response.ok) throw new Error('数据暂时不可用');\n    const DATA = await response.json();`);
   const wrapped = `(async () => {\ntry {\n${code}\n` +
     `if (document.body.dataset.renderError) throw new Error('图表暂时不可用');\n` +
     `document.documentElement.classList.add('js');\n` +
