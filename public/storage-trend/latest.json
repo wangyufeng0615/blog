@@ -1,8 +1,8 @@
 {
  "name": "王工存储指数",
  "url": "https://wangyufeng.org/storage-trend/",
- "generated_at": "2026-11-22T09:38:22Z",
- "as_of": "2026-11-22",
+ "generated_at": "2026-11-23T07:32:10Z",
+ "as_of": "2026-11-23",
  "cycle": {
   "state": "分化",
   "ready_count": 7,
@@ -75,7 +75,7 @@
    "value_text": "68.1",
    "unit": "分 · 0–100",
    "date": "2026-10-08",
-   "freshness": "watch",
+   "freshness": "stale",
    "cycle": null,
    "trend": {
     "direction": "up",
@@ -872,7 +872,7 @@
    "name": "X 存储讨论公开样本",
    "url": null,
    "date": "2026-10-08",
-   "freshness": "watch"
+   "freshness": "stale"
   }
  ],
  "notes": [
