@@ -5,7 +5,7 @@
   "files": [
     {
       "path": "index.html",
-      "sha256": "44665e9eec122fe58f75ddafcf936412beeedf8a2d48920aa2a182d21bfe4d08"
+      "sha256": "8188f6c4e42e92546e8c59ba53105438687b39d15aa14a394430d8f2e87e7630"
     },
     {
       "path": "style.css",
@@ -13,7 +13,7 @@
     },
     {
       "path": "app.js",
-      "sha256": "da9819789f5ceb93b6ba418a3ff96e7e81252811f2fad4806477720d7455e0c3"
+      "sha256": "878e643b52b42c69ff20e5ab17c700d1a879d0e2915f76fc2ad5cbcc4dcec5e4"
     },
     {
       "path": "i18n.js",
@@ -25,11 +25,15 @@
     },
     {
       "path": "worker.js",
-      "sha256": "1ac14aec3dccc35a4a416cdd41808a74953f7d7ad4a3588b35b6b85ec17a5d3b"
+      "sha256": "ebd22cbeb493ea9726bc90ea3d02d5c8d6c80ac661fe53e0f1c48a9af5565801"
     },
     {
       "path": "manifest.json",
       "sha256": "956731bbcd9e9e067b180bd7ccf6b2ececd774c1242f77d3e01e49a3f0760791"
+    },
+    {
+      "path": "boot.json",
+      "sha256": "db3beb90efe935373487e4bd457dcf69a2a23cc8be4d5538e6e251b891058622"
     },
     {
       "path": "downloads.json",

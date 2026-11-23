@@ -7,7 +7,7 @@ const argument=process.argv.indexOf('--source');
 if(argument<0||!process.argv[argument+1])throw new Error('Usage: node scripts/stellaris/sync.mjs --source /absolute/path/to/web-library/dist');
 const source=path.resolve(process.argv[argument+1]);
 const target=path.join(root,'posts/20261023');
-const allowed=['index.html','style.css','app.js','i18n.js','preferences.js','worker.js','manifest.json','downloads.json','report.txt','data','downloads','texts','lookup','catalog.json','catalog.html','index.md','schema.md','llms.txt'];
+const allowed=['index.html','style.css','app.js','i18n.js','preferences.js','worker.js','manifest.json','boot.json','downloads.json','report.txt','data','downloads','texts','lookup','catalog.json','catalog.html','index.md','schema.md','llms.txt'];
 // No index.md at post root: the blog intentionally gives Markdown articles precedence.
 const artifactFiles=[];
 function walk(dir,prefix=''){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name),prefix+d.name+'/'):[prefix+d.name])}
