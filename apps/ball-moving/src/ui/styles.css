@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap');
-
 :root {
-  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   color: #eefaff;
   background: #020408;
   font-synthesis: none;
@@ -13,7 +11,7 @@
   --panel: #07101a;
   --panel-soft: #0b1722;
   --line: rgba(105, 213, 255, 0.24);
-  --display: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  --display: "DIN Alternate", "SF Pro Display", "Segoe UI", "PingFang SC", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -25,9 +23,9 @@ body {
   min-height: 100vh;
   overflow: hidden;
   background:
-    linear-gradient(rgba(1, 4, 7, 0.76), rgba(1, 4, 7, 0.9)),
-    url('/assets/deep-space.png') center / cover fixed,
-    #020408;
+    radial-gradient(circle at 24% 18%, rgba(12, 58, 88, 0.42), transparent 52%),
+    radial-gradient(circle at 80% 78%, rgba(86, 16, 48, 0.28), transparent 48%),
+    linear-gradient(160deg, #02060b, #020408 60%, #050a11);
 }
 
 button, input { font: inherit; }

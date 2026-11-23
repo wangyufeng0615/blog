@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { GameEngine } from '../engine/GameEngine'
+import type { GameEngine } from '../engine/GameEngine'
 import type { GameEvent, GameSnapshot } from '../game/types'
 import {
   ClockIcon,
@@ -65,23 +65,53 @@ export function App() {
     noticeTimerRef.current = window.setTimeout(() => setNotice(null), 2200)
   }, [])
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const engine = new GameEngine(canvas, setSnapshot, handleGameEvent)
-    engineRef.current = engine
+  const pendingStartRef = useRef<string | null>(null)
+  const enginePromiseRef = useRef<Promise<GameEngine | null> | null>(null)
+  const mountedRef = useRef(true)
 
+  const preloadEngineModule = useCallback(() => {
+    void import('../engine/GameEngine')
+  }, [])
+
+  const ensureEngine = useCallback(() => {
+    if (engineRef.current) return Promise.resolve(engineRef.current)
+    if (enginePromiseRef.current) return enginePromiseRef.current
+    const canvas = canvasRef.current
+    if (!canvas) return Promise.resolve(null)
+    const promise = import('../engine/GameEngine').then(({ GameEngine }) => {
+      if (!mountedRef.current) return null
+      const engine = new GameEngine(canvas, setSnapshot, handleGameEvent)
+      engineRef.current = engine
+      if (pendingStartRef.current !== null) {
+        engine.start(pendingStartRef.current)
+        pendingStartRef.current = null
+      }
+      return engine
+    })
+    enginePromiseRef.current = promise
+    return promise
+  }, [handleGameEvent])
+
+  useEffect(() => {
+    mountedRef.current = true
     return () => {
-      engine.destroy()
+      mountedRef.current = false
+      engineRef.current?.destroy()
       engineRef.current = null
+      enginePromiseRef.current = null
       if (noticeTimerRef.current !== null) window.clearTimeout(noticeTimerRef.current)
     }
-  }, [handleGameEvent])
+  }, [])
 
   const startGame = () => {
     const name = playerName.trim() || 'PLAYER'
     setPlayerName(name)
-    engineRef.current?.start(name)
+    if (engineRef.current) {
+      engineRef.current.start(name)
+    } else {
+      pendingStartRef.current = name
+      void ensureEngine()
+    }
     setShowIntro(false)
   }
 
@@ -130,6 +160,14 @@ export function App() {
             <div className="corner corner-bl" />
             <div className="corner corner-br" />
             <canvas ref={canvasRef} className="game-canvas" aria-label="3D 小球竞技场" />
+
+            {!snapshot.ready && !showIntro ? (
+              <div className="empty-prompt" aria-live="polite">
+                <span className="empty-orbit" />
+                <strong>正在启动物理引擎</strong>
+                <small>即将进入 3D 竞技场…</small>
+              </div>
+            ) : null}
 
             {snapshot.ready && snapshot.status === 'playing' && snapshot.ballCount === 0 && !showIntro ? (
               <div className="empty-prompt" aria-live="polite">
@@ -250,21 +288,30 @@ export function App() {
                   value={playerName}
                   maxLength={16}
                   autoFocus
-                  onChange={(event) => setPlayerName(event.target.value)}
+                  onChange={(event) => {
+                    preloadEngineModule()
+                    setPlayerName(event.target.value)
+                  }}
                   onKeyDown={(event) => {
-                    if (event.key === 'Enter' && snapshot.ready) startGame()
+                    if (event.key === 'Enter') startGame()
                   }}
                 />
               </label>
-              <button className="start-button" type="button" disabled={!snapshot.ready} onClick={startGame}>
-                <span>{snapshot.ready ? '进入竞技场' : '正在启动物理引擎'}</span>
+              <button
+                className="start-button"
+                type="button"
+                onPointerEnter={preloadEngineModule}
+                onFocus={preloadEngineModule}
+                onClick={startGame}
+              >
+                <span>进入竞技场</span>
                 <i>→</i>
               </button>
             </div>
 
             <figure className="original-preview">
               <div className="original-image-frame">
-                <img src={`${import.meta.env.BASE_URL}assets/original-game.png`} alt="2015 年原版小球移动游戏画面" />
+                <img src={`${import.meta.env.BASE_URL}assets/original-game.webp`} alt="2015 年原版小球移动游戏画面" fetchPriority="high" decoding="async" />
               </div>
               <figcaption>原版画面 · 2015</figcaption>
             </figure>

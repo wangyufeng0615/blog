@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { addLanguageHeaders, languageRedirect, preferredLanguage } from "./land-below-wind-router.js";
+import { addLanguageHeaders, fetchUpstreamHtml, languageRedirect, preferredLanguage } from "./land-below-wind-router.js";
 
 test("negotiates the highest-quality browser language", () => {
   assert.equal(preferredLanguage("zh-CN,zh;q=0.9,en;q=0.8"), "zh");
@@ -53,4 +53,35 @@ test("the negotiated root cannot be reused by a shared cache or a browser", () =
   assert.match(zh.headers.get('Vary'), /Accept-Language, Cookie/);
   const en = addLanguageHeaders(new Response('English', { headers: { 'Cache-Control': 'max-age=600' } }), 'en');
   assert.equal(en.headers.get('Cache-Control'), 'max-age=600');
+});
+
+test("upstream HTML is edge-cached while client negotiated root stays private, no-store", async () => {
+  const store = new Map();
+  const mockCache = {
+    async match(req) {
+      const hit = store.get(req.url);
+      return hit ? hit.clone() : undefined;
+    },
+    async put(req, res) {
+      store.set(req.url, res);
+    },
+  };
+  let originCalls = 0;
+  const mockFetch = async () => {
+    originCalls += 1;
+    return new Response("<html>中文</html>", {
+      status: 200,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
+  };
+  const req = new Request("https://wangyufeng.org/land-below-the-wind/", {
+    headers: { "Accept-Language": "zh-CN", Cookie: "lbw_lang=zh" },
+  });
+  const first = addLanguageHeaders(await fetchUpstreamHtml(req, null, mockCache, mockFetch), "zh-CN");
+  const second = addLanguageHeaders(await fetchUpstreamHtml(req, null, mockCache, mockFetch), "zh-CN");
+  assert.equal(originCalls, 1);
+  assert.equal(await first.text(), "<html>中文</html>");
+  assert.equal(await second.text(), "<html>中文</html>");
+  assert.equal(second.headers.get("Cache-Control"), "private, no-store");
+  assert.match(second.headers.get("Vary"), /Accept-Language, Cookie/);
 });

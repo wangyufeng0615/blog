@@ -67,13 +67,15 @@ function splitRadar(document, file) {
   fs.writeFileSync(path.join(path.dirname(file), 'data.json'), json);
   const code = runtime.childNodes[0].value.replace(
     "const DATA = JSON.parse(document.getElementById('dashboard-data').textContent);",
-    `const response = await fetch(${JSON.stringify(dataUrl)});\n    if (!response.ok) throw new Error('数据暂时不可用');\n    const DATA = await response.json();`);
+    `const response = await fetch(${JSON.stringify(dataUrl)}, { credentials: 'omit' });\n    if (!response.ok) throw new Error('数据暂时不可用');\n    const DATA = await response.json();`);
   const wrapped = `(async () => {\ntry {\n${code}\n` +
     `if (document.body.dataset.renderError) throw new Error('图表暂时不可用');\n` +
     `document.documentElement.classList.add('js');\n` +
     `document.getElementById('radar-loading')?.remove();\n` +
     `} catch (error) {\n` +
     `document.documentElement.classList.remove('js');\n` +
+    `const authors = document.getElementById('authors');\n` +
+    `if (authors) authors.style.minHeight = '0';\n` +
     `const status = document.getElementById('radar-loading');\n` +
     `if (status) { status.textContent = '图表加载失败，可阅读下方文字摘要，或刷新页面重试。'; status.setAttribute('role', 'alert'); }\n` +
     `console.error('dashboard data load failed', error);\n}\n})();\n`;

@@ -77,6 +77,9 @@ export class GameEngine {
   private speed = 1
   private ready = false
   private destroyed = false
+  private needsRender = true
+  private arenaPulseActive = false
+  private centerRings: THREE.Object3D | null = null
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -98,6 +101,8 @@ export class GameEngine {
     this.renderer.toneMappingExposure = 1.15
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFShadowMap
+    this.renderer.shadowMap.autoUpdate = false
+    this.renderer.shadowMap.needsUpdate = true
 
     this.composer = new EffectComposer(this.renderer)
     this.composer.addPass(new RenderPass(this.scene, this.camera))
@@ -119,6 +124,7 @@ export class GameEngine {
   public start(playerName: string): void {
     this.playerName = playerName.trim().slice(0, 16) || 'PLAYER'
     this.status = 'playing'
+    this.needsRender = true
     this.emitSnapshot()
   }
 
@@ -183,6 +189,8 @@ export class GameEngine {
     }
 
     this.emitSnapshot()
+    this.renderer.shadowMap.needsUpdate = true
+    this.needsRender = true
   }
 
   public togglePause(): void {
@@ -193,6 +201,7 @@ export class GameEngine {
       message: this.paused ? '竞技场已暂停' : '继续挑战',
       tone: 'info',
     })
+    this.needsRender = true
     this.emitSnapshot()
   }
 
@@ -263,6 +272,9 @@ export class GameEngine {
       this.status = 'playing'
       this.nextBallId = data.nextBallId
       data.balls.forEach((ball) => this.createBall(ball))
+      this.updateScene(0)
+      this.renderer.shadowMap.needsUpdate = true
+      this.needsRender = true
       this.onEvent({ type: 'notice', message: '存档读取成功', tone: 'success' })
       this.emitSnapshot()
     } catch {
@@ -279,6 +291,8 @@ export class GameEngine {
     this.status = 'playing'
     this.speed = 1
     this.nextBallId = 1
+    this.renderer.shadowMap.needsUpdate = true
+    this.needsRender = true
     this.emitSnapshot()
   }
 
@@ -297,7 +311,7 @@ export class GameEngine {
 
   private buildScene(): void {
     this.scene.background = new THREE.Color('#020407')
-    new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}assets/deep-space.png`, (texture) => {
+    new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}assets/deep-space.webp`, (texture) => {
       if (this.destroyed) {
         texture.dispose()
         return
@@ -307,6 +321,7 @@ export class GameEngine {
       texture.magFilter = THREE.LinearFilter
       this.spaceTexture = texture
       this.scene.background = texture
+      this.needsRender = true
     })
     this.scene.fog = new THREE.FogExp2('#02060b', 0.027)
     this.camera.position.set(0, 10.5, 12.5)
@@ -355,6 +370,13 @@ export class GameEngine {
 
     this.buildWalls()
     this.buildCenterMark()
+    this.centerRings = this.scene.getObjectByName('center-rings') ?? null
+    this.scene.updateMatrixWorld(true)
+    this.scene.traverse((obj) => {
+      if (obj !== this.scene && obj !== this.centerRings && obj.parent !== this.centerRings) {
+        obj.matrixAutoUpdate = false
+      }
+    })
   }
 
   private buildWalls(): void {
@@ -604,7 +626,8 @@ export class GameEngine {
     this.timer.update(timestamp)
     const delta = Math.min(this.timer.getDelta(), 0.05)
 
-    if (!this.paused && this.status === 'playing') {
+    const simulating = !this.paused && this.status === 'playing' && this.balls.size > 0
+    if (simulating) {
       this.accumulator += delta
       if (this.started) this.elapsedSeconds += delta
       while (this.accumulator >= FIXED_TIMESTEP) {
@@ -612,21 +635,32 @@ export class GameEngine {
         this.world.step()
         this.accumulator -= FIXED_TIMESTEP
       }
+      this.renderer.shadowMap.needsUpdate = true
+    } else if (!this.paused && this.status === 'playing' && this.started) {
+      this.elapsedSeconds += delta
     }
 
-    this.updateScene(delta)
-    this.snapshotAccumulator += delta
-    if (this.snapshotAccumulator > 0.2) {
-      this.snapshotAccumulator = 0
-      this.emitSnapshot()
+    const activeVisual = simulating || this.bursts.length > 0 || this.arenaPulseActive || (this.status === 'playing' && !this.paused)
+    if (activeVisual) {
+      this.updateScene(delta)
+      this.needsRender = true
     }
-    this.composer.render()
+    if (this.started && !this.paused && this.status === 'playing') {
+      this.snapshotAccumulator += delta
+      if (this.snapshotAccumulator > 0.2) {
+        this.snapshotAccumulator = 0
+        this.emitSnapshot()
+      }
+    }
+    if (this.needsRender) {
+      this.needsRender = false
+      this.composer.render()
+    }
   }
 
   private updateScene(delta: number): void {
     const elapsed = this.timer.getElapsed()
-    const centerRings = this.scene.getObjectByName('center-rings')
-    if (centerRings) centerRings.rotation.y = elapsed * 0.08
+    if (this.centerRings) this.centerRings.rotation.y = elapsed * 0.08
     this.balls.forEach((ball) => {
       const position = ball.body.translation()
       ball.root.position.set(position.x, position.y, position.z)
@@ -709,8 +743,12 @@ export class GameEngine {
     if (!(material instanceof THREE.MeshPhysicalMaterial)) return
     material.emissive.copy(color)
     material.emissiveIntensity = intensity
+    this.arenaPulseActive = true
+    this.needsRender = true
     window.setTimeout(() => {
       if (material) material.emissiveIntensity = 0
+      this.arenaPulseActive = false
+      this.needsRender = true
     }, 180)
   }
 
@@ -790,12 +828,15 @@ export class GameEngine {
   private resize(): void {
     const width = Math.max(1, this.canvas.clientWidth)
     const height = Math.max(1, this.canvas.clientHeight)
-    const pixelRatio = Math.min(window.devicePixelRatio, 1.75)
+    const pixelRatio = Math.min(window.devicePixelRatio, 1.5)
     this.renderer.setPixelRatio(pixelRatio)
     this.renderer.setSize(width, height, false)
     this.composer.setPixelRatio(pixelRatio)
     this.composer.setSize(width, height)
+    this.bloom.resolution.set(Math.max(1, Math.round(width * 0.5)), Math.max(1, Math.round(height * 0.5)))
     this.camera.aspect = width / height
     this.camera.updateProjectionMatrix()
+    this.renderer.shadowMap.needsUpdate = true
+    this.needsRender = true
   }
 }

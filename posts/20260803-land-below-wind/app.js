@@ -293,6 +293,7 @@ function applyLanguage(language) {
     element.setAttribute("aria-label", `${point.name}, ${point.date}`);
     const label = element.querySelector(".map-marker-label");
     if (label) label.textContent = point.name;
+    delete element._labelWidth;
   });
   renderPlaceLedger();
   updateMapAccessibility();
@@ -976,16 +977,22 @@ function updateMarkerLabels() {
   const focusLabels = chapterFocusLabels[activeChapter] || new Set();
   const narrative = document.querySelector(`.chapter[data-chapter="${activeChapter}"] .chapter-card, .chapter[data-chapter="${activeChapter}"] .hero-copy`);
   const narrativeRect = narrative?.getBoundingClientRect();
+  const viewportWidth = window.innerWidth;
+  const updates = [];
   markerElements.forEach((element, id) => {
     const point = pointById.get(id);
     const label = element.querySelector(".map-marker-label");
     const isFocused = focusLabels.has(id);
     const projected = map.project(point.coord);
-    const labelWidth = Math.max(label?.scrollWidth || 0, label?.getBoundingClientRect().width || 0);
-    const labelOnLeft = projected.x + 19 + labelWidth > window.innerWidth - 18;
+    let labelWidth = element._labelWidth;
+    if (labelWidth === undefined) {
+      labelWidth = Math.max(label?.scrollWidth || 0, label?.getBoundingClientRect().width || 0);
+      if (labelWidth > 0) element._labelWidth = labelWidth;
+    }
+    const labelOnLeft = projected.x + 19 + labelWidth > viewportWidth - 18;
     const labelLeft = labelOnLeft ? projected.x - 19 - labelWidth : projected.x + 19;
     const labelRight = labelOnLeft ? projected.x - 19 : projected.x + 19 + labelWidth;
-    const overlapsNarrative = window.innerWidth > 820 && narrativeRect
+    const overlapsNarrative = viewportWidth > 820 && narrativeRect
       && labelRight > narrativeRect.left
       && labelLeft < narrativeRect.right
       && projected.y + 12 > narrativeRect.top
@@ -996,10 +1003,14 @@ function updateMarkerLabels() {
       || (activeChapter === "related" && contextLabels.has(id))
       || (point.category === "route" ? zoom >= 8.5 : zoom >= 9.5)
     );
+    updates.push([element, label, labelOnLeft, isFocused, visible]);
+  });
+  for (let i = 0; i < updates.length; i += 1) {
+    const [element, label, labelOnLeft, isFocused, visible] = updates[i];
     element.classList.toggle("is-label-left", labelOnLeft);
     element.classList.toggle("is-chapter-focus", isFocused);
     label?.classList.toggle("is-visible", visible);
-  });
+  }
 }
 
 function updateRouteHighlight(chapter) {
@@ -1072,5 +1083,10 @@ window.addEventListener("resize", () => {
   });
 }, { passive: true });
 
-applyLanguage(currentLang);
-window.addEventListener("load", initializeMap);
+if (currentLang === "zh" && document.documentElement.lang === "zh-CN") {
+  renderPlaceLedger();
+  updateMapAccessibility();
+} else {
+  applyLanguage(currentLang);
+}
+window.addEventListener("load", () => requestAnimationFrame(initializeMap));

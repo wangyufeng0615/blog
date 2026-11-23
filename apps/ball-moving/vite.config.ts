@@ -7,5 +7,14 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('@dimforge/rapier3d')) return 'rapier'
+          if (id.includes('/three/')) return 'three'
+          if (id.includes('/react/') || id.includes('/react-dom/')) return 'react'
+        },
+      },
+    },
   },
 })

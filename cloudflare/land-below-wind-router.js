@@ -87,15 +87,45 @@ export function addLanguageHeaders(response, language) {
   });
 }
 
+const ORIGIN_CACHE_TTL_SECONDS = 600;
+
+export async function fetchUpstreamHtml(request, ctx, cache = typeof caches !== "undefined" ? caches.default : null, fetcher = fetch) {
+  const url = new URL(request.url);
+  if (!cache || request.method !== "GET" || url.search) {
+    return fetcher(request);
+  }
+
+  const cacheKey = new Request(url.origin + url.pathname, { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
+  const originResponse = await fetcher(cacheKey);
+  if (originResponse.ok && originResponse.status === 200) {
+    const cacheHeaders = new Headers(originResponse.headers);
+    cacheHeaders.set("Cache-Control", `public, max-age=${ORIGIN_CACHE_TTL_SECONDS}`);
+    cacheHeaders.delete("Set-Cookie");
+    const toCache = new Response(originResponse.clone().body, {
+      status: originResponse.status,
+      statusText: originResponse.statusText,
+      headers: cacheHeaders,
+    });
+    const putPromise = cache.put(cacheKey, toCache);
+    if (ctx?.waitUntil) ctx.waitUntil(putPromise);
+    else await putPromise;
+  }
+  return originResponse;
+}
+
 export default {
-  async fetch(request) {
+  async fetch(request, _env, ctx) {
     const redirectResponse = languageRedirect(request);
     if (redirectResponse) return redirectResponse;
 
-    const response = await fetch(request);
     const pathname = new URL(request.url).pathname;
-    if (pathname === "/land-below-the-wind/") return addLanguageHeaders(response, "zh-CN");
-    if (pathname === "/land-below-the-wind/en/") return addLanguageHeaders(response, "en");
-    return response;
+    if (pathname === "/land-below-the-wind/" || pathname === "/land-below-the-wind/en/") {
+      const response = await fetchUpstreamHtml(request, ctx);
+      return addLanguageHeaders(response, pathname === "/land-below-the-wind/" ? "zh-CN" : "en");
+    }
+    return fetch(request);
   },
 };

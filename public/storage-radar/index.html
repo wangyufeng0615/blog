@@ -53,15 +53,17 @@
 
     .page { max-width: 1480px; margin: 0 auto; padding: 0 24px 40px; }
 
-    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border: 1px solid var(--line); border-top: 0; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); min-height: 94px; background: var(--surface); border: 1px solid var(--line); border-top: 0; }
+    #radar-loading { grid-column: 1 / -1; margin: 0; padding: 18px 22px; color: var(--muted); font-size: 13px; display: flex; align-items: center; }
     .metric { min-width: 0; padding: 18px 22px; border-right: 1px solid var(--line); }
     .metric:last-child { border-right: 0; }
     .metric-label { color: var(--muted); font-size: 13px; }
     .metric-value { margin-top: 4px; font-size: 30px; font-weight: 800; letter-spacing: -.025em; font-variant-numeric: tabular-nums; line-height: 1.1; }
 
-    .jumpbar { display: flex; align-items: center; gap: 14px; margin: 18px 0 6px; }
+    .jumpbar { display: flex; align-items: center; gap: 14px; margin: 18px 0 6px; min-height: 31px; }
     .jumpbar-label { color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; flex: 0 0 auto; }
-    .account-links { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+    .account-links { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; min-height: 31px; }
+    #authors { min-height: 100vh; }
     .account-links a { flex: 0 0 auto; padding: 4px 8px; color: var(--muted); border-bottom: 1px solid transparent; font-size: 13px; white-space: nowrap; }
     .account-links a:hover, .account-links a:focus-visible { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
 
@@ -152,6 +154,7 @@
     @media (max-width: 920px) {
       .topbar-inner { padding: 0 16px; }
       .page { padding: 0 16px 32px; }
+      .metrics { min-height: 85px; }
       .author-row { grid-template-columns: 200px 1fr 92px; gap: 16px; }
       .metric { padding: 16px 14px; }
       .metric-value { font-size: 26px; }
@@ -160,7 +163,7 @@
       .topbar-inner { padding: 0 14px; }
       .brand-sub { display: none; }
       .page { padding: 0 14px 28px; }
-      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .metrics { grid-template-columns: repeat(2, 1fr); min-height: 159px; }
       .metric { padding: 14px 12px; border-bottom: 1px solid var(--line); }
       .metric:nth-child(2n) { border-right: 0; }
       .metric:nth-last-child(-n+2) { border-bottom: 0; }
@@ -184,6 +187,7 @@
     .text-summary { max-width: 960px; margin: 0 auto; padding: 24px; font-size: 15px; line-height: 1.7; }
     .js .text-summary { display: none; }
   </style>
+  <noscript><style>#authors{min-height:0}</style></noscript>
   <script>document.documentElement.classList.add('js')</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dataset", "name": "X 个人存储博主样本情绪雷达", "description": "跟踪 X 上关注者不少于 10 万的中英文个人存储博主公开发言，用 LLM 标注情绪、交易动作与证据，按博主展示情绪时间轴并与 DRAM ETF 价格对照。", "url": "https://wangyufeng.org/storage-radar/", "inLanguage": "zh-CN", "isAccessibleForFree": true, "dateModified": "2026-10-09T12:38:01.019989+00:00", "temporalCoverage": "2026-01-01/2026-10-08", "creator": {"@type": "Person", "name": "王雨峰", "url": "https://wangyufeng.org/"}, "keywords": ["存储", "DRAM", "HBM", "NAND", "情绪指数", "X", "LLM"]}</script>
 </head>
@@ -328,7 +332,7 @@
         esc(account.expertise_category || '综合观察')
       ];
       return `<article class="author-row" id="author-${encodeURIComponent(keyOf(account.handle))}" data-handle="${esc(account.handle)}">
-        <div class="identity"><img class="avatar" src="${account.avatar_data_uri || fallbackAvatar(account.handle)}" alt="${esc(account.author)} 头像"><div class="id-text"><h2 class="author-name">${esc(account.author)}</h2><div class="author-meta">${metaParts.join(' · ')}</div>${summary ? `<p class="author-summary">${esc(summary)}</p>` : ''}</div></div>
+        <div class="identity"><img class="avatar" src="${account.avatar_data_uri || fallbackAvatar(account.handle)}" alt="${esc(account.author)} 头像" width="44" height="44" loading="lazy" decoding="async"><div class="id-text"><h2 class="author-name">${esc(account.author)}</h2><div class="author-meta">${metaParts.join(' · ')}</div>${summary ? `<p class="author-summary">${esc(summary)}</p>` : ''}</div></div>
         <div class="chart-shell"><div class="chart" id="chart-${index}"></div><div class="tooltip" id="tip-${index}"></div></div>
         <div class="score"><div class="score-value ${hasSample ? tone(latest?.adjusted_sentiment ?? account.adjusted_sentiment) : 'neutral'}">${hasSample ? signed(latest?.adjusted_sentiment ?? account.adjusted_sentiment) : '—'}</div><div class="score-label">${hasSample ? shortDate(latest.date) : '暂无样本'}</div></div>
         ${buildIndex(rows)}
@@ -369,9 +373,8 @@
       }).filter(Boolean);
     }
 
-    function renderChart(target, rows, cardIndex, account) {
-      const mobile = window.matchMedia('(max-width: 720px)').matches;
-      const width = Math.max(280, Math.round(target.getBoundingClientRect().width));
+    function renderChart(target, rows, cardIndex, account, measuredWidth, mobile) {
+      const width = measuredWidth ?? Math.max(280, Math.round(target.getBoundingClientRect().width));
       if (!rows.length) {
         target.innerHTML = `<div class="empty-chart">本窗口无存储相关样本</div>`;
         target._chartState = {rows: [], points: [], width, height: mobile ? 112 : 120, cardIndex};
@@ -464,9 +467,12 @@
       });
     }
     function renderAll() {
-      DISPLAY_ACCOUNTS.forEach(account => {
+      const mobile = window.matchMedia('(max-width: 720px)').matches;
+      const targets = DISPLAY_ACCOUNTS.map(account => document.getElementById(`chart-${account._chartIndex}`));
+      const firstWidth = targets[0] ? Math.max(280, Math.round(targets[0].getBoundingClientRect().width)) : 280;
+      DISPLAY_ACCOUNTS.forEach((account, i) => {
         const index = account._chartIndex;
-        renderChart(document.getElementById(`chart-${index}`), byHandle.get(keyOf(account.handle)) || [], index, account);
+        renderChart(targets[i], byHandle.get(keyOf(account.handle)) || [], index, account, firstWidth, mobile);
       });
       bindInteractions();
     }
