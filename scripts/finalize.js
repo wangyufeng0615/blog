@@ -12,6 +12,8 @@ const dist = path.join(root, 'dist');
 const origin = 'https://wangyufeng.org';
 const posts = JSON.parse(fs.readFileSync(path.join(dist, 'posts.json'), 'utf8'));
 const entries = new Map();
+// Authored hreflang links of pages without build-time alternates (e.g. bilingual public/ pages).
+const hreflangs = new Map();
 const attr = (node, name) => node.attrs?.find(item => item.name === name)?.value;
 const setAttr = (node, name, value) => {
   const old = node.attrs.find(item => item.name === name);
@@ -156,6 +158,13 @@ for (const file of walk(dist)) {
   imageHints(document, url);
   fs.writeFileSync(file, serialize(document));
   entries.set(origin + url, modified);
+  const languages = [];
+  const collect = node => {
+    if (node.tagName === 'link' && attr(node, 'rel') === 'alternate' && attr(node, 'hreflang') && attr(node, 'href')) languages.push([attr(node, 'hreflang'), attr(node, 'href')]);
+    (node.childNodes || []).forEach(collect);
+  };
+  collect(head);
+  if (languages.length) hreflangs.set(origin + url, languages);
 }
 
 // Preserve authored hreflang entries, deduplicate them, then cover nested pages.
@@ -168,7 +177,10 @@ sitemap = sitemap.replace(/\s*<url>[\s\S]*?<\/url>/g, block => {
   seen.add(loc);
   return block;
 });
-const extras = [...entries].filter(([url]) => !seen.has(url)).map(([url, date]) => `  <url><loc>${escapeHtml(url)}</loc>${date ? `<lastmod>${date}</lastmod>` : ''}</url>`).join('\n');
+const extras = [...entries].filter(([url]) => !seen.has(url)).map(([url, date]) => {
+  const links = (hreflangs.get(url) || []).map(([language, href]) => `<xhtml:link rel="alternate" hreflang="${escapeHtml(language)}" href="${escapeHtml(href)}" />`).join('');
+  return `  <url><loc>${escapeHtml(url)}</loc>${links}${date ? `<lastmod>${date}</lastmod>` : ''}</url>`;
+}).join('\n');
 sitemap = sitemap.replace('</urlset>', extras + '\n</urlset>');
 fs.writeFileSync(sitemapFile, sitemap);
 console.log(`✓ Finalized ${entries.size} HTML pages; radar data is independently cacheable`);

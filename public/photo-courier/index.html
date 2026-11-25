@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>照片信使：让电脑上的 AI Agent 读取 iPhone 照片</title>
+  <meta name="description" content="照片信使是免费的 iPhone/iPad App：电脑上的 AI Agent（如 Claude Code、Codex）经同一 Wi-Fi 或数据线，通过本地 HTTPS 读取你批准的照片。每次连接都要在手机上点允许，没有开发者服务器、账号或广告。">
+  <meta name="apple-itunes-app" content="app-id=6800279514">
+  <link rel="canonical" href="https://wangyufeng.org/photo-courier/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wangyufeng.org/photo-courier/">
+  <link rel="alternate" hreflang="en" href="https://wangyufeng.org/photo-courier/en/">
+  <link rel="alternate" hreflang="x-default" href="https://wangyufeng.org/photo-courier/">
+  <link rel="icon" href="/photo-courier/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/photo-courier/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="王雨峰的博客">
+  <meta property="og:title" content="照片信使：让电脑上的 AI Agent 读取 iPhone 照片">
+  <meta property="og:description" content="照片信使是免费的 iPhone/iPad App：电脑上的 AI Agent（如 Claude Code、Codex）经同一 Wi-Fi 或数据线，通过本地 HTTPS 读取你批准的照片。每次连接都要在手机上点允许，没有开发者服务器、账号或广告。">
+  <meta property="og:url" content="https://wangyufeng.org/photo-courier/">
+  <meta property="og:image" content="https://wangyufeng.org/photo-courier/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="照片信使：让电脑上的 AI Agent 读取 iPhone 照片">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="照片信使：让电脑上的 AI Agent 读取 iPhone 照片">
+  <meta name="twitter:description" content="照片信使是免费的 iPhone/iPad App：电脑上的 AI Agent（如 Claude Code、Codex）经同一 Wi-Fi 或数据线，通过本地 HTTPS 读取你批准的照片。每次连接都要在手机上点允许，没有开发者服务器、账号或广告。">
+  <meta name="twitter:image" content="https://wangyufeng.org/photo-courier/og.png">
+  <meta name="twitter:image:alt" content="照片信使：让电脑上的 AI Agent 读取 iPhone 照片">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MobileApplication",
+      "@id": "https://wangyufeng.org/photo-courier/#app",
+      "name": "照片信使",
+      "alternateName": "Photo Courier for AI Agents",
+      "description": "照片信使是免费的 iPhone/iPad App：电脑上的 AI Agent（如 Claude Code、Codex）经同一 Wi-Fi 或数据线，通过本地 HTTPS 读取你批准的照片。每次连接都要在手机上点允许，没有开发者服务器、账号或广告。",
+      "url": "https://wangyufeng.org/photo-courier/",
+      "inLanguage": "zh-Hans",
+      "operatingSystem": "iOS",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "downloadUrl": "https://apps.apple.com/app/id6800279514",
+      "installUrl": "https://apps.apple.com/app/id6800279514",
+      "image": "https://wangyufeng.org/photo-courier/icon.png",
+      "screenshot": "https://wangyufeng.org/photo-courier/og.png",
+      "author": {
+        "@type": "Person",
+        "@id": "https://wangyufeng.org/#person",
+        "name": "王雨峰",
+        "url": "https://wangyufeng.org/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wangyufeng.org/photo-courier/#faq",
+      "url": "https://wangyufeng.org/photo-courier/",
+      "inLanguage": "zh-Hans",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "怎么和 Claude Code、Codex、Cursor 或豆包配合使用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 App 里点“复制连接信息”，把内容粘贴给电脑上的 Agent。里面是本地 HTTPS 地址和这台设备的公钥固定值，Agent 照着连接，你在手机上点允许即可。只要 Agent 能在电脑上发起本地 HTTPS 请求并查看图片就能用，不依赖某个特定工具；能否满足取决于你用的 Agent 及其设置。用 Claude Code 或 Codex 时，还可以选装一份 Skill，让 Agent 知道怎么连接、怎么做。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "照片会上传到云端吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "照片信使没有开发者服务器、账号、广告或统计，照片经本地 HTTPS 直接从手机传到你的电脑。不过，你批准的 Agent 可能按它自己的隐私条款，把收到的照片发给它所用的 AI 服务商；每次批准时，App 都会在按钮上方提醒这一点。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "手机和电脑必须连同一个 Wi-Fi 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "二选一：连同一个 Wi-Fi（路由器没有开启客户端隔离），或者用数据线把手机和电脑直连。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "离开 App 会怎样？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "连接只在照片信使处于前台时有效。退到后台会立即断开、撤销令牌，并清除剩余的临时文件。重新打开 App 后，Agent 再次请求、你再次允许即可继续。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "支持 iCloud 照片吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只存在 iCloud 的照片默认跳过。只有当你在批准卡片上允许了 Agent 的 iCloud 请求，才由 iOS 从你自己的 iCloud 下载；App 本身不连接任何服务器。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "会修改或删除我的照片吗？支持视频吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不会修改或删除。照片信使只读，临时副本发完即删。目前不支持视频，也不支持后台读取。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    :root { --bg: #ffffff; --fg: #1f2328; --muted: #5b6372; --line: #e4e7ec; --accent: #b4560a; --on-accent: #ffffff; --card: #f5f6f8;
+      font: 17px/1.62 system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f131b; --fg: #e6e9ef; --muted: #9aa3b2; --line: #262d3a; --accent: #ffa03a; --on-accent: #1a1205; --card: #171c26; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 72px; }
+    a { color: var(--accent); overflow-wrap: anywhere; }
+    nav { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--fg); }
+    header { margin-top: 24px; display: grid; grid-template-columns: auto 1fr; gap: 20px 24px; align-items: center; }
+    header img { width: 112px; height: 112px; display: block; }
+    h1 { margin: 0; font-size: clamp(30px, 6vw, 42px); line-height: 1.15; letter-spacing: -0.01em; }
+    .lead { grid-column: 1 / -1; margin: 0; font-size: clamp(18px, 2.6vw, 20px); }
+    .get { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 10px;
+      background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
+    .button:hover { filter: brightness(1.08); }
+    .get p { margin: 0; color: var(--muted); font-size: 15px; }
+    section { margin-top: 56px; }
+    h2 { font-size: 24px; line-height: 1.25; margin: 0 0 16px; }
+    ol { padding-left: 1.4em; margin: 0; }
+    ol li + li { margin-top: 10px; }
+    .points { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .points li { background: var(--card); border-radius: 12px; padding: 16px 18px; }
+    .points strong { display: block; margin-bottom: 4px; }
+    .points span { color: var(--muted); font-size: 15px; }
+    .faq h3 { font-size: 18px; line-height: 1.35; margin: 28px 0 6px; }
+    .faq p { margin: 0; }
+    footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    footer .links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+    footer .links a { display: inline-flex; align-items: center; min-height: 44px; }
+    footer p { margin: 12px 0 0; }
+    @media (max-width: 480px) {
+      header { grid-template-columns: 1fr; }
+      header img { width: 88px; height: 88px; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a href="/">王雨峰的博客</a>
+      <a href="en/" hreflang="en" lang="en">English</a>
+    </nav>
+    <main>
+      <header>
+        <img src="icon.png" alt="" width="112" height="112">
+        <h1>照片信使</h1>
+        <p class="lead">复制一次连接信息，电脑上的 AI Agent 就能经同一 Wi-Fi 或数据线查找、查看你手机里的照片。每次连接都要你在手机上点“允许”，照片不经过开发者的服务器。</p>
+        <div class="get">
+          <a class="button" href="https://apps.apple.com/app/id6800279514">在 App Store 下载</a>
+          <p>免费，支持 iPhone 和 iPad。中国大陆 App Store 暂不可下载。</p>
+        </div>
+      </header>
+
+      <section>
+        <h2>怎么用</h2>
+        <ol>
+        <li>打开照片信使，点“复制连接信息”。</li>
+        <li>把内容粘贴给电脑上的 AI Agent，比如 Claude Code、Codex、Cursor 或豆包，配置一次就行。</li>
+        <li>直接吩咐它，比如“找出我上周末在海边拍的照片”。手机会显示是谁在请求、要看什么，你点“允许”之前，一张照片都不会发出。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>隐私与控制</h2>
+        <ul class="points">
+        <li><strong>只在前台有效</strong><span>App 打开时才能连接；退到后台立即断开、撤销令牌。</span></li>
+        <li><strong>只给你允许的</strong><span>可以手动挑几张照片只给这些；Agent 也可以按相册、收藏筛选，或去掉截图。</span></li>
+        <li><strong>本地直传</strong><span>经本地 HTTPS 从手机直接传到电脑，用公钥固定值（pin）防止冒充。没有开发者服务器、账号、广告或统计。</span></li>
+        <li><strong>只读不留存</strong><span>不修改、不删除原图；临时副本发完即删。</span></li>
+        <li><strong>说明透明</strong><span>发给 Agent 的操作说明（Skill）可以在 App 里逐字查看。</span></li>
+        </ul>
+      </section>
+
+      <section class="faq">
+        <h2>常见问题</h2>
+      <h3>怎么和 Claude Code、Codex、Cursor 或豆包配合使用？</h3>
+      <p>在 App 里点“复制连接信息”，把内容粘贴给电脑上的 Agent。里面是本地 HTTPS 地址和这台设备的公钥固定值，Agent 照着连接，你在手机上点允许即可。只要 Agent 能在电脑上发起本地 HTTPS 请求并查看图片就能用，不依赖某个特定工具；能否满足取决于你用的 Agent 及其设置。用 Claude Code 或 Codex 时，还可以选装一份 Skill，让 Agent 知道怎么连接、怎么做。</p>
+      <h3>照片会上传到云端吗？</h3>
+      <p>照片信使没有开发者服务器、账号、广告或统计，照片经本地 HTTPS 直接从手机传到你的电脑。不过，你批准的 Agent 可能按它自己的隐私条款，把收到的照片发给它所用的 AI 服务商；每次批准时，App 都会在按钮上方提醒这一点。</p>
+      <h3>手机和电脑必须连同一个 Wi-Fi 吗？</h3>
+      <p>二选一：连同一个 Wi-Fi（路由器没有开启客户端隔离），或者用数据线把手机和电脑直连。</p>
+      <h3>离开 App 会怎样？</h3>
+      <p>连接只在照片信使处于前台时有效。退到后台会立即断开、撤销令牌，并清除剩余的临时文件。重新打开 App 后，Agent 再次请求、你再次允许即可继续。</p>
+      <h3>支持 iCloud 照片吗？</h3>
+      <p>只存在 iCloud 的照片默认跳过。只有当你在批准卡片上允许了 Agent 的 iCloud 请求，才由 iOS 从你自己的 iCloud 下载；App 本身不连接任何服务器。</p>
+      <h3>会修改或删除我的照片吗？支持视频吗？</h3>
+      <p>不会修改或删除。照片信使只读，临时副本发完即删。目前不支持视频，也不支持后台读取。</p>
+      </section>
+    </main>
+    <footer>
+      <div class="links">
+        <a href="support/">支持</a>
+        <a href="privacy/">隐私政策</a>
+        <a href="skill/SKILL.md">Agent Skill</a>
+      </div>
+      <p>Claude Code、Codex、Cursor、豆包是各自所有者的商标，照片信使与它们没有关联。</p>
+    </footer>
+  </div>
+</body>
+</html>

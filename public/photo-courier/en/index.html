@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Photo Courier: let your AI agent see photos on your iPhone</title>
+  <meta name="description" content="A free iPhone and iPad app that lets the AI agent on your computer, such as Claude Code or Codex, read photos you approve over Wi-Fi or cable. You approve every connection; no developer server.">
+  <meta name="apple-itunes-app" content="app-id=6800279514">
+  <link rel="canonical" href="https://wangyufeng.org/photo-courier/en/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wangyufeng.org/photo-courier/">
+  <link rel="alternate" hreflang="en" href="https://wangyufeng.org/photo-courier/en/">
+  <link rel="alternate" hreflang="x-default" href="https://wangyufeng.org/photo-courier/">
+  <link rel="icon" href="/photo-courier/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/photo-courier/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wang Yufeng’s Blog">
+  <meta property="og:title" content="Photo Courier: let your AI agent see photos on your iPhone">
+  <meta property="og:description" content="A free iPhone and iPad app that lets the AI agent on your computer, such as Claude Code or Codex, read photos you approve over Wi-Fi or cable. You approve every connection; no developer server.">
+  <meta property="og:url" content="https://wangyufeng.org/photo-courier/en/">
+  <meta property="og:image" content="https://wangyufeng.org/photo-courier/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Photo Courier: let your AI agent see photos on your iPhone">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Photo Courier: let your AI agent see photos on your iPhone">
+  <meta name="twitter:description" content="A free iPhone and iPad app that lets the AI agent on your computer, such as Claude Code or Codex, read photos you approve over Wi-Fi or cable. You approve every connection; no developer server.">
+  <meta name="twitter:image" content="https://wangyufeng.org/photo-courier/og.png">
+  <meta name="twitter:image:alt" content="Photo Courier: let your AI agent see photos on your iPhone">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MobileApplication",
+      "@id": "https://wangyufeng.org/photo-courier/en/#app",
+      "name": "Photo Courier for AI Agents",
+      "alternateName": "Photo Courier",
+      "description": "A free iPhone and iPad app that lets the AI agent on your computer, such as Claude Code or Codex, read photos you approve over Wi-Fi or cable. You approve every connection; no developer server.",
+      "url": "https://wangyufeng.org/photo-courier/en/",
+      "inLanguage": "en",
+      "operatingSystem": "iOS",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "downloadUrl": "https://apps.apple.com/app/id6800279514",
+      "installUrl": "https://apps.apple.com/app/id6800279514",
+      "image": "https://wangyufeng.org/photo-courier/icon.png",
+      "screenshot": "https://wangyufeng.org/photo-courier/og.png",
+      "author": {
+        "@type": "Person",
+        "@id": "https://wangyufeng.org/#person",
+        "name": "王雨峰",
+        "url": "https://wangyufeng.org/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wangyufeng.org/photo-courier/en/#faq",
+      "url": "https://wangyufeng.org/photo-courier/en/",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I use it with Claude Code, Codex, Cursor, or Doubao?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tap “Copy Connection Details” in the app and paste the text to the agent on your computer. It contains a local HTTPS address and this device’s public-key pin; the agent connects with them and you tap Allow on your phone. Any agent that can make local HTTPS requests on your computer and view images can use it, so it does not depend on a specific tool; whether yours qualifies depends on the agent and its settings. With Claude Code or Codex you can also install an optional skill that tells the agent how to connect and behave."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my photos uploaded to the cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Photo Courier has no developer server, account, ads, or analytics; photos travel over local HTTPS directly from your phone to your computer. The agent you approve may send the photos it receives to its own AI provider under that agent’s privacy terms, and the approval screen reminds you of this every time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do my phone and computer need to be on the same Wi-Fi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Either put them on the same Wi-Fi network (without client isolation on the router) or connect them directly with a cable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when I leave the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Connections work only while Photo Courier is in the foreground. Leaving the app disconnects immediately, revokes tokens, and removes remaining temporary files. Reopen the app and approve the agent’s next request to continue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support iCloud Photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Photos stored only in iCloud are skipped by default. They are downloaded by iOS from your own iCloud only when you allow an agent’s iCloud request on the approval card; the app itself connects to no server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it edit or delete my photos? Does it support video?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It cannot edit or delete anything: Photo Courier is read-only, and temporary copies are deleted after sending. Videos and background access are not supported."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    :root { --bg: #ffffff; --fg: #1f2328; --muted: #5b6372; --line: #e4e7ec; --accent: #b4560a; --on-accent: #ffffff; --card: #f5f6f8;
+      font: 17px/1.62 system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f131b; --fg: #e6e9ef; --muted: #9aa3b2; --line: #262d3a; --accent: #ffa03a; --on-accent: #1a1205; --card: #171c26; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 72px; }
+    a { color: var(--accent); overflow-wrap: anywhere; }
+    nav { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--fg); }
+    header { margin-top: 24px; display: grid; grid-template-columns: auto 1fr; gap: 20px 24px; align-items: center; }
+    header img { width: 112px; height: 112px; display: block; }
+    h1 { margin: 0; font-size: clamp(30px, 6vw, 42px); line-height: 1.15; letter-spacing: -0.01em; }
+    .lead { grid-column: 1 / -1; margin: 0; font-size: clamp(18px, 2.6vw, 20px); }
+    .get { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 10px;
+      background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
+    .button:hover { filter: brightness(1.08); }
+    .get p { margin: 0; color: var(--muted); font-size: 15px; }
+    section { margin-top: 56px; }
+    h2 { font-size: 24px; line-height: 1.25; margin: 0 0 16px; }
+    ol { padding-left: 1.4em; margin: 0; }
+    ol li + li { margin-top: 10px; }
+    .points { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .points li { background: var(--card); border-radius: 12px; padding: 16px 18px; }
+    .points strong { display: block; margin-bottom: 4px; }
+    .points span { color: var(--muted); font-size: 15px; }
+    .faq h3 { font-size: 18px; line-height: 1.35; margin: 28px 0 6px; }
+    .faq p { margin: 0; }
+    footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    footer .links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+    footer .links a { display: inline-flex; align-items: center; min-height: 44px; }
+    footer p { margin: 12px 0 0; }
+    @media (max-width: 480px) {
+      header { grid-template-columns: 1fr; }
+      header img { width: 88px; height: 88px; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a href="/">Wang Yufeng’s blog</a>
+      <a href="../" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </nav>
+    <main>
+      <header>
+        <img src="../icon.png" alt="" width="112" height="112">
+        <h1>Photo Courier for AI Agents</h1>
+        <p class="lead">Copy the connection details once, and the AI agent on your computer can find and view photos on your iPhone over Wi-Fi or a cable. You approve every connection on your phone, and nothing goes through a developer server.</p>
+        <div class="get">
+          <a class="button" href="https://apps.apple.com/app/id6800279514">Download on the App Store</a>
+          <p>Free for iPhone and iPad.</p>
+        </div>
+      </header>
+
+      <section>
+        <h2>How it works</h2>
+        <ol>
+        <li>Open Photo Courier and tap “Copy Connection Details”.</li>
+        <li>Paste the text to the AI agent on your computer, such as Claude Code, Codex, Cursor, or Doubao. That is the entire setup.</li>
+        <li>Ask for what you need, for example “find the photos I took at the beach last weekend”. Your iPhone shows who is asking and what access it wants. Nothing leaves your device until you tap Allow.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Privacy and control</h2>
+        <ul class="points">
+        <li><strong>Foreground only</strong><span>Access works only while the app is open on screen. Leaving it disconnects immediately and revokes tokens.</span></li>
+        <li><strong>Only what you allow</strong><span>Hand-pick a few photos to share just those. Agents can also filter by album or Favorites, or leave out screenshots.</span></li>
+        <li><strong>Direct and local</strong><span>Photos travel over local HTTPS from your phone to your computer, with a public-key pin that prevents impersonation. No developer server, account, ads, or analytics.</span></li>
+        <li><strong>Read-only, nothing kept</strong><span>Never edits or deletes your photos. Temporary copies are deleted right after sending.</span></li>
+        <li><strong>Transparent instructions</strong><span>Read the exact guide (skill) sent to your agent inside the app.</span></li>
+        </ul>
+      </section>
+
+      <section class="faq">
+        <h2>FAQ</h2>
+      <h3>How do I use it with Claude Code, Codex, Cursor, or Doubao?</h3>
+      <p>Tap “Copy Connection Details” in the app and paste the text to the agent on your computer. It contains a local HTTPS address and this device’s public-key pin; the agent connects with them and you tap Allow on your phone. Any agent that can make local HTTPS requests on your computer and view images can use it, so it does not depend on a specific tool; whether yours qualifies depends on the agent and its settings. With Claude Code or Codex you can also install an optional skill that tells the agent how to connect and behave.</p>
+      <h3>Are my photos uploaded to the cloud?</h3>
+      <p>Photo Courier has no developer server, account, ads, or analytics; photos travel over local HTTPS directly from your phone to your computer. The agent you approve may send the photos it receives to its own AI provider under that agent’s privacy terms, and the approval screen reminds you of this every time.</p>
+      <h3>Do my phone and computer need to be on the same Wi-Fi?</h3>
+      <p>Either put them on the same Wi-Fi network (without client isolation on the router) or connect them directly with a cable.</p>
+      <h3>What happens when I leave the app?</h3>
+      <p>Connections work only while Photo Courier is in the foreground. Leaving the app disconnects immediately, revokes tokens, and removes remaining temporary files. Reopen the app and approve the agent’s next request to continue.</p>
+      <h3>Does it support iCloud Photos?</h3>
+      <p>Photos stored only in iCloud are skipped by default. They are downloaded by iOS from your own iCloud only when you allow an agent’s iCloud request on the approval card; the app itself connects to no server.</p>
+      <h3>Can it edit or delete my photos? Does it support video?</h3>
+      <p>It cannot edit or delete anything: Photo Courier is read-only, and temporary copies are deleted after sending. Videos and background access are not supported.</p>
+      </section>
+    </main>
+    <footer>
+      <div class="links">
+        <a href="../support/">Support</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../skill/SKILL.md">Agent skill</a>
+      </div>
+      <p>Claude Code, Codex, Cursor, and Doubao are trademarks of their respective owners. Photo Courier is not affiliated with them.</p>
+    </footer>
+  </div>
+</body>
+</html>
