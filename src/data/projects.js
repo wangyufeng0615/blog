@@ -91,7 +91,7 @@ export const allProjects = [
     stats: '已上架 App Store（国区暂不可下）',
     sticker: 'photo-courier',
     featured: true,
-    url: 'https://apps.apple.com/app/id6800279514',
+    url: 'https://apps.apple.com/app/apple-store/id6800279514?pt=128786108&ct=blog-home&mt=8',
     type: 'iOS app',
     year: '2026',
     tags: ['iOS', 'AI tools', 'Photos', 'Privacy'],
