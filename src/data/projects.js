@@ -75,6 +75,19 @@ export const allProjects = [
     status: 'Live',
   },
   {
+    name: '九龙城寨 · 1989',
+    // 楼栋与楼层数来自页面自身统计（城寨模型 2026-11-26）
+    description: '按 1987 年测量图一栋栋搭回来的九龙城寨，黄昏跟着巷灯在不见天日的巷子里迷路',
+    stats: '422 栋楼、4,270 个楼层，可漫游、可逃离',
+    sticker: 'walled-city',
+    featured: true,
+    url: 'https://kowloon.wangyufeng.org/',
+    type: 'Historical 3D reconstruction',
+    year: '2026',
+    tags: ['3D', 'History', 'Hong Kong', 'WebGL', 'Trilingual'],
+    status: 'Live',
+  },
+  {
     name: '冰原对决',
     description: '浏览器直玩的百人雪地抢枪 FPS，Rust 服务端，人少时机器人补位',
     sticker: 'snowgun',
