@@ -550,6 +550,7 @@ const homeJsonLd = {
       '@type': 'WebSite',
       '@id': 'https://wangyufeng.org/#website',
       name: '王雨峰的博客',
+      alternateName: 'Wang Yufeng’s Blog',
       url: 'https://wangyufeng.org',
       author: { '@id': 'https://wangyufeng.org/#person' },
       inLanguage: ['zh-CN', 'en']
@@ -558,6 +559,7 @@ const homeJsonLd = {
       '@type': 'Person',
       '@id': 'https://wangyufeng.org/#person',
       name: '王雨峰',
+      alternateName: 'Wang Yufeng',
       url: 'https://wangyufeng.org',
       email: 'mailto:alanwang424@gmail.com',
       sameAs: ['https://github.com/wangyufeng0615'],
@@ -873,6 +875,35 @@ Sitemap: https://wangyufeng.org/sitemap.xml
   console.log('✓ robots.txt');
 }
 
+// Markdown posts moved from /posts/<slug>/ to /posts/<slug>.html on 2026-04-25.
+// GitHub Pages has no server redirects, so each old address gets a static page
+// that points search engines (canonical) and visitors (refresh) to the new one.
+function generateLegacyPostRedirects(posts) {
+  let count = 0;
+  for (const post of posts) {
+    if (post.type !== 'markdown') continue;
+    const file = path.join(DIST_DIR, 'posts', post.slug, 'index.html');
+    if (fs.existsSync(file)) continue;
+    const target = `${SITE_URL}${post.url}`;
+    const title = escapeHtml(post.title);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, `<!DOCTYPE html>
+<html lang="zh-CN" data-legacy-redirect>
+<head>
+  <meta charset="UTF-8">
+  <title>${title}</title>
+  <link rel="canonical" href="${target}">
+  <meta http-equiv="refresh" content="0; url=${target}">
+  <script>location.replace(${JSON.stringify(post.url)} + location.search + location.hash)</script>
+</head>
+<body><p><a href="${target}">${title}</a></p></body>
+</html>
+`);
+    count++;
+  }
+  console.log(`✓ ${count} legacy post redirects`);
+}
+
 // 主函数
 async function build() {
   console.log('\n🔨 Building blog...\n');
@@ -887,6 +918,7 @@ async function build() {
   copyImages(posts);
   buildCustomPosts(posts);
   copyPublicFiles();
+  generateLegacyPostRedirects(posts);
   generateAiReadableFiles(posts);
   generateSitemap(posts);
   generateRobots();

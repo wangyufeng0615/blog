@@ -124,6 +124,8 @@ for (const file of walk(dist)) {
   const url = '/' + relative.replace(/(^|\/)index\.html$/, '$1');
   const document = parse(fs.readFileSync(file, 'utf8'));
   const head = find(document, node => node.tagName === 'head');
+  // Legacy-address redirect pages stay minimal and out of the sitemap.
+  if (attr(find(document, node => node.tagName === 'html'), 'data-legacy-redirect') !== undefined) continue;
   const body = find(document, node => node.tagName === 'body');
   const titleNode = find(head, node => node.tagName === 'title');
   const title = titleNode?.childNodes.map(node => node.value || '').join('') || '王雨峰的博客';

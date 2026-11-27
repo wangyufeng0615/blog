@@ -11,6 +11,7 @@ const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).fla
   return entry.isDirectory() ? walk(file) : file.endsWith('.html') ? [file] : [];
 });
 let pages = 0;
+let redirects = 0;
 for (const file of walk(dist)) {
   if (path.basename(file) === '404.html') continue;
   const elements = [];
@@ -19,6 +20,12 @@ for (const file of walk(dist)) {
   const canonicals = elements.filter(node => node.tagName === 'link' && attr(node, 'rel') === 'canonical');
   assert.equal(canonicals.length, 1, `Canonical count: ${file}`);
   assert.equal(new URL(attr(canonicals[0], 'href')).origin, 'https://wangyufeng.org', file);
+  if (attr(elements.find(node => node.tagName === 'html'), 'data-legacy-redirect') !== undefined) {
+    const target = new URL(attr(canonicals[0], 'href'));
+    assert.ok(fs.existsSync(path.join(dist, decodeURIComponent(target.pathname))), `Redirect target missing: ${file}`);
+    redirects++;
+    continue;
+  }
   const meta = elements.find(node => node.tagName === 'meta' && attr(node, 'name') === 'description');
   assert.ok(attr(meta, 'content')?.length, `Missing description: ${file}`);
   assert.deepEqual(meta.attrs.map(item => item.name).sort(), ['content', 'name'], `Malformed description: ${file}`);
@@ -43,4 +50,4 @@ assert.deepEqual(fullData, originalData, 'Full radar snapshot must remain lossle
 const displayData = JSON.parse(fs.readFileSync(path.join(dist, 'storage-radar/data.json'), 'utf8'));
 for (const key of ['daily_authors', 'watch_daily_authors', 'metrics', 'coverage', 'market']) assert.deepEqual(displayData[key], originalData[key], `Radar data changed: ${key}`);
 assert.ok(fs.statSync(path.join(dist, 'storage-radar/index.html')).size < 100_000, 'Radar HTML grew unexpectedly');
-console.log(`Verified ${pages} HTML pages, ${locations.length} sitemap URLs, vendor checksums and lossless radar data.`);
+console.log(`Verified ${pages} HTML pages, ${redirects} legacy redirects, ${locations.length} sitemap URLs, vendor checksums and lossless radar data.`);
